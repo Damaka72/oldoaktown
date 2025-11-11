@@ -661,6 +661,330 @@
             font-weight: 600;
         }
 
+        /* News Ticker */
+        .news-ticker {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%);
+            color: white;
+            padding: 0.8rem 0;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 3px solid var(--warm-brown);
+        }
+
+        .ticker-label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--warm-brown);
+            padding: 0.5rem 1.5rem;
+            font-weight: 700;
+            z-index: 10;
+            border-radius: 0 5px 5px 0;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+        }
+
+        .ticker-content {
+            display: flex;
+            animation: scroll-left 60s linear infinite;
+            padding-left: 100%;
+            white-space: nowrap;
+        }
+
+        .ticker-content:hover {
+            animation-play-state: paused;
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 3rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ticker-item:hover {
+            transform: scale(1.05);
+        }
+
+        .ticker-item::before {
+            content: "●";
+            margin-right: 1rem;
+            font-size: 0.6rem;
+            color: var(--cream);
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .ticker-label {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .ticker-item {
+                font-size: 0.85rem;
+                padding: 0 2rem;
+            }
+        }
+
+        /* Enhanced Interactive Timeline */
+        .interactive-timeline {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--primary-green) 0%, var(--warm-brown) 100%);
+            transform: translateX(-50%);
+        }
+
+        .timeline-phase {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .timeline-phase:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-phase:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-phase:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-phase:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-phase:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .timeline-phase:nth-child(odd) .timeline-content {
+            margin-left: auto;
+            margin-right: 5%;
+        }
+
+        .timeline-phase:nth-child(even) .timeline-content {
+            margin-right: auto;
+            margin-left: 5%;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--primary-green);
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: white;
+            border: 4px solid var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-phase:hover .timeline-icon {
+            transform: translateX(-50%) scale(1.2) rotate(360deg);
+            background: var(--primary-green);
+        }
+
+        .timeline-phase.current .timeline-icon {
+            background: var(--warm-brown);
+            border-color: var(--warm-brown);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 0 rgba(139, 69, 19, 0.7);
+            }
+            50% {
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 20px rgba(139, 69, 19, 0);
+            }
+        }
+
+        .timeline-year-badge {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .timeline-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-current {
+            background: #fff3cd;
+            color: #856404;
+            animation: glow 2s infinite;
+        }
+
+        .status-upcoming {
+            background: #e7f3ff;
+            color: #004085;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 193, 7, 0.8);
+            }
+        }
+
+        .timeline-progress {
+            margin-top: 1rem;
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .timeline-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-green) 0%, var(--warm-brown) 100%);
+            border-radius: 10px;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .timeline-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+            margin-top: 1rem;
+        }
+
+        .timeline-content.expanded .timeline-details {
+            max-height: 500px;
+        }
+
+        .timeline-content h3 {
+            color: var(--primary-green);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .expand-indicator {
+            text-align: center;
+            margin-top: 1rem;
+            color: var(--warm-brown);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .timeline-content.expanded .expand-indicator::after {
+            content: " ▲";
+        }
+
+        .timeline-content:not(.expanded) .expand-indicator::after {
+            content: " ▼";
+        }
+
+        /* Responsive Timeline */
+        @media (max-width: 968px) {
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-icon {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-phase:nth-child(odd) .timeline-content,
+            .timeline-phase:nth-child(even) .timeline-content {
+                margin-left: 80px;
+                margin-right: 0;
+            }
+        }
+
         /* Footer */
         footer {
             background: var(--dark-grey);
@@ -870,6 +1194,14 @@
             </ul>
         </div>
     </nav>
+
+    <!-- News Ticker -->
+    <div class="news-ticker">
+        <div class="ticker-label">LATEST NEWS</div>
+        <div class="ticker-content" id="tickerContent">
+            <!-- Ticker items will be duplicated for seamless loop -->
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -1364,70 +1696,134 @@
             </div>
 
             <!-- Development Timeline -->
-            <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-green);">Development Timeline</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="timeline-year">2015-2020</span>
-                    <h3>Planning & Preparation</h3>
-                    <p><strong>Key Milestones:</strong></p>
-                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                        <li>Old Oak and Park Royal Development Corporation (OPDC) established</li>
-                        <li>Masterplan consultation completed</li>
-                        <li>HS2 station design finalized</li>
-                        <li>Site preparation and enabling works begun</li>
-                    </ul>
+            <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-green);">Interactive Development Timeline</h3>
+            <p style="margin-bottom: 2rem; text-align: center; color: #666;">Click on any phase to explore details. Hover over icons for animations.</p>
+
+            <div class="interactive-timeline">
+                <div class="timeline-line"></div>
+
+                <!-- Phase 1: 2015-2020 -->
+                <div class="timeline-phase">
+                    <div class="timeline-icon">📋</div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <span class="timeline-year-badge">2015-2020</span>
+                        <h3>Planning & Preparation</h3>
+                        <p><strong>Foundation Phase</strong></p>
+                        <span class="timeline-status status-completed">Completed</span>
+                        <div class="timeline-progress">
+                            <div class="timeline-progress-bar" style="width: 100%"></div>
+                        </div>
+                        <div class="timeline-details">
+                            <p style="margin-top: 1rem;"><strong>Key Milestones:</strong></p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Old Oak and Park Royal Development Corporation (OPDC) established</li>
+                                <li>Masterplan consultation completed</li>
+                                <li>HS2 station design finalized</li>
+                                <li>Site preparation and enabling works begun</li>
+                            </ul>
+                        </div>
+                        <div class="expand-indicator">Click to expand</div>
+                    </div>
                 </div>
 
-                <div class="timeline-item">
-                    <span class="timeline-year">2020-2025</span>
-                    <h3>Early Construction Phase</h3>
-                    <p><strong>Current Status:</strong></p>
-                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                        <li>HS2 station foundation work completed (2024)</li>
-                        <li>Platform installation underway</li>
-                        <li>First housing development approved (500 homes)</li>
-                        <li>Enhanced bus services launched</li>
-                        <li>Old Oak Jobs Centre opened</li>
-                    </ul>
+                <!-- Phase 2: 2020-2025 -->
+                <div class="timeline-phase current">
+                    <div class="timeline-icon">🏗️</div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <span class="timeline-year-badge">2020-2025</span>
+                        <h3>Early Construction Phase</h3>
+                        <p><strong>Active Construction</strong></p>
+                        <span class="timeline-status status-current">In Progress</span>
+                        <div class="timeline-progress">
+                            <div class="timeline-progress-bar" style="width: 75%"></div>
+                        </div>
+                        <div class="timeline-details">
+                            <p style="margin-top: 1rem;"><strong>Current Status:</strong></p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>HS2 station foundation work completed (2024)</li>
+                                <li>Platform installation underway</li>
+                                <li>First housing development approved (500 homes)</li>
+                                <li>Enhanced bus services launched</li>
+                                <li>Old Oak Jobs Centre opened</li>
+                            </ul>
+                        </div>
+                        <div class="expand-indicator">Click to expand</div>
+                    </div>
                 </div>
 
-                <div class="timeline-item">
-                    <span class="timeline-year">2026-2030</span>
-                    <h3>Accelerated Development</h3>
-                    <p><strong>Planned Milestones:</strong></p>
-                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                        <li>First residents move in (2027)</li>
-                        <li>HS2 station structure completed</li>
-                        <li>Multiple housing phases under construction</li>
-                        <li>Commercial developments begin</li>
-                        <li>Park and green space creation starts</li>
-                    </ul>
+                <!-- Phase 3: 2026-2030 -->
+                <div class="timeline-phase">
+                    <div class="timeline-icon">🏘️</div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <span class="timeline-year-badge">2026-2030</span>
+                        <h3>Accelerated Development</h3>
+                        <p><strong>Housing & Infrastructure Expansion</strong></p>
+                        <span class="timeline-status status-upcoming">Upcoming</span>
+                        <div class="timeline-progress">
+                            <div class="timeline-progress-bar" style="width: 20%"></div>
+                        </div>
+                        <div class="timeline-details">
+                            <p style="margin-top: 1rem;"><strong>Planned Milestones:</strong></p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>First residents move in (2027)</li>
+                                <li>HS2 station structure completed</li>
+                                <li>Multiple housing phases under construction</li>
+                                <li>Commercial developments begin</li>
+                                <li>Park and green space creation starts</li>
+                            </ul>
+                        </div>
+                        <div class="expand-indicator">Click to expand</div>
+                    </div>
                 </div>
 
-                <div class="timeline-item">
-                    <span class="timeline-year">2030-2035</span>
-                    <h3>Station Opening & Growth</h3>
-                    <p><strong>Major Events:</strong></p>
-                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                        <li>HS2 Old Oak Common station opens (2033)</li>
-                        <li>10,000+ homes completed</li>
-                        <li>Commercial districts established</li>
-                        <li>Community facilities operational</li>
-                        <li>Major employers relocate to area</li>
-                    </ul>
+                <!-- Phase 4: 2030-2035 -->
+                <div class="timeline-phase">
+                    <div class="timeline-icon">🚄</div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <span class="timeline-year-badge">2030-2035</span>
+                        <h3>Station Opening & Growth</h3>
+                        <p><strong>Major Milestone Achievement</strong></p>
+                        <span class="timeline-status status-upcoming">Upcoming</span>
+                        <div class="timeline-progress">
+                            <div class="timeline-progress-bar" style="width: 10%"></div>
+                        </div>
+                        <div class="timeline-details">
+                            <p style="margin-top: 1rem;"><strong>Major Events:</strong></p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>HS2 Old Oak Common station opens (2033)</li>
+                                <li>10,000+ homes completed</li>
+                                <li>Commercial districts established</li>
+                                <li>Community facilities operational</li>
+                                <li>Major employers relocate to area</li>
+                            </ul>
+                        </div>
+                        <div class="expand-indicator">Click to expand</div>
+                    </div>
                 </div>
 
-                <div class="timeline-item">
-                    <span class="timeline-year">2035-2039</span>
-                    <h3>Completion & Maturation</h3>
-                    <p><strong>Final Phase:</strong></p>
-                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                        <li>All 25,500 homes completed</li>
-                        <li>Full employment target reached (65,000 jobs)</li>
-                        <li>Complete neighborhood infrastructure in place</li>
-                        <li>Old Oak established as major London hub</li>
-                        <li>Long-term community institutions thriving</li>
-                    </ul>
+                <!-- Phase 5: 2035-2039 -->
+                <div class="timeline-phase">
+                    <div class="timeline-icon">✨</div>
+                    <div class="timeline-content" onclick="toggleTimeline(this)">
+                        <span class="timeline-year-badge">2035-2039</span>
+                        <h3>Completion & Maturation</h3>
+                        <p><strong>Final Phase & Community Establishment</strong></p>
+                        <span class="timeline-status status-upcoming">Upcoming</span>
+                        <div class="timeline-progress">
+                            <div class="timeline-progress-bar" style="width: 5%"></div>
+                        </div>
+                        <div class="timeline-details">
+                            <p style="margin-top: 1rem;"><strong>Final Phase:</strong></p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>All 25,500 homes completed</li>
+                                <li>Full employment target reached (65,000 jobs)</li>
+                                <li>Complete neighborhood infrastructure in place</li>
+                                <li>Old Oak established as major London hub</li>
+                                <li>Long-term community institutions thriving</li>
+                            </ul>
+                        </div>
+                        <div class="expand-indicator">Click to expand</div>
+                    </div>
                 </div>
             </div>
 
@@ -1988,6 +2384,44 @@
                 });
             }
         });
+
+        // Interactive Timeline Toggle Function
+        function toggleTimeline(element) {
+            element.classList.toggle('expanded');
+        }
+
+        // News Ticker Initialization
+        function initNewsTicker() {
+            const tickerContent = document.getElementById('tickerContent');
+            if (!tickerContent) return;
+
+            // Create ticker items from various sources
+            const tickerItems = [
+                { text: "HS2 Station Construction Reaches Major Milestone - Platform Installation Underway", link: "#news" },
+                { text: "500 New Homes Approved Including 50% Affordable Housing in Old Oak Mile Development", link: "#news" },
+                { text: "Local Business Forum Launches to Connect Businesses with Development Opportunities", link: "#news" },
+                { text: "New Bus Routes Connect Old Oak to Central London Starting Next Month", link: "#news" },
+                { text: "Old Oak Jobs Centre Opens - Free Training & Job Placement Services Available", link: "#news" },
+                { text: "Old Oak Community Forum - Nov 15 at Harlesden Library, 6:30 PM", link: "#events" },
+                { text: "HS2 Station Tour - Nov 22, Guided Tour with Q&A Session", link: "#events" },
+                { text: "Old Oak Christmas Market - Dec 1 at Wormholt Park, 10 AM - 4 PM", link: "#events" },
+                { text: "25,500 Homes & 65,000 Jobs Planned for Old Oak Common", link: "#development" },
+                { text: "£1.7 Billion Investment in HS2 Station - Opening 2033", link: "#development" }
+            ];
+
+            // Create ticker HTML - duplicate items for seamless loop
+            let tickerHTML = '';
+            const duplicatedItems = [...tickerItems, ...tickerItems]; // Duplicate for seamless scrolling
+
+            duplicatedItems.forEach(item => {
+                tickerHTML += `<span class="ticker-item" onclick="window.location.hash='${item.link}'">${item.text}</span>`;
+            });
+
+            tickerContent.innerHTML = tickerHTML;
+        }
+
+        // Initialize ticker on page load
+        document.addEventListener('DOMContentLoaded', initNewsTicker);
     </script>
 
     <!-- Events Calendar Script -->
