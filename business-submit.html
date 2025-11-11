@@ -902,6 +902,22 @@
             }
 
             try {
+                // Verify Stripe is loaded
+                if (typeof Stripe === 'undefined') {
+                    alert('Error: Stripe.js failed to load. Please check your internet connection and refresh the page.');
+                    return;
+                }
+
+                // Verify config is loaded
+                if (typeof STRIPE_CONFIG === 'undefined') {
+                    alert('Error: Stripe configuration not loaded. Please refresh the page.');
+                    return;
+                }
+
+                console.log('Initializing Stripe with key:', STRIPE_CONFIG.publishableKey.substring(0, 20) + '...');
+                console.log('Using Price ID:', priceId);
+                console.log('Payment mode:', selectedFrequency === 'monthly' ? 'subscription' : 'payment');
+
                 // Initialize Stripe
                 const stripe = Stripe(STRIPE_CONFIG.publishableKey);
 
@@ -912,6 +928,8 @@
 
                 // Determine payment mode
                 const mode = selectedFrequency === 'monthly' ? 'subscription' : 'payment';
+
+                console.log('Calling redirectToCheckout...');
 
                 // Redirect to Stripe Checkout
                 const { error } = await stripe.redirectToCheckout({
@@ -933,13 +951,13 @@
 
                 if (error) {
                     console.error('Stripe error:', error);
-                    alert('Payment error: ' + error.message);
+                    alert('Stripe Error: ' + error.message + '\n\nPlease contact support if this continues.');
                     submitBtn.disabled = false;
                     submitBtn.textContent = 'Proceed to Payment';
                 }
             } catch (error) {
                 console.error('Payment processing error:', error);
-                alert('An error occurred. Please try again or contact support.');
+                alert('Error Details: ' + error.message + '\n\nPlease try again or contact support at info@oldoaktown.co.uk');
                 document.getElementById('submitBtn').disabled = false;
                 document.getElementById('submitBtn').textContent = 'Proceed to Payment';
             }
