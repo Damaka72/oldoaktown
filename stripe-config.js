@@ -9,16 +9,16 @@ const STRIPE_CONFIG = {
     // Create these in Stripe Dashboard: https://dashboard.stripe.com/test/products
     priceIds: {
         featured: {
-            monthly: 'price_featured_monthly',  // £35/month subscription
-            annual: 'price_featured_annual'     // £126/year one-time or subscription
+            monthly: 'price_1SSKXXACivaWK7rdlClSn2TY',  // £35/month subscription
+            annual: 'price_1SSKaiACivaWK7rdbseMMAUd'     // £126/year subscription
         },
         premium: {
-            monthly: 'price_premium_monthly',   // £75/month subscription
-            annual: 'price_premium_annual'      // £270/year one-time or subscription
+            monthly: 'price_1SSKdXACivaWK7rdhuJ8eRpL',   // £75/month subscription
+            annual: 'price_1SSKeCACivaWK7rdMpujbIQp'     // £270/year subscription
         },
         newsletter: {
-            monthly: 'price_newsletter_monthly', // £150/month subscription
-            annual: 'price_newsletter_annual'    // £540/year one-time or subscription
+            monthly: 'price_1SSKemACivaWK7rd4eVi2Nrf', // £150/month subscription
+            annual: 'price_1SSKfJACivaWK7rdYn2UFfNm'    // £540/year subscription
         }
     },
 
