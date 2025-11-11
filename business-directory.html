@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Directory | Old Oak Town</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+            --light-grey: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background: var(--light-grey);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--primary-green);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .search-bar {
+            background: white;
+            padding: 2rem;
+            margin: -1rem auto 2rem;
+            max-width: 800px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .search-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-controls input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .search-controls select {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            background: var(--light-grey);
+            border: 2px solid var(--primary-green);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .directory-stats {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .directory-stats h2 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .business-card {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-green);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .business-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .business-card.featured {
+            background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+            border-left-color: var(--warm-brown);
+            border-left-width: 6px;
+        }
+
+        .business-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .business-info h3 {
+            color: var(--primary-green);
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .business-category {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-badge {
+            background: var(--warm-brown);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .business-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+        }
+
+        .detail-item strong {
+            color: var(--dark-grey);
+        }
+
+        .business-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1f3610;
+        }
+
+        .btn-upgrade {
+            background: var(--warm-brown);
+            color: white;
+        }
+
+        .btn-upgrade:hover {
+            background: #6d3510;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .category-section {
+            margin: 3rem 0;
+        }
+
+        .category-section h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-green);
+        }
+
+        .cta-box {
+            background: var(--primary-green);
+            color: white;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 10px;
+            margin: 3rem 0;
+        }
+
+        .cta-box h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .cta-box p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-box .btn {
+            background: white;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .search-controls {
+                flex-direction: column;
+            }
+
+            .business-header {
+                flex-direction: column;
+            }
+
+            .business-details {
+                grid-template-columns: 1fr;
+            }
+
+            .business-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🏢 Old Oak Town Business Directory</h1>
+            <p>Discover local businesses serving the Old Oak Common area</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <div class="search-controls">
+                <input type="text" id="searchInput" placeholder="Search businesses..." onkeyup="searchBusinesses()">
+                <select id="categoryFilter" onchange="filterByCategory()">
+                    <option value="all">All Categories</option>
+                    <option value="food">Food & Drink</option>
+                    <option value="retail">Retail</option>
+                    <option value="services">Professional Services</option>
+                    <option value="property">Property</option>
+                    <option value="automotive">Automotive</option>
+                    <option value="industrial">Industrial</option>
+                </select>
+            </div>
+            <div class="filter-tags">
+                <span class="filter-tag active" onclick="filterArea('all')">All Areas</span>
+                <span class="filter-tag" onclick="filterArea('park-royal')">Park Royal</span>
+                <span class="filter-tag" onclick="filterArea('harlesden')">Harlesden</span>
+                <span class="filter-tag" onclick="filterArea('north-acton')">North Acton</span>
+                <span class="filter-tag" onclick="filterArea('kensal-green')">Kensal Green</span>
+                <span class="filter-tag" onclick="filterArea('willesden')">Willesden</span>
+                <span class="filter-tag" onclick="filterArea('east-acton')">East Acton</span>
+            </div>
+        </div>
+
+        <div class="directory-stats">
+            <h2>200+ Local Businesses Listed</h2>
+            <p>Free basic listings • Upgrade for premium features and top placement</p>
+        </div>
+
+        <!-- FEATURED BUSINESSES -->
+        <div class="category-section">
+            <h2>⭐ Featured Businesses</h2>
+
+            <div class="business-card featured">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Food & Drink</span>
+                        <h3>The Grand Junction Arms</h3>
+                        <p>North West London's most vibrant canalside pub. Great atmosphere, live sports, and the best Sunday roasts in the area.</p>
+                    </div>
+                    <span class="featured-badge">FEATURED</span>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Acton Lane, Park Royal, NW10 7AD</div>
+                    <div class="detail-item">📞 020 8161 0035</div>
+                    <div class="detail-item">🌐 <a href="https://www.grandjunctionarmsnw10.co.uk" target="_blank">Visit Website</a></div>
+                </div>
+                <div class="business-actions">
+                    <a href="#" class="btn btn-primary">View Full Profile</a>
+                    <a href="#" class="btn btn-secondary">Get Directions</a>
+                </div>
+            </div>
+
+            <div class="business-card featured">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Industrial/Food</span>
+                        <h3>McVitie's Factory</h3>
+                        <p>Historic biscuit factory operating since 1902. One of the largest biscuit manufacturers in the UK.</p>
+                    </div>
+                    <span class="featured-badge">FEATURED</span>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🏭 Major Employer - 1000+ staff</div>
+                </div>
+                <div class="business-actions">
+                    <a href="#" class="btn btn-primary">View Full Profile</a>
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20McVities" class="btn btn-upgrade">Upgrade This Listing</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOD & DRINK -->
+        <div class="category-section">
+            <h2>🍽️ Food & Drink</h2>
+
+            <!-- Park Royal Area -->
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Restaurant</span>
+                        <h3>Ace Cafe London</h3>
+                        <p>Iconic roadside café serving breakfast, burgers and British classics. Popular with motorcycle enthusiasts.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Ace Corner, North Circular Road, NW10</div>
+                    <div class="detail-item">⏰ Open 24 hours (weekends)</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Ace%20Cafe" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Takeaway</span>
+                        <h3>Greggs</h3>
+                        <p>Popular bakery chain offering sandwiches, pastries and hot drinks.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Unit 1, Park Royal, Acton Lane, NW10 7GF</div>
+                    <div class="detail-item">☕ Bakery & Coffee</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Greggs" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Restaurant</span>
+                        <h3>Naava Restaurant & Bar</h3>
+                        <p>Modern dining and drinks in a contemporary setting.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 247 Acton Lane, NW10 7NR</div>
+                    <div class="detail-item">🍷 Restaurant & Bar</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Naava" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <!-- Harlesden Area -->
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Caribbean Restaurant</span>
+                        <h3>One Stop Jerk Centre</h3>
+                        <p>Authentic Caribbean cuisine specializing in jerk chicken and traditional dishes.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 212 High Street, Harlesden, NW10 4SY</div>
+                    <div class="detail-item">🍗 Caribbean Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20One%20Stop%20Jerk" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Caribbean Takeaway</span>
+                        <h3>Movements Caribbean Takeaway</h3>
+                        <p>Authentic Caribbean takeaway with generous portions.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 132 High Street, NW10 4SP</div>
+                    <div class="detail-item">🍗 Caribbean Takeaway</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Movements" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Caribbean Restaurant</span>
+                        <h3>Jerkalicious</h3>
+                        <p>Vibrant Caribbean restaurant serving authentic jerk dishes and island flavors.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Harlesden, NW10</div>
+                    <div class="detail-item">🍗 Caribbean Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Jerkalicious" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Indian Restaurant</span>
+                        <h3>Palace Tandoori Restaurant</h3>
+                        <p>Traditional Indian cuisine with tandoori specialties.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 High Street, Harlesden, NW10</div>
+                    <div class="detail-item">🍛 Indian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Palace%20Tandoori" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Somali Restaurant</span>
+                        <h3>Saapo's</h3>
+                        <p>Authentic Somali cuisine bringing East African flavors to Harlesden.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 High Street, Harlesden, NW10</div>
+                    <div class="detail-item">🍲 Somali Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Saapos" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Portuguese Restaurant</span>
+                        <h3>Restaurante Sabor Brasileiro</h3>
+                        <p>Authentic Brazilian cuisine and warm atmosphere near Kensal Green.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 639 Harrow Road, NW10 5NU</div>
+                    <div class="detail-item">🇧🇷 Brazilian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Sabor%20Brasileiro" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Portuguese Restaurant</span>
+                        <h3>Tasca Da Madeira</h3>
+                        <p>Traditional Portuguese restaurant serving authentic dishes.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 31 Station Road, NW10 4UP</div>
+                    <div class="detail-item">🇵🇹 Portuguese Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Tasca%20Da%20Madeira" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Indian/Pakistani Restaurant</span>
+                        <h3>Taste Of Lahore</h3>
+                        <p>Authentic Indian and Pakistani cuisine with halal options.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 1 Manor Park Road, NW10 4JW</div>
+                    <div class="detail-item">🍛 Indian/Pakistani Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Taste%20of%20Lahore" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Fast Food</span>
+                        <h3>KFC Harlesden</h3>
+                        <p>Popular fried chicken chain restaurant.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 High Street, NW10 4NE</div>
+                    <div class="detail-item">🍗 Fast Food</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20KFC" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Portuguese Cafe</span>
+                        <h3>Tamariz Cafe & Deli</h3>
+                        <p>Portuguese café and deli with homemade pastries and coffee.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 High Street, Harlesden, NW10</div>
+                    <div class="detail-item">☕ Café & Deli</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Tamariz" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <!-- Kensal Green Area -->
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Pub & Restaurant</span>
+                        <h3>Paradise By Way of Kensal Green</h3>
+                        <p>Vibrant pub and restaurant with Sunday roasts, live music, film nights and events.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Chamberlayne Road, Kensal Green, NW10</div>
+                    <div class="detail-item">🎵 Live Events & Music</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Paradise" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Restaurant</span>
+                        <h3>Parlour</h3>
+                        <p>All-day restaurant serving everything from DIY toast to cow pies and duck liver profiteroles.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🍴 Modern British</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Parlour" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Turkish Restaurant</span>
+                        <h3>Shishlique</h3>
+                        <p>BYOB Turkish Restaurant with great selection of meats, fresh salads and tasty sides.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🥙 Turkish Cuisine - BYOB</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Shishlique" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Italian Restaurant</span>
+                        <h3>Sacro Cuore</h3>
+                        <p>Authentic Southern Italian pizza with traditional cooking methods and imported ovens.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🍕 Italian Pizza</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Sacro%20Cuore" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Italian Restaurant</span>
+                        <h3>Ida</h3>
+                        <p>Authentic Italian cuisine in a welcoming atmosphere.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🍝 Italian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Ida" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Gastropub</span>
+                        <h3>The Chamberlayne</h3>
+                        <p>Cracking pub with great Sunday roasts and local atmosphere.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Chamberlayne Road, Kensal Green, NW10</div>
+                    <div class="detail-item">🍺 Pub & Food</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Chamberlayne" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Gastropub</span>
+                        <h3>The Whippet Inn</h3>
+                        <p>Independent gastropub with great vibes, craft beer and wine selection.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Green, NW10</div>
+                    <div class="detail-item">🍺 Craft Beer & Food</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Whippet%20Inn" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Cafe</span>
+                        <h3>Bel & Nev</h3>
+                        <p>Small family-run, family-friendly café serving tasty food and coffee.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">☕ Family Café</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Bel%20Nev" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Coffee Shop</span>
+                        <h3>Cable Co</h3>
+                        <p>Specialty coffee using Climpson & Sons roasted beans with expert baristas.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">☕ Specialty Coffee</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Cable%20Co" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Coffee House</span>
+                        <h3>Wild Card</h3>
+                        <p>Specialist coffee house combining great coffee and delicious cafe style food.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">☕ Coffee & Food</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Wild%20Card" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Cafe & Wellness</span>
+                        <h3>Gracelands Yard</h3>
+                        <p>Community-focused café and wellness hub with a relaxed atmosphere.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">☕ Café & Wellness</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Gracelands" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Cafe</span>
+                        <h3>Arthur's Cafe</h3>
+                        <p>Local hidden gem visited by locals for generations.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">☕ Traditional Café</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Arthurs" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Cafe</span>
+                        <h3>Vicki's Cafe</h3>
+                        <p>Family-run neighbourhood favourite making healthy food taste indulgent.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">☕ Healthy Café</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Vickis" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <!-- Willesden Area -->
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Pub & Thai Food</span>
+                        <h3>The Rising Sun</h3>
+                        <p>Traditional pub with Secret Garden serving authentic Thai cuisine.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 25 Harlesden Road, NW10 2BY</div>
+                    <div class="detail-item">🍺 Pub & Thai Food</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Rising%20Sun" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <!-- North Acton Area -->
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Chinese Restaurant</span>
+                        <h3>North China</h3>
+                        <p>Authentic Chinese restaurant serving traditional dishes.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 305 Uxbridge Road, W3 9QU</div>
+                    <div class="detail-item">🍜 Chinese Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20North%20China" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Italian Restaurant</span>
+                        <h3>Casereccio</h3>
+                        <p>Homemade Sardinian food right by Acton Town Station.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Acton Town Station, W3</div>
+                    <div class="detail-item">🍝 Sardinian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Casereccio" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Indian Restaurant</span>
+                        <h3>Anokha</h3>
+                        <p>Modern Indian restaurant with innovative dishes.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 15 Churchfield Road, W3 6BD</div>
+                    <div class="detail-item">🍛 Indian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Anokha" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Indian Restaurant</span>
+                        <h3>Chapati Club</h3>
+                        <p>Non-traditional Indian restaurant offering modern takes on classics.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Acton, W3</div>
+                    <div class="detail-item">🍛 Modern Indian</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Chapati%20Club" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Restaurant & Bar</span>
+                        <h3>The Foundry</h3>
+                        <p>Contemporary restaurant and bar serving modern British cuisine.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 1 Victoria Road, W3 6UP</div>
+                    <div class="detail-item">🍴 Restaurant & Bar</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Foundry" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Iraqi Restaurant</span>
+                        <h3>Al Enam</h3>
+                        <p>Authentic Iraqi cuisine near North Acton station.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Near North Acton Station, W3</div>
+                    <div class="detail-item">🍲 Iraqi Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Al%20Enam" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Lebanese Restaurant</span>
+                        <h3>Barbar</h3>
+                        <p>Lebanese restaurant with authentic Middle Eastern flavors.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Near North Acton Station, W3</div>
+                    <div class="detail-item">🥙 Lebanese Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Barbar" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Lebanese Restaurant</span>
+                        <h3>Momtaz</h3>
+                        <p>Popular Lebanese restaurant serving mezze and grilled specialties.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Near North Acton Station, W3</div>
+                    <div class="detail-item">🥙 Lebanese Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Momtaz" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Italian Restaurant</span>
+                        <h3>Casa Bardotti</h3>
+                        <p>Italian restaurant offering traditional dishes in a warm setting.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Near North Acton Station, W3</div>
+                    <div class="detail-item">🍝 Italian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Casa%20Bardotti" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <!-- East Acton Area -->
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Thai Restaurant</span>
+                        <h3>Giggling Squid</h3>
+                        <p>Vibrant Thai restaurant with authentic flavors and modern ambiance.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Churchfield Road, W3 6EB</div>
+                    <div class="detail-item">🍜 Thai Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Giggling%20Squid" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Indian Restaurant</span>
+                        <h3>Poets Indian Restaurant</h3>
+                        <p>Classic Indian restaurant with extensive menu and takeaway options.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Du Cane Road, W12 0BJ</div>
+                    <div class="detail-item">🍛 Indian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Poets" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Italian Restaurant</span>
+                        <h3>Giulia Restaurant</h3>
+                        <p>Authentic Italian restaurant with homemade pasta and traditional recipes.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Askew Road, W12 9BJ</div>
+                    <div class="detail-item">🍝 Italian Cuisine</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Giulia" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Coffee Shop</span>
+                        <h3>Costa Coffee</h3>
+                        <p>Popular coffee chain with comfortable seating and WiFi.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 East Acton, W3/W12</div>
+                    <div class="detail-item">☕ Chain Coffee Shop</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Costa" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Coffee Shop</span>
+                        <h3>Esquires Coffee</h3>
+                        <p>Specialty coffee shop with fresh pastries and light bites.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Acton, W3</div>
+                    <div class="detail-item">☕ Coffee Shop</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Esquires" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Cafe</span>
+                        <h3>Cafe Blue</h3>
+                        <p>Convenient café located at North Acton Station.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 North Acton Station, W3</div>
+                    <div class="detail-item">☕ Station Café</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Cafe%20Blue" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RETAIL & SHOPPING -->
+        <div class="category-section">
+            <h2>🛍️ Retail & Shopping</h2>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Supermarket</span>
+                        <h3>ASDA Superstore</h3>
+                        <p>Large supermarket with groceries, household items, and pharmacy services.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🛒 Supermarket</div>
+                    <div class="detail-item">⏰ Open 7 days</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20ASDA" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Supermarket</span>
+                        <h3>Iceland</h3>
+                        <p>Frozen food specialist with groceries and household essentials.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 90-92 Old Oak Common Lane, W3 7DA</div>
+                    <div class="detail-item">🛒 Frozen Food Specialist</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Iceland" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Supermarket</span>
+                        <h3>Lidl</h3>
+                        <p>Discount supermarket with quality products at low prices.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Western Avenue, W3 7XX</div>
+                    <div class="detail-item">🛒 Discount Supermarket</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Lidl" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">DIY & Home</span>
+                        <h3>B&Q Superstore</h3>
+                        <p>Home improvement and DIY store with extensive range of tools and materials.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🔨 DIY & Home Improvement</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20BandQ" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">DIY & Home</span>
+                        <h3>Homebase</h3>
+                        <p>Home and garden improvement store with plants, tools and furnishings.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Western Avenue, W3 7XX</div>
+                    <div class="detail-item">🏡 Home & Garden</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Homebase" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Office Supplies</span>
+                        <h3>Staples Superstore</h3>
+                        <p>Office supplies, printing services, and business equipment.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">📝 Office Supplies</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Staples" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Butcher</span>
+                        <h3>Brooks Butchers</h3>
+                        <p>Award-winning butchers with quality meat, game and fish.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🥩 Butcher Shop</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Brooks" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Florist</span>
+                        <h3>Scarlet & Violet</h3>
+                        <p>Beautiful flower shop with fresh bouquets and arrangements.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">💐 Florist</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Scarlet%20Violet" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Wine Shop</span>
+                        <h3>Rise & Vine</h3>
+                        <p>Independent wine, beer and spirits from small producers and dealers.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🍷 Wine & Spirits</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Rise%20Vine" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Wine Shop & Bar</span>
+                        <h3>Vindinista</h3>
+                        <p>Neighbourhood wine shop and wine bar with cheese, salami and premium spirits.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Acton, W3</div>
+                    <div class="detail-item">🍷 Wine Shop & Bar</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Vindinista" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Furniture & Salvage</span>
+                        <h3>Retrouvius</h3>
+                        <p>Aladdin's Cave of salvaged furniture and architectural pieces.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🪑 Salvage & Furniture</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Retrouvius" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Grocery</span>
+                        <h3>Kensal Green Grocery</h3>
+                        <p>Local greengrocer with fresh fruit and vegetables.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 83 College Road, NW10 5ES</div>
+                    <div class="detail-item">🥬 Greengrocer</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Kensal%20Grocery" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Grocery</span>
+                        <h3>Harleseden Food Centre</h3>
+                        <p>Local grocery store with diverse international products.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 9 Craven Park Road, NW10</div>
+                    <div class="detail-item">🛒 Grocery Store</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Harleseden%20Food" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Grocery Delivery</span>
+                        <h3>Basil & Tom's</h3>
+                        <p>Family-run grocery delivering fruit/veg boxes, eggs and sourdough bread.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Delivering to W3, W4, W5, W12, W13</div>
+                    <div class="detail-item">🥬 Grocery Delivery</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Basil%20Toms" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Food & Wine</span>
+                        <h3>Ankaran Food & Wine</h3>
+                        <p>Convenience store with groceries and beverages.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Erconwald Street, W12 0BP</div>
+                    <div class="detail-item">🛒 Convenience Store</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Ankaran" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUTOMOTIVE -->
+        <div class="category-section">
+            <h2>🚗 Automotive Services</h2>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Car Dealership</span>
+                        <h3>Renault Dealership</h3>
+                        <p>Authorised Renault dealer with new and used vehicles, servicing and parts.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🚗 New & Used Cars</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Renault" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Car Dealership</span>
+                        <h3>Nissan Dealership</h3>
+                        <p>Authorised Nissan dealer offering sales, service and genuine parts.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🚗 New & Used Cars</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Nissan" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Motor Services</span>
+                        <h3>Park Royal Motor Services</h3>
+                        <p>MOT testing, servicing and repairs for all makes and models.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 19 Corby Road, NW10 7AH</div>
+                    <div class="detail-item">🔧 MOT & Servicing</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Park%20Royal%20Motors" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROFESSIONAL SERVICES -->
+        <div class="category-section">
+            <h2>💼 Professional Services</h2>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Legal Services</span>
+                        <h3>Willesden County Court</h3>
+                        <p>County court serving the local area.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Acton Lane, NW10</div>
+                    <div class="detail-item">⚖️ County Court</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20County%20Court" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Personal Care</span>
+                        <h3>Zubaldy & Co</h3>
+                        <p>Personal care and beauty services.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Space House, Abbey Road, NW10 7SU</div>
+                    <div class="detail-item">💇 Personal Care</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Zubaldy" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ENTERTAINMENT & LEISURE -->
+        <div class="category-section">
+            <h2>🎬 Entertainment & Leisure</h2>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Cinema</span>
+                        <h3>The Lexi Cinema</h3>
+                        <p>Britain's first independent boutique cinema and social enterprise.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Kensal Rise, NW10</div>
+                    <div class="detail-item">🎬 Independent Cinema</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Lexi" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- INDUSTRIAL & MANUFACTURING -->
+        <div class="category-section">
+            <h2>🏭 Industrial & Manufacturing</h2>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Food Manufacturing</span>
+                        <h3>Heinz</h3>
+                        <p>Major food manufacturing facility in Park Royal since 1919.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🏭 Food Manufacturing</div>
+                    <div class="detail-item">💼 Major Employer</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Heinz" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Bakery Manufacturing</span>
+                        <h3>The Doughnut Factory</h3>
+                        <p>Artisan doughnut production facility.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 10 Warple Mews, Warple Way, W3 0RF</div>
+                    <div class="detail-item">🍩 Bakery & Manufacturing</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Doughnut%20Factory" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+
+            <div class="business-card">
+                <div class="business-header">
+                    <div class="business-info">
+                        <span class="business-category">Business Park</span>
+                        <h3>Park Royal Business Park</h3>
+                        <p>London's largest business park hosting over 2,000 businesses.</p>
+                    </div>
+                </div>
+                <div class="business-details">
+                    <div class="detail-item">📍 Park Royal, NW10</div>
+                    <div class="detail-item">🏢 Business Park - 1,200 acres</div>
+                    <div class="detail-item">💼 2,000+ businesses</div>
+                </div>
+                <div class="business-actions">
+                    <a href="mailto:info@oldoaktown.co.uk?subject=Upgrade%20Listing%20-%20Park%20Royal%20Business" class="btn btn-upgrade">Upgrade to Featured - £35/month</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA BOX -->
+        <div class="cta-box">
+            <h2>Is Your Business Listed?</h2>
+            <p>Claim your free listing today and upgrade to reach thousands of Old Oak residents and workers!</p>
+            <a href="mailto:info@oldoaktown.co.uk?subject=List%20My%20Business" class="btn">List Your Business Free</a>
+        </div>
+    </div>
+
+    <script>
+        function searchBusinesses() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const cards = document.getElementsByClassName('business-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const text = card.textContent || card.innerText;
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            }
+        }
+
+        function filterByCategory() {
+            const select = document.getElementById('categoryFilter');
+            const category = select.value;
+            const cards = document.getElementsByClassName('business-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const categoryTag = card.querySelector('.business-category');
+
+                if (category === 'all') {
+                    card.style.display = "";
+                } else {
+                    const categoryText = categoryTag ? categoryTag.textContent.toLowerCase() : '';
+                    if (categoryText.indexOf(category) > -1) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function filterArea(area) {
+            // Remove active class from all tags
+            const tags = document.querySelectorAll('.filter-tag');
+            tags.forEach(tag => tag.classList.remove('active'));
+
+            // Add active class to clicked tag
+            event.target.classList.add('active');
+
+            const cards = document.getElementsByClassName('business-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                const card = cards[i];
+                const text = card.textContent || card.innerText;
+
+                if (area === 'all') {
+                    card.style.display = "";
+                } else {
+                    const areaText = text.toLowerCase();
+                    const areaName = area.replace('-', ' ');
+
+                    if (areaText.indexOf(areaName) > -1 ||
+                        (area === 'park-royal' && areaText.indexOf('nw10') > -1) ||
+                        (area === 'harlesden' && areaText.indexOf('harlesden') > -1) ||
+                        (area === 'kensal-green' && areaText.indexOf('kensal') > -1) ||
+                        (area === 'north-acton' && areaText.indexOf('north acton') > -1) ||
+                        (area === 'willesden' && areaText.indexOf('willesden') > -1) ||
+                        (area === 'east-acton' && areaText.indexOf('east acton') > -1)) {
+                        card.style.display = "";
+                    } else {
+                        card.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
