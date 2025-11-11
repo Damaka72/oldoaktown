@@ -350,6 +350,140 @@
             font-weight: bold;
         }
 
+        /* Video Gallery */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-card-content {
+            padding: 1.5rem;
+        }
+
+        .video-card-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--warm-brown);
+        }
+
+        .video-card-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .video-tag {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Community Resources */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--warm-brown);
+        }
+
+        .resource-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .resource-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .resource-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .resource-card ul li:before {
+            content: "→ ";
+            color: var(--warm-brown);
+            font-weight: bold;
+        }
+
+        /* Development Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            padding-left: 4rem;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 2px var(--primary-green);
+        }
+
+        .timeline-year {
+            background: var(--warm-brown);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
         /* Footer */
         footer {
             background: var(--dark-grey);
@@ -549,9 +683,11 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#news">News</a></li>
+                <li><a href="#videos">Videos</a></li>
                 <li><a href="#directory">Directory</a></li>
-                <li><a href="#events">Events</a></li>
                 <li><a href="#development">Development</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#events">Events</a></li>
                 <li><a href="#advertise">Advertise</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -653,6 +789,94 @@
         </div>
     </section>
 
+    <!-- Videos Section -->
+    <section id="videos" style="background: var(--light-grey);">
+        <div class="container">
+            <h2>Video Gallery</h2>
+            <p style="margin-bottom: 2rem;">Watch the transformation of Old Oak Common - construction updates, community stories, and development insights</p>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/FQF1rULj0r8" title="HS2 Old Oak Common Station" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <span class="video-tag">HS2</span>
+                        <span class="video-tag">Construction</span>
+                        <h3>Old Oak Common HS2 Station Construction</h3>
+                        <p>Watch the progress of the UK's largest newly built station taking shape in West London.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/mzyNV6J37Cg" title="Old Oak Development Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <span class="video-tag">Development</span>
+                        <span class="video-tag">Planning</span>
+                        <h3>Old Oak Common Regeneration Plans</h3>
+                        <p>An overview of the masterplan transforming 140 hectares of West London.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/Y_yyxc4FQiM" title="Community Impact" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <span class="video-tag">Community</span>
+                        <span class="video-tag">Local Stories</span>
+                        <h3>Community Stories & Impact</h3>
+                        <p>Hear from local residents about the changes coming to their neighborhood.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/CW-gBL2jl6E" title="Park Royal Industrial Estate" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <span class="video-tag">Business</span>
+                        <span class="video-tag">Jobs</span>
+                        <h3>Park Royal Business District</h3>
+                        <p>Discover the existing business hub and opportunities for growth in the area.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/ZGaXBhRj7eU" title="Transport Links" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <span class="video-tag">Transport</span>
+                        <span class="video-tag">Infrastructure</span>
+                        <h3>Transport & Connectivity</h3>
+                        <p>Explore the transport links that will make Old Oak the UK's best-connected station.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Future Living" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-card-content">
+                        <span class="video-tag">Housing</span>
+                        <span class="video-tag">Lifestyle</span>
+                        <h3>Living in Old Oak Common</h3>
+                        <p>A glimpse into what life will be like in this new West London neighborhood.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="color: #666; font-style: italic;">
+                    Have a video about Old Oak Common? <a href="#contact" class="btn">Submit Your Video</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
     <!-- News Article Modal -->
     <div id="articleModal" class="modal">
         <div class="modal-content">
@@ -710,6 +934,247 @@
         </div>
     </section>
 
+    <!-- Community Resources -->
+    <section id="community">
+        <div class="container">
+            <h2>Community Resources</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Everything you need to live, work, and thrive in Old Oak Common - your comprehensive guide to local services, support, and opportunities.</p>
+
+            <!-- For Residents -->
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--warm-brown);">For Residents</h3>
+            <div class="resource-grid" style="margin-bottom: 3rem;">
+                <div class="resource-card">
+                    <h3>🏠 Housing Support</h3>
+                    <p><strong>Affordable Housing Portal</strong></p>
+                    <p>Register interest for affordable homes</p>
+                    <ul>
+                        <li>Social rent applications</li>
+                        <li>Shared ownership schemes</li>
+                        <li>Housing advice sessions</li>
+                        <li>Priority allocation criteria</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Contact:</strong> housing@opdc.london.gov.uk</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>💼 Jobs & Training</h3>
+                    <p><strong>Old Oak Jobs Centre</strong></p>
+                    <p>45 High Street, Harlesden, NW10 4NX</p>
+                    <ul>
+                        <li>Free CV and interview support</li>
+                        <li>Skills training programs</li>
+                        <li>Apprenticeship opportunities</li>
+                        <li>Direct employer connections</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Hours:</strong> Mon-Fri 9am-6pm, Sat 10am-2pm</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🏥 Health & Wellbeing</h3>
+                    <p><strong>Local Health Services</strong></p>
+                    <ul>
+                        <li>Harlesden Medical Centre</li>
+                        <li>Park Royal Community Clinic</li>
+                        <li>Mental health support services</li>
+                        <li>Children's health services</li>
+                        <li>Dental practices</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Emergency:</strong> 999 | <strong>NHS 111:</strong> Call 111</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🎓 Education</h3>
+                    <p><strong>Schools & Learning</strong></p>
+                    <ul>
+                        <li>Primary schools in the area</li>
+                        <li>Secondary school options</li>
+                        <li>Nursery and childcare</li>
+                        <li>Adult education courses</li>
+                        <li>West London College</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Admissions:</strong> eadmissions.org.uk</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🚌 Transport</h3>
+                    <p><strong>Getting Around</strong></p>
+                    <ul>
+                        <li>Bus routes: 220, 224, 226, 228, 260</li>
+                        <li>Elizabeth Line (Crossrail)</li>
+                        <li>Overground connections</li>
+                        <li>Cycle hire and routes</li>
+                        <li>TfL journey planner</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Info:</strong> tfl.gov.uk</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>📚 Libraries & Community</h3>
+                    <p><strong>Local Facilities</strong></p>
+                    <ul>
+                        <li>Harlesden Library</li>
+                        <li>Community centers</li>
+                        <li>Sports facilities</li>
+                        <li>Youth clubs</li>
+                        <li>Senior activities</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Library Hours:</strong> Mon-Sat 9am-6pm</p>
+                </div>
+            </div>
+
+            <!-- For Businesses -->
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--warm-brown);">For Businesses</h3>
+            <div class="resource-grid" style="margin-bottom: 3rem;">
+                <div class="resource-card">
+                    <h3>💡 Business Support</h3>
+                    <p><strong>Old Oak Business Forum</strong></p>
+                    <p>Connecting businesses with opportunities</p>
+                    <ul>
+                        <li>Networking events</li>
+                        <li>Tender opportunities</li>
+                        <li>Business advice</li>
+                        <li>Supplier connections</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Contact:</strong> business@oldoaktown.co.uk</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🏢 Commercial Property</h3>
+                    <p><strong>Workspace & Premises</strong></p>
+                    <ul>
+                        <li>Industrial units</li>
+                        <li>Office space</li>
+                        <li>Retail opportunities</li>
+                        <li>Co-working spaces</li>
+                        <li>Development plots</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Enquiries:</strong> commercial@oldoaktown.co.uk</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>📋 Planning & Permits</h3>
+                    <p><strong>OPDC Planning</strong></p>
+                    <ul>
+                        <li>Planning applications</li>
+                        <li>Building regulations</li>
+                        <li>Business permits</li>
+                        <li>Consultation processes</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Portal:</strong> london.gov.uk/opdc</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🤝 Funding & Grants</h3>
+                    <p><strong>Financial Support</strong></p>
+                    <ul>
+                        <li>Start-up grants</li>
+                        <li>Business loans</li>
+                        <li>Innovation funding</li>
+                        <li>Skills training grants</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Info:</strong> businessadvicehub.org.uk</p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🛠️ Business Services</h3>
+                    <p><strong>Local Suppliers</strong></p>
+                    <ul>
+                        <li>Legal services</li>
+                        <li>Accounting firms</li>
+                        <li>Marketing agencies</li>
+                        <li>IT support</li>
+                        <li>Logistics providers</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><a href="#directory">View Directory →</a></p>
+                </div>
+
+                <div class="resource-card">
+                    <h3>🎯 Marketing Your Business</h3>
+                    <p><strong>Reach Local Customers</strong></p>
+                    <ul>
+                        <li>Free business listing</li>
+                        <li>Featured directory placements</li>
+                        <li>Newsletter advertising</li>
+                        <li>Content partnerships</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><a href="#advertise">See Packages →</a></p>
+                </div>
+            </div>
+
+            <!-- Key Contacts -->
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--warm-brown);">Key Contacts & Organizations</h3>
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div>
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Old Oak & Park Royal Development Corporation (OPDC)</h4>
+                        <p><strong>Website:</strong> london.gov.uk/opdc</p>
+                        <p><strong>Email:</strong> info@opdc.london.gov.uk</p>
+                        <p style="margin-top: 0.5rem; color: #666;">Lead planning authority for the area</p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Old Oak Neighbourhood Forum</h4>
+                        <p><strong>Website:</strong> oldoakneighbourhoodforum.org</p>
+                        <p><strong>Email:</strong> contact@oonf.org</p>
+                        <p style="margin-top: 0.5rem; color: #666;">Community voice in planning decisions</p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">HS2 Ltd</h4>
+                        <p><strong>Website:</strong> hs2.org.uk</p>
+                        <p><strong>Helpdesk:</strong> 08081 434 434</p>
+                        <p style="margin-top: 0.5rem; color: #666;">Station construction updates</p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Local Councils</h4>
+                        <p><strong>Hammersmith & Fulham:</strong> lbhf.gov.uk</p>
+                        <p><strong>Ealing:</strong> ealing.gov.uk</p>
+                        <p><strong>Brent:</strong> brent.gov.uk</p>
+                        <p style="margin-top: 0.5rem; color: #666;">Council services and support</p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Transport for London (TfL)</h4>
+                        <p><strong>Website:</strong> tfl.gov.uk</p>
+                        <p><strong>Phone:</strong> 0343 222 1234</p>
+                        <p style="margin-top: 0.5rem; color: #666;">Transport updates and planning</p>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Park Royal Business Group</h4>
+                        <p><strong>Website:</strong> parkroyal.org</p>
+                        <p><strong>Email:</strong> info@parkroyal.org</p>
+                        <p style="margin-top: 0.5rem; color: #666;">Business network and advocacy</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency & Important Numbers -->
+            <div style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%); color: white; padding: 2rem; border-radius: 10px;">
+                <h3 style="color: white; margin-bottom: 1rem;">Emergency & Important Numbers</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <p><strong>Emergency Services:</strong> 999</p>
+                        <p><strong>NHS 24/7 Advice:</strong> 111</p>
+                    </div>
+                    <div>
+                        <p><strong>Police Non-Emergency:</strong> 101</p>
+                        <p><strong>Crimestoppers:</strong> 0800 555 111</p>
+                    </div>
+                    <div>
+                        <p><strong>Gas Emergency:</strong> 0800 111 999</p>
+                        <p><strong>Power Cut:</strong> 105</p>
+                    </div>
+                    <div>
+                        <p><strong>Water Emergency:</strong> 0845 920 0800</p>
+                        <p><strong>Flood Line:</strong> 0345 988 1188</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Events -->
     <section id="events">
         <div class="container">
@@ -744,26 +1209,170 @@
     <!-- Development Progress -->
     <section id="development" style="background: var(--light-grey);">
         <div class="container">
-            <h2>Development Progress</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                <div>
-                    <h3>HS2 Station</h3>
-                    <p>Foundation work complete. Platform installation underway. The 14-platform station will be the UK's largest newly built station.</p>
-                    <p><strong>Status:</strong> On Track</p>
-                    <p><strong>Expected Opening:</strong> 2033+</p>
+            <h2>Development Progress & Timeline</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Track the transformation of 140 hectares into West London's newest neighborhood - 25,500 homes, 65,000 jobs, and the UK's best-connected transport hub.</p>
+
+            <!-- Development Overview Cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                <div class="resource-card">
+                    <h3>🚄 HS2 Station</h3>
+                    <p><strong>Investment:</strong> £1.7 billion</p>
+                    <p><strong>Size:</strong> 14 platforms, 850m roof span</p>
+                    <p><strong>Capacity:</strong> 250,000 passengers daily</p>
+                    <p><strong>Status:</strong> Under Construction</p>
+                    <p><strong>Opening:</strong> 2033+</p>
+                    <p style="margin-top: 1rem; color: #666;">The UK's largest newly built station, connecting HS2, Elizabeth Line, Great Western Main Line, and Heathrow Express.</p>
                 </div>
-                <div>
-                    <h3>Housing Developments</h3>
-                    <p>First phase of 500 homes approved with 50% affordable housing. Multiple developers engaged for future phases.</p>
-                    <p><strong>Status:</strong> Planning Stage</p>
-                    <p><strong>First Completions:</strong> 2027</p>
+
+                <div class="resource-card">
+                    <h3>🏘️ Housing</h3>
+                    <p><strong>Total Homes:</strong> 25,500 planned</p>
+                    <p><strong>Affordable:</strong> 50% of all homes</p>
+                    <p><strong>First Phase:</strong> 500 homes approved</p>
+                    <p><strong>Status:</strong> Planning & Construction</p>
+                    <p><strong>Timeline:</strong> 2027-2039</p>
+                    <p style="margin-top: 1rem; color: #666;">Creating one of London's most ambitious mixed-tenure communities with genuine affordable housing integration.</p>
                 </div>
-                <div>
-                    <h3>Commercial Space</h3>
-                    <p>2.5 million sq ft of new workspace planned to complement existing Park Royal industrial estate.</p>
+
+                <div class="resource-card">
+                    <h3>💼 Employment</h3>
+                    <p><strong>New Jobs:</strong> 65,000 planned</p>
+                    <p><strong>Current Jobs:</strong> 40,000 (Park Royal)</p>
+                    <p><strong>Commercial Space:</strong> 2.5 million sq ft</p>
                     <p><strong>Status:</strong> Masterplanning</p>
-                    <p><strong>Timeline:</strong> 2028-2035</p>
+                    <p><strong>Timeline:</strong> 2028-2039</p>
+                    <p style="margin-top: 1rem; color: #666;">Building on Park Royal's industrial legacy with modern workspace, tech hubs, and diverse employment opportunities.</p>
                 </div>
+
+                <div class="resource-card">
+                    <h3>🌳 Green Space</h3>
+                    <p><strong>Parks:</strong> 40 hectares planned</p>
+                    <p><strong>Grand Union Canal:</strong> Enhanced towpath</p>
+                    <p><strong>Biodiversity:</strong> Protected habitats</p>
+                    <p><strong>Status:</strong> Design Phase</p>
+                    <p><strong>Timeline:</strong> 2026-2035</p>
+                    <p style="margin-top: 1rem; color: #666;">Creating one of London's greenest new neighborhoods with extensive parks, waterways, and sustainable design.</p>
+                </div>
+            </div>
+
+            <!-- Development Timeline -->
+            <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-green);">Development Timeline</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">2015-2020</span>
+                    <h3>Planning & Preparation</h3>
+                    <p><strong>Key Milestones:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Old Oak and Park Royal Development Corporation (OPDC) established</li>
+                        <li>Masterplan consultation completed</li>
+                        <li>HS2 station design finalized</li>
+                        <li>Site preparation and enabling works begun</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">2020-2025</span>
+                    <h3>Early Construction Phase</h3>
+                    <p><strong>Current Status:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>HS2 station foundation work completed (2024)</li>
+                        <li>Platform installation underway</li>
+                        <li>First housing development approved (500 homes)</li>
+                        <li>Enhanced bus services launched</li>
+                        <li>Old Oak Jobs Centre opened</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">2026-2030</span>
+                    <h3>Accelerated Development</h3>
+                    <p><strong>Planned Milestones:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>First residents move in (2027)</li>
+                        <li>HS2 station structure completed</li>
+                        <li>Multiple housing phases under construction</li>
+                        <li>Commercial developments begin</li>
+                        <li>Park and green space creation starts</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">2030-2035</span>
+                    <h3>Station Opening & Growth</h3>
+                    <p><strong>Major Events:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>HS2 Old Oak Common station opens (2033)</li>
+                        <li>10,000+ homes completed</li>
+                        <li>Commercial districts established</li>
+                        <li>Community facilities operational</li>
+                        <li>Major employers relocate to area</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <span class="timeline-year">2035-2039</span>
+                    <h3>Completion & Maturation</h3>
+                    <p><strong>Final Phase:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>All 25,500 homes completed</li>
+                        <li>Full employment target reached (65,000 jobs)</li>
+                        <li>Complete neighborhood infrastructure in place</li>
+                        <li>Old Oak established as major London hub</li>
+                        <li>Long-term community institutions thriving</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Development Areas -->
+            <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-green); margin-top: 3rem;">Key Development Areas</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h3>Old Oak North</h3>
+                    <p><strong>Focus:</strong> Residential & Community</p>
+                    <p style="margin-top: 1rem;">High-density mixed-tenure housing with excellent access to the HS2 station. Includes schools, healthcare, and community facilities.</p>
+                    <p style="margin-top: 1rem;"><strong>Homes:</strong> 8,000+ | <strong>Timeline:</strong> 2027-2035</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h3>Old Oak South</h3>
+                    <p><strong>Focus:</strong> Mixed-Use Gateway</p>
+                    <p style="margin-top: 1rem;">Commercial and residential mix creating a vibrant gateway district around the station with retail, dining, and entertainment.</p>
+                    <p style="margin-top: 1rem;"><strong>Homes:</strong> 6,000+ | <strong>Timeline:</strong> 2028-2036</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h3>Park Royal</h3>
+                    <p><strong>Focus:</strong> Employment & Innovation</p>
+                    <p style="margin-top: 1rem;">Transformation of existing industrial estate into modern workspace, tech clusters, and innovation districts while preserving key industries.</p>
+                    <p style="margin-top: 1rem;"><strong>Jobs:</strong> 40,000+ | <strong>Timeline:</strong> 2025-2039</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h3>Grand Union Canal</h3>
+                    <p><strong>Focus:</strong> Leisure & Waterfront</p>
+                    <p style="margin-top: 1rem;">Enhanced canal-side development with waterfront homes, towpath improvements, cafes, and leisure facilities creating a unique urban oasis.</p>
+                    <p style="margin-top: 1rem;"><strong>Homes:</strong> 3,000+ | <strong>Timeline:</strong> 2029-2038</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h3>Scrubs Lane</h3>
+                    <p><strong>Focus:</strong> Creative Industries</p>
+                    <p style="margin-top: 1rem;">Building on the area's TV and media heritage with studio space, creative workspace, and homes for creative professionals.</p>
+                    <p style="margin-top: 1rem;"><strong>Homes:</strong> 4,000+ | <strong>Timeline:</strong> 2030-2037</p>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <h3>Wormwood Scrubs</h3>
+                    <p><strong>Focus:</strong> Green Connection</p>
+                    <p style="margin-top: 1rem;">Enhancing connections to this historic open space with improved access, ecological corridors, and community green initiatives.</p>
+                    <p style="margin-top: 1rem;"><strong>Status:</strong> Protected Space | <strong>Timeline:</strong> Ongoing</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem; background: white; padding: 2rem; border-radius: 10px;">
+                <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Stay Updated on Development Progress</h3>
+                <p style="margin-bottom: 1rem;">Get monthly updates on construction milestones, planning applications, and community consultations.</p>
+                <a href="#contact" class="btn btn-primary">Subscribe to Development Updates</a>
             </div>
         </div>
     </section>
