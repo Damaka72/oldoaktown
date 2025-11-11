@@ -2,8 +2,8 @@
 // Replace these with your actual Stripe Price IDs after creating products in Stripe Dashboard
 
 const STRIPE_CONFIG = {
-    // REPLACE WITH YOUR STRIPE PUBLISHABLE KEY
-    publishableKey: 'pk_test_YOUR_KEY_HERE', // Get from https://dashboard.stripe.com/test/apikeys
+    // Stripe Publishable Key (Test Mode)
+    publishableKey: 'pk_test_51SSKU2ACivaWK7rd4GweHtrVYLG3hb4j9mSbMUn63dJGrW5qZ4F2UXwgO0mXLEaCOnK0yeHo3W10TBRxmenmSfWi00o75BTXd9',
 
     // Price IDs for each package/frequency combination
     // Create these in Stripe Dashboard: https://dashboard.stripe.com/test/products
