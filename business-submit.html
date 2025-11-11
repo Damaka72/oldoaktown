@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Business - Old Oak Town</title>
+    <meta name="description" content="Advertise your business on Old Oak Town. Choose your package and get started today.">
+
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="stripe-config.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+            --light-grey: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background: var(--light-grey);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        header {
+            background: var(--primary-green);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-section h2 {
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--warm-brown);
+            padding-bottom: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+
+        label .required {
+            color: #dc3545;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .package-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .package-option {
+            border: 3px solid #ddd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            background: white;
+        }
+
+        .package-option:hover {
+            border-color: var(--primary-green);
+            transform: translateY(-3px);
+        }
+
+        .package-option.selected {
+            border-color: var(--primary-green);
+            background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.2);
+        }
+
+        .package-option h3 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--warm-brown);
+            margin: 0.5rem 0;
+        }
+
+        .payment-frequency {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .frequency-option {
+            flex: 1;
+            border: 3px solid #ddd;
+            padding: 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            background: white;
+            position: relative;
+        }
+
+        .frequency-option:hover {
+            border-color: var(--primary-green);
+        }
+
+        .frequency-option.selected {
+            border-color: var(--primary-green);
+            background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
+        }
+
+        .savings-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #dc3545;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .price-summary {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .price-summary h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .price-total {
+            border-top: 2px solid rgba(255,255,255,0.3);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .features-list {
+            background: var(--cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .features-list h4 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .features-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        .conditional-fields {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .conditional-fields.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+
+        .btn:hover {
+            background: var(--warm-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #0066cc;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+        }
+
+        .info-box h4 {
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-message h2 {
+            color: #155724;
+            margin-bottom: 1rem;
+        }
+
+        .file-upload {
+            border: 2px dashed #ddd;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary-green);
+            background: var(--cream);
+        }
+
+        .file-upload.dragover {
+            border-color: var(--primary-green);
+            background: var(--cream);
+        }
+
+        @media (max-width: 768px) {
+            .package-selector,
+            .payment-frequency {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .form-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Advertise Your Business</h1>
+            <p>Choose your package, submit your details, and start reaching thousands of Old Oak visitors</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <a href="index.html#advertise" class="back-link">← Back to Main Site</a>
+
+        <div id="formContainer">
+            <!-- Step 1: Package Selection -->
+            <div class="form-section">
+                <h2>Step 1: Choose Your Package</h2>
+
+                <div class="package-selector">
+                    <div class="package-option" data-package="free" onclick="selectPackage('free')">
+                        <h3>Free Listing</h3>
+                        <div class="package-price">£0</div>
+                        <p>Basic directory presence</p>
+                    </div>
+
+                    <div class="package-option" data-package="featured" onclick="selectPackage('featured')">
+                        <h3>Featured Listing</h3>
+                        <div class="package-price">£35<span style="font-size:1rem">/mo</span></div>
+                        <p>Stand out from the crowd</p>
+                    </div>
+
+                    <div class="package-option" data-package="premium" onclick="selectPackage('premium')">
+                        <h3>Premium Package</h3>
+                        <div class="package-price">£75<span style="font-size:1rem">/mo</span></div>
+                        <p>Maximum visibility</p>
+                    </div>
+
+                    <div class="package-option" data-package="newsletter" onclick="selectPackage('newsletter')">
+                        <h3>Newsletter Sponsor</h3>
+                        <div class="package-price">£150<span style="font-size:1rem">/mo</span></div>
+                        <p>Direct audience reach</p>
+                    </div>
+                </div>
+
+                <div id="packageFeatures" class="features-list" style="display:none;">
+                    <h4>Your Package Includes:</h4>
+                    <ul id="featuresList"></ul>
+                </div>
+            </div>
+
+            <!-- Step 2: Payment Frequency (shown only for paid packages) -->
+            <div class="form-section" id="paymentSection" style="display:none;">
+                <h2>Step 2: Choose Payment Frequency</h2>
+
+                <div class="payment-frequency">
+                    <div class="frequency-option" data-frequency="monthly" onclick="selectFrequency('monthly')">
+                        <h3>Monthly</h3>
+                        <p id="monthlyPrice">£0/month</p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;">Pay as you go</p>
+                    </div>
+
+                    <div class="frequency-option" data-frequency="annual" onclick="selectFrequency('annual')">
+                        <div class="savings-badge">SAVE 70%!</div>
+                        <h3>Annual</h3>
+                        <p id="annualPrice">£0/year</p>
+                        <p style="margin-top: 0.5rem; color: #666; font-size: 0.9rem;" id="savingsText">Save £0</p>
+                    </div>
+                </div>
+
+                <div class="price-summary" id="priceSummary" style="display:none;">
+                    <h3>Price Summary</h3>
+                    <div class="price-row">
+                        <span>Package:</span>
+                        <span id="summaryPackage">-</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Billing:</span>
+                        <span id="summaryFrequency">-</span>
+                    </div>
+                    <div class="price-row price-total">
+                        <span>Total:</span>
+                        <span id="summaryTotal">£0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Business Information -->
+            <div class="form-section" id="businessInfoSection" style="display:none;">
+                <h2>Step 3: Business Information</h2>
+
+                <div class="info-box">
+                    <h4>What happens next?</h4>
+                    <p>After submitting your information, you'll be redirected to secure payment. Once payment is confirmed, we'll review your listing and publish it within 24 hours.</p>
+                </div>
+
+                <form id="businessForm">
+                    <!-- Basic Information (All Packages) -->
+                    <div class="form-group">
+                        <label>Business Name <span class="required">*</span></label>
+                        <input type="text" id="businessName" name="businessName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Business Category <span class="required">*</span></label>
+                        <select id="category" name="category" required>
+                            <option value="">Select a category</option>
+                            <option value="food-drink">Food & Drink</option>
+                            <option value="retail">Retail & Shopping</option>
+                            <option value="services">Professional Services</option>
+                            <option value="health">Health & Wellness</option>
+                            <option value="property">Property & Real Estate</option>
+                            <option value="construction">Construction & Trade</option>
+                            <option value="technology">Technology & IT</option>
+                            <option value="education">Education & Training</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Business Address</label>
+                        <input type="text" id="address" name="address" placeholder="Street Address">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Postcode</label>
+                        <input type="text" id="postcode" name="postcode" placeholder="e.g., NW10 1AB">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Business Description <span class="required">*</span></label>
+                        <textarea id="description" name="description" required placeholder="Tell us about your business (50-200 words)"></textarea>
+                        <small style="color: #666;">Maximum 200 words</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                    </div>
+
+                    <!-- Featured Listing and Above -->
+                    <div class="conditional-fields" id="featuredFields">
+                        <div class="form-group">
+                            <label>Upload Logo <span class="required">*</span></label>
+                            <div class="file-upload" id="logoUpload">
+                                <p>📷 Click to upload or drag and drop</p>
+                                <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">PNG, JPG or SVG (max 2MB)</p>
+                                <input type="file" id="logo" name="logo" accept="image/*" style="display:none;">
+                            </div>
+                            <div id="logoPreview" style="margin-top: 1rem;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Business Images (optional)</label>
+                            <div class="file-upload" id="imagesUpload">
+                                <p>📸 Click to upload multiple images</p>
+                                <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">Up to 5 images (max 2MB each)</p>
+                                <input type="file" id="images" name="images" accept="image/*" multiple style="display:none;">
+                            </div>
+                            <div id="imagesPreview" style="margin-top: 1rem;"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Social Media Links</label>
+                            <input type="url" id="facebook" name="facebook" placeholder="Facebook URL" style="margin-bottom: 0.5rem;">
+                            <input type="url" id="instagram" name="instagram" placeholder="Instagram URL" style="margin-bottom: 0.5rem;">
+                            <input type="url" id="twitter" name="twitter" placeholder="Twitter/X URL" style="margin-bottom: 0.5rem;">
+                            <input type="url" id="linkedin" name="linkedin" placeholder="LinkedIn URL">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Opening Hours</label>
+                            <textarea id="hours" name="hours" placeholder="e.g., Mon-Fri: 9am-5pm, Sat: 10am-4pm, Sun: Closed"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Premium and Newsletter Packages -->
+                    <div class="conditional-fields" id="premiumFields">
+                        <div class="form-group">
+                            <label>Special Offers/Promotions</label>
+                            <textarea id="offers" name="offers" placeholder="Any special offers you'd like to highlight?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Target Audience</label>
+                            <input type="text" id="audience" name="audience" placeholder="e.g., Local residents, New homeowners, Business professionals">
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; font-weight: normal;">
+                            <input type="checkbox" id="terms" required style="width: auto; margin-right: 0.5rem;">
+                            I agree to the <a href="#" style="color: var(--primary-green);">Terms & Conditions</a> and confirm all information provided is accurate
+                        </label>
+                    </div>
+
+                    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">Start Over</button>
+                        <button type="submit" class="btn" id="submitBtn">Proceed to Payment</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage">
+                <h2>✅ Submission Successful!</h2>
+                <p style="margin: 1rem 0;">Thank you for submitting your business listing!</p>
+                <p>You'll receive a confirmation email shortly with payment details.</p>
+                <p style="margin-top: 1.5rem;">
+                    <a href="index.html" class="btn">Return to Homepage</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Package and pricing data
+        const packages = {
+            free: {
+                name: 'Free Listing',
+                price: 0,
+                features: [
+                    'Business name & category',
+                    'Contact details',
+                    'Brief description',
+                    'Standard placement'
+                ]
+            },
+            featured: {
+                name: 'Featured Listing',
+                monthlyPrice: 35,
+                annualPrice: 126,
+                features: [
+                    'Everything in Free',
+                    'Logo & images',
+                    'Top of category placement',
+                    'Enhanced description',
+                    'Social media links',
+                    'Opening hours display'
+                ]
+            },
+            premium: {
+                name: 'Premium Package',
+                monthlyPrice: 75,
+                annualPrice: 270,
+                features: [
+                    'Everything in Featured',
+                    'Homepage banner placement',
+                    'Newsletter feature',
+                    'Special offers section',
+                    'Priority support',
+                    'Analytics dashboard'
+                ]
+            },
+            newsletter: {
+                name: 'Newsletter Sponsor',
+                monthlyPrice: 150,
+                annualPrice: 540,
+                features: [
+                    'Dedicated sponsor section',
+                    'Logo & description in every newsletter',
+                    'Link to your website',
+                    'Reach 5,000+ subscribers',
+                    'Monthly performance report',
+                    'Social media promotion'
+                ]
+            }
+        };
+
+        let selectedPackage = null;
+        let selectedFrequency = null;
+
+        // Package selection
+        function selectPackage(packageType) {
+            selectedPackage = packageType;
+
+            // Update UI
+            document.querySelectorAll('.package-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector(`[data-package="${packageType}"]`).classList.add('selected');
+
+            // Show features
+            const pkg = packages[packageType];
+            const featuresList = document.getElementById('featuresList');
+            featuresList.innerHTML = pkg.features.map(f => `<li>${f}</li>`).join('');
+            document.getElementById('packageFeatures').style.display = 'block';
+
+            // Show payment section for paid packages
+            if (packageType !== 'free') {
+                document.getElementById('paymentSection').style.display = 'block';
+                updatePricing();
+            } else {
+                document.getElementById('paymentSection').style.display = 'none';
+                document.getElementById('businessInfoSection').style.display = 'block';
+                updateConditionalFields();
+            }
+
+            // Scroll to next section
+            setTimeout(() => {
+                const nextSection = packageType === 'free' ?
+                    document.getElementById('businessInfoSection') :
+                    document.getElementById('paymentSection');
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // Frequency selection
+        function selectFrequency(frequency) {
+            selectedFrequency = frequency;
+
+            // Update UI
+            document.querySelectorAll('.frequency-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector(`[data-frequency="${frequency}"]`).classList.add('selected');
+
+            // Show summary
+            updatePriceSummary();
+            document.getElementById('priceSummary').style.display = 'block';
+            document.getElementById('businessInfoSection').style.display = 'block';
+            updateConditionalFields();
+
+            // Scroll to form
+            setTimeout(() => {
+                document.getElementById('businessInfoSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+        }
+
+        // Update pricing display
+        function updatePricing() {
+            if (!selectedPackage || selectedPackage === 'free') return;
+
+            const pkg = packages[selectedPackage];
+            const monthlyPrice = pkg.monthlyPrice;
+            const annualPrice = pkg.annualPrice;
+            const savings = (monthlyPrice * 12) - annualPrice;
+
+            document.getElementById('monthlyPrice').textContent = `£${monthlyPrice}/month`;
+            document.getElementById('annualPrice').textContent = `£${annualPrice}/year`;
+            document.getElementById('savingsText').textContent = `Save £${savings}`;
+        }
+
+        // Update price summary
+        function updatePriceSummary() {
+            if (!selectedPackage || !selectedFrequency) return;
+
+            const pkg = packages[selectedPackage];
+            const price = selectedFrequency === 'monthly' ?
+                `£${pkg.monthlyPrice}/month` :
+                `£${pkg.annualPrice}/year`;
+
+            document.getElementById('summaryPackage').textContent = pkg.name;
+            document.getElementById('summaryFrequency').textContent =
+                selectedFrequency === 'monthly' ? 'Monthly' : 'Annual (Save 70%)';
+            document.getElementById('summaryTotal').textContent = price;
+        }
+
+        // Update conditional fields based on package
+        function updateConditionalFields() {
+            const featuredFields = document.getElementById('featuredFields');
+            const premiumFields = document.getElementById('premiumFields');
+
+            // Hide all first
+            featuredFields.classList.remove('show');
+            premiumFields.classList.remove('show');
+
+            // Show based on package
+            if (selectedPackage === 'featured' || selectedPackage === 'premium' || selectedPackage === 'newsletter') {
+                featuredFields.classList.add('show');
+                // Make logo required for paid packages
+                document.getElementById('logo').required = true;
+            }
+
+            if (selectedPackage === 'premium' || selectedPackage === 'newsletter') {
+                premiumFields.classList.add('show');
+            }
+        }
+
+        // File upload handling
+        function setupFileUpload(uploadId, inputId, previewId, multiple = false) {
+            const uploadDiv = document.getElementById(uploadId);
+            const input = document.getElementById(inputId);
+            const preview = document.getElementById(previewId);
+
+            uploadDiv.addEventListener('click', () => input.click());
+
+            uploadDiv.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadDiv.classList.add('dragover');
+            });
+
+            uploadDiv.addEventListener('dragleave', () => {
+                uploadDiv.classList.remove('dragover');
+            });
+
+            uploadDiv.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadDiv.classList.remove('dragover');
+                input.files = e.dataTransfer.files;
+                handleFileSelect(input, preview);
+            });
+
+            input.addEventListener('change', () => {
+                handleFileSelect(input, preview);
+            });
+        }
+
+        function handleFileSelect(input, preview) {
+            preview.innerHTML = '';
+            const files = Array.from(input.files);
+
+            files.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.maxWidth = '150px';
+                        img.style.margin = '0.5rem';
+                        img.style.borderRadius = '5px';
+                        img.style.border = '2px solid #ddd';
+                        preview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        // Initialize file uploads
+        setupFileUpload('logoUpload', 'logo', 'logoPreview');
+        setupFileUpload('imagesUpload', 'images', 'imagesPreview', true);
+
+        // Form submission
+        document.getElementById('businessForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Gather form data
+            const formData = new FormData(this);
+            const data = {
+                package: selectedPackage,
+                frequency: selectedFrequency,
+                businessName: formData.get('businessName'),
+                category: formData.get('category'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                address: formData.get('address'),
+                postcode: formData.get('postcode'),
+                description: formData.get('description'),
+                website: formData.get('website'),
+                facebook: formData.get('facebook'),
+                instagram: formData.get('instagram'),
+                twitter: formData.get('twitter'),
+                linkedin: formData.get('linkedin'),
+                hours: formData.get('hours'),
+                offers: formData.get('offers'),
+                audience: formData.get('audience'),
+                submittedAt: new Date().toISOString()
+            };
+
+            // Calculate total price
+            let totalPrice = 0;
+            if (selectedPackage !== 'free') {
+                const pkg = packages[selectedPackage];
+                totalPrice = selectedFrequency === 'monthly' ? pkg.monthlyPrice : pkg.annualPrice;
+            }
+
+            console.log('Form Data:', data);
+            console.log('Total Price:', totalPrice);
+
+            // TODO: Send to backend/payment processor
+            // For now, simulate submission
+
+            if (selectedPackage === 'free') {
+                // For free listings, just submit
+                await simulateSubmission(data);
+                showSuccess();
+            } else {
+                // For paid listings, redirect to payment
+                redirectToPayment(data, totalPrice);
+            }
+        });
+
+        async function simulateSubmission(data) {
+            // In production, this would send to your backend
+            // Example: await fetch('/api/business-submit', { method: 'POST', body: JSON.stringify(data) })
+
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log('Submitting to backend:', data);
+                    resolve();
+                }, 1000);
+            });
+        }
+
+        async function redirectToPayment(data, amount) {
+            // Store data in sessionStorage for payment confirmation
+            sessionStorage.setItem('businessSubmission', JSON.stringify(data));
+
+            // Get the appropriate Stripe Price ID
+            const priceId = STRIPE_CONFIG.priceIds[selectedPackage][selectedFrequency];
+
+            if (!priceId || priceId.startsWith('price_')) {
+                // Stripe not configured yet - show instructions
+                alert(
+                    `⚠️ Stripe Payment Not Configured Yet\n\n` +
+                    `To enable payments:\n` +
+                    `1. Create a Stripe account at stripe.com\n` +
+                    `2. Create products in Stripe Dashboard\n` +
+                    `3. Update stripe-config.js with your Price IDs\n\n` +
+                    `For now, showing demo success page.\n\n` +
+                    `Amount: £${amount}`
+                );
+                showSuccess();
+                return;
+            }
+
+            try {
+                // Initialize Stripe
+                const stripe = Stripe(STRIPE_CONFIG.publishableKey);
+
+                // Show loading state
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Redirecting to payment...';
+
+                // Determine payment mode
+                const mode = selectedFrequency === 'monthly' ? 'subscription' : 'payment';
+
+                // Redirect to Stripe Checkout
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price: priceId,
+                        quantity: 1
+                    }],
+                    mode: mode,
+                    successUrl: STRIPE_CONFIG.successUrl + '?session_id={CHECKOUT_SESSION_ID}',
+                    cancelUrl: STRIPE_CONFIG.cancelUrl,
+                    customerEmail: data.email,
+                    clientReferenceId: Date.now().toString(), // Unique reference for this submission
+                    metadata: {
+                        businessName: data.businessName,
+                        package: selectedPackage,
+                        frequency: selectedFrequency
+                    }
+                });
+
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('Payment error: ' + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Proceed to Payment';
+                }
+            } catch (error) {
+                console.error('Payment processing error:', error);
+                alert('An error occurred. Please try again or contact support.');
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('submitBtn').textContent = 'Proceed to Payment';
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to start over? All entered information will be lost.')) {
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
