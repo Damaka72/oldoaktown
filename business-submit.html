@@ -926,8 +926,8 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Redirecting to payment...';
 
-                // Determine payment mode
-                const mode = selectedFrequency === 'monthly' ? 'subscription' : 'payment';
+                // All our products are subscriptions (both monthly and annual)
+                const mode = 'subscription';
 
                 console.log('Calling redirectToCheckout...');
 
@@ -941,7 +941,7 @@
                     successUrl: STRIPE_CONFIG.successUrl + '?session_id={CHECKOUT_SESSION_ID}',
                     cancelUrl: STRIPE_CONFIG.cancelUrl,
                     customerEmail: data.email,
-                    clientReferenceId: Date.now().toString(), // Unique reference for this submission
+                    clientReferenceId: Date.now().toString(),
                     metadata: {
                         businessName: data.businessName,
                         package: selectedPackage,
