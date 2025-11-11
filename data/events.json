@@ -1,0 +1,52 @@
+{
+  "events": [
+    {
+      "id": "old-oak-community-forum-2025-11-15",
+      "title": "Old Oak Community Forum",
+      "date": "2025-11-15",
+      "startTime": "18:30",
+      "endTime": "20:30",
+      "location": {
+        "name": "Harlesden Library",
+        "address": "High Street, Harlesden"
+      },
+      "description": "Monthly community meeting to discuss development updates and local concerns.",
+      "category": "community",
+      "registrationUrl": "https://www.brent.gov.uk/your-community/community-events",
+      "sourceUrl": "https://www.brent.gov.uk/your-community/community-events",
+      "status": "upcoming"
+    },
+    {
+      "id": "hs2-station-tour-2025-11-22",
+      "title": "HS2 Station Tour",
+      "date": "2025-11-22",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "location": {
+        "name": "Old Oak Common Station Site",
+        "address": "Meet at Victoria Gate"
+      },
+      "description": "Guided tour of the new HS2 station construction site with Q&A session.",
+      "category": "tour",
+      "registrationUrl": "https://www.hs2.org.uk/events/old-oak-common-tours",
+      "sourceUrl": "https://www.hs2.org.uk/events/old-oak-common-tours",
+      "status": "upcoming"
+    },
+    {
+      "id": "christmas-market-2025-12-01",
+      "title": "Old Oak Christmas Market",
+      "date": "2025-12-01",
+      "startTime": "10:00",
+      "endTime": "16:00",
+      "location": {
+        "name": "Wormholt Park",
+        "address": "Wormholt Park, W12"
+      },
+      "description": "Annual Christmas market featuring local vendors, food, and entertainment.",
+      "category": "market",
+      "registrationUrl": "https://www.lbhf.gov.uk/events",
+      "sourceUrl": "https://www.lbhf.gov.uk/events",
+      "status": "upcoming"
+    }
+  ]
+}
