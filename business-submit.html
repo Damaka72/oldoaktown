@@ -941,12 +941,7 @@
                     successUrl: STRIPE_CONFIG.successUrl + '?session_id={CHECKOUT_SESSION_ID}',
                     cancelUrl: STRIPE_CONFIG.cancelUrl,
                     customerEmail: data.email,
-                    clientReferenceId: Date.now().toString(),
-                    metadata: {
-                        businessName: data.businessName,
-                        package: selectedPackage,
-                        frequency: selectedFrequency
-                    }
+                    clientReferenceId: Date.now().toString()
                 });
 
                 if (error) {
