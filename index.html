@@ -1484,32 +1484,6 @@
             <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--warm-brown);">For Businesses</h3>
             <div class="resource-grid" style="margin-bottom: 3rem;">
                 <div class="resource-card">
-                    <h3>💡 Business Support</h3>
-                    <p><strong>Old Oak Business Forum</strong></p>
-                    <p>Connecting businesses with opportunities</p>
-                    <ul>
-                        <li>Networking events</li>
-                        <li>Tender opportunities</li>
-                        <li>Business advice</li>
-                        <li>Supplier connections</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Contact:</strong> business@oldoaktown.co.uk</p>
-                </div>
-
-                <div class="resource-card">
-                    <h3>🏢 Commercial Property</h3>
-                    <p><strong>Workspace & Premises</strong></p>
-                    <ul>
-                        <li>Industrial units</li>
-                        <li>Office space</li>
-                        <li>Retail opportunities</li>
-                        <li>Co-working spaces</li>
-                        <li>Development plots</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Enquiries:</strong> commercial@oldoaktown.co.uk</p>
-                </div>
-
-                <div class="resource-card">
                     <h3>📋 Planning & Permits</h3>
                     <p><strong>OPDC Planning</strong></p>
                     <ul>
@@ -1898,9 +1872,9 @@
                         <li>Brief description</li>
                         <li>Standard placement</li>
                     </ul>
-                    <a href="#contact" class="btn">Get Started</a>
+                    <a href="business-submit.html" class="btn">Get Started</a>
                 </div>
-                
+
                 <div class="pricing-card featured">
                     <h3>Featured Listing</h3>
                     <div class="price">£35<span style="font-size: 1rem;">/month</span></div>
@@ -1912,9 +1886,10 @@
                         <li>Enhanced description</li>
                         <li>Social media links</li>
                     </ul>
-                    <a href="#contact" class="btn btn-primary">Get Featured</a>
+                    <a href="business-submit.html" class="btn btn-primary">Get Featured</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">or £126/year (Save 70%)</p>
                 </div>
-                
+
                 <div class="pricing-card">
                     <h3>Premium Package</h3>
                     <div class="price">£75<span style="font-size: 1rem;">/month</span></div>
@@ -1926,9 +1901,10 @@
                         <li>Priority support</li>
                         <li>Analytics dashboard</li>
                     </ul>
-                    <a href="#contact" class="btn">Go Premium</a>
+                    <a href="business-submit.html" class="btn">Go Premium</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">or £270/year (Save 70%)</p>
                 </div>
-                
+
                 <div class="pricing-card">
                     <h3>Newsletter Sponsor</h3>
                     <div class="price">£150<span style="font-size: 1rem;">/month</span></div>
@@ -1940,41 +1916,19 @@
                         <li>5,000+ subscribers</li>
                         <li>Monthly report</li>
                     </ul>
-                    <a href="#contact" class="btn">Sponsor Now</a>
+                    <a href="business-submit.html" class="btn">Sponsor Now</a>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">or £540/year (Save 70%)</p>
                 </div>
             </div>
 
-            <div style="background: white; padding: 2rem; border-radius: 10px; margin-top: 3rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                <h3>Business Listing Enquiry</h3>
-                <form id="businessForm">
-                    <div class="form-group">
-                        <label>Business Name *</label>
-                        <input type="text" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Contact Email *</label>
-                        <input type="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number *</label>
-                        <input type="tel" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Listing Type *</label>
-                        <select required>
-                            <option value="">Select an option</option>
-                            <option>Free Listing (£0)</option>
-                            <option>Featured Listing (£35/month)</option>
-                            <option>Premium Package (£75/month)</option>
-                            <option>Newsletter Sponsor (£150/month)</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Business Description</label>
-                        <textarea placeholder="Tell us about your business..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit Enquiry</button>
-                </form>
+            <div style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%); color: white; padding: 3rem; border-radius: 10px; margin-top: 3rem; text-align: center;">
+                <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem;">Ready to Get Started?</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Join hundreds of businesses reaching thousands of Old Oak visitors every month</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="business-submit.html" class="btn" style="background: white; color: var(--primary-green); font-size: 1.1rem;">Submit Your Business Now</a>
+                    <a href="#contact" class="btn" style="background: transparent; border: 2px solid white; font-size: 1.1rem;">Contact Us First</a>
+                </div>
+                <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.9;">💳 Secure payment • ⚡ Published within 24 hours • 📊 Monthly analytics</p>
             </div>
         </div>
     </section>
@@ -2328,27 +2282,6 @@
 
             alert('Thank you for your message! We\'ll get back to you soon.');
             this.reset();        });
-
-        // Business Listing Form Handling
-        document.getElementById('businessForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const listingType = this.querySelector('select').value;
-
-            // Track event in Google Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'business_listing_submission', {
-                    'event_category': 'monetization',
-                    'event_label': listingType
-                });
-            }
-
-            // In production, this would send data to a backend API
-            alert('Thank you for your interest in ' + listingType + '!\n\nWe\'ll contact you within 24 hours with next steps and payment details (if applicable).');
-
-            this.reset();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
 
         // Newsletter Form Handling
         const newsletterForms = document.querySelectorAll('.newsletter-form');

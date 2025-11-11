@@ -41,6 +41,7 @@ config/keys.json
 # Data that might contain personal information
 data/submissions/
 data/private/
+submissions/
 
 # Backup files
 *.bak
