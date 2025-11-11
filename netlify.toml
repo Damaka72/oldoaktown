@@ -1,0 +1,29 @@
+# Netlify Configuration for Old Oak Town
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Environment variables (set these in Netlify dashboard or use .env file locally)
+# STRIPE_SECRET_KEY - Your Stripe secret key
+# SMTP_HOST - SMTP server host
+# SMTP_PORT - SMTP server port
+# SMTP_USER - SMTP username
+# SMTP_PASS - SMTP password
+# SMTP_FROM - From email address
+# ADMIN_EMAIL - Admin email to receive notifications
+
+# Redirect rules
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Headers for security
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"

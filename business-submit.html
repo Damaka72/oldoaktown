@@ -6,6 +6,10 @@
     <title>Submit Your Business - Old Oak Town</title>
     <meta name="description" content="Advertise your business on Old Oak Town. Choose your package and get started today.">
 
+    <!-- Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="stripe-config.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -874,28 +878,70 @@
             });
         }
 
-        function redirectToPayment(data, amount) {
+        async function redirectToPayment(data, amount) {
             // Store data in sessionStorage for payment confirmation
             sessionStorage.setItem('businessSubmission', JSON.stringify(data));
 
-            // In production, integrate with Stripe/PayPal
-            // Example Stripe integration:
-            /*
-            const stripe = Stripe('your_publishable_key');
-            stripe.redirectToCheckout({
-                lineItems: [{
-                    price: 'price_id',
-                    quantity: 1
-                }],
-                mode: selectedFrequency === 'monthly' ? 'subscription' : 'payment',
-                successUrl: window.location.origin + '/payment-success.html',
-                cancelUrl: window.location.href
-            });
-            */
+            // Get the appropriate Stripe Price ID
+            const priceId = STRIPE_CONFIG.priceIds[selectedPackage][selectedFrequency];
 
-            // For demo purposes, show success
-            alert(`In production, you would be redirected to secure payment for £${amount}`);
-            showSuccess();
+            if (!priceId || priceId.startsWith('price_')) {
+                // Stripe not configured yet - show instructions
+                alert(
+                    `⚠️ Stripe Payment Not Configured Yet\n\n` +
+                    `To enable payments:\n` +
+                    `1. Create a Stripe account at stripe.com\n` +
+                    `2. Create products in Stripe Dashboard\n` +
+                    `3. Update stripe-config.js with your Price IDs\n\n` +
+                    `For now, showing demo success page.\n\n` +
+                    `Amount: £${amount}`
+                );
+                showSuccess();
+                return;
+            }
+
+            try {
+                // Initialize Stripe
+                const stripe = Stripe(STRIPE_CONFIG.publishableKey);
+
+                // Show loading state
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Redirecting to payment...';
+
+                // Determine payment mode
+                const mode = selectedFrequency === 'monthly' ? 'subscription' : 'payment';
+
+                // Redirect to Stripe Checkout
+                const { error } = await stripe.redirectToCheckout({
+                    lineItems: [{
+                        price: priceId,
+                        quantity: 1
+                    }],
+                    mode: mode,
+                    successUrl: STRIPE_CONFIG.successUrl + '?session_id={CHECKOUT_SESSION_ID}',
+                    cancelUrl: STRIPE_CONFIG.cancelUrl,
+                    customerEmail: data.email,
+                    clientReferenceId: Date.now().toString(), // Unique reference for this submission
+                    metadata: {
+                        businessName: data.businessName,
+                        package: selectedPackage,
+                        frequency: selectedFrequency
+                    }
+                });
+
+                if (error) {
+                    console.error('Stripe error:', error);
+                    alert('Payment error: ' + error.message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Proceed to Payment';
+                }
+            } catch (error) {
+                console.error('Payment processing error:', error);
+                alert('An error occurred. Please try again or contact support.');
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('submitBtn').textContent = 'Proceed to Payment';
+            }
         }
 
         function showSuccess() {

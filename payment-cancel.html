@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Cancelled - Old Oak Town</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background: linear-gradient(135deg, #666 0%, #999 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .cancel-container {
+            background: white;
+            max-width: 600px;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff3cd;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+        }
+
+        h1 {
+            color: var(--dark-grey);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .info-box ul {
+            margin-left: 1.5rem;
+        }
+
+        .info-box li {
+            margin: 0.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            margin: 0.5rem;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--warm-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .cancel-container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cancel-container">
+        <div class="icon">⚠️</div>
+
+        <h1>Payment Cancelled</h1>
+        <p class="subtitle">Your payment was not completed</p>
+
+        <p style="margin: 2rem 0; color: #666;">
+            No charges have been made to your account. Your business listing information has been saved.
+        </p>
+
+        <div class="info-box">
+            <h3>What would you like to do?</h3>
+            <ul>
+                <li><strong>Try Again:</strong> Complete your payment and get your business listed</li>
+                <li><strong>Save for Later:</strong> We'll send you an email with a link to complete your listing</li>
+                <li><strong>Free Listing:</strong> Start with our free option instead</li>
+                <li><strong>Contact Us:</strong> Get help from our support team</li>
+            </ul>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+            <a href="business-submit.html" class="btn">Try Again</a>
+            <a href="index.html" class="btn btn-secondary">Return to Homepage</a>
+        </div>
+
+        <p style="margin-top: 2rem; color: #666;">
+            Need assistance? Email us at <strong>info@oldoaktown.co.uk</strong>
+        </p>
+
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">
+            Your session data has been preserved. You can return and complete your listing at any time.
+        </p>
+    </div>
+
+    <script>
+        // Preserve the submission data for if they want to try again
+        const submissionData = sessionStorage.getItem('businessSubmission');
+
+        if (submissionData) {
+            console.log('Submission data preserved for retry');
+            // Optionally send to backend to save as draft
+            // sendDraftToBackend(JSON.parse(submissionData));
+        }
+
+        async function sendDraftToBackend(data) {
+            try {
+                await fetch('/api/business-draft', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...data,
+                        status: 'draft',
+                        paymentAttempted: true,
+                        createdAt: new Date().toISOString()
+                    })
+                });
+            } catch (error) {
+                console.error('Error saving draft:', error);
+            }
+        }
+    </script>
+</body>
+</html>

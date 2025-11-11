@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Old Oak Town</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .success-container {
+            background: white;
+            max-width: 700px;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #d4edda;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        .checkmark svg {
+            width: 50px;
+            height: 50px;
+            stroke: #28a745;
+            stroke-width: 3;
+            fill: none;
+            stroke-dasharray: 50;
+            stroke-dashoffset: 50;
+            animation: draw 0.5s ease-out 0.3s forwards;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        h1 {
+            color: var(--primary-green);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .details-box {
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .details-box h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--dark-grey);
+        }
+
+        .detail-value {
+            color: #666;
+        }
+
+        .next-steps {
+            background: #e7f3ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #0066cc;
+        }
+
+        .next-steps h3 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps ul {
+            text-align: left;
+            margin-left: 1.5rem;
+        }
+
+        .next-steps li {
+            margin: 0.5rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            margin: 0.5rem;
+            background: var(--primary-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--warm-brown);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .success-container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .detail-row {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark">
+            <svg viewBox="0 0 52 52">
+                <polyline points="14,26 22,34 38,18"/>
+            </svg>
+        </div>
+
+        <h1>Payment Successful!</h1>
+        <p class="subtitle">Thank you for your business listing submission</p>
+
+        <div class="details-box" id="orderDetails">
+            <h3>Order Confirmation</h3>
+            <div class="detail-row">
+                <span class="detail-label">Business Name:</span>
+                <span class="detail-value" id="businessName">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Package:</span>
+                <span class="detail-value" id="package">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Billing:</span>
+                <span class="detail-value" id="frequency">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Email:</span>
+                <span class="detail-value" id="email">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Transaction ID:</span>
+                <span class="detail-value" id="sessionId">-</span>
+            </div>
+        </div>
+
+        <div class="next-steps">
+            <h3>📋 What Happens Next?</h3>
+            <ul>
+                <li>✅ You'll receive a confirmation email within 5 minutes</li>
+                <li>🔍 Our team will review your listing within 24 hours</li>
+                <li>🚀 Your business will be published and live on the site</li>
+                <li>📊 You'll receive access to your analytics dashboard</li>
+                <li>💳 For monthly subscriptions, you'll be billed automatically</li>
+            </ul>
+        </div>
+
+        <p style="margin: 2rem 0; color: #666;">
+            Need to make changes? Contact us at <strong>info@oldoaktown.co.uk</strong>
+        </p>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <a href="index.html" class="btn">Return to Homepage</a>
+            <a href="business-directory.html" class="btn btn-secondary">View Directory</a>
+        </div>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; color: #999;">
+            If you have any questions, please don't hesitate to reach out to our support team.
+        </p>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+
+        // Retrieve submission data from sessionStorage
+        const submissionData = sessionStorage.getItem('businessSubmission');
+
+        if (submissionData) {
+            const data = JSON.parse(submissionData);
+
+            // Populate order details
+            document.getElementById('businessName').textContent = data.businessName || '-';
+            document.getElementById('package').textContent = formatPackage(data.package) || '-';
+            document.getElementById('frequency').textContent = formatFrequency(data.frequency) || '-';
+            document.getElementById('email').textContent = data.email || '-';
+            document.getElementById('sessionId').textContent = sessionId || 'Pending';
+
+            // Send confirmation email (in production)
+            // sendConfirmationEmail(data, sessionId);
+
+            // Send to backend to store submission
+            submitToBackend(data, sessionId);
+
+            // Clear session storage
+            sessionStorage.removeItem('businessSubmission');
+        } else {
+            // No submission data found
+            document.getElementById('orderDetails').innerHTML = `
+                <p style="color: #666;">Order details will be sent to your email.</p>
+            `;
+        }
+
+        function formatPackage(pkg) {
+            const names = {
+                'featured': 'Featured Listing',
+                'premium': 'Premium Package',
+                'newsletter': 'Newsletter Sponsor'
+            };
+            return names[pkg] || pkg;
+        }
+
+        function formatFrequency(freq) {
+            if (freq === 'monthly') return 'Monthly Subscription';
+            if (freq === 'annual') return 'Annual Payment (70% Discount)';
+            return freq;
+        }
+
+        async function submitToBackend(data, sessionId) {
+            try {
+                // In production, send to your backend
+                const response = await fetch('/api/business-submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        ...data,
+                        stripeSessionId: sessionId,
+                        paymentStatus: 'completed',
+                        submittedAt: new Date().toISOString()
+                    })
+                });
+
+                if (response.ok) {
+                    console.log('Submission sent to backend successfully');
+                } else {
+                    console.error('Failed to send submission to backend');
+                }
+            } catch (error) {
+                console.error('Error submitting to backend:', error);
+                // In production, you might want to retry or queue this
+            }
+        }
+    </script>
+</body>
+</html>
