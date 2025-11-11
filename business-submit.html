@@ -885,7 +885,8 @@
             // Get the appropriate Stripe Price ID
             const priceId = STRIPE_CONFIG.priceIds[selectedPackage][selectedFrequency];
 
-            if (!priceId || priceId.startsWith('price_')) {
+            // Check if Price ID is a real Stripe ID (not a placeholder)
+            if (!priceId || priceId.includes('_monthly') || priceId.includes('_annual')) {
                 // Stripe not configured yet - show instructions
                 alert(
                     `⚠️ Stripe Payment Not Configured Yet\n\n` +
