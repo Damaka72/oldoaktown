@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Old Oak Town | West London's Largest Regeneration Project</title>
     <meta name="description" content="Your guide to Old Oak Common's transformation. Latest news on HS2, housing, jobs and community developments in West London.">
+
+    <!-- Google Analytics 4 - Replace G-XXXXXXXXXX with your actual measurement ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+
+    <!-- Google AdSense - Replace ca-pub-XXXXXXXXXXXXXXXX with your actual publisher ID -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+         crossorigin="anonymous"></script> -->
+
     <style>
         * {
             margin: 0;
@@ -814,8 +828,76 @@
             });
         });
 
-        // Form handling
+        // Enhanced Form Handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
+
+            // Track event in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'contact_form_submission', {
+                    'event_category': 'engagement',
+                    'event_label': 'contact_form'
+                });
+            }
+
             alert('Thank you for your message! We\'ll get back to you soon.');
+            this.reset();        });
+
+        // Business Listing Form Handling
+        document.getElementById('businessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const listingType = this.querySelector('select').value;
+
+            // Track event in Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'business_listing_submission', {
+                    'event_category': 'monetization',
+                    'event_label': listingType
+                });
+            }
+
+            // In production, this would send data to a backend API
+            alert('Thank you for your interest in ' + listingType + '!\n\nWe\'ll contact you within 24 hours with next steps and payment details (if applicable).');
+
             this.reset();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Newsletter Form Handling
+        const newsletterForms = document.querySelectorAll('.newsletter-form');
+        newsletterForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const email = this.querySelector('input[type="email"]').value;
+
+                // Track event in Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'newsletter_signup', {
+                        'event_category': 'engagement',
+                        'event_label': 'footer_newsletter'
+                    });
+                }
+
+                alert('✅ Success! You\'ve subscribed to the Old Oak Town newsletter.\n\nWe\'ll send weekly updates to: ' + email);
+                this.reset();
+            });
+        });
+
+        // Track external link clicks (for affiliate monitoring)
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            if (!link.href.includes(window.location.hostname)) {
+                link.addEventListener('click', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'external_link_click', {
+                            'event_category': 'engagement',
+                            'event_label': this.href
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
