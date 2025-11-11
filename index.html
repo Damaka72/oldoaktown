@@ -399,6 +399,91 @@
             color: #999;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            overflow: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            max-width: 900px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1;
+        }
+
+        .modal-header img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            line-height: 1.8;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body h4 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            color: #666;
+            cursor: pointer;
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .close-modal:hover {
+            background: var(--light-grey);
+            color: var(--dark-grey);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -440,6 +525,17 @@
 
             .stat-item h2 {
                 font-size: 2.5rem;
+            }
+
+            .modal-content {
+                margin: 0;
+                max-width: 100%;
+                border-radius: 0;
+                max-height: 100vh;
+            }
+
+            .modal-header img {
+                height: 200px;
             }
         }
     </style>
@@ -496,39 +592,79 @@
         <div class="container">
             <h2>Latest News & Updates</h2>
             <div class="news-grid">
-                <div class="news-card">
+                <div class="news-card" data-article="1">
                     <img src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop" alt="HS2 Construction">
                     <div class="news-card-content">
                         <div class="news-meta">3 days ago • HS2 Updates</div>
                         <h3>Old Oak Common Station Construction Progresses</h3>
                         <p>Foundation work completed for the UK's largest newly built station, with platform installation underway.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <a href="#" class="btn" onclick="openArticle(event, 1)">Read More</a>
                     </div>
                 </div>
-                <div class="news-card">
+                <div class="news-card" data-article="2">
                     <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" alt="New Housing">
                     <div class="news-card-content">
                         <div class="news-meta">5 days ago • Housing</div>
                         <h3>First Phase Housing Development Approved</h3>
                         <p>OPDC approves 500 new homes including 50% affordable housing in the Old Oak Mile development.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <a href="#" class="btn" onclick="openArticle(event, 2)">Read More</a>
                     </div>
                 </div>
-                <div class="news-card">
+                <div class="news-card" data-article="3">
                     <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="Community">
                     <div class="news-card-content">
                         <div class="news-meta">1 week ago • Community</div>
                         <h3>Local Business Forum Launches</h3>
                         <p>New initiative connects existing Park Royal businesses with incoming developments and opportunities.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <a href="#" class="btn" onclick="openArticle(event, 3)">Read More</a>
+                    </div>
+                </div>
+                <div class="news-card" data-article="4">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop" alt="Transport">
+                    <div class="news-card-content">
+                        <div class="news-meta">2 weeks ago • Transport</div>
+                        <h3>New Bus Routes Connect Old Oak to Central London</h3>
+                        <p>Transport for London announces enhanced bus services ahead of station opening, improving local connectivity.</p>
+                        <a href="#" class="btn" onclick="openArticle(event, 4)">Read More</a>
+                    </div>
+                </div>
+                <div class="news-card" data-article="5">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop" alt="Affordable Housing">
+                    <div class="news-card-content">
+                        <div class="news-meta">3 weeks ago • Housing</div>
+                        <h3>Affordable Housing Initiative Reaches Milestone</h3>
+                        <p>OPDC confirms commitment to deliver 50% affordable homes across all new developments in the area.</p>
+                        <a href="#" class="btn" onclick="openArticle(event, 5)">Read More</a>
+                    </div>
+                </div>
+                <div class="news-card" data-article="6">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop" alt="Jobs">
+                    <div class="news-card-content">
+                        <div class="news-meta">1 month ago • Employment</div>
+                        <h3>Job Centre Opens to Support Local Employment</h3>
+                        <p>New dedicated employment hub launched to connect residents with thousands of upcoming job opportunities.</p>
+                        <a href="#" class="btn" onclick="openArticle(event, 6)">Read More</a>
                     </div>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
-                <a href="#" class="btn btn-primary">View All News</a>
+                <p style="color: #666; font-style: italic;">More articles coming soon as the development progresses</p>
             </div>
         </div>
     </section>
+
+    <!-- News Article Modal -->
+    <div id="articleModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="">
+                <div class="news-meta" id="modalMeta"></div>
+                <h2 id="modalTitle"></h2>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
 
     <!-- Business Directory -->
     <section id="directory" style="background: var(--light-grey);">
@@ -810,6 +946,239 @@
     </footer>
 
     <script>
+        // Article Database with Full Content
+        const articles = {
+            1: {
+                title: "Old Oak Common Station Construction Progresses",
+                meta: "3 days ago • HS2 Updates",
+                image: "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop",
+                content: `
+                    <p>Major progress has been achieved at the Old Oak Common HS2 station site, with foundation work now complete for what will become the UK's largest newly built railway station. The £1.2 billion project has reached a critical milestone as platform installation begins across the 14-platform facility.</p>
+
+                    <h4>Construction Milestones</h4>
+                    <p>The completion of foundation work marks a significant achievement for the project, which has seen over 300 workers on site daily. The station's foundations required the excavation of approximately 3 million cubic meters of earth and the pouring of 80,000 cubic meters of concrete.</p>
+
+                    <p>Platform installation is now underway, with the first of 14 platforms taking shape. Each platform will be 450 meters long, capable of accommodating the full length of HS2's high-speed trains. The platforms are being constructed using modular pre-cast concrete sections to ensure quality and speed of installation.</p>
+
+                    <h4>What Makes Old Oak Common Special</h4>
+                    <p>Once complete, Old Oak Common will be the UK's best-connected station, serving as an interchange between HS2, the Elizabeth Line, the Great Western Main Line, and the Heathrow Express. The station will handle an estimated 250,000 passengers daily, more than any other UK station outside of London's major termini.</p>
+
+                    <p>The station design features a striking roof canopy spanning 850 meters, which will be one of the largest single-span station roofs in Europe. The design prioritizes natural light, with extensive glazing to create bright, welcoming spaces for passengers.</p>
+
+                    <h4>Timeline and Next Steps</h4>
+                    <p>The project remains on track for completion ahead of HS2 services beginning in 2033. Over the next 18 months, construction teams will focus on completing the platform installation, followed by the erection of the roof structure and the fit-out of passenger facilities.</p>
+
+                    <p>The station will include extensive retail and dining options, as well as community spaces integrated into the design. Local residents are being consulted on aspects of the station's public spaces and connectivity to the surrounding neighborhood.</p>
+                `
+            },
+            2: {
+                title: "First Phase Housing Development Approved",
+                meta: "5 days ago • Housing",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop",
+                content: `
+                    <p>The Old Oak and Park Royal Development Corporation (OPDC) has granted planning permission for the first major residential development in the Old Oak area, marking a transformative moment for West London's largest regeneration project. The approved scheme will deliver 500 new homes, with 50% designated as affordable housing.</p>
+
+                    <h4>Development Details</h4>
+                    <p>The Old Oak Mile development, located just a short walk from the future HS2 station, will feature a mix of one, two, and three-bedroom apartments designed to meet the needs of a diverse community. The development includes:</p>
+
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>250 affordable homes (50% of total)</li>
+                        <li>150 shared ownership properties</li>
+                        <li>100 private sale apartments</li>
+                        <li>5,000 sq ft of commercial space at ground level</li>
+                        <li>Landscaped communal gardens and play areas</li>
+                    </ul>
+
+                    <h4>Affordable Housing Commitment</h4>
+                    <p>This development sets a benchmark for the area, delivering on OPDC's commitment to ensure that 50% of all new homes in Old Oak are affordable. The affordable homes will be available through social rent and London Affordable Rent programs, making them accessible to local residents and keyworkers.</p>
+
+                    <p>"This is exactly the kind of development Old Oak needs," said OPDC Chief Executive, speaking at the approval meeting. "We're creating a new community that's genuinely mixed and affordable, not just luxury apartments for the wealthy."</p>
+
+                    <h4>Sustainability Features</h4>
+                    <p>The development incorporates cutting-edge sustainability measures, including solar panels, green roofs, rainwater harvesting, and high-performance insulation. All homes will achieve an EPC rating of A or B, ensuring low energy costs for residents.</p>
+
+                    <p>Construction is expected to begin in Q2 2026, with the first residents moving in by late 2027. The development will create approximately 200 construction jobs and 50 permanent jobs in the commercial spaces.</p>
+                `
+            },
+            3: {
+                title: "Local Business Forum Launches",
+                meta: "1 week ago • Community",
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop",
+                content: `
+                    <p>A groundbreaking initiative to connect established Park Royal businesses with the opportunities arising from the Old Oak development has officially launched. The Old Oak Business Forum will serve as a vital bridge between the area's industrial heritage and its future as a major mixed-use destination.</p>
+
+                    <h4>Connecting Past and Future</h4>
+                    <p>Park Royal is already home to over 2,000 businesses employing 40,000 people, making it one of London's most important industrial and logistics hubs. The new forum ensures these established businesses aren't left behind but instead become active participants in the area's transformation.</p>
+
+                    <p>The forum's objectives include:</p>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Connecting local businesses with new supply chain opportunities</li>
+                        <li>Providing support for business expansion and relocation</li>
+                        <li>Facilitating networking between established and incoming businesses</li>
+                        <li>Advocating for local business interests in planning decisions</li>
+                        <li>Coordinating skills training programs with local colleges</li>
+                    </ul>
+
+                    <h4>First Meeting Success</h4>
+                    <p>The forum's inaugural meeting attracted over 150 local business representatives, demonstrating the strong interest in engaging with the development. Attendees heard presentations from major contractors working on HS2 and residential projects, with many expressing interest in becoming suppliers or partners.</p>
+
+                    <p>"We've been in Park Royal for 30 years," said one local logistics company owner. "It's great to see that we're not being forgotten in all this development. The forum gives us a voice and a way to access new opportunities."</p>
+
+                    <h4>Support Services</h4>
+                    <p>The forum has established a dedicated support team offering free business advice, including guidance on tendering for contracts, accessing development-related opportunities, and navigating planning processes for business expansions or relocations.</p>
+
+                    <p>Monthly meetings will be held at various venues across the area, with online participation options to ensure maximum accessibility. A business directory is being created to connect suppliers with opportunities in real-time.</p>
+                `
+            },
+            4: {
+                title: "New Bus Routes Connect Old Oak to Central London",
+                meta: "2 weeks ago • Transport",
+                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop",
+                content: `
+                    <p>Transport for London (TfL) has announced a comprehensive upgrade to bus services serving the Old Oak area, dramatically improving connectivity years before the HS2 station opens. The new routes will provide direct links to central London destinations and better integration with existing transport networks.</p>
+
+                    <h4>New Route Details</h4>
+                    <p>Three new bus routes will launch in phases over the next 12 months:</p>
+
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Route 224:</strong> Old Oak Common - Paddington - Victoria (every 8-10 minutes during peak hours)</li>
+                        <li><strong>Route 226:</strong> Park Royal - White City - Kensington (every 12 minutes)</li>
+                        <li><strong>Route 228:</strong> Old Oak - Harlesden - Wembley (every 10 minutes)</li>
+                    </ul>
+
+                    <p>Additionally, existing routes 220 and 260 will see frequency increases, with buses running every 5-7 minutes during peak times compared to the current 10-12 minute intervals.</p>
+
+                    <h4>Electric Fleet</h4>
+                    <p>All new routes will be served by state-of-the-art electric buses, part of TfL's commitment to zero-emission transport. These modern vehicles feature USB charging ports, free Wi-Fi, and improved accessibility features including wheelchair spaces and audio-visual announcements.</p>
+
+                    <p>"These aren't just any buses," explained a TfL spokesperson. "We're deploying our newest electric double-deckers with all the modern amenities passengers expect. This is about making Old Oak accessible and attractive even before the station opens."</p>
+
+                    <h4>Infrastructure Improvements</h4>
+                    <p>Alongside the new routes, TfL is investing £3 million in infrastructure improvements, including:</p>
+
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Five new bus stops with real-time information displays</li>
+                        <li>Upgraded shelters with weather protection and seating</li>
+                        <li>Improved lighting and CCTV for passenger safety</li>
+                        <li>Dedicated bus lanes on key approach roads</li>
+                    </ul>
+
+                    <p>The enhanced bus network will reduce journey times to central London by up to 20 minutes, making the area significantly more accessible for current residents and businesses while preparing for the influx of new residents expected over the coming decade.</p>
+                `
+            },
+            5: {
+                title: "Affordable Housing Initiative Reaches Milestone",
+                meta: "3 weeks ago • Housing",
+                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop",
+                content: `
+                    <p>The Old Oak and Park Royal Development Corporation has reaffirmed its commitment to delivering 50% affordable housing across all developments in the area, setting a new standard for major regeneration projects across the UK. This commitment represents one of the most ambitious affordable housing targets in the country.</p>
+
+                    <h4>What Does 50% Mean?</h4>
+                    <p>Out of the planned 9,000 new homes to be built in Old Oak over the next 15 years, 4,500 will be designated as affordable housing. This breaks down into several categories:</p>
+
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Social Rent:</strong> 1,800 homes at approximately 60% of market rent</li>
+                        <li><strong>London Affordable Rent:</strong> 1,350 homes at approximately 80% of market rent</li>
+                        <li><strong>Shared Ownership:</strong> 1,350 homes where residents can buy a share (typically 25-75%) and pay rent on the remainder</li>
+                    </ul>
+
+                    <h4>Who Qualifies?</h4>
+                    <p>Priority for affordable homes is being given to existing residents of Hammersmith & Fulham, Ealing, and Brent - the three boroughs that overlap with the Old Oak area. Key workers including teachers, nurses, police officers, and transport workers will also receive priority allocation.</p>
+
+                    <p>Income caps ensure the homes go to those who genuinely need them, with household income limits set at £90,000 for shared ownership properties and £60,000 for London Affordable Rent properties.</p>
+
+                    <h4>Design and Quality</h4>
+                    <p>Crucially, affordable homes in Old Oak will be indistinguishable from private sale properties and fully integrated into developments. There will be no "poor doors" or separate entrances. All residents will have access to the same amenities, communal spaces, and building services.</p>
+
+                    <p>"We're building a genuinely mixed community," explained OPDC's housing director. "Every development will have affordable and private homes side by side. That's how you create real communities, not segregated neighborhoods."</p>
+
+                    <h4>Registration and Timeline</h4>
+                    <p>A dedicated housing portal has been launched where interested residents can register their interest and track upcoming developments. The first affordable homes are expected to become available for allocation in late 2027, with a steady pipeline of properties becoming available each year thereafter.</p>
+
+                    <p>Community workshops are being held monthly to help potential applicants understand the process and prepare their applications. Free advice sessions are available at Harlesden Library every Wednesday.</p>
+                `
+            },
+            6: {
+                title: "Job Centre Opens to Support Local Employment",
+                meta: "1 month ago • Employment",
+                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop",
+                content: `
+                    <p>A specialist employment hub dedicated to connecting local residents with opportunities arising from the Old Oak development has opened in Harlesden. The Old Oak Jobs Centre represents a £2 million investment in ensuring that local people benefit from the estimated 11,000 new jobs being created in the area.</p>
+
+                    <h4>Services Offered</h4>
+                    <p>The Jobs Centre provides a comprehensive range of free services to local job seekers:</p>
+
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Job Matching:</strong> Direct connections to construction, retail, hospitality, and professional roles</li>
+                        <li><strong>Skills Training:</strong> Free courses in construction skills, hospitality, digital skills, and customer service</li>
+                        <li><strong>CV Writing:</strong> One-on-one support to create professional CVs and cover letters</li>
+                        <li><strong>Interview Preparation:</strong> Mock interviews and coaching sessions</li>
+                        <li><strong>Apprenticeships:</strong> Links to apprenticeship programs with major employers</li>
+                        <li><strong>Childcare Support:</strong> Advice on childcare options and financial support available</li>
+                    </ul>
+
+                    <h4>Partnership with Employers</h4>
+                    <p>Over 50 employers have already partnered with the Jobs Centre, including major construction firms working on HS2, retail chains planning to open in the area, and professional services companies setting up offices near the future station.</p>
+
+                    <p>These employers have committed to interviewing qualified local candidates first, ensuring that Old Oak residents have the best chance of securing new opportunities. Several employers are offering guaranteed interview schemes for candidates who complete relevant training courses through the centre.</p>
+
+                    <h4>Early Success Stories</h4>
+                    <p>In its first month of operation, the Jobs Centre has already helped 127 local residents secure employment, with roles ranging from construction workers and site supervisors to customer service representatives and administrative staff.</p>
+
+                    <p>"I'd been looking for work for six months," said Marcus, a recent placement success. "The Jobs Centre helped me update my CV, practiced interviews with me, and connected me directly with employers. Within three weeks, I had a job offer as a site operative on the HS2 project. It's changed my life."</p>
+
+                    <h4>Training Programs</h4>
+                    <p>The centre runs rolling training programs in partnership with local colleges:</p>
+
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Construction Skills Certification Scheme (CSCS):</strong> 4-week course leading to industry-recognized qualification</li>
+                        <li><strong>Hospitality and Customer Service:</strong> 3-week intensive training program</li>
+                        <li><strong>Digital Skills Bootcamp:</strong> 6-week program covering Microsoft Office, digital marketing, and basic IT</li>
+                        <li><strong>Professional Development:</strong> Courses in project management, administration, and business skills</li>
+                    </ul>
+
+                    <p>All training is completely free for local residents, with support available for transport costs and childcare to ensure everyone can participate.</p>
+
+                    <h4>Opening Hours and Contact</h4>
+                    <p>The Old Oak Jobs Centre is located at 45 High Street, Harlesden, NW10 4NX. Opening hours are Monday to Friday, 9am-6pm, and Saturday, 10am-2pm. No appointment is necessary - just drop in and speak to one of the friendly advisors.</p>
+                `
+            }
+        };
+
+        // Modal Functions
+        function openArticle(event, articleId) {
+            event.preventDefault();
+            const article = articles[articleId];
+            if (!article) return;
+
+            document.getElementById('modalTitle').textContent = article.title;
+            document.getElementById('modalMeta').textContent = article.meta;
+            document.getElementById('modalImage').src = article.image;
+            document.getElementById('modalBody').innerHTML = article.content;
+
+            document.getElementById('articleModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            document.getElementById('articleModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal when clicking outside the content
+        document.getElementById('articleModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
@@ -818,8 +1187,12 @@
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                // Don't prevent default for non-section links
+                if (href === '#') return;
+
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     // Close mobile menu if open
