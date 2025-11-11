@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Review Dashboard - Old Oak Town Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+            --light-grey: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light-grey);
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--primary-green);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .stat-box {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .filters {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: 600;
+        }
+
+        .filter-group select {
+            padding: 0.5rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .review-item {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--warning);
+        }
+
+        .review-item.priority-high {
+            border-left-color: var(--danger);
+        }
+
+        .review-item.priority-medium {
+            border-left-color: var(--warning);
+        }
+
+        .review-item.priority-low {
+            border-left-color: #6c757d;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .meta-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .meta-badge.source {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .meta-badge.category {
+            background: var(--cream);
+            color: var(--dark-grey);
+        }
+
+        .meta-badge.priority {
+            background: var(--warning);
+            color: white;
+        }
+
+        .meta-badge.priority-high {
+            background: var(--danger);
+        }
+
+        .item-title {
+            font-size: 1.5rem;
+            color: var(--dark-grey);
+            margin-bottom: 1rem;
+        }
+
+        .item-content {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .item-excerpt {
+            max-height: 150px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .item-excerpt.expanded {
+            max-height: none;
+        }
+
+        .read-more {
+            color: var(--primary-green);
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .item-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        .item-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #eee;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-approve {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-edit {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #e0a800;
+            transform: translateY(-2px);
+        }
+
+        .btn-reject {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        .btn-view {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #1f3a0f;
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem;
+            color: #999;
+        }
+
+        .empty-state h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            width: 90%;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .item-footer {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>📋 Content Review Dashboard</h1>
+        <p>Human-in-the-Loop Quality Control for Old Oak Town</p>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-box">
+            <div class="stat-number" id="pendingCount">0</div>
+            <div class="stat-label">Pending Review</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="publishedToday">0</div>
+            <div class="stat-label">Published Today</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="avgReviewTime">0</div>
+            <div class="stat-label">Avg Review Time (min)</div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+        <div class="filter-group">
+            <label>Category:</label>
+            <select id="filterCategory">
+                <option value="all">All</option>
+                <option value="hs2">HS2</option>
+                <option value="construction">Construction</option>
+                <option value="community">Community</option>
+                <option value="planning">Planning</option>
+                <option value="transport">Transport</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Priority:</label>
+            <select id="filterPriority">
+                <option value="all">All</option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+            </select>
+        </div>
+        <div class="filter-group">
+            <label>Source:</label>
+            <select id="filterSource">
+                <option value="all">All Sources</option>
+            </select>
+        </div>
+        <button class="btn btn-view" onclick="loadReviewQueue()">🔄 Refresh</button>
+    </div>
+
+    <!-- Review Queue Container -->
+    <div id="reviewQueue">
+        <div class="empty-state">
+            <h2>✨ All Caught Up!</h2>
+            <p>No items pending review. Check back after the next RSS aggregation.</p>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Article</h2>
+                <button class="modal-close" onclick="closeEditModal()">&times;</button>
+            </div>
+            <form id="editForm">
+                <div class="form-group">
+                    <label>Title:</label>
+                    <input type="text" id="editTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>Content:</label>
+                    <textarea id="editContent" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tags (comma-separated):</label>
+                    <input type="text" id="editTags">
+                </div>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="btn btn-approve">💾 Save & Approve</button>
+                    <button type="button" class="btn" onclick="closeEditModal()" style="background: #6c757d; color: white;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // This is a demonstration interface
+        // In production, this would connect to actual backend APIs
+
+        let reviewItems = [];
+        let currentEditItem = null;
+
+        // Mock data for demonstration
+        const DEMO_ITEMS = [
+            {
+                id: 'hs2-station-platforms-installed',
+                title: 'First Platforms Installed at HS2 Old Oak Common Station',
+                content: 'The first platforms have been successfully installed at the Old Oak Common HS2 station, marking a significant milestone in the construction of what will be the UK\'s largest newly built railway station. The 450-metre platforms will serve high-speed trains connecting London with Birmingham, Manchester, and beyond.',
+                contentSnippet: 'The first platforms have been successfully installed at the Old Oak Common HS2 station...',
+                publishDate: new Date().toISOString(),
+                author: 'HS2 Ltd',
+                source: {
+                    name: 'HS2 Ltd',
+                    category: 'hs2',
+                    priority: 'high'
+                },
+                tags: ['hs2', 'construction', 'milestone'],
+                imageUrl: 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop',
+                url: 'https://www.hs2.org.uk/news/first-platforms-installed'
+            },
+            {
+                id: 'community-consultation-nov-2025',
+                title: 'November Community Consultation on Housing Development',
+                content: 'The Old Oak Neighbourhood Forum invites all residents to attend the November community consultation regarding the proposed housing development on Atlas Road. This is an opportunity to voice concerns and provide feedback on the 300-unit mixed-use development.',
+                contentSnippet: 'The Old Oak Neighbourhood Forum invites all residents to attend...',
+                publishDate: new Date(Date.now() - 86400000).toISOString(),
+                author: 'Old Oak Neighbourhood Forum',
+                source: {
+                    name: 'Old Oak Neighbourhood Forum',
+                    category: 'community',
+                    priority: 'high'
+                },
+                tags: ['community', 'consultation', 'housing'],
+                imageUrl: null,
+                url: 'http://oldoakneighbourhoodforum.org/consultation-nov'
+            }
+        ];
+
+        // Initialize dashboard
+        function init() {
+            loadReviewQueue();
+            updateStats();
+        }
+
+        // Load review queue items
+        function loadReviewQueue() {
+            // In production, this would fetch from actual data files
+            // For now, use demo data
+            reviewItems = DEMO_ITEMS;
+
+            const queueContainer = document.getElementById('reviewQueue');
+
+            if (reviewItems.length === 0) {
+                queueContainer.innerHTML = `
+                    <div class="empty-state">
+                        <h2>✨ All Caught Up!</h2>
+                        <p>No items pending review. Check back after the next RSS aggregation.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            queueContainer.innerHTML = reviewItems.map(item => `
+                <div class="review-item priority-${item.source.priority}" data-id="${item.id}">
+                    <div class="item-header">
+                        <div class="item-meta">
+                            <span class="meta-badge source">${item.source.name}</span>
+                            <span class="meta-badge category">${item.source.category}</span>
+                            <span class="meta-badge priority priority-${item.source.priority}">${item.source.priority.toUpperCase()}</span>
+                        </div>
+                        <small style="color: #999;">${new Date(item.publishDate).toLocaleString()}</small>
+                    </div>
+                    <h3 class="item-title">${item.title}</h3>
+                    ${item.imageUrl ? `<img src="${item.imageUrl}" alt="${item.title}" class="item-image">` : ''}
+                    <div class="item-content">
+                        <div class="item-excerpt">${item.content}</div>
+                    </div>
+                    <div>
+                        <strong>Source URL:</strong> <a href="${item.url}" target="_blank">${item.url}</a>
+                    </div>
+                    <div style="margin-top: 0.5rem;">
+                        <strong>Tags:</strong> ${item.tags.join(', ')}
+                    </div>
+                    <div class="item-footer">
+                        <button class="btn btn-approve" onclick="approveItem('${item.id}')">✅ Approve & Publish</button>
+                        <button class="btn btn-edit" onclick="editItem('${item.id}')">✏️ Edit</button>
+                        <button class="btn btn-reject" onclick="rejectItem('${item.id}')">❌ Reject</button>
+                        <button class="btn btn-view" onclick="window.open('${item.url}', '_blank')">🔗 View Source</button>
+                    </div>
+                </div>
+            `).join('');
+
+            updateStats();
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('pendingCount').textContent = reviewItems.length;
+            document.getElementById('publishedToday').textContent = '0'; // Would fetch from published data
+            document.getElementById('avgReviewTime').textContent = '5'; // Would calculate from actual data
+        }
+
+        // Approve item
+        function approveItem(itemId) {
+            if (confirm('Approve and publish this article?')) {
+                console.log('Approving item:', itemId);
+                // In production: move file from review-queue to published
+                alert('✅ Article approved and published!');
+                removeItemFromQueue(itemId);
+            }
+        }
+
+        // Edit item
+        function editItem(itemId) {
+            const item = reviewItems.find(i => i.id === itemId);
+            if (!item) return;
+
+            currentEditItem = item;
+            document.getElementById('editTitle').value = item.title;
+            document.getElementById('editContent').value = item.content;
+            document.getElementById('editTags').value = item.tags.join(', ');
+
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        // Close edit modal
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('active');
+            currentEditItem = null;
+        }
+
+        // Handle edit form submission
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!currentEditItem) return;
+
+            // Update item with edited content
+            currentEditItem.title = document.getElementById('editTitle').value;
+            currentEditItem.content = document.getElementById('editContent').value;
+            currentEditItem.tags = document.getElementById('editTags').value.split(',').map(t => t.trim());
+
+            console.log('Saving edited item:', currentEditItem);
+            // In production: save edited content and move to published
+
+            alert('✅ Article updated and published!');
+            removeItemFromQueue(currentEditItem.id);
+            closeEditModal();
+        });
+
+        // Reject item
+        function rejectItem(itemId) {
+            if (confirm('Reject this article? It will be moved to the rejected folder.')) {
+                console.log('Rejecting item:', itemId);
+                // In production: move file from review-queue to rejected
+                alert('❌ Article rejected');
+                removeItemFromQueue(itemId);
+            }
+        }
+
+        // Remove item from queue
+        function removeItemFromQueue(itemId) {
+            reviewItems = reviewItems.filter(i => i.id !== itemId);
+            loadReviewQueue();
+        }
+
+        // Initialize on page load
+        init();
+    </script>
+</body>
+</html>

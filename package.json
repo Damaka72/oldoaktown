@@ -1,0 +1,23 @@
+{
+  "name": "oldoaktown",
+  "version": "1.0.0",
+  "description": "Old Oak Town - Hyperlocal news and community resource for Old Oak Common regeneration",
+  "main": "index.html",
+  "scripts": {
+    "fetch-feeds": "node scripts/rss-aggregator.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "old-oak-common",
+    "hs2",
+    "local-news",
+    "london",
+    "hyperlocal"
+  ],
+  "author": "Old Oak Town",
+  "license": "MIT",
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {}
+}

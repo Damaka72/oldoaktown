@@ -1,0 +1,60 @@
+name: Daily RSS Aggregation
+
+on:
+  schedule:
+    # Run daily at 8 AM UTC (9 AM BST, 8 AM GMT)
+    - cron: '0 8 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  aggregate-feeds:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run RSS aggregator
+        run: npm run fetch-feeds
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push new content
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config user.name "RSS Aggregator Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/
+          git commit -m "📰 Daily RSS aggregation - $(date +'%Y-%m-%d')"
+          git push
+
+      - name: Create summary
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          echo "✅ RSS aggregation complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**New items added to review queue**" >> $GITHUB_STEP_SUMMARY
+          echo "Check the admin dashboard to review and publish." >> $GITHUB_STEP_SUMMARY
+
+      - name: No new content
+        if: steps.check_changes.outputs.changes == 'false'
+        run: |
+          echo "ℹ️ No new content found in RSS feeds" >> $GITHUB_STEP_SUMMARY
