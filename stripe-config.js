@@ -1,30 +1,23 @@
 // Stripe Configuration for Old Oak Town Business Listings
-// Replace these with your actual Stripe Price IDs after creating products in Stripe Dashboard
+// Using Stripe Payment Links for simplified checkout
 
 const STRIPE_CONFIG = {
-    // Stripe Publishable Key (Test Mode)
-    publishableKey: 'pk_test_51SSKU2ACivaWK7rd4GweHtrVYLG3hb4j9mSbMUn63dJGrW5qZ4F2UXwgO0mXLEaCOnK0yeHo3W10TBRxmenmSfWi00o75BTXd9',
-
-    // Price IDs for each package/frequency combination
-    // Create these in Stripe Dashboard: https://dashboard.stripe.com/test/products
-    priceIds: {
+    // Payment Link URLs for each package/frequency combination
+    // These are pre-built Stripe-hosted checkout pages that handle subscriptions
+    paymentLinks: {
         featured: {
-            monthly: 'price_1SSKXXACivaWK7rdlClSn2TY',  // £35/month subscription
-            annual: 'price_1SSKaiACivaWK7rdbseMMAUd'     // £126/year subscription
+            monthly: 'https://buy.stripe.com/3cI14p4Gz51GeGWgEUes000',  // £35/month subscription
+            annual: 'https://buy.stripe.com/28E9AV6OHcu8cyOcoEes002'     // £126/year subscription
         },
         premium: {
-            monthly: 'price_1SSKdXACivaWK7rdhuJ8eRpL',   // £75/month subscription
-            annual: 'price_1SSKeCACivaWK7rdMpujbIQp'     // £270/year subscription
+            monthly: 'https://buy.stripe.com/8x23cx8WP51G6aq74kes003',   // £75/month subscription
+            annual: 'https://buy.stripe.com/7sYfZj0qjdycbuK4Wces004'     // £270/year subscription
         },
         newsletter: {
-            monthly: 'price_1SSKemACivaWK7rd4eVi2Nrf', // £150/month subscription
-            annual: 'price_1SSKfJACivaWK7rdYn2UFfNm'    // £540/year subscription
+            monthly: 'https://buy.stripe.com/cNi3cx4Gz0Lq7eufAQes005', // £150/month subscription
+            annual: 'https://buy.stripe.com/7sYfZjeh9dyc56mcoEes006'    // £540/year subscription
         }
-    },
-
-    // URLs for redirect after payment
-    successUrl: window.location.origin + '/payment-success.html',
-    cancelUrl: window.location.origin + '/payment-cancel.html'
+    }
 };
 
 // Instructions to set up Stripe products:

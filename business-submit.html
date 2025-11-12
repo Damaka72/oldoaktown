@@ -6,8 +6,7 @@
     <title>Submit Your Business - Old Oak Town</title>
     <meta name="description" content="Advertise your business on Old Oak Town. Choose your package and get started today.">
 
-    <!-- Stripe.js -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Stripe Configuration -->
     <script src="stripe-config.js"></script>
 
     <style>
@@ -878,84 +877,31 @@
             });
         }
 
-        async function redirectToPayment(data, amount) {
+        function redirectToPayment(data, amount) {
             // Store data in sessionStorage for payment confirmation
             sessionStorage.setItem('businessSubmission', JSON.stringify(data));
 
-            // Get the appropriate Stripe Price ID
-            const priceId = STRIPE_CONFIG.priceIds[selectedPackage][selectedFrequency];
+            // Get the appropriate Stripe Payment Link
+            const paymentLink = STRIPE_CONFIG.paymentLinks[selectedPackage][selectedFrequency];
 
-            // Check if Price ID is a real Stripe ID (not a placeholder)
-            if (!priceId || priceId.includes('_monthly') || priceId.includes('_annual')) {
-                // Stripe not configured yet - show instructions
-                alert(
-                    `⚠️ Stripe Payment Not Configured Yet\n\n` +
-                    `To enable payments:\n` +
-                    `1. Create a Stripe account at stripe.com\n` +
-                    `2. Create products in Stripe Dashboard\n` +
-                    `3. Update stripe-config.js with your Price IDs\n\n` +
-                    `For now, showing demo success page.\n\n` +
-                    `Amount: £${amount}`
-                );
-                showSuccess();
+            // Verify config is loaded
+            if (typeof STRIPE_CONFIG === 'undefined' || !paymentLink) {
+                alert('Error: Stripe configuration not loaded. Please refresh the page.');
                 return;
             }
 
-            try {
-                // Verify Stripe is loaded
-                if (typeof Stripe === 'undefined') {
-                    alert('Error: Stripe.js failed to load. Please check your internet connection and refresh the page.');
-                    return;
-                }
+            console.log('Redirecting to Stripe Payment Link...');
+            console.log('Package:', selectedPackage);
+            console.log('Frequency:', selectedFrequency);
+            console.log('Amount: £' + amount);
 
-                // Verify config is loaded
-                if (typeof STRIPE_CONFIG === 'undefined') {
-                    alert('Error: Stripe configuration not loaded. Please refresh the page.');
-                    return;
-                }
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Redirecting to payment...';
 
-                console.log('Initializing Stripe with key:', STRIPE_CONFIG.publishableKey.substring(0, 20) + '...');
-                console.log('Using Price ID:', priceId);
-                console.log('Payment mode:', selectedFrequency === 'monthly' ? 'subscription' : 'payment');
-
-                // Initialize Stripe
-                const stripe = Stripe(STRIPE_CONFIG.publishableKey);
-
-                // Show loading state
-                const submitBtn = document.getElementById('submitBtn');
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Redirecting to payment...';
-
-                // All our products are subscriptions (both monthly and annual)
-                const mode = 'subscription';
-
-                console.log('Calling redirectToCheckout...');
-
-                // Redirect to Stripe Checkout
-                const { error } = await stripe.redirectToCheckout({
-                    lineItems: [{
-                        price: priceId,
-                        quantity: 1
-                    }],
-                    mode: mode,
-                    successUrl: STRIPE_CONFIG.successUrl + '?session_id={CHECKOUT_SESSION_ID}',
-                    cancelUrl: STRIPE_CONFIG.cancelUrl,
-                    customerEmail: data.email,
-                    clientReferenceId: Date.now().toString()
-                });
-
-                if (error) {
-                    console.error('Stripe error:', error);
-                    alert('Stripe Error: ' + error.message + '\n\nPlease contact support if this continues.');
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Proceed to Payment';
-                }
-            } catch (error) {
-                console.error('Payment processing error:', error);
-                alert('Error Details: ' + error.message + '\n\nPlease try again or contact support at info@oldoaktown.co.uk');
-                document.getElementById('submitBtn').disabled = false;
-                document.getElementById('submitBtn').textContent = 'Proceed to Payment';
-            }
+            // Redirect to Stripe Payment Link
+            window.location.href = paymentLink;
         }
 
         function showSuccess() {
