@@ -1034,6 +1034,27 @@
             color: #999;
         }
 
+        .social-links {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .social-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-green);
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -2004,6 +2025,14 @@
                         <input type="email" placeholder="Your email" required>
                         <button type="submit" class="btn">Subscribe</button>
                     </form>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <p>Connect with us on social media</p>
+                    <ul class="social-links">
+                        <li><a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <!-- LinkedIn and Instagram links to be added -->
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
