@@ -131,7 +131,6 @@ Description:
 ${data.description}
 
 Social Media:
-Facebook: ${data.facebook || 'N/A'}
 Instagram: ${data.instagram || 'N/A'}
 Twitter: ${data.twitter || 'N/A'}
 LinkedIn: ${data.linkedin || 'N/A'}
