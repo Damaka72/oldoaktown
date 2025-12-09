@@ -16,6 +16,10 @@
     <meta property="og:description" content="Advertise your business on Old Oak Town. Choose your package and get started today.">
     <meta property="og:site_name" content="Old Oak Town">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
     <!-- Stripe Configuration -->
     <script src="stripe-config.js"></script>
 
@@ -53,6 +57,16 @@
             padding: 2rem 0;
             text-align: center;
             margin-bottom: 2rem;
+        }
+
+        header .logo-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        header .logo-link img {
+            height: 50px;
+            width: auto;
         }
 
         header h1 {
@@ -387,6 +401,7 @@
 <body>
     <header>
         <div class="container">
+            <a href="index.html" class="logo-link"><img src="images/logo.png" alt="Old Oak Town"></a>
             <h1>Advertise Your Business</h1>
             <p>Choose your package, submit your details, and start reaching thousands of Old Oak visitors</p>
         </div>
