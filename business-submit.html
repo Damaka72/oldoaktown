@@ -885,10 +885,7 @@
             });
         }
 
-        function redirectToPayment(data, amount) {
-            // Store data in sessionStorage for payment confirmation
-            sessionStorage.setItem('businessSubmission', JSON.stringify(data));
-
+        async function redirectToPayment(data, amount) {
             // Get the appropriate Stripe Payment Link
             const paymentLink = STRIPE_CONFIG.paymentLinks[selectedPackage][selectedFrequency];
 
@@ -898,7 +895,7 @@
                 return;
             }
 
-            console.log('Redirecting to Stripe Payment Link...');
+            console.log('Processing payment...');
             console.log('Package:', selectedPackage);
             console.log('Frequency:', selectedFrequency);
             console.log('Amount: £' + amount);
@@ -906,10 +903,42 @@
             // Show loading state
             const submitBtn = document.getElementById('submitBtn');
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Redirecting to payment...';
+            submitBtn.textContent = 'Saving submission...';
 
-            // Redirect to Stripe Payment Link
-            window.location.href = paymentLink;
+            try {
+                // First, save submission to backend
+                const response = await fetch('/api/save-submission', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to save submission');
+                }
+
+                const result = await response.json();
+                console.log('✅ Submission saved:', result.submissionId);
+
+                // Store data in sessionStorage for payment confirmation page
+                sessionStorage.setItem('businessSubmission', JSON.stringify(data));
+
+                // Update button text
+                submitBtn.textContent = 'Redirecting to payment...';
+
+                // Redirect to Stripe Payment Link
+                window.location.href = paymentLink;
+
+            } catch (error) {
+                console.error('Error saving submission:', error);
+                alert('Error processing your submission. Please try again or contact support at info@oldoaktown.co.uk');
+
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Proceed to Payment';
+            }
         }
 
         function showSuccess() {

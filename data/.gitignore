@@ -1,0 +1,3 @@
+# Ignore data files that may contain customer information during development
+# Remove this in production to track approved listings in git
+pending-listings.json
