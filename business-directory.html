@@ -16,6 +16,10 @@
     <meta property="og:description" content="Discover local businesses serving the Old Oak Common area. Your directory for services, shops, and companies in West London's newest development.">
     <meta property="og:site_name" content="Old Oak Town">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
     <style>
         * {
             margin: 0;
@@ -290,10 +294,14 @@
         }
 
         .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            display: flex;
+            align-items: center;
             text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: auto;
         }
 
         .nav-links {
@@ -370,7 +378,7 @@
     <!-- Navigation -->
     <nav>
         <div class="container">
-            <a href="index.html" class="logo">Old Oak Town</a>
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Old Oak Town"></a>
             <button class="mobile-menu-toggle" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
