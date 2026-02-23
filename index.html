@@ -1892,184 +1892,70 @@
         });
 
         // ─────────────────────────────────────────
-        // ARTICLE MODAL
-        // ─────────────────────────────────────────
-        const articles = {
-            1: {
-                title: "Old Oak Common Station Construction Progresses",
-                meta: "3 days ago • HS2 Updates",
-                image: "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop",
-                content: `
-                    <p>Major progress has been achieved at the Old Oak Common HS2 station site, with foundation work now complete for what will become the UK's largest newly built railway station. The £1.2 billion project has reached a critical milestone as platform installation begins across the 14-platform facility.</p>
-                    <h4>Construction Milestones</h4>
-                    <p>The completion of foundation work marks a significant achievement for the project, which has seen over 300 workers on site daily. The station's foundations required the excavation of approximately 3 million cubic metres of earth and the pouring of 80,000 cubic metres of concrete.</p>
-                    <p>Platform installation is now underway, with the first of 14 platforms taking shape. Each platform will be 450 metres long, capable of accommodating the full length of HS2's high-speed trains.</p>
-                    <h4>What Makes Old Oak Common Special</h4>
-                    <p>Once complete, Old Oak Common will be the UK's best-connected station, serving as an interchange between HS2, the Elizabeth Line, the Great Western Main Line, and the Heathrow Express. The station will handle an estimated 250,000 passengers daily.</p>
-                    <h4>Timeline and Next Steps</h4>
-                    <p>The project remains on track for completion ahead of HS2 services beginning in 2033. Over the next 18 months, construction teams will focus on completing the platform installation, followed by the erection of the roof structure and the fit-out of passenger facilities.</p>
-                `
-            },
-            2: {
-                title: "First Phase Housing Development Approved",
-                meta: "5 days ago • Housing",
-                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop",
-                content: `
-                    <p>The Old Oak and Park Royal Development Corporation (OPDC) has granted planning permission for the first major residential development in the Old Oak area, marking a transformative moment for West London's largest regeneration project. The approved scheme will deliver 500 new homes, with 50% designated as affordable housing.</p>
-                    <h4>Development Details</h4>
-                    <p>The Old Oak Mile development will feature a mix of one, two, and three-bedroom apartments including 250 affordable homes, 150 shared ownership properties, and 100 private sale apartments.</p>
-                    <h4>Affordable Housing Commitment</h4>
-                    <p>This development sets a benchmark for the area, delivering on OPDC's commitment to ensure that 50% of all new homes in Old Oak are affordable. Construction is expected to begin in Q2 2026, with the first residents moving in by late 2027.</p>
-                `
-            },
-            3: {
-                title: "Local Business Forum Launches",
-                meta: "1 week ago • Community",
-                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop",
-                content: `
-                    <p>A groundbreaking initiative to connect established Park Royal businesses with the opportunities arising from the Old Oak development has officially launched. The Old Oak Business Forum will serve as a vital bridge between the area's industrial heritage and its future.</p>
-                    <h4>First Meeting Success</h4>
-                    <p>The forum's inaugural meeting attracted over 150 local business representatives. Attendees heard presentations from major contractors working on HS2 and residential projects, with many expressing interest in becoming suppliers or partners.</p>
-                    <h4>Support Services</h4>
-                    <p>The forum has established a dedicated support team offering free business advice, including guidance on tendering for contracts and accessing development-related opportunities. Monthly meetings will be held at various venues across the area.</p>
-                `
-            },
-            4: {
-                title: "New Bus Routes Connect Old Oak to Central London",
-                meta: "2 weeks ago • Transport",
-                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop",
-                content: `
-                    <p>Transport for London (TfL) has announced a comprehensive upgrade to bus services serving the Old Oak area, dramatically improving connectivity years before the HS2 station opens.</p>
-                    <h4>New Route Details</h4>
-                    <p>Three new bus routes will launch in phases: Route 224 (Old Oak–Paddington–Victoria), Route 226 (Park Royal–White City–Kensington), and Route 228 (Old Oak–Harlesden–Wembley). All new routes will be served by state-of-the-art electric buses.</p>
-                    <h4>Infrastructure Improvements</h4>
-                    <p>TfL is investing £3 million in new bus stops with real-time displays, upgraded shelters, improved lighting, and dedicated bus lanes. The enhanced network will reduce journey times to central London by up to 20 minutes.</p>
-                `
-            },
-            5: {
-                title: "Affordable Housing Initiative Reaches Milestone",
-                meta: "3 weeks ago • Housing",
-                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop",
-                content: `
-                    <p>The Old Oak and Park Royal Development Corporation has reaffirmed its commitment to delivering 50% affordable housing across all developments in the area, setting a new standard for major regeneration projects across the UK.</p>
-                    <h4>What Does 50% Mean?</h4>
-                    <p>Out of the planned 9,000 new homes, 4,500 will be designated as affordable housing — 1,800 at social rent, 1,350 at London Affordable Rent, and 1,350 as shared ownership.</p>
-                    <h4>Design and Quality</h4>
-                    <p>Crucially, affordable homes in Old Oak will be indistinguishable from private sale properties and fully integrated into developments. There will be no "poor doors" or separate entrances. A dedicated housing portal has been launched for residents to register their interest.</p>
-                `
-            },
-            6: {
-                title: "Job Centre Opens to Support Local Employment",
-                meta: "1 month ago • Employment",
-                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop",
-                content: `
-                    <p>A specialist employment hub dedicated to connecting local residents with opportunities arising from the Old Oak development has opened in Harlesden. The Old Oak Jobs Centre represents a £2 million investment in ensuring that local people benefit from the estimated 11,000 new jobs being created.</p>
-                    <h4>Services Offered</h4>
-                    <p>Free services include job matching, skills training, CV writing, interview preparation, apprenticeship links, and childcare support advice. Over 50 employers have already partnered with the centre.</p>
-                    <h4>Early Success Stories</h4>
-                    <p>In its first month, the Jobs Centre helped 127 local residents secure employment. The centre is located at 45 High Street, Harlesden, NW10 4NX, open Monday to Friday 9am–6pm and Saturday 10am–2pm.</p>
-                `
-            }
-        };
+// NEWSLETTER SUBSCRIPTION — robust version
+// ─────────────────────────────────────────
+function handleNewsletterSubmit(emailInputId, btnId, msgId) {
+    var emailEl = document.getElementById(emailInputId);
+    var btn     = document.getElementById(btnId);
+    var msg     = document.getElementById(msgId);
 
-        function openArticle(event, articleId) {
-            event.preventDefault();
-            const article = articles[articleId];
-            if (!article) return;
-            document.getElementById('modalTitle').textContent = article.title;
-            document.getElementById('modalMeta').textContent = article.meta;
-            document.getElementById('modalImage').src = article.image;
-            document.getElementById('modalBody').innerHTML = article.content;
-            document.getElementById('articleModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+    if (!emailEl || !btn || !msg) {
+        console.error('Newsletter form elements not found:', emailInputId, btnId, msgId);
+        return;
+    }
+
+    var email = emailEl.value.trim();
+
+    if (!email || !email.includes('@')) {
+        msg.textContent = 'Please enter a valid email address.';
+        msg.className = 'nl-form__message error';
+        return;
+    }
+
+    btn.disabled = true;
+    var originalText = btn.textContent;
+    btn.textContent = 'Subscribing…';
+    msg.textContent = '';
+    msg.className = 'nl-form__message';
+
+    fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+    })
+    .then(function(response) { return response.json(); })
+    .then(function(data) {
+        if (data.success) {
+            msg.textContent = data.message;
+            msg.className = 'nl-form__message success';
+            emailEl.value = '';
+            btn.textContent = '✓ Subscribed!';
+        } else {
+            throw new Error(data.error || 'Subscription failed.');
         }
+    })
+    .catch(function(err) {
+        msg.textContent = err.message || 'Something went wrong. Please try again.';
+        msg.className = 'nl-form__message error';
+        btn.disabled = false;
+        btn.textContent = originalText;
+    });
+}
 
-        function closeModal() {
-            document.getElementById('articleModal').classList.remove('active');
-            document.body.style.overflow = '';
-        }
+// Wire up forms safely
+['Hero', 'Mid', 'Dev', 'Footer'].forEach(function(suffix) {
+    var formId  = suffix === 'Footer' ? 'nlFormFooter' : 'nlForm' + suffix;
+    var emailId = suffix === 'Footer' ? 'nlEmailFooter' : 'nlEmail' + suffix;
+    var btnId   = suffix === 'Footer' ? 'nlBtnFooter'  : 'nlBtn'   + suffix;
+    var msgId   = suffix === 'Footer' ? 'nlMsgFooter'  : 'nlMsg'   + suffix;
 
-        document.getElementById('articleModal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
-
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    document.getElementById('navLinks').classList.remove('active');
-                }
-            });
-        });
-
-        // Contact form
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+    var form = document.getElementById(formId);
+    if (form) {
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'contact_form_submission', { event_category: 'engagement', event_label: 'contact_form' });
-            }
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            this.reset();
+            handleNewsletterSubmit(emailId, btnId, msgId);
         });
-
-        // Track external link clicks
-        document.querySelectorAll('a[href^="http"]').forEach(link => {
-            if (!link.href.includes(window.location.hostname)) {
-                link.addEventListener('click', function() {
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'external_link_click', { event_category: 'engagement', event_label: this.href });
-                    }
-                });
-            }
-        });
-
-        // Interactive Timeline
-        function toggleTimeline(element) {
-            element.classList.toggle('expanded');
-        }
-
-        // News Ticker
-        function initNewsTicker() {
-            const tickerContent = document.getElementById('tickerContent');
-            if (!tickerContent) return;
-            const tickerItems = [
-                { text: "HS2 Station Construction Reaches Major Milestone - Platform Installation Underway", link: "#news" },
-                { text: "500 New Homes Approved Including 50% Affordable Housing in Old Oak Mile Development", link: "#news" },
-                { text: "Local Business Forum Launches to Connect Businesses with Development Opportunities", link: "#news" },
-                { text: "New Bus Routes Connect Old Oak to Central London Starting Next Month", link: "#news" },
-                { text: "Old Oak Jobs Centre Opens - Free Training & Job Placement Services Available", link: "#news" },
-                { text: "Old Oak Community Forum - Nov 15 at Harlesden Library, 6:30 PM", link: "#events" },
-                { text: "HS2 Station Tour - Nov 22, Guided Tour with Q&A Session", link: "#events" },
-                { text: "Old Oak Christmas Market - Dec 1 at Wormholt Park, 10 AM - 4 PM", link: "#events" },
-                { text: "25,500 Homes & 65,000 Jobs Planned for Old Oak Common", link: "#development" },
-                { text: "£1.7 Billion Investment in HS2 Station - Opening 2033", link: "#development" }
-            ];
-            const duplicatedItems = [...tickerItems, ...tickerItems];
-            tickerContent.innerHTML = duplicatedItems
-                .map(item => `<span class="ticker-item" onclick="window.location.hash='${item.link}'">${item.text}</span>`)
-                .join('');
-        }
-
-        document.addEventListener('DOMContentLoaded', initNewsTicker);
-    </script>
-
-    <!-- Events Calendar Script -->
-    <script src="/scripts/events-calendar.js"></script>
-
-    <!-- AI Chatbot -->
-    <script src="/scripts/chatbot.js"></script>
-</body>
-</html>
+    } else {
+        console.warn('Newsletter form not found:', formId);
+    }
+});
