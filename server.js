@@ -15,7 +15,74 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
-// Business submission endpoint
+// ─────────────────────────────────────────────
+// BEEHIIV NEWSLETTER SUBSCRIPTION
+// ─────────────────────────────────────────────
+
+app.post('/api/subscribe', async (req, res) => {
+    try {
+        const { email, firstName } = req.body;
+
+        if (!email || !email.includes('@')) {
+            return res.status(400).json({ error: 'A valid email address is required' });
+        }
+
+        const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
+        const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
+
+        if (!BEEHIIV_API_KEY || !BEEHIIV_PUBLICATION_ID) {
+            console.error('Beehiiv credentials not configured');
+            return res.status(500).json({ error: 'Newsletter service not configured' });
+        }
+
+        const response = await fetch(
+            `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${BEEHIIV_API_KEY}`
+                },
+                body: JSON.stringify({
+                    email,
+                    first_name: firstName || '',
+                    reactivate_existing: true,
+                    send_welcome_email: true,
+                    utm_source: 'oldoaktown-website',
+                    utm_medium: 'organic',
+                    utm_campaign: 'site-signup'
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            console.error('Beehiiv API error:', data);
+            return res.status(response.status).json({
+                error: 'Failed to subscribe. Please try again.'
+            });
+        }
+
+        console.log('New subscriber added to Beehiiv:', email);
+
+        res.json({
+            success: true,
+            message: "You're subscribed! Your first issue of The Old Oak Weekly will arrive soon."
+        });
+
+    } catch (error) {
+        console.error('Subscription error:', error);
+        res.status(500).json({
+            error: 'Something went wrong. Please try again.'
+        });
+    }
+});
+
+// ─────────────────────────────────────────────
+// BUSINESS SUBMISSION
+// ─────────────────────────────────────────────
+
 app.post('/api/business-submit', async (req, res) => {
     try {
         const data = req.body;
@@ -68,7 +135,10 @@ app.post('/api/business-submit', async (req, res) => {
     }
 });
 
-// Get all submissions (admin endpoint - should be protected in production)
+// ─────────────────────────────────────────────
+// ADMIN: GET ALL SUBMISSIONS
+// ─────────────────────────────────────────────
+
 app.get('/api/submissions', async (req, res) => {
     try {
         const submissionsDir = path.join(__dirname, 'submissions');
@@ -85,7 +155,6 @@ app.get('/api/submissions', async (req, res) => {
             }
         }
 
-        // Sort by submission date (newest first)
         submissions.sort((a, b) =>
             new Date(b.submittedAt) - new Date(a.submittedAt)
         );
@@ -97,7 +166,10 @@ app.get('/api/submissions', async (req, res) => {
     }
 });
 
-// Email notification function
+// ─────────────────────────────────────────────
+// EMAIL NOTIFICATION HELPER
+// ─────────────────────────────────────────────
+
 async function sendEmailNotification(data) {
     const nodemailer = require('nodemailer');
 
@@ -145,7 +217,6 @@ Submitted: ${data.submittedAt}
     `;
 
     try {
-        // Send to admin
         await transporter.sendMail({
             from: process.env.SMTP_FROM || '"Old Oak Town" <noreply@oldoaktown.co.uk>',
             to: process.env.ADMIN_EMAIL || 'admin@oldoaktown.co.uk',
@@ -153,7 +224,6 @@ Submitted: ${data.submittedAt}
             text: emailContent
         });
 
-        // Send confirmation to customer
         await transporter.sendMail({
             from: process.env.SMTP_FROM || '"Old Oak Town" <noreply@oldoaktown.co.uk>',
             to: data.email,
@@ -167,7 +237,10 @@ Submitted: ${data.submittedAt}
     }
 }
 
-// Serve HTML files
+// ─────────────────────────────────────────────
+// SERVE HTML FILES
+// ─────────────────────────────────────────────
+
 app.get('*', (req, res) => {
     const file = req.path === '/' ? 'index.html' : req.path;
     res.sendFile(path.join(__dirname, file), (err) => {
