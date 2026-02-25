@@ -1826,136 +1826,259 @@
 
     <script>
         // ─────────────────────────────────────────
-        // NEWSLETTER SUBSCRIPTION — shared handler
-        // All 4 forms use this single function.
+        // NEWSLETTER SUBSCRIPTION
         // ─────────────────────────────────────────
-        async function handleNewsletterSubmit(emailInputId, btnId, msgId) {
-            const emailEl = document.getElementById(emailInputId);
-            const btn     = document.getElementById(btnId);
-            const msg     = document.getElementById(msgId);
-            const email   = emailEl.value.trim();
+        function handleNewsletterSubmit(emailInputId, btnId, msgId) {
+            var emailEl = document.getElementById(emailInputId);
+            var btn     = document.getElementById(btnId);
+            var msg     = document.getElementById(msgId);
+
+            if (!emailEl || !btn || !msg) {
+                console.error('Newsletter form elements not found:', emailInputId, btnId, msgId);
+                return;
+            }
+
+            var email = emailEl.value.trim();
+
+            if (!email || !email.includes('@')) {
+                msg.textContent = 'Please enter a valid email address.';
+                msg.className = 'nl-form__message error';
+                return;
+            }
 
             btn.disabled = true;
+            var originalText = btn.textContent;
             btn.textContent = 'Subscribing…';
             msg.textContent = '';
-            msg.className = msg.className.replace(/success|error/g, '').trim();
 
-            try {
-                const response = await fetch('/api/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.success) {
                     msg.textContent = data.message;
-                    msg.classList.add('success');
+                    msg.className = 'nl-form__message success';
                     emailEl.value = '';
                     btn.textContent = '✓ Subscribed!';
-
-                    // GA event tracking
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'newsletter_signup', { event_category: 'engagement', event_label: emailInputId });
-                    }
                 } else {
                     throw new Error(data.error || 'Subscription failed. Please try again.');
                 }
-            } catch (err) {
-                msg.textContent = err.message;
-                msg.classList.add('error');
+            })
+            .catch(function(err) {
+                msg.textContent = err.message || 'Something went wrong. Please try again.';
+                msg.className = 'nl-form__message error';
                 btn.disabled = false;
-                btn.textContent = 'Subscribe';
-            }
+                btn.textContent = originalText;
+            });
         }
 
         // Wire up all 4 newsletter forms
-        document.getElementById('nlFormHero').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleNewsletterSubmit('nlEmailHero', 'nlBtnHero', 'nlMsgHero');
-        });
+        document.addEventListener('DOMContentLoaded', function() {
+            var forms = [
+                { formId: 'nlFormHero',   emailId: 'nlEmailHero',   btnId: 'nlBtnHero',   msgId: 'nlMsgHero' },
+                { formId: 'nlFormMid',    emailId: 'nlEmailMid',    btnId: 'nlBtnMid',    msgId: 'nlMsgMid' },
+                { formId: 'nlFormDev',    emailId: 'nlEmailDev',    btnId: 'nlBtnDev',    msgId: 'nlMsgDev' },
+                { formId: 'nlFormFooter', emailId: 'nlEmailFooter', btnId: 'nlBtnFooter', msgId: 'nlMsgFooter' }
+            ];
 
-        document.getElementById('nlFormMid').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleNewsletterSubmit('nlEmailMid', 'nlBtnMid', 'nlMsgMid');
-        });
-
-        document.getElementById('nlFormDev').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleNewsletterSubmit('nlEmailDev', 'nlBtnDev', 'nlMsgDev');
-        });
-
-        document.getElementById('nlFormFooter').addEventListener('submit', function(e) {
-            e.preventDefault();
-            handleNewsletterSubmit('nlEmailFooter', 'nlBtnFooter', 'nlMsgFooter');
+            forms.forEach(function(f) {
+                var form = document.getElementById(f.formId);
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        handleNewsletterSubmit(f.emailId, f.btnId, f.msgId);
+                    });
+                }
+            });
         });
 
         // ─────────────────────────────────────────
-// NEWSLETTER SUBSCRIPTION — robust version
-// ─────────────────────────────────────────
-function handleNewsletterSubmit(emailInputId, btnId, msgId) {
-    var emailEl = document.getElementById(emailInputId);
-    var btn     = document.getElementById(btnId);
-    var msg     = document.getElementById(msgId);
-
-    if (!emailEl || !btn || !msg) {
-        console.error('Newsletter form elements not found:', emailInputId, btnId, msgId);
-        return;
-    }
-
-    var email = emailEl.value.trim();
-
-    if (!email || !email.includes('@')) {
-        msg.textContent = 'Please enter a valid email address.';
-        msg.className = 'nl-form__message error';
-        return;
-    }
-
-    btn.disabled = true;
-    var originalText = btn.textContent;
-    btn.textContent = 'Subscribing…';
-    msg.textContent = '';
-    msg.className = 'nl-form__message';
-
-    fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email })
-    })
-    .then(function(response) { return response.json(); })
-    .then(function(data) {
-        if (data.success) {
-            msg.textContent = data.message;
-            msg.className = 'nl-form__message success';
-            emailEl.value = '';
-            btn.textContent = '✓ Subscribed!';
-        } else {
-            throw new Error(data.error || 'Subscription failed.');
+        // MOBILE MENU
+        // ─────────────────────────────────────────
+        function toggleMenu() {
+            var navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
         }
-    })
-    .catch(function(err) {
-        msg.textContent = err.message || 'Something went wrong. Please try again.';
-        msg.className = 'nl-form__message error';
-        btn.disabled = false;
-        btn.textContent = originalText;
-    });
-}
 
-// Wire up forms safely
-['Hero', 'Mid', 'Dev', 'Footer'].forEach(function(suffix) {
-    var formId  = suffix === 'Footer' ? 'nlFormFooter' : 'nlForm' + suffix;
-    var emailId = suffix === 'Footer' ? 'nlEmailFooter' : 'nlEmail' + suffix;
-    var btnId   = suffix === 'Footer' ? 'nlBtnFooter'  : 'nlBtn'   + suffix;
-    var msgId   = suffix === 'Footer' ? 'nlMsgFooter'  : 'nlMsg'   + suffix;
+        // ─────────────────────────────────────────
+        // NEWS TICKER
+        // ─────────────────────────────────────────
+        var tickerItems = [
+            'HS2 Old Oak Common station platforms now being installed',
+            'OPDC approves first 500 homes in Old Oak Mile development',
+            'New bus routes connecting Old Oak to Central London launched',
+            'Elizabeth Line extension to Old Oak Common in planning',
+            'Park Royal Business Group launches new networking events',
+            'Old Oak Community Forum meets monthly — all welcome'
+        ];
 
-    var form = document.getElementById(formId);
-    if (form) {
-        form.addEventListener('submit', function(e) {
+        var ticker = document.getElementById('tickerContent');
+        if (ticker) {
+            var html = '';
+            tickerItems.concat(tickerItems).forEach(function(item) {
+                html += '<span class="ticker-item">' + item + '</span>';
+            });
+            ticker.innerHTML = html;
+        }
+
+        // ─────────────────────────────────────────
+        // ARTICLE MODAL
+        // ─────────────────────────────────────────
+        var articles = {
+            1: {
+                title: 'Old Oak Common Station Construction Progresses',
+                meta: '3 days ago • HS2 Updates',
+                image: 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop',
+                body: '<p>Foundation work has been completed for the UK\'s largest newly built station at Old Oak Common, with platform installation now underway.</p><p>HS2 Ltd confirmed that the first platform sections have been installed, marking a significant milestone in the construction programme. The station will have 14 platforms serving HS2 high-speed services, the Elizabeth Line, Great Western Mainline, and Heathrow Express.</p>'
+            },
+            2: {
+                title: 'First Phase Housing Development Approved',
+                meta: '5 days ago • Housing',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop',
+                body: '<p>The Old Oak and Park Royal Development Corporation (OPDC) has approved the first phase of housing in the Old Oak Mile development, comprising 500 new homes with 50% designated as affordable housing.</p><p>Construction is expected to begin in 2026 with first residents moving in by 2028.</p>'
+            },
+            3: {
+                title: 'Local Business Forum Launches',
+                meta: '1 week ago • Community',
+                image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop',
+                body: '<p>A new initiative connecting existing Park Royal businesses with incoming developments and opportunities has launched, bringing together over 200 local employers for the first time.</p>'
+            },
+            4: {
+                title: 'New Bus Routes Connect Old Oak to Central London',
+                meta: '2 weeks ago • Transport',
+                image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop',
+                body: '<p>Transport for London has announced enhanced bus services connecting Old Oak Common to Central London ahead of the station opening, significantly improving connectivity for existing residents.</p>'
+            },
+            5: {
+                title: 'Affordable Housing Initiative Reaches Milestone',
+                meta: '3 weeks ago • Housing',
+                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop',
+                body: '<p>OPDC has reconfirmed its commitment to delivering 50% affordable homes across all new developments in the area, a target that puts Old Oak Common ahead of most major London regeneration schemes.</p>'
+            },
+            6: {
+                title: 'Job Centre Opens to Support Local Employment',
+                meta: '1 month ago • Employment',
+                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop',
+                body: '<p>A new dedicated employment hub has launched in the Old Oak area to connect local residents with the thousands of job opportunities expected from the regeneration project over the coming decade.</p>'
+            }
+        };
+
+        function openArticle(e, id) {
             e.preventDefault();
-            handleNewsletterSubmit(emailId, btnId, msgId);
+            var article = articles[id];
+            if (!article) return;
+            document.getElementById('modalTitle').textContent = article.title;
+            document.getElementById('modalMeta').textContent = article.meta;
+            document.getElementById('modalImage').src = article.image;
+            document.getElementById('modalBody').innerHTML = article.body;
+            document.getElementById('articleModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('articleModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('articleModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
         });
-    } else {
-        console.warn('Newsletter form not found:', formId);
-    }
-});
+
+        // ─────────────────────────────────────────
+        // INTERACTIVE TIMELINE
+        // ─────────────────────────────────────────
+        function toggleTimeline(el) {
+            el.classList.toggle('expanded');
+        }
+
+        // ─────────────────────────────────────────
+        // EVENTS CALENDAR
+        // ─────────────────────────────────────────
+        var calendarEvents = [
+            {
+                title: 'OPDC Public Consultation — Old Oak North',
+                date: new Date(2026, 2, 5),
+                time: '6:00 PM – 8:00 PM',
+                location: 'Old Oak Community Centre',
+                address: 'Braybrook Street, London W12 0AP',
+                description: 'OPDC invites residents to share views on the latest planning proposals for Old Oak North.',
+                registerUrl: 'https://www.eventbrite.co.uk/o/old-oak-and-park-royal-development-corporation-10724173382'
+            },
+            {
+                title: 'Park Royal Business Networking Evening',
+                date: new Date(2026, 2, 12),
+                time: '5:30 PM – 7:30 PM',
+                location: 'Park Royal Business Centre',
+                address: 'Victoria Road, London NW10 6NY',
+                description: 'Monthly networking for businesses in and around Park Royal. All welcome.',
+                registerUrl: '#'
+            },
+            {
+                title: 'Old Oak Neighbourhood Forum Monthly Meeting',
+                date: new Date(2026, 2, 18),
+                time: '7:00 PM – 9:00 PM',
+                location: 'St Mary Magdalene Church Hall',
+                address: 'Woodfield Road, London W9 2BA',
+                description: 'Monthly open meeting of the Old Oak Neighbourhood Forum.',
+                registerUrl: 'http://oldoakneighbourhoodforum.org/'
+            }
+        ];
+
+        var currentMonth = new Date().getMonth();
+        var currentYear  = new Date().getFullYear();
+
+        function renderCalendar() {
+            var container = document.getElementById('calendar-container');
+            var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+            var monthEvents = calendarEvents.filter(function(ev) {
+                return ev.date.getMonth() === currentMonth && ev.date.getFullYear() === currentYear;
+            });
+
+            var html = '<div class="calendar-header">';
+            html += '<button class="calendar-nav-btn" onclick="changeMonth(-1)">← Previous</button>';
+            html += '<h2 class="calendar-month-title">' + monthNames[currentMonth] + ' ' + currentYear + '</h2>';
+            html += '<button class="calendar-nav-btn" onclick="changeMonth(1)">Next →</button>';
+            html += '</div>';
+
+            if (monthEvents.length === 0) {
+                html += '<div class="no-events"><p>No events scheduled for ' + monthNames[currentMonth] + '. Check back soon!</p></div>';
+            } else {
+                html += '<div class="events-grid">';
+                monthEvents.forEach(function(ev) {
+                    var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+                    html += '<div class="event-card">';
+                    html += '<span class="event-date-badge">' + dayNames[ev.date.getDay()] + ' ' + ev.date.getDate() + ' ' + monthNames[ev.date.getMonth()] + '</span>';
+                    html += '<h3 class="event-title">' + ev.title + '</h3>';
+                    html += '<p class="event-time">🕐 ' + ev.time + '</p>';
+                    html += '<p class="event-location">📍 ' + ev.location + '</p>';
+                    html += '<p class="event-address">' + ev.address + '</p>';
+                    html += '<p class="event-description">' + ev.description + '</p>';
+                    html += '<div class="event-links">';
+                    if (ev.registerUrl && ev.registerUrl !== '#') {
+                        html += '<a href="' + ev.registerUrl + '" target="_blank" class="btn btn-primary">Register / More Info</a>';
+                    }
+                    html += '<a href="#contact" class="btn btn-secondary">Contact Us</a>';
+                    html += '</div></div>';
+                });
+                html += '</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        function changeMonth(dir) {
+            currentMonth += dir;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        }
+
+        renderCalendar();
+
+    </script>
+</body>
+</html>
