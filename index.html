@@ -145,6 +145,13 @@
             margin-right: auto;
         }
 
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .btn {
             display: inline-block;
             padding: 0.8rem 2rem;
@@ -154,6 +161,9 @@
             border-radius: 5px;
             font-weight: 600;
             transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         .btn:hover {
@@ -164,6 +174,119 @@
         .btn-primary {
             background: var(--warm-brown);
             color: white;
+        }
+
+        .btn-hero-subscribe {
+            background: white;
+            color: var(--primary-green);
+            font-weight: 700;
+            border: 2px solid white;
+        }
+
+        .btn-hero-subscribe:hover {
+            background: transparent;
+            color: white;
+        }
+
+        /* ─────────────────────────────────────────
+           NEWSLETTER SIGN-UP SECTION
+           ───────────────────────────────────────── */
+        .newsletter-section {
+            background: var(--primary-green);
+            color: white;
+            padding: 3.5rem 0;
+        }
+
+        .newsletter-section__inner {
+            max-width: 620px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-section h2 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-section p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .nl-form__fields {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nl-form__fields input[type="email"] {
+            flex: 1 1 260px;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            color: var(--dark-grey);
+        }
+
+        .nl-form__fields input[type="email"]:focus {
+            box-shadow: 0 0 0 3px rgba(255,255,255,0.4);
+        }
+
+        .nl-form__fields button {
+            padding: 0.75rem 1.75rem;
+            background: var(--warm-brown);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .nl-form__fields button:hover { background: #7a4010; }
+        .nl-form__fields button:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        .nl-form__message {
+            margin-top: 0.75rem;
+            font-size: 0.95rem;
+            min-height: 1.4em;
+        }
+
+        .nl-form__message.success { color: #a8f0a8; }
+        .nl-form__message.error   { color: #ffb3b3; }
+
+        .nl-form__privacy {
+            margin-top: 0.6rem;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* Inline newsletter (used in articles / development section) */
+        .newsletter-inline {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #3d6b20 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .newsletter-inline h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-inline p {
+            opacity: 0.9;
+            margin-bottom: 1.25rem;
         }
 
         /* Stats Section */
@@ -303,9 +426,7 @@
         }
 
         /* Calendar View */
-        #calendar-container {
-            margin-top: 2rem;
-        }
+        #calendar-container { margin-top: 2rem; }
 
         .calendar-header {
             display: flex;
@@ -318,14 +439,10 @@
             color: white;
         }
 
-        .calendar-month-title {
-            font-size: 1.8rem;
-            margin: 0;
-            color: white;
-        }
+        .calendar-month-title { font-size: 1.8rem; margin: 0; color: white; }
 
         .calendar-nav-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             color: white;
             border: 2px solid white;
             padding: 0.75rem 1.5rem;
@@ -335,22 +452,10 @@
             transition: all 0.3s ease;
         }
 
-        .calendar-nav-btn:hover:not(:disabled) {
-            background: white;
-            color: var(--primary-green);
-            transform: translateY(-2px);
-        }
+        .calendar-nav-btn:hover:not(:disabled) { background: white; color: var(--primary-green); transform: translateY(-2px); }
+        .calendar-nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        .calendar-nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .events-grid {
-            display: grid;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
+        .events-grid { display: grid; gap: 2rem; margin-top: 2rem; }
 
         .event-date-badge {
             background: var(--primary-green);
@@ -363,133 +468,36 @@
             font-size: 0.95rem;
         }
 
-        .event-title {
-            color: var(--dark-grey);
-            margin-bottom: 1rem;
-        }
+        .event-title { color: var(--dark-grey); margin-bottom: 1rem; }
+        .event-time, .event-location { margin-bottom: 0.75rem; color: var(--dark-grey); }
+        .event-address { color: #666; font-size: 0.95rem; }
+        .event-description { line-height: 1.6; color: var(--dark-grey); margin: 1rem 0 1.5rem 0; }
+        .event-links { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-        .event-time, .event-location {
-            margin-bottom: 0.75rem;
-            color: var(--dark-grey);
-        }
+        .btn-secondary { background: white; color: var(--primary-green); border: 2px solid var(--primary-green); }
+        .btn-secondary:hover { background: var(--primary-green); color: white; }
+        .btn-primary { background: var(--warm-brown); color: white; border: 2px solid var(--warm-brown); }
+        .btn-primary:hover { background: transparent; color: var(--warm-brown); }
 
-        .event-address {
-            color: #666;
-            font-size: 0.95rem;
-        }
+        .no-events { text-align: center; padding: 3rem; background: white; border-radius: 10px; margin-top: 2rem; }
+        .no-events p { color: #666; font-size: 1.1rem; }
+        .calendar-loading { text-align: center; padding: 3rem; background: white; border-radius: 10px; margin-top: 2rem; }
+        .calendar-loading p { color: #666; font-size: 1.1rem; }
+        .calendar-error { text-align: center; padding: 3rem; background: #fff3cd; border: 1px solid #ffc107; border-radius: 10px; margin-top: 2rem; }
+        .calendar-error p { color: #856404; font-size: 1.1rem; margin: 0; }
 
-        .event-description {
-            line-height: 1.6;
-            color: var(--dark-grey);
-            margin: 1rem 0 1.5rem 0;
-        }
-
-        .event-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary-green);
-            border: 2px solid var(--primary-green);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary-green);
-            color: white;
-        }
-
-        .btn-primary {
-            background: var(--warm-brown);
-            color: white;
-            border: 2px solid var(--warm-brown);
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--warm-brown);
-        }
-
-        .no-events {
-            text-align: center;
-            padding: 3rem;
-            background: white;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-
-        .no-events p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .calendar-loading {
-            text-align: center;
-            padding: 3rem;
-            background: white;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-
-        .calendar-loading p {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .calendar-error {
-            text-align: center;
-            padding: 3rem;
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-
-        .calendar-error p {
-            color: #856404;
-            font-size: 1.1rem;
-            margin: 0;
-        }
-
-        /* Responsive Calendar */
         @media (max-width: 768px) {
-            .calendar-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .calendar-month-title {
-                font-size: 1.5rem;
-            }
-
-            .calendar-nav-btn {
-                width: 100%;
-                padding: 0.75rem;
-            }
-
-            .event-links {
-                flex-direction: column;
-            }
-
-            .event-links a {
-                width: 100%;
-                text-align: center;
-            }
+            .calendar-header { flex-direction: column; gap: 1rem; }
+            .calendar-month-title { font-size: 1.5rem; }
+            .calendar-nav-btn { width: 100%; padding: 0.75rem; }
+            .event-links { flex-direction: column; }
+            .event-links a { width: 100%; text-align: center; }
         }
 
         /* Forms */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--dark-grey);
-        }
+        label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--dark-grey); }
 
         input, textarea, select {
             width: 100%;
@@ -500,15 +508,8 @@
             transition: border-color 0.3s;
         }
 
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-green);
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-green); }
+        textarea { min-height: 120px; resize: vertical; }
 
         /* Pricing Tables */
         .pricing-grid {
@@ -527,41 +528,16 @@
             border-top: 4px solid var(--primary-green);
         }
 
-        .pricing-card.featured {
-            border-top-color: var(--warm-brown);
-            transform: scale(1.05);
-        }
+        .pricing-card.featured { border-top-color: var(--warm-brown); transform: scale(1.05); }
 
-        .price {
-            font-size: 2.5rem;
-            color: var(--primary-green);
-            font-weight: bold;
-            margin: 1rem 0;
-        }
+        .price { font-size: 2.5rem; color: var(--primary-green); font-weight: bold; margin: 1rem 0; }
 
-        .pricing-features {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left;
-        }
-
-        .pricing-features li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .pricing-features li:before {
-            content: "✓ ";
-            color: var(--primary-green);
-            font-weight: bold;
-        }
+        .pricing-features { list-style: none; margin: 2rem 0; text-align: left; }
+        .pricing-features li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+        .pricing-features li:before { content: "✓ "; color: var(--primary-green); font-weight: bold; }
 
         /* Video Gallery */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; }
 
         .video-card {
             background: white;
@@ -571,39 +547,13 @@
             transition: transform 0.3s;
         }
 
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
+        .video-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); }
 
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            height: 0;
-            overflow: hidden;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .video-card-content {
-            padding: 1.5rem;
-        }
-
-        .video-card-content h3 {
-            margin-bottom: 0.5rem;
-            color: var(--warm-brown);
-        }
-
-        .video-card-content p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .video-card-content { padding: 1.5rem; }
+        .video-card-content h3 { margin-bottom: 0.5rem; color: var(--warm-brown); }
+        .video-card-content p { color: #666; margin-bottom: 1rem; }
 
         .video-tag {
             display: inline-block;
@@ -616,11 +566,7 @@
         }
 
         /* Community Resources */
-        .resource-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
 
         .resource-card {
             background: white;
@@ -630,32 +576,13 @@
             border-left: 4px solid var(--warm-brown);
         }
 
-        .resource-card h3 {
-            color: var(--primary-green);
-            margin-bottom: 1rem;
-        }
-
-        .resource-card ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .resource-card ul li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .resource-card ul li:before {
-            content: "→ ";
-            color: var(--warm-brown);
-            font-weight: bold;
-        }
+        .resource-card h3 { color: var(--primary-green); margin-bottom: 1rem; }
+        .resource-card ul { list-style: none; margin-top: 1rem; }
+        .resource-card ul li { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+        .resource-card ul li:before { content: "→ "; color: var(--warm-brown); font-weight: bold; }
 
         /* Development Timeline */
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
+        .timeline { position: relative; padding: 2rem 0; }
 
         .timeline-item {
             background: white;
@@ -721,9 +648,7 @@
             white-space: nowrap;
         }
 
-        .ticker-content:hover {
-            animation-play-state: paused;
-        }
+        .ticker-content:hover { animation-play-state: paused; }
 
         .ticker-item {
             display: inline-flex;
@@ -734,9 +659,7 @@
             transition: all 0.3s ease;
         }
 
-        .ticker-item:hover {
-            transform: scale(1.05);
-        }
+        .ticker-item:hover { transform: scale(1.05); }
 
         .ticker-item::before {
             content: "●";
@@ -746,32 +669,17 @@
         }
 
         @keyframes scroll-left {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         @media (max-width: 768px) {
-            .ticker-label {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.8rem;
-            }
-
-            .ticker-item {
-                font-size: 0.85rem;
-                padding: 0 2rem;
-            }
+            .ticker-label { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
+            .ticker-item { font-size: 0.85rem; padding: 0 2rem; }
         }
 
-        /* Enhanced Interactive Timeline */
-        .interactive-timeline {
-            position: relative;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
+        /* Interactive Timeline */
+        .interactive-timeline { position: relative; max-width: 1100px; margin: 0 auto; }
 
         .timeline-line {
             position: absolute;
@@ -797,14 +705,8 @@
         .timeline-phase:nth-child(5) { animation-delay: 0.5s; }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .timeline-content {
@@ -819,21 +721,10 @@
             border: 2px solid transparent;
         }
 
-        .timeline-phase:nth-child(odd) .timeline-content {
-            margin-left: auto;
-            margin-right: 5%;
-        }
+        .timeline-phase:nth-child(odd) .timeline-content { margin-left: auto; margin-right: 5%; }
+        .timeline-phase:nth-child(even) .timeline-content { margin-right: auto; margin-left: 5%; }
 
-        .timeline-phase:nth-child(even) .timeline-content {
-            margin-right: auto;
-            margin-left: 5%;
-        }
-
-        .timeline-content:hover {
-            transform: scale(1.03);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-            border-color: var(--primary-green);
-        }
+        .timeline-content:hover { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0,0,0,0.15); border-color: var(--primary-green); }
 
         .timeline-icon {
             position: absolute;
@@ -854,10 +745,7 @@
             transition: all 0.3s ease;
         }
 
-        .timeline-phase:hover .timeline-icon {
-            transform: translateX(-50%) scale(1.2) rotate(360deg);
-            background: var(--primary-green);
-        }
+        .timeline-phase:hover .timeline-icon { transform: translateX(-50%) scale(1.2) rotate(360deg); background: var(--primary-green); }
 
         .timeline-phase.current .timeline-icon {
             background: var(--warm-brown);
@@ -866,12 +754,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 0 rgba(139, 69, 19, 0.7);
-            }
-            50% {
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 20px rgba(139, 69, 19, 0);
-            }
+            0%, 100% { box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 0 rgba(139,69,19,0.7); }
+            50% { box-shadow: 0 4px 10px rgba(0,0,0,0.2), 0 0 0 20px rgba(139,69,19,0); }
         }
 
         .timeline-year-badge {
@@ -895,39 +779,16 @@
             margin-top: 1rem;
         }
 
-        .status-completed {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-current {
-            background: #fff3cd;
-            color: #856404;
-            animation: glow 2s infinite;
-        }
-
-        .status-upcoming {
-            background: #e7f3ff;
-            color: #004085;
-        }
+        .status-completed { background: #d4edda; color: #155724; }
+        .status-current { background: #fff3cd; color: #856404; animation: glow 2s infinite; }
+        .status-upcoming { background: #e7f3ff; color: #004085; }
 
         @keyframes glow {
-            0%, 100% {
-                box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(255, 193, 7, 0.8);
-            }
+            0%, 100% { box-shadow: 0 0 5px rgba(255,193,7,0.5); }
+            50% { box-shadow: 0 0 20px rgba(255,193,7,0.8); }
         }
 
-        .timeline-progress {
-            margin-top: 1rem;
-            background: #e9ecef;
-            height: 8px;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
+        .timeline-progress { margin-top: 1rem; background: #e9ecef; height: 8px; border-radius: 10px; overflow: hidden; position: relative; }
 
         .timeline-progress-bar {
             height: 100%;
@@ -941,85 +802,34 @@
         .timeline-progress-bar::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
+            top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
             animation: shimmer 2s infinite;
         }
 
         @keyframes shimmer {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
-        .timeline-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease;
-            margin-top: 1rem;
-        }
+        .timeline-details { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; margin-top: 1rem; }
+        .timeline-content.expanded .timeline-details { max-height: 500px; }
+        .timeline-content h3 { color: var(--primary-green); font-size: 1.6rem; margin-bottom: 1rem; }
 
-        .timeline-content.expanded .timeline-details {
-            max-height: 500px;
-        }
+        .expand-indicator { text-align: center; margin-top: 1rem; color: var(--warm-brown); font-size: 0.9rem; font-weight: 600; }
+        .timeline-content.expanded .expand-indicator::after { content: " ▲"; }
+        .timeline-content:not(.expanded) .expand-indicator::after { content: " ▼"; }
 
-        .timeline-content h3 {
-            color: var(--primary-green);
-            font-size: 1.6rem;
-            margin-bottom: 1rem;
-        }
-
-        .expand-indicator {
-            text-align: center;
-            margin-top: 1rem;
-            color: var(--warm-brown);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .timeline-content.expanded .expand-indicator::after {
-            content: " ▲";
-        }
-
-        .timeline-content:not(.expanded) .expand-indicator::after {
-            content: " ▼";
-        }
-
-        /* Responsive Timeline */
         @media (max-width: 968px) {
-            .timeline-line {
-                left: 30px;
-            }
-
-            .timeline-icon {
-                left: 30px;
-            }
-
-            .timeline-content {
-                width: calc(100% - 80px);
-                margin-left: 80px !important;
-                margin-right: 0 !important;
-            }
-
+            .timeline-line { left: 30px; }
+            .timeline-icon { left: 30px; }
+            .timeline-content { width: calc(100% - 80px); margin-left: 80px !important; margin-right: 0 !important; }
             .timeline-phase:nth-child(odd) .timeline-content,
-            .timeline-phase:nth-child(even) .timeline-content {
-                margin-left: 80px;
-                margin-right: 0;
-            }
+            .timeline-phase:nth-child(even) .timeline-content { margin-left: 80px; margin-right: 0; }
         }
 
         /* Footer */
-        footer {
-            background: var(--dark-grey);
-            color: white;
-            padding: 3rem 0 1rem;
-        }
+        footer { background: var(--dark-grey); color: white; padding: 3rem 0 1rem; }
 
         .footer-grid {
             display: grid;
@@ -1028,78 +838,57 @@
             margin-bottom: 2rem;
         }
 
-        .footer-section h3 {
-            color: var(--cream);
-            margin-bottom: 1rem;
-        }
+        .footer-section h3 { color: var(--cream); margin-bottom: 1rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: #ccc; text-decoration: none; line-height: 2; }
+        .footer-section a:hover { color: white; }
 
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: #ccc;
-            text-decoration: none;
-            line-height: 2;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .newsletter-form {
+        .footer-newsletter-form {
             display: flex;
             gap: 0.5rem;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #555;
-            color: #999;
-        }
-
-        .social-links {
-            list-style: none;
             margin-top: 1rem;
         }
 
-        .social-links li {
-            margin-bottom: 0.5rem;
+        .footer-newsletter-form input {
+            flex: 1;
+            padding: 0.6rem 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--dark-grey);
+            background: #fff;
         }
 
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .footer-newsletter-form button {
+            padding: 0.6rem 1rem;
+            background: var(--warm-brown);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background 0.2s;
         }
 
-        .social-links a:hover {
-            color: var(--primary-green);
-        }
+        .footer-newsletter-form button:hover { background: #7a4010; }
+        .footer-newsletter-form button:disabled { opacity: 0.7; cursor: not-allowed; }
+
+        .footer-nl-message { margin-top: 0.5rem; font-size: 0.85rem; min-height: 1.2em; }
+        .footer-nl-message.success { color: #a8f0a8; }
+        .footer-nl-message.error { color: #ffb3b3; }
+
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #555; color: #999; }
+
+        .social-links { list-style: none; margin-top: 1rem; }
+        .social-links li { margin-bottom: 0.5rem; }
+        .social-links a { display: inline-flex; align-items: center; color: #ccc; text-decoration: none; transition: color 0.3s ease; }
+        .social-links a:hover { color: var(--primary-green); }
 
         /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            overflow: auto;
-        }
-
-        .modal.active {
-            display: block;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); overflow: auto; }
+        .modal.active { display: block; }
 
         .modal-content {
             background-color: white;
@@ -1113,37 +902,11 @@
             overflow-y: auto;
         }
 
-        .modal-header {
-            padding: 2rem;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 1;
-        }
-
-        .modal-header img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .modal-body {
-            padding: 2rem;
-            line-height: 1.8;
-        }
-
-        .modal-body p {
-            margin-bottom: 1rem;
-        }
-
-        .modal-body h4 {
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-green);
-        }
+        .modal-header { padding: 2rem; border-bottom: 1px solid #eee; position: sticky; top: 0; background: white; z-index: 1; }
+        .modal-header img { width: 100%; height: 300px; object-fit: cover; border-radius: 5px; margin-bottom: 1rem; }
+        .modal-body { padding: 2rem; line-height: 1.8; }
+        .modal-body p { margin-bottom: 1rem; }
+        .modal-body h4 { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-green); }
 
         .close-modal {
             position: absolute;
@@ -1164,64 +927,23 @@
             z-index: 2;
         }
 
-        .close-modal:hover {
-            background: var(--light-grey);
-            color: var(--dark-grey);
-        }
+        .close-modal:hover { background: var(--light-grey); color: var(--dark-grey); }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--primary-green);
-                flex-direction: column;
-                padding: 1rem;
-                gap: 0;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                padding: 1rem;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            .stat-item h2 {
-                font-size: 2.5rem;
-            }
-
-            .modal-content {
-                margin: 0;
-                max-width: 100%;
-                border-radius: 0;
-                max-height: 100vh;
-            }
-
-            .modal-header img {
-                height: 200px;
-            }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--primary-green); flex-direction: column; padding: 1rem; gap: 0; }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+            .mobile-menu-toggle { display: block; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            h2 { font-size: 2rem; }
+            .stat-item h2 { font-size: 2.5rem; }
+            .modal-content { margin: 0; max-width: 100%; border-radius: 0; max-height: 100vh; }
+            .modal-header img { height: 200px; }
+            .nl-form__fields { flex-direction: column; align-items: stretch; }
+            .nl-form__fields input[type="email"],
+            .nl-form__fields button { width: 100%; }
         }
     </style>
 </head>
@@ -1248,9 +970,7 @@
     <!-- News Ticker -->
     <div class="news-ticker">
         <div class="ticker-label">LATEST NEWS</div>
-        <div class="ticker-content" id="tickerContent">
-            <!-- Ticker items will be duplicated for seamless loop -->
-        </div>
+        <div class="ticker-content" id="tickerContent"></div>
     </div>
 
     <!-- Hero Section -->
@@ -1258,7 +978,32 @@
         <div class="container">
             <h1>Welcome to Old Oak Town</h1>
             <p>Your comprehensive guide to West London's largest regeneration project - tracking HS2, housing, jobs, and community developments</p>
-            <a href="#news" class="btn">Explore Latest News</a>
+            <div class="hero-buttons">
+                <a href="#news" class="btn">Explore Latest News</a>
+                <a href="#newsletter" class="btn btn-hero-subscribe">Get the Weekly Digest ✉️</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         NEWSLETTER SIGN-UP — POSITION 1: Hero CTA
+         Immediately below the hero, above the stats.
+         Captures visitors at peak interest.
+         ═══════════════════════════════════════════ -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <div class="newsletter-section__inner">
+                <h2>Stay Ahead of the Development</h2>
+                <p>Get <strong>The Old Oak Weekly</strong> — HS2 construction updates, planning news, local business spotlights, and community stories, every Thursday. Free.</p>
+                <form class="nl-form" id="nlFormHero">
+                    <div class="nl-form__fields">
+                        <input type="email" id="nlEmailHero" placeholder="Your email address" required autocomplete="email">
+                        <button type="submit" id="nlBtnHero">Subscribe Free</button>
+                    </div>
+                    <p class="nl-form__message" id="nlMsgHero" aria-live="polite"></p>
+                    <p class="nl-form__privacy">No spam. Unsubscribe any time.</p>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -1445,6 +1190,29 @@
         </div>
     </section>
 
+    <!-- ═══════════════════════════════════════════
+         NEWSLETTER SIGN-UP — POSITION 2: Mid-page
+         Between Directory and Community sections.
+         Captures visitors who've browsed content
+         and are now engaged and ready to commit.
+         ═══════════════════════════════════════════ -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-section__inner">
+                <h2>Never Miss a Development Update</h2>
+                <p>Join residents and businesses already receiving <strong>The Old Oak Weekly</strong> — the only newsletter dedicated entirely to the Old Oak Common regeneration.</p>
+                <form class="nl-form" id="nlFormMid">
+                    <div class="nl-form__fields">
+                        <input type="email" id="nlEmailMid" placeholder="Your email address" required autocomplete="email">
+                        <button type="submit" id="nlBtnMid">Join the Community</button>
+                    </div>
+                    <p class="nl-form__message" id="nlMsgMid" aria-live="polite"></p>
+                    <p class="nl-form__privacy">No spam. Unsubscribe any time.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Community Resources -->
     <section id="community">
         <div class="container">
@@ -1584,7 +1352,7 @@
             </div>
 
             <!-- Key Contacts -->
-            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--warm-brown);">Key Contacts & Organizations</h3>
+            <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--warm-brown);">Key Contacts & Organisations</h3>
             <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem;">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
                     <div>
@@ -1593,21 +1361,18 @@
                         <p><strong>Email:</strong> info@opdc.london.gov.uk</p>
                         <p style="margin-top: 0.5rem; color: #666;">Lead planning authority for the area</p>
                     </div>
-
                     <div>
                         <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Old Oak Neighbourhood Forum</h4>
                         <p><strong>Website:</strong> oldoakneighbourhoodforum.org</p>
                         <p><strong>Email:</strong> contact@oonf.org</p>
                         <p style="margin-top: 0.5rem; color: #666;">Community voice in planning decisions</p>
                     </div>
-
                     <div>
                         <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">HS2 Ltd</h4>
                         <p><strong>Website:</strong> hs2.org.uk</p>
                         <p><strong>Helpdesk:</strong> 08081 434 434</p>
                         <p style="margin-top: 0.5rem; color: #666;">Station construction updates</p>
                     </div>
-
                     <div>
                         <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Local Councils</h4>
                         <p><strong>Hammersmith & Fulham:</strong> lbhf.gov.uk</p>
@@ -1615,14 +1380,12 @@
                         <p><strong>Brent:</strong> brent.gov.uk</p>
                         <p style="margin-top: 0.5rem; color: #666;">Council services and support</p>
                     </div>
-
                     <div>
                         <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Transport for London (TfL)</h4>
                         <p><strong>Website:</strong> tfl.gov.uk</p>
                         <p><strong>Phone:</strong> 0343 222 1234</p>
                         <p style="margin-top: 0.5rem; color: #666;">Transport updates and planning</p>
                     </div>
-
                     <div>
                         <h4 style="color: var(--primary-green); margin-bottom: 0.5rem;">Park Royal Business Group</h4>
                         <p><strong>Website:</strong> parkroyal.org</p>
@@ -1632,26 +1395,14 @@
                 </div>
             </div>
 
-            <!-- Emergency & Important Numbers -->
+            <!-- Emergency Numbers -->
             <div style="background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%); color: white; padding: 2rem; border-radius: 10px;">
                 <h3 style="color: white; margin-bottom: 1rem;">Emergency & Important Numbers</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                    <div>
-                        <p><strong>Emergency Services:</strong> 999</p>
-                        <p><strong>NHS 24/7 Advice:</strong> 111</p>
-                    </div>
-                    <div>
-                        <p><strong>Police Non-Emergency:</strong> 101</p>
-                        <p><strong>Crimestoppers:</strong> 0800 555 111</p>
-                    </div>
-                    <div>
-                        <p><strong>Gas Emergency:</strong> 0800 111 999</p>
-                        <p><strong>Power Cut:</strong> 105</p>
-                    </div>
-                    <div>
-                        <p><strong>Water Emergency:</strong> 0845 920 0800</p>
-                        <p><strong>Flood Line:</strong> 0345 988 1188</p>
-                    </div>
+                    <div><p><strong>Emergency Services:</strong> 999</p><p><strong>NHS 24/7 Advice:</strong> 111</p></div>
+                    <div><p><strong>Police Non-Emergency:</strong> 101</p><p><strong>Crimestoppers:</strong> 0800 555 111</p></div>
+                    <div><p><strong>Gas Emergency:</strong> 0800 111 999</p><p><strong>Power Cut:</strong> 105</p></div>
+                    <div><p><strong>Water Emergency:</strong> 0845 920 0800</p><p><strong>Flood Line:</strong> 0345 988 1188</p></div>
                 </div>
             </div>
         </div>
@@ -1662,10 +1413,7 @@
         <div class="container">
             <h2>Upcoming Events</h2>
             <div id="calendar-container">
-                <!-- Calendar will be loaded here by JavaScript -->
-                <div class="calendar-loading">
-                    <p>Loading events calendar...</p>
-                </div>
+                <div class="calendar-loading"><p>Loading events calendar...</p></div>
             </div>
         </div>
     </section>
@@ -1674,9 +1422,8 @@
     <section id="development" style="background: var(--light-grey);">
         <div class="container">
             <h2>Development Progress & Timeline</h2>
-            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Track the transformation of 140 hectares into West London's newest neighborhood - 25,500 homes, 65,000 jobs, and the UK's best-connected transport hub.</p>
+            <p style="margin-bottom: 2rem; font-size: 1.1rem;">Track the transformation of 140 hectares into West London's newest neighbourhood - 25,500 homes, 65,000 jobs, and the UK's best-connected transport hub.</p>
 
-            <!-- Development Overview Cards -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
                 <div class="resource-card">
                     <h3>🚄 HS2 Station</h3>
@@ -1687,7 +1434,6 @@
                     <p><strong>Opening:</strong> 2033+</p>
                     <p style="margin-top: 1rem; color: #666;">The UK's largest newly built station, connecting HS2, Elizabeth Line, Great Western Main Line, and Heathrow Express.</p>
                 </div>
-
                 <div class="resource-card">
                     <h3>🏘️ Housing</h3>
                     <p><strong>Total Homes:</strong> 25,500 planned</p>
@@ -1697,7 +1443,6 @@
                     <p><strong>Timeline:</strong> 2027-2039</p>
                     <p style="margin-top: 1rem; color: #666;">Creating one of London's most ambitious mixed-tenure communities with genuine affordable housing integration.</p>
                 </div>
-
                 <div class="resource-card">
                     <h3>💼 Employment</h3>
                     <p><strong>New Jobs:</strong> 65,000 planned</p>
@@ -1707,7 +1452,6 @@
                     <p><strong>Timeline:</strong> 2028-2039</p>
                     <p style="margin-top: 1rem; color: #666;">Building on Park Royal's industrial legacy with modern workspace, tech hubs, and diverse employment opportunities.</p>
                 </div>
-
                 <div class="resource-card">
                     <h3>🌳 Green Space</h3>
                     <p><strong>Parks:</strong> 40 hectares planned</p>
@@ -1715,18 +1459,17 @@
                     <p><strong>Biodiversity:</strong> Protected habitats</p>
                     <p><strong>Status:</strong> Design Phase</p>
                     <p><strong>Timeline:</strong> 2026-2035</p>
-                    <p style="margin-top: 1rem; color: #666;">Creating one of London's greenest new neighborhoods with extensive parks, waterways, and sustainable design.</p>
+                    <p style="margin-top: 1rem; color: #666;">Creating one of London's greenest new neighbourhoods with extensive parks, waterways, and sustainable design.</p>
                 </div>
             </div>
 
-            <!-- Development Timeline -->
+            <!-- Interactive Timeline -->
             <h3 style="font-size: 2rem; margin-bottom: 2rem; color: var(--primary-green);">Interactive Development Timeline</h3>
             <p style="margin-bottom: 2rem; text-align: center; color: #666;">Click on any phase to explore details. Hover over icons for animations.</p>
 
             <div class="interactive-timeline">
                 <div class="timeline-line"></div>
 
-                <!-- Phase 1: 2015-2020 -->
                 <div class="timeline-phase">
                     <div class="timeline-icon">📋</div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1734,15 +1477,13 @@
                         <h3>Planning & Preparation</h3>
                         <p><strong>Foundation Phase</strong></p>
                         <span class="timeline-status status-completed">Completed</span>
-                        <div class="timeline-progress">
-                            <div class="timeline-progress-bar" style="width: 100%"></div>
-                        </div>
+                        <div class="timeline-progress"><div class="timeline-progress-bar" style="width: 100%"></div></div>
                         <div class="timeline-details">
                             <p style="margin-top: 1rem;"><strong>Key Milestones:</strong></p>
                             <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                                 <li>Old Oak and Park Royal Development Corporation (OPDC) established</li>
                                 <li>Masterplan consultation completed</li>
-                                <li>HS2 station design finalized</li>
+                                <li>HS2 station design finalised</li>
                                 <li>Site preparation and enabling works begun</li>
                             </ul>
                         </div>
@@ -1750,7 +1491,6 @@
                     </div>
                 </div>
 
-                <!-- Phase 2: 2020-2025 -->
                 <div class="timeline-phase current">
                     <div class="timeline-icon">🏗️</div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1758,9 +1498,7 @@
                         <h3>Early Construction Phase</h3>
                         <p><strong>Active Construction</strong></p>
                         <span class="timeline-status status-current">In Progress</span>
-                        <div class="timeline-progress">
-                            <div class="timeline-progress-bar" style="width: 75%"></div>
-                        </div>
+                        <div class="timeline-progress"><div class="timeline-progress-bar" style="width: 75%"></div></div>
                         <div class="timeline-details">
                             <p style="margin-top: 1rem;"><strong>Current Status:</strong></p>
                             <ul style="margin-left: 2rem; margin-top: 0.5rem;">
@@ -1775,7 +1513,6 @@
                     </div>
                 </div>
 
-                <!-- Phase 3: 2026-2030 -->
                 <div class="timeline-phase">
                     <div class="timeline-icon">🏘️</div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1783,9 +1520,7 @@
                         <h3>Accelerated Development</h3>
                         <p><strong>Housing & Infrastructure Expansion</strong></p>
                         <span class="timeline-status status-upcoming">Upcoming</span>
-                        <div class="timeline-progress">
-                            <div class="timeline-progress-bar" style="width: 20%"></div>
-                        </div>
+                        <div class="timeline-progress"><div class="timeline-progress-bar" style="width: 20%"></div></div>
                         <div class="timeline-details">
                             <p style="margin-top: 1rem;"><strong>Planned Milestones:</strong></p>
                             <ul style="margin-left: 2rem; margin-top: 0.5rem;">
@@ -1800,7 +1535,6 @@
                     </div>
                 </div>
 
-                <!-- Phase 4: 2030-2035 -->
                 <div class="timeline-phase">
                     <div class="timeline-icon">🚄</div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1808,9 +1542,7 @@
                         <h3>Station Opening & Growth</h3>
                         <p><strong>Major Milestone Achievement</strong></p>
                         <span class="timeline-status status-upcoming">Upcoming</span>
-                        <div class="timeline-progress">
-                            <div class="timeline-progress-bar" style="width: 10%"></div>
-                        </div>
+                        <div class="timeline-progress"><div class="timeline-progress-bar" style="width: 10%"></div></div>
                         <div class="timeline-details">
                             <p style="margin-top: 1rem;"><strong>Major Events:</strong></p>
                             <ul style="margin-left: 2rem; margin-top: 0.5rem;">
@@ -1825,7 +1557,6 @@
                     </div>
                 </div>
 
-                <!-- Phase 5: 2035-2039 -->
                 <div class="timeline-phase">
                     <div class="timeline-icon">✨</div>
                     <div class="timeline-content" onclick="toggleTimeline(this)">
@@ -1833,15 +1564,13 @@
                         <h3>Completion & Maturation</h3>
                         <p><strong>Final Phase & Community Establishment</strong></p>
                         <span class="timeline-status status-upcoming">Upcoming</span>
-                        <div class="timeline-progress">
-                            <div class="timeline-progress-bar" style="width: 5%"></div>
-                        </div>
+                        <div class="timeline-progress"><div class="timeline-progress-bar" style="width: 5%"></div></div>
                         <div class="timeline-details">
                             <p style="margin-top: 1rem;"><strong>Final Phase:</strong></p>
                             <ul style="margin-left: 2rem; margin-top: 0.5rem;">
                                 <li>All 25,500 homes completed</li>
                                 <li>Full employment target reached (65,000 jobs)</li>
-                                <li>Complete neighborhood infrastructure in place</li>
+                                <li>Complete neighbourhood infrastructure in place</li>
                                 <li>Old Oak established as major London hub</li>
                                 <li>Long-term community institutions thriving</li>
                             </ul>
@@ -1860,35 +1589,30 @@
                     <p style="margin-top: 1rem;">High-density mixed-tenure housing with excellent access to the HS2 station. Includes schools, healthcare, and community facilities.</p>
                     <p style="margin-top: 1rem;"><strong>Homes:</strong> 8,000+ | <strong>Timeline:</strong> 2027-2035</p>
                 </div>
-
                 <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     <h3>Old Oak South</h3>
                     <p><strong>Focus:</strong> Mixed-Use Gateway</p>
                     <p style="margin-top: 1rem;">Commercial and residential mix creating a vibrant gateway district around the station with retail, dining, and entertainment.</p>
                     <p style="margin-top: 1rem;"><strong>Homes:</strong> 6,000+ | <strong>Timeline:</strong> 2028-2036</p>
                 </div>
-
                 <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     <h3>Park Royal</h3>
                     <p><strong>Focus:</strong> Employment & Innovation</p>
                     <p style="margin-top: 1rem;">Transformation of existing industrial estate into modern workspace, tech clusters, and innovation districts while preserving key industries.</p>
                     <p style="margin-top: 1rem;"><strong>Jobs:</strong> 40,000+ | <strong>Timeline:</strong> 2025-2039</p>
                 </div>
-
                 <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     <h3>Grand Union Canal</h3>
                     <p><strong>Focus:</strong> Leisure & Waterfront</p>
                     <p style="margin-top: 1rem;">Enhanced canal-side development with waterfront homes, towpath improvements, cafes, and leisure facilities creating a unique urban oasis.</p>
                     <p style="margin-top: 1rem;"><strong>Homes:</strong> 3,000+ | <strong>Timeline:</strong> 2029-2038</p>
                 </div>
-
                 <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     <h3>Scrubs Lane</h3>
                     <p><strong>Focus:</strong> Creative Industries</p>
                     <p style="margin-top: 1rem;">Building on the area's TV and media heritage with studio space, creative workspace, and homes for creative professionals.</p>
                     <p style="margin-top: 1rem;"><strong>Homes:</strong> 4,000+ | <strong>Timeline:</strong> 2030-2037</p>
                 </div>
-
                 <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                     <h3>Wormwood Scrubs</h3>
                     <p><strong>Focus:</strong> Green Connection</p>
@@ -1897,10 +1621,23 @@
                 </div>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem; background: white; padding: 2rem; border-radius: 10px;">
-                <h3 style="color: var(--primary-green); margin-bottom: 1rem;">Stay Updated on Development Progress</h3>
-                <p style="margin-bottom: 1rem;">Get monthly updates on construction milestones, planning applications, and community consultations.</p>
-                <a href="#contact" class="btn btn-primary">Subscribe to Development Updates</a>
+            <!-- ═══════════════════════════════════════════
+                 NEWSLETTER SIGN-UP — POSITION 3: End of Development section
+                 Visitors who've read the full development
+                 timeline are highly motivated to stay updated.
+                 This is the highest-intent placement.
+                 ═══════════════════════════════════════════ -->
+            <div class="newsletter-inline" id="nl-development">
+                <h3>Get Monthly Development Updates</h3>
+                <p>Construction milestones, planning applications, and community consultations — straight to your inbox every Thursday.</p>
+                <form class="nl-form" id="nlFormDev">
+                    <div class="nl-form__fields">
+                        <input type="email" id="nlEmailDev" placeholder="Your email address" required autocomplete="email">
+                        <button type="submit" id="nlBtnDev">Subscribe to Updates</button>
+                    </div>
+                    <p class="nl-form__message" id="nlMsgDev" aria-live="polite"></p>
+                    <p class="nl-form__privacy" style="opacity: 0.6; font-size: 0.8rem; margin-top: 0.5rem;">No spam. Unsubscribe any time.</p>
+                </form>
             </div>
         </div>
     </section>
@@ -1910,7 +1647,7 @@
         <div class="container">
             <h2>Advertise With Us</h2>
             <p style="margin-bottom: 2rem;">Reach thousands of Old Oak residents, businesses, and stakeholders with targeted advertising</p>
-            
+
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Free Listing</h3>
@@ -1924,7 +1661,6 @@
                     </ul>
                     <a href="business-submit.html" class="btn">Get Started</a>
                 </div>
-
                 <div class="pricing-card featured">
                     <h3>Featured Listing</h3>
                     <div class="price">£35<span style="font-size: 1rem;">/month</span></div>
@@ -1939,7 +1675,6 @@
                     <a href="business-submit.html" class="btn btn-primary">Get Featured</a>
                     <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">or £126/year (Save 70%)</p>
                 </div>
-
                 <div class="pricing-card">
                     <h3>Premium Package</h3>
                     <div class="price">£75<span style="font-size: 1rem;">/month</span></div>
@@ -1954,7 +1689,6 @@
                     <a href="business-submit.html" class="btn">Go Premium</a>
                     <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">or £270/year (Save 70%)</p>
                 </div>
-
                 <div class="pricing-card">
                     <h3>Newsletter Sponsor</h3>
                     <div class="price">£150<span style="font-size: 1rem;">/month</span></div>
@@ -2061,12 +1795,19 @@
                         <li><a href="#contact">Contact Sales</a></li>
                     </ul>
                 </div>
+                <!-- ═══════════════════════════════════════════
+                     NEWSLETTER SIGN-UP — POSITION 4: Footer
+                     Wired to the real /api/subscribe endpoint.
+                     ═══════════════════════════════════════════ -->
                 <div class="footer-section">
                     <h3>Newsletter</h3>
-                    <p>Get weekly updates delivered to your inbox</p>
-                    <form class="newsletter-form" style="margin-top: 1rem;">
-                        <input type="email" placeholder="Your email" required>
-                        <button type="submit" class="btn">Subscribe</button>
+                    <p>Get <strong>The Old Oak Weekly</strong> delivered to your inbox every Thursday.</p>
+                    <form id="nlFormFooter">
+                        <div class="footer-newsletter-form">
+                            <input type="email" id="nlEmailFooter" placeholder="Your email" required autocomplete="email">
+                            <button type="submit" id="nlBtnFooter">Subscribe</button>
+                        </div>
+                        <p class="footer-nl-message" id="nlMsgFooter" aria-live="polite"></p>
                     </form>
                 </div>
                 <div class="footer-section">
@@ -2074,7 +1815,6 @@
                     <p>Connect with us on social media</p>
                     <ul class="social-links">
                         <li><a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                        <!-- LinkedIn and Instagram links to be added -->
                     </ul>
                 </div>
             </div>
@@ -2085,354 +1825,260 @@
     </footer>
 
     <script>
-        // Article Database with Full Content
-        const articles = {
+        // ─────────────────────────────────────────
+        // NEWSLETTER SUBSCRIPTION
+        // ─────────────────────────────────────────
+        function handleNewsletterSubmit(emailInputId, btnId, msgId) {
+            var emailEl = document.getElementById(emailInputId);
+            var btn     = document.getElementById(btnId);
+            var msg     = document.getElementById(msgId);
+
+            if (!emailEl || !btn || !msg) {
+                console.error('Newsletter form elements not found:', emailInputId, btnId, msgId);
+                return;
+            }
+
+            var email = emailEl.value.trim();
+
+            if (!email || !email.includes('@')) {
+                msg.textContent = 'Please enter a valid email address.';
+                msg.className = 'nl-form__message error';
+                return;
+            }
+
+            btn.disabled = true;
+            var originalText = btn.textContent;
+            btn.textContent = 'Subscribing…';
+            msg.textContent = '';
+
+            fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.success) {
+                    msg.textContent = data.message;
+                    msg.className = 'nl-form__message success';
+                    emailEl.value = '';
+                    btn.textContent = '✓ Subscribed!';
+                } else {
+                    throw new Error(data.error || 'Subscription failed. Please try again.');
+                }
+            })
+            .catch(function(err) {
+                msg.textContent = err.message || 'Something went wrong. Please try again.';
+                msg.className = 'nl-form__message error';
+                btn.disabled = false;
+                btn.textContent = originalText;
+            });
+        }
+
+        // Wire up all 4 newsletter forms
+        document.addEventListener('DOMContentLoaded', function() {
+            var forms = [
+                { formId: 'nlFormHero',   emailId: 'nlEmailHero',   btnId: 'nlBtnHero',   msgId: 'nlMsgHero' },
+                { formId: 'nlFormMid',    emailId: 'nlEmailMid',    btnId: 'nlBtnMid',    msgId: 'nlMsgMid' },
+                { formId: 'nlFormDev',    emailId: 'nlEmailDev',    btnId: 'nlBtnDev',    msgId: 'nlMsgDev' },
+                { formId: 'nlFormFooter', emailId: 'nlEmailFooter', btnId: 'nlBtnFooter', msgId: 'nlMsgFooter' }
+            ];
+
+            forms.forEach(function(f) {
+                var form = document.getElementById(f.formId);
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        handleNewsletterSubmit(f.emailId, f.btnId, f.msgId);
+                    });
+                }
+            });
+        });
+
+        // ─────────────────────────────────────────
+        // MOBILE MENU
+        // ─────────────────────────────────────────
+        function toggleMenu() {
+            var navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // ─────────────────────────────────────────
+        // NEWS TICKER
+        // ─────────────────────────────────────────
+        var tickerItems = [
+            'HS2 Old Oak Common station platforms now being installed',
+            'OPDC approves first 500 homes in Old Oak Mile development',
+            'New bus routes connecting Old Oak to Central London launched',
+            'Elizabeth Line extension to Old Oak Common in planning',
+            'Park Royal Business Group launches new networking events',
+            'Old Oak Community Forum meets monthly — all welcome'
+        ];
+
+        var ticker = document.getElementById('tickerContent');
+        if (ticker) {
+            var html = '';
+            tickerItems.concat(tickerItems).forEach(function(item) {
+                html += '<span class="ticker-item">' + item + '</span>';
+            });
+            ticker.innerHTML = html;
+        }
+
+        // ─────────────────────────────────────────
+        // ARTICLE MODAL
+        // ─────────────────────────────────────────
+        var articles = {
             1: {
-                title: "Old Oak Common Station Construction Progresses",
-                meta: "3 days ago • HS2 Updates",
-                image: "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop",
-                content: `
-                    <p>Major progress has been achieved at the Old Oak Common HS2 station site, with foundation work now complete for what will become the UK's largest newly built railway station. The £1.2 billion project has reached a critical milestone as platform installation begins across the 14-platform facility.</p>
-
-                    <h4>Construction Milestones</h4>
-                    <p>The completion of foundation work marks a significant achievement for the project, which has seen over 300 workers on site daily. The station's foundations required the excavation of approximately 3 million cubic meters of earth and the pouring of 80,000 cubic meters of concrete.</p>
-
-                    <p>Platform installation is now underway, with the first of 14 platforms taking shape. Each platform will be 450 meters long, capable of accommodating the full length of HS2's high-speed trains. The platforms are being constructed using modular pre-cast concrete sections to ensure quality and speed of installation.</p>
-
-                    <h4>What Makes Old Oak Common Special</h4>
-                    <p>Once complete, Old Oak Common will be the UK's best-connected station, serving as an interchange between HS2, the Elizabeth Line, the Great Western Main Line, and the Heathrow Express. The station will handle an estimated 250,000 passengers daily, more than any other UK station outside of London's major termini.</p>
-
-                    <p>The station design features a striking roof canopy spanning 850 meters, which will be one of the largest single-span station roofs in Europe. The design prioritizes natural light, with extensive glazing to create bright, welcoming spaces for passengers.</p>
-
-                    <h4>Timeline and Next Steps</h4>
-                    <p>The project remains on track for completion ahead of HS2 services beginning in 2033. Over the next 18 months, construction teams will focus on completing the platform installation, followed by the erection of the roof structure and the fit-out of passenger facilities.</p>
-
-                    <p>The station will include extensive retail and dining options, as well as community spaces integrated into the design. Local residents are being consulted on aspects of the station's public spaces and connectivity to the surrounding neighborhood.</p>
-                `
+                title: 'Old Oak Common Station Construction Progresses',
+                meta: '3 days ago • HS2 Updates',
+                image: 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop',
+                body: '<p>Foundation work has been completed for the UK\'s largest newly built station at Old Oak Common, with platform installation now underway.</p><p>HS2 Ltd confirmed that the first platform sections have been installed, marking a significant milestone in the construction programme. The station will have 14 platforms serving HS2 high-speed services, the Elizabeth Line, Great Western Mainline, and Heathrow Express.</p>'
             },
             2: {
-                title: "First Phase Housing Development Approved",
-                meta: "5 days ago • Housing",
-                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop",
-                content: `
-                    <p>The Old Oak and Park Royal Development Corporation (OPDC) has granted planning permission for the first major residential development in the Old Oak area, marking a transformative moment for West London's largest regeneration project. The approved scheme will deliver 500 new homes, with 50% designated as affordable housing.</p>
-
-                    <h4>Development Details</h4>
-                    <p>The Old Oak Mile development, located just a short walk from the future HS2 station, will feature a mix of one, two, and three-bedroom apartments designed to meet the needs of a diverse community. The development includes:</p>
-
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li>250 affordable homes (50% of total)</li>
-                        <li>150 shared ownership properties</li>
-                        <li>100 private sale apartments</li>
-                        <li>5,000 sq ft of commercial space at ground level</li>
-                        <li>Landscaped communal gardens and play areas</li>
-                    </ul>
-
-                    <h4>Affordable Housing Commitment</h4>
-                    <p>This development sets a benchmark for the area, delivering on OPDC's commitment to ensure that 50% of all new homes in Old Oak are affordable. The affordable homes will be available through social rent and London Affordable Rent programs, making them accessible to local residents and keyworkers.</p>
-
-                    <p>"This is exactly the kind of development Old Oak needs," said OPDC Chief Executive, speaking at the approval meeting. "We're creating a new community that's genuinely mixed and affordable, not just luxury apartments for the wealthy."</p>
-
-                    <h4>Sustainability Features</h4>
-                    <p>The development incorporates cutting-edge sustainability measures, including solar panels, green roofs, rainwater harvesting, and high-performance insulation. All homes will achieve an EPC rating of A or B, ensuring low energy costs for residents.</p>
-
-                    <p>Construction is expected to begin in Q2 2026, with the first residents moving in by late 2027. The development will create approximately 200 construction jobs and 50 permanent jobs in the commercial spaces.</p>
-                `
+                title: 'First Phase Housing Development Approved',
+                meta: '5 days ago • Housing',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop',
+                body: '<p>The Old Oak and Park Royal Development Corporation (OPDC) has approved the first phase of housing in the Old Oak Mile development, comprising 500 new homes with 50% designated as affordable housing.</p><p>Construction is expected to begin in 2026 with first residents moving in by 2028.</p>'
             },
             3: {
-                title: "Local Business Forum Launches",
-                meta: "1 week ago • Community",
-                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop",
-                content: `
-                    <p>A groundbreaking initiative to connect established Park Royal businesses with the opportunities arising from the Old Oak development has officially launched. The Old Oak Business Forum will serve as a vital bridge between the area's industrial heritage and its future as a major mixed-use destination.</p>
-
-                    <h4>Connecting Past and Future</h4>
-                    <p>Park Royal is already home to over 2,000 businesses employing 40,000 people, making it one of London's most important industrial and logistics hubs. The new forum ensures these established businesses aren't left behind but instead become active participants in the area's transformation.</p>
-
-                    <p>The forum's objectives include:</p>
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li>Connecting local businesses with new supply chain opportunities</li>
-                        <li>Providing support for business expansion and relocation</li>
-                        <li>Facilitating networking between established and incoming businesses</li>
-                        <li>Advocating for local business interests in planning decisions</li>
-                        <li>Coordinating skills training programs with local colleges</li>
-                    </ul>
-
-                    <h4>First Meeting Success</h4>
-                    <p>The forum's inaugural meeting attracted over 150 local business representatives, demonstrating the strong interest in engaging with the development. Attendees heard presentations from major contractors working on HS2 and residential projects, with many expressing interest in becoming suppliers or partners.</p>
-
-                    <p>"We've been in Park Royal for 30 years," said one local logistics company owner. "It's great to see that we're not being forgotten in all this development. The forum gives us a voice and a way to access new opportunities."</p>
-
-                    <h4>Support Services</h4>
-                    <p>The forum has established a dedicated support team offering free business advice, including guidance on tendering for contracts, accessing development-related opportunities, and navigating planning processes for business expansions or relocations.</p>
-
-                    <p>Monthly meetings will be held at various venues across the area, with online participation options to ensure maximum accessibility. A business directory is being created to connect suppliers with opportunities in real-time.</p>
-                `
+                title: 'Local Business Forum Launches',
+                meta: '1 week ago • Community',
+                image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop',
+                body: '<p>A new initiative connecting existing Park Royal businesses with incoming developments and opportunities has launched, bringing together over 200 local employers for the first time.</p>'
             },
             4: {
-                title: "New Bus Routes Connect Old Oak to Central London",
-                meta: "2 weeks ago • Transport",
-                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop",
-                content: `
-                    <p>Transport for London (TfL) has announced a comprehensive upgrade to bus services serving the Old Oak area, dramatically improving connectivity years before the HS2 station opens. The new routes will provide direct links to central London destinations and better integration with existing transport networks.</p>
-
-                    <h4>New Route Details</h4>
-                    <p>Three new bus routes will launch in phases over the next 12 months:</p>
-
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li><strong>Route 224:</strong> Old Oak Common - Paddington - Victoria (every 8-10 minutes during peak hours)</li>
-                        <li><strong>Route 226:</strong> Park Royal - White City - Kensington (every 12 minutes)</li>
-                        <li><strong>Route 228:</strong> Old Oak - Harlesden - Wembley (every 10 minutes)</li>
-                    </ul>
-
-                    <p>Additionally, existing routes 220 and 260 will see frequency increases, with buses running every 5-7 minutes during peak times compared to the current 10-12 minute intervals.</p>
-
-                    <h4>Electric Fleet</h4>
-                    <p>All new routes will be served by state-of-the-art electric buses, part of TfL's commitment to zero-emission transport. These modern vehicles feature USB charging ports, free Wi-Fi, and improved accessibility features including wheelchair spaces and audio-visual announcements.</p>
-
-                    <p>"These aren't just any buses," explained a TfL spokesperson. "We're deploying our newest electric double-deckers with all the modern amenities passengers expect. This is about making Old Oak accessible and attractive even before the station opens."</p>
-
-                    <h4>Infrastructure Improvements</h4>
-                    <p>Alongside the new routes, TfL is investing £3 million in infrastructure improvements, including:</p>
-
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li>Five new bus stops with real-time information displays</li>
-                        <li>Upgraded shelters with weather protection and seating</li>
-                        <li>Improved lighting and CCTV for passenger safety</li>
-                        <li>Dedicated bus lanes on key approach roads</li>
-                    </ul>
-
-                    <p>The enhanced bus network will reduce journey times to central London by up to 20 minutes, making the area significantly more accessible for current residents and businesses while preparing for the influx of new residents expected over the coming decade.</p>
-                `
+                title: 'New Bus Routes Connect Old Oak to Central London',
+                meta: '2 weeks ago • Transport',
+                image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop',
+                body: '<p>Transport for London has announced enhanced bus services connecting Old Oak Common to Central London ahead of the station opening, significantly improving connectivity for existing residents.</p>'
             },
             5: {
-                title: "Affordable Housing Initiative Reaches Milestone",
-                meta: "3 weeks ago • Housing",
-                image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop",
-                content: `
-                    <p>The Old Oak and Park Royal Development Corporation has reaffirmed its commitment to delivering 50% affordable housing across all developments in the area, setting a new standard for major regeneration projects across the UK. This commitment represents one of the most ambitious affordable housing targets in the country.</p>
-
-                    <h4>What Does 50% Mean?</h4>
-                    <p>Out of the planned 9,000 new homes to be built in Old Oak over the next 15 years, 4,500 will be designated as affordable housing. This breaks down into several categories:</p>
-
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li><strong>Social Rent:</strong> 1,800 homes at approximately 60% of market rent</li>
-                        <li><strong>London Affordable Rent:</strong> 1,350 homes at approximately 80% of market rent</li>
-                        <li><strong>Shared Ownership:</strong> 1,350 homes where residents can buy a share (typically 25-75%) and pay rent on the remainder</li>
-                    </ul>
-
-                    <h4>Who Qualifies?</h4>
-                    <p>Priority for affordable homes is being given to existing residents of Hammersmith & Fulham, Ealing, and Brent - the three boroughs that overlap with the Old Oak area. Key workers including teachers, nurses, police officers, and transport workers will also receive priority allocation.</p>
-
-                    <p>Income caps ensure the homes go to those who genuinely need them, with household income limits set at £90,000 for shared ownership properties and £60,000 for London Affordable Rent properties.</p>
-
-                    <h4>Design and Quality</h4>
-                    <p>Crucially, affordable homes in Old Oak will be indistinguishable from private sale properties and fully integrated into developments. There will be no "poor doors" or separate entrances. All residents will have access to the same amenities, communal spaces, and building services.</p>
-
-                    <p>"We're building a genuinely mixed community," explained OPDC's housing director. "Every development will have affordable and private homes side by side. That's how you create real communities, not segregated neighborhoods."</p>
-
-                    <h4>Registration and Timeline</h4>
-                    <p>A dedicated housing portal has been launched where interested residents can register their interest and track upcoming developments. The first affordable homes are expected to become available for allocation in late 2027, with a steady pipeline of properties becoming available each year thereafter.</p>
-
-                    <p>Community workshops are being held monthly to help potential applicants understand the process and prepare their applications. Free advice sessions are available at Harlesden Library every Wednesday.</p>
-                `
+                title: 'Affordable Housing Initiative Reaches Milestone',
+                meta: '3 weeks ago • Housing',
+                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop',
+                body: '<p>OPDC has reconfirmed its commitment to delivering 50% affordable homes across all new developments in the area, a target that puts Old Oak Common ahead of most major London regeneration schemes.</p>'
             },
             6: {
-                title: "Job Centre Opens to Support Local Employment",
-                meta: "1 month ago • Employment",
-                image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop",
-                content: `
-                    <p>A specialist employment hub dedicated to connecting local residents with opportunities arising from the Old Oak development has opened in Harlesden. The Old Oak Jobs Centre represents a £2 million investment in ensuring that local people benefit from the estimated 11,000 new jobs being created in the area.</p>
-
-                    <h4>Services Offered</h4>
-                    <p>The Jobs Centre provides a comprehensive range of free services to local job seekers:</p>
-
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li><strong>Job Matching:</strong> Direct connections to construction, retail, hospitality, and professional roles</li>
-                        <li><strong>Skills Training:</strong> Free courses in construction skills, hospitality, digital skills, and customer service</li>
-                        <li><strong>CV Writing:</strong> One-on-one support to create professional CVs and cover letters</li>
-                        <li><strong>Interview Preparation:</strong> Mock interviews and coaching sessions</li>
-                        <li><strong>Apprenticeships:</strong> Links to apprenticeship programs with major employers</li>
-                        <li><strong>Childcare Support:</strong> Advice on childcare options and financial support available</li>
-                    </ul>
-
-                    <h4>Partnership with Employers</h4>
-                    <p>Over 50 employers have already partnered with the Jobs Centre, including major construction firms working on HS2, retail chains planning to open in the area, and professional services companies setting up offices near the future station.</p>
-
-                    <p>These employers have committed to interviewing qualified local candidates first, ensuring that Old Oak residents have the best chance of securing new opportunities. Several employers are offering guaranteed interview schemes for candidates who complete relevant training courses through the centre.</p>
-
-                    <h4>Early Success Stories</h4>
-                    <p>In its first month of operation, the Jobs Centre has already helped 127 local residents secure employment, with roles ranging from construction workers and site supervisors to customer service representatives and administrative staff.</p>
-
-                    <p>"I'd been looking for work for six months," said Marcus, a recent placement success. "The Jobs Centre helped me update my CV, practiced interviews with me, and connected me directly with employers. Within three weeks, I had a job offer as a site operative on the HS2 project. It's changed my life."</p>
-
-                    <h4>Training Programs</h4>
-                    <p>The centre runs rolling training programs in partnership with local colleges:</p>
-
-                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
-                        <li><strong>Construction Skills Certification Scheme (CSCS):</strong> 4-week course leading to industry-recognized qualification</li>
-                        <li><strong>Hospitality and Customer Service:</strong> 3-week intensive training program</li>
-                        <li><strong>Digital Skills Bootcamp:</strong> 6-week program covering Microsoft Office, digital marketing, and basic IT</li>
-                        <li><strong>Professional Development:</strong> Courses in project management, administration, and business skills</li>
-                    </ul>
-
-                    <p>All training is completely free for local residents, with support available for transport costs and childcare to ensure everyone can participate.</p>
-
-                    <h4>Opening Hours and Contact</h4>
-                    <p>The Old Oak Jobs Centre is located at 45 High Street, Harlesden, NW10 4NX. Opening hours are Monday to Friday, 9am-6pm, and Saturday, 10am-2pm. No appointment is necessary - just drop in and speak to one of the friendly advisors.</p>
-                `
+                title: 'Job Centre Opens to Support Local Employment',
+                meta: '1 month ago • Employment',
+                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop',
+                body: '<p>A new dedicated employment hub has launched in the Old Oak area to connect local residents with the thousands of job opportunities expected from the regeneration project over the coming decade.</p>'
             }
         };
 
-        // Modal Functions
-        function openArticle(event, articleId) {
-            event.preventDefault();
-            const article = articles[articleId];
+        function openArticle(e, id) {
+            e.preventDefault();
+            var article = articles[id];
             if (!article) return;
-
             document.getElementById('modalTitle').textContent = article.title;
             document.getElementById('modalMeta').textContent = article.meta;
             document.getElementById('modalImage').src = article.image;
-            document.getElementById('modalBody').innerHTML = article.content;
-
+            document.getElementById('modalBody').innerHTML = article.body;
             document.getElementById('articleModal').classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('articleModal').classList.remove('active');
-            document.body.style.overflow = ''; // Restore scrolling
+            document.body.style.overflow = '';
         }
 
-        // Close modal when clicking outside the content
         document.getElementById('articleModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
+            if (e.target === this) closeModal();
         });
 
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
-
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
+        // ─────────────────────────────────────────
+        // INTERACTIVE TIMELINE
+        // ─────────────────────────────────────────
+        function toggleTimeline(el) {
+            el.classList.toggle('expanded');
         }
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                // Don't prevent default for non-section links
-                if (href === '#') return;
-
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile menu if open
-                    document.getElementById('navLinks').classList.remove('active');
-                }
-            });
-        });
-
-        // Enhanced Form Handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Track event in Google Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'contact_form_submission', {
-                    'event_category': 'engagement',
-                    'event_label': 'contact_form'
-                });
+        // ─────────────────────────────────────────
+        // EVENTS CALENDAR
+        // ─────────────────────────────────────────
+        var calendarEvents = [
+            {
+                title: 'OPDC Public Consultation — Old Oak North',
+                date: new Date(2026, 2, 5),
+                time: '6:00 PM – 8:00 PM',
+                location: 'Old Oak Community Centre',
+                address: 'Braybrook Street, London W12 0AP',
+                description: 'OPDC invites residents to share views on the latest planning proposals for Old Oak North.',
+                registerUrl: 'https://www.eventbrite.co.uk/o/old-oak-and-park-royal-development-corporation-10724173382'
+            },
+            {
+                title: 'Park Royal Business Networking Evening',
+                date: new Date(2026, 2, 12),
+                time: '5:30 PM – 7:30 PM',
+                location: 'Park Royal Business Centre',
+                address: 'Victoria Road, London NW10 6NY',
+                description: 'Monthly networking for businesses in and around Park Royal. All welcome.',
+                registerUrl: '#'
+            },
+            {
+                title: 'Old Oak Neighbourhood Forum Monthly Meeting',
+                date: new Date(2026, 2, 18),
+                time: '7:00 PM – 9:00 PM',
+                location: 'St Mary Magdalene Church Hall',
+                address: 'Woodfield Road, London W9 2BA',
+                description: 'Monthly open meeting of the Old Oak Neighbourhood Forum.',
+                registerUrl: 'http://oldoakneighbourhoodforum.org/'
             }
+        ];
 
-            alert('Thank you for your message! We\'ll get back to you soon.');
-            this.reset();        });
+        var currentMonth = new Date().getMonth();
+        var currentYear  = new Date().getFullYear();
 
-        // Newsletter Form Handling
-        const newsletterForms = document.querySelectorAll('.newsletter-form');
-        newsletterForms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
+        function renderCalendar() {
+            var container = document.getElementById('calendar-container');
+            var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-                const email = this.querySelector('input[type="email"]').value;
-
-                // Track event in Google Analytics
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'newsletter_signup', {
-                        'event_category': 'engagement',
-                        'event_label': 'footer_newsletter'
-                    });
-                }
-
-                alert('✅ Success! You\'ve subscribed to the Old Oak Town newsletter.\n\nWe\'ll send weekly updates to: ' + email);
-                this.reset();
+            var monthEvents = calendarEvents.filter(function(ev) {
+                return ev.date.getMonth() === currentMonth && ev.date.getFullYear() === currentYear;
             });
-        });
 
-        // Track external link clicks (for affiliate monitoring)
-        document.querySelectorAll('a[href^="http"]').forEach(link => {
-            if (!link.href.includes(window.location.hostname)) {
-                link.addEventListener('click', function() {
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'external_link_click', {
-                            'event_category': 'engagement',
-                            'event_label': this.href
-                        });
+            var html = '<div class="calendar-header">';
+            html += '<button class="calendar-nav-btn" onclick="changeMonth(-1)">← Previous</button>';
+            html += '<h2 class="calendar-month-title">' + monthNames[currentMonth] + ' ' + currentYear + '</h2>';
+            html += '<button class="calendar-nav-btn" onclick="changeMonth(1)">Next →</button>';
+            html += '</div>';
+
+            if (monthEvents.length === 0) {
+                html += '<div class="no-events"><p>No events scheduled for ' + monthNames[currentMonth] + '. Check back soon!</p></div>';
+            } else {
+                html += '<div class="events-grid">';
+                monthEvents.forEach(function(ev) {
+                    var dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+                    html += '<div class="event-card">';
+                    html += '<span class="event-date-badge">' + dayNames[ev.date.getDay()] + ' ' + ev.date.getDate() + ' ' + monthNames[ev.date.getMonth()] + '</span>';
+                    html += '<h3 class="event-title">' + ev.title + '</h3>';
+                    html += '<p class="event-time">🕐 ' + ev.time + '</p>';
+                    html += '<p class="event-location">📍 ' + ev.location + '</p>';
+                    html += '<p class="event-address">' + ev.address + '</p>';
+                    html += '<p class="event-description">' + ev.description + '</p>';
+                    html += '<div class="event-links">';
+                    if (ev.registerUrl && ev.registerUrl !== '#') {
+                        html += '<a href="' + ev.registerUrl + '" target="_blank" class="btn btn-primary">Register / More Info</a>';
                     }
+                    html += '<a href="#contact" class="btn btn-secondary">Contact Us</a>';
+                    html += '</div></div>';
                 });
+                html += '</div>';
             }
-        });
 
-        // Interactive Timeline Toggle Function
-        function toggleTimeline(element) {
-            element.classList.toggle('expanded');
+            container.innerHTML = html;
         }
 
-        // News Ticker Initialization
-        function initNewsTicker() {
-            const tickerContent = document.getElementById('tickerContent');
-            if (!tickerContent) return;
-
-            // Create ticker items from various sources
-            const tickerItems = [
-                { text: "HS2 Station Construction Reaches Major Milestone - Platform Installation Underway", link: "#news" },
-                { text: "500 New Homes Approved Including 50% Affordable Housing in Old Oak Mile Development", link: "#news" },
-                { text: "Local Business Forum Launches to Connect Businesses with Development Opportunities", link: "#news" },
-                { text: "New Bus Routes Connect Old Oak to Central London Starting Next Month", link: "#news" },
-                { text: "Old Oak Jobs Centre Opens - Free Training & Job Placement Services Available", link: "#news" },
-                { text: "Old Oak Community Forum - Nov 15 at Harlesden Library, 6:30 PM", link: "#events" },
-                { text: "HS2 Station Tour - Nov 22, Guided Tour with Q&A Session", link: "#events" },
-                { text: "Old Oak Christmas Market - Dec 1 at Wormholt Park, 10 AM - 4 PM", link: "#events" },
-                { text: "25,500 Homes & 65,000 Jobs Planned for Old Oak Common", link: "#development" },
-                { text: "£1.7 Billion Investment in HS2 Station - Opening 2033", link: "#development" }
-            ];
-
-            // Create ticker HTML - duplicate items for seamless loop
-            let tickerHTML = '';
-            const duplicatedItems = [...tickerItems, ...tickerItems]; // Duplicate for seamless scrolling
-
-            duplicatedItems.forEach(item => {
-                tickerHTML += `<span class="ticker-item" onclick="window.location.hash='${item.link}'">${item.text}</span>`;
-            });
-
-            tickerContent.innerHTML = tickerHTML;
+        function changeMonth(dir) {
+            currentMonth += dir;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            if (currentMonth < 0)  { currentMonth = 11; currentYear--; }
+            renderCalendar();
         }
 
-        // Initialize ticker on page load
-        document.addEventListener('DOMContentLoaded', initNewsTicker);
+        renderCalendar();
+
     </script>
-
-    <!-- Events Calendar Script -->
-    <script src="/scripts/events-calendar.js"></script>
-
-    <!-- AI Chatbot -->
-    <script src="/scripts/chatbot.js"></script>
 </body>
 </html>
