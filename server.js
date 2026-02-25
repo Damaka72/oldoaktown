@@ -97,6 +97,17 @@ app.post('/api/subscribe', async (req, res) => {
         res.status(500).json({
             error: 'Something went wrong. Please try again.',
             detail: error.message
+            const submitBusiness = require('./api/submit-business');
+const approveBusiness = require('./api/approve-business');
+const getBusinesses = require('./api/get-businesses');
+const stripeWebhook = require('./api/stripe-webhook');
+
+app.post('/api/submit-business', submitBusiness);
+app.get('/api/approve-business', approveBusiness);
+app.get('/api/get-businesses', getBusinesses);
+
+// Stripe webhook needs raw body
+app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), stripeWebhook);
         });
     }
 });
