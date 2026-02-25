@@ -1,5 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
-const nodemailer = require('nodemailer').default || require('nodemailer');
+const nodemailer = require('nodemailer');
 
 async function generateDigest() {
     console.log('Starting weekly digest generation...');
@@ -18,11 +18,11 @@ Today is ${today}.
 
 Your task is to write a complete draft newsletter issue. Research and write about the following topics:
 
-1. **HS2 & Station Update** — Any recent news about Old Oak Common station construction, HS2 progress, delays, or milestones
-2. **Planning & Development** — Recent OPDC planning decisions, new housing approvals, consultations
-3. **Local Business Spotlight** — Feature a business type or sector thriving in Park Royal or the surrounding area
-4. **Community News** — Anything relevant to residents of North Acton, Harlesden, Park Royal, or Wormwood Scrubs
-5. **Upcoming Events** — Any OPDC consultations, community meetings, or local events worth highlighting
+1. HS2 & Station Update — Any recent news about Old Oak Common station construction, HS2 progress, delays, or milestones
+2. Planning & Development — Recent OPDC planning decisions, new housing approvals, consultations
+3. Local Business Spotlight — Feature a business type or sector thriving in Park Royal or the surrounding area
+4. Community News — Anything relevant to residents of North Acton, Harlesden, Park Royal, or Wormwood Scrubs
+5. Upcoming Events — Any OPDC consultations, community meetings, or local events worth highlighting
 
 Format the newsletter exactly like this:
 
@@ -33,43 +33,43 @@ PREVIEW TEXT: [One sentence that appears under the subject line in email clients
 
 ---
 
-👋 WELCOME
+WELCOME
 
-[2-3 sentence warm intro from the editor's perspective, referencing something current]
+[2-3 sentence warm intro from the editor perspective, referencing something current]
 
 ---
 
-🚄 HS2 & STATION UPDATE
+HS2 & STATION UPDATE
 
 [2-3 paragraphs covering latest station construction news. Be specific about what is known. If uncertain, say "reports suggest" or "according to latest updates"]
 
 ---
 
-🏘️ PLANNING & DEVELOPMENT
+PLANNING & DEVELOPMENT
 
 [2-3 paragraphs on OPDC decisions, housing developments, planning applications]
 
 ---
 
-🏪 BUSINESS SPOTLIGHT
+BUSINESS SPOTLIGHT
 
 [1-2 paragraphs featuring a local business sector or specific business type relevant to the area's growth]
 
 ---
 
-👥 COMMUNITY NEWS
+COMMUNITY NEWS
 
 [1-2 paragraphs on community matters, resident groups, local issues]
 
 ---
 
-📅 EVENTS & CONSULTATIONS
+EVENTS & CONSULTATIONS
 
 [List 2-3 upcoming events or consultations with dates if known]
 
 ---
 
-✉️ SIGN OFF
+SIGN OFF
 
 [Brief friendly sign off from The Old Oak Weekly team]
 
@@ -100,7 +100,7 @@ Write in a warm, informative, community-focused tone. Be factual and honest — 
         : `The Old Oak Weekly — ${today}`;
 
     // Send email
-    const transporter = nodemailer.createTransporter({
+    const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 587,
         secure: false,
