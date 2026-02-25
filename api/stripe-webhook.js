@@ -1,178 +1,218 @@
-/**
- * API Endpoint: Stripe Webhook Handler
- *
- * This endpoint receives webhook notifications from Stripe when:
- * - A checkout session is completed (payment succeeded)
- * - A subscription is created, updated, or cancelled
- *
- * It matches the payment to a pending submission and updates the status.
- *
- * SECURITY: This endpoint verifies the Stripe webhook signature to ensure
- * the request actually came from Stripe.
- */
+// api/stripe-webhook.js
+// Listens for Stripe payment events
+// Automatically upgrades listing tier when payment is confirmed
+// Downgrades when subscription is cancelled
 
-import fs from 'fs';
-import path from 'path';
-import Stripe from 'stripe';
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { createClient } = require('@supabase/supabase-js');
+const nodemailer = require('nodemailer');
 
-// Initialize Stripe with your secret key
-// You'll need to set this as an environment variable in Vercel
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '');
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY
+);
 
-// This is your Stripe webhook signing secret
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET || '';
+module.exports = async (req, res) => {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
 
-export const config = {
-  api: {
-    bodyParser: false, // Disable body parsing, we need the raw body for signature verification
-  },
+    const sig = req.headers['stripe-signature'];
+    let event;
+
+    try {
+        // Verify webhook signature from Stripe
+        event = stripe.webhooks.constructEvent(
+            req.body, // must be raw body - see server.js note below
+            sig,
+            process.env.STRIPE_WEBHOOK_SECRET
+        );
+    } catch (err) {
+        console.error('Webhook signature error:', err.message);
+        return res.status(400).json({ error: `Webhook error: ${err.message}` });
+    }
+
+    console.log('Stripe webhook event:', event.type);
+
+    try {
+        switch (event.type) {
+
+            // ─────────────────────────────────────────────
+            // Payment succeeded - activate the listing
+            // ─────────────────────────────────────────────
+            case 'checkout.session.completed': {
+                const session = event.data.object;
+                const submissionId = session.metadata?.submission_id;
+                const tier = session.metadata?.tier;
+
+                if (!submissionId) {
+                    console.log('No submission_id in metadata, skipping');
+                    break;
+                }
+
+                // Update business: mark as pending_approval with payment confirmed
+                // Admin still needs to approve the listing content
+                const { error } = await supabase
+                    .from('businesses')
+                    .update({
+                        status: 'pending',
+                        tier: tier || 'featured',
+                        stripe_customer_id: session.customer,
+                        stripe_subscription_id: session.subscription,
+                        stripe_payment_status: 'active'
+                    })
+                    .eq('id', submissionId);
+
+                if (error) {
+                    console.error('Supabase update error:', error);
+                } else {
+                    console.log(`Payment confirmed for submission ${submissionId}, tier: ${tier}`);
+                    // Get business details and send admin notification
+                    const { data: business } = await supabase
+                        .from('businesses')
+                        .select('*')
+                        .eq('id', submissionId)
+                        .single();
+
+                    if (business) {
+                        await sendPaidApprovalEmail(business, submissionId);
+                    }
+                }
+                break;
+            }
+
+            // ─────────────────────────────────────────────
+            // Subscription cancelled - downgrade to free
+            // ─────────────────────────────────────────────
+            case 'customer.subscription.deleted': {
+                const subscription = event.data.object;
+
+                const { data: business, error: fetchError } = await supabase
+                    .from('businesses')
+                    .select('*')
+                    .eq('stripe_subscription_id', subscription.id)
+                    .single();
+
+                if (!fetchError && business) {
+                    await supabase
+                        .from('businesses')
+                        .update({
+                            tier: 'free',
+                            stripe_payment_status: 'cancelled',
+                            stripe_subscription_id: null
+                        })
+                        .eq('id', business.id);
+
+                    console.log(`Subscription cancelled, ${business.business_name} downgraded to free`);
+                    await sendCancellationEmail(business);
+                }
+                break;
+            }
+
+            // ─────────────────────────────────────────────
+            // Payment failed - suspend listing
+            // ─────────────────────────────────────────────
+            case 'invoice.payment_failed': {
+                const invoice = event.data.object;
+                const subscriptionId = invoice.subscription;
+
+                if (subscriptionId) {
+                    await supabase
+                        .from('businesses')
+                        .update({ stripe_payment_status: 'payment_failed' })
+                        .eq('stripe_subscription_id', subscriptionId);
+
+                    console.log(`Payment failed for subscription ${subscriptionId}`);
+                }
+                break;
+            }
+
+            default:
+                console.log(`Unhandled event type: ${event.type}`);
+        }
+
+        return res.status(200).json({ received: true });
+
+    } catch (err) {
+        console.error('Webhook processing error:', err);
+        return res.status(500).json({ error: 'Webhook processing failed' });
+    }
 };
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+async function sendPaidApprovalEmail(business, businessId) {
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
+    const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
+    const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
 
-  // Get the raw body for signature verification
-  const buf = await buffer(req);
-  const sig = req.headers['stripe-signature'];
+    const transporter = nodemailer.createTransporter({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT || 587,
+        secure: false,
+        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+    });
 
-  let event;
+    const tierLabel = business.tier === 'premium' ? 'Premium (£75/mo)' : 'Featured (£35/mo)';
 
-  try {
-    // Verify the webhook signature
-    if (webhookSecret) {
-      event = stripe.webhooks.constructEvent(buf, sig, webhookSecret);
-    } else {
-      // In development, parse the body directly (NOT SECURE - for testing only)
-      console.warn('⚠️ WARNING: Webhook signature verification is disabled. Set STRIPE_WEBHOOK_SECRET in production!');
-      event = JSON.parse(buf.toString());
-    }
-  } catch (err) {
-    console.error('⚠️ Webhook signature verification failed:', err.message);
-    return res.status(400).json({ error: `Webhook Error: ${err.message}` });
-  }
-
-  // Handle the event
-  try {
-    switch (event.type) {
-      case 'checkout.session.completed':
-        await handleCheckoutCompleted(event.data.object);
-        break;
-
-      case 'customer.subscription.created':
-        console.log('✅ Subscription created:', event.data.object.id);
-        break;
-
-      case 'customer.subscription.updated':
-        console.log('ℹ️ Subscription updated:', event.data.object.id);
-        break;
-
-      case 'customer.subscription.deleted':
-        console.log('⚠️ Subscription cancelled:', event.data.object.id);
-        // You could send an email notification here
-        break;
-
-      default:
-        console.log(`Unhandled event type: ${event.type}`);
-    }
-
-    return res.status(200).json({ received: true });
-
-  } catch (error) {
-    console.error('Error processing webhook:', error);
-    return res.status(500).json({ error: 'Webhook processing failed' });
-  }
+    await transporter.sendMail({
+        from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
+        to: ADMIN_EMAIL,
+        subject: `💳 Payment Confirmed - ${business.business_name} [${tierLabel}] - Needs Approval`,
+        html: `
+            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:#2D5016;color:white;padding:20px;text-align:center;">
+                    <h1>💳 Payment Confirmed - Action Required</h1>
+                    <p>A paid listing is ready for your approval</p>
+                </div>
+                <div style="padding:30px;background:#f9f9f9;">
+                    <div style="background:#d4edda;border:1px solid #c3e6cb;padding:15px;border-radius:5px;margin-bottom:20px;">
+                        <strong>✅ Payment confirmed:</strong> ${tierLabel}
+                    </div>
+                    <h2 style="color:#2D5016;">${business.business_name}</h2>
+                    <table style="width:100%;border-collapse:collapse;">
+                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Tier:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${tierLabel}</td></tr>
+                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Category:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.category}</td></tr>
+                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Email:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.email}</td></tr>
+                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Phone:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.phone || 'Not provided'}</td></tr>
+                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Address:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.address || 'Not provided'}, ${business.postcode || ''}</td></tr>
+                        <tr><td style="padding:8px;"><strong>Description:</strong></td><td style="padding:8px;">${business.description || 'Not provided'}</td></tr>
+                    </table>
+                    <div style="margin-top:30px;text-align:center;">
+                        <a href="${approveUrl}" style="background:#2D5016;color:white;padding:15px 30px;text-decoration:none;border-radius:5px;margin-right:10px;font-weight:bold;display:inline-block;">✅ APPROVE & PUBLISH</a>
+                        <a href="${rejectUrl}" style="background:#dc3545;color:white;padding:15px 30px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">❌ REJECT</a>
+                    </div>
+                </div>
+            </div>
+        `
+    });
 }
 
-/**
- * Handle successful checkout session
- */
-async function handleCheckoutCompleted(session) {
-  console.log('🎉 Checkout completed!');
-  console.log('Session ID:', session.id);
-  console.log('Customer Email:', session.customer_email);
-  console.log('Amount Total:', session.amount_total);
+async function sendCancellationEmail(business) {
+    const transporter = nodemailer.createTransporter({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT || 587,
+        secure: false,
+        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+    });
 
-  const customerEmail = session.customer_email;
-  const customerId = session.customer;
-
-  if (!customerEmail) {
-    console.error('❌ No customer email in session');
-    return;
-  }
-
-  // Find the matching pending submission
-  const dataPath = path.join(process.cwd(), 'data', 'pending-listings.json');
-  let data = { submissions: [] };
-
-  try {
-    const fileContent = fs.readFileSync(dataPath, 'utf8');
-    data = JSON.parse(fileContent);
-  } catch (error) {
-    console.error('Error reading pending listings:', error);
-    return;
-  }
-
-  // Find submission by email (most recent if multiple)
-  const submissionIndex = data.submissions.findIndex(
-    sub => sub.email.toLowerCase() === customerEmail.toLowerCase() &&
-           sub.status === 'awaiting_payment'
-  );
-
-  if (submissionIndex === -1) {
-    console.error(`❌ No pending submission found for email: ${customerEmail}`);
-    console.log('This might be an upgrade from an existing customer.');
-    // You could create a new submission here or log it for manual review
-    return;
-  }
-
-  // Update the submission
-  data.submissions[submissionIndex].status = 'paid';
-  data.submissions[submissionIndex].paymentConfirmedAt = new Date().toISOString();
-  data.submissions[submissionIndex].stripeSessionId = session.id;
-  data.submissions[submissionIndex].stripeCustomerId = customerId;
-
-  // Write back to file
-  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
-
-  console.log(`✅ Payment confirmed for: ${data.submissions[submissionIndex].businessName}`);
-  console.log(`📧 Email: ${customerEmail}`);
-  console.log(`💰 Amount: £${(session.amount_total / 100).toFixed(2)}`);
-
-  // TODO: Optional - send confirmation email to customer
-  // TODO: Optional - add email to newsletter service
-  // await addToNewsletter(customerEmail, data.submissions[submissionIndex].businessName);
+    await transporter.sendMail({
+        from: `"Old Oak Town" <info@oldoaktown.co.uk>`,
+        to: business.email,
+        subject: `Your Old Oak Town subscription has been cancelled - ${business.business_name}`,
+        html: `
+            <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
+                <div style="background:#2D5016;color:white;padding:20px;text-align:center;">
+                    <h1>Subscription Cancelled</h1>
+                </div>
+                <div style="padding:30px;">
+                    <p>Your ${business.tier} subscription for <strong>${business.business_name}</strong> has been cancelled.</p>
+                    <p style="margin-top:15px;">Your listing will remain in the directory as a free listing.</p>
+                    <p style="margin-top:15px;">
+                        <a href="https://www.oldoaktown.co.uk/business-submit.html" style="background:#2D5016;color:white;padding:12px 25px;text-decoration:none;border-radius:5px;display:inline-block;">Resubscribe</a>
+                    </p>
+                    <hr style="margin:30px 0;border:none;border-top:1px solid #eee;">
+                    <p style="color:#999;font-size:0.85rem;">Old Oak Town · info@oldoaktown.co.uk</p>
+                </div>
+            </div>
+        `
+    });
 }
-
-/**
- * Helper function to get raw body from request
- */
-async function buffer(req) {
-  const chunks = [];
-  for await (const chunk of req) {
-    chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-  }
-  return Buffer.concat(chunks);
-}
-
-/**
- * Optional: Add customer to newsletter
- * Uncomment and implement based on your newsletter service
- */
-/*
-async function addToNewsletter(email, businessName) {
-  // Example for Mailchimp:
-  // const mailchimp = require('@mailchimp/mailchimp_marketing');
-  // await mailchimp.lists.addListMember(LIST_ID, { email_address: email });
-
-  // Example for ConvertKit:
-  // const response = await fetch('https://api.convertkit.com/v3/forms/FORM_ID/subscribe', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify({ email, api_key: process.env.CONVERTKIT_API_KEY })
-  // });
-
-  console.log(`📧 Added ${email} to newsletter`);
-}
-*/
