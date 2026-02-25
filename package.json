@@ -29,6 +29,7 @@
     "nodemailer": "^6.9.7",
     "stripe": "^14.7.0",
     "@anthropic-ai/sdk": "^0.36.3"
+    "@supabase/supabase-js": "^2.39.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.2",
