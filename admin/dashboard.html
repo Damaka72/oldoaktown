@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Old Oak Town</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: var(--dark-grey); }
+
+        .admin-header {
+            background: var(--primary-green);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-header h1 { font-size: 1.5rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .stat-card .label { color: #666; font-size: 0.9rem; margin-top: 0.3rem; }
+
+        .tab-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 0;
+        }
+
+        .tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+
+        .tab.active { color: var(--primary-green); border-bottom-color: var(--primary-green); }
+        .tab:hover { color: var(--primary-green); }
+
+        .tab .count {
+            background: #dc3545;
+            color: white;
+            border-radius: 10px;
+            padding: 0.1rem 0.5rem;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .business-list { display: flex; flex-direction: column; gap: 1rem; }
+
+        .admin-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .admin-card-header {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .admin-card-header:hover { background: #f9f9f9; }
+
+        .admin-card-title { font-weight: 600; font-size: 1.1rem; color: var(--primary-green); }
+        .admin-card-meta { color: #666; font-size: 0.85rem; margin-top: 0.2rem; }
+
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.pending { background: #fff3cd; color: #856404; }
+        .status-badge.approved { background: #d4edda; color: #155724; }
+        .status-badge.rejected { background: #f8d7da; color: #721c24; }
+
+        .tier-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .tier-badge.free { background: #e9ecef; color: #495057; }
+        .tier-badge.featured { background: #8B4513; color: white; }
+        .tier-badge.premium { background: var(--primary-green); color: white; }
+
+        .admin-card-body { padding: 1.5rem; display: none; }
+        .admin-card-body.open { display: block; }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item label { font-weight: 600; font-size: 0.85rem; color: #666; display: block; margin-bottom: 0.3rem; }
+        .detail-item span { color: var(--dark-grey); }
+
+        .description-box {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .action-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-approve { background: #28a745; color: white; }
+        .btn-approve:hover { background: #218838; }
+        .btn-reject { background: #dc3545; color: white; }
+        .btn-reject:hover { background: #c82333; }
+        .btn-edit { background: #ffc107; color: #333; }
+        .btn-delete { background: #6c757d; color: white; }
+
+        .loading { text-align: center; padding: 3rem; color: #666; }
+
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: var(--primary-green);
+        }
+
+        .login-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .login-card h1 { color: var(--primary-green); margin-bottom: 0.5rem; }
+        .login-card p { color: #666; margin-bottom: 2rem; }
+        .login-card input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .login-card input:focus { outline: none; border-color: var(--primary-green); }
+
+        .btn-login { width: 100%; background: var(--primary-green); color: white; padding: 1rem; font-size: 1rem; border-radius: 5px; }
+
+        .empty-state { text-align: center; padding: 3rem; color: #666; }
+        .empty-state p { font-size: 3rem; margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .admin-header { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-card">
+            <img src="../images/logo.png" alt="Old Oak Town" style="height:80px; margin-bottom:1rem;">
+            <h1>Admin Dashboard</h1>
+            <p>Old Oak Town Business Directory</p>
+            <input type="password" id="passwordInput" placeholder="Enter admin password" onkeypress="if(event.key==='Enter') login()">
+            <button class="btn btn-login" onclick="login()">Sign In</button>
+            <p id="loginError" style="color:#dc3545; margin-top:1rem; display:none;">Incorrect password</p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard (hidden until logged in) -->
+    <div id="dashboard" style="display:none;">
+
+        <div class="admin-header">
+            <h1>🌳 Old Oak Town — Admin Dashboard</h1>
+            <div>
+                <a href="../business-directory.html" style="color:rgba(255,255,255,0.8); margin-right:1.5rem; text-decoration:none;">View Directory →</a>
+                <button onclick="logout()" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:0.5rem 1rem; border-radius:5px; cursor:pointer;">Sign Out</button>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number" id="statPending">—</div>
+                    <div class="label">Pending Review</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statApproved">—</div>
+                    <div class="label">Live Listings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statFeatured">—</div>
+                    <div class="label">Featured (£35/mo)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statPremium">—</div>
+                    <div class="label">Premium (£75/mo)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="statRevenue">—</div>
+                    <div class="label">Est. Monthly Revenue</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tab-bar">
+                <div class="tab active" onclick="switchTab('pending', this)">
+                    Pending <span class="count" id="pendingCount">0</span>
+                </div>
+                <div class="tab" onclick="switchTab('approved', this)">Approved</div>
+                <div class="tab" onclick="switchTab('rejected', this)">Rejected</div>
+                <div class="tab" onclick="switchTab('all', this)">All</div>
+            </div>
+
+            <div id="businessList" class="business-list">
+                <div class="loading">Loading listings...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
+
+        // Simple admin password check (client-side only - good enough for MVP)
+        const ADMIN_PASSWORD = 'OldOak2025!';
+        let currentTab = 'pending';
+        let allData = [];
+
+        function login() {
+            const pw = document.getElementById('passwordInput').value;
+            if (pw === ADMIN_PASSWORD) {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                sessionStorage.setItem('adminAuth', 'true');
+                loadDashboard();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('adminAuth');
+            location.reload();
+        }
+
+        // Check if already logged in
+        if (sessionStorage.getItem('adminAuth') === 'true') {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            loadDashboard();
+        }
+
+        async function fetchAllBusinesses() {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/businesses?order=submitted_at.desc`, {
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                }
+            });
+            return await response.json();
+        }
+
+        async function updateBusiness(id, updates) {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/businesses?id=eq.${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(updates)
+            });
+            return response.ok;
+        }
+
+        async function loadDashboard() {
+            allData = await fetchAllBusinesses();
+            updateStats(allData);
+            renderList(currentTab);
+        }
+
+        function updateStats(data) {
+            const pending = data.filter(b => b.status === 'pending').length;
+            const approved = data.filter(b => b.status === 'approved').length;
+            const featured = data.filter(b => b.tier === 'featured' && b.status === 'approved').length;
+            const premium = data.filter(b => b.tier === 'premium' && b.status === 'approved').length;
+            const revenue = (featured * 35) + (premium * 75);
+
+            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statApproved').textContent = approved;
+            document.getElementById('statFeatured').textContent = featured;
+            document.getElementById('statPremium').textContent = premium;
+            document.getElementById('statRevenue').textContent = `£${revenue}`;
+            document.getElementById('pendingCount').textContent = pending;
+        }
+
+        function switchTab(tab, el) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            renderList(tab);
+        }
+
+        function renderList(filter) {
+            const list = document.getElementById('businessList');
+            let data = allData;
+
+            if (filter !== 'all') {
+                data = allData.filter(b => b.status === filter);
+            }
+
+            if (data.length === 0) {
+                list.innerHTML = `<div class="empty-state"><p>✅</p><h3>No ${filter} listings</h3></div>`;
+                return;
+            }
+
+            list.innerHTML = data.map(b => renderAdminCard(b)).join('');
+        }
+
+        function renderAdminCard(b) {
+            const date = new Date(b.submitted_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+            return `
+                <div class="admin-card">
+                    <div class="admin-card-header" onclick="toggleCard('${b.id}')">
+                        <div>
+                            <div class="admin-card-title">${b.business_name}</div>
+                            <div class="admin-card-meta">${b.category} · ${b.email} · Submitted ${date}</div>
+                        </div>
+                        <div style="display:flex; gap:0.5rem; align-items:center;">
+                            <span class="tier-badge ${b.tier}">${b.tier}</span>
+                            <span class="status-badge ${b.status}">${b.status}</span>
+                            <span style="color:#999; margin-left:0.5rem;">▼</span>
+                        </div>
+                    </div>
+                    <div class="admin-card-body" id="card-${b.id}">
+                        <div class="detail-grid">
+                            <div class="detail-item">
+                                <label>Phone</label>
+                                <span>${b.phone || '—'}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Address</label>
+                                <span>${b.address || '—'} ${b.postcode || ''}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Website</label>
+                                <span>${b.website ? `<a href="${b.website}" target="_blank">${b.website}</a>` : '—'}</span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Payment Status</label>
+                                <span>${b.payment_status || '—'}</span>
+                            </div>
+                            ${b.instagram ? `<div class="detail-item"><label>Instagram</label><span><a href="${b.instagram}" target="_blank">View</a></span></div>` : ''}
+                            ${b.opening_hours ? `<div class="detail-item"><label>Opening Hours</label><span>${b.opening_hours}</span></div>` : ''}
+                        </div>
+                        <div class="description-box">
+                            <strong>Description:</strong><br>${b.description || '—'}
+                        </div>
+                        ${b.special_offers ? `<div class="description-box"><strong>Special Offers:</strong><br>${b.special_offers}</div>` : ''}
+                        <div class="action-buttons">
+                            ${b.status !== 'approved' ? `<button class="btn btn-approve" onclick="approveBusiness('${b.id}')">✅ Approve</button>` : ''}
+                            ${b.status !== 'rejected' ? `<button class="btn btn-reject" onclick="rejectBusiness('${b.id}')">❌ Reject</button>` : ''}
+                            ${b.status === 'approved' ? `<button class="btn btn-edit" onclick="suspendBusiness('${b.id}')">⏸ Suspend</button>` : ''}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleCard(id) {
+            const body = document.getElementById(`card-${id}`);
+            body.classList.toggle('open');
+        }
+
+        async function approveBusiness(id) {
+            if (!confirm('Approve this listing? It will go live on the directory.')) return;
+            const ok = await updateBusiness(id, {
+                status: 'approved',
+                approved_at: new Date().toISOString()
+            });
+            if (ok) {
+                showToast('✅ Listing approved and live!');
+                await loadDashboard();
+            } else {
+                showToast('❌ Error updating listing', true);
+            }
+        }
+
+        async function rejectBusiness(id) {
+            if (!confirm('Reject this listing? The business will be notified.')) return;
+            const ok = await updateBusiness(id, { status: 'rejected' });
+            if (ok) {
+                showToast('Listing rejected');
+                await loadDashboard();
+            }
+        }
+
+        async function suspendBusiness(id) {
+            if (!confirm('Suspend this listing? It will be hidden from the directory.')) return;
+            const ok = await updateBusiness(id, { status: 'pending' });
+            if (ok) {
+                showToast('Listing suspended');
+                await loadDashboard();
+            }
+        }
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed; bottom: 2rem; right: 2rem; z-index: 9999;
+                background: ${isError ? '#dc3545' : '#28a745'}; color: white;
+                padding: 1rem 2rem; border-radius: 10px; font-weight: 600;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                animation: fadeIn 0.3s;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
