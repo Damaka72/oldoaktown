@@ -1,5 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
-const nodemailer = require('nodemailer');
+const nodemailer = require('nodemailer').default || require('nodemailer');
 
 async function generateDigest() {
     console.log('Starting weekly digest generation...');
