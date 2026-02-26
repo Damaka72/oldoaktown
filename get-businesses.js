@@ -62,7 +62,11 @@ module.exports = async (req, res) => {
 
         if (error) {
             console.error('Supabase query error:', error);
-            return res.status(500).json({ error: 'Failed to fetch businesses' });
+            return res.status(500).json({
+                error: 'Failed to fetch businesses',
+                detail: error.message,
+                code: error.code
+            });
         }
 
         // Group by category for easier rendering

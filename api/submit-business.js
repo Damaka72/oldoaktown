@@ -71,7 +71,13 @@ module.exports = async (req, res) => {
 
         if (error) {
             console.error('Supabase insert error:', error);
-            return res.status(500).json({ error: 'Failed to save submission' });
+            // Include the Supabase error code + message so the operator can
+            // diagnose missing tables / RLS blocks without digging through logs.
+            return res.status(500).json({
+                error: 'Failed to save submission',
+                detail: error.message,
+                code: error.code
+            });
         }
 
         const businessId = data.id;
