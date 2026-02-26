@@ -12,10 +12,12 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_KEY
 );
 
-// Disable body parsing - we need raw body for Stripe signature verification
-module.exports.config = {
-    api: { bodyParser: false }
-};
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT || 587,
+    secure: false,
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+});
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
@@ -130,13 +132,6 @@ async function sendPaidApprovalEmail(business, businessId) {
     const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
     const tierLabel = business.tier === 'premium' ? 'Premium (£75/mo)' : 'Featured (£35/mo)';
 
-    const transporter = nodemailer.createTransporter({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT || 587,
-        secure: false,
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-    });
-
     await transporter.sendMail({
         from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
         to: ADMIN_EMAIL,
@@ -169,13 +164,6 @@ async function sendPaidApprovalEmail(business, businessId) {
 }
 
 async function sendCancellationEmail(business) {
-    const transporter = nodemailer.createTransporter({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT || 587,
-        secure: false,
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-    });
-
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
     const SITE_URL = process.env.SITE_URL || 'https://www.oldoaktown.co.uk';
     await transporter.sendMail({

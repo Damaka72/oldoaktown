@@ -10,8 +10,33 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware
-app.use(cors());
+// ─────────────────────────────────────────────
+// CORS — restrict to the production domain
+// ─────────────────────────────────────────────
+app.use(cors({
+    origin: process.env.NODE_ENV === 'production'
+        ? (process.env.SITE_URL || 'https://www.oldoaktown.co.uk')
+        : '*'
+}));
+
+// ─────────────────────────────────────────────
+// Simple in-memory rate limiter
+// ─────────────────────────────────────────────
+const _rateLimitStore = new Map();
+function rateLimit(windowMs, max) {
+    return (req, res, next) => {
+        const key = req.ip || 'unknown';
+        const now = Date.now();
+        const hits = (_rateLimitStore.get(key) || []).filter(t => t > now - windowMs);
+        if (hits.length >= max) {
+            return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+        }
+        hits.push(now);
+        _rateLimitStore.set(key, hits);
+        next();
+    };
+}
+
 app.use(express.json());
 app.use(express.static(__dirname));
 
@@ -19,7 +44,7 @@ app.use(express.static(__dirname));
 // BEEHIIV NEWSLETTER SUBSCRIPTION
 // ─────────────────────────────────────────────
 
-app.post('/api/subscribe', async (req, res) => {
+app.post('/api/subscribe', rateLimit(60_000, 5), async (req, res) => {
     try {
         const { email, firstName } = req.body;
 
@@ -85,11 +110,15 @@ const submitBusiness = require('./api/submit-business');
 const approveBusiness = require('./approve-business');
 const getBusinesses = require('./get-businesses');
 const stripeWebhook = require('./api/stripe-webhook');
+const getPending = require('./api/get-pending');
+const approveListing = require('./api/approve-listing');
 
-app.post('/api/submit-business', submitBusiness);
+app.post('/api/submit-business', rateLimit(60_000, 10), submitBusiness);
 app.get('/api/approve-business', approveBusiness);
 app.get('/api/get-businesses', getBusinesses);
 app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), stripeWebhook);
+app.get('/api/get-pending', getPending);
+app.post('/api/approve-listing', approveListing);
 
 app.listen(PORT, () => {
     console.log(`Old Oak Town server running on port ${PORT}`);
