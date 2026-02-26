@@ -22,7 +22,8 @@ module.exports = async (req, res) => {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const buf = await getRawBody(req);
+    // express.raw() (applied in server.js) already stores the raw body in req.body
+    const buf = req.body;
     const sig = req.headers['stripe-signature'];
 
     let event;
@@ -123,14 +124,6 @@ module.exports = async (req, res) => {
     }
 };
 
-async function getRawBody(req) {
-    const chunks = [];
-    for await (const chunk of req) {
-        chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
-    }
-    return Buffer.concat(chunks);
-}
-
 async function sendPaidApprovalEmail(business, businessId) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
     const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
@@ -183,8 +176,10 @@ async function sendCancellationEmail(business) {
         auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
     });
 
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
+    const SITE_URL = process.env.SITE_URL || 'https://www.oldoaktown.co.uk';
     await transporter.sendMail({
-        from: `"Old Oak Town" <info@oldoaktown.co.uk>`,
+        from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
         to: business.email,
         subject: `Your Old Oak Town subscription has been cancelled - ${business.business_name}`,
         html: `
@@ -196,13 +191,13 @@ async function sendCancellationEmail(business) {
                     <p>Your ${business.tier} subscription for <strong>${business.business_name}</strong> has been cancelled.</p>
                     <p style="margin-top:15px;">Your listing will remain as a free listing.</p>
                     <p style="margin-top:15px;">
-                        <a href="https://www.oldoaktown.co.uk/business-submit.html"
+                        <a href="${SITE_URL}/business-submit.html"
                            style="background:#2D5016;color:white;padding:12px 25px;text-decoration:none;border-radius:5px;display:inline-block;">
                             Resubscribe
                         </a>
                     </p>
                     <hr style="margin:30px 0;border:none;border-top:1px solid #eee;">
-                    <p style="color:#999;font-size:0.85rem;">Old Oak Town · info@oldoaktown.co.uk</p>
+                    <p style="color:#999;font-size:0.85rem;">Old Oak Town · ${ADMIN_EMAIL}</p>
                 </div>
             </div>
         `

@@ -19,8 +19,6 @@ app.use(express.static(__dirname));
 // BEEHIIV NEWSLETTER SUBSCRIPTION
 // ─────────────────────────────────────────────
 
-// Replace your existing app.post('/api/subscribe', ...) block with this.
-// Once the bug is fixed, remove the extra console.log lines.
 app.post('/api/subscribe', async (req, res) => {
     try {
         const { email, firstName } = req.body;
@@ -32,20 +30,12 @@ app.post('/api/subscribe', async (req, res) => {
         const BEEHIIV_API_KEY = process.env.BEEHIIV_API_KEY;
         const BEEHIIV_PUBLICATION_ID = process.env.BEEHIIV_PUBLICATION_ID;
 
-        // DEBUG: log what we actually have
-        console.log('--- BEEHIIV DEBUG ---');
-        console.log('API key present:', !!BEEHIIV_API_KEY);
-        console.log('API key prefix:', BEEHIIV_API_KEY ? BEEHIIV_API_KEY.substring(0, 8) : 'MISSING');
-        console.log('Publication ID:', BEEHIIV_PUBLICATION_ID || 'MISSING');
-        console.log('Email:', email);
-
         if (!BEEHIIV_API_KEY || !BEEHIIV_PUBLICATION_ID) {
             console.error('Beehiiv credentials not configured');
             return res.status(500).json({ error: 'Newsletter service not configured' });
         }
 
         const url = `https://api.beehiiv.com/v2/publications/${BEEHIIV_PUBLICATION_ID}/subscriptions`;
-        console.log('Calling URL:', url);
 
         const payload = {
             email,
@@ -61,8 +51,6 @@ app.post('/api/subscribe', async (req, res) => {
             payload.first_name = firstName.trim();
         }
 
-        console.log('Payload:', JSON.stringify(payload));
-
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -72,20 +60,12 @@ app.post('/api/subscribe', async (req, res) => {
             body: JSON.stringify(payload)
         });
 
-        const data = await response.json();
-
-        // DEBUG: log the full Beehiiv response
-        console.log('Beehiiv status:', response.status);
-        console.log('Beehiiv response:', JSON.stringify(data));
-        console.log('--- END DEBUG ---');
-
         if (!response.ok) {
-            return res.status(response.status).json({
-                error: 'Failed to subscribe. Please try again.',
-                // Temporarily expose Beehiiv's error so we can see it in the browser too
-                detail: data
-            });
+            const data = await response.json();
+            console.error('Beehiiv subscription error:', response.status, data);
+            return res.status(502).json({ error: 'Failed to subscribe. Please try again.' });
         }
+
         res.json({
             success: true,
             message: "You're subscribed! Your first issue of The Old Oak Weekly will arrive soon."
@@ -93,10 +73,7 @@ app.post('/api/subscribe', async (req, res) => {
 
     } catch (error) {
         console.error('Subscription error:', error);
-        res.status(500).json({
-            error: 'Something went wrong. Please try again.',
-            detail: error.message
-        });
+        res.status(500).json({ error: 'Something went wrong. Please try again.' });
     }
 });
 
@@ -105,11 +82,15 @@ app.post('/api/subscribe', async (req, res) => {
 // ─────────────────────────────────────────────
 
 const submitBusiness = require('./api/submit-business');
-const approveBusiness = require('./api/approve-business');
-const getBusinesses = require('./api/get-businesses');
+const approveBusiness = require('./approve-business');
+const getBusinesses = require('./get-businesses');
 const stripeWebhook = require('./api/stripe-webhook');
 
 app.post('/api/submit-business', submitBusiness);
 app.get('/api/approve-business', approveBusiness);
 app.get('/api/get-businesses', getBusinesses);
 app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), stripeWebhook);
+
+app.listen(PORT, () => {
+    console.log(`Old Oak Town server running on port ${PORT}`);
+});
