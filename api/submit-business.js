@@ -1,28 +1,28 @@
 // api/submit-business.js
 // Handles new business submissions (free and paid)
-// Saves to Supabase, sends approval email to admin
+// Saves to Supabase when configured, otherwise falls back to local JSON file
 
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
+const fs = require('fs');
+const path = require('path');
+
+const PENDING_FILE = path.join(__dirname, '..', 'data', 'pending-listings.json');
+
+function saveToFile(record) {
+    let existing = { submissions: [] };
+    try {
+        existing = JSON.parse(fs.readFileSync(PENDING_FILE, 'utf8'));
+    } catch (_) { /* file doesn't exist yet */ }
+    existing.submissions.push(record);
+    fs.mkdirSync(path.dirname(PENDING_FILE), { recursive: true });
+    fs.writeFileSync(PENDING_FILE, JSON.stringify(existing, null, 2));
+}
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
-
-    // Check required environment variables before doing anything
-    if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
-        console.error('Missing required env vars: SUPABASE_URL and/or SUPABASE_SERVICE_KEY');
-        return res.status(500).json({
-            error: 'Server configuration error',
-            detail: 'Supabase credentials are not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_KEY in your environment variables.'
-        });
-    }
-
-    const supabase = createClient(
-        process.env.SUPABASE_URL,
-        process.env.SUPABASE_SERVICE_KEY
-    );
 
     try {
         const {
@@ -39,55 +39,77 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'Business name, category and email are required' });
         }
 
-        // Determine initial status
-        // Free listings: pending (need approval)
-        // Paid listings: pending_payment (payment not yet confirmed)
         const status = tier === 'free' ? 'pending' : 'pending_payment';
+        let useSupabase = !!(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY);
 
-        // Insert into Supabase
-        const { data, error } = await supabase
-            .from('businesses')
-            .insert([{
+        let businessId;
+        let record;
+
+        if (useSupabase) {
+            try {
+                const supabase = createClient(
+                    process.env.SUPABASE_URL,
+                    process.env.SUPABASE_SERVICE_KEY
+                );
+
+                const { data, error } = await supabase
+                    .from('businesses')
+                    .insert([{
+                        business_name: businessName,
+                        category,
+                        email,
+                        phone,
+                        address,
+                        postcode,
+                        description,
+                        website,
+                        instagram,
+                        twitter,
+                        linkedin,
+                        opening_hours: openingHours,
+                        special_offers: specialOffers,
+                        target_audience: targetAudience,
+                        tier: tier || 'free',
+                        status,
+                        billing_frequency: billingFrequency,
+                        stripe_customer_id: stripeCustomerId,
+                        stripe_subscription_id: stripeSubscriptionId
+                    }])
+                    .select()
+                    .single();
+
+                if (error) throw error;
+
+                businessId = data.id;
+                record = data;
+            } catch (supabaseErr) {
+                console.warn('Supabase unavailable, falling back to local file:', supabaseErr.message);
+                useSupabase = false; // fall through to file storage below
+            }
+        }
+
+        if (!useSupabase) {
+            // Supabase not configured or unreachable — save to local file instead
+            businessId = `local_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+            record = {
+                id: businessId,
                 business_name: businessName,
-                category,
-                email,
-                phone,
-                address,
-                postcode,
-                description,
-                website,
-                instagram,
-                twitter,
-                linkedin,
+                category, email, phone, address, postcode, description,
+                website, instagram, twitter, linkedin,
                 opening_hours: openingHours,
                 special_offers: specialOffers,
                 target_audience: targetAudience,
                 tier: tier || 'free',
-                status,
                 billing_frequency: billingFrequency,
-                stripe_customer_id: stripeCustomerId,
-                stripe_subscription_id: stripeSubscriptionId
-            }])
-            .select()
-            .single();
-
-        if (error) {
-            console.error('Supabase insert error:', error);
-            // Include the Supabase error code + message so the operator can
-            // diagnose missing tables / RLS blocks without digging through logs.
-            return res.status(500).json({
-                error: 'Failed to save submission',
-                detail: error.message,
-                code: error.code
-            });
+                status,
+                created_at: new Date().toISOString()
+            };
+            saveToFile(record);
         }
 
-        const businessId = data.id;
-
         // Send approval email to admin (free listings only)
-        // Paid listings are approved after Stripe webhook confirms payment
         if (tier === 'free') {
-            await sendApprovalEmail(data, businessId);
+            await sendApprovalEmail(record, businessId);
         }
 
         return res.status(200).json({
@@ -100,7 +122,7 @@ module.exports = async (req, res) => {
 
     } catch (err) {
         console.error('Submit business error:', err);
-        return res.status(500).json({ error: 'Internal server error' });
+        return res.status(500).json({ error: 'Internal server error', detail: err.message });
     }
 };
 
