@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Your Business | Old Oak Town</title>
+    <meta name="description" content="Add your business to the Old Oak Town directory. Free and premium listings available for businesses serving West London's newest development area.">
+    <link rel="canonical" href="https://www.oldoaktown.co.uk/business-submit.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.oldoaktown.co.uk/business-submit.html">
+    <meta property="og:title" content="List Your Business | Old Oak Town">
+    <meta property="og:description" content="Reach thousands of residents and workers in West London's fastest-growing area.">
+    <meta property="og:site_name" content="Old Oak Town">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+            --light-grey: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background: var(--light-grey);
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: var(--primary-green);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        header p { opacity: 0.9; font-size: 1.05rem; }
+
+        nav {
+            background: #1a3009;
+            padding: 1rem 0;
+        }
+
+        nav .container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active { color: white; }
+
+        /* ── Billing toggle ─────────────────────────── */
+        .billing-toggle-wrap {
+            text-align: center;
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .billing-toggle-wrap h2 {
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .billing-toggle-wrap p { color: #555; margin-bottom: 1.5rem; }
+
+        .toggle-row {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .toggle-label { color: var(--dark-grey); }
+        .toggle-label.active { color: var(--primary-green); }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #ccc;
+            border-radius: 28px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .slider::before {
+            content: '';
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch input:checked + .slider { background: var(--primary-green); }
+        .toggle-switch input:checked + .slider::before { transform: translateX(24px); }
+
+        .save-badge {
+            background: #e8f5e9;
+            color: var(--primary-green);
+            padding: 0.15rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Pricing grid ───────────────────────────── */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .plan-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 1.5rem 1.25rem;
+            cursor: pointer;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+            position: relative;
+        }
+
+        .plan-card:hover {
+            border-color: var(--primary-green);
+            box-shadow: 0 4px 16px rgba(45,80,22,0.15);
+            transform: translateY(-2px);
+        }
+
+        .plan-card.selected {
+            border-color: var(--primary-green);
+            box-shadow: 0 4px 20px rgba(45,80,22,0.25);
+        }
+
+        .plan-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 12px;
+            right: 14px;
+            background: var(--primary-green);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .plan-popular {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--warm-brown);
+            color: white;
+            padding: 0.2rem 0.9rem;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .plan-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: 0.35rem;
+        }
+
+        .plan-price {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--dark-grey);
+            line-height: 1.1;
+        }
+
+        .plan-price span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #777;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .plan-features li {
+            padding: 0.2rem 0;
+        }
+
+        .plan-features li::before {
+            content: '✓ ';
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        /* ── Form ───────────────────────────────────── */
+        .form-wrap {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .form-wrap h2 {
+            color: var(--primary-green);
+            font-size: 1.4rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .form-section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--warm-brown);
+            margin: 1.75rem 0 0.75rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: #444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 0.9rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: var(--dark-grey);
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        .required { color: #c0392b; }
+
+        .hint { font-size: 0.78rem; color: #888; margin-top: 0.25rem; }
+
+        /* ── Submit button ──────────────────────────── */
+        .submit-row {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .btn-submit {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0.9rem 2.5rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            min-width: 220px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: var(--warm-brown);
+            transform: translateY(-1px);
+        }
+
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+        .submit-note {
+            margin-top: 0.75rem;
+            font-size: 0.82rem;
+            color: #777;
+        }
+
+        /* ── Alerts ─────────────────────────────────── */
+        .alert {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .alert-error { background: #fdecea; color: #b71c1c; border: 1px solid #ef9a9a; }
+        .alert-success { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; }
+
+        /* ── Footer ─────────────────────────────────── */
+        footer {
+            background: var(--primary-green);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .pricing-grid { grid-template-columns: 1fr 1fr; }
+            .form-wrap { padding: 1.5rem; }
+            header h1 { font-size: 1.6rem; }
+        }
+
+        @media (max-width: 420px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <a href="index.html"><img src="images/logo.png" alt="Old Oak Town" style="height:70px; margin-bottom:0.75rem;"></a>
+        <h1>List Your Business</h1>
+        <p>Reach thousands of residents and workers in West London's fastest-growing area</p>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="index.html">Home</a>
+        <a href="business-directory.html">Directory</a>
+        <a href="business-submit.html" class="active">List Your Business</a>
+        <a href="index.html#news">News</a>
+        <a href="index.html#newsletter">Newsletter</a>
+    </div>
+</nav>
+
+<div class="container" style="padding-top: 1rem;">
+
+    <!-- Billing toggle -->
+    <div class="billing-toggle-wrap">
+        <h2>Choose Your Plan</h2>
+        <p>All plans include a listing in the Old Oak Town Business Directory</p>
+        <div class="toggle-row">
+            <span class="toggle-label active" id="labelMonthly">Monthly</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="billingToggle">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-label" id="labelAnnual">Annual <span class="save-badge">Save 30%</span></span>
+        </div>
+    </div>
+
+    <!-- Pricing cards -->
+    <div class="pricing-grid" id="pricingGrid">
+
+        <div class="plan-card selected" data-tier="free" onclick="selectPlan(this)">
+            <div class="plan-name">Free</div>
+            <div class="plan-price">£0 <span>/ forever</span></div>
+            <ul class="plan-features">
+                <li>Basic directory listing</li>
+                <li>Business name &amp; contact</li>
+                <li>Category &amp; description</li>
+            </ul>
+        </div>
+
+        <div class="plan-card" data-tier="featured" onclick="selectPlan(this)">
+            <span class="plan-popular">Most Popular</span>
+            <div class="plan-name">Featured</div>
+            <div class="plan-price" id="price-featured">£35 <span>/ month</span></div>
+            <ul class="plan-features">
+                <li>Everything in Free</li>
+                <li>Featured badge &amp; priority placement</li>
+                <li>Website link</li>
+                <li>Opening hours</li>
+            </ul>
+        </div>
+
+        <div class="plan-card" data-tier="premium" onclick="selectPlan(this)">
+            <div class="plan-name">Premium</div>
+            <div class="plan-price" id="price-premium">£75 <span>/ month</span></div>
+            <ul class="plan-features">
+                <li>Everything in Featured</li>
+                <li>Social media links</li>
+                <li>Special offers section</li>
+                <li>Monthly newsletter mention</li>
+            </ul>
+        </div>
+
+        <div class="plan-card" data-tier="newsletter" onclick="selectPlan(this)">
+            <div class="plan-name">Newsletter Sponsor</div>
+            <div class="plan-price" id="price-newsletter">£150 <span>/ month</span></div>
+            <ul class="plan-features">
+                <li>Everything in Premium</li>
+                <li>Full newsletter ad each issue</li>
+                <li>Top of directory placement</li>
+                <li>Dedicated feature article</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Business details form -->
+    <div class="form-wrap">
+        <h2>Your Business Details</h2>
+
+        <div id="formAlert" class="alert alert-error" style="display:none;"></div>
+
+        <form id="businessForm" novalidate>
+
+            <p class="form-section-label">Required Information</p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="businessName">Business Name <span class="required">*</span></label>
+                    <input type="text" id="businessName" name="businessName" placeholder="e.g. Oak Street Café" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category <span class="required">*</span></label>
+                    <select id="category" name="category" required>
+                        <option value="">— Select a category —</option>
+                        <option value="food-drink">Food &amp; Drink</option>
+                        <option value="retail">Retail &amp; Shopping</option>
+                        <option value="services">Professional Services</option>
+                        <option value="health">Health &amp; Wellness</option>
+                        <option value="property">Property &amp; Real Estate</option>
+                        <option value="construction">Construction &amp; Trade</option>
+                        <option value="technology">Technology &amp; IT</option>
+                        <option value="education">Education &amp; Training</option>
+                        <option value="motor">Motor Services</option>
+                        <option value="industrial">Industrial &amp; Manufacturing</option>
+                        <option value="entertainment">Entertainment &amp; Leisure</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Contact Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="hello@yourbusiness.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="020 1234 5678">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Business Description <span class="required">*</span></label>
+                <textarea id="description" name="description" placeholder="Tell residents what your business does and why they should visit…" required></textarea>
+                <p class="hint">Keep it to 2–4 sentences. This is what people see in the directory.</p>
+            </div>
+
+            <p class="form-section-label">Location &amp; Online Presence</p>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="address">Street Address</label>
+                    <input type="text" id="address" name="address" placeholder="123 High Street">
+                </div>
+                <div class="form-group">
+                    <label for="postcode">Postcode</label>
+                    <input type="text" id="postcode" name="postcode" placeholder="NW10 7AB">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="website">Website URL</label>
+                <input type="url" id="website" name="website" placeholder="https://www.yourbusiness.com">
+            </div>
+
+            <!-- Social & extras — shown only for premium / newsletter -->
+            <div id="premiumFields" style="display:none;">
+                <p class="form-section-label">Social Media</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="instagram">Instagram</label>
+                        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/yourbusiness">
+                    </div>
+                    <div class="form-group">
+                        <label for="twitter">X / Twitter</label>
+                        <input type="url" id="twitter" name="twitter" placeholder="https://twitter.com/yourbusiness">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn</label>
+                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/company/yourbusiness">
+                </div>
+
+                <p class="form-section-label">Additional Details</p>
+                <div class="form-group">
+                    <label for="openingHours">Opening Hours</label>
+                    <input type="text" id="openingHours" name="openingHours" placeholder="Mon–Fri 9am–6pm, Sat 10am–4pm">
+                </div>
+                <div class="form-group">
+                    <label for="specialOffers">Special Offers</label>
+                    <textarea id="specialOffers" name="specialOffers" placeholder="Any current promotions or discounts for Old Oak Town residents…" style="min-height:80px;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="targetAudience">Target Audience</label>
+                    <input type="text" id="targetAudience" name="targetAudience" placeholder="e.g. Local residents, construction workers, commuters">
+                </div>
+            </div>
+
+            <div class="submit-row">
+                <button type="submit" class="btn-submit" id="submitBtn">Submit Free Listing</button>
+                <p class="submit-note" id="submitNote">Free listings are reviewed within 2 business days.</p>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<footer>
+    <p>&copy; 2024 Old Oak Town &middot; <a href="index.html" style="color:rgba(255,255,255,0.8);">Home</a> &middot; <a href="business-directory.html" style="color:rgba(255,255,255,0.8);">Directory</a></p>
+</footer>
+
+<script>
+    // Stripe Payment Link URLs (from stripe-config.js)
+    const PAYMENT_LINKS = {
+        featured:   { monthly: 'https://buy.stripe.com/3cI14p4Gz51GeGWgEUes000', annual: 'https://buy.stripe.com/28E9AV6OHcu8cyOcoEes002' },
+        premium:    { monthly: 'https://buy.stripe.com/8x23cx8WP51G6aq74kes003', annual: 'https://buy.stripe.com/7sYfZj0qjdycbuK4Wces004' },
+        newsletter: { monthly: 'https://buy.stripe.com/cNi3cx4Gz0Lq7eufAQes005', annual: 'https://buy.stripe.com/7sYfZjeh9dyc56mcoEes006' }
+    };
+
+    const MONTHLY_PRICES = { free: '£0', featured: '£35', premium: '£75', newsletter: '£150' };
+    const ANNUAL_PRICES  = { free: '£0', featured: '£126', premium: '£270', newsletter: '£540' };
+
+    let selectedTier = 'free';
+    let billingFrequency = 'monthly';
+
+    // ── Plan selection ───────────────────────────
+    function selectPlan(card) {
+        document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedTier = card.dataset.tier;
+        updateUI();
+    }
+
+    function updateUI() {
+        const isPaid = selectedTier !== 'free';
+        const isAnnual = billingFrequency === 'annual';
+        const prices = isAnnual ? ANNUAL_PRICES : MONTHLY_PRICES;
+        const perUnit = isAnnual ? '/ year' : '/ month';
+
+        // Update price labels
+        ['featured', 'premium', 'newsletter'].forEach(tier => {
+            const el = document.getElementById('price-' + tier);
+            if (el) el.innerHTML = `${prices[tier]} <span>${perUnit}</span>`;
+        });
+
+        // Show/hide premium-only fields
+        document.getElementById('premiumFields').style.display =
+            (selectedTier === 'premium' || selectedTier === 'newsletter') ? 'block' : 'none';
+
+        // Update submit button text
+        const btn = document.getElementById('submitBtn');
+        const note = document.getElementById('submitNote');
+
+        if (selectedTier === 'free') {
+            btn.textContent = 'Submit Free Listing';
+            note.textContent = 'Free listings are reviewed within 2 business days.';
+        } else {
+            const label = { featured: 'Featured', premium: 'Premium', newsletter: 'Newsletter Sponsor' }[selectedTier];
+            btn.textContent = `Continue to Payment — ${prices[selectedTier]}${isAnnual ? '/yr' : '/mo'}`;
+            note.textContent = `You will be redirected to our secure Stripe checkout to complete your ${label} subscription.`;
+        }
+    }
+
+    // ── Billing toggle ───────────────────────────
+    document.getElementById('billingToggle').addEventListener('change', function () {
+        billingFrequency = this.checked ? 'annual' : 'monthly';
+        document.getElementById('labelMonthly').classList.toggle('active', !this.checked);
+        document.getElementById('labelAnnual').classList.toggle('active', this.checked);
+        updateUI();
+    });
+
+    // ── Form submission ──────────────────────────
+    document.getElementById('businessForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const alertEl = document.getElementById('formAlert');
+        alertEl.style.display = 'none';
+
+        const btn = document.getElementById('submitBtn');
+
+        // Basic client-side validation
+        const businessName = document.getElementById('businessName').value.trim();
+        const category     = document.getElementById('category').value;
+        const email        = document.getElementById('email').value.trim();
+        const description  = document.getElementById('description').value.trim();
+
+        if (!businessName) return showError('Please enter your business name.');
+        if (!category)     return showError('Please select a category.');
+        if (!email || !email.includes('@')) return showError('Please enter a valid email address.');
+        if (!description)  return showError('Please add a short business description.');
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+
+        const payload = {
+            businessName,
+            category,
+            email,
+            description,
+            phone:          document.getElementById('phone').value.trim() || null,
+            address:        document.getElementById('address').value.trim() || null,
+            postcode:       document.getElementById('postcode').value.trim() || null,
+            website:        document.getElementById('website').value.trim() || null,
+            instagram:      document.getElementById('instagram').value.trim() || null,
+            twitter:        document.getElementById('twitter').value.trim() || null,
+            linkedin:       document.getElementById('linkedin').value.trim() || null,
+            openingHours:   document.getElementById('openingHours').value.trim() || null,
+            specialOffers:  document.getElementById('specialOffers').value.trim() || null,
+            targetAudience: document.getElementById('targetAudience').value.trim() || null,
+            tier:              selectedTier,
+            billingFrequency: billingFrequency
+        };
+
+        try {
+            const res = await fetch('/api/submit-business', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || 'Submission failed. Please try again.');
+            }
+
+            if (selectedTier === 'free') {
+                // Show inline success for free tier
+                document.querySelector('.form-wrap').innerHTML = `
+                    <div style="text-align:center; padding: 2rem 1rem;">
+                        <div style="font-size:3.5rem; margin-bottom:1rem;">✅</div>
+                        <h2 style="color:var(--primary-green); margin-bottom:1rem;">Submission Received!</h2>
+                        <p style="color:#555; margin-bottom:1.5rem; font-size:1.05rem;">
+                            Thanks for listing <strong>${escapeHtml(businessName)}</strong>.<br>
+                            We'll review it and you'll receive an email within 2 business days.
+                        </p>
+                        <a href="business-directory.html"
+                           style="display:inline-block; background:var(--primary-green); color:white; padding:0.8rem 2rem; border-radius:6px; text-decoration:none; font-weight:600;">
+                            View the Directory
+                        </a>
+                    </div>`;
+            } else {
+                // Redirect to Stripe for paid tiers
+                const stripeUrl = PAYMENT_LINKS[selectedTier][billingFrequency];
+                // Pass email as a prefill param if supported (Stripe adds ?prefilled_email=)
+                const redirectUrl = stripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+                window.location.href = redirectUrl;
+            }
+
+        } catch (err) {
+            showError(err.message);
+            btn.disabled = false;
+            updateUI(); // restore button text
+        }
+    });
+
+    function showError(msg) {
+        const el = document.getElementById('formAlert');
+        el.textContent = msg;
+        el.style.display = 'block';
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function escapeHtml(str) {
+        return String(str)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+</script>
+
+</body>
+</html>
