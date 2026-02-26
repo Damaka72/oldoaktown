@@ -254,6 +254,9 @@
     </div>
 
     <script>
+        // Clear the Stripe redirect flag — payment completed successfully
+        sessionStorage.removeItem('stripeRedirectPending');
+
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const sessionId = urlParams.get('session_id');
