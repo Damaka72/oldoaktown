@@ -94,10 +94,10 @@ export default async function handler(req, res) {
 
   // Generate HTML
   res.setHeader('Content-Type', 'text/html');
-  res.status(200).send(generateAdminHTML(awaitingPayment, paid, approved, adminPassword));
+  res.status(200).send(generateAdminHTML(awaitingPayment, paid, approved));
 }
 
-function generateAdminHTML(awaitingPayment, paid, approved, password) {
+function generateAdminHTML(awaitingPayment, paid, approved) {
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -292,24 +292,27 @@ function generateAdminHTML(awaitingPayment, paid, approved, password) {
   <div class="section">
     <h2>💰 Paid Submissions - Ready to Approve</h2>
     ${paid.length === 0 ? '<div class="empty-state">No paid submissions pending approval</div>' : ''}
-    ${paid.map(sub => generateListingCard(sub, true, password)).join('')}
+    ${paid.map(sub => generateListingCard(sub, true)).join('')}
   </div>
 
   <!-- AWAITING PAYMENT -->
   <div class="section">
     <h2>⏳ Awaiting Payment</h2>
     ${awaitingPayment.length === 0 ? '<div class="empty-state">No submissions awaiting payment</div>' : ''}
-    ${awaitingPayment.map(sub => generateListingCard(sub, false, password)).join('')}
+    ${awaitingPayment.map(sub => generateListingCard(sub, false)).join('')}
   </div>
 
   <!-- APPROVED (FOR REFERENCE) -->
   <div class="section">
     <h2>✅ Approved Listings</h2>
     ${approved.length === 0 ? '<div class="empty-state">No approved listings yet</div>' : ''}
-    ${approved.map(sub => generateListingCard(sub, false, password)).join('')}
+    ${approved.map(sub => generateListingCard(sub, false)).join('')}
   </div>
 
   <script>
+    // Read the password from the current URL query string (page is already auth-gated)
+    const _adminPassword = new URLSearchParams(window.location.search).get('password') || '';
+
     async function approveListing(id) {
       if (!confirm('Are you sure you want to approve this listing?')) return;
 
@@ -319,7 +322,7 @@ function generateAdminHTML(awaitingPayment, paid, approved, password) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             submissionId: id,
-            password: '${password}'
+            password: _adminPassword
           })
         });
 
@@ -345,78 +348,91 @@ function generateAdminHTML(awaitingPayment, paid, approved, password) {
   `;
 }
 
-function generateListingCard(sub, showApprove, password) {
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;');
+}
+
+function generateListingCard(sub, showApprove) {
   const statusClass = sub.status === 'paid' ? 'paid' : '';
   const statusBadge = sub.status === 'awaiting_payment' ? 'status-awaiting' :
                       sub.status === 'paid' ? 'status-paid' : 'status-approved';
   const statusText = sub.status === 'awaiting_payment' ? '⏳ Awaiting Payment' :
                      sub.status === 'paid' ? '💰 Paid' : '✅ Approved';
 
+  const safeId = escapeHtml(sub.id);
+  const safeSessionId = escapeHtml(sub.stripeSessionId);
+
   return `
     <div class="listing-card ${statusClass}">
       <div class="listing-header">
-        <div class="business-name">${sub.businessName}</div>
+        <div class="business-name">${escapeHtml(sub.businessName)}</div>
         <span class="status-badge ${statusBadge}">${statusText}</span>
       </div>
 
       <div class="detail-grid">
         <div class="detail">
           <span class="detail-label">Contact Person</span>
-          <span class="detail-value">${sub.contactName || 'N/A'}</span>
+          <span class="detail-value">${escapeHtml(sub.contactName) || 'N/A'}</span>
         </div>
         <div class="detail">
           <span class="detail-label">Email</span>
-          <span class="detail-value">${sub.email}</span>
+          <span class="detail-value">${escapeHtml(sub.email)}</span>
         </div>
         <div class="detail">
           <span class="detail-label">Phone</span>
-          <span class="detail-value">${sub.phone || 'N/A'}</span>
+          <span class="detail-value">${escapeHtml(sub.phone) || 'N/A'}</span>
         </div>
         <div class="detail">
           <span class="detail-label">Category</span>
-          <span class="detail-value">${sub.category || 'N/A'}</span>
+          <span class="detail-value">${escapeHtml(sub.category) || 'N/A'}</span>
         </div>
         <div class="detail">
           <span class="detail-label">Package</span>
-          <span class="detail-value">${formatPackage(sub.package)} - ${formatFrequency(sub.frequency)}</span>
+          <span class="detail-value">${escapeHtml(formatPackage(sub.package))} - ${escapeHtml(formatFrequency(sub.frequency))}</span>
         </div>
         <div class="detail">
           <span class="detail-label">Website</span>
-          <span class="detail-value">${sub.website ? `<a href="${sub.website}" target="_blank">${sub.website}</a>` : 'N/A'}</span>
+          <span class="detail-value">${sub.website ? `<a href="${escapeHtml(sub.website)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sub.website)}</a>` : 'N/A'}</span>
         </div>
       </div>
 
       <div class="description-box">
         <strong>Business Description:</strong><br>
-        ${sub.description || 'No description provided'}
+        ${escapeHtml(sub.description) || 'No description provided'}
       </div>
 
       <div class="detail-grid">
         <div class="detail">
           <span class="detail-label">Address</span>
-          <span class="detail-value">${sub.address || 'N/A'}</span>
+          <span class="detail-value">${escapeHtml(sub.address) || 'N/A'}</span>
         </div>
         ${sub.logoUrl ? `
         <div class="detail">
           <span class="detail-label">Logo</span>
-          <span class="detail-value"><a href="${sub.logoUrl}" target="_blank">View Logo</a></span>
+          <span class="detail-value"><a href="${escapeHtml(sub.logoUrl)}" target="_blank" rel="noopener noreferrer">View Logo</a></span>
         </div>
         ` : ''}
       </div>
 
       <div class="timestamp">
-        Submitted: ${new Date(sub.submittedAt).toLocaleString()}<br>
-        ${sub.paymentConfirmedAt ? `Payment Confirmed: ${new Date(sub.paymentConfirmedAt).toLocaleString()}<br>` : ''}
-        ${sub.stripeSessionId ? `Stripe Session: ${sub.stripeSessionId}` : ''}
+        Submitted: ${escapeHtml(new Date(sub.submittedAt).toLocaleString())}<br>
+        ${sub.paymentConfirmedAt ? `Payment Confirmed: ${escapeHtml(new Date(sub.paymentConfirmedAt).toLocaleString())}<br>` : ''}
+        ${safeSessionId ? `Stripe Session: ${safeSessionId}` : ''}
       </div>
 
       ${showApprove ? `
         <div class="actions">
-          <button class="btn btn-approve" onclick="approveListing('${sub.id}')">
+          <button class="btn btn-approve" onclick="approveListing('${safeId}')">
             ✅ Approve & Publish
           </button>
-          ${sub.stripeSessionId ? `
-            <button class="btn btn-view" onclick="viewStripe('${sub.stripeSessionId}')">
+          ${safeSessionId ? `
+            <button class="btn btn-view" onclick="viewStripe('${safeSessionId}')">
               💳 View in Stripe
             </button>
           ` : ''}

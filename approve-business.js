@@ -154,7 +154,7 @@ async function sendBusinessNotification(business, decision) {
     `;
 
     await transporter.sendMail({
-        from: `"Old Oak Town" <info@oldoaktown.co.uk>`,
+        from: `"Old Oak Town" <${process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk'}>`,
         to: business.email,
         subject: decision === 'approved'
             ? `Your Old Oak Town listing is live! - ${business.business_name}`
