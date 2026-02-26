@@ -1,29 +1,34 @@
 // api/stripe-webhook.js
 // Listens for Stripe payment events
-// Automatically upgrades listing tier when payment is confirmed
-// Downgrades when subscription is cancelled
+// Upgrades listing tier when payment confirmed, downgrades on cancellation
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_SERVICE_KEY
 );
+
+// Disable body parsing - we need raw body for Stripe signature verification
+module.exports.config = {
+    api: { bodyParser: false }
+};
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
+    const buf = await getRawBody(req);
     const sig = req.headers['stripe-signature'];
-    let event;
 
+    let event;
     try {
-        // Verify webhook signature from Stripe
         event = stripe.webhooks.constructEvent(
-            req.body, // must be raw body - see server.js note below
+            buf,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET
         );
@@ -37,9 +42,6 @@ module.exports = async (req, res) => {
     try {
         switch (event.type) {
 
-            // ─────────────────────────────────────────────
-            // Payment succeeded - activate the listing
-            // ─────────────────────────────────────────────
             case 'checkout.session.completed': {
                 const session = event.data.object;
                 const submissionId = session.metadata?.submission_id;
@@ -50,8 +52,6 @@ module.exports = async (req, res) => {
                     break;
                 }
 
-                // Update business: mark as pending_approval with payment confirmed
-                // Admin still needs to approve the listing content
                 const { error } = await supabase
                     .from('businesses')
                     .update({
@@ -66,27 +66,19 @@ module.exports = async (req, res) => {
                 if (error) {
                     console.error('Supabase update error:', error);
                 } else {
-                    console.log(`Payment confirmed for submission ${submissionId}, tier: ${tier}`);
-                    // Get business details and send admin notification
+                    console.log(`Payment confirmed for ${submissionId}, tier: ${tier}`);
                     const { data: business } = await supabase
                         .from('businesses')
                         .select('*')
                         .eq('id', submissionId)
                         .single();
-
-                    if (business) {
-                        await sendPaidApprovalEmail(business, submissionId);
-                    }
+                    if (business) await sendPaidApprovalEmail(business, submissionId);
                 }
                 break;
             }
 
-            // ─────────────────────────────────────────────
-            // Subscription cancelled - downgrade to free
-            // ─────────────────────────────────────────────
             case 'customer.subscription.deleted': {
                 const subscription = event.data.object;
-
                 const { data: business, error: fetchError } = await supabase
                     .from('businesses')
                     .select('*')
@@ -102,27 +94,19 @@ module.exports = async (req, res) => {
                             stripe_subscription_id: null
                         })
                         .eq('id', business.id);
-
-                    console.log(`Subscription cancelled, ${business.business_name} downgraded to free`);
+                    console.log(`${business.business_name} downgraded to free`);
                     await sendCancellationEmail(business);
                 }
                 break;
             }
 
-            // ─────────────────────────────────────────────
-            // Payment failed - suspend listing
-            // ─────────────────────────────────────────────
             case 'invoice.payment_failed': {
                 const invoice = event.data.object;
-                const subscriptionId = invoice.subscription;
-
-                if (subscriptionId) {
+                if (invoice.subscription) {
                     await supabase
                         .from('businesses')
                         .update({ stripe_payment_status: 'payment_failed' })
-                        .eq('stripe_subscription_id', subscriptionId);
-
-                    console.log(`Payment failed for subscription ${subscriptionId}`);
+                        .eq('stripe_subscription_id', invoice.subscription);
                 }
                 break;
             }
@@ -139,10 +123,19 @@ module.exports = async (req, res) => {
     }
 };
 
+async function getRawBody(req) {
+    const chunks = [];
+    for await (const chunk of req) {
+        chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    }
+    return Buffer.concat(chunks);
+}
+
 async function sendPaidApprovalEmail(business, businessId) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
     const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
     const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
+    const tierLabel = business.tier === 'premium' ? 'Premium (£75/mo)' : 'Featured (£35/mo)';
 
     const transporter = nodemailer.createTransporter({
         host: process.env.SMTP_HOST,
@@ -151,8 +144,6 @@ async function sendPaidApprovalEmail(business, businessId) {
         auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
     });
 
-    const tierLabel = business.tier === 'premium' ? 'Premium (£75/mo)' : 'Featured (£35/mo)';
-
     await transporter.sendMail({
         from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
         to: ADMIN_EMAIL,
@@ -160,8 +151,8 @@ async function sendPaidApprovalEmail(business, businessId) {
         html: `
             <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
                 <div style="background:#2D5016;color:white;padding:20px;text-align:center;">
-                    <h1>💳 Payment Confirmed - Action Required</h1>
-                    <p>A paid listing is ready for your approval</p>
+                    <h1>💳 Payment Confirmed</h1>
+                    <p>A paid listing needs your approval</p>
                 </div>
                 <div style="padding:30px;background:#f9f9f9;">
                     <div style="background:#d4edda;border:1px solid #c3e6cb;padding:15px;border-radius:5px;margin-bottom:20px;">
@@ -169,15 +160,13 @@ async function sendPaidApprovalEmail(business, businessId) {
                     </div>
                     <h2 style="color:#2D5016;">${business.business_name}</h2>
                     <table style="width:100%;border-collapse:collapse;">
-                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Tier:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${tierLabel}</td></tr>
                         <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Category:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.category}</td></tr>
                         <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Email:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.email}</td></tr>
-                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Phone:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.phone || 'Not provided'}</td></tr>
-                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Address:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.address || 'Not provided'}, ${business.postcode || ''}</td></tr>
-                        <tr><td style="padding:8px;"><strong>Description:</strong></td><td style="padding:8px;">${business.description || 'Not provided'}</td></tr>
+                        <tr><td style="padding:8px;border-bottom:1px solid #ddd;"><strong>Address:</strong></td><td style="padding:8px;border-bottom:1px solid #ddd;">${business.address || ''}, ${business.postcode || ''}</td></tr>
+                        <tr><td style="padding:8px;"><strong>Description:</strong></td><td style="padding:8px;">${business.description || ''}</td></tr>
                     </table>
                     <div style="margin-top:30px;text-align:center;">
-                        <a href="${approveUrl}" style="background:#2D5016;color:white;padding:15px 30px;text-decoration:none;border-radius:5px;margin-right:10px;font-weight:bold;display:inline-block;">✅ APPROVE & PUBLISH</a>
+                        <a href="${approveUrl}" style="background:#2D5016;color:white;padding:15px 30px;text-decoration:none;border-radius:5px;margin-right:10px;font-weight:bold;display:inline-block;">✅ APPROVE</a>
                         <a href="${rejectUrl}" style="background:#dc3545;color:white;padding:15px 30px;text-decoration:none;border-radius:5px;font-weight:bold;display:inline-block;">❌ REJECT</a>
                     </div>
                 </div>
@@ -205,14 +194,17 @@ async function sendCancellationEmail(business) {
                 </div>
                 <div style="padding:30px;">
                     <p>Your ${business.tier} subscription for <strong>${business.business_name}</strong> has been cancelled.</p>
-                    <p style="margin-top:15px;">Your listing will remain in the directory as a free listing.</p>
+                    <p style="margin-top:15px;">Your listing will remain as a free listing.</p>
                     <p style="margin-top:15px;">
-                        <a href="https://www.oldoaktown.co.uk/business-submit.html" style="background:#2D5016;color:white;padding:12px 25px;text-decoration:none;border-radius:5px;display:inline-block;">Resubscribe</a>
+                        <a href="https://www.oldoaktown.co.uk/business-submit.html"
+                           style="background:#2D5016;color:white;padding:12px 25px;text-decoration:none;border-radius:5px;display:inline-block;">
+                            Resubscribe
+                        </a>
                     </p>
                     <hr style="margin:30px 0;border:none;border-top:1px solid #eee;">
                     <p style="color:#999;font-size:0.85rem;">Old Oak Town · info@oldoaktown.co.uk</p>
                 </div>
             </div>
-        
+        `
     });
 }
