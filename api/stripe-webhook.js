@@ -213,6 +213,6 @@ async function sendCancellationEmail(business) {
                     <p style="color:#999;font-size:0.85rem;">Old Oak Town · info@oldoaktown.co.uk</p>
                 </div>
             </div>
-        `
+        
     });
 }
