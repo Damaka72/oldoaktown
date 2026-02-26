@@ -75,7 +75,13 @@ module.exports = async (req, res) => {
                         .select('*')
                         .eq('id', submissionId)
                         .single();
-                    if (business) await sendPaidApprovalEmail(business, submissionId);
+                    if (business) {
+                        try {
+                            await sendPaidApprovalEmail(business, submissionId);
+                        } catch (emailErr) {
+                            console.error('Failed to send paid approval email:', emailErr.message);
+                        }
+                    }
                 }
                 break;
             }
@@ -98,7 +104,11 @@ module.exports = async (req, res) => {
                         })
                         .eq('id', business.id);
                     console.log(`${business.business_name} downgraded to free`);
-                    await sendCancellationEmail(business);
+                    try {
+                        await sendCancellationEmail(business);
+                    } catch (emailErr) {
+                        console.error('Failed to send cancellation email:', emailErr.message);
+                    }
                 }
                 break;
             }

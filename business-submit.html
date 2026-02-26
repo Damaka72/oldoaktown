@@ -397,7 +397,7 @@
                 <input type="checkbox" id="billingToggle">
                 <span class="slider"></span>
             </label>
-            <span class="toggle-label" id="labelAnnual">Annual <span class="save-badge">Save 30%</span></span>
+            <span class="toggle-label" id="labelAnnual">Annual <span class="save-badge">Save 70%</span></span>
         </div>
     </div>
 
@@ -568,6 +568,17 @@
 </footer>
 
 <script>
+    // ── Detect return from cancelled Stripe Payment Link ─────────────────────
+    // Payment Links don't support a cancel URL, so if the user comes back to
+    // this page with the pending flag still set it means they didn't complete
+    // payment — send them to the cancel page instead.
+    (function () {
+        if (sessionStorage.getItem('stripeRedirectPending') === 'true') {
+            sessionStorage.removeItem('stripeRedirectPending');
+            window.location.href = 'payment-cancel.html';
+        }
+    })();
+
     // Stripe Payment Link URLs (from stripe-config.js)
     const PAYMENT_LINKS = {
         featured:   { monthly: 'https://buy.stripe.com/3cI14p4Gz51GeGWgEUes000', annual: 'https://buy.stripe.com/28E9AV6OHcu8cyOcoEes002' },
@@ -698,6 +709,17 @@
                         </a>
                     </div>`;
             } else {
+                // Save submission data so payment-success.html can display the order summary
+                sessionStorage.setItem('businessSubmission', JSON.stringify({
+                    businessName,
+                    email,
+                    package:   selectedTier,
+                    frequency: billingFrequency
+                }));
+
+                // Flag used to detect if the user returns here after cancelling on Stripe
+                sessionStorage.setItem('stripeRedirectPending', 'true');
+
                 // Redirect to Stripe for paid tiers
                 const stripeUrl = PAYMENT_LINKS[selectedTier][billingFrequency];
                 // Pass email as a prefill param if supported (Stripe adds ?prefilled_email=)

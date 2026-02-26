@@ -1158,7 +1158,7 @@
                     <p>Independent coffee shop serving locally roasted beans and homemade pastries.</p>
                     <p><strong>📍</strong> 45 Park Royal Road, NW10</p>
                     <p><strong>📞</strong> 020 1234 5678</p>
-                    <a href="#" class="btn" style="margin-top: 1rem;">Visit Website</a>
+                    <a href="business-directory.html" class="btn" style="margin-top: 1rem;">Visit Website</a>
                 </div>
                 <div class="directory-card">
                     <span class="directory-tag">Property</span>
@@ -1180,7 +1180,7 @@
                     <p>State-of-the-art gym with personal training and classes.</p>
                     <p><strong>📍</strong> 34 Victoria Road, NW10</p>
                     <p><strong>📞</strong> 020 7890 1234</p>
-                    <a href="#" class="btn" style="margin-top: 1rem;">Book Now</a>
+                    <a href="business-directory.html" class="btn" style="margin-top: 1rem;">Book Now</a>
                 </div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
@@ -1733,21 +1733,22 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <label>Name *</label>
-                            <input type="text" required>
+                            <input type="text" id="contactName" required>
                         </div>
                         <div class="form-group">
                             <label>Email *</label>
-                            <input type="email" required>
+                            <input type="email" id="contactEmail" required>
                         </div>
                         <div class="form-group">
                             <label>Subject</label>
-                            <input type="text">
+                            <input type="text" id="contactSubject">
                         </div>
                         <div class="form-group">
                             <label>Message *</label>
-                            <textarea required></textarea>
+                            <textarea id="contactMessage" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
+                        <button type="submit" class="btn btn-primary" id="contactBtn">Send Message</button>
+                        <p id="contactMsg" style="margin-top: 0.75rem; font-size: 0.9rem;" aria-live="polite"></p>
                     </form>
                 </div>
             </div>
@@ -1893,6 +1894,38 @@
                     });
                 }
             });
+        });
+
+        // ─────────────────────────────────────────
+        // CONTACT FORM
+        // ─────────────────────────────────────────
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name    = document.getElementById('contactName').value.trim();
+            var email   = document.getElementById('contactEmail').value.trim();
+            var subject = document.getElementById('contactSubject').value.trim();
+            var message = document.getElementById('contactMessage').value.trim();
+            var btn     = document.getElementById('contactBtn');
+            var msg     = document.getElementById('contactMsg');
+
+            if (!name || !email || !message) {
+                msg.textContent = 'Please fill in all required fields.';
+                msg.style.color = '#c0392b';
+                return;
+            }
+
+            // Build a mailto link as a fallback since there is no backend handler yet
+            var mailtoUrl = 'mailto:info@oldoaktown.co.uk'
+                + '?subject=' + encodeURIComponent(subject || 'Website enquiry from ' + name)
+                + '&body=' + encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\n' + message);
+
+            btn.disabled = true;
+            window.location.href = mailtoUrl;
+
+            msg.textContent = 'Opening your email client… Alternatively email us directly at info@oldoaktown.co.uk';
+            msg.style.color = '#2D5016';
+
+            setTimeout(function() { btn.disabled = false; }, 3000);
         });
 
         // ─────────────────────────────────────────
