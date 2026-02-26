@@ -10,6 +10,13 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_KEY
 );
 
+const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT || 587,
+    secure: false,
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+});
+
 module.exports = async (req, res) => {
     const { id, action, token } = req.query;
 
@@ -104,16 +111,6 @@ module.exports = async (req, res) => {
 };
 
 async function sendBusinessNotification(business, decision) {
-    const transporter = nodemailer.createTransporter({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT || 587,
-        secure: false,
-        auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS
-        }
-    });
-
     const approvedHtml = `
         <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
             <div style="background:#2D5016;color:white;padding:20px;text-align:center;">

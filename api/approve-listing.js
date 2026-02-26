@@ -1,124 +1,65 @@
-/**
- * API Endpoint: Approve Business Listing
- *
- * This endpoint approves a paid submission and moves it to the approved list
- * It updates the status to 'approved' and adds a timestamp
- *
- * TODO: Optionally send confirmation email to customer
- * TODO: Optionally add to newsletter mailing list
- */
+// api/approve-listing.js
+// Approves a pending business listing in Supabase
+// POST /api/approve-listing  { submissionId, password }
 
-import fs from 'fs';
-import path from 'path';
+const { createClient } = require('@supabase/supabase-js');
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY
+);
 
-  try {
+module.exports = async function handler(req, res) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Method not allowed' });
+    }
+
     const { submissionId, password } = req.body;
 
-    // Verify admin password
-    const adminPassword = process.env.ADMIN_PASSWORD || 'oldoak2024';
-    if (password !== adminPassword) {
-      return res.status(401).json({ error: 'Unauthorized' });
+    const adminPassword = process.env.ADMIN_PASSWORD;
+    if (!adminPassword || password !== adminPassword) {
+        return res.status(401).json({ error: 'Unauthorized' });
     }
 
     if (!submissionId) {
-      return res.status(400).json({ error: 'Missing submissionId' });
+        return res.status(400).json({ error: 'Missing submissionId' });
     }
-
-    // Read pending listings
-    const pendingPath = path.join(process.cwd(), 'data', 'pending-listings.json');
-    let pendingData = { submissions: [] };
 
     try {
-      const fileContent = fs.readFileSync(pendingPath, 'utf8');
-      pendingData = JSON.parse(fileContent);
-    } catch (error) {
-      return res.status(500).json({ error: 'Failed to read pending listings' });
+        const { data: business, error: fetchError } = await supabase
+            .from('businesses')
+            .select('id, business_name, status')
+            .eq('id', submissionId)
+            .single();
+
+        if (fetchError || !business) {
+            return res.status(404).json({ error: 'Submission not found' });
+        }
+
+        if (business.status !== 'pending') {
+            return res.status(400).json({
+                error: 'Can only approve listings with pending status',
+                currentStatus: business.status
+            });
+        }
+
+        const { error: updateError } = await supabase
+            .from('businesses')
+            .update({ status: 'approved', approved_at: new Date().toISOString() })
+            .eq('id', submissionId);
+
+        if (updateError) throw updateError;
+
+        console.log(`Listing approved: ${business.business_name} (${submissionId})`);
+
+        return res.status(200).json({
+            success: true,
+            message: 'Listing approved successfully',
+            businessName: business.business_name
+        });
+
+    } catch (err) {
+        console.error('approve-listing error:', err);
+        return res.status(500).json({ error: 'Failed to approve listing' });
     }
-
-    // Find the submission
-    const submissionIndex = pendingData.submissions.findIndex(s => s.id === submissionId);
-
-    if (submissionIndex === -1) {
-      return res.status(404).json({ error: 'Submission not found' });
-    }
-
-    const submission = pendingData.submissions[submissionIndex];
-
-    // Verify it's been paid
-    if (submission.status !== 'paid') {
-      return res.status(400).json({
-        error: 'Can only approve paid submissions',
-        currentStatus: submission.status
-      });
-    }
-
-    // Update status
-    submission.status = 'approved';
-    submission.approvedAt = new Date().toISOString();
-
-    // Save back to pending (we keep the record)
-    fs.writeFileSync(pendingPath, JSON.stringify(pendingData, null, 2));
-
-    // Also add to approved listings
-    const approvedPath = path.join(process.cwd(), 'data', 'approved-listings.json');
-    let approvedData = { businesses: [] };
-
-    try {
-      const approvedContent = fs.readFileSync(approvedPath, 'utf8');
-      approvedData = JSON.parse(approvedContent);
-    } catch (error) {
-      // File doesn't exist, use default structure
-    }
-
-    // Format for directory display
-    const businessListing = {
-      id: submission.id,
-      name: submission.businessName,
-      category: submission.category,
-      description: submission.description,
-      contactName: submission.contactName,
-      email: submission.email,
-      phone: submission.phone,
-      website: submission.website,
-      address: submission.address,
-      logoUrl: submission.logoUrl,
-      package: submission.package,
-      frequency: submission.frequency,
-      stripeCustomerId: submission.stripeCustomerId,
-      approvedAt: submission.approvedAt,
-      featured: submission.package === 'featured' || submission.package === 'premium' || submission.package === 'newsletter'
-    };
-
-    approvedData.businesses.push(businessListing);
-
-    // Write approved listings
-    fs.writeFileSync(approvedPath, JSON.stringify(approvedData, null, 2));
-
-    console.log(`✅ Listing approved: ${submission.businessName}`);
-    console.log(`📧 Customer email: ${submission.email}`);
-
-    // TODO: Send confirmation email
-    // await sendConfirmationEmail(submission);
-
-    // TODO: Add to newsletter
-    // await addToNewsletter(submission.email, submission.businessName);
-
-    return res.status(200).json({
-      success: true,
-      message: 'Listing approved successfully',
-      business: businessListing
-    });
-
-  } catch (error) {
-    console.error('Error approving listing:', error);
-    return res.status(500).json({
-      error: 'Failed to approve listing',
-      details: error.message
-    });
-  }
-}
+};
