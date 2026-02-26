@@ -397,7 +397,7 @@
                 <input type="checkbox" id="billingToggle">
                 <span class="slider"></span>
             </label>
-            <span class="toggle-label" id="labelAnnual">Annual <span class="save-badge">Save 30%</span></span>
+            <span class="toggle-label" id="labelAnnual">Annual <span class="save-badge">Save 70%</span></span>
         </div>
     </div>
 
@@ -698,6 +698,14 @@
                         </a>
                     </div>`;
             } else {
+                // Save submission data to sessionStorage so payment-success.html can display order details
+                sessionStorage.setItem('businessSubmission', JSON.stringify({
+                    businessName,
+                    email,
+                    package:   selectedTier,
+                    frequency: billingFrequency
+                }));
+
                 // Redirect to Stripe for paid tiers
                 const stripeUrl = PAYMENT_LINKS[selectedTier][billingFrequency];
                 // Pass email as a prefill param if supported (Stripe adds ?prefilled_email=)

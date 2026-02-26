@@ -297,14 +297,14 @@
 
         function formatFrequency(freq) {
             if (freq === 'monthly') return 'Monthly Subscription';
-            if (freq === 'annual') return 'Annual Payment (70% Discount)';
+            if (freq === 'annual') return 'Annual Subscription (Save 70%)';
             return freq;
         }
 
         async function submitToBackend(data, sessionId) {
             try {
                 // In production, send to your backend
-                const response = await fetch('/api/business-submit', {
+                const response = await fetch('/api/submit-business', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
