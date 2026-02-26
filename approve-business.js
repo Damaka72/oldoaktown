@@ -21,7 +21,9 @@ module.exports = async (req, res) => {
     const { id, action, token } = req.query;
 
     // Verify admin token to prevent unauthorised approvals
-    if (token !== process.env.ADMIN_TOKEN) {
+    // Explicit check that ADMIN_TOKEN is set — if it's undefined, every request
+    // would satisfy `undefined !== undefined === false` and bypass auth entirely
+    if (!process.env.ADMIN_TOKEN || token !== process.env.ADMIN_TOKEN) {
         return res.status(403).send(`
             <html><body style="font-family:sans-serif;text-align:center;padding:50px;">
                 <h2 style="color:#dc3545;">❌ Unauthorised</h2>
@@ -63,8 +65,13 @@ module.exports = async (req, res) => {
 
             if (updateError) throw updateError;
 
-            // Notify business owner
-            await sendBusinessNotification(business, 'approved');
+            // Notify business owner — wrapped so an email failure doesn't
+            // return 500 after the Supabase update already committed
+            try {
+                await sendBusinessNotification(business, 'approved');
+            } catch (emailErr) {
+                console.error('Failed to send approval notification:', emailErr.message);
+            }
 
             return res.send(`
                 <html><body style="font-family:sans-serif;text-align:center;padding:50px;background:#f9f9f9;">
@@ -90,8 +97,11 @@ module.exports = async (req, res) => {
 
             if (updateError) throw updateError;
 
-            // Notify business owner
-            await sendBusinessNotification(business, 'rejected');
+            try {
+                await sendBusinessNotification(business, 'rejected');
+            } catch (emailErr) {
+                console.error('Failed to send rejection notification:', emailErr.message);
+            }
 
             return res.send(`
                 <html><body style="font-family:sans-serif;text-align:center;padding:50px;background:#f9f9f9;">
