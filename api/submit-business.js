@@ -108,8 +108,13 @@ module.exports = async (req, res) => {
         }
 
         // Send approval email to admin (free listings only)
+        // Wrapped in its own try/catch so an SMTP failure never blocks the submission
         if (tier === 'free') {
-            await sendApprovalEmail(record, businessId);
+            try {
+                await sendApprovalEmail(record, businessId);
+            } catch (emailErr) {
+                console.error('Approval email failed (submission still saved):', emailErr.message);
+            }
         }
 
         return res.status(200).json({
