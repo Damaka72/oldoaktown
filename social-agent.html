@@ -881,77 +881,19 @@ async function runPipeline() {
 }
 
 async function callClaude(theme, context, tone, weekDate) {
-  const prompt = `You are a senior social media strategist for Old Oak Town — a hyperlocal news and business directory for West London's Old Oak Common regeneration zone (North Acton, Harlesden, Park Royal). The area is undergoing the UK's largest brownfield regeneration: £1.7bn HS2/Elizabeth Line/Great Western station, 9,000 new homes, 11,000 new jobs. Audience: young (39% aged 20–39), diverse, community-minded.
-
-Platform strategies:
-- Facebook: Community notice board — warm, conversational, shareable local news and events.
-- Instagram: Visual storytelling — punchy, emoji-rich, local life and construction progress.
-- LinkedIn: Professional regeneration insight — authoritative, data-driven, business-focused.
-
-Campaign brief:
-Week commencing: ${weekDate}
-Theme: ${theme}
-Additional context: ${context || 'None'}
-Tone: ${tone}
-
-Return ONLY valid JSON, no markdown:
-
-{
-  "strategy": "2-3 sentence strategic overview",
-  "findings": ["research finding 1", "finding 2", "finding 3", "finding 4"],
-  "days": [
-    {
-      "day": "Monday",
-      "theme": "sub-theme for the day",
-      "posts": [
-        {
-          "platform": "facebook",
-          "caption": "Full ready-to-post caption 120-180 words. Warm and community-focused. No hashtags in body.",
-          "hashtags": "#OldOakTown #WestLondon #NorthActon #Harlesden #ParkRoyal #HS2",
-          "bestTime": "9:00am",
-          "scheduledDate": "${weekDate}"
-        },
-        {
-          "platform": "instagram",
-          "caption": "Punchy visual caption 60-90 words with relevant emojis. Hook in first line.",
-          "hashtags": "#OldOakTown #OldOakCommon #WestLondon #LondonLife #HS2 #NorthActon #Harlesden #ParkRoyal #LondonRegeneration #NewLondon #LondonCommunity #CityLiving",
-          "bestTime": "12:00pm",
-          "scheduledDate": "${weekDate}"
-        },
-        {
-          "platform": "linkedin",
-          "caption": "Professional insight 150-200 words. Data and development angle. Minimal emojis.",
-          "hashtags": "#OldOakCommon #LondonRegeneration #HS2 #UrbanDevelopment #WestLondon #PropTech",
-          "bestTime": "8:00am",
-          "scheduledDate": "${weekDate}"
-        }
-      ]
-    }
-  ]
-}
-
-Generate all 5 days Monday-Friday. Make every caption genuinely specific to Old Oak Town and West London. Each platform must sound distinctly different.`;
-
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  // Call the server-side proxy — keeps the Anthropic API key out of the browser
+  const response = await fetch('/api/generate-posts', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-      messages: [{ role: 'user', content: prompt }]
-    })
+    body: JSON.stringify({ theme, context, tone, weekDate })
   });
 
-  const data = await response.json();
-  let raw = '';
-  for (const block of (data.content || [])) {
-    if (block.type === 'text') raw += block.text;
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error || `Server error ${response.status}`);
   }
-  if (!raw) throw new Error('Empty response');
-  const match = raw.replace(/```json|```/g, '').match(/\{[\s\S]*\}/);
-  if (!match) throw new Error('Could not parse response');
-  return JSON.parse(match[0]);
+
+  return response.json();
 }
 
 function flattenPosts(plan, weekDate) {
