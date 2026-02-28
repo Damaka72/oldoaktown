@@ -8,7 +8,8 @@
     "dev": "nodemon server.js",
     "fetch-feeds": "node scripts/rss-aggregator.js",
     "netlify": "netlify dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "node scripts/apply-migrations.js"
   },
   "keywords": [
     "old-oak-common",
@@ -29,7 +30,8 @@
     "nodemailer": "^6.9.7",
     "stripe": "^14.7.0",
     "@anthropic-ai/sdk": "^0.36.3",
-    "@supabase/supabase-js": "^2.39.0"
+    "@supabase/supabase-js": "^2.39.0",
+    "pg": "^8.11.3"
   },
   "devDependencies": {
     "nodemon": "^3.0.2",
