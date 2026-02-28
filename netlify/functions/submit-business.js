@@ -1,16 +1,19 @@
-// api/submit-business.js
-// Handles new business submissions (free and paid)
-// Saves to Supabase when configured, otherwise falls back to local JSON file
+// netlify/functions/submit-business.js
+// Handles new business submissions for Netlify deployments.
+// Mirrors api/submit-business.js but uses the Netlify Functions
+// handler signature (event) instead of Express (req / res).
 
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
 
-module.exports = async (req, res) => {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+exports.handler = async (event) => {
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
     }
 
     try {
+        const body = JSON.parse(event.body || '{}');
+
         const {
             businessName, category, email, phone,
             address, postcode, description, website,
@@ -18,28 +21,30 @@ module.exports = async (req, res) => {
             specialOffers, targetAudience,
             tier, billingFrequency,
             stripeCustomerId, stripeSubscriptionId
-        } = req.body;
+        } = body;
 
-        // Validate required fields
         if (!businessName || !category || !email) {
-            return res.status(400).json({ error: 'Business name, category and email are required' });
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: 'Business name, category and email are required' })
+            };
         }
 
-        const status = tier === 'free' ? 'pending' : 'pending_payment';
-        let useSupabase = !!(process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY);
-
-        let businessId;
-        let record;
-
-        if (!useSupabase) {
-            console.error('Supabase credentials missing — SUPABASE_URL and SUPABASE_SERVICE_KEY must be set');
-            return res.status(500).json({ error: 'Server misconfiguration: database not configured' });
+        // ── Supabase insert ───────────────────────────────────────────────────
+        if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_KEY) {
+            console.error('SUPABASE_URL or SUPABASE_SERVICE_KEY not set');
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'Server misconfiguration: Supabase credentials missing' })
+            };
         }
 
         const supabase = createClient(
             process.env.SUPABASE_URL,
             process.env.SUPABASE_SERVICE_KEY
         );
+
+        const status = tier === 'free' ? 'pending' : 'pending_payment';
 
         const { data, error: supabaseError } = await supabase
             .from('businesses')
@@ -69,46 +74,54 @@ module.exports = async (req, res) => {
 
         if (supabaseError) {
             console.error('Supabase insert failed:', supabaseError);
-            return res.status(500).json({ error: 'Failed to save submission', detail: supabaseError.message });
+            return {
+                statusCode: 500,
+                body: JSON.stringify({ error: 'Failed to save submission', detail: supabaseError.message })
+            };
         }
 
-        businessId = data.id;
-        record = data;
+        const businessId = data.id;
 
-        // Send approval email to admin (free listings only)
-        // Wrapped in its own try/catch so an SMTP failure never blocks the submission
+        // ── Admin approval email (free tier only) ─────────────────────────────
         if (tier === 'free') {
             try {
-                await sendApprovalEmail(record, businessId);
+                await sendApprovalEmail(data, businessId);
             } catch (emailErr) {
                 console.error('Approval email failed (submission still saved):', emailErr.message);
             }
         }
 
-        return res.status(200).json({
-            success: true,
-            submissionId: businessId,
-            message: tier === 'free'
-                ? 'Submission received. You will be notified once approved.'
-                : 'Details saved. Redirecting to payment.'
-        });
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                success: true,
+                submissionId: businessId,
+                message: tier === 'free'
+                    ? 'Submission received. You will be notified once approved.'
+                    : 'Details saved. Redirecting to payment.'
+            })
+        };
 
     } catch (err) {
         console.error('Submit business error:', err);
-        return res.status(500).json({ error: 'Internal server error', detail: err.message });
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Internal server error', detail: err.message })
+        };
     }
 };
 
 async function sendApprovalEmail(business, businessId) {
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-        console.warn('SMTP credentials not configured — skipping approval email for submission', businessId);
+        console.warn('SMTP credentials not configured — skipping approval email for', businessId);
         return;
     }
 
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
+    const SITE_URL = process.env.SITE_URL || 'https://www.oldoaktown.co.uk';
 
-    const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
-    const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
+    const approveUrl = `${SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
+    const rejectUrl  = `${SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
 
     const emailHtml = `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
@@ -126,7 +139,6 @@ async function sendApprovalEmail(business, businessId) {
                     <tr><td style="padding: 8px; border-bottom: 1px solid #ddd;"><strong>Website:</strong></td><td style="padding: 8px; border-bottom: 1px solid #ddd;">${business.website || 'Not provided'}</td></tr>
                     <tr><td style="padding: 8px;"><strong>Description:</strong></td><td style="padding: 8px;">${business.description || 'Not provided'}</td></tr>
                 </table>
-
                 <div style="margin-top: 30px; text-align: center;">
                     <a href="${approveUrl}" style="background: #2D5016; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; margin-right: 10px; font-weight: bold; display: inline-block;">
                         ✅ APPROVE LISTING
@@ -145,7 +157,7 @@ async function sendApprovalEmail(business, businessId) {
 
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST || 'smtp.gmail.com',
-        port: process.env.SMTP_PORT || 587,
+        port: Number(process.env.SMTP_PORT) || 587,
         secure: false,
         auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
     });
