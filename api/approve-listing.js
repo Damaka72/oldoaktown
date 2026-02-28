@@ -1,6 +1,7 @@
 // api/approve-listing.js
-// Approves a pending business listing in Supabase
-// POST /api/approve-listing  { submissionId, password }
+// Approve, reject, or suspend a business listing in Supabase
+// POST /api/approve-listing  { submissionId, action, password }
+// action: 'approve' (default) | 'reject' | 'suspend'
 
 const { createClient } = require('@supabase/supabase-js');
 
@@ -14,7 +15,7 @@ module.exports = async function handler(req, res) {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    const { submissionId, password } = req.body;
+    const { submissionId, action = 'approve', password } = req.body;
 
     const adminPassword = process.env.ADMIN_PASSWORD;
     if (!adminPassword || password !== adminPassword) {
@@ -36,30 +37,35 @@ module.exports = async function handler(req, res) {
             return res.status(404).json({ error: 'Submission not found' });
         }
 
-        if (business.status !== 'pending') {
-            return res.status(400).json({
-                error: 'Can only approve listings with pending status',
-                currentStatus: business.status
-            });
+        const updates = {};
+        if (action === 'approve') {
+            updates.status = 'approved';
+            updates.approved_at = new Date().toISOString();
+        } else if (action === 'reject') {
+            updates.status = 'rejected';
+        } else if (action === 'suspend') {
+            updates.status = 'pending';
+        } else {
+            return res.status(400).json({ error: 'Invalid action. Use approve, reject, or suspend.' });
         }
 
         const { error: updateError } = await supabase
             .from('businesses')
-            .update({ status: 'approved', approved_at: new Date().toISOString() })
+            .update(updates)
             .eq('id', submissionId);
 
         if (updateError) throw updateError;
 
-        console.log(`Listing approved: ${business.business_name} (${submissionId})`);
+        console.log(`Listing ${action}d: ${business.business_name} (${submissionId})`);
 
         return res.status(200).json({
             success: true,
-            message: 'Listing approved successfully',
+            message: `Listing ${action}d successfully`,
             businessName: business.business_name
         });
 
     } catch (err) {
         console.error('approve-listing error:', err);
-        return res.status(500).json({ error: 'Failed to approve listing' });
+        return res.status(500).json({ error: 'Failed to update listing' });
     }
 };
