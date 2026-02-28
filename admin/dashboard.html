@@ -284,13 +284,15 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
 
         // Simple admin password check (client-side only - good enough for MVP)
-        const ADMIN_PASSWORD = 'OldOak2025!';
+        const ADMIN_PASSWORD = 'Salvation2026!';
+        let _adminPassword = '';
         let currentTab = 'pending';
         let allData = [];
 
         function login() {
             const pw = document.getElementById('passwordInput').value;
             if (pw === ADMIN_PASSWORD) {
+                _adminPassword = pw;
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 sessionStorage.setItem('adminAuth', 'true');
@@ -313,7 +315,7 @@
         }
 
         async function fetchAllBusinesses() {
-            const response = await fetch(`${SUPABASE_URL}/rest/v1/businesses?order=submitted_at.desc`, {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/businesses?order=created_at.desc`, {
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,
                     'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
@@ -322,16 +324,11 @@
             return await response.json();
         }
 
-        async function updateBusiness(id, updates) {
-            const response = await fetch(`${SUPABASE_URL}/rest/v1/businesses?id=eq.${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify(updates)
+        async function updateBusiness(id, action) {
+            const response = await fetch('/api/approve-listing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ submissionId: id, action, password: _adminPassword })
             });
             return response.ok;
         }
@@ -381,7 +378,7 @@
         }
 
         function renderAdminCard(b) {
-            const date = new Date(b.submitted_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            const date = new Date(b.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 
             return `
                 <div class="admin-card">
@@ -438,10 +435,7 @@
 
         async function approveBusiness(id) {
             if (!confirm('Approve this listing? It will go live on the directory.')) return;
-            const ok = await updateBusiness(id, {
-                status: 'approved',
-                approved_at: new Date().toISOString()
-            });
+            const ok = await updateBusiness(id, 'approve');
             if (ok) {
                 showToast('✅ Listing approved and live!');
                 await loadDashboard();
@@ -452,7 +446,7 @@
 
         async function rejectBusiness(id) {
             if (!confirm('Reject this listing? The business will be notified.')) return;
-            const ok = await updateBusiness(id, { status: 'rejected' });
+            const ok = await updateBusiness(id, 'reject');
             if (ok) {
                 showToast('Listing rejected');
                 await loadDashboard();
@@ -461,7 +455,7 @@
 
         async function suspendBusiness(id) {
             if (!confirm('Suspend this listing? It will be hidden from the directory.')) return;
-            const ok = await updateBusiness(id, { status: 'pending' });
+            const ok = await updateBusiness(id, 'suspend');
             if (ok) {
                 showToast('Listing suspended');
                 await loadDashboard();
