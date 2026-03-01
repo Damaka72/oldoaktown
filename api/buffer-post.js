@@ -38,18 +38,38 @@ export default async function handler(req, res) {
     });
   }
 
+  // Instagram requires at least one media item — skip text-only posts
+  if (platformKey === 'instagram') {
+    return res.status(200).json({
+      success: false,
+      skipped: true,
+      platform: platformKey,
+      reason: 'Instagram posts require an image or video. Text-only posts are not supported on Instagram via Buffer.',
+      day
+    });
+  }
+
   try {
     // If no scheduled time provided, default to 1 hour from now
     const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
 
+    // LinkedIn hard cap enforced by Buffer
+    const LINKEDIN_CHAR_LIMIT = 1248;
+    const postText = platformKey === 'linkedin' && text.length > LINKEDIN_CHAR_LIMIT
+      ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
+      : text;
+
+    // Facebook and LinkedIn require an explicit postType
+    const postTypeField = platformKey === 'facebook' ? '\n          postType: post,' : '';
+
     const mutation = `
       mutation CreatePost {
         createPost(input: {
-          text: ${JSON.stringify(text)},
+          text: ${JSON.stringify(postText)},
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}
+          dueAt: ${JSON.stringify(dueAt)}${postTypeField}
         }) {
           ... on PostActionSuccess {
             post { id text }
