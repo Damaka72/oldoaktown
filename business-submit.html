@@ -452,7 +452,7 @@
 
     <!-- Business details form -->
     <div class="form-wrap">
-        <h2>Your Business Details</h2>
+        <h2>Your Free Listing Details</h2>
 
         <div id="formAlert" class="alert alert-error" style="display:none;"></div>
 
@@ -517,13 +517,11 @@
 
             <!-- Website + opening hours — shown for featured, premium & newsletter -->
             <div id="featuredFields" style="display:none;">
-                <p class="form-section-label">Online Presence</p>
+                <p class="form-section-label">Online Presence &amp; Hours</p>
                 <div class="form-group">
                     <label for="website">Website URL</label>
                     <input type="url" id="website" name="website" placeholder="https://www.yourbusiness.com">
                 </div>
-
-                <p class="form-section-label">Additional Details</p>
                 <div class="form-group">
                     <label for="openingHours">Opening Hours</label>
                     <input type="text" id="openingHours" name="openingHours" placeholder="Mon–Fri 9am–6pm, Sat 10am–4pm">
@@ -617,6 +615,15 @@
             const el = document.getElementById('price-' + tier);
             if (el) el.innerHTML = `${prices[tier]} <span>${perUnit}</span>`;
         });
+
+        // Update form heading to reflect selected plan
+        const headingMap = {
+            free:       'Your Free Listing Details',
+            featured:   'Your Featured Listing Details',
+            premium:    'Your Premium Listing Details',
+            newsletter: 'Your Newsletter Sponsor Details'
+        };
+        document.querySelector('.form-wrap h2').textContent = headingMap[selectedTier] || 'Your Business Details';
 
         // Show website & opening hours for featured, premium, newsletter
         document.getElementById('featuredFields').style.display =
