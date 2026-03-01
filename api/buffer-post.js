@@ -2,11 +2,17 @@
  * Old Oak Town — Buffer GraphQL Proxy
  * POST /api/buffer-post
  *
+ * Routes each post to the correct Buffer channel by platform.
  * Required env var: BUFFER_API_KEY
  */
 
 const BUFFER_API = 'https://api.buffer.com';
-const CHANNEL_ID = '69a213f74be271803d75d07e';
+
+const CHANNEL_IDS = {
+  linkedin:  '69a213f74be271803d75d07e',
+  instagram: '69a43f953f3b94a121052f11',
+  facebook:  '69a4431d3f3b94a12105386d',
+};
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -18,51 +24,21 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.BUFFER_API_KEY;
   if (!apiKey) {
-    console.error('BUFFER_API_KEY environment variable is not set');
     return res.status(500).json({ error: 'BUFFER_API_KEY not configured in Vercel environment variables' });
   }
 
   const { text, scheduledAt, platform, day } = req.body;
   if (!text) return res.status(400).json({ error: 'Missing required field: text' });
 
-  try {
-    // Step 1: Get organisation ID
-    const orgRes = await fetch(BUFFER_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        query: `query { account { organizations { id name } } }`
-      })
+  const platformKey = (platform || '').toLowerCase();
+  const channelId = CHANNEL_IDS[platformKey];
+  if (!channelId) {
+    return res.status(400).json({ 
+      error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.` 
     });
+  }
 
-    const orgData = await orgRes.json();
-    console.log('Buffer org response status:', orgRes.status);
-    console.log('Buffer org data:', JSON.stringify(orgData).slice(0, 300));
-
-    if (!orgRes.ok) {
-      return res.status(502).json({
-        error: 'Buffer API returned non-200',
-        status: orgRes.status,
-        details: orgData
-      });
-    }
-
-    if (orgData.errors) {
-      return res.status(502).json({ error: 'Buffer auth/query error', details: orgData.errors });
-    }
-
-    const orgId = orgData?.data?.account?.organizations?.[0]?.id;
-    if (!orgId) {
-      return res.status(502).json({
-        error: 'Could not retrieve Buffer organisation ID',
-        received: orgData
-      });
-    }
-
-    // Step 2: Create the post
+  try {
     const mutation = `
       mutation CreatePost($input: PostCreateInput!) {
         postCreate(input: $input) {
@@ -74,7 +50,7 @@ export default async function handler(req, res) {
 
     const variables = {
       input: {
-        channelId: CHANNEL_ID,
+        channelId,
         content: { text },
         scheduling: scheduledAt
           ? { scheduledAt, type: 'SCHEDULED' }
@@ -92,8 +68,7 @@ export default async function handler(req, res) {
     });
 
     const postData = await postRes.json();
-    console.log('Buffer post response status:', postRes.status);
-    console.log('Buffer post data:', JSON.stringify(postData).slice(0, 300));
+    console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
     if (postData.errors) {
       return res.status(502).json({ error: 'Buffer mutation error', details: postData.errors });
@@ -105,14 +80,14 @@ export default async function handler(req, res) {
     }
 
     const created = postData?.data?.postCreate?.post;
-    console.log(`✓ Buffer post created: ${created?.id} | ${platform} | ${day}`);
+    console.log(`✓ ${platformKey} post queued: ${created?.id} | ${day}`);
 
     return res.status(200).json({
       success: true,
       postId: created?.id,
       status: created?.status,
       scheduledAt: created?.scheduledAt,
-      platform,
+      platform: platformKey,
       day
     });
 
