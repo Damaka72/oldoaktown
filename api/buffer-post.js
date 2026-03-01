@@ -43,13 +43,13 @@ export default async function handler(req, res) {
     const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
 
     const mutation = `
-      mutation CreatePost($text: String!, $channelId: String!, $dueAt: String!) {
+      mutation CreatePost {
         createPost(input: {
-          text: $text,
-          channelId: $channelId,
+          text: ${JSON.stringify(text)},
+          channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customSchedule,
-          dueAt: $dueAt
+          dueAt: ${JSON.stringify(dueAt)}
         }) {
           ... on PostActionSuccess {
             post { id text }
@@ -67,7 +67,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ query: mutation, variables: { text, channelId, dueAt } })
+      body: JSON.stringify({ query: mutation })
     });
 
     const postData = await postRes.json();
@@ -78,7 +78,6 @@ export default async function handler(req, res) {
     }
 
     const result = postData?.data?.createPost;
-
     if (result?.message) {
       return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
     }
