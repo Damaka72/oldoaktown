@@ -6,7 +6,7 @@
  * Required env var: BUFFER_API_KEY
  */
 
-const BUFFER_API = 'https://api.buffer.com';
+const BUFFER_API = 'https://api.buffer.com/graphql';
 
 const CHANNEL_IDS = {
   linkedin:  '69a213f74be271803d75d07e',
