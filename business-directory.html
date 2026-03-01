@@ -610,7 +610,7 @@
                 ? `<a href="business-submit.html" class="btn btn-upgrade">Upgrade to Featured</a>`
                 : '';
 
-            const websiteBtn = b.website
+            const websiteBtn = (b.website && b.tier !== 'free')
                 ? `<a href="${b.website}" target="_blank" rel="noopener" class="btn btn-primary">Visit Website</a>`
                 : '';
 
