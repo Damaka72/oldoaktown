@@ -502,7 +502,7 @@
                 <p class="hint">Keep it to 2–4 sentences. This is what people see in the directory.</p>
             </div>
 
-            <p class="form-section-label">Location &amp; Online Presence</p>
+            <p class="form-section-label">Location</p>
 
             <div class="form-row">
                 <div class="form-group">
@@ -515,9 +515,19 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="website">Website URL</label>
-                <input type="url" id="website" name="website" placeholder="https://www.yourbusiness.com">
+            <!-- Website + opening hours — shown for featured, premium & newsletter -->
+            <div id="featuredFields" style="display:none;">
+                <p class="form-section-label">Online Presence</p>
+                <div class="form-group">
+                    <label for="website">Website URL</label>
+                    <input type="url" id="website" name="website" placeholder="https://www.yourbusiness.com">
+                </div>
+
+                <p class="form-section-label">Additional Details</p>
+                <div class="form-group">
+                    <label for="openingHours">Opening Hours</label>
+                    <input type="text" id="openingHours" name="openingHours" placeholder="Mon–Fri 9am–6pm, Sat 10am–4pm">
+                </div>
             </div>
 
             <!-- Social & extras — shown only for premium / newsletter -->
@@ -538,11 +548,7 @@
                     <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/company/yourbusiness">
                 </div>
 
-                <p class="form-section-label">Additional Details</p>
-                <div class="form-group">
-                    <label for="openingHours">Opening Hours</label>
-                    <input type="text" id="openingHours" name="openingHours" placeholder="Mon–Fri 9am–6pm, Sat 10am–4pm">
-                </div>
+                <p class="form-section-label">Promotions</p>
                 <div class="form-group">
                     <label for="specialOffers">Special Offers</label>
                     <textarea id="specialOffers" name="specialOffers" placeholder="Any current promotions or discounts for Old Oak Town residents…" style="min-height:80px;"></textarea>
@@ -612,7 +618,11 @@
             if (el) el.innerHTML = `${prices[tier]} <span>${perUnit}</span>`;
         });
 
-        // Show/hide premium-only fields
+        // Show opening hours for featured, premium, newsletter
+        document.getElementById('featuredFields').style.display =
+            (selectedTier === 'featured' || selectedTier === 'premium' || selectedTier === 'newsletter') ? 'block' : 'none';
+
+        // Show social media & extras for premium, newsletter only
         document.getElementById('premiumFields').style.display =
             (selectedTier === 'premium' || selectedTier === 'newsletter') ? 'block' : 'none';
 
