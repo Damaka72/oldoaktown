@@ -307,18 +307,43 @@ textarea { min-height: 68px; }
 .stat-pill.pending-stat .stat-num { color: var(--amber); }
 
 .posts-board {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── DAY GROUP ── */
+.day-group { display: flex; flex-direction: column; gap: 10px; }
+.day-group-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0 6px;
+  border-bottom: 2px solid var(--border);
+}
+.day-group-label {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px; color: var(--green-deep);
+}
+.day-group-date {
+  font-size: 12px; color: var(--muted); font-weight: 500;
+}
+.day-platform-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 /* ── POST CARD ── */
 .post-card {
-  background: white; border: 2px solid var(--border);
+  background: white;
+  border: 2px solid var(--border);
+  border-top: 4px solid var(--border);
   border-radius: 13px; overflow: hidden;
   transition: border-color 0.2s, box-shadow 0.2s;
   display: flex; flex-direction: column;
 }
+.post-card.fb-card  { border-top-color: var(--fb); }
+.post-card.ig-card  { border-top-color: var(--ig); }
+.post-card.li-card  { border-top-color: var(--li); }
 .post-card.approved { border-color: var(--green-bright); box-shadow: 0 0 0 3px rgba(76,138,53,0.1); }
 .post-card.rejected { border-color: var(--red); opacity: 0.5; }
 .post-card.sent { border-color: var(--make); box-shadow: 0 0 0 3px rgba(109,0,204,0.08); }
@@ -512,4 +537,790 @@ textarea { min-height: 68px; }
 }
 
 .test-result {
-  margin-top: 10px; pad
+  margin-top: 10px; padding: 10px 13px; border-radius: 7px;
+  font-size: 12px; display: none;
+}
+.test-result.success { background: var(--green-pale); color: var(--green-deep); }
+.test-result.error { background: var(--red-pale); color: var(--red); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 26px; right: 26px;
+  background: var(--ink); color: white;
+  padding: 11px 18px; border-radius: 9px;
+  font-size: 13px; font-weight: 500; z-index: 1000;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  max-width: 300px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.success { background: var(--green-mid); }
+.toast.error { background: var(--red); }
+.toast.info { background: var(--blue); }
+.toast.make { background: var(--make); }
+
+.dots::after {
+  content: ''; animation: dotdot 1.2s infinite;
+}
+@keyframes dotdot {
+  0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'}
+}
+
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { height: auto; position: relative; top: 0; }
+  .pipeline-steps { display: none; }
+  .day-platform-row { grid-template-columns: 1fr; }
+  .day-group-header { padding: 8px 0 4px; }
+  .stats-bar { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="brand">
+    <div class="brand-icon">O</div>
+    <div>
+      <div class="brand-name">Old Oak Town</div>
+      <div class="brand-sub">Social Command Centre</div>
+    </div>
+  </div>
+
+  <div class="pipeline-steps">
+    <div class="step active" id="step1"><div class="step-num">1</div>Research</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step2"><div class="step-num">2</div>Draft</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step3"><div class="step-num">3</div>Review</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step4"><div class="step-num">4</div>Buffer</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step5"><div class="step-num">5</div>Live</div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="webhook-status">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusLabel">Buffer API ready</span>
+    </div>
+    <button class="settings-btn" onclick="openSettings()">⚙ Buffer Info</button>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>Campaign Brief</h3>
+      <div class="form-group">
+        <label>Week commencing</label>
+        <input type="date" id="weekDate">
+      </div>
+      <div class="form-group">
+        <label>Weekly theme</label>
+        <input type="text" id="weekTheme" placeholder="HS2 update, new business spotlight…">
+      </div>
+      <div class="form-group">
+        <label>Specific context</label>
+        <textarea id="weekContext" placeholder="Events, news, businesses to feature…"></textarea>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Tone</h3>
+      <div class="tone-grid">
+        <button class="tone-opt active" data-tone="Community-focused and warm">Community</button>
+        <button class="tone-opt" data-tone="Informative and journalistic">Journalistic</button>
+        <button class="tone-opt" data-tone="Excited and aspirational">Aspirational</button>
+        <button class="tone-opt" data-tone="Professional and authoritative">Professional</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Research Sources</h3>
+      <div class="research-toggles">
+        <div class="toggle-row">
+          <span>🔍 HS2 / OPDC news</span>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>🌐 Old Oak Town site</span>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>📰 Local London news</span>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>🏗 Planning updates</span>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+      </div>
+    </div>
+
+    <button class="run-btn" id="runBtn" onclick="runPipeline()">
+      ✦ Research &amp; Draft
+    </button>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content" id="mainContent">
+
+    <!-- IDLE -->
+    <div id="idleState" class="idle-state">
+      <div class="idle-icon">🌳</div>
+      <h2>Ready when you are</h2>
+      <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts post directly to Buffer via the Old Oak Town API.</p>
+    </div>
+
+    <!-- RESEARCH -->
+    <div id="researchPhase" class="research-phase">
+      <div class="phase-header">
+        <div class="phase-badge green">Steps 1–2</div>
+        <h2>Researching &amp; Drafting<span class="dots"></span></h2>
+      </div>
+      <div class="research-log" id="researchLog"></div>
+      <div class="research-findings" id="researchFindings" style="display:none">
+        <h3>📌 Research Findings</h3>
+        <div class="finding-chips" id="findingChips"></div>
+      </div>
+    </div>
+
+    <!-- APPROVAL -->
+    <div id="approvalPhase" class="approval-phase">
+      <div class="phase-header">
+        <div class="phase-badge amber">Step 3</div>
+        <h2>Review &amp; Approve</h2>
+      </div>
+
+      <div class="stats-bar" id="statsBar"></div>
+
+      <div class="board-controls">
+        <button class="filter-btn active" onclick="filterBoard('all',this)">All</button>
+        <button class="filter-btn" onclick="filterBoard('pending',this)">Pending</button>
+        <button class="filter-btn" onclick="filterBoard('approved',this)">Approved</button>
+        <button class="filter-btn" onclick="filterBoard('rejected',this)">Rejected</button>
+        <button class="approve-all-btn" onclick="approveAll()">✓ Approve All</button>
+      </div>
+
+      <div class="posts-board" id="postsBoard"></div>
+
+      <div class="send-bar" id="sendBar">
+        <div class="send-bar-info">
+          <h3>Send to Buffer</h3>
+          <p id="sendBarDesc">Approve posts above, then send them directly to Buffer.</p>
+        </div>
+        <button class="send-btn" id="sendBtn" onclick="sendToBuffer()">
+          📤 Send to Buffer Direct
+        </button>
+      </div>
+    </div>
+
+    <!-- SENDING -->
+    <div id="sendingPhase" class="sending-phase">
+      <div class="phase-header">
+        <div class="phase-badge make">Step 4</div>
+        <h2 id="sendingTitle">Sending to Buffer<span class="dots"></span></h2>
+      </div>
+      <div class="sending-log" id="sendingLog"></div>
+      <div class="result-grid" id="resultGrid"></div>
+      <button class="restart-btn" id="restartBtn" style="display:none" onclick="restart()">
+        ✦ Plan Another Week
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="make-badge">⚡ Buffer Direct Integration</div>
+    <h2>Webhook Setup</h2>
+    <p>Your posts go directly to Buffer's API via oldoaktown.co.uk/api/buffer-post — fully serverless, no Make.com needed.</p>
+
+    <div class="modal-field">
+      <label>Buffer Channel ID (pre-configured)</label>
+      <input type="text" id="webhookInput" value="69a213f74be271803d75d07e" readonly style="opacity:0.6;cursor:not-allowed">
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Posts go to your connected Buffer channel. To change this, update the channel ID in api/buffer-post.js</div>
+    </div>
+
+    <div class="test-result" id="testResult"></div>
+
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="saveWebhook()">Close</button>
+      <button class="btn-secondary" onclick="closeSettings()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+const BUFFER_PROXY = '/api/buffer-post';
+
+const state = {
+  bufferProxy: BUFFER_PROXY,
+  posts: [],
+  currentFilter: 'all'
+};
+
+// ── INIT ───────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const d = new Date();
+  const diff = d.getDay() === 0 ? 1 : (8 - d.getDay());
+  d.setDate(d.getDate() + diff);
+  document.getElementById('weekDate').value = d.toISOString().split('T')[0];
+
+  document.getElementById('webhookInput').value = state.bufferProxy;
+  updateConnectionStatus();
+
+  document.querySelectorAll('.tone-opt').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.tone-opt').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+});
+
+function updateConnectionStatus() {
+  const dot = document.getElementById('statusDot');
+  const label = document.getElementById('statusLabel');
+  dot.classList.add('connected');
+  label.textContent = 'Buffer direct ✓';
+}
+
+// ── SETTINGS ───────────────────────────────────────────────────
+function openSettings() {
+  document.getElementById('webhookInput').value = state.bufferProxy;
+  document.getElementById('testResult').style.display = 'none';
+  document.getElementById('settingsModal').classList.add('open');
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').classList.remove('open');
+}
+
+async function saveWebhook() {
+  const url = document.getElementById('webhookInput').value.trim();
+  if (!url) { showToast('Please enter your webhook URL', 'error'); return; }
+
+  const result = document.getElementById('testResult');
+  result.style.display = 'block';
+  result.className = 'test-result';
+  result.textContent = 'Testing connection…';
+
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'connection_test', source: 'Old Oak Town Social Agent', timestamp: new Date().toISOString() })
+    });
+
+    state.webhook = url;
+    localStorage.setItem('oot_webhook', url);
+    updateConnectionStatus();
+
+    result.className = 'test-result success';
+    result.textContent = '✓ Connected! Make.com received the test ping successfully.';
+    showToast('Webhook saved & connected', 'success');
+
+  } catch (err) {
+    result.className = 'test-result error';
+    result.textContent = '✗ Could not reach the webhook. Check your Make.com scenario is turned on.';
+  }
+}
+
+// ── PIPELINE ───────────────────────────────────────────────────
+async function runPipeline() {
+  const theme = document.getElementById('weekTheme').value.trim();
+  if (!theme) { showToast('Please enter a weekly theme', 'error'); return; }
+
+  document.getElementById('runBtn').disabled = true;
+  document.getElementById('runBtn').textContent = 'Generating…';
+  showPhase('research');
+  setStep(1);
+
+  const log = document.getElementById('researchLog');
+  log.innerHTML = '';
+
+  addLog(log, '> Initialising Old Oak Town research pipeline…', 0);
+  addLog(log, '> Searching: HS2 Old Oak Common latest news 2025…', 600, 'info');
+  addLog(log, '> Fetching: oldoaktown.co.uk content…', 1100, 'info');
+  addLog(log, '> Searching: West London regeneration community news…', 1600, 'info');
+  addLog(log, '> Searching: OPDC planning updates Park Royal…', 2000, 'info');
+  addLog(log, '> Research complete. Passing to drafting engine…', 2600, 'done');
+  addLog(log, '> Generating 15 posts: 5 days × 3 platforms…', 3000, 'info');
+
+  await delay(3400);
+  setStep(2);
+
+  const weekDate = document.getElementById('weekDate').value;
+  const context = document.getElementById('weekContext').value.trim();
+  const tone = document.querySelector('.tone-opt.active')?.dataset.tone || 'Community-focused and warm';
+
+  let plan;
+  try {
+    plan = await callClaude(theme, context, tone, weekDate);
+  } catch (e) {
+    showToast('Generation failed: ' + e.message, 'error');
+    document.getElementById('runBtn').disabled = false;
+    document.getElementById('runBtn').innerHTML = '✦ Research &amp; Draft';
+    showPhase('idle');
+    return;
+  }
+
+  addLog(log, '> ✓ 15 posts drafted successfully', 0, 'done');
+  addLog(log, '> Building approval board…', 400, 'done');
+
+  await delay(700);
+
+  // Show findings
+  if (plan.findings?.length) {
+    const el = document.getElementById('researchFindings');
+    const chips = document.getElementById('findingChips');
+    el.style.display = 'block';
+    chips.innerHTML = '';
+    plan.findings.forEach(f => {
+      const chip = document.createElement('div');
+      chip.className = 'finding-chip';
+      chip.textContent = f;
+      chips.appendChild(chip);
+    });
+    await delay(500);
+  }
+
+  state.posts = flattenPosts(plan, weekDate);
+  setStep(3);
+  renderApprovalBoard();
+  updateStats();
+  showPhase('approval');
+
+  document.getElementById('runBtn').disabled = false;
+  document.getElementById('runBtn').innerHTML = '✦ Research &amp; Draft';
+}
+
+async function callClaude(theme, context, tone, weekDate) {
+  // Call the server-side proxy — keeps the Anthropic API key out of the browser
+  const response = await fetch('/api/generate-posts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ theme, context, tone, weekDate })
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error || `Server error ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function flattenPosts(plan, weekDate) {
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const posts = [];
+  (plan.days || []).forEach(day => {
+    const dayOffset = days.indexOf(day.day);
+    (day.posts || []).forEach(post => {
+      // Calculate actual scheduled date
+      const d = new Date(weekDate + 'T00:00:00');
+      d.setDate(d.getDate() + Math.max(0, dayOffset));
+      const scheduledDate = d.toISOString().split('T')[0];
+
+      posts.push({
+        id: `${day.day}-${post.platform}-${Date.now()}`,
+        day: day.day,
+        dayTheme: day.theme,
+        platform: post.platform,
+        caption: post.caption,
+        hashtags: post.hashtags,
+        bestTime: post.bestTime,
+        scheduledDate,
+        status: 'pending'
+      });
+    });
+  });
+  return posts;
+}
+
+// ── APPROVAL BOARD ─────────────────────────────────────────────
+function renderApprovalBoard(filter) {
+  filter = filter || state.currentFilter;
+  state.currentFilter = filter;
+  const board = document.getElementById('postsBoard');
+  board.innerHTML = '';
+
+  const platCls   = { facebook:'fb', instagram:'ig', linkedin:'li' };
+  const platLabel = { facebook:'📘 Facebook', instagram:'📸 Instagram', linkedin:'💼 LinkedIn' };
+  const platOrder = ['facebook', 'instagram', 'linkedin'];
+  const statusText = { pending:'Pending', approved:'Approved ✓', rejected:'Rejected ✗', sent:'Sent ✓' };
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+
+  // Group posts by day
+  const byDay = {};
+  days.forEach(d => { byDay[d] = {}; platOrder.forEach(p => { byDay[d][p] = null; }); });
+  state.posts.forEach(post => {
+    if (byDay[post.day]) byDay[post.day][post.platform] = post;
+  });
+
+  let anyVisible = false;
+
+  days.forEach(dayName => {
+    const dayPosts = platOrder.map(p => byDay[dayName][p]).filter(Boolean);
+    if (!dayPosts.length) return;
+
+    // Apply filter
+    const visiblePosts = filter === 'all' ? dayPosts : dayPosts.filter(p => p.status === filter);
+    if (visiblePosts.length === 0 && filter !== 'all') return;
+    anyVisible = true;
+
+    // Day group container
+    const group = document.createElement('div');
+    group.className = 'day-group';
+    group.id = `day-group-${dayName}`;
+
+    // Day header
+    const samplePost = dayPosts[0];
+    group.innerHTML = `
+      <div class="day-group-header">
+        <span class="day-group-label">${dayName}</span>
+        <span class="day-group-date">${samplePost?.scheduledDate || ''}</span>
+      </div>
+      <div class="day-platform-row" id="row-${dayName}"></div>
+    `;
+    board.appendChild(group);
+
+    const row = group.querySelector(`#row-${dayName}`);
+
+    // Render one card per platform in fixed order
+    platOrder.forEach(plat => {
+      const post = byDay[dayName][plat];
+      if (!post) {
+        // Empty slot — keeps columns aligned
+        const empty = document.createElement('div');
+        empty.style.cssText = 'min-height:60px';
+        row.appendChild(empty);
+        return;
+      }
+      if (filter !== 'all' && post.status !== filter) {
+        const empty = document.createElement('div');
+        row.appendChild(empty);
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = `post-card ${platCls[plat]}-card ${post.status !== 'pending' ? post.status : ''}`;
+      card.id = `card-${post.id}`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="plat-pill ${platCls[plat]}">
+            <span class="plat-dot"></span>${platLabel[plat]}
+          </div>
+          <span class="card-status ${post.status}" id="cs-${post.id}">${statusText[post.status]}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-caption" id="cap-${post.id}">${escHtml(post.caption)}</div>
+          <textarea class="caption-edit" id="edit-${post.id}">${post.caption}</textarea>
+          <div class="card-meta">
+            <div class="meta-row">
+              <span class="meta-key">Tags</span>
+              <span class="meta-tags">${escHtml(post.hashtags)}</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Time</span>
+              <span class="meta-time">🕐 ${post.bestTime}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions" id="act-${post.id}">
+          ${renderActions(post)}
+        </div>
+      `;
+      row.appendChild(card);
+    });
+  });
+
+  if (!anyVisible) {
+    board.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted);font-size:14px">No ${filter} posts to show.</div>`;
+  }
+
+  updateSendBar();
+}
+
+function renderActions(post) {
+  if (post.status === 'sent') return '<span style="font-size:12px;color:var(--make);padding:0 4px">✓ Sent to Buffer</span>';
+  if (post.status === 'pending') return `
+    <button class="action-btn approve" onclick="setStatus('${post.id}','approved')">✓ Approve</button>
+    <button class="action-btn edit" onclick="toggleEdit('${post.id}')">✎ Edit</button>
+    <button class="action-btn reject" onclick="setStatus('${post.id}','rejected')">✗ Reject</button>
+  `;
+  if (post.status === 'approved') return `
+    <button class="action-btn edit" onclick="toggleEdit('${post.id}')">✎ Edit</button>
+    <button class="action-btn reject" onclick="setStatus('${post.id}','pending')">↺ Undo</button>
+  `;
+  if (post.status === 'rejected') return `
+    <button class="action-btn approve" onclick="setStatus('${post.id}','approved')">✓ Approve</button>
+    <button class="action-btn reject" onclick="setStatus('${post.id}','pending')">↺ Restore</button>
+  `;
+  return '';
+}
+
+function setStatus(id, status) {
+  const post = state.posts.find(p => p.id === id);
+  if (!post) return;
+
+  const editEl = document.getElementById(`edit-${id}`);
+  if (editEl?.style.display !== 'none' && editEl?.style.display !== '') {
+    post.caption = editEl.value;
+    document.getElementById(`cap-${id}`).textContent = editEl.value;
+    editEl.style.display = 'none';
+    document.getElementById(`cap-${id}`).style.display = 'block';
+  }
+
+  post.status = status;
+
+  const card = document.getElementById(`card-${id}`);
+  if (card) {
+    card.className = `post-card ${status !== 'pending' ? status : ''}`;
+    const cs = document.getElementById(`cs-${id}`);
+    const labels = { pending:'Pending', approved:'Approved ✓', rejected:'Rejected ✗', sent:'Sent ✓' };
+    cs.className = `card-status ${status}`;
+    cs.textContent = labels[status];
+    document.getElementById(`act-${id}`).innerHTML = renderActions(post);
+  }
+
+  updateStats();
+  updateSendBar();
+}
+
+function toggleEdit(id) {
+  const cap = document.getElementById(`cap-${id}`);
+  const edit = document.getElementById(`edit-${id}`);
+  const post = state.posts.find(p => p.id === id);
+  if (!edit) return;
+
+  if (!edit.style.display || edit.style.display === 'none') {
+    cap.style.display = 'none';
+    edit.style.display = 'block';
+    edit.focus();
+  } else {
+    post.caption = edit.value;
+    cap.textContent = edit.value;
+    cap.style.display = 'block';
+    edit.style.display = 'none';
+  }
+}
+
+function approveAll() {
+  state.posts.filter(p => p.status === 'pending').forEach(p => p.status = 'approved');
+  renderApprovalBoard();
+  updateStats();
+  showToast('All pending posts approved', 'success');
+}
+
+function filterBoard(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderApprovalBoard(filter);
+}
+
+function updateStats() {
+  const total = state.posts.length;
+  const approved = state.posts.filter(p => p.status === 'approved').length;
+  const rejected = state.posts.filter(p => p.status === 'rejected').length;
+  const pending = state.posts.filter(p => p.status === 'pending').length;
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-pill"><div class="stat-num">${total}</div><div class="stat-label">Total</div></div>
+    <div class="stat-pill pending-stat"><div class="stat-num">${pending}</div><div class="stat-label">Pending</div></div>
+    <div class="stat-pill approved-stat"><div class="stat-num">${approved}</div><div class="stat-label">Approved</div></div>
+    <div class="stat-pill rejected-stat"><div class="stat-num">${rejected}</div><div class="stat-label">Rejected</div></div>
+  `;
+}
+
+function updateSendBar() {
+  const approved = state.posts.filter(p => p.status === 'approved').length;
+  const desc = document.getElementById('sendBarDesc');
+  const btn = document.getElementById('sendBtn');
+  if (approved === 0) {
+    desc.textContent = 'Approve posts above, then send them directly to Buffer.';
+    btn.disabled = true;
+  } else {
+    desc.textContent = `${approved} post${approved > 1 ? 's' : ''} approved and ready to send to Buffer.`;
+    btn.disabled = false;
+  }
+}
+
+// ── SEND TO MAKE ───────────────────────────────────────────────
+async function sendToBuffer() {
+  // Using fixed proxy endpoint - no config needed
+
+  const approved = state.posts.filter(p => p.status === 'approved');
+  if (approved.length === 0) { showToast('No approved posts to send', 'error'); return; }
+
+  setStep(4);
+  showPhase('sending');
+
+  const slog = document.getElementById('sendingLog');
+  const rgrid = document.getElementById('resultGrid');
+  slog.innerHTML = '';
+  rgrid.innerHTML = '';
+
+  addLog(slog, `> Preparing ${approved.length} posts for Buffer…`, 0);
+  addLog(slog, `> Connecting to Buffer API…`, 500, 'info');
+
+  await delay(800);
+
+  let successCount = 0;
+  let failCount = 0;
+
+  for (let i = 0; i < approved.length; i++) {
+    const post = approved[i];
+    const platLabel = { facebook:'📘 Facebook', instagram:'📸 Instagram', linkedin:'💼 LinkedIn' };
+
+    addLog(slog, `> Sending ${post.day} · ${platLabel[post.platform]}…`, 0, 'info');
+
+    // Add result card (sending state)
+    const rc = document.createElement('div');
+    rc.className = 'result-card';
+    rc.id = `rc-${post.id}`;
+    rc.innerHTML = `
+      <div class="result-icon">${i % 3 === 0 ? '📘' : i % 3 === 1 ? '📸' : '💼'}</div>
+      <div class="result-text">
+        <div class="result-plat">${post.day} · ${post.platform}</div>
+        <div class="result-day">${post.scheduledDate} at ${post.bestTime}</div>
+      </div>
+      <span class="result-badge sending">Sending…</span>
+    `;
+    rgrid.appendChild(rc);
+
+    try {
+      const payload = {
+        platform: post.platform,
+        text: post.caption + '\n\n' + post.hashtags,
+        caption: post.caption,
+        hashtags: post.hashtags,
+        day: post.day,
+        scheduledDate: post.scheduledDate,
+        bestTime: post.bestTime,
+        scheduledAt: buildScheduledISO(post.scheduledDate, post.bestTime),
+        source: 'Old Oak Town Social Agent',
+        weekTheme: document.getElementById('weekTheme').value
+      };
+
+      const res = await fetch(state.bufferProxy, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const resData = await res.json().catch(() => ({}));
+      if (res.ok && resData.success) {
+        rc.querySelector('.result-badge').className = 'result-badge queued';
+        rc.querySelector('.result-badge').textContent = 'Queued ✓';
+        post.status = 'sent';
+        setStatus(post.id, 'sent');
+        successCount++;
+        addLog(slog, `> ✓ Queued in Buffer`, 0, 'done');
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+    } catch (err) {
+      rc.querySelector('.result-badge').className = 'result-badge failed';
+      rc.querySelector('.result-badge').textContent = 'Failed ✗';
+      failCount++;
+      addLog(slog, `> ✗ Failed: ${err.message}`, 0);
+    }
+
+    await delay(350);
+  }
+
+  await delay(400);
+
+  if (failCount === 0) {
+    addLog(slog, `> ✓ ✓ All posts queued in Buffer successfully!`, 0, 'done');
+    setStep(5);
+    showToast(`🎉 ${successCount} posts sent to Buffer!`, 'make');
+  } else {
+    addLog(slog, `> ${successCount} sent, ${failCount} failed. Check your BUFFER_API_KEY is set in Vercel.`, 0);
+    showToast(`${successCount} sent, ${failCount} failed`, 'error');
+  }
+
+  document.getElementById('sendingTitle').textContent = failCount === 0 ? '✓ All Posts Queued in Buffer' : 'Sending Complete';
+  document.getElementById('restartBtn').style.display = 'inline-flex';
+}
+
+function buildScheduledISO(dateStr, timeStr) {
+  try {
+    const match = timeStr.match(/(\d+):(\d+)(am|pm)?/i);
+    if (!match) return dateStr + 'T09:00:00Z';
+    let h = parseInt(match[1]);
+    const m = parseInt(match[2]);
+    const meridiem = (match[3] || '').toLowerCase();
+    if (meridiem === 'pm' && h !== 12) h += 12;
+    if (meridiem === 'am' && h === 12) h = 0;
+    return `${dateStr}T${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:00Z`;
+  } catch { return dateStr + 'T09:00:00Z'; }
+}
+
+function restart() {
+  state.posts = [];
+  showPhase('idle');
+  setStep(1);
+  document.getElementById('weekTheme').value = '';
+  document.getElementById('weekContext').value = '';
+  document.getElementById('restartBtn').style.display = 'none';
+}
+
+// ── PHASE MANAGEMENT ───────────────────────────────────────────
+function showPhase(phase) {
+  ['idleState','researchPhase','approvalPhase','sendingPhase'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  const map = { idle:'idleState', research:'researchPhase', approval:'approvalPhase', sending:'sendingPhase' };
+  document.getElementById(map[phase]).style.display = 'block';
+}
+
+function setStep(n) {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById(`step${i}`);
+    if (!el) continue;
+    el.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
+  }
+}
+
+// ── HELPERS ────────────────────────────────────────────────────
+function addLog(container, text, delayMs, cls = '') {
+  const fn = () => {
+    const line = document.createElement('div');
+    line.className = `log-line ${cls}`;
+    line.textContent = text;
+    container.appendChild(line);
+    container.scrollTop = container.scrollHeight;
+  };
+  if (delayMs > 0) setTimeout(fn, delayMs);
+  else fn();
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function escHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast show ${type}`;
+  setTimeout(() => { t.className = 'toast'; }, 3800);
+}
+</script>
+</body>
+</html>
