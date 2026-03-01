@@ -618,7 +618,7 @@
             if (el) el.innerHTML = `${prices[tier]} <span>${perUnit}</span>`;
         });
 
-        // Show opening hours for featured, premium, newsletter
+        // Show website & opening hours for featured, premium, newsletter
         document.getElementById('featuredFields').style.display =
             (selectedTier === 'featured' || selectedTier === 'premium' || selectedTier === 'newsletter') ? 'block' : 'none';
 
