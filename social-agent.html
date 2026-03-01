@@ -1229,7 +1229,10 @@ async function sendToBuffer() {
         successCount++;
         addLog(slog, `> ✓ Queued in Buffer`, 0, 'done');
       } else {
-        throw new Error(`HTTP ${res.status}`);
+        const detail = resData.details
+          ? (typeof resData.details === 'string' ? resData.details : JSON.stringify(resData.details))
+          : resData.error || `HTTP ${res.status}`;
+        throw new Error(detail);
       }
 
     } catch (err) {
