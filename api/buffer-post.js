@@ -6,7 +6,7 @@
  * Required env var: BUFFER_API_KEY
  */
 
-const BUFFER_API = 'https://api.buffer.com/graphql';
+const BUFFER_API = 'https://api.buffer.com';
 
 const CHANNEL_IDS = {
   linkedin:  '69a213f74be271803d75d07e',
@@ -39,47 +39,27 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Buffer's current GraphQL API uses createPost with a flat input object.
-    // schedulingType and mode are enum values so they go inline in the query string;
-    // text, channelId and dueAt are passed as variables.
-    const isScheduled = !!scheduledAt;
+    // If no scheduled time provided, default to 1 hour from now
+    const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
 
-    const mutation = isScheduled
-      ? `mutation CreatePost($text: String!, $channelId: String!, $dueAt: String!) {
-          createPost(input: {
-            text: $text,
-            channelId: $channelId,
-            schedulingType: automatic,
-            mode: customSchedule,
-            dueAt: $dueAt
-          }) {
-            ... on PostActionSuccess {
-              post { id text }
-            }
-            ... on MutationError {
-              message
-            }
+    const mutation = `
+      mutation CreatePost($text: String!, $channelId: String!, $dueAt: String!) {
+        createPost(input: {
+          text: $text,
+          channelId: $channelId,
+          schedulingType: automatic,
+          mode: customSchedule,
+          dueAt: $dueAt
+        }) {
+          ... on PostActionSuccess {
+            post { id text }
           }
-        }`
-      : `mutation CreatePost($text: String!, $channelId: String!) {
-          createPost(input: {
-            text: $text,
-            channelId: $channelId,
-            schedulingType: automatic,
-            mode: queue
-          }) {
-            ... on PostActionSuccess {
-              post { id text }
-            }
-            ... on MutationError {
-              message
-            }
+          ... on MutationError {
+            message
           }
-        }`;
-
-    const variables = isScheduled
-      ? { text, channelId, dueAt: scheduledAt }
-      : { text, channelId };
+        }
+      }
+    `;
 
     const postRes = await fetch(BUFFER_API, {
       method: 'POST',
@@ -87,35 +67,29 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ query: mutation, variables })
+      body: JSON.stringify({ query: mutation, variables: { text, channelId, dueAt } })
     });
 
     const postData = await postRes.json();
     console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
     if (postData.errors) {
-      return res.status(502).json({ error: 'Buffer API mutation error', details: postData.errors });
+      return res.status(502).json({ error: 'Buffer API error', details: postData.errors });
     }
 
     const result = postData?.data?.createPost;
 
-    if (!result) {
-      return res.status(502).json({ error: 'No response from Buffer API' });
+    if (result?.message) {
+      return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
     }
 
-    // createPost returns a union: PostActionSuccess or MutationError
-    if (result.message !== undefined) {
-      console.error('Buffer createPost MutationError:', result.message);
-      return res.status(502).json({ error: 'Buffer rejected the post', details: result.message });
-    }
-
-    const created = result.post;
+    const created = result?.post;
     console.log(`✓ ${platformKey} post queued: ${created?.id} | ${day}`);
 
     return res.status(200).json({
       success: true,
       postId: created?.id,
-      scheduledAt: scheduledAt || null,
+      scheduledAt: dueAt,
       platform: platformKey,
       day
     });
