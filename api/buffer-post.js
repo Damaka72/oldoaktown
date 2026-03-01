@@ -48,7 +48,7 @@ export default async function handler(req, res) {
           text: ${JSON.stringify(text)},
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
-          mode: customSchedule,
+          mode: customScheduled,
           dueAt: ${JSON.stringify(dueAt)}
         }) {
           ... on PostActionSuccess {
