@@ -6,7 +6,7 @@
  * Required env var: BUFFER_API_KEY
  */
 
-const BUFFER_API = 'https://api.buffer.com/graphql';
+const BUFFER_API = 'https://api.buffer.com';
 
 const CHANNEL_IDS = {
   linkedin:  '69a213f74be271803d75d07e',
@@ -33,30 +33,33 @@ export default async function handler(req, res) {
   const platformKey = (platform || '').toLowerCase();
   const channelId = CHANNEL_IDS[platformKey];
   if (!channelId) {
-    return res.status(400).json({ 
-      error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.` 
+    return res.status(400).json({
+      error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.`
     });
   }
 
   try {
+    // If no scheduled time provided, default to 1 hour from now
+    const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
+
     const mutation = `
-      mutation CreatePost($input: PostCreateInput!) {
-        postCreate(input: $input) {
-          post { id text status scheduledAt }
-          errors { message code }
+      mutation CreatePost {
+        createPost(input: {
+          text: ${JSON.stringify(text)},
+          channelId: ${JSON.stringify(channelId)},
+          schedulingType: automatic,
+          mode: customSchedule,
+          dueAt: ${JSON.stringify(dueAt)}
+        }) {
+          ... on PostActionSuccess {
+            post { id text }
+          }
+          ... on MutationError {
+            message
+          }
         }
       }
     `;
-
-    const variables = {
-      input: {
-        channelId,
-        content: { text },
-        scheduling: scheduledAt
-          ? { scheduledAt, type: 'SCHEDULED' }
-          : { type: 'QUEUE' }
-      }
-    };
 
     const postRes = await fetch(BUFFER_API, {
       method: 'POST',
@@ -64,29 +67,27 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ query: mutation, variables })
+      body: JSON.stringify({ query: mutation })
     });
 
     const postData = await postRes.json();
     console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
     if (postData.errors) {
-      return res.status(502).json({ error: 'Buffer mutation error', details: postData.errors });
+      return res.status(502).json({ error: 'Buffer API error', details: postData.errors });
     }
 
-    const postErrors = postData?.data?.postCreate?.errors;
-    if (postErrors?.length) {
-      return res.status(502).json({ error: 'Buffer rejected post', details: postErrors });
+    const result = postData?.data?.createPost;
+    if (result?.message) {
+      return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
     }
 
-    const created = postData?.data?.postCreate?.post;
+    const created = result?.post;
     console.log(`✓ ${platformKey} post queued: ${created?.id} | ${day}`);
 
     return res.status(200).json({
       success: true,
       postId: created?.id,
-      status: created?.status,
-      scheduledAt: created?.scheduledAt,
       platform: platformKey,
       day
     });
