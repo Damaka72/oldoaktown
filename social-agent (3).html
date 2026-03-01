@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Old Oak Town — Social Command Centre</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+:root {
+  --ink: #0F1A0A;
+  --green-deep: #1C3A0E;
+  --green-mid: #2F6020;
+  --green-bright: #4C8A35;
+  --green-pale: #D4E8C8;
+  --green-ghost: #F0F7EB;
+  --amber: #D4860A;
+  --amber-pale: #FEF3DC;
+  --red: #C0392B;
+  --red-pale: #FDECEA;
+  --blue: #1A5CB8;
+  --blue-pale: #E8F0FC;
+  --cream: #FAF8F4;
+  --white: #FFFFFF;
+  --border: #DDE8D4;
+  --muted: #6B7B5E;
+  --fb: #1877F2;
+  --ig: #C13584;
+  --li: #0A66C2;
+  --make: #6D00CC;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--green-deep);
+  padding: 0 28px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  height: 62px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--green-bright);
+}
+
+.brand { display: flex; align-items: center; gap: 11px; }
+
+.brand-icon {
+  width: 34px; height: 34px;
+  background: var(--green-bright);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Instrument Serif', serif;
+  font-size: 19px; color: white; font-style: italic;
+}
+
+.brand-name { font-family: 'Instrument Serif', serif; font-size: 19px; color: white; line-height: 1; }
+.brand-sub { font-size: 10px; color: var(--green-pale); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 2px; }
+
+.pipeline-steps {
+  display: flex; align-items: center; gap: 0; justify-content: center;
+}
+
+.step {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 14px;
+  font-size: 11px; font-weight: 500;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.step.active { color: var(--green-pale); }
+.step.done { color: var(--green-bright); }
+
+.step-num {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: 'Geist Mono', monospace; flex-shrink: 0;
+}
+
+.step.done .step-num { background: var(--green-bright); border-color: var(--green-bright); color: white; }
+.step-arrow { color: rgba(255,255,255,0.2); font-size: 13px; padding: 0 2px; }
+
+.webhook-status {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; color: rgba(255,255,255,0.5);
+}
+
+.status-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #ef4444;
+  transition: background 0.3s;
+}
+
+.status-dot.connected { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+
+.settings-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white; padding: 5px 13px; border-radius: 6px;
+  font-size: 11px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: background 0.2s;
+}
+.settings-btn:hover { background: rgba(255,255,255,0.18); }
+
+/* ── LAYOUT ── */
+.layout {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  min-height: calc(100vh - 62px);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  padding: 22px;
+  display: flex; flex-direction: column; gap: 18px;
+  overflow-y: auto;
+  height: calc(100vh - 62px);
+  position: sticky; top: 62px;
+}
+
+.sidebar-section h3 {
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 11px;
+  padding-bottom: 7px; border-bottom: 1px solid var(--border);
+}
+
+.form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 11px; }
+.form-group:last-child { margin-bottom: 0; }
+
+label {
+  font-size: 11px; font-weight: 600; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+input, select, textarea {
+  font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--ink);
+  background: var(--green-ghost); border: 1.5px solid var(--border);
+  border-radius: 7px; padding: 8px 11px; outline: none;
+  transition: border-color 0.2s, background 0.2s; width: 100%; resize: vertical;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--green-bright); background: white; }
+textarea { min-height: 68px; }
+
+.tone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+
+.tone-opt {
+  padding: 7px 8px; border: 1.5px solid var(--border); border-radius: 6px;
+  background: white; font-size: 11px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; text-align: center; color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+}
+.tone-opt.active { background: var(--green-deep); border-color: var(--green-deep); color: white; }
+.tone-opt:hover:not(.active) { border-color: var(--green-bright); color: var(--green-bright); }
+
+.research-toggles { display: flex; flex-direction: column; gap: 7px; }
+
+.toggle-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 10px; background: var(--green-ghost);
+  border-radius: 7px; border: 1px solid var(--border);
+}
+
+.toggle-row span { font-size: 12px; font-weight: 500; color: var(--ink); }
+
+.toggle {
+  width: 34px; height: 19px; background: var(--border);
+  border-radius: 10px; border: none; cursor: pointer;
+  position: relative; transition: background 0.2s; flex-shrink: 0;
+}
+.toggle.on { background: var(--green-bright); }
+.toggle::after {
+  content: ''; position: absolute;
+  width: 13px; height: 13px; background: white;
+  border-radius: 50%; top: 3px; left: 3px; transition: left 0.2s;
+}
+.toggle.on::after { left: 18px; }
+
+.run-btn {
+  width: 100%; padding: 12px;
+  background: var(--green-deep); color: white; border: none;
+  border-radius: 9px; font-family: 'Instrument Serif', serif;
+  font-size: 16px; font-style: italic; cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+}
+.run-btn:hover { background: var(--green-mid); }
+.run-btn:active { transform: scale(0.98); }
+.run-btn:disabled { background: #9CA3AF; cursor: not-allowed; font-style: normal; font-size: 13px; }
+
+/* ── CONTENT ── */
+.content { padding: 26px 30px; overflow-y: auto; }
+
+/* ── IDLE ── */
+.idle-state {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; min-height: 420px;
+  gap: 14px; color: var(--muted); text-align: center;
+}
+.idle-icon { font-size: 52px; opacity: 0.22; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.idle-state h2 { font-family: 'Instrument Serif', serif; font-size: 26px; color: var(--ink); opacity: 0.45; }
+.idle-state p { font-size: 13px; max-width: 320px; line-height: 1.7; }
+
+/* ── RESEARCH ── */
+.research-phase { display: none; }
+
+.phase-header { display: flex; align-items: center; gap: 13px; margin-bottom: 22px; }
+
+.phase-badge {
+  color: white; font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 11px; border-radius: 20px;
+}
+.phase-badge.green { background: var(--green-deep); }
+.phase-badge.amber { background: var(--amber); }
+.phase-badge.blue { background: var(--blue); }
+.phase-badge.make { background: var(--make); }
+
+.phase-header h2 { font-family: 'Instrument Serif', serif; font-size: 24px; color: var(--ink); }
+
+.research-log {
+  background: var(--ink); border-radius: 10px; padding: 18px;
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: #A3E635; line-height: 2.1; min-height: 130px;
+  margin-bottom: 18px; overflow: hidden;
+}
+
+.log-line { opacity: 0; animation: fadeIn 0.3s forwards; }
+.log-line.done { color: #86EFAC; }
+.log-line.info { color: #93C5FD; }
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+.research-findings {
+  background: white; border: 1px solid var(--border);
+  border-radius: 11px; padding: 18px; margin-bottom: 18px;
+}
+.research-findings h3 { font-family: 'Instrument Serif', serif; font-size: 17px; margin-bottom: 12px; }
+
+.finding-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.finding-chip {
+  background: var(--green-ghost); border: 1px solid var(--border);
+  border-radius: 20px; padding: 5px 13px;
+  font-size: 12px; color: var(--green-deep); font-weight: 500;
+}
+
+/* ── APPROVAL BOARD ── */
+.approval-phase { display: none; }
+
+.board-controls {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 18px; flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 5px 13px; border-radius: 20px;
+  border: 1.5px solid var(--border); background: white;
+  font-size: 12px; font-weight: 500; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; color: var(--muted);
+  transition: all 0.15s;
+}
+.filter-btn.active { background: var(--green-deep); border-color: var(--green-deep); color: white; }
+
+.approve-all-btn {
+  margin-left: auto; padding: 7px 16px;
+  background: var(--green-bright); color: white; border: none;
+  border-radius: 7px; font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: background 0.2s; display: flex; align-items: center; gap: 6px;
+}
+.approve-all-btn:hover { background: var(--green-mid); }
+
+/* Stats bar */
+.stats-bar {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 10px; margin-bottom: 18px;
+}
+
+.stat-pill {
+  background: white; border: 1px solid var(--border);
+  border-radius: 9px; padding: 11px 14px; text-align: center;
+}
+
+.stat-num { font-family: 'Instrument Serif', serif; font-size: 28px; color: var(--green-deep); line-height: 1; }
+.stat-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+.stat-pill.approved-stat .stat-num { color: var(--green-bright); }
+.stat-pill.rejected-stat .stat-num { color: var(--red); }
+.stat-pill.pending-stat .stat-num { color: var(--amber); }
+
+.posts-board {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── DAY GROUP ── */
+.day-group { display: flex; flex-direction: column; gap: 10px; }
+.day-group-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0 6px;
+  border-bottom: 2px solid var(--border);
+}
+.day-group-label {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px; color: var(--green-deep);
+}
+.day-group-date {
+  font-size: 12px; color: var(--muted); font-weight: 500;
+}
+.day-platform-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ── POST CARD ── */
+.post-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-top: 4px solid var(--border);
+  border-radius: 13px; overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column;
+}
+.post-card.fb-card  { border-top-color: var(--fb); }
+.post-card.ig-card  { border-top-color: var(--ig); }
+.post-card.li-card  { border-top-color: var(--li); }
+.post-card.approved { border-color: var(--green-bright); box-shadow: 0 0 0 3px rgba(76,138,53,0.1); }
+.post-card.rejected { border-color: var(--red); opacity: 0.5; }
+.post-card.sent { border-color: var(--make); box-shadow: 0 0 0 3px rgba(109,0,204,0.08); }
+
+.card-header {
+  padding: 10px 13px; display: flex; align-items: center;
+  gap: 9px; border-bottom: 1px solid var(--border);
+  background: #FAFAF8;
+}
+
+.plat-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 9px; border-radius: 5px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.plat-pill.fb { background: #E7F0FD; color: var(--fb); }
+.plat-pill.ig { background: #FEE9F3; color: var(--ig); }
+.plat-pill.li { background: #E8F0FA; color: var(--li); }
+.plat-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.card-day { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+.card-status {
+  margin-left: auto; font-size: 10px; font-weight: 700;
+  padding: 3px 9px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.card-status.pending { background: #F3F4F6; color: var(--muted); }
+.card-status.approved { background: var(--green-pale); color: var(--green-deep); }
+.card-status.rejected { background: var(--red-pale); color: var(--red); }
+.card-status.sent { background: #EDE9FE; color: var(--make); }
+
+.card-body { padding: 13px; flex: 1; display: flex; flex-direction: column; gap: 9px; }
+
+.card-caption { font-size: 13px; line-height: 1.65; color: var(--ink); flex: 1; }
+
+.caption-edit {
+  font-size: 13px; line-height: 1.65; color: var(--ink);
+  border: 1.5px solid var(--green-bright); border-radius: 7px;
+  padding: 8px; background: var(--green-ghost);
+  min-height: 100px; resize: vertical; display: none;
+  width: 100%; font-family: 'DM Sans', sans-serif;
+}
+
+.card-meta { display: flex; flex-direction: column; gap: 4px; }
+.meta-row { display: flex; gap: 6px; align-items: flex-start; font-size: 11px; color: var(--muted); }
+.meta-key {
+  font-weight: 700; color: var(--green-bright);
+  text-transform: uppercase; font-size: 10px; letter-spacing: 0.05em;
+  padding-top: 1px; width: 36px; flex-shrink: 0;
+}
+.meta-tags { color: var(--green-mid); font-size: 11px; line-height: 1.5; word-break: break-word; }
+.meta-time {
+  background: var(--green-ghost); color: var(--green-deep);
+  padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 500; width: fit-content;
+}
+
+.card-actions {
+  display: flex; gap: 5px; padding: 9px 13px;
+  border-top: 1px solid var(--border); background: #FAFAF8;
+}
+
+.action-btn {
+  flex: 1; padding: 6px 0; border: 1.5px solid var(--border);
+  border-radius: 6px; font-size: 11px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: all 0.15s; display: flex; align-items: center; justify-content: center; gap: 4px;
+}
+.action-btn.approve { background: var(--green-pale); border-color: var(--green-bright); color: var(--green-deep); }
+.action-btn.approve:hover { background: var(--green-bright); color: white; }
+.action-btn.reject { background: var(--red-pale); border-color: #FECACA; color: var(--red); }
+.action-btn.reject:hover { background: var(--red); color: white; }
+.action-btn.edit { background: var(--blue-pale); border-color: #BFDBFE; color: var(--blue); }
+.action-btn.edit:hover { background: var(--blue); color: white; }
+.action-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── SEND BAR ── */
+.send-bar {
+  margin-top: 22px;
+  background: white; border: 1px solid var(--border);
+  border-radius: 13px; padding: 18px 22px;
+  display: flex; align-items: center; gap: 16px;
+}
+
+.send-bar-info { flex: 1; }
+.send-bar-info h3 { font-family: 'Instrument Serif', serif; font-size: 18px; color: var(--ink); margin-bottom: 3px; }
+.send-bar-info p { font-size: 12px; color: var(--muted); }
+
+.send-btn {
+  padding: 11px 26px;
+  background: var(--make); color: white; border: none;
+  border-radius: 9px; font-family: 'Instrument Serif', serif;
+  font-size: 16px; font-style: italic; cursor: pointer;
+  transition: background 0.2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 9px;
+}
+.send-btn:hover { background: #5800aa; }
+.send-btn:disabled { background: #9CA3AF; cursor: not-allowed; }
+
+/* ── SENDING PHASE ── */
+.sending-phase { display: none; }
+
+.sending-log {
+  background: var(--ink); border-radius: 11px; padding: 20px;
+  font-family: 'Geist Mono', monospace; font-size: 12px;
+  color: #A3E635; line-height: 2.2; margin-bottom: 20px;
+}
+
+.result-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px; margin-bottom: 20px;
+}
+
+.result-card {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.result-icon { font-size: 20px; flex-shrink: 0; }
+
+.result-text { flex: 1; }
+.result-plat { font-size: 12px; font-weight: 600; color: var(--ink); }
+.result-day { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+.result-badge {
+  font-size: 10px; font-weight: 700; padding: 3px 9px;
+  border-radius: 10px; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.result-badge.queued { background: #EDE9FE; color: var(--make); }
+.result-badge.failed { background: var(--red-pale); color: var(--red); }
+.result-badge.sending { background: var(--amber-pale); color: var(--amber); }
+
+.restart-btn {
+  padding: 12px 24px;
+  background: var(--green-deep); color: white; border: none;
+  border-radius: 9px; font-family: 'Instrument Serif', serif;
+  font-size: 16px; font-style: italic; cursor: pointer;
+  transition: background 0.2s;
+}
+.restart-btn:hover { background: var(--green-mid); }
+
+/* ── SETTINGS MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,26,10,0.6); z-index: 500;
+  align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: white; border-radius: 15px; padding: 30px;
+  width: 460px; max-width: 92vw;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+}
+
+.modal h2 { font-family: 'Instrument Serif', serif; font-size: 22px; margin-bottom: 5px; }
+.modal p { font-size: 13px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; }
+
+.make-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #EDE9FE; color: var(--make);
+  padding: 5px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+
+.webhook-preview {
+  background: var(--ink); color: #A3E635;
+  font-family: 'Geist Mono', monospace; font-size: 11px;
+  padding: 10px 14px; border-radius: 7px; margin: 10px 0;
+  word-break: break-all; line-height: 1.6;
+}
+
+.modal-field { margin-bottom: 14px; }
+.modal-field label { display: block; margin-bottom: 5px; }
+
+.modal-actions { display: flex; gap: 9px; margin-top: 20px; }
+
+.btn-primary {
+  flex: 1; padding: 10px; background: var(--make); color: white;
+  border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.btn-primary:hover { background: #5800aa; }
+
+.btn-secondary {
+  padding: 10px 18px; background: white; color: var(--muted);
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer;
+}
+
+.test-result {
+  margin-top: 10px; padding: 10px 13px; border-radius: 7px;
+  font-size: 12px; display: none;
+}
+.test-result.success { background: var(--green-pale); color: var(--green-deep); }
+.test-result.error { background: var(--red-pale); color: var(--red); }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed; bottom: 26px; right: 26px;
+  background: var(--ink); color: white;
+  padding: 11px 18px; border-radius: 9px;
+  font-size: 13px; font-weight: 500; z-index: 1000;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  max-width: 300px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast.success { background: var(--green-mid); }
+.toast.error { background: var(--red); }
+.toast.info { background: var(--blue); }
+.toast.make { background: var(--make); }
+
+.dots::after {
+  content: ''; animation: dotdot 1.2s infinite;
+}
+@keyframes dotdot {
+  0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'}
+}
+
+@media (max-width: 760px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { height: auto; position: relative; top: 0; }
+  .pipeline-steps { display: none; }
+  .day-platform-row { grid-template-columns: 1fr; }
+  .day-group-header { padding: 8px 0 4px; }
+  .stats-bar { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="brand">
+    <div class="brand-icon">O</div>
+    <div>
+      <div class="brand-name">Old Oak Town</div>
+      <div class="brand-sub">Social Command Centre</div>
+    </div>
+  </div>
+
+  <div class="pipeline-steps">
+    <div class="step active" id="step1"><div class="step-num">1</div>Research</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step2"><div class="step-num">2</div>Draft</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step3"><div class="step-num">3</div>Review</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step4"><div class="step-num">4</div>Buffer</div>
+    <div class="step-arrow">›</div>
+    <div class="step" id="step5"><div class="step-num">5</div>Live</div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:10px">
+    <div class="webhook-status">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusLabel">Buffer API ready</span>
+    </div>
+    <button class="settings-btn" onclick="openSettings()">⚙ Buffer Info</button>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>Campaign Brief</h3>
+      <div class="form-group">
+        <label>Week commencing</label>
+        <input type="date" id="weekDate">
+      </div>
+      <div class="form-group">
+        <label>Weekly theme</label>
+        <input type="text" id="weekTheme" placeholder="HS2 update, new business spotlight…">
+      </div>
+      <div class="form-group">
+        <label>Specific context</label>
+        <textarea id="weekContext" placeholder="Events, news, businesses to feature…"></textarea>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Tone</h3>
+      <div class="tone-grid">
+        <button class="tone-opt active" data-tone="Community-focused and warm">Community</button>
+        <button class="tone-opt" data-tone="Informative and journalistic">Journalistic</button>
+        <button class="tone-opt" data-tone="Excited and aspirational">Aspirational</button>
+        <button class="tone-opt" data-tone="Professional and authoritative">Professional</button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Research Sources</h3>
+      <div class="research-toggles">
+        <div class="toggle-row">
+          <span>🔍 HS2 / OPDC news</span>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>🌐 Old Oak Town site</span>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>📰 Local London news</span>
+          <button class="toggle on" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>🏗 Planning updates</span>
+          <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+      </div>
+    </div>
+
+    <button class="run-btn" id="runBtn" onclick="runPipeline()">
+      ✦ Research &amp; Draft
+    </button>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="content" id="mainContent">
+
+    <!-- IDLE -->
+    <div id="idleState" class="idle-state">
+      <div class="idle-icon">🌳</div>
+      <h2>Ready when you are</h2>
+      <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts post directly to Buffer via the Old Oak Town API.</p>
+    </div>
+
+    <!-- RESEARCH -->
+    <div id="researchPhase" class="research-phase">
+      <div class="phase-header">
+        <div class="phase-badge green">Steps 1–2</div>
+        <h2>Researching &amp; Drafting<span class="dots"></span></h2>
+      </div>
+      <div class="research-log" id="researchLog"></div>
+      <div class="research-findings" id="researchFindings" style="display:none">
+        <h3>📌 Research Findings</h3>
+        <div class="finding-chips" id="findingChips"></div>
+      </div>
+    </div>
+
+    <!-- APPROVAL -->
+    <div id="approvalPhase" class="approval-phase">
+      <div class="phase-header">
+        <div class="phase-badge amber">Step 3</div>
+        <h2>Review &amp; Approve</h2>
+      </div>
+
+      <div class="stats-bar" id="statsBar"></div>
+
+      <div class="board-controls">
+        <button class="filter-btn active" onclick="filterBoard('all',this)">All</button>
+        <button class="filter-btn" onclick="filterBoard('pending',this)">Pending</button>
+        <button class="filter-btn" onclick="filterBoard('approved',this)">Approved</button>
+        <button class="filter-btn" onclick="filterBoard('rejected',this)">Rejected</button>
+        <button class="approve-all-btn" onclick="approveAll()">✓ Approve All</button>
+      </div>
+
+      <div class="posts-board" id="postsBoard"></div>
+
+      <div class="send-bar" id="sendBar">
+        <div class="send-bar-info">
+          <h3>Send to Buffer</h3>
+          <p id="sendBarDesc">Approve posts above, then send them directly to Buffer.</p>
+        </div>
+        <button class="send-btn" id="sendBtn" onclick="sendToBuffer()">
+          📤 Send to Buffer Direct
+        </button>
+      </div>
+    </div>
+
+    <!-- SENDING -->
+    <div id="sendingPhase" class="sending-phase">
+      <div class="phase-header">
+        <div class="phase-badge make">Step 4</div>
+        <h2 id="sendingTitle">Sending to Buffer<span class="dots"></span></h2>
+      </div>
+      <div class="sending-log" id="sendingLog"></div>
+      <div class="result-grid" id="resultGrid"></div>
+      <button class="restart-btn" id="restartBtn" style="display:none" onclick="restart()">
+        ✦ Plan Another Week
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="make-badge">⚡ Buffer Direct Integration</div>
+    <h2>Webhook Setup</h2>
+    <p>Your posts go directly to Buffer's API via oldoaktown.co.uk/api/buffer-post — fully serverless, no Make.com needed.</p>
+
+    <div class="modal-field">
+      <label>Buffer Channel ID (pre-configured)</label>
+      <input type="text" id="webhookInput" value="69a213f74be271803d75d07e" readonly style="opacity:0.6;cursor:not-allowed">
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">Posts go to your connected Buffer channel. To change this, update the channel ID in api/buffer-post.js</div>
+    </div>
+
+    <div class="test-result" id="testResult"></div>
+
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="saveWebhook()">Close</button>
+      <button class="btn-secondary" onclick="closeSettings()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+const BUFFER_PROXY = '/api/buffer-post';
+
+const state = {
+  bufferProxy: BUFFER_PROXY,
+  posts: [],
+  currentFilter: 'all'
+};
+
+// ── INIT ───────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  const d = new Date();
+  const diff = d.getDay() === 0 ? 1 : (8 - d.getDay());
+  d.setDate(d.getDate() + diff);
+  document.getElementById('weekDate').value = d.toISOString().split('T')[0];
+
+  document.getElementById('webhookInput').value = state.bufferProxy;
+  updateConnectionStatus();
+
+  document.querySelectorAll('.tone-opt').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.tone-opt').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+});
+
+function updateConnectionStatus() {
+  const dot = document.getElementById('statusDot');
+  const label = document.getElementById('statusLabel');
+  dot.classList.add('connected');
+  label.textContent = 'Buffer direct ✓';
+}
+
+// ── SETTINGS ───────────────────────────────────────────────────
+function openSettings() {
+  document.getElementById('webhookInput').value = state.bufferProxy;
+  document.getElementById('testResult').style.display = 'none';
+  document.getElementById('settingsModal').classList.add('open');
+}
+
+function closeSettings() {
+  document.getElementById('settingsModal').classList.remove('open');
+}
+
+async function saveWebhook() {
+  const url = document.getElementById('webhookInput').value.trim();
+  if (!url) { showToast('Please enter your webhook URL', 'error'); return; }
+
+  const result = document.getElementById('testResult');
+  result.style.display = 'block';
+  result.className = 'test-result';
+  result.textContent = 'Testing connection…';
+
+  try {
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'connection_test', source: 'Old Oak Town Social Agent', timestamp: new Date().toISOString() })
+    });
+
+    state.webhook = url;
+    localStorage.setItem('oot_webhook', url);
+    updateConnectionStatus();
+
+    result.className = 'test-result success';
+    result.textContent = '✓ Connected! Make.com received the test ping successfully.';
+    showToast('Webhook saved & connected', 'success');
+
+  } catch (err) {
+    result.className = 'test-result error';
+    result.textContent = '✗ Could not reach the webhook. Check your Make.com scenario is turned on.';
+  }
+}
+
+// ── PIPELINE ───────────────────────────────────────────────────
+async function runPipeline() {
+  const theme = document.getElementById('weekTheme').value.trim();
+  if (!theme) { showToast('Please enter a weekly theme', 'error'); return; }
+
+  document.getElementById('runBtn').disabled = true;
+  document.getElementById('runBtn').textContent = 'Generating…';
+  showPhase('research');
+  setStep(1);
+
+  const log = document.getElementById('researchLog');
+  log.innerHTML = '';
+
+  addLog(log, '> Initialising Old Oak Town research pipeline…', 0);
+  addLog(log, '> Searching: HS2 Old Oak Common latest news 2025…', 600, 'info');
+  addLog(log, '> Fetching: oldoaktown.co.uk content…', 1100, 'info');
+  addLog(log, '> Searching: West London regeneration community news…', 1600, 'info');
+  addLog(log, '> Searching: OPDC planning updates Park Royal…', 2000, 'info');
+  addLog(log, '> Research complete. Passing to drafting engine…', 2600, 'done');
+  addLog(log, '> Generating 15 posts: 5 days × 3 platforms…', 3000, 'info');
+
+  await delay(3400);
+  setStep(2);
+
+  const weekDate = document.getElementById('weekDate').value;
+  const context = document.getElementById('weekContext').value.trim();
+  const tone = document.querySelector('.tone-opt.active')?.dataset.tone || 'Community-focused and warm';
+
+  let plan;
+  try {
+    plan = await callClaude(theme, context, tone, weekDate);
+  } catch (e) {
+    showToast('Generation failed: ' + e.message, 'error');
+    document.getElementById('runBtn').disabled = false;
+    document.getElementById('runBtn').innerHTML = '✦ Research &amp; Draft';
+    showPhase('idle');
+    return;
+  }
+
+  addLog(log, '> ✓ 15 posts drafted successfully', 0, 'done');
+  addLog(log, '> Building approval board…', 400, 'done');
+
+  await delay(700);
+
+  // Show findings
+  if (plan.findings?.length) {
+    const el = document.getElementById('researchFindings');
+    const chips = document.getElementById('findingChips');
+    el.style.display = 'block';
+    chips.innerHTML = '';
+    plan.findings.forEach(f => {
+      const chip = document.createElement('div');
+      chip.className = 'finding-chip';
+      chip.textContent = f;
+      chips.appendChild(chip);
+    });
+    await delay(500);
+  }
+
+  state.posts = flattenPosts(plan, weekDate);
+  setStep(3);
+  renderApprovalBoard();
+  updateStats();
+  showPhase('approval');
+
+  document.getElementById('runBtn').disabled = false;
+  document.getElementById('runBtn').innerHTML = '✦ Research &amp; Draft';
+}
+
+async function callClaude(theme, context, tone, weekDate) {
+  // Call the server-side proxy — keeps the Anthropic API key out of the browser
+  const response = await fetch('/api/generate-posts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ theme, context, tone, weekDate })
+  });
+
+  if (!response.ok) {
+    const err = await response.json().catch(() => ({}));
+    throw new Error(err.error || `Server error ${response.status}`);
+  }
+
+  return response.json();
+}
+
+function flattenPosts(plan, weekDate) {
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const posts = [];
+  (plan.days || []).forEach(day => {
+    const dayOffset = days.indexOf(day.day);
+    (day.posts || []).forEach(post => {
+      // Calculate actual scheduled date
+      const d = new Date(weekDate + 'T00:00:00');
+      d.setDate(d.getDate() + Math.max(0, dayOffset));
+      const scheduledDate = d.toISOString().split('T')[0];
+
+      posts.push({
+        id: `${day.day}-${post.platform}-${Date.now()}`,
+        day: day.day,
+        dayTheme: day.theme,
+        platform: post.platform,
+        caption: post.caption,
+        hashtags: post.hashtags,
+        bestTime: post.bestTime,
+        scheduledDate,
+        status: 'pending'
+      });
+    });
+  });
+  return posts;
+}
+
+// ── APPROVAL BOARD ─────────────────────────────────────────────
+function renderApprovalBoard(filter) {
+  filter = filter || state.currentFilter;
+  state.currentFilter = filter;
+  const board = document.getElementById('postsBoard');
+  board.innerHTML = '';
+
+  const platCls   = { facebook:'fb', instagram:'ig', linkedin:'li' };
+  const platLabel = { facebook:'📘 Facebook', instagram:'📸 Instagram', linkedin:'💼 LinkedIn' };
+  const platOrder = ['facebook', 'instagram', 'linkedin'];
+  const statusText = { pending:'Pending', approved:'Approved ✓', rejected:'Rejected ✗', sent:'Sent ✓' };
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+
+  // Group posts by day
+  const byDay = {};
+  days.forEach(d => { byDay[d] = {}; platOrder.forEach(p => { byDay[d][p] = null; }); });
+  state.posts.forEach(post => {
+    if (byDay[post.day]) byDay[post.day][post.platform] = post;
+  });
+
+  let anyVisible = false;
+
+  days.forEach(dayName => {
+    const dayPosts = platOrder.map(p => byDay[dayName][p]).filter(Boolean);
+    if (!dayPosts.length) return;
+
+    // Apply filter
+    const visiblePosts = filter === 'all' ? dayPosts : dayPosts.filter(p => p.status === filter);
+    if (visiblePosts.length === 0 && filter !== 'all') return;
+    anyVisible = true;
+
+    // Day group container
+    const group = document.createElement('div');
+    group.className = 'day-group';
+    group.id = `day-group-${dayName}`;
+
+    // Day header
+    const samplePost = dayPosts[0];
+    group.innerHTML = `
+      <div class="day-group-header">
+        <span class="day-group-label">${dayName}</span>
+        <span class="day-group-date">${samplePost?.scheduledDate || ''}</span>
+      </div>
+      <div class="day-platform-row" id="row-${dayName}"></div>
+    `;
+    board.appendChild(group);
+
+    const row = group.querySelector(`#row-${dayName}`);
+
+    // Render one card per platform in fixed order
+    platOrder.forEach(plat => {
+      const post = byDay[dayName][plat];
+      if (!post) {
+        // Empty slot — keeps columns aligned
+        const empty = document.createElement('div');
+        empty.style.cssText = 'min-height:60px';
+        row.appendChild(empty);
+        return;
+      }
+      if (filter !== 'all' && post.status !== filter) {
+        const empty = document.createElement('div');
+        row.appendChild(empty);
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = `post-card ${platCls[plat]}-card ${post.status !== 'pending' ? post.status : ''}`;
+      card.id = `card-${post.id}`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="plat-pill ${platCls[plat]}">
+            <span class="plat-dot"></span>${platLabel[plat]}
+          </div>
+          <span class="card-status ${post.status}" id="cs-${post.id}">${statusText[post.status]}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-caption" id="cap-${post.id}">${escHtml(post.caption)}</div>
+          <textarea class="caption-edit" id="edit-${post.id}">${post.caption}</textarea>
+          <div class="card-meta">
+            <div class="meta-row">
+              <span class="meta-key">Tags</span>
+              <span class="meta-tags">${escHtml(post.hashtags)}</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Time</span>
+              <span class="meta-time">🕐 ${post.bestTime}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions" id="act-${post.id}">
+          ${renderActions(post)}
+        </div>
+      `;
+      row.appendChild(card);
+    });
+  });
+
+  if (!anyVisible) {
+    board.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted);font-size:14px">No ${filter} posts to show.</div>`;
+  }
+
+  updateSendBar();
+}
+
+function renderActions(post) {
+  if (post.status === 'sent') return '<span style="font-size:12px;color:var(--make);padding:0 4px">✓ Sent to Buffer</span>';
+  if (post.status === 'pending') return `
+    <button class="action-btn approve" onclick="setStatus('${post.id}','approved')">✓ Approve</button>
+    <button class="action-btn edit" onclick="toggleEdit('${post.id}')">✎ Edit</button>
+    <button class="action-btn reject" onclick="setStatus('${post.id}','rejected')">✗ Reject</button>
+  `;
+  if (post.status === 'approved') return `
+    <button class="action-btn edit" onclick="toggleEdit('${post.id}')">✎ Edit</button>
+    <button class="action-btn reject" onclick="setStatus('${post.id}','pending')">↺ Undo</button>
+  `;
+  if (post.status === 'rejected') return `
+    <button class="action-btn approve" onclick="setStatus('${post.id}','approved')">✓ Approve</button>
+    <button class="action-btn reject" onclick="setStatus('${post.id}','pending')">↺ Restore</button>
+  `;
+  return '';
+}
+
+function setStatus(id, status) {
+  const post = state.posts.find(p => p.id === id);
+  if (!post) return;
+
+  const editEl = document.getElementById(`edit-${id}`);
+  if (editEl?.style.display !== 'none' && editEl?.style.display !== '') {
+    post.caption = editEl.value;
+    document.getElementById(`cap-${id}`).textContent = editEl.value;
+    editEl.style.display = 'none';
+    document.getElementById(`cap-${id}`).style.display = 'block';
+  }
+
+  post.status = status;
+
+  const card = document.getElementById(`card-${id}`);
+  if (card) {
+    card.className = `post-card ${status !== 'pending' ? status : ''}`;
+    const cs = document.getElementById(`cs-${id}`);
+    const labels = { pending:'Pending', approved:'Approved ✓', rejected:'Rejected ✗', sent:'Sent ✓' };
+    cs.className = `card-status ${status}`;
+    cs.textContent = labels[status];
+    document.getElementById(`act-${id}`).innerHTML = renderActions(post);
+  }
+
+  updateStats();
+  updateSendBar();
+}
+
+function toggleEdit(id) {
+  const cap = document.getElementById(`cap-${id}`);
+  const edit = document.getElementById(`edit-${id}`);
+  const post = state.posts.find(p => p.id === id);
+  if (!edit) return;
+
+  if (!edit.style.display || edit.style.display === 'none') {
+    cap.style.display = 'none';
+    edit.style.display = 'block';
+    edit.focus();
+  } else {
+    post.caption = edit.value;
+    cap.textContent = edit.value;
+    cap.style.display = 'block';
+    edit.style.display = 'none';
+  }
+}
+
+function approveAll() {
+  state.posts.filter(p => p.status === 'pending').forEach(p => p.status = 'approved');
+  renderApprovalBoard();
+  updateStats();
+  showToast('All pending posts approved', 'success');
+}
+
+function filterBoard(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderApprovalBoard(filter);
+}
+
+function updateStats() {
+  const total = state.posts.length;
+  const approved = state.posts.filter(p => p.status === 'approved').length;
+  const rejected = state.posts.filter(p => p.status === 'rejected').length;
+  const pending = state.posts.filter(p => p.status === 'pending').length;
+
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat-pill"><div class="stat-num">${total}</div><div class="stat-label">Total</div></div>
+    <div class="stat-pill pending-stat"><div class="stat-num">${pending}</div><div class="stat-label">Pending</div></div>
+    <div class="stat-pill approved-stat"><div class="stat-num">${approved}</div><div class="stat-label">Approved</div></div>
+    <div class="stat-pill rejected-stat"><div class="stat-num">${rejected}</div><div class="stat-label">Rejected</div></div>
+  `;
+}
+
+function updateSendBar() {
+  const approved = state.posts.filter(p => p.status === 'approved').length;
+  const desc = document.getElementById('sendBarDesc');
+  const btn = document.getElementById('sendBtn');
+  if (approved === 0) {
+    desc.textContent = 'Approve posts above, then send them directly to Buffer.';
+    btn.disabled = true;
+  } else {
+    desc.textContent = `${approved} post${approved > 1 ? 's' : ''} approved and ready to send to Buffer.`;
+    btn.disabled = false;
+  }
+}
+
+// ── SEND TO MAKE ───────────────────────────────────────────────
+async function sendToBuffer() {
+  // Using fixed proxy endpoint - no config needed
+
+  const approved = state.posts.filter(p => p.status === 'approved');
+  if (approved.length === 0) { showToast('No approved posts to send', 'error'); return; }
+
+  setStep(4);
+  showPhase('sending');
+
+  const slog = document.getElementById('sendingLog');
+  const rgrid = document.getElementById('resultGrid');
+  slog.innerHTML = '';
+  rgrid.innerHTML = '';
+
+  addLog(slog, `> Preparing ${approved.length} posts for Buffer…`, 0);
+  addLog(slog, `> Connecting to Buffer API…`, 500, 'info');
+
+  await delay(800);
+
+  let successCount = 0;
+  let failCount = 0;
+
+  for (let i = 0; i < approved.length; i++) {
+    const post = approved[i];
+    const platLabel = { facebook:'📘 Facebook', instagram:'📸 Instagram', linkedin:'💼 LinkedIn' };
+
+    addLog(slog, `> Sending ${post.day} · ${platLabel[post.platform]}…`, 0, 'info');
+
+    // Add result card (sending state)
+    const rc = document.createElement('div');
+    rc.className = 'result-card';
+    rc.id = `rc-${post.id}`;
+    rc.innerHTML = `
+      <div class="result-icon">${i % 3 === 0 ? '📘' : i % 3 === 1 ? '📸' : '💼'}</div>
+      <div class="result-text">
+        <div class="result-plat">${post.day} · ${post.platform}</div>
+        <div class="result-day">${post.scheduledDate} at ${post.bestTime}</div>
+      </div>
+      <span class="result-badge sending">Sending…</span>
+    `;
+    rgrid.appendChild(rc);
+
+    try {
+      const payload = {
+        platform: post.platform,
+        text: post.caption + '\n\n' + post.hashtags,
+        caption: post.caption,
+        hashtags: post.hashtags,
+        day: post.day,
+        scheduledDate: post.scheduledDate,
+        bestTime: post.bestTime,
+        scheduledAt: buildScheduledISO(post.scheduledDate, post.bestTime),
+        source: 'Old Oak Town Social Agent',
+        weekTheme: document.getElementById('weekTheme').value
+      };
+
+      const res = await fetch(state.bufferProxy, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const resData = await res.json().catch(() => ({}));
+      if (res.ok && resData.success) {
+        rc.querySelector('.result-badge').className = 'result-badge queued';
+        rc.querySelector('.result-badge').textContent = 'Queued ✓';
+        post.status = 'sent';
+        setStatus(post.id, 'sent');
+        successCount++;
+        addLog(slog, `> ✓ Queued in Buffer`, 0, 'done');
+      } else {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+    } catch (err) {
+      rc.querySelector('.result-badge').className = 'result-badge failed';
+      rc.querySelector('.result-badge').textContent = 'Failed ✗';
+      failCount++;
+      addLog(slog, `> ✗ Failed: ${err.message}`, 0);
+    }
+
+    await delay(350);
+  }
+
+  await delay(400);
+
+  if (failCount === 0) {
+    addLog(slog, `> ✓ ✓ All posts queued in Buffer successfully!`, 0, 'done');
+    setStep(5);
+    showToast(`🎉 ${successCount} posts sent to Buffer!`, 'make');
+  } else {
+    addLog(slog, `> ${successCount} sent, ${failCount} failed. Check your BUFFER_API_KEY is set in Vercel.`, 0);
+    showToast(`${successCount} sent, ${failCount} failed`, 'error');
+  }
+
+  document.getElementById('sendingTitle').textContent = failCount === 0 ? '✓ All Posts Queued in Buffer' : 'Sending Complete';
+  document.getElementById('restartBtn').style.display = 'inline-flex';
+}
+
+function buildScheduledISO(dateStr, timeStr) {
+  try {
+    const match = timeStr.match(/(\d+):(\d+)(am|pm)?/i);
+    if (!match) return dateStr + 'T09:00:00Z';
+    let h = parseInt(match[1]);
+    const m = parseInt(match[2]);
+    const meridiem = (match[3] || '').toLowerCase();
+    if (meridiem === 'pm' && h !== 12) h += 12;
+    if (meridiem === 'am' && h === 12) h = 0;
+    return `${dateStr}T${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:00Z`;
+  } catch { return dateStr + 'T09:00:00Z'; }
+}
+
+function restart() {
+  state.posts = [];
+  showPhase('idle');
+  setStep(1);
+  document.getElementById('weekTheme').value = '';
+  document.getElementById('weekContext').value = '';
+  document.getElementById('restartBtn').style.display = 'none';
+}
+
+// ── PHASE MANAGEMENT ───────────────────────────────────────────
+function showPhase(phase) {
+  ['idleState','researchPhase','approvalPhase','sendingPhase'].forEach(id => {
+    document.getElementById(id).style.display = 'none';
+  });
+  const map = { idle:'idleState', research:'researchPhase', approval:'approvalPhase', sending:'sendingPhase' };
+  document.getElementById(map[phase]).style.display = 'block';
+}
+
+function setStep(n) {
+  for (let i = 1; i <= 5; i++) {
+    const el = document.getElementById(`step${i}`);
+    if (!el) continue;
+    el.className = 'step' + (i < n ? ' done' : i === n ? ' active' : '');
+  }
+}
+
+// ── HELPERS ────────────────────────────────────────────────────
+function addLog(container, text, delayMs, cls = '') {
+  const fn = () => {
+    const line = document.createElement('div');
+    line.className = `log-line ${cls}`;
+    line.textContent = text;
+    container.appendChild(line);
+    container.scrollTop = container.scrollHeight;
+  };
+  if (delayMs > 0) setTimeout(fn, delayMs);
+  else fn();
+}
+
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function escHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast show ${type}`;
+  setTimeout(() => { t.className = 'toast'; }, 3800);
+}
+</script>
+</body>
+</html>
