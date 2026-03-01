@@ -41,6 +41,11 @@ module.exports = async (req, res) => {
             process.env.SUPABASE_SERVICE_KEY
         );
 
+        // Enforce tier field permissions server-side
+        const isFree     = !tier || tier === 'free';
+        const isFeatured = tier === 'featured' || tier === 'premium' || tier === 'newsletter';
+        const isPremium  = tier === 'premium' || tier === 'newsletter';
+
         const { data, error: supabaseError } = await supabase
             .from('businesses')
             .insert([{
@@ -51,13 +56,13 @@ module.exports = async (req, res) => {
                 address,
                 postcode,
                 description,
-                website,
-                instagram,
-                twitter,
-                linkedin,
-                opening_hours: openingHours,
-                special_offers: specialOffers,
-                target_audience: targetAudience,
+                website:          isFeatured ? website : null,
+                instagram:        isPremium  ? instagram : null,
+                twitter:          isPremium  ? twitter   : null,
+                linkedin:         isPremium  ? linkedin  : null,
+                opening_hours:    isFeatured ? openingHours   : null,
+                special_offers:   isPremium  ? specialOffers  : null,
+                target_audience:  isPremium  ? targetAudience : null,
                 tier: tier || 'free',
                 status,
                 billing_frequency: billingFrequency,

@@ -307,18 +307,43 @@ textarea { min-height: 68px; }
 .stat-pill.pending-stat .stat-num { color: var(--amber); }
 
 .posts-board {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── DAY GROUP ── */
+.day-group { display: flex; flex-direction: column; gap: 10px; }
+.day-group-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0 6px;
+  border-bottom: 2px solid var(--border);
+}
+.day-group-label {
+  font-family: 'Instrument Serif', serif;
+  font-size: 18px; color: var(--green-deep);
+}
+.day-group-date {
+  font-size: 12px; color: var(--muted); font-weight: 500;
+}
+.day-platform-row {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 /* ── POST CARD ── */
 .post-card {
-  background: white; border: 2px solid var(--border);
+  background: white;
+  border: 2px solid var(--border);
+  border-top: 4px solid var(--border);
   border-radius: 13px; overflow: hidden;
   transition: border-color 0.2s, box-shadow 0.2s;
   display: flex; flex-direction: column;
 }
+.post-card.fb-card  { border-top-color: var(--fb); }
+.post-card.ig-card  { border-top-color: var(--ig); }
+.post-card.li-card  { border-top-color: var(--li); }
 .post-card.approved { border-color: var(--green-bright); box-shadow: 0 0 0 3px rgba(76,138,53,0.1); }
 .post-card.rejected { border-color: var(--red); opacity: 0.5; }
 .post-card.sent { border-color: var(--make); box-shadow: 0 0 0 3px rgba(109,0,204,0.08); }
@@ -545,7 +570,8 @@ textarea { min-height: 68px; }
   .layout { grid-template-columns: 1fr; }
   .sidebar { height: auto; position: relative; top: 0; }
   .pipeline-steps { display: none; }
-  .posts-board { grid-template-columns: 1fr; }
+  .day-platform-row { grid-template-columns: 1fr; }
+  .day-group-header { padding: 8px 0 4px; }
   .stats-bar { grid-template-columns: repeat(2,1fr); }
 }
 </style>
@@ -930,48 +956,98 @@ function renderApprovalBoard(filter) {
   const board = document.getElementById('postsBoard');
   board.innerHTML = '';
 
-  const platCls = { facebook:'fb', instagram:'ig', linkedin:'li' };
-  const platLabel = { facebook:'Facebook', instagram:'Instagram', linkedin:'LinkedIn' };
+  const platCls   = { facebook:'fb', instagram:'ig', linkedin:'li' };
+  const platLabel = { facebook:'📘 Facebook', instagram:'📸 Instagram', linkedin:'💼 LinkedIn' };
+  const platOrder = ['facebook', 'instagram', 'linkedin'];
   const statusText = { pending:'Pending', approved:'Approved ✓', rejected:'Rejected ✗', sent:'Sent ✓' };
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 
-  const filtered = filter === 'all' ? state.posts : state.posts.filter(p => p.status === filter);
-
-  filtered.forEach(post => {
-    const card = document.createElement('div');
-    card.className = `post-card ${post.status !== 'pending' ? post.status : ''}`;
-    card.id = `card-${post.id}`;
-
-    card.innerHTML = `
-      <div class="card-header">
-        <div class="plat-pill ${platCls[post.platform]}">
-          <span class="plat-dot"></span>${platLabel[post.platform]}
-        </div>
-        <span class="card-day">${post.day}</span>
-        <span class="card-status ${post.status}" id="cs-${post.id}">${statusText[post.status]}</span>
-      </div>
-      <div class="card-body">
-        <div class="card-caption" id="cap-${post.id}">${escHtml(post.caption)}</div>
-        <textarea class="caption-edit" id="edit-${post.id}">${post.caption}</textarea>
-        <div class="card-meta">
-          <div class="meta-row">
-            <span class="meta-key">Tags</span>
-            <span class="meta-tags">${escHtml(post.hashtags)}</span>
-          </div>
-          <div class="meta-row">
-            <span class="meta-key">Time</span>
-            <span class="meta-time">🕐 ${post.bestTime} · ${post.scheduledDate}</span>
-          </div>
-        </div>
-      </div>
-      <div class="card-actions" id="act-${post.id}">
-        ${renderActions(post)}
-      </div>
-    `;
-    board.appendChild(card);
+  // Group posts by day
+  const byDay = {};
+  days.forEach(d => { byDay[d] = {}; platOrder.forEach(p => { byDay[d][p] = null; }); });
+  state.posts.forEach(post => {
+    if (byDay[post.day]) byDay[post.day][post.platform] = post;
   });
 
-  if (filtered.length === 0) {
-    board.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:14px">No ${filter} posts to show.</div>`;
+  let anyVisible = false;
+
+  days.forEach(dayName => {
+    const dayPosts = platOrder.map(p => byDay[dayName][p]).filter(Boolean);
+    if (!dayPosts.length) return;
+
+    // Apply filter
+    const visiblePosts = filter === 'all' ? dayPosts : dayPosts.filter(p => p.status === filter);
+    if (visiblePosts.length === 0 && filter !== 'all') return;
+    anyVisible = true;
+
+    // Day group container
+    const group = document.createElement('div');
+    group.className = 'day-group';
+    group.id = `day-group-${dayName}`;
+
+    // Day header
+    const samplePost = dayPosts[0];
+    group.innerHTML = `
+      <div class="day-group-header">
+        <span class="day-group-label">${dayName}</span>
+        <span class="day-group-date">${samplePost?.scheduledDate || ''}</span>
+      </div>
+      <div class="day-platform-row" id="row-${dayName}"></div>
+    `;
+    board.appendChild(group);
+
+    const row = group.querySelector(`#row-${dayName}`);
+
+    // Render one card per platform in fixed order
+    platOrder.forEach(plat => {
+      const post = byDay[dayName][plat];
+      if (!post) {
+        // Empty slot — keeps columns aligned
+        const empty = document.createElement('div');
+        empty.style.cssText = 'min-height:60px';
+        row.appendChild(empty);
+        return;
+      }
+      if (filter !== 'all' && post.status !== filter) {
+        const empty = document.createElement('div');
+        row.appendChild(empty);
+        return;
+      }
+
+      const card = document.createElement('div');
+      card.className = `post-card ${platCls[plat]}-card ${post.status !== 'pending' ? post.status : ''}`;
+      card.id = `card-${post.id}`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="plat-pill ${platCls[plat]}">
+            <span class="plat-dot"></span>${platLabel[plat]}
+          </div>
+          <span class="card-status ${post.status}" id="cs-${post.id}">${statusText[post.status]}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-caption" id="cap-${post.id}">${escHtml(post.caption)}</div>
+          <textarea class="caption-edit" id="edit-${post.id}">${post.caption}</textarea>
+          <div class="card-meta">
+            <div class="meta-row">
+              <span class="meta-key">Tags</span>
+              <span class="meta-tags">${escHtml(post.hashtags)}</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-key">Time</span>
+              <span class="meta-time">🕐 ${post.bestTime}</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-actions" id="act-${post.id}">
+          ${renderActions(post)}
+        </div>
+      `;
+      row.appendChild(card);
+    });
+  });
+
+  if (!anyVisible) {
+    board.innerHTML = `<div style="text-align:center;padding:40px;color:var(--muted);font-size:14px">No ${filter} posts to show.</div>`;
   }
 
   updateSendBar();

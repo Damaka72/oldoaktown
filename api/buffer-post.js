@@ -2,104 +2,63 @@
  * Old Oak Town — Buffer GraphQL Proxy
  * POST /api/buffer-post
  *
- * Receives a post payload from the Social Command Centre app
- * and forwards it to Buffer's GraphQL API server-side,
- * avoiding CORS restrictions in the browser.
- *
+ * Routes each post to the correct Buffer channel by platform.
  * Required env var: BUFFER_API_KEY
  */
 
-const BUFFER_API = 'https://api.buffer.com';
-const CHANNEL_ID = '69a213f74be271803d75d07e';
+const BUFFER_API = 'https://api.buffer.com/graphql';
+
+const CHANNEL_IDS = {
+  linkedin:  '69a213f74be271803d75d07e',
+  instagram: '69a43f953f3b94a121052f11',
+  facebook:  '69a4431d3f3b94a12105386d',
+};
 
 export default async function handler(req, res) {
-  // CORS headers so the HTML app can call this endpoint
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const apiKey = process.env.BUFFER_API_KEY;
   if (!apiKey) {
-    console.error('BUFFER_API_KEY environment variable not set');
-    return res.status(500).json({ error: 'Buffer API key not configured' });
+    return res.status(500).json({ error: 'BUFFER_API_KEY not configured in Vercel environment variables' });
   }
 
   const { text, scheduledAt, platform, day } = req.body;
+  if (!text) return res.status(400).json({ error: 'Missing required field: text' });
 
-  if (!text) {
-    return res.status(400).json({ error: 'Missing required field: text' });
+  const platformKey = (platform || '').toLowerCase();
+  const channelId = CHANNEL_IDS[platformKey];
+  if (!channelId) {
+    return res.status(400).json({ 
+      error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.` 
+    });
   }
 
-  // Build the GraphQL mutation to create a post in Buffer
-  // Uses createIdea first (drafts) since direct scheduling requires
-  // knowing the organisation ID — we fetch that dynamically
   try {
-    // Step 1: Get organisation ID
-    const orgQuery = await fetch(BUFFER_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        query: `query { account { organizations { id name } } }`
-      })
-    });
-
-    const orgData = await orgQuery.json();
-
-    if (orgData.errors) {
-      console.error('Buffer org query errors:', orgData.errors);
-      return res.status(502).json({ error: 'Buffer API error', details: orgData.errors });
-    }
-
-    const orgId = orgData?.data?.account?.organizations?.[0]?.id;
-    if (!orgId) {
-      return res.status(502).json({ error: 'Could not retrieve Buffer organisation ID' });
-    }
-
-    // Step 2: Create the post
-    // Schedule if scheduledAt provided, otherwise add to queue
-    const schedulingType = scheduledAt ? 'SCHEDULED' : 'QUEUE';
-
     const mutation = `
       mutation CreatePost($input: PostCreateInput!) {
         postCreate(input: $input) {
-          post {
-            id
-            text
-            status
-            scheduledAt
-          }
-          errors {
-            message
-            code
-          }
+          post { id text status scheduledAt }
+          errors { message code }
         }
       }
     `;
 
     const variables = {
       input: {
-        channelId: CHANNEL_ID,
-        content: {
-          text: text,
-        },
+        channelId,
+        content: { text },
         scheduling: scheduledAt
-          ? { scheduledAt: scheduledAt, type: schedulingType }
-          : { type: schedulingType }
+          ? { scheduledAt, type: 'SCHEDULED' }
+          : { type: 'QUEUE' }
       }
     };
 
-    const postResponse = await fetch(BUFFER_API, {
+    const postRes = await fetch(BUFFER_API, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -108,29 +67,27 @@ export default async function handler(req, res) {
       body: JSON.stringify({ query: mutation, variables })
     });
 
-    const postData = await postResponse.json();
+    const postData = await postRes.json();
+    console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
     if (postData.errors) {
-      console.error('Buffer post mutation errors:', postData.errors);
-      return res.status(502).json({ error: 'Buffer API mutation error', details: postData.errors });
+      return res.status(502).json({ error: 'Buffer mutation error', details: postData.errors });
     }
 
     const postErrors = postData?.data?.postCreate?.errors;
-    if (postErrors && postErrors.length > 0) {
-      console.error('Buffer postCreate errors:', postErrors);
-      return res.status(502).json({ error: 'Buffer rejected the post', details: postErrors });
+    if (postErrors?.length) {
+      return res.status(502).json({ error: 'Buffer rejected post', details: postErrors });
     }
 
-    const createdPost = postData?.data?.postCreate?.post;
-
-    console.log(`✓ Buffer post created: ${createdPost?.id} | ${platform} | ${day}`);
+    const created = postData?.data?.postCreate?.post;
+    console.log(`✓ ${platformKey} post queued: ${created?.id} | ${day}`);
 
     return res.status(200).json({
       success: true,
-      postId: createdPost?.id,
-      status: createdPost?.status,
-      scheduledAt: createdPost?.scheduledAt,
-      platform,
+      postId: created?.id,
+      status: created?.status,
+      scheduledAt: created?.scheduledAt,
+      platform: platformKey,
       day
     });
 

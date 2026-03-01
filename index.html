@@ -27,6 +27,44 @@
     <meta property="og:image" content="https://www.oldoaktown.co.uk/images/logo.png">
     <meta property="og:image:alt" content="Old Oak Town — West London's largest regeneration project">
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.oldoaktown.co.uk/#organization",
+          "name": "Old Oak Town",
+          "url": "https://www.oldoaktown.co.uk/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.oldoaktown.co.uk/images/logo.png"
+          },
+          "description": "Your comprehensive guide to West London's largest regeneration project — tracking HS2, housing, jobs, and community developments.",
+          "sameAs": [
+            "https://www.facebook.com/profile.php?id=61584494333990",
+            "https://www.instagram.com/oldoaktown",
+            "https://www.linkedin.com/company/110106506/"
+          ],
+          "areaServed": {
+            "@type": "Place",
+            "name": "Old Oak Common, London, UK"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.oldoaktown.co.uk/#website",
+          "url": "https://www.oldoaktown.co.uk/",
+          "name": "Old Oak Town",
+          "publisher": { "@id": "https://www.oldoaktown.co.uk/#organization" }
+        }
+      ]
+    }
+    </script>
+    <!-- Dynamic NewsArticle JSON-LD (populated by JS when an article opens) -->
+    <script type="application/ld+json" id="articleJsonLd"></script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/logo.png">
@@ -1071,7 +1109,259 @@
             .nl-form__fields { flex-direction: column; align-items: stretch; }
             .nl-form__fields input[type="email"],
             .nl-form__fields button { width: 100%; }
+            .ig-feed-grid { grid-template-columns: repeat(3, 1fr); }
+            .nav-social { display: none; }
         }
+
+        /* ─── Nav Social Icons ─── */
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-left: 1rem;
+        }
+        .nav-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .nav-social a:hover { background: rgba(255,255,255,0.3); }
+
+        /* ─── Instagram Feed Grid ─── */
+        .ig-feed-section {
+            background: #f0f0ea;
+            padding: 2.5rem 0;
+        }
+        .ig-feed-title {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 1.25rem;
+            color: #333;
+        }
+        .ig-feed-title a { color: inherit; text-decoration: none; border-bottom: 2px solid #e1306c; }
+        .ig-feed-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 4px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .ig-feed-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            display: block;
+            background: #ddd;
+        }
+        .ig-feed-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .ig-feed-item:hover img { transform: scale(1.08); }
+        .ig-feed-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            opacity: 0;
+            transition: opacity 0.2s;
+            text-align: center;
+            padding: 0.5rem;
+        }
+        .ig-feed-item:hover .ig-feed-overlay { opacity: 1; }
+        .ig-feed-more {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+            color: #bc1888;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        .ig-feed-more:hover { text-decoration: underline; }
+
+        /* ─── Share LinkedIn ─── */
+        .share-linkedin { background: #0077b5; color: white; }
+
+        /* ─── Submit a Tip ─── */
+        .tip-section { background: var(--cream); }
+        .tip-form__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        .tip-form__full { grid-column: 1 / -1; }
+        .tip-form label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            color: #444;
+        }
+        .tip-form input,
+        .tip-form select,
+        .tip-form textarea {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            box-sizing: border-box;
+            background: white;
+        }
+        .tip-form input:focus,
+        .tip-form select:focus,
+        .tip-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+        .tip-form button[type="submit"] {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .tip-form button[type="submit"]:hover { background: #1e3a0e; }
+        .tip-form__message {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            min-height: 1.2em;
+        }
+        .tip-form__message.success { color: var(--primary-green); font-weight: 600; }
+        .tip-form__message.error { color: #c0392b; }
+        .tip-form__privacy {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #999;
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            .tip-form__grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── Modal Related Articles ─── */
+        .modal-related {
+            padding: 1.5rem 2rem 2rem;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+        .modal-related h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+        .related-card {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid #eee;
+            transition: box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .related-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+        .related-card img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+        }
+        .related-card-body {
+            padding: 0.5rem 0.65rem 0.65rem;
+        }
+        .related-card-body .news-meta {
+            font-size: 0.65rem;
+            margin-bottom: 0.25rem;
+        }
+        .related-card-body h5 {
+            font-size: 0.78rem;
+            line-height: 1.35;
+            color: #222;
+        }
+        @media (max-width: 600px) {
+            .related-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── Cookie Consent Banner ─── */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #1a1a1a;
+            color: #ddd;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 9999;
+            flex-wrap: wrap;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+        }
+        .cookie-banner p {
+            flex: 1;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            min-width: 200px;
+            margin: 0;
+        }
+        .cookie-banner a { color: #aed6a0; }
+        .cookie-banner__btns {
+            display: flex;
+            gap: 0.6rem;
+            flex-shrink: 0;
+        }
+        .cookie-accept {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 0.55rem 1.4rem;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .cookie-decline {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid #555;
+            padding: 0.55rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .cookie-banner.hidden { display: none; }
     </style>
 </head>
 <body>
@@ -1091,6 +1381,17 @@
                 <li><a href="#advertise">Advertise</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div class="nav-social">
+                <a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer" title="Instagram">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer" title="Facebook">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/110106506/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -1245,6 +1546,40 @@
         </div>
     </section>
 
+    <!-- Instagram Feed Preview -->
+    <div class="ig-feed-section">
+        <div class="container">
+            <p class="ig-feed-title">Latest from <a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">@oldoaktown</a></p>
+            <div class="ig-feed-grid">
+                <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=300&h=300&fit=crop" alt="HS2 construction at Old Oak Common">
+                    <div class="ig-feed-overlay">HS2 platforms now being installed</div>
+                </a>
+                <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&h=300&fit=crop" alt="New housing development">
+                    <div class="ig-feed-overlay">First 500 homes approved</div>
+                </a>
+                <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=300&h=300&fit=crop" alt="Community forum">
+                    <div class="ig-feed-overlay">Local business forum launches</div>
+                </a>
+                <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=300&h=300&fit=crop" alt="Transport links">
+                    <div class="ig-feed-overlay">New bus routes connecting Old Oak</div>
+                </a>
+                <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=300&h=300&fit=crop" alt="Affordable housing">
+                    <div class="ig-feed-overlay">50% affordable housing confirmed</div>
+                </a>
+                <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=300&h=300&fit=crop" alt="Jobs and employment">
+                    <div class="ig-feed-overlay">New job centre opens locally</div>
+                </a>
+            </div>
+            <a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer" class="ig-feed-more">View all posts on Instagram &rarr;</a>
+        </div>
+    </div>
+
     <!-- Videos Section -->
     <section id="videos" style="background: var(--light-grey);">
         <div class="container">
@@ -1295,6 +1630,7 @@
                 <h2 id="modalTitle"></h2>
             </div>
             <div class="modal-body" id="modalBody"></div>
+            <div class="modal-related" id="modalRelated"></div>
         </div>
     </div>
 
@@ -1869,6 +2205,48 @@
         </div>
     </section>
 
+    <!-- Submit a Tip -->
+    <section id="submit-tip" class="tip-section">
+        <div class="container">
+            <h2>Submit a News Tip</h2>
+            <p style="margin-bottom: 2rem;">Spotted something happening in Old Oak? Construction update, planning decision, community issue — help us keep the neighbourhood informed.</p>
+            <div style="max-width: 680px;">
+                <form class="tip-form" id="tipForm">
+                    <div class="tip-form__grid">
+                        <div>
+                            <label for="tipName">Your Name <span style="color:#aaa;font-weight:400;">(optional)</span></label>
+                            <input type="text" id="tipName" placeholder="e.g. Jane Smith" autocomplete="name">
+                        </div>
+                        <div>
+                            <label for="tipEmail">Email <span style="color:#aaa;font-weight:400;">(optional, for follow-up)</span></label>
+                            <input type="email" id="tipEmail" placeholder="your@email.com" autocomplete="email">
+                        </div>
+                        <div class="tip-form__full">
+                            <label for="tipCategory">Category</label>
+                            <select id="tipCategory">
+                                <option value="">Select a category…</option>
+                                <option>HS2 / Station</option>
+                                <option>Housing</option>
+                                <option>Transport</option>
+                                <option>Community</option>
+                                <option>Employment</option>
+                                <option>Planning</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="tip-form__full">
+                            <label for="tipDetails">What did you see or hear? *</label>
+                            <textarea id="tipDetails" rows="4" placeholder="Describe what you spotted — include location, date, and any relevant details…" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" id="tipBtn">Send Tip</button>
+                    <p class="tip-form__message" id="tipMsg" aria-live="polite"></p>
+                    <p class="tip-form__privacy">Tips may be published anonymously. We will never use your name without permission.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" style="background: var(--light-grey);">
         <div class="container">
@@ -1974,11 +2352,14 @@
                     <p>Connect with us on social media</p>
                     <ul class="social-links">
                         <li><a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                        <li><a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                        <li><a href="https://www.linkedin.com/company/110106506/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/oldoaktown" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Old Oak Town. All rights reserved. | <a href="#" style="color: #999;">Privacy Policy</a> | <a href="#" style="color: #999;">Terms of Service</a></p>
+                <p>&copy; 2025 Old Oak Town. All rights reserved. | <a href="privacy.html" style="color: #999;">Privacy Policy</a> | <a href="#" style="color: #999;">Terms of Service</a></p>
             </div>
         </div>
     </footer>
@@ -2091,24 +2472,29 @@
         // ─────────────────────────────────────────
         function shareArticle(platform, btn) {
             var card = btn.closest('.news-card');
+            var articleId = card.getAttribute('data-article');
             var title = card.querySelector('h3').textContent;
-            var url = 'https://www.oldoaktown.co.uk/';
+            var url = 'https://www.oldoaktown.co.uk/#article-' + articleId;
             var text = title + ' — ' + url + ' #OldOakTown';
             if (platform === 'whatsapp') {
                 window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
             } else if (platform === 'facebook') {
                 window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '&quote=' + encodeURIComponent(title), '_blank');
+            } else if (platform === 'linkedin') {
+                window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank');
             } else if (platform === 'copy') {
                 navigator.clipboard.writeText(url).then(function() {
+                    var prev = btn.innerHTML;
                     btn.textContent = 'Copied!';
                     btn.classList.add('copied');
-                    setTimeout(function() { btn.innerHTML = copyIcon + ' Copy link'; btn.classList.remove('copied'); }, 2000);
+                    setTimeout(function() { btn.innerHTML = prev; btn.classList.remove('copied'); }, 2000);
                 });
             }
         }
 
         var waIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
         var fbIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>';
+        var liIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
         var copyIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -2120,6 +2506,7 @@
                 bar.innerHTML = '<span>Share</span>'
                     + '<button class="share-btn share-whatsapp" onclick="shareArticle(\'whatsapp\', this)">' + waIcon + ' WhatsApp</button>'
                     + '<button class="share-btn share-facebook" onclick="shareArticle(\'facebook\', this)">' + fbIcon + ' Facebook</button>'
+                    + '<button class="share-btn share-linkedin" onclick="shareArticle(\'linkedin\', this)">' + liIcon + ' LinkedIn</button>'
                     + '<button class="share-btn share-copy" onclick="shareArticle(\'copy\', this)">' + copyIcon + ' Copy link</button>';
                 content.appendChild(bar);
             });
@@ -2204,6 +2591,42 @@
             document.getElementById('modalMeta').textContent = article.meta;
             document.getElementById('modalImage').src = article.image;
             document.getElementById('modalBody').innerHTML = article.body;
+
+            // Permalink
+            history.pushState({ articleId: id }, '', '#article-' + id);
+
+            // Dynamic NewsArticle JSON-LD
+            var ld = document.getElementById('articleJsonLd');
+            if (ld) {
+                ld.textContent = JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'NewsArticle',
+                    'headline': article.title,
+                    'image': [article.image],
+                    'datePublished': new Date().toISOString().split('T')[0],
+                    'publisher': { '@id': 'https://www.oldoaktown.co.uk/#organization' },
+                    'mainEntityOfPage': { '@type': 'WebPage', '@id': 'https://www.oldoaktown.co.uk/#article-' + id }
+                });
+            }
+
+            // Related articles (3 others, cycled from sorted list)
+            var allIds = Object.keys(articles).map(Number);
+            var others = allIds.filter(function(i) { return i !== id; });
+            var related = others.slice(0, 3);
+            var relDiv = document.getElementById('modalRelated');
+            if (relDiv && related.length) {
+                var html = '<h4>More Stories</h4><div class="related-grid">';
+                related.forEach(function(rid) {
+                    var a = articles[rid];
+                    html += '<a class="related-card" href="#" onclick="openArticle(event,' + rid + ')">'
+                        + '<img src="' + a.image.replace('w=900&h=400', 'w=300&h=160') + '" alt="">'
+                        + '<div class="related-card-body"><div class="news-meta">' + a.meta + '</div>'
+                        + '<h5>' + a.title + '</h5></div></a>';
+                });
+                html += '</div>';
+                relDiv.innerHTML = html;
+            }
+
             document.getElementById('articleModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2211,6 +2634,10 @@
         function closeModal() {
             document.getElementById('articleModal').classList.remove('active');
             document.body.style.overflow = '';
+            // Restore URL (remove article hash)
+            if (window.location.hash.match(/^#article-/)) {
+                history.pushState({}, '', window.location.pathname + window.location.search);
+            }
         }
 
         document.getElementById('articleModal').addEventListener('click', function(e) {
@@ -2309,6 +2736,81 @@
 
         renderCalendar();
 
+        // ─────────────────────────────────────────
+        // COOKIE CONSENT BANNER
+        // ─────────────────────────────────────────
+        (function() {
+            if (localStorage.getItem('cookieConsent')) return;
+            var banner = document.createElement('div');
+            banner.className = 'cookie-banner';
+            banner.id = 'cookieBanner';
+            banner.innerHTML = '<p>We use cookies to improve your experience and analyse site traffic. By clicking "Accept", you consent to our use of cookies. <a href="privacy.html">Learn more in our Privacy Policy.</a></p>'
+                + '<div class="cookie-banner__btns">'
+                + '<button class="cookie-accept" onclick="cookieConsent(\'accepted\')">Accept</button>'
+                + '<button class="cookie-decline" onclick="cookieConsent(\'declined\')">Decline</button>'
+                + '</div>';
+            document.body.appendChild(banner);
+        })();
+
+        function cookieConsent(choice) {
+            localStorage.setItem('cookieConsent', choice);
+            var b = document.getElementById('cookieBanner');
+            if (b) b.classList.add('hidden');
+        }
+
+        // ─────────────────────────────────────────
+        // ARTICLE PERMALINKS
+        // ─────────────────────────────────────────
+        // On page load: open article if hash matches #article-N
+        (function() {
+            var hash = window.location.hash;
+            var match = hash.match(/^#article-(\d+)$/);
+            if (match) {
+                var id = parseInt(match[1], 10);
+                if (articles[id]) {
+                    // Defer slightly so the page renders first
+                    setTimeout(function() { openArticle({ preventDefault: function(){} }, id); }, 200);
+                }
+            }
+        })();
+
+        // ─────────────────────────────────────────
+        // TIP FORM
+        // ─────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function() {
+            var tipForm = document.getElementById('tipForm');
+            if (!tipForm) return;
+            tipForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var details = document.getElementById('tipDetails').value.trim();
+                var btn = document.getElementById('tipBtn');
+                var msg = document.getElementById('tipMsg');
+                if (!details) {
+                    msg.textContent = 'Please describe what you spotted.';
+                    msg.className = 'tip-form__message error';
+                    return;
+                }
+                var name     = document.getElementById('tipName').value.trim();
+                var email    = document.getElementById('tipEmail').value.trim();
+                var category = document.getElementById('tipCategory').value;
+                var mailtoUrl = 'mailto:tips@oldoaktown.co.uk'
+                    + '?subject=' + encodeURIComponent('News Tip: ' + (category || 'General'))
+                    + '&body=' + encodeURIComponent(
+                        (name  ? 'Name: '     + name  + '\n' : '') +
+                        (email ? 'Email: '    + email + '\n' : '') +
+                        (category ? 'Category: ' + category + '\n' : '') +
+                        '\nDetails:\n' + details
+                    );
+                btn.disabled = true;
+                window.location.href = mailtoUrl;
+                msg.textContent = 'Opening your email client… Thank you for your tip!';
+                msg.className = 'tip-form__message success';
+                setTimeout(function() { btn.disabled = false; }, 3000);
+            });
+        });
+
     </script>
+
+    <!-- Cookie banner (rendered by JS above) -->
 </body>
 </html>
