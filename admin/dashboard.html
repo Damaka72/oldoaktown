@@ -363,6 +363,7 @@
 
         // Check if already logged in
         if (sessionStorage.getItem('adminAuth') === 'true') {
+            _adminPassword = ADMIN_PASSWORD;
             document.getElementById('loginScreen').style.display = 'none';
             document.getElementById('dashboard').style.display = 'block';
             loadDashboard();
