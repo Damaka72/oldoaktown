@@ -1586,29 +1586,9 @@
             <h2>Video Gallery</h2>
             <p style="margin-bottom: 2rem;">Watch the transformation of Old Oak Common - construction updates, community stories, and development insights</p>
 
-            <div class="video-grid">
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/SkSf9122EPA" title="Old Oak Common Featured Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <span class="video-tag">Featured</span>
-                        <span class="video-tag">Old Oak</span>
-                        <h3>Old Oak Common Development Update</h3>
-                        <p>Latest insights and updates on the Old Oak Common transformation project.</p>
-                    </div>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/95lby5LLTRI" title="Old Oak Common Latest" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-card-content">
-                        <span class="video-tag">Featured</span>
-                        <span class="video-tag">News</span>
-                        <h3>Old Oak Common Latest News</h3>
-                        <p>Recent updates and developments from the Old Oak Common regeneration project.</p>
-                    </div>
+            <div class="video-grid" id="videoGrid">
+                <div id="videoLoading" style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                    Loading videos...
                 </div>
             </div>
 
@@ -2807,6 +2787,59 @@
                 msg.className = 'tip-form__message success';
                 setTimeout(function() { btn.disabled = false; }, 3000);
             });
+        });
+
+        // ─────────────────────────────────────────
+        // VIDEO GALLERY — dynamic load
+        // ─────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function() {
+            var grid    = document.getElementById('videoGrid');
+            var loading = document.getElementById('videoLoading');
+
+            if (!grid) return;
+
+            fetch('/api/get-videos')
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    var videos = data.videos || [];
+
+                    if (videos.length === 0) {
+                        loading.textContent = 'No videos yet — check back soon.';
+                        return;
+                    }
+
+                    loading.remove();
+
+                    videos.forEach(function(v) {
+                        var tags = (v.tags || '')
+                            .split(',')
+                            .map(function(t) { return t.trim(); })
+                            .filter(Boolean)
+                            .map(function(t) { return '<span class="video-tag">' + t + '</span>'; })
+                            .join('');
+
+                        var iframeAttrs = v.platform === 'youtube'
+                            ? 'frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen'
+                            : 'frameborder="0" allowfullscreen';
+
+                        var card = document.createElement('div');
+                        card.className = 'video-card';
+                        card.innerHTML =
+                            '<div class="video-wrapper">' +
+                                '<iframe src="' + v.embed_url + '" title="' + v.title.replace(/"/g, '&quot;') + '" ' + iframeAttrs + '></iframe>' +
+                            '</div>' +
+                            '<div class="video-card-content">' +
+                                tags +
+                                '<h3>' + v.title + '</h3>' +
+                                (v.description ? '<p>' + v.description + '</p>' : '') +
+                            '</div>';
+
+                        grid.appendChild(card);
+                    });
+                })
+                .catch(function() {
+                    loading.textContent = 'Could not load videos. Please refresh the page.';
+                });
         });
 
     </script>

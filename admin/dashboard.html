@@ -261,6 +261,10 @@
                     <div class="number" id="statRevenue">—</div>
                     <div class="label">Est. Monthly Revenue</div>
                 </div>
+                <div class="stat-card">
+                    <div class="number" id="statVideos">—</div>
+                    <div class="label">Videos Live</div>
+                </div>
             </div>
 
             <!-- Tabs -->
@@ -271,11 +275,61 @@
                 <div class="tab" onclick="switchTab('approved', this)">Approved</div>
                 <div class="tab" onclick="switchTab('rejected', this)">Rejected</div>
                 <div class="tab" onclick="switchTab('all', this)">All</div>
+                <div class="tab" onclick="switchTab('videos', this)">Videos</div>
             </div>
 
             <div id="businessList" class="business-list">
                 <div class="loading">Loading listings...</div>
             </div>
+
+            <div id="videosPanel" style="display:none;">
+
+                <!-- Add Video Form -->
+                <div class="admin-card" style="margin-bottom: 1.5rem;">
+                    <div class="admin-card-header" style="cursor:default;">
+                        <div>
+                            <div class="admin-card-title">Add New Video</div>
+                            <div class="admin-card-meta">Paste a YouTube or Vimeo URL to add it to the homepage</div>
+                        </div>
+                    </div>
+                    <div class="admin-card-body" style="display:block;">
+                        <div class="detail-grid" style="margin-bottom:1rem;">
+                            <div class="detail-item" style="grid-column: 1/-1;">
+                                <label>Video URL *</label>
+                                <input type="url" id="vUrl" placeholder="https://www.youtube.com/watch?v=..."
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;"
+                                       oninput="previewVideoUrl(this.value)">
+                                <small id="vUrlPreview" style="color:#666; margin-top:0.3rem; display:block;"></small>
+                            </div>
+                            <div class="detail-item">
+                                <label>Title *</label>
+                                <input type="text" id="vTitle" placeholder="e.g. Old Oak Common Construction Update"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item">
+                                <label>Tags (comma-separated)</label>
+                                <input type="text" id="vTags" placeholder="e.g. Featured, Construction, 2026"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item" style="grid-column: 1/-1;">
+                                <label>Description</label>
+                                <textarea id="vDesc" rows="2" placeholder="Short description shown under the video..."
+                                          style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem; resize:vertical;"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-approve" onclick="addVideo()" id="addVideoBtn">
+                            + Add Video to Homepage
+                        </button>
+                        <span id="addVideoMsg" style="margin-left:1rem; font-weight:600;"></span>
+                    </div>
+                </div>
+
+                <!-- Existing video list -->
+                <div id="videoList" class="business-list">
+                    <div class="loading">Loading videos...</div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -337,6 +391,7 @@
             allData = await fetchAllBusinesses();
             updateStats(allData);
             renderList(currentTab);
+            loadVideos(); // populates Videos Live stat card on page load
         }
 
         function updateStats(data) {
@@ -358,7 +413,16 @@
             currentTab = tab;
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             el.classList.add('active');
-            renderList(tab);
+
+            var isVideos = tab === 'videos';
+            document.getElementById('businessList').style.display = isVideos ? 'none' : '';
+            document.getElementById('videosPanel').style.display  = isVideos ? 'block' : 'none';
+
+            if (isVideos) {
+                loadVideos();
+            } else {
+                renderList(tab);
+            }
         }
 
         function renderList(filter) {
@@ -475,6 +539,144 @@
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 3000);
         }
+
+        // ─── VIDEO MANAGEMENT ────────────────────────────────────────────────
+
+        function parseVideoUrlClient(url) {
+            url = url.trim();
+            var ytMatch = url.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+            if (ytMatch) return { platform: 'YouTube', embedUrl: 'https://www.youtube.com/embed/' + ytMatch[1] };
+            var vmMatch = url.match(/(?:vimeo\.com\/(?:video\/|channels\/[^/]+\/)?|player\.vimeo\.com\/video\/)(\d+)/);
+            if (vmMatch) return { platform: 'Vimeo', embedUrl: 'https://player.vimeo.com/video/' + vmMatch[1] };
+            if (url.startsWith('https://')) return { platform: 'Other', embedUrl: url };
+            return null;
+        }
+
+        function previewVideoUrl(url) {
+            var preview = document.getElementById('vUrlPreview');
+            if (!url) { preview.textContent = ''; return; }
+            var parsed = parseVideoUrlClient(url);
+            if (parsed) {
+                preview.style.color = '#28a745';
+                preview.textContent = 'Recognised as ' + parsed.platform + ' — embed: ' + parsed.embedUrl;
+            } else {
+                preview.style.color = '#dc3545';
+                preview.textContent = 'URL not recognised. Use a YouTube or Vimeo link.';
+            }
+        }
+
+        async function loadVideos() {
+            var list = document.getElementById('videoList');
+            if (list) list.innerHTML = '<div class="loading">Loading videos...</div>';
+
+            try {
+                var resp = await fetch('/api/get-videos');
+                var data = await resp.json();
+                var videos = data.videos || [];
+
+                document.getElementById('statVideos').textContent = videos.length;
+
+                if (!list) return;
+
+                if (videos.length === 0) {
+                    list.innerHTML = '<div class="empty-state"><p>🎬</p><h3>No videos yet</h3><p>Add one using the form above.</p></div>';
+                    return;
+                }
+
+                list.innerHTML = videos.map(function(v) {
+                    return '<div class="admin-card">' +
+                        '<div class="admin-card-header" style="cursor:default;">' +
+                            '<div>' +
+                                '<div class="admin-card-title">' + v.title + '</div>' +
+                                '<div class="admin-card-meta">' + v.platform + ' &middot; Order: ' + v.display_order + ' &middot; Tags: ' + (v.tags || '—') + '</div>' +
+                            '</div>' +
+                            '<div>' +
+                                '<button class="btn btn-delete" onclick="deleteVideo(\'' + v.id + '\', \'' + v.title.replace(/'/g, "\\'") + '\')">Delete</button>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="admin-card-body" style="display:block; padding:0;">' +
+                            '<div style="position:relative; padding-bottom:30%; height:0; overflow:hidden;">' +
+                                '<iframe src="' + v.embed_url + '" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allowfullscreen></iframe>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+                }).join('');
+
+            } catch (err) {
+                if (list) list.innerHTML = '<div class="empty-state"><p>Error loading videos.</p></div>';
+            }
+        }
+
+        async function addVideo() {
+            var url   = document.getElementById('vUrl').value.trim();
+            var title = document.getElementById('vTitle').value.trim();
+            var desc  = document.getElementById('vDesc').value.trim();
+            var tags  = document.getElementById('vTags').value.trim();
+            var btn   = document.getElementById('addVideoBtn');
+            var msg   = document.getElementById('addVideoMsg');
+
+            if (!url || !title) {
+                msg.style.color = '#dc3545';
+                msg.textContent = 'URL and Title are required.';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+            msg.textContent = '';
+
+            try {
+                var resp = await fetch('/api/manage-video', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: _adminPassword, url: url, title: title, description: desc, tags: tags })
+                });
+                var data = await resp.json();
+
+                if (data.success) {
+                    msg.style.color = '#28a745';
+                    msg.textContent = '✅ Video added!';
+                    document.getElementById('vUrl').value   = '';
+                    document.getElementById('vTitle').value = '';
+                    document.getElementById('vDesc').value  = '';
+                    document.getElementById('vTags').value  = '';
+                    document.getElementById('vUrlPreview').textContent = '';
+                    await loadVideos();
+                } else {
+                    msg.style.color = '#dc3545';
+                    msg.textContent = '❌ ' + (data.error || 'Failed to add video');
+                }
+            } catch (err) {
+                msg.style.color = '#dc3545';
+                msg.textContent = '❌ Network error. Please try again.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '+ Add Video to Homepage';
+            }
+        }
+
+        async function deleteVideo(id, title) {
+            if (!confirm('Delete "' + title + '"? This will remove it from the homepage immediately.')) return;
+
+            try {
+                var resp = await fetch('/api/manage-video', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password: _adminPassword, id: id })
+                });
+                var data = await resp.json();
+
+                if (data.success) {
+                    showToast('Video deleted');
+                    await loadVideos();
+                } else {
+                    showToast('❌ ' + (data.error || 'Failed to delete'), true);
+                }
+            } catch (err) {
+                showToast('❌ Network error', true);
+            }
+        }
+
     </script>
 </body>
 </html>
