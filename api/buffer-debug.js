@@ -20,6 +20,35 @@ export default async function handler(req, res) {
     });
   }
 
+  // ?probe=facebook — sends a minimal test mutation and returns the raw Buffer response
+  // so we can see exactly what field names Buffer accepts / rejects
+  if (req.query.probe === 'facebook') {
+    const FACEBOOK_CHANNEL_ID = '69a4431d3f3b94a12105386d';
+    const dueAt = new Date(Date.now() + 3600 * 1000).toISOString();
+    const variants = [
+      { label: 'no-type',            mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}" })` },
+      { label: 'facebook.type.post', mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}", facebook: { type: post } })` },
+      { label: 'facebook.type.POST', mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}", facebook: { type: POST } })` },
+      { label: 'postType.post',      mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}", postType: post })` },
+    ];
+    const results = [];
+    for (const v of variants) {
+      try {
+        const r = await fetch(BUFFER_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+          body: JSON.stringify({ query: `mutation { ${v.mutation} { ... on PostActionSuccess { post { id } } ... on MutationError { message } } }` })
+        });
+        results.push({ label: v.label, status: r.status, body: await r.json() });
+      } catch (err) {
+        results.push({ label: v.label, error: err.message });
+      }
+      // stop after first success so we don't queue junk posts
+      if (results.at(-1)?.body?.data?.createPost?.post) break;
+    }
+    return res.status(200).json({ probe: 'facebook', results });
+  }
+
   // ?introspect=1 — deep schema dump for CreatePostInput including nested types
   if (req.query.introspect === '1') {
     const deepTypeFragment = `
