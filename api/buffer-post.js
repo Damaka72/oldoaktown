@@ -59,14 +59,9 @@ export default async function handler(req, res) {
       ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
       : text;
 
-    // Facebook and Instagram require an explicit postType
-    const postTypeField = (platformKey === 'facebook' || platformKey === 'instagram')
-      ? '\n          postType: post,'
-      : '';
-
-    // Include media URL when provided (required for Instagram, optional for others)
+    // Include media URLs when provided (required for Instagram, optional for others)
     const mediaField = mediaUrl
-      ? `\n          media: { url: ${JSON.stringify(mediaUrl)} },`
+      ? `\n          mediaUrls: [${JSON.stringify(mediaUrl)}],`
       : '';
 
     const mutation = `
@@ -76,7 +71,7 @@ export default async function handler(req, res) {
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}${postTypeField}${mediaField}
+          dueAt: ${JSON.stringify(dueAt)}${mediaField}
         }) {
           ... on PostActionSuccess {
             post { id text }
