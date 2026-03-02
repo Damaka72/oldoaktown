@@ -49,6 +49,41 @@ export default async function handler(req, res) {
     return res.status(200).json({ probe: 'facebook', results });
   }
 
+  // ?introspect=2 — list every field name on CreatePostInput (flat, easy to read)
+  if (req.query.introspect === '2') {
+    try {
+      const r = await fetch(BUFFER_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          query: `query {
+            __type(name: "CreatePostInput") {
+              name
+              inputFields {
+                name
+                description
+                type {
+                  name kind
+                  ofType { name kind }
+                }
+              }
+            }
+          }`
+        })
+      });
+      const d = await r.json();
+      // Return just the field names + type names for easy scanning
+      const fields = d?.data?.__type?.inputFields?.map(f => ({
+        field: f.name,
+        description: f.description,
+        type: f.type.name || `${f.type.kind}(${f.type.ofType?.name})`
+      }));
+      return res.status(200).json({ inputFields: fields, raw: d });
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
   // ?introspect=1 — deep schema dump for CreatePostInput including nested types
   if (req.query.introspect === '1') {
     const deepTypeFragment = `
