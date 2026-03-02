@@ -20,14 +20,47 @@ export default async function handler(req, res) {
     });
   }
 
-  // ?introspect=1 — returns all fields on CreatePostInput so we can find the correct media field
+  // ?introspect=1 — deep schema dump for CreatePostInput including nested types
   if (req.query.introspect === '1') {
+    const deepTypeFragment = `
+      name kind
+      enumValues { name }
+      inputFields {
+        name
+        type {
+          name kind
+          enumValues { name }
+          inputFields {
+            name
+            type { name kind ofType { name kind enumValues { name } } }
+          }
+          ofType { name kind enumValues { name } }
+        }
+      }
+      ofType {
+        name kind
+        enumValues { name }
+        inputFields {
+          name
+          type { name kind ofType { name kind } }
+        }
+      }
+    `;
     try {
       const r = await fetch(BUFFER_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
         body: JSON.stringify({
-          query: `query { __type(name: "CreatePostInput") { name inputFields { name type { name kind ofType { name kind } } } } }`
+          query: `query {
+            __type(name: "CreatePostInput") {
+              name
+              inputFields {
+                name
+                description
+                type { ${deepTypeFragment} }
+              }
+            }
+          }`
         })
       });
       const d = await r.json();
