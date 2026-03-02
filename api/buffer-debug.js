@@ -14,10 +14,27 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.BUFFER_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'BUFFER_API_KEY not set in Vercel environment variables',
       fix: 'Go to Vercel → Settings → Environment Variables and add BUFFER_API_KEY'
     });
+  }
+
+  // ?introspect=1 — returns all fields on CreatePostInput so we can find the correct media field
+  if (req.query.introspect === '1') {
+    try {
+      const r = await fetch(BUFFER_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          query: `query { __type(name: "CreatePostInput") { name inputFields { name type { name kind ofType { name kind } } } } }`
+        })
+      });
+      const d = await r.json();
+      return res.status(200).json(d);
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   }
 
   try {
