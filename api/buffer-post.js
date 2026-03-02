@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'BUFFER_API_KEY not configured in Vercel environment variables' });
   }
 
-  const { text, scheduledAt, platform, day } = req.body;
+  const { text, scheduledAt, platform, day, mediaUrl } = req.body;
   if (!text) return res.status(400).json({ error: 'Missing required field: text' });
 
   const platformKey = (platform || '').toLowerCase();
@@ -38,18 +38,45 @@ export default async function handler(req, res) {
     });
   }
 
+  // Instagram requires at least one media item — skip if no URL was provided
+  if (platformKey === 'instagram' && !mediaUrl) {
+    return res.status(200).json({
+      success: false,
+      skipped: true,
+      platform: platformKey,
+      reason: 'Instagram posts require an image or video. Add a photo/video URL to the card and re-send.',
+      day
+    });
+  }
+
   try {
     // If no scheduled time provided, default to 1 hour from now
     const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
 
+    // LinkedIn hard cap enforced by Buffer
+    const LINKEDIN_CHAR_LIMIT = 1248;
+    const postText = platformKey === 'linkedin' && text.length > LINKEDIN_CHAR_LIMIT
+      ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
+      : text;
+
+    // Facebook and Instagram require an explicit postType
+    const postTypeField = (platformKey === 'facebook' || platformKey === 'instagram')
+      ? '\n          postType: post,'
+      : '';
+
+    // Include media URL when provided (required for Instagram, optional for others)
+    const mediaField = mediaUrl
+      ? `\n          media: { url: ${JSON.stringify(mediaUrl)} },`
+      : '';
+
     const mutation = `
       mutation CreatePost {
         createPost(input: {
-          text: ${JSON.stringify(text)},
+          text: ${JSON.stringify(postText)},
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}
+          dueAt: ${JSON.stringify(dueAt)}${postTypeField}${mediaField}
         }) {
           ... on PostActionSuccess {
             post { id text }
