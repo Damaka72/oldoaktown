@@ -740,8 +740,11 @@
 
                 // Redirect to Stripe for paid tiers
                 const stripeUrl = PAYMENT_LINKS[selectedTier][billingFrequency];
-                // Pass email as a prefill param if supported (Stripe adds ?prefilled_email=)
-                const redirectUrl = stripeUrl + '?prefilled_email=' + encodeURIComponent(email);
+                // Pass email prefill and the submission ID so the webhook can
+                // match the Stripe session back to this business record.
+                const redirectUrl = stripeUrl
+                    + '?prefilled_email=' + encodeURIComponent(email)
+                    + '&client_reference_id=' + encodeURIComponent(data.submissionId);
                 window.location.href = redirectUrl;
             }
 

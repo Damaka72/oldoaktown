@@ -47,7 +47,9 @@ module.exports = async (req, res) => {
 
             case 'checkout.session.completed': {
                 const session = event.data.object;
-                const submissionId = session.metadata?.submission_id;
+                // Payment Links pass the ID via client_reference_id; custom checkout
+                // sessions use metadata.submission_id.
+                const submissionId = session.client_reference_id || session.metadata?.submission_id;
                 const tier = session.metadata?.tier;
 
                 if (!submissionId) {
@@ -55,15 +57,20 @@ module.exports = async (req, res) => {
                     break;
                 }
 
+                // Build the update; only override tier if the session carries
+                // it explicitly (custom checkout), otherwise keep whatever was
+                // saved when the business was submitted.
+                const updatePayload = {
+                    status: 'pending',
+                    stripe_customer_id: session.customer,
+                    stripe_subscription_id: session.subscription,
+                    stripe_payment_status: 'active'
+                };
+                if (tier) updatePayload.tier = tier;
+
                 const { error } = await supabase
                     .from('businesses')
-                    .update({
-                        status: 'pending',
-                        tier: tier || 'featured',
-                        stripe_customer_id: session.customer,
-                        stripe_subscription_id: session.subscription,
-                        stripe_payment_status: 'active'
-                    })
+                    .update(updatePayload)
                     .eq('id', submissionId);
 
                 if (error) {
