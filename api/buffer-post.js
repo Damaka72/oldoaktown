@@ -60,13 +60,14 @@ export default async function handler(req, res) {
       : text;
 
     // Include media when provided (required for Instagram, optional for others)
-    const mediaField = mediaUrl
-      ? `,\n          media: [{ url: ${JSON.stringify(mediaUrl)} }]`
+    // AssetsInput is the correct wrapper — not the top-level "media" field
+    const assetsField = mediaUrl
+      ? `,\n          assets: { photo: [{ url: ${JSON.stringify(mediaUrl)} }] }`
       : '';
 
-    // Facebook requires a post type — Buffer rejects without it (post, story, or reel)
-    const facebookField = platformKey === 'facebook'
-      ? `,\n          facebook: { type: post }`
+    // Facebook requires a post type inside metadata.facebook — not at top level
+    const metadataField = platformKey === 'facebook'
+      ? `,\n          metadata: { facebook: { type: post } }`
       : '';
 
     const mutation = `
@@ -76,7 +77,7 @@ export default async function handler(req, res) {
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}${mediaField}${facebookField}
+          dueAt: ${JSON.stringify(dueAt)}${assetsField}${metadataField}
         }) {
           __typename
           ... on PostActionSuccess {
