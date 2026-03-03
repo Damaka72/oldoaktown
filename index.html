@@ -2503,7 +2503,7 @@
         // ─────────────────────────────────────────
         // NEWS TICKER
         // ─────────────────────────────────────────
-        var tickerItems = [
+        var tickerFallback = [
             'HS2 Old Oak Common station platforms now being installed',
             'OPDC approves first 500 homes in Old Oak Mile development',
             'New bus routes connecting Old Oak to Central London launched',
@@ -2512,14 +2512,31 @@
             'Old Oak Community Forum meets monthly — all welcome'
         ];
 
-        var ticker = document.getElementById('tickerContent');
-        if (ticker) {
+        function renderTicker(items) {
+            var ticker = document.getElementById('tickerContent');
+            if (!ticker || !items.length) return;
             var html = '';
-            tickerItems.concat(tickerItems).forEach(function(item) {
-                html += '<span class="ticker-item">' + item + '</span>';
+            // Duplicate items so the scroll animation loops seamlessly
+            items.concat(items).forEach(function(item) {
+                var text = typeof item === 'string' ? item : item.title;
+                var url = item.url || null;
+                if (url) {
+                    html += '<span class="ticker-item"><a href="' + url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + text + '</a></span>';
+                } else {
+                    html += '<span class="ticker-item">' + text + '</span>';
+                }
             });
             ticker.innerHTML = html;
         }
+
+        fetch('/api/get-ticker-news')
+            .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+            .then(function(data) {
+                renderTicker((data.items && data.items.length) ? data.items : tickerFallback);
+            })
+            .catch(function() {
+                renderTicker(tickerFallback);
+            });
 
         // ─────────────────────────────────────────
         // ARTICLE MODAL
