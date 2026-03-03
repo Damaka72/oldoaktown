@@ -64,11 +64,6 @@ export default async function handler(req, res) {
       ? `,\n          media: [{ url: ${JSON.stringify(mediaUrl)} }]`
       : '';
 
-    // Facebook requires a post type in its platform-specific nested field
-    const facebookField = platformKey === 'facebook'
-      ? `,\n          facebook: { type: post }`
-      : '';
-
     const mutation = `
       mutation CreatePost {
         createPost(input: {
@@ -76,8 +71,9 @@ export default async function handler(req, res) {
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}${mediaField}${facebookField}
+          dueAt: ${JSON.stringify(dueAt)}${mediaField}
         }) {
+          __typename
           ... on PostActionSuccess {
             post { id text }
           }
