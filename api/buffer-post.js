@@ -24,9 +24,9 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const apiKey = process.env.BUFFER_API_KEY;
+  const apiKey = req.headers['x-buffer-key'] || process.env.BUFFER_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'BUFFER_API_KEY not configured in Vercel environment variables' });
+    return res.status(500).json({ error: 'No Buffer API key — set BUFFER_API_KEY in Vercel env vars or enter it in Settings' });
   }
 
   const { text, scheduledAt, platform, day, mediaUrl } = req.body;
