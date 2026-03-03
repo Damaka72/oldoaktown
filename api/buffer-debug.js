@@ -49,36 +49,75 @@ export default async function handler(req, res) {
     return res.status(200).json({ probe: 'facebook', results });
   }
 
-  // ?introspect=2 — list every field name on CreatePostInput (flat, easy to read)
-  if (req.query.introspect === '2') {
+  // ?type=TypeName — introspect any named type (e.g. PostInputMetaData, AssetsInput)
+  if (req.query.type) {
     try {
       const r = await fetch(BUFFER_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
         body: JSON.stringify({
           query: `query {
-            __type(name: "CreatePostInput") {
-              name
+            __type(name: ${JSON.stringify(req.query.type)}) {
+              name kind
               inputFields {
-                name
-                description
+                name description
                 type {
                   name kind
-                  ofType { name kind }
+                  enumValues { name }
+                  inputFields {
+                    name description
+                    type { name kind ofType { name kind } }
+                  }
+                  ofType { name kind enumValues { name } }
                 }
               }
+              enumValues { name description }
             }
           }`
         })
       });
-      const d = await r.json();
-      // Return just the field names + type names for easy scanning
-      const fields = d?.data?.__type?.inputFields?.map(f => ({
-        field: f.name,
-        description: f.description,
-        type: f.type.name || `${f.type.kind}(${f.type.ofType?.name})`
-      }));
-      return res.status(200).json({ inputFields: fields, raw: d });
+      return res.status(200).json(await r.json());
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
+  // ?introspect=2 — CreatePostInput + PostInputMetaData + AssetsInput schemas
+  if (req.query.introspect === '2') {
+    const introspectType = async (name) => {
+      const r = await fetch(BUFFER_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          query: `query {
+            __type(name: ${JSON.stringify(name)}) {
+              name kind
+              inputFields {
+                name description
+                type {
+                  name kind
+                  enumValues { name }
+                  inputFields {
+                    name description
+                    type { name kind ofType { name kind enumValues { name } } }
+                  }
+                  ofType { name kind enumValues { name } }
+                }
+              }
+              enumValues { name }
+            }
+          }`
+        })
+      });
+      return r.json();
+    };
+    try {
+      const [createPost, metaData, assetsInput] = await Promise.all([
+        introspectType('CreatePostInput'),
+        introspectType('PostInputMetaData'),
+        introspectType('AssetsInput'),
+      ]);
+      return res.status(200).json({ createPost, metaData, assetsInput });
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -134,48 +173,80 @@ export default async function handler(req, res) {
     }
   }
 
-  try {
-    const response = await fetch(BUFFER_API, {
+  const introspectType = async (name) => {
+    const r = await fetch(BUFFER_API, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        query: `
-          query {
-            account {
-              id
-              name
-              email
-              organizations {
+        query: `query {
+          __type(name: ${JSON.stringify(name)}) {
+            name kind
+            inputFields {
+              name description
+              type {
+                name kind
+                enumValues { name }
+                inputFields {
+                  name description
+                  type { name kind ofType { name kind enumValues { name } } }
+                }
+                ofType { name kind enumValues { name } }
+              }
+            }
+            enumValues { name }
+          }
+        }`
+      })
+    });
+    return r.json();
+  };
+
+  try {
+    const [response, metaData, assetsInput] = await Promise.all([
+      fetch(BUFFER_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          query: `
+            query {
+              account {
                 id
                 name
-                channels {
+                email
+                organizations {
                   id
                   name
-                  service
-                  serviceId
-                  avatar
+                  channels {
+                    id
+                    name
+                    service
+                    serviceId
+                    avatar
+                  }
                 }
               }
             }
-          }
-        `
-      })
-    });
+          `
+        })
+      }),
+      introspectType('PostInputMetaData'),
+      introspectType('AssetsInput'),
+    ]);
 
     const data = await response.json();
 
     if (data.errors) {
-      return res.status(502).json({ 
+      return res.status(502).json({
         error: 'Buffer API error — likely invalid API key',
-        details: data.errors 
+        details: data.errors
       });
     }
 
     const account = data?.data?.account;
-    const channels = account?.organizations?.flatMap(o => 
+    const channels = account?.organizations?.flatMap(o =>
       (o.channels || []).map(c => ({
         id: c.id,
         name: c.name,
@@ -188,7 +259,8 @@ export default async function handler(req, res) {
       success: true,
       account: { id: account?.id, name: account?.name, email: account?.email },
       channels,
-      message: `Found ${channels.length} connected channel(s)`
+      message: `Found ${channels.length} connected channel(s)`,
+      schema: { metaData, assetsInput },
     });
 
   } catch (err) {
