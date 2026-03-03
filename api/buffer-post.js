@@ -1,12 +1,14 @@
 /**
- * Old Oak Town — Buffer GraphQL Proxy
+ * Old Oak Town — Buffer REST API Proxy
  * POST /api/buffer-post
  *
  * Routes each post to the correct Buffer channel by platform.
+ * Uses Buffer's REST API v1 — simple, documented, no GraphQL.
+ *
  * Required env var: BUFFER_API_KEY
  */
 
-const BUFFER_API = 'https://api.buffer.com';
+const BUFFER_REST_API = 'https://api.buffer.com/1/updates/create.json';
 
 const CHANNEL_IDS = {
   linkedin:  '69a213f74be271803d75d07e',
@@ -53,70 +55,49 @@ export default async function handler(req, res) {
     // If no scheduled time provided, default to 1 hour from now
     const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
 
-    // LinkedIn hard cap enforced by Buffer
+    // LinkedIn hard cap
     const LINKEDIN_CHAR_LIMIT = 1248;
     const postText = platformKey === 'linkedin' && text.length > LINKEDIN_CHAR_LIMIT
       ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
       : text;
 
-    // Include media when provided (required for Instagram, optional for others)
-    // AssetsInput is the correct wrapper — not the top-level "media" field
-    const assetsField = mediaUrl
-      ? `,\n          assets: { photo: [{ url: ${JSON.stringify(mediaUrl)} }] }`
-      : '';
+    // Buffer REST v1 expects scheduled_at as a Unix timestamp (seconds)
+    const scheduledAtUnix = Math.floor(new Date(dueAt).getTime() / 1000);
 
-    // Facebook requires a post type inside metadata.facebook — not at top level
-    const metadataField = platformKey === 'facebook'
-      ? `,\n          metadata: { facebook: { type: post } }`
-      : '';
+    const params = new URLSearchParams();
+    params.append('profile_ids[]', channelId);
+    params.append('text', postText);
+    params.append('scheduled_at', scheduledAtUnix.toString());
+    if (mediaUrl) {
+      params.append('media[photo]', mediaUrl);
+    }
 
-    const mutation = `
-      mutation CreatePost {
-        createPost(input: {
-          text: ${JSON.stringify(postText)},
-          channelId: ${JSON.stringify(channelId)},
-          schedulingType: automatic,
-          mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}${assetsField}${metadataField}
-        }) {
-          __typename
-          ... on PostActionSuccess {
-            post { id text }
-          }
-          ... on MutationError {
-            message
-          }
-        }
-      }
-    `;
-
-    const postRes = await fetch(BUFFER_API, {
+    const postRes = await fetch(BUFFER_REST_API, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify({ query: mutation })
+      body: params.toString()
     });
 
     const postData = await postRes.json();
     console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
-    if (postData.errors) {
-      return res.status(502).json({ error: 'Buffer API error', details: postData.errors });
+    if (!postRes.ok) {
+      return res.status(502).json({ error: 'Buffer API error', details: postData });
     }
 
-    const result = postData?.data?.createPost;
-    if (result?.message) {
-      return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
+    const created = postData?.updates?.[0];
+    if (!created) {
+      return res.status(502).json({ error: 'Buffer returned no update', details: postData });
     }
 
-    const created = result?.post;
-    console.log(`✓ ${platformKey} post queued: ${created?.id} | ${day}`);
+    console.log(`✓ ${platformKey} post queued: ${created.id} | ${day}`);
 
     return res.status(200).json({
       success: true,
-      postId: created?.id,
+      postId: created.id,
       scheduledAt: dueAt,
       platform: platformKey,
       day
