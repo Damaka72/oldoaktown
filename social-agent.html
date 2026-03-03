@@ -725,45 +725,20 @@ function openSettings() {
 }
 
 async function postOneToBuffer(apiKey, { platform, text, scheduledAt, mediaUrl, day }) {
-  const platformKey = platform.toLowerCase();
-  const channelId   = CHANNEL_IDS[platformKey];
-
-  if (!channelId) throw new Error(`Unknown platform: ${platform}`);
-
-  // Instagram requires media
-  if (platformKey === 'instagram' && !mediaUrl) {
-    return { skipped: true, reason: 'Instagram requires an image URL' };
-  }
-
-  const LINKEDIN_LIMIT = 1248;
-  const postText = platformKey === 'linkedin' && text.length > LINKEDIN_LIMIT
-    ? text.slice(0, LINKEDIN_LIMIT - 1) + '…'
-    : text;
-
-  const scheduledAtUnix = Math.floor(new Date(scheduledAt).getTime() / 1000);
-
-  const params = new URLSearchParams();
-  params.append('profile_ids[]', channelId);
-  params.append('text',          postText);
-  params.append('scheduled_at',  scheduledAtUnix.toString());
-  if (mediaUrl) params.append('media[photo]', mediaUrl);
-
-  const res  = await fetch(BUFFER_REST_API, {
+  const res = await fetch('/api/buffer-post', {
     method:  'POST',
     headers: {
-      'Content-Type':  'application/x-www-form-urlencoded',
-      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      ...(apiKey ? { 'X-Buffer-Key': apiKey } : {}),
     },
-    body: params.toString(),
+    body: JSON.stringify({ platform, text, scheduledAt, mediaUrl, day }),
   });
 
   const data = await res.json();
   if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+  if (data.skipped) return { skipped: true, reason: data.reason };
 
-  const update = data?.updates?.[0];
-  if (!update) throw new Error('Buffer returned no update');
-
-  return { success: true, postId: update.id };
+  return { success: true, postId: data.postId };
 }
 
 // ═══════════════════════════════════════════════════════════════
