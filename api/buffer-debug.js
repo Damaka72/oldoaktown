@@ -82,36 +82,42 @@ export default async function handler(req, res) {
     }
   }
 
-  // ?introspect=2 — list every field name on CreatePostInput (flat, easy to read)
+  // ?introspect=2 — CreatePostInput + PostInputMetaData + AssetsInput schemas
   if (req.query.introspect === '2') {
-    try {
+    const introspectType = async (name) => {
       const r = await fetch(BUFFER_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
         body: JSON.stringify({
           query: `query {
-            __type(name: "CreatePostInput") {
-              name
+            __type(name: ${JSON.stringify(name)}) {
+              name kind
               inputFields {
-                name
-                description
+                name description
                 type {
                   name kind
-                  ofType { name kind }
+                  enumValues { name }
+                  inputFields {
+                    name description
+                    type { name kind ofType { name kind enumValues { name } } }
+                  }
+                  ofType { name kind enumValues { name } }
                 }
               }
+              enumValues { name }
             }
           }`
         })
       });
-      const d = await r.json();
-      // Return just the field names + type names for easy scanning
-      const fields = d?.data?.__type?.inputFields?.map(f => ({
-        field: f.name,
-        description: f.description,
-        type: f.type.name || `${f.type.kind}(${f.type.ofType?.name})`
-      }));
-      return res.status(200).json({ inputFields: fields, raw: d });
+      return r.json();
+    };
+    try {
+      const [createPost, metaData, assetsInput] = await Promise.all([
+        introspectType('CreatePostInput'),
+        introspectType('PostInputMetaData'),
+        introspectType('AssetsInput'),
+      ]);
+      return res.status(200).json({ createPost, metaData, assetsInput });
     } catch (err) {
       return res.status(500).json({ error: err.message });
     }
