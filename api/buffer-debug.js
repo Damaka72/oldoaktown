@@ -20,16 +20,16 @@ export default async function handler(req, res) {
     });
   }
 
-  // ?probe=facebook — sends a minimal test mutation and returns the raw Buffer response
-  // so we can see exactly what field names Buffer accepts / rejects
+  // ?probe=facebook — tests metadata.facebook variants to confirm correct field names
   if (req.query.probe === 'facebook') {
     const FACEBOOK_CHANNEL_ID = '69a4431d3f3b94a12105386d';
     const dueAt = new Date(Date.now() + 3600 * 1000).toISOString();
+    const base = `text: "probe-test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}"`;
     const variants = [
-      { label: 'no-type',            mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}" })` },
-      { label: 'facebook.type.post', mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}", facebook: { type: post } })` },
-      { label: 'facebook.type.POST', mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}", facebook: { type: POST } })` },
-      { label: 'postType.post',      mutation: `createPost(input: { text: "test", channelId: "${FACEBOOK_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}", postType: post })` },
+      { label: 'metadata.facebook.type.post',    input: `${base}, metadata: { facebook: { type: post } }` },
+      { label: 'metadata.facebook.type.POST',    input: `${base}, metadata: { facebook: { type: POST } }` },
+      { label: 'metadata.facebook.postType.post',input: `${base}, metadata: { facebook: { postType: post } }` },
+      { label: 'no-metadata',                    input: base },
     ];
     const results = [];
     for (const v of variants) {
@@ -37,16 +37,45 @@ export default async function handler(req, res) {
         const r = await fetch(BUFFER_API, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-          body: JSON.stringify({ query: `mutation { ${v.mutation} { ... on PostActionSuccess { post { id } } ... on MutationError { message } } }` })
+          body: JSON.stringify({ query: `mutation { createPost(input: { ${v.input} }) { __typename ... on PostActionSuccess { post { id } } ... on MutationError { message } } }` })
         });
         results.push({ label: v.label, status: r.status, body: await r.json() });
       } catch (err) {
         results.push({ label: v.label, error: err.message });
       }
-      // stop after first success so we don't queue junk posts
-      if (results.at(-1)?.body?.data?.createPost?.post) break;
+      // stop after first success so we don't create real scheduled posts
+      if (results.at(-1)?.body?.data?.createPost?.post?.id) break;
     }
     return res.status(200).json({ probe: 'facebook', results });
+  }
+
+  // ?probe=instagram — tests assets field variants to confirm correct media field names
+  if (req.query.probe === 'instagram') {
+    const INSTAGRAM_CHANNEL_ID = '69a43f953f3b94a121052f11';
+    const dueAt = new Date(Date.now() + 3600 * 1000).toISOString();
+    const testUrl = 'https://oldoaktown.co.uk/images/logo.png';
+    const base = `text: "probe-test", channelId: "${INSTAGRAM_CHANNEL_ID}", schedulingType: automatic, mode: customScheduled, dueAt: "${dueAt}"`;
+    const variants = [
+      { label: 'assets.photo',  input: `${base}, assets: { photo: [{ url: "${testUrl}" }] }` },
+      { label: 'assets.photos', input: `${base}, assets: { photos: [{ url: "${testUrl}" }] }` },
+      { label: 'assets.image',  input: `${base}, assets: { image: [{ url: "${testUrl}" }] }` },
+      { label: 'assets.images', input: `${base}, assets: { images: [{ url: "${testUrl}" }] }` },
+    ];
+    const results = [];
+    for (const v of variants) {
+      try {
+        const r = await fetch(BUFFER_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+          body: JSON.stringify({ query: `mutation { createPost(input: { ${v.input} }) { __typename ... on PostActionSuccess { post { id } } ... on MutationError { message } } }` })
+        });
+        results.push({ label: v.label, status: r.status, body: await r.json() });
+      } catch (err) {
+        results.push({ label: v.label, error: err.message });
+      }
+      if (results.at(-1)?.body?.data?.createPost?.post?.id) break;
+    }
+    return res.status(200).json({ probe: 'instagram', results });
   }
 
   // ?type=TypeName — introspect any named type (e.g. PostInputMetaData, AssetsInput)
