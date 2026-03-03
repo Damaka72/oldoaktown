@@ -64,6 +64,11 @@ export default async function handler(req, res) {
       ? `,\n          media: [{ url: ${JSON.stringify(mediaUrl)} }]`
       : '';
 
+    // Facebook requires a post type — Buffer rejects without it (post, story, or reel)
+    const facebookField = platformKey === 'facebook'
+      ? `,\n          facebook: { type: post }`
+      : '';
+
     const mutation = `
       mutation CreatePost {
         createPost(input: {
@@ -71,7 +76,7 @@ export default async function handler(req, res) {
           channelId: ${JSON.stringify(channelId)},
           schedulingType: automatic,
           mode: customScheduled,
-          dueAt: ${JSON.stringify(dueAt)}${mediaField}
+          dueAt: ${JSON.stringify(dueAt)}${mediaField}${facebookField}
         }) {
           __typename
           ... on PostActionSuccess {
