@@ -686,9 +686,9 @@
 
         .ticker-content {
             display: flex;
-            animation: scroll-left 40s linear infinite;
-            padding-left: 100%;
+            animation: ticker-scroll 20s linear infinite;
             white-space: nowrap;
+            will-change: transform;
         }
 
         .ticker-content:hover { animation-play-state: paused; }
@@ -699,10 +699,10 @@
             padding: 0 3rem;
             font-size: 0.95rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
         }
 
-        .ticker-item:hover { transform: scale(1.05); }
+        .ticker-item:hover { opacity: 0.85; }
 
         .ticker-item::before {
             content: "●";
@@ -711,7 +711,7 @@
             color: var(--cream);
         }
 
-        @keyframes scroll-left {
+        @keyframes ticker-scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
@@ -2516,27 +2516,38 @@
             var ticker = document.getElementById('tickerContent');
             if (!ticker || !items.length) return;
             var html = '';
-            // Duplicate items so the scroll animation loops seamlessly
+            // Duplicate items so the -50% translateX animation loops seamlessly
             items.concat(items).forEach(function(item) {
                 var text = typeof item === 'string' ? item : item.title;
-                var url = item.url || null;
+                var url = (typeof item === 'object' && item.url) ? item.url : null;
                 if (url) {
                     html += '<span class="ticker-item"><a href="' + url + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + text + '</a></span>';
                 } else {
                     html += '<span class="ticker-item">' + text + '</span>';
                 }
             });
+            // Restart animation cleanly when content is refreshed
+            ticker.style.animation = 'none';
             ticker.innerHTML = html;
+            // Force reflow then re-apply animation
+            ticker.offsetWidth; // eslint-disable-line no-unused-expressions
+            ticker.style.animation = '';
         }
 
-        fetch('/api/get-ticker-news')
-            .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
-            .then(function(data) {
-                renderTicker((data.items && data.items.length) ? data.items : tickerFallback);
-            })
-            .catch(function() {
-                renderTicker(tickerFallback);
-            });
+        function loadTicker() {
+            fetch('/api/get-ticker-news')
+                .then(function(res) { return res.ok ? res.json() : Promise.reject(); })
+                .then(function(data) {
+                    renderTicker((data.items && data.items.length) ? data.items : tickerFallback);
+                })
+                .catch(function() {
+                    renderTicker(tickerFallback);
+                });
+        }
+
+        loadTicker();
+        // Re-fetch every hour so the ticker picks up the daily update automatically
+        setInterval(loadTicker, 60 * 60 * 1000);
 
         // ─────────────────────────────────────────
         // ARTICLE MODAL

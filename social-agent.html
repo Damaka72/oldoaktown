@@ -677,13 +677,14 @@ textarea { min-height: 68px; }
   <div class="modal">
     <div class="make-badge">⚡ Buffer Direct Integration</div>
     <h2>Buffer Setup</h2>
-    <p>Posts go directly to Buffer's API via oldoaktown.co.uk/api/buffer-post — fully serverless, no Make.com needed. Channel IDs (Facebook, Instagram, LinkedIn) are configured in <code>api/buffer-post.js</code> on GitHub.</p>
+    <p>Posts go directly to Buffer's API from your browser — no server required. Your API key is saved locally in this browser only.</p>
     <div class="modal-field">
-      <label>Buffer proxy endpoint</label>
-      <input type="text" value="/api/buffer-post" readonly style="opacity:0.6;cursor:not-allowed">
+      <label>Buffer API Key</label>
+      <input type="password" id="bufferApiKeyInput" placeholder="Paste your Buffer API key here…" style="font-family:monospace">
     </div>
     <div class="modal-actions">
-      <button class="btn-primary" onclick="closeSettings()">Close</button>
+      <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
+      <button onclick="closeSettings()">Close</button>
     </div>
   </div>
 </div>
@@ -695,8 +696,75 @@ textarea { min-height: 68px; }
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTS
 // ═══════════════════════════════════════════════════════════════
-const BUFFER_PROXY = '/api/buffer-post';
-const SESSION_KEY  = 'oot_drafts_v2';   // localStorage key
+const BUFFER_REST_API = 'https://api.buffer.com/1/updates/create.json';
+const BUFFER_KEY_STORE = 'oot_buffer_key';
+const SESSION_KEY      = 'oot_drafts_v2';
+
+const CHANNEL_IDS = {
+  linkedin:  '69a213f74be271803d75d07e',
+  instagram: '69a43f953f3b94a121052f11',
+  facebook:  '69a4431d3f3b94a12105386d',
+};
+
+function getApiKey() {
+  return localStorage.getItem(BUFFER_KEY_STORE) || '';
+}
+
+function saveApiKey() {
+  const key = document.getElementById('bufferApiKeyInput').value.trim();
+  if (!key) { showToast('Please enter your Buffer API key', 'error'); return; }
+  localStorage.setItem(BUFFER_KEY_STORE, key);
+  showToast('Buffer API key saved', 'done');
+  closeSettings();
+}
+
+function openSettings() {
+  const modal = document.getElementById('settingsModal');
+  document.getElementById('bufferApiKeyInput').value = getApiKey();
+  modal.classList.add('open');
+}
+
+async function postOneToBuffer(apiKey, { platform, text, scheduledAt, mediaUrl, day }) {
+  const platformKey = platform.toLowerCase();
+  const channelId   = CHANNEL_IDS[platformKey];
+
+  if (!channelId) throw new Error(`Unknown platform: ${platform}`);
+
+  // Instagram requires media
+  if (platformKey === 'instagram' && !mediaUrl) {
+    return { skipped: true, reason: 'Instagram requires an image URL' };
+  }
+
+  const LINKEDIN_LIMIT = 1248;
+  const postText = platformKey === 'linkedin' && text.length > LINKEDIN_LIMIT
+    ? text.slice(0, LINKEDIN_LIMIT - 1) + '…'
+    : text;
+
+  const scheduledAtUnix = Math.floor(new Date(scheduledAt).getTime() / 1000);
+
+  const params = new URLSearchParams();
+  params.append('profile_ids[]', channelId);
+  params.append('text',          postText);
+  params.append('scheduled_at',  scheduledAtUnix.toString());
+  if (mediaUrl) params.append('media[photo]', mediaUrl);
+
+  const res  = await fetch(BUFFER_REST_API, {
+    method:  'POST',
+    headers: {
+      'Content-Type':  'application/x-www-form-urlencoded',
+      'Authorization': `Bearer ${apiKey}`,
+    },
+    body: params.toString(),
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+
+  const update = data?.updates?.[0];
+  if (!update) throw new Error('Buffer returned no update');
+
+  return { success: true, postId: update.id };
+}
 
 // ═══════════════════════════════════════════════════════════════
 // STATE
@@ -796,7 +864,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // ═══════════════════════════════════════════════════════════════
 // SETTINGS MODAL
 // ═══════════════════════════════════════════════════════════════
-function openSettings()  { document.getElementById('settingsModal').classList.add('open'); }
 function closeSettings() { document.getElementById('settingsModal').classList.remove('open'); }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1133,6 +1200,13 @@ async function sendToBuffer() {
   const approved = state.posts.filter(p => p.status === 'approved');
   if (!approved.length) { showToast('No approved posts to send', 'error'); return; }
 
+  const apiKey = getApiKey();
+  if (!apiKey) {
+    showToast('Add your Buffer API key first — click ⚙ Buffer Info', 'error');
+    openSettings();
+    return;
+  }
+
   setStep(4);
   showPhase('sending');
 
@@ -1166,43 +1240,26 @@ async function sendToBuffer() {
     rgrid.appendChild(rc);
 
     try {
-      const res = await fetch(BUFFER_PROXY, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          platform:      post.platform,
-          text:          post.caption + '\n\n' + post.hashtags,
-          caption:       post.caption,
-          hashtags:      post.hashtags,
-          day:           post.day,
-          scheduledDate: post.scheduledDate,
-          bestTime:      post.bestTime,
-          scheduledAt:   buildScheduledISO(post.scheduledDate, post.bestTime),
-          source:        'Old Oak Town Social Agent',
-          weekTheme:     document.getElementById('weekTheme').value,
-          mediaUrl:      post.mediaUrl || ''
-        })
+      const result = await postOneToBuffer(apiKey, {
+        platform:    post.platform,
+        text:        post.caption + '\n\n' + post.hashtags,
+        scheduledAt: buildScheduledISO(post.scheduledDate, post.bestTime),
+        mediaUrl:    post.mediaUrl || '',
+        day:         post.day,
       });
 
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && data.success) {
+      if (result.success) {
         rc.querySelector('.result-badge').className   = 'result-badge queued';
         rc.querySelector('.result-badge').textContent = 'Queued ✓';
         post.status = 'sent';
         setStatus(post.id, 'sent');
         successCount++;
         addLog(slog, `> ✓ Queued in Buffer`, 0, 'done');
-      } else if (res.ok && data.skipped) {
+      } else if (result.skipped) {
         rc.querySelector('.result-badge').className   = 'result-badge skipped';
         rc.querySelector('.result-badge').textContent = 'No image ↷';
         skippedCount++;
         addLog(slog, `> ↷ Instagram skipped — add a photo URL to this post`, 0, 'info');
-      } else {
-        const detail = data.details
-          ? (typeof data.details === 'string' ? data.details : JSON.stringify(data.details))
-          : data.error || `HTTP ${res.status}`;
-        throw new Error(detail);
       }
     } catch (err) {
       rc.querySelector('.result-badge').className   = 'result-badge failed';
@@ -1221,11 +1278,11 @@ async function sendToBuffer() {
   if (failCount === 0) {
     addLog(slog, `> ✓ Done — ${successCount} queued in Buffer${skippedNote}`, 0, 'done');
     setStep(5);
-    clearSession(); // ← all sent successfully — clean up storage
+    clearSession();
     showToast(`🎉 ${successCount} posts sent to Buffer!`, 'make');
   } else {
-    saveSession(); // ← partial send — keep remaining drafts
-    addLog(slog, `> ${successCount} sent, ${failCount} failed${skippedNote}. Check BUFFER_API_KEY in Vercel.`, 0);
+    saveSession();
+    addLog(slog, `> ${successCount} sent, ${failCount} failed${skippedNote}.`, 0);
     showToast(`${successCount} sent, ${failCount} failed`, 'error');
   }
 
