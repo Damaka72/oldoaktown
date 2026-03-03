@@ -49,6 +49,39 @@ export default async function handler(req, res) {
     return res.status(200).json({ probe: 'facebook', results });
   }
 
+  // ?type=TypeName — introspect any named type (e.g. PostInputMetaData, AssetsInput)
+  if (req.query.type) {
+    try {
+      const r = await fetch(BUFFER_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          query: `query {
+            __type(name: ${JSON.stringify(req.query.type)}) {
+              name kind
+              inputFields {
+                name description
+                type {
+                  name kind
+                  enumValues { name }
+                  inputFields {
+                    name description
+                    type { name kind ofType { name kind } }
+                  }
+                  ofType { name kind enumValues { name } }
+                }
+              }
+              enumValues { name description }
+            }
+          }`
+        })
+      });
+      return res.status(200).json(await r.json());
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
+  }
+
   // ?introspect=2 — list every field name on CreatePostInput (flat, easy to read)
   if (req.query.introspect === '2') {
     try {
