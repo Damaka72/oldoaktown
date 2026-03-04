@@ -6,7 +6,7 @@ const STRIPE_CONFIG = {
     // These are pre-built Stripe-hosted checkout pages that handle subscriptions
     paymentLinks: {
         featured: {
-            monthly: 'https://buy.stripe.com/3cI14p4Gz51GeGWgEUes000',  // £35/month subscription
+            monthly: 'https://buy.stripe.com/test_3cI14p4Gz51GeGWgEUes000',  // £35/month subscription (test mode)
             annual: 'https://buy.stripe.com/28E9AV6OHcu8cyOcoEes002'     // £126/year subscription
         },
         premium: {
