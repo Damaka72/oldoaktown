@@ -337,16 +337,22 @@
         const SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
 
-        // Simple admin password check (client-side only - good enough for MVP)
-        const ADMIN_PASSWORD = 'Salvation2026!';
+        // Password stored as SHA-256 hash — plaintext never in source code
+        const ADMIN_PASSWORD_HASH = '741192329bc285a0e833f3a2eaa303338c3abec48686001907334b59a819d50b';
         let _adminPassword = '';
         let currentTab = 'pending';
         let allData = [];
 
-        function login() {
+        async function sha256(str) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function login() {
             const pw = document.getElementById('passwordInput').value;
-            if (pw === ADMIN_PASSWORD) {
-                _adminPassword = pw;
+            const hash = await sha256(pw);
+            if (hash === ADMIN_PASSWORD_HASH) {
+                _adminPassword = pw; // kept in memory only, never in source or storage
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 sessionStorage.setItem('adminAuth', 'true');
@@ -357,16 +363,16 @@
         }
 
         function logout() {
+            _adminPassword = '';
             sessionStorage.removeItem('adminAuth');
             location.reload();
         }
 
-        // Check if already logged in
+        // Returning session: still requires re-entering password on hard reload
+        // sessionStorage cleared on tab close, so this only persists within the same tab session
         if (sessionStorage.getItem('adminAuth') === 'true') {
-            _adminPassword = ADMIN_PASSWORD;
-            document.getElementById('loginScreen').style.display = 'none';
-            document.getElementById('dashboard').style.display = 'block';
-            loadDashboard();
+            // Prompt for password again to repopulate _adminPassword (needed for API calls)
+            document.getElementById('loginScreen').style.display = 'flex';
         }
 
         async function fetchAllBusinesses() {
