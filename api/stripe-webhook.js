@@ -6,7 +6,11 @@ const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(
+    process.env.NODE_ENV === 'production'
+        ? process.env.STRIPE_SECRET_KEY
+        : process.env.STRIPE_SECRET_KEY_TEST
+);
 const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_SERVICE_KEY
