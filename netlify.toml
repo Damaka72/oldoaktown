@@ -13,6 +13,18 @@
 # SMTP_FROM - From email address
 # ADMIN_EMAIL - Admin email to receive notifications
 
+# ── Admin HTTP Basic Auth (Netlify Pro / Business plan required) ──────────────
+# Uncomment this block and set ADMIN_BASIC_AUTH in Netlify dashboard env vars
+# to add a second layer of auth in front of /admin/* at the CDN edge.
+# Format for ADMIN_BASIC_AUTH:  username:password
+# [[redirects]]
+#   from = "/admin/*"
+#   to = "/admin/:splat"
+#   status = 200
+#   force = true
+#   [redirects.headers]
+#     Basic-Auth = "oldoak:{ADMIN_BASIC_AUTH}"
+
 # Redirect rules
 [[redirects]]
   from = "/api/*"

@@ -352,6 +352,21 @@
     </style>
 </head>
 <body>
+
+    <!-- Login Screen -->
+    <div id="loginScreen" style="display:flex; align-items:center; justify-content:center; min-height:100vh; background:#2D5016; position:fixed; top:0; left:0; width:100%; z-index:9999;">
+        <div style="background:white; padding:3rem; border-radius:15px; max-width:400px; width:90%; text-align:center;">
+            <img src="../images/logo.png" alt="Old Oak Town" style="height:80px; margin-bottom:1rem;">
+            <h1 style="color:#2D5016; margin-bottom:0.5rem;">Admin Access</h1>
+            <p style="color:#666; margin-bottom:2rem;">Content Review Dashboard</p>
+            <input type="password" id="reviewPasswordInput" placeholder="Enter admin password"
+                   style="width:100%; padding:1rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-bottom:1rem;"
+                   onkeypress="if(event.key==='Enter') reviewLogin()">
+            <button onclick="reviewLogin()" style="width:100%; background:#2D5016; color:white; border:none; padding:1rem; border-radius:5px; font-size:1rem; font-weight:600; cursor:pointer;">Sign In</button>
+            <p id="reviewLoginError" style="color:#dc3545; margin-top:1rem; display:none;">Incorrect password</p>
+        </div>
+    </div>
+
     <!-- Header -->
     <div class="header">
         <h1>📋 Content Review Dashboard</h1>
@@ -440,6 +455,34 @@
             </form>
         </div>
     </div>
+
+    <script>
+        // ── Auth gate ──────────────────────────────────────────────────────────
+        const REVIEW_PASSWORD_HASH = '741192329bc285a0e833f3a2eaa303338c3abec48686001907334b59a819d50b';
+
+        async function sha256(str) {
+            const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function reviewLogin() {
+            const pw = document.getElementById('reviewPasswordInput').value;
+            const hash = await sha256(pw);
+            if (hash === REVIEW_PASSWORD_HASH) {
+                document.getElementById('loginScreen').style.display = 'none';
+                sessionStorage.setItem('adminAuth', 'true');
+            } else {
+                document.getElementById('reviewLoginError').style.display = 'block';
+            }
+        }
+
+        // Hide login screen if already authenticated in this tab session
+        if (sessionStorage.getItem('adminAuth') !== 'true') {
+            // login screen shown by default (display:flex already set)
+        } else {
+            document.getElementById('loginScreen').style.display = 'none';
+        }
+    </script>
 
     <script>
         // This is a demonstration interface
