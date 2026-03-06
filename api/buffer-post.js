@@ -1,19 +1,23 @@
 /**
- * Old Oak Town — Buffer REST API Proxy
+ * Old Oak Town — PostEverywhere.ai REST API Proxy
  * POST /api/buffer-post
  *
- * Routes each post to the correct Buffer channel by platform.
- * Uses Buffer's REST API v1 — simple, documented, no GraphQL.
+ * Routes each post to the correct PostEverywhere account by platform.
  *
- * Required env var: BUFFER_API_KEY
+ * Required env var: POSTEVERYWHERE_API_KEY
+ *
+ * Account IDs: integer IDs from your PostEverywhere connected accounts.
+ * Run GET /api/get-pe-accounts to look them up, then fill in below.
  */
 
-const BUFFER_REST_API = 'https://api.buffer.com/1/updates/create.json';
+const PE_API_BASE = 'https://app.posteverywhere.ai/api/v1';
 
-const CHANNEL_IDS = {
-  linkedin:  '69a213f74be271803d75d07e',
-  instagram: '69a43f953f3b94a121052f11',
-  facebook:  '69a4431d3f3b94a12105386d',
+// Fill these in with the integer account IDs from your PostEverywhere dashboard.
+// Hit GET /api/get-pe-accounts to list all connected accounts with their IDs.
+const ACCOUNT_IDS = {
+  facebook:  null,  // e.g. 12
+  instagram: null,  // e.g. 34
+  linkedin:  null,  // e.g. 56
 };
 
 export default async function handler(req, res) {
@@ -24,19 +28,19 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const apiKey = req.headers['x-buffer-key'] || process.env.BUFFER_API_KEY;
+  const apiKey = req.headers['x-pe-key'] || process.env.POSTEVERYWHERE_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'No Buffer API key — set BUFFER_API_KEY in Vercel env vars or enter it in Settings' });
+    return res.status(500).json({ error: 'No PostEverywhere API key — set POSTEVERYWHERE_API_KEY in Vercel env vars or enter it in Settings' });
   }
 
   const { text, scheduledAt, platform, day, mediaUrl } = req.body;
   if (!text) return res.status(400).json({ error: 'Missing required field: text' });
 
   const platformKey = (platform || '').toLowerCase();
-  const channelId = CHANNEL_IDS[platformKey];
-  if (!channelId) {
+  const accountId = ACCOUNT_IDS[platformKey];
+  if (!accountId) {
     return res.status(400).json({
-      error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.`
+      error: `Unknown or unconfigured platform: "${platform}". Must be linkedin, instagram, or facebook, and the account ID must be set in api/buffer-post.js.`
     });
   }
 
@@ -61,50 +65,50 @@ export default async function handler(req, res) {
       ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
       : text;
 
-    // Buffer REST v1 expects scheduled_at as a Unix timestamp (seconds)
-    const scheduledAtUnix = Math.floor(new Date(dueAt).getTime() / 1000);
+    const body = {
+      content: postText,
+      account_ids: [accountId],
+      scheduled_at: dueAt,
+      timezone: 'Europe/London',
+    };
 
-    const params = new URLSearchParams();
-    params.append('profile_ids[]', channelId);
-    params.append('text', postText);
-    params.append('scheduled_at', scheduledAtUnix.toString());
     if (mediaUrl) {
-      params.append('media[photo]', mediaUrl);
+      body.media_url = mediaUrl;
     }
 
-    const postRes = await fetch(BUFFER_REST_API, {
+    const postRes = await fetch(`${PE_API_BASE}/posts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: params.toString()
+      body: JSON.stringify(body),
     });
 
     const postData = await postRes.json();
-    console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
+    console.log(`PostEverywhere [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
     if (!postRes.ok) {
-      return res.status(502).json({ error: 'Buffer API error', details: postData });
+      return res.status(502).json({ error: 'PostEverywhere API error', details: postData });
     }
 
-    const created = postData?.updates?.[0];
-    if (!created) {
-      return res.status(502).json({ error: 'Buffer returned no update', details: postData });
+    const postId = postData?.id;
+    if (!postId) {
+      return res.status(502).json({ error: 'PostEverywhere returned no post ID', details: postData });
     }
 
-    console.log(`✓ ${platformKey} post queued: ${created.id} | ${day}`);
+    console.log(`✓ ${platformKey} post scheduled: ${postId} | ${day}`);
 
     return res.status(200).json({
       success: true,
-      postId: created.id,
+      postId,
       scheduledAt: dueAt,
       platform: platformKey,
       day
     });
 
   } catch (err) {
-    console.error('Buffer proxy error:', err);
+    console.error('PostEverywhere proxy error:', err);
     return res.status(500).json({ error: 'Internal proxy error', message: err.message });
   }
 }

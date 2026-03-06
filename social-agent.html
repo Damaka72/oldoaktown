@@ -536,7 +536,7 @@ textarea { min-height: 68px; }
     <div class="step-arrow">›</div>
     <div class="step" id="step3"><div class="step-num">3</div>Review</div>
     <div class="step-arrow">›</div>
-    <div class="step" id="step4"><div class="step-num">4</div>Buffer</div>
+    <div class="step" id="step4"><div class="step-num">4</div>PostEverywhere</div>
     <div class="step-arrow">›</div>
     <div class="step" id="step5"><div class="step-num">5</div>Live</div>
   </div>
@@ -544,9 +544,9 @@ textarea { min-height: 68px; }
   <div style="display:flex;align-items:center;gap:10px">
     <div class="webhook-status">
       <div class="status-dot connected" id="statusDot"></div>
-      <span id="statusLabel">Buffer direct ✓</span>
+      <span id="statusLabel">PostEverywhere ✓</span>
     </div>
-    <button class="settings-btn" onclick="openSettings()">⚙ Buffer Info</button>
+    <button class="settings-btn" onclick="openSettings()">⚙ PE Settings</button>
   </div>
 </header>
 
@@ -624,7 +624,7 @@ textarea { min-height: 68px; }
     <div id="idleState" class="idle-state">
       <div class="idle-icon">🌳</div>
       <h2>Ready when you are</h2>
-      <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to Buffer via the Old Oak Town API.</p>
+      <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to PostEverywhere via the Old Oak Town API.</p>
     </div>
 
     <!-- RESEARCH -->
@@ -661,11 +661,11 @@ textarea { min-height: 68px; }
 
       <div class="send-bar" id="sendBar">
         <div class="send-bar-info">
-          <h3>Send to Buffer</h3>
-          <p id="sendBarDesc">Approve posts above, then send them directly to Buffer.</p>
+          <h3>Send to PostEverywhere</h3>
+          <p id="sendBarDesc">Approve posts above, then send them directly to PostEverywhere.</p>
         </div>
-        <button class="send-btn" id="sendBtn" onclick="sendToBuffer()">
-          📤 Send to Buffer Direct
+        <button class="send-btn" id="sendBtn" onclick="sendToSocial()">
+          📤 Schedule via PostEverywhere
         </button>
       </div>
     </div>
@@ -674,7 +674,7 @@ textarea { min-height: 68px; }
     <div id="sendingPhase" class="sending-phase">
       <div class="phase-header">
         <div class="phase-badge make">Step 4</div>
-        <h2 id="sendingTitle">Sending to Buffer<span class="dots"></span></h2>
+        <h2 id="sendingTitle">Sending to PostEverywhere<span class="dots"></span></h2>
       </div>
       <div class="sending-log" id="sendingLog"></div>
       <div class="result-grid" id="resultGrid"></div>
@@ -689,12 +689,12 @@ textarea { min-height: 68px; }
 <!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settingsModal">
   <div class="modal">
-    <div class="make-badge">⚡ Buffer Direct Integration</div>
-    <h2>Buffer Setup</h2>
-    <p>Posts go directly to Buffer's API from your browser — no server required. Your API key is saved locally in this browser only.</p>
+    <div class="make-badge">⚡ PostEverywhere Integration</div>
+    <h2>PostEverywhere Setup</h2>
+    <p>Posts are scheduled via PostEverywhere's API. Your API key is saved locally in this browser only.</p>
     <div class="modal-field">
-      <label>Buffer API Key</label>
-      <input type="password" id="bufferApiKeyInput" placeholder="Paste your Buffer API key here…" style="font-family:monospace">
+      <label>PostEverywhere API Key</label>
+      <input type="password" id="peApiKeyInput" placeholder="Enter PostEverywhere API key (pe_live_…)" style="font-family:monospace">
     </div>
     <div class="modal-actions">
       <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
@@ -734,40 +734,33 @@ if (sessionStorage.getItem('adminAuth') === 'true') {
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTS
 // ═══════════════════════════════════════════════════════════════
-const BUFFER_REST_API = 'https://api.buffer.com/1/updates/create.json';
-const BUFFER_KEY_STORE = 'oot_buffer_key';
-const SESSION_KEY      = 'oot_drafts_v2';
-
-const CHANNEL_IDS = {
-  linkedin:  '69a213f74be271803d75d07e',
-  instagram: '69a43f953f3b94a121052f11',
-  facebook:  '69a4431d3f3b94a12105386d',
-};
+const PE_KEY_STORE = 'oot_pe_key';
+const SESSION_KEY  = 'oot_drafts_v2';
 
 function getApiKey() {
-  return localStorage.getItem(BUFFER_KEY_STORE) || '';
+  return localStorage.getItem(PE_KEY_STORE) || '';
 }
 
 function saveApiKey() {
-  const key = document.getElementById('bufferApiKeyInput').value.trim();
-  if (!key) { showToast('Please enter your Buffer API key', 'error'); return; }
-  localStorage.setItem(BUFFER_KEY_STORE, key);
-  showToast('Buffer API key saved', 'done');
+  const key = document.getElementById('peApiKeyInput').value.trim();
+  if (!key) { showToast('Please enter your PostEverywhere API key', 'error'); return; }
+  localStorage.setItem(PE_KEY_STORE, key);
+  showToast('PostEverywhere API key saved', 'done');
   closeSettings();
 }
 
 function openSettings() {
   const modal = document.getElementById('settingsModal');
-  document.getElementById('bufferApiKeyInput').value = getApiKey();
+  document.getElementById('peApiKeyInput').value = getApiKey();
   modal.classList.add('open');
 }
 
-async function postOneToBuffer(apiKey, { platform, text, scheduledAt, mediaUrl, day }) {
+async function postOneToSocial(apiKey, { platform, text, scheduledAt, mediaUrl, day }) {
   const res = await fetch('/api/buffer-post', {
     method:  'POST',
     headers: {
       'Content-Type': 'application/json',
-      ...(apiKey ? { 'X-Buffer-Key': apiKey } : {}),
+      ...(apiKey ? { 'X-PE-Key': apiKey } : {}),
     },
     body: JSON.stringify({ platform, text, scheduledAt, mediaUrl, day }),
   });
@@ -1092,7 +1085,7 @@ function renderApprovalBoard(filter) {
 
 function renderActions(post) {
   if (post.status === 'sent')
-    return `<span style="font-size:12px;color:var(--make);padding:0 4px">✓ Sent to Buffer</span>`;
+    return `<span style="font-size:12px;color:var(--make);padding:0 4px">✓ Scheduled</span>`;
   if (post.status === 'pending')
     return `<button class="action-btn approve" onclick="setStatus('${post.id}','approved')">✓ Approve</button>
             <button class="action-btn edit"    onclick="toggleEdit('${post.id}')">✎ Edit</button>
@@ -1198,24 +1191,24 @@ function updateSendBar() {
   const desc = document.getElementById('sendBarDesc');
   const btn  = document.getElementById('sendBtn');
   if (approved === 0) {
-    desc.textContent = 'Approve posts above, then send them directly to Buffer.';
+    desc.textContent = 'Approve posts above, then send them directly to PostEverywhere.';
     btn.disabled = true;
   } else {
-    desc.textContent = `${approved} post${approved > 1 ? 's' : ''} approved and ready to send to Buffer.`;
+    desc.textContent = `${approved} post${approved > 1 ? 's' : ''} approved and ready to send to PostEverywhere.`;
     btn.disabled = false;
   }
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SEND TO BUFFER
+// SEND TO POSTEVERYWHERE
 // ═══════════════════════════════════════════════════════════════
-async function sendToBuffer() {
+async function sendToSocial() {
   const approved = state.posts.filter(p => p.status === 'approved');
   if (!approved.length) { showToast('No approved posts to send', 'error'); return; }
 
   const apiKey = getApiKey();
   if (!apiKey) {
-    showToast('Add your Buffer API key first — click ⚙ Buffer Info', 'error');
+    showToast('Add your PostEverywhere API key first — click ⚙ PE Settings', 'error');
     openSettings();
     return;
   }
@@ -1228,8 +1221,8 @@ async function sendToBuffer() {
   slog.innerHTML = '';
   rgrid.innerHTML = '';
 
-  addLog(slog, `> Preparing ${approved.length} posts for Buffer…`, 0);
-  addLog(slog, `> Connecting to Buffer API…`, 500, 'info');
+  addLog(slog, `> Preparing ${approved.length} posts for PostEverywhere…`, 0);
+  addLog(slog, `> Connecting to PostEverywhere API…`, 500, 'info');
   await delay(800);
 
   const icons = { facebook:'📘', instagram:'📸', linkedin:'💼' };
@@ -1253,7 +1246,7 @@ async function sendToBuffer() {
     rgrid.appendChild(rc);
 
     try {
-      const result = await postOneToBuffer(apiKey, {
+      const result = await postOneToSocial(apiKey, {
         platform:    post.platform,
         text:        post.caption + '\n\n' + post.hashtags,
         scheduledAt: buildScheduledISO(post.scheduledDate, post.bestTime),
@@ -1267,7 +1260,7 @@ async function sendToBuffer() {
         post.status = 'sent';
         setStatus(post.id, 'sent');
         successCount++;
-        addLog(slog, `> ✓ Queued in Buffer`, 0, 'done');
+        addLog(slog, `> ✓ Scheduled in PostEverywhere`, 0, 'done');
       } else if (result.skipped) {
         rc.querySelector('.result-badge').className   = 'result-badge skipped';
         rc.querySelector('.result-badge').textContent = 'No image ↷';
@@ -1289,10 +1282,10 @@ async function sendToBuffer() {
   const skippedNote = skippedCount ? `, ${skippedCount} Instagram skipped (add image URLs)` : '';
 
   if (failCount === 0) {
-    addLog(slog, `> ✓ Done — ${successCount} queued in Buffer${skippedNote}`, 0, 'done');
+    addLog(slog, `> ✓ Done — ${successCount} scheduled in PostEverywhere${skippedNote}`, 0, 'done');
     setStep(5);
     clearSession();
-    showToast(`🎉 ${successCount} posts sent to Buffer!`, 'make');
+    showToast(`🎉 ${successCount} posts scheduled in PostEverywhere!`, 'make');
   } else {
     saveSession();
     addLog(slog, `> ${successCount} sent, ${failCount} failed${skippedNote}.`, 0);
@@ -1300,7 +1293,7 @@ async function sendToBuffer() {
   }
 
   document.getElementById('sendingTitle').textContent =
-    failCount === 0 ? '✓ All Posts Queued in Buffer' : 'Sending Complete';
+    failCount === 0 ? '✓ All Posts Scheduled in PostEverywhere' : 'Sending Complete';
   document.getElementById('restartBtn').style.display = 'inline-flex';
 }
 
