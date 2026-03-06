@@ -505,6 +505,20 @@ textarea { min-height: 68px; }
 </head>
 <body>
 
+<!-- Login Screen -->
+<div id="loginScreen" style="display:flex; align-items:center; justify-content:center; min-height:100vh; background:#1C3A0E; position:fixed; top:0; left:0; width:100%; z-index:9999;">
+  <div style="background:white; padding:3rem; border-radius:15px; max-width:400px; width:90%; text-align:center;">
+    <img src="images/logo.png" alt="Old Oak Town" style="height:80px; margin-bottom:1rem;">
+    <h1 style="color:#1C3A0E; margin-bottom:0.5rem;">Admin Access</h1>
+    <p style="color:#666; margin-bottom:2rem;">Social Command Centre</p>
+    <input type="password" id="socialPasswordInput" placeholder="Enter admin password"
+           style="width:100%; padding:1rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-bottom:1rem;"
+           onkeypress="if(event.key==='Enter') socialLogin()">
+    <button onclick="socialLogin()" style="width:100%; background:#1C3A0E; color:white; border:none; padding:1rem; border-radius:5px; font-size:1rem; font-weight:600; cursor:pointer;">Sign In</button>
+    <p id="socialLoginError" style="color:#dc3545; margin-top:1rem; display:none;">Incorrect password</p>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header class="header">
   <div class="brand">
@@ -693,6 +707,30 @@ textarea { min-height: 68px; }
 <div class="toast" id="toast"></div>
 
 <script>
+// ── Auth gate ──────────────────────────────────────────────────
+const ADMIN_PASSWORD_HASH = '924325fbd85f063f2439544a4bd4cbe61433c2c83eb3e5a7ead42b984b7a2223';
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function socialLogin() {
+  const pw = document.getElementById('socialPasswordInput').value;
+  const hash = await sha256(pw);
+  if (hash === ADMIN_PASSWORD_HASH) {
+    document.getElementById('loginScreen').style.display = 'none';
+    sessionStorage.setItem('adminAuth', 'true');
+  } else {
+    document.getElementById('socialLoginError').style.display = 'block';
+  }
+}
+
+if (sessionStorage.getItem('adminAuth') === 'true') {
+  document.getElementById('loginScreen').style.display = 'none';
+}
+// ──────────────────────────────────────────────────────────────
+
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTS
 // ═══════════════════════════════════════════════════════════════
