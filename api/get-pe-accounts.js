@@ -3,7 +3,7 @@
  * GET /api/get-pe-accounts
  *
  * Lists all connected social media accounts with their integer IDs.
- * Use this to look up the IDs you need to fill in api/buffer-post.js.
+ * Use this to look up the IDs you need to fill in api/pe-post.js.
  *
  * Required env var: POSTEVERYWHERE_API_KEY
  */
