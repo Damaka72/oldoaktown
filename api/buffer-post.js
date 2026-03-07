@@ -35,9 +35,15 @@ async function resolveAccountId(platformKey, apiKey) {
   const accounts = Array.isArray(data) ? data : (data?.data ?? data?.accounts ?? []);
 
   const match = accounts.find(a => {
-    const p = (a.platform ?? a.service ?? a.type ?? '').toLowerCase();
-    return p === platformKey || p.includes(platformKey);
+    const p = (a.platform ?? a.service ?? a.type ?? a.network ?? a.provider ?? '').toLowerCase();
+    return p === platformKey || p.includes(platformKey) || platformKey.includes(p);
   });
+
+  if (!match) {
+    console.log(`[PE] No ${platformKey} account found. Available accounts:`,
+      JSON.stringify(accounts.map(a => ({ id: a.id, platform: a.platform, service: a.service, type: a.type, network: a.network, provider: a.provider, name: a.name ?? a.username })))
+    );
+  }
 
   return match?.id ?? null;
 }
@@ -65,8 +71,17 @@ export default async function handler(req, res) {
 
   const accountId = await resolveAccountId(platformKey, apiKey);
   if (!accountId) {
+    // Fetch account list again to include in the error for debugging
+    let foundAccounts = [];
+    try {
+      const r = await fetch(`${PE_API_BASE}/accounts`, { headers: { 'Authorization': `Bearer ${apiKey}` } });
+      const d = await r.json();
+      const accs = Array.isArray(d) ? d : (d?.data ?? d?.accounts ?? []);
+      foundAccounts = accs.map(a => a.platform ?? a.service ?? a.type ?? a.network ?? a.provider ?? JSON.stringify(a)).slice(0, 10);
+    } catch (_) {}
     return res.status(400).json({
-      error: `No connected ${platform} account found in PostEverywhere. Make sure the account is connected at app.posteverywhere.ai.`
+      error: `No connected ${platform} account found in PostEverywhere.`,
+      hint: `Accounts returned by PE API: ${foundAccounts.length ? foundAccounts.join(', ') : 'none (check API key)'}`,
     });
   }
 
