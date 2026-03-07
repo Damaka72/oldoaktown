@@ -703,7 +703,7 @@ const SESSION_KEY  = 'oot_drafts_v2';
 
 
 async function postOneToSocial({ platform, text, scheduledAt, mediaUrl, day }) {
-  const res = await fetch('/api/pe-post', {
+  const res = await fetch('/api/buffer-post', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ platform, text, scheduledAt, mediaUrl, day }),
@@ -1139,7 +1139,7 @@ function updateSendBar() {
 }
 
 // ═══════════════════════════════════════════════════════════════
-// SEND TO POSTEVERYWHERE
+// SEND TO BUFFER
 // ═══════════════════════════════════════════════════════════════
 async function sendToSocial() {
   const approved = state.posts.filter(p => p.status === 'approved');
