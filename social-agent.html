@@ -756,7 +756,7 @@ function openSettings() {
 }
 
 async function postOneToSocial(apiKey, { platform, text, scheduledAt, mediaUrl, day }) {
-  const res = await fetch('/api/buffer-post', {
+  const res = await fetch('/api/pe-post', {
     method:  'POST',
     headers: {
       'Content-Type': 'application/json',
