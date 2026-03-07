@@ -710,7 +710,7 @@ async function postOneToSocial({ platform, text, scheduledAt, mediaUrl, day }) {
   });
 
   const data = await res.json();
-  if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+  if (!res.ok) throw new Error((data?.error || `HTTP ${res.status}`) + (data?.hint ? ` | ${data.hint}` : ''));
   if (data.skipped) return { skipped: true, reason: data.reason };
 
   return { success: true, postId: data.postId };
