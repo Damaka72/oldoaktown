@@ -88,17 +88,6 @@ body {
 .step.done .step-num { background: var(--green-bright); border-color: var(--green-bright); color: white; }
 .step-arrow { color: rgba(255,255,255,0.2); font-size: 13px; padding: 0 2px; }
 
-.webhook-status { display: flex; align-items: center; gap: 7px; font-size: 11px; color: rgba(255,255,255,0.5); }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: #ef4444; transition: background 0.3s; }
-.status-dot.connected { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
-.settings-btn {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: white; padding: 5px 13px; border-radius: 6px;
-  font-size: 11px; font-family: 'DM Sans', sans-serif;
-  cursor: pointer; transition: background 0.2s;
-}
-.settings-btn:hover { background: rgba(255,255,255,0.18); }
 
 /* ── SAVED SESSION BANNER ── */
 .saved-banner {
@@ -541,13 +530,6 @@ textarea { min-height: 68px; }
     <div class="step" id="step5"><div class="step-num">5</div>Live</div>
   </div>
 
-  <div style="display:flex;align-items:center;gap:10px">
-    <div class="webhook-status">
-      <div class="status-dot connected" id="statusDot"></div>
-      <span id="statusLabel">PostEverywhere ✓</span>
-    </div>
-    <button class="settings-btn" onclick="openSettings()">⚙ PE Settings</button>
-  </div>
 </header>
 
 <!-- SAVED SESSION BANNER — shown automatically if drafts exist -->
@@ -686,23 +668,6 @@ textarea { min-height: 68px; }
   </main>
 </div>
 
-<!-- SETTINGS MODAL -->
-<div class="modal-overlay" id="settingsModal">
-  <div class="modal">
-    <div class="make-badge">⚡ PostEverywhere Integration</div>
-    <h2>PostEverywhere Setup</h2>
-    <p>Posts are scheduled via PostEverywhere's API. Your API key is saved locally in this browser only.</p>
-    <div class="modal-field">
-      <label>PostEverywhere API Key</label>
-      <input type="password" id="peApiKeyInput" placeholder="Enter PostEverywhere API key (pe_live_…)" style="font-family:monospace">
-    </div>
-    <div class="modal-actions">
-      <button class="btn-primary" onclick="saveApiKey()">Save Key</button>
-      <button onclick="closeSettings()">Close</button>
-    </div>
-  </div>
-</div>
-
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -734,34 +699,13 @@ if (sessionStorage.getItem('adminAuth') === 'true') {
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTS
 // ═══════════════════════════════════════════════════════════════
-const PE_KEY_STORE = 'oot_pe_key';
 const SESSION_KEY  = 'oot_drafts_v2';
 
-function getApiKey() {
-  return localStorage.getItem(PE_KEY_STORE) || '';
-}
 
-function saveApiKey() {
-  const key = document.getElementById('peApiKeyInput').value.trim();
-  if (!key) { showToast('Please enter your PostEverywhere API key', 'error'); return; }
-  localStorage.setItem(PE_KEY_STORE, key);
-  showToast('PostEverywhere API key saved', 'done');
-  closeSettings();
-}
-
-function openSettings() {
-  const modal = document.getElementById('settingsModal');
-  document.getElementById('peApiKeyInput').value = getApiKey();
-  modal.classList.add('open');
-}
-
-async function postOneToSocial(apiKey, { platform, text, scheduledAt, mediaUrl, day }) {
+async function postOneToSocial({ platform, text, scheduledAt, mediaUrl, day }) {
   const res = await fetch('/api/pe-post', {
     method:  'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(apiKey ? { 'X-PE-Key': apiKey } : {}),
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ platform, text, scheduledAt, mediaUrl, day }),
   });
 
@@ -866,11 +810,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('savedBanner').classList.add('show');
   }
 });
-
-// ═══════════════════════════════════════════════════════════════
-// SETTINGS MODAL
-// ═══════════════════════════════════════════════════════════════
-function closeSettings() { document.getElementById('settingsModal').classList.remove('open'); }
 
 // ═══════════════════════════════════════════════════════════════
 // PIPELINE — research, draft, flatten
@@ -1206,13 +1145,6 @@ async function sendToSocial() {
   const approved = state.posts.filter(p => p.status === 'approved');
   if (!approved.length) { showToast('No approved posts to send', 'error'); return; }
 
-  const apiKey = getApiKey();
-  if (!apiKey) {
-    showToast('Add your PostEverywhere API key first — click ⚙ PE Settings', 'error');
-    openSettings();
-    return;
-  }
-
   setStep(4);
   showPhase('sending');
 
@@ -1246,7 +1178,7 @@ async function sendToSocial() {
     rgrid.appendChild(rc);
 
     try {
-      const result = await postOneToSocial(apiKey, {
+      const result = await postOneToSocial({
         platform:    post.platform,
         text:        post.caption + '\n\n' + post.hashtags,
         scheduledAt: buildScheduledISO(post.scheduledDate, post.bestTime),
