@@ -1,6 +1,6 @@
 /**
  * Old Oak Town — PostEverywhere.ai REST API Proxy
- * POST /api/buffer-post
+ * POST /api/pe-post
  *
  * Routes each post to the correct PostEverywhere account by platform.
  *
@@ -34,15 +34,23 @@ async function resolveAccountId(platformKey, apiKey) {
   const data = await accountsRes.json();
   const accounts = Array.isArray(data) ? data : (data?.data ?? data?.accounts ?? []);
 
+  // Log the full raw response on every call so we can inspect field names in Vercel logs
+  console.log(`[PE] Raw accounts response:`, JSON.stringify(data).slice(0, 800));
+
   const match = accounts.find(a => {
-    const p = (a.platform ?? a.service ?? a.type ?? a.network ?? a.provider ?? '').toLowerCase();
-    return p === platformKey || p.includes(platformKey) || platformKey.includes(p);
+    // Try every string value in the account object for a platform match
+    const allValues = Object.values(a)
+      .filter(v => typeof v === 'string')
+      .map(v => v.toLowerCase());
+    return allValues.some(v => v === platformKey || v.includes(platformKey) || platformKey.includes(v));
   });
 
   if (!match) {
-    console.log(`[PE] No ${platformKey} account found. Available accounts:`,
-      JSON.stringify(accounts.map(a => ({ id: a.id, platform: a.platform, service: a.service, type: a.type, network: a.network, provider: a.provider, name: a.name ?? a.username })))
+    console.log(`[PE] No ${platformKey} account found. Full account objects:`,
+      JSON.stringify(accounts).slice(0, 800)
     );
+  } else {
+    console.log(`[PE] Matched ${platformKey} → id=${match.id}`);
   }
 
   return match?.id ?? null;
