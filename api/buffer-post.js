@@ -6,19 +6,41 @@
  *
  * Required env var: POSTEVERYWHERE_API_KEY
  *
- * Account IDs: integer IDs from your PostEverywhere connected accounts.
- * Run GET /api/get-pe-accounts to look them up, then fill in below.
+ * Account IDs are resolved automatically from your PostEverywhere connected
+ * accounts. You can also pin specific IDs via env vars:
+ *   POSTEVERYWHERE_INSTAGRAM_ACCOUNT_ID
+ *   POSTEVERYWHERE_FACEBOOK_ACCOUNT_ID
+ *   POSTEVERYWHERE_LINKEDIN_ACCOUNT_ID
  */
 
 const PE_API_BASE = 'https://app.posteverywhere.ai/api/v1';
 
-// Fill these in with the integer account IDs from your PostEverywhere dashboard.
-// Hit GET /api/get-pe-accounts to list all connected accounts with their IDs.
-const ACCOUNT_IDS = {
-  facebook:  null,  // e.g. 12
-  instagram: null,  // e.g. 34
-  linkedin:  null,  // e.g. 56
+// Optional: pin account IDs via env vars to skip the auto-discovery fetch.
+const PINNED_ACCOUNT_IDS = {
+  facebook:  process.env.POSTEVERYWHERE_FACEBOOK_ACCOUNT_ID  ? Number(process.env.POSTEVERYWHERE_FACEBOOK_ACCOUNT_ID)  : null,
+  instagram: process.env.POSTEVERYWHERE_INSTAGRAM_ACCOUNT_ID ? Number(process.env.POSTEVERYWHERE_INSTAGRAM_ACCOUNT_ID) : null,
+  linkedin:  process.env.POSTEVERYWHERE_LINKEDIN_ACCOUNT_ID  ? Number(process.env.POSTEVERYWHERE_LINKEDIN_ACCOUNT_ID)  : null,
 };
+
+async function resolveAccountId(platformKey, apiKey) {
+  if (PINNED_ACCOUNT_IDS[platformKey]) return PINNED_ACCOUNT_IDS[platformKey];
+
+  // Auto-discover: fetch all connected accounts and match by platform name
+  const accountsRes = await fetch(`${PE_API_BASE}/accounts`, {
+    headers: { 'Authorization': `Bearer ${apiKey}` },
+  });
+  if (!accountsRes.ok) return null;
+
+  const data = await accountsRes.json();
+  const accounts = Array.isArray(data) ? data : (data?.data ?? data?.accounts ?? []);
+
+  const match = accounts.find(a => {
+    const p = (a.platform ?? a.service ?? a.type ?? '').toLowerCase();
+    return p === platformKey || p.includes(platformKey);
+  });
+
+  return match?.id ?? null;
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -37,10 +59,14 @@ export default async function handler(req, res) {
   if (!text) return res.status(400).json({ error: 'Missing required field: text' });
 
   const platformKey = (platform || '').toLowerCase();
-  const accountId = ACCOUNT_IDS[platformKey];
+  if (!['facebook', 'instagram', 'linkedin'].includes(platformKey)) {
+    return res.status(400).json({ error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.` });
+  }
+
+  const accountId = await resolveAccountId(platformKey, apiKey);
   if (!accountId) {
     return res.status(400).json({
-      error: `Unknown or unconfigured platform: "${platform}". Must be linkedin, instagram, or facebook, and the account ID must be set in api/buffer-post.js.`
+      error: `No connected ${platform} account found in PostEverywhere. Make sure the account is connected at app.posteverywhere.ai.`
     });
   }
 
