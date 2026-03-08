@@ -79,7 +79,7 @@ export default async function handler(req, res) {
         channelId,
         text: postText,
         schedulingType: 'automatic',
-        mode: 'customSchedule',
+        mode: 'customScheduled',
         dueAt,
       }
     };
