@@ -81,6 +81,8 @@ export default async function handler(req, res) {
         schedulingType: 'automatic',
         mode: 'customScheduled',
         dueAt,
+        // Facebook and Instagram require an explicit content type
+        ...(platformKey !== 'linkedin' && { type: 'post' }),
       }
     };
     if (mediaUrl) variables.input.mediaUrls = [mediaUrl];
