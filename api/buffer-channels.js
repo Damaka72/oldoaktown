@@ -28,14 +28,49 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(500).json({ error: 'BUFFER_API_KEY not set' });
 
   try {
-    // Step 1: get the organization ID from the authed user
-    const meData = await bufferQuery(apiKey, `{ me { account { organizationId } } }`);
-    const organizationId = meData?.data?.me?.account?.organizationId;
-    if (!organizationId) {
-      return res.status(500).json({ error: 'Could not resolve organizationId', meData });
+    // Step 1: introspect root Query fields to find the org/account query
+    const schemaData = await bufferQuery(apiKey, `
+      {
+        __schema {
+          queryType {
+            fields {
+              name
+              args { name type { name kind ofType { name kind } } }
+            }
+          }
+        }
+      }
+    `);
+    const queryFields = schemaData?.data?.__schema?.queryType?.fields || [];
+
+    // Step 2: look for an organization or account field
+    const orgField = queryFields.find(f =>
+      ['organization', 'organizations', 'account', 'viewer', 'currentUser', 'user'].includes(f.name)
+    );
+
+    if (!orgField) {
+      return res.status(200).json({
+        hint: 'Could not find org field — pick one from the list below and pass ?orgId=YOUR_ORG_ID',
+        queryFields: queryFields.map(f => f.name),
+      });
     }
 
-    // Step 2: list channels for that org
+    // Step 3: fetch organizationId via whichever field exists
+    let organizationId = req.query.orgId;
+    if (!organizationId) {
+      const orgData = await bufferQuery(apiKey, `{ ${orgField.name} { id } }`);
+      organizationId = orgData?.data?.[orgField.name]?.id
+        ?? orgData?.data?.[orgField.name]?.[0]?.id;
+    }
+
+    if (!organizationId) {
+      return res.status(500).json({
+        error: 'Could not resolve organizationId automatically. Pass ?orgId=YOUR_ORG_ID',
+        queryFields: queryFields.map(f => f.name),
+      });
+    }
+
+    // Step 4: list channels for that org
     const channelsData = await bufferQuery(apiKey, `
       {
         channels(input: { organizationId: "${organizationId}" }) {
