@@ -58,9 +58,11 @@ export default async function handler(req, res) {
     // Step 3: fetch organizationId via whichever field exists
     let organizationId = req.query.orgId;
     if (!organizationId) {
-      const orgData = await bufferQuery(apiKey, `{ ${orgField.name} { id } }`);
-      organizationId = orgData?.data?.[orgField.name]?.id
-        ?? orgData?.data?.[orgField.name]?.[0]?.id;
+      // Also fetch channelCount to compare against channels list result
+      const orgData = await bufferQuery(apiKey, `{ ${orgField.name} { id channelCount } }`);
+      const orgObj = orgData?.data?.[orgField.name];
+      organizationId = orgObj?.id ?? orgObj?.[0]?.id;
+      var channelCount = orgObj?.channelCount ?? orgObj?.[0]?.channelCount ?? null;
     }
 
     if (!organizationId) {
@@ -70,7 +72,35 @@ export default async function handler(req, res) {
       });
     }
 
-    // Step 4: list channels via top-level channels query
+    // Step 4: introspect ChannelsInput.filter to find disconnected/hidden channel options
+    const filterTypeData = await bufferQuery(apiKey, `
+      {
+        __type(name: "ChannelsInput") {
+          inputFields {
+            name
+            type { name kind ofType { name kind } }
+          }
+        }
+      }
+    `);
+    const channelsInputFields = filterTypeData?.data?.__type?.inputFields ?? [];
+    const filterField = channelsInputFields.find(f => f.name === 'filter');
+    let filterTypeName = filterField?.type?.name ?? filterField?.type?.ofType?.name ?? null;
+
+    // Introspect the filter type to find all available filter options
+    let filterOptions = null;
+    if (filterTypeName) {
+      const filterTypeDetail = await bufferQuery(apiKey, `
+        {
+          __type(name: "${filterTypeName}") {
+            inputFields { name type { name kind } }
+          }
+        }
+      `);
+      filterOptions = filterTypeDetail?.data?.__type?.inputFields?.map(f => f.name) ?? null;
+    }
+
+    // Step 5: list channels — try plain query first
     const channelsData = await bufferQuery(apiKey, `
       {
         channels(input: { organizationId: "${organizationId}" }) {
@@ -80,33 +110,32 @@ export default async function handler(req, res) {
     `);
     const channels = channelsData?.data?.channels ?? [];
 
-    // Step 5: also try fetching via the organization type's channels sub-field
-    const orgTypeData = await bufferQuery(apiKey, `
-      {
-        __type(name: "Organization") {
-          fields { name }
-        }
-      }
-    `);
-    const orgFields = orgTypeData?.data?.__type?.fields?.map(f => f.name) ?? [];
-    let orgChannels = null;
-    if (orgFields.includes('channels')) {
-      const orgChData = await bufferQuery(apiKey, `
+    // Step 6: if empty, try with includeDisconnected or paused filter variants
+    let channelsWithDisconnected = null;
+    if (channels.length === 0 && filterOptions?.includes('includeDisconnected')) {
+      const dcData = await bufferQuery(apiKey, `
         {
-          ${orgField.name} { channels { id name service serviceId serviceUsername isDisconnected } }
+          channels(input: { organizationId: "${organizationId}", filter: { includeDisconnected: true } }) {
+            id name service serviceId serviceUsername isDisconnected
+          }
         }
       `);
-      orgChannels = orgChData?.data?.[orgField.name]?.channels ?? orgChData;
+      channelsWithDisconnected = dcData?.data?.channels ?? dcData;
     }
+
+    const allChannels = channelsWithDisconnected ?? channels;
+    const note = allChannels.length === 0
+      ? 'No channels found even with disconnected filter. The Instagram/Facebook accounts may need to be re-connected at buffer.com under Channels. Once reconnected, call this endpoint again to get the updated IDs to put in buffer-post.js.'
+      : undefined;
 
     return res.status(200).json({
       organizationId,
+      channelCount,
       channels,
-      orgTypeFields: orgFields,
-      orgChannels,
-      note: channels.length === 0
-        ? 'No channels found — the Instagram/Facebook accounts may be disconnected in Buffer. Re-connect them at buffer.com and run this endpoint again to get the new channel IDs.'
-        : undefined,
+      filterTypeName,
+      filterOptions,
+      channelsWithDisconnected,
+      note,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
