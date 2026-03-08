@@ -64,21 +64,22 @@ export default async function handler(req, res) {
     // Buffer REST v1 expects scheduled_at as a Unix timestamp (seconds)
     const scheduledAtUnix = Math.floor(new Date(dueAt).getTime() / 1000);
 
-    const params = new URLSearchParams();
-    params.append('profile_ids[]', channelId);
-    params.append('text', postText);
-    params.append('scheduled_at', scheduledAtUnix.toString());
+    const payload = {
+      profile_ids: [channelId],
+      text: postText,
+      scheduled_at: scheduledAtUnix,
+    };
     if (mediaUrl) {
-      params.append('media[photo]', mediaUrl);
+      payload.media = { photo: mediaUrl };
     }
 
     const postRes = await fetch(BUFFER_REST_API, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: params.toString()
+      body: JSON.stringify(payload)
     });
 
     const postData = await postRes.json();

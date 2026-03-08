@@ -525,7 +525,7 @@ textarea { min-height: 68px; }
     <div class="step-arrow">›</div>
     <div class="step" id="step3"><div class="step-num">3</div>Review</div>
     <div class="step-arrow">›</div>
-    <div class="step" id="step4"><div class="step-num">4</div>PostEverywhere</div>
+    <div class="step" id="step4"><div class="step-num">4</div>Buffer</div>
     <div class="step-arrow">›</div>
     <div class="step" id="step5"><div class="step-num">5</div>Live</div>
   </div>
@@ -606,7 +606,7 @@ textarea { min-height: 68px; }
     <div id="idleState" class="idle-state">
       <div class="idle-icon">🌳</div>
       <h2>Ready when you are</h2>
-      <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to PostEverywhere via the Old Oak Town API.</p>
+      <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to Buffer via the Old Oak Town API.</p>
     </div>
 
     <!-- RESEARCH -->
@@ -643,11 +643,11 @@ textarea { min-height: 68px; }
 
       <div class="send-bar" id="sendBar">
         <div class="send-bar-info">
-          <h3>Send to PostEverywhere</h3>
-          <p id="sendBarDesc">Approve posts above, then send them directly to PostEverywhere.</p>
+          <h3>Send to Buffer</h3>
+          <p id="sendBarDesc">Approve posts above, then send them directly to Buffer.</p>
         </div>
         <button class="send-btn" id="sendBtn" onclick="sendToSocial()">
-          📤 Schedule via PostEverywhere
+          📤 Schedule via Buffer
         </button>
       </div>
     </div>
@@ -656,7 +656,7 @@ textarea { min-height: 68px; }
     <div id="sendingPhase" class="sending-phase">
       <div class="phase-header">
         <div class="phase-badge make">Step 4</div>
-        <h2 id="sendingTitle">Sending to PostEverywhere<span class="dots"></span></h2>
+        <h2 id="sendingTitle">Sending to Buffer<span class="dots"></span></h2>
       </div>
       <div class="sending-log" id="sendingLog"></div>
       <div class="result-grid" id="resultGrid"></div>
@@ -1130,10 +1130,10 @@ function updateSendBar() {
   const desc = document.getElementById('sendBarDesc');
   const btn  = document.getElementById('sendBtn');
   if (approved === 0) {
-    desc.textContent = 'Approve posts above, then send them directly to PostEverywhere.';
+    desc.textContent = 'Approve posts above, then send them directly to Buffer.';
     btn.disabled = true;
   } else {
-    desc.textContent = `${approved} post${approved > 1 ? 's' : ''} approved and ready to send to PostEverywhere.`;
+    desc.textContent = `${approved} post${approved > 1 ? 's' : ''} approved and ready to send to Buffer.`;
     btn.disabled = false;
   }
 }
@@ -1153,8 +1153,8 @@ async function sendToSocial() {
   slog.innerHTML = '';
   rgrid.innerHTML = '';
 
-  addLog(slog, `> Preparing ${approved.length} posts for PostEverywhere…`, 0);
-  addLog(slog, `> Connecting to PostEverywhere API…`, 500, 'info');
+  addLog(slog, `> Preparing ${approved.length} posts for Buffer…`, 0);
+  addLog(slog, `> Connecting to Buffer API…`, 500, 'info');
   await delay(800);
 
   const icons = { facebook:'📘', instagram:'📸', linkedin:'💼' };
@@ -1192,7 +1192,7 @@ async function sendToSocial() {
         post.status = 'sent';
         setStatus(post.id, 'sent');
         successCount++;
-        addLog(slog, `> ✓ Scheduled in PostEverywhere`, 0, 'done');
+        addLog(slog, `> ✓ Queued in Buffer`, 0, 'done');
       } else if (result.skipped) {
         rc.querySelector('.result-badge').className   = 'result-badge skipped';
         rc.querySelector('.result-badge').textContent = 'No image ↷';
@@ -1214,10 +1214,10 @@ async function sendToSocial() {
   const skippedNote = skippedCount ? `, ${skippedCount} Instagram skipped (add image URLs)` : '';
 
   if (failCount === 0) {
-    addLog(slog, `> ✓ Done — ${successCount} scheduled in PostEverywhere${skippedNote}`, 0, 'done');
+    addLog(slog, `> ✓ Done — ${successCount} queued in Buffer${skippedNote}`, 0, 'done');
     setStep(5);
     clearSession();
-    showToast(`🎉 ${successCount} posts scheduled in PostEverywhere!`, 'make');
+    showToast(`🎉 ${successCount} posts queued in Buffer!`, 'make');
   } else {
     saveSession();
     addLog(slog, `> ${successCount} sent, ${failCount} failed${skippedNote}.`, 0);
@@ -1225,7 +1225,7 @@ async function sendToSocial() {
   }
 
   document.getElementById('sendingTitle').textContent =
-    failCount === 0 ? '✓ All Posts Scheduled in PostEverywhere' : 'Sending Complete';
+    failCount === 0 ? '✓ All Posts Queued in Buffer' : 'Sending Complete';
   document.getElementById('restartBtn').style.display = 'inline-flex';
 }
 
