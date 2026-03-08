@@ -70,8 +70,11 @@ export default async function handler(req, res) {
       });
     }
 
-    // Step 4: list channels for that org
-    const channelsData = await bufferQuery(apiKey, `
+    // Step 4: introspect the channels field to understand its args
+    const channelsFieldInfo = queryFields.find(f => f.name === 'channels');
+
+    // Step 5: try fetching channels — first with organizationId, then without
+    const withOrgId = await bufferQuery(apiKey, `
       {
         channels(input: { organizationId: "${organizationId}" }) {
           id
@@ -82,7 +85,23 @@ export default async function handler(req, res) {
       }
     `);
 
-    return res.status(200).json({ organizationId, channels: channelsData?.data?.channels, raw: channelsData });
+    const withoutFilter = await bufferQuery(apiKey, `
+      {
+        channels {
+          id
+          name
+          service
+          serviceId
+        }
+      }
+    `);
+
+    return res.status(200).json({
+      organizationId,
+      channelsFieldArgs: channelsFieldInfo?.args ?? null,
+      withOrgId: withOrgId?.data?.channels ?? withOrgId,
+      withoutFilter: withoutFilter?.data?.channels ?? withoutFilter,
+    });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
