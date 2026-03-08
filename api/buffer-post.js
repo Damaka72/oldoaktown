@@ -74,6 +74,15 @@ export default async function handler(req, res) {
       }
     `;
 
+    // Platform-specific metadata: Facebook and Instagram require a post type
+    // in metadata.<platform>.type (NOT at top-level input).
+    // Instagram also requires shouldShareToFeed (NON_NULL Boolean).
+    const metadata = platformKey === 'facebook'
+      ? { facebook: { type: 'post' } }
+      : platformKey === 'instagram'
+        ? { instagram: { type: 'post', shouldShareToFeed: true } }
+        : undefined;
+
     const variables = {
       input: {
         channelId,
@@ -81,11 +90,10 @@ export default async function handler(req, res) {
         schedulingType: 'automatic',
         mode: 'customScheduled',
         dueAt,
-        // Facebook and Instagram require an explicit content type
-        ...(platformKey !== 'linkedin' && { type: 'post' }),
+        ...(metadata && { metadata }),
+        ...(mediaUrl && { assets: { images: [{ url: mediaUrl }] } }),
       }
     };
-    if (mediaUrl) variables.input.mediaUrls = [mediaUrl];
 
     const postRes = await fetch(BUFFER_GRAPHQL, {
       method: 'POST',
