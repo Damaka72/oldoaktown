@@ -70,37 +70,38 @@ export default async function handler(req, res) {
       });
     }
 
-    // Step 4: introspect the channels field to understand its args
-    const channelsFieldInfo = queryFields.find(f => f.name === 'channels');
-
-    // Step 5: try fetching channels — first with organizationId, then without
-    const withOrgId = await bufferQuery(apiKey, `
+    // Step 4: introspect ChannelsInput to find the correct field names
+    const inputTypeData = await bufferQuery(apiKey, `
       {
-        channels(input: { organizationId: "${organizationId}" }) {
-          id
-          name
-          service
-          serviceId
+        __type(name: "ChannelsInput") {
+          inputFields { name type { name kind ofType { name kind } } }
         }
       }
     `);
+    const inputFields = inputTypeData?.data?.__type?.inputFields ?? [];
 
-    const withoutFilter = await bufferQuery(apiKey, `
-      {
-        channels {
-          id
-          name
-          service
-          serviceId
+    // Step 5: build the input object using whatever fields ChannelsInput exposes
+    //   Common candidates: organizationId, orgId, accountId, userId
+    const orgField2 = inputFields.find(f =>
+      ['organizationId', 'orgId', 'accountId', 'userId'].includes(f.name)
+    );
+    let channelsData, channelsInput;
+    if (orgField2) {
+      channelsInput = { [orgField2.name]: organizationId };
+      channelsData = await bufferQuery(apiKey, `
+        {
+          channels(input: { ${orgField2.name}: "${organizationId}" }) {
+            id name service serviceId
+          }
         }
-      }
-    `);
+      `);
+    }
 
     return res.status(200).json({
       organizationId,
-      channelsFieldArgs: channelsFieldInfo?.args ?? null,
-      withOrgId: withOrgId?.data?.channels ?? withOrgId,
-      withoutFilter: withoutFilter?.data?.channels ?? withoutFilter,
+      channelsInputFields: inputFields.map(f => f.name),
+      channelsInput,
+      channels: channelsData?.data?.channels ?? channelsData,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
