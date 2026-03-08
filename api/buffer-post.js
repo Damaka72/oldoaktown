@@ -8,7 +8,7 @@
  * Required env var: BUFFER_API_KEY
  */
 
-const BUFFER_REST_API = 'https://api.buffer.com/1/updates/create.json';
+const BUFFER_GRAPHQL = 'https://api.buffer.com/graphql';
 
 const CHANNEL_IDS = {
   linkedin:  '69a213f74be271803d75d07e',
@@ -61,25 +61,37 @@ export default async function handler(req, res) {
       ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
       : text;
 
-    // Buffer REST v1 expects scheduled_at as a Unix timestamp (seconds)
-    const scheduledAtUnix = Math.floor(new Date(dueAt).getTime() / 1000);
+    const mutation = `
+      mutation CreatePost($input: CreatePostInput!) {
+        createPost(input: $input) {
+          ... on PostActionSuccess {
+            post { id }
+          }
+          ... on MutationError {
+            message
+          }
+        }
+      }
+    `;
 
-    const payload = {
-      profile_ids: [channelId],
-      text: postText,
-      scheduled_at: scheduledAtUnix,
+    const variables = {
+      input: {
+        channelId,
+        text: postText,
+        schedulingType: 'automatic',
+        mode: 'customSchedule',
+        dueAt,
+      }
     };
-    if (mediaUrl) {
-      payload.media = { photo: mediaUrl };
-    }
+    if (mediaUrl) variables.input.mediaUrls = [mediaUrl];
 
-    const postRes = await fetch(BUFFER_REST_API, {
+    const postRes = await fetch(BUFFER_GRAPHQL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({ query: mutation, variables })
     });
 
     const postData = await postRes.json();
@@ -89,16 +101,21 @@ export default async function handler(req, res) {
       return res.status(502).json({ error: 'Buffer API error', details: postData });
     }
 
-    const created = postData?.updates?.[0];
-    if (!created) {
-      return res.status(502).json({ error: 'Buffer returned no update', details: postData });
+    const result = postData?.data?.createPost;
+    if (result?.message) {
+      return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
     }
 
-    console.log(`✓ ${platformKey} post queued: ${created.id} | ${day}`);
+    const postId = result?.post?.id;
+    if (!postId) {
+      return res.status(502).json({ error: 'Buffer returned no post ID', details: postData });
+    }
+
+    console.log(`✓ ${platformKey} post queued: ${postId} | ${day}`);
 
     return res.status(200).json({
       success: true,
-      postId: created.id,
+      postId,
       scheduledAt: dueAt,
       platform: platformKey,
       day
