@@ -35,10 +35,11 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(500).json({ error: 'BUFFER_API_KEY not set' });
 
   try {
-    // Step 1: find valid fields on the Channel type
-    const channelTypeData = await bufferQuery(apiKey, `
-      { __type(name: "Channel") { fields { name } } }
-    `);
+    // Step 1: find valid fields on Channel type + args on channel/channels queries
+    const [channelTypeData, schemaData] = await Promise.all([
+      bufferQuery(apiKey, `{ __type(name: "Channel") { fields { name } } }`),
+      bufferQuery(apiKey, `{ __schema { queryType { fields { name args { name } } } } }`),
+    ]);
     const channelFields = channelTypeData?.data?.__type?.fields?.map(f => f.name) ?? [];
 
     // Pick a safe subset of fields we know Buffer is likely to have
@@ -47,42 +48,52 @@ export default async function handler(req, res) {
     );
     const fieldStr = safeFields.join(' ');
 
-    // Step 2: get organizationId via account query
-    const accountData = await bufferQuery(apiKey, `{ account { id } }`);
-    const organizationId = req.query.orgId ?? accountData?.data?.account?.id;
+    // Step 2: get account.id AND real org IDs from account.organizations
+    const accountData = await bufferQuery(apiKey, `
+      { account { id organizations { id name } } }
+    `);
+    const account = accountData?.data?.account;
+    const organizations = account?.organizations ?? [];
+    // Prefer the org ID from organizations list; fall back to account.id
+    const organizationId = req.query.orgId
+      ?? organizations[0]?.id
+      ?? account?.id;
 
-    // Step 3: channels list query with only safe fields
-    let channels = null;
-    let channelsError = null;
-    if (organizationId) {
+    // Step 3: channels list query with only safe fields — try all org IDs
+    const orgIdsToTry = req.query.orgId
+      ? [req.query.orgId]
+      : [...new Set([...organizations.map(o => o.id), account?.id].filter(Boolean))];
+
+    const channelsByOrg = {};
+    for (const orgId of orgIdsToTry) {
       const d = await bufferQuery(apiKey, `
-        { channels(input: { organizationId: "${organizationId}" }) { ${fieldStr} } }
+        { channels(input: { organizationId: "${orgId}" }) { ${fieldStr} } }
       `);
-      channels = d?.data?.channels ?? null;
-      channelsError = d?.errors ?? null;
+      channelsByOrg[orgId] = { channels: d?.data?.channels ?? null, errors: d?.errors ?? null };
     }
+    const channels = Object.values(channelsByOrg).flatMap(r => r.channels ?? []);
 
-    // Step 4: look up each known channel ID individually via singular "channel" query
-    const channelArgs = (channelTypeData?.data?.__schema ?? null); // unused; checking via schema
+    // Step 4: introspect args on singular "channel" query, then look up known IDs
+    const channelQueryField = (schemaData?.data?.__schema?.queryType?.fields ?? [])
+      .find(f => f.name === 'channel');
+    const channelIdArg = channelQueryField?.args?.[0]?.name ?? 'id';
     const knownChannelResults = {};
     for (const [platform, id] of Object.entries(KNOWN_IDS)) {
-      const d = await bufferQuery(apiKey, `{ channel(id: "${id}") { ${fieldStr} } }`);
-      knownChannelResults[platform] = d?.data?.channel ?? { error: d?.errors?.[0]?.message ?? 'null response' };
+      const d = await bufferQuery(apiKey, `{ channel(${channelIdArg}: "${id}") { ${fieldStr} } }`);
+      knownChannelResults[platform] = d?.data?.channel
+        ?? { error: d?.errors?.[0]?.message ?? 'null response' };
     }
-
-    // Step 5: try account.organizations path
-    const orgData = await bufferQuery(apiKey, `
-      { account { organizations { id name } } }
-    `);
-    const organizations = orgData?.data?.account?.organizations ?? null;
 
     return res.status(200).json({
       organizationId,
-      channelTypeFields: channelFields,
-      channels,
-      channelsError,
-      knownChannelResults,
       organizations,
+      channelTypeFields: channelFields,
+      channelsByOrg,
+      channels,
+      knownChannelResults,
+      note: channels.length === 0
+        ? 'Still no channels. Instagram/Facebook may need to be reconnected at buffer.com → Channels.'
+        : undefined,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
