@@ -12,7 +12,7 @@ const BUFFER_GRAPHQL = 'https://api.buffer.com/graphql';
 
 const CHANNEL_IDS = {
   linkedin:  '69a213f74be271803d75d07e',
-  instagram: '69a43f953f3b94a121052f11',
+  instagram: '69aca3e03f3b94a1212866bf',
   facebook:  '69a4431d3f3b94a12105386d',
 };
 
