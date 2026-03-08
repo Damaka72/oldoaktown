@@ -883,11 +883,37 @@ async function runPipeline() {
   document.getElementById('runBtn').innerHTML = '✦ Research &amp; Draft';
 }
 
+const HISTORY_KEY = 'oot_post_history';
+
+function archiveSentPosts() {
+  const theme    = document.getElementById('weekTheme').value.trim();
+  const weekDate = document.getElementById('weekDate').value;
+  const sent     = state.posts.filter(p => p.status === 'sent');
+  if (!sent.length) return;
+
+  const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+  history.unshift({
+    theme,
+    weekDate,
+    sentAt: new Date().toISOString(),
+    posts: sent.map(p => ({ platform: p.platform, day: p.day, caption: p.caption.slice(0, 120) }))
+  });
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 52))); // keep ~1 year
+}
+
+function getPreviousThemes() {
+  try {
+    const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+    return history.map(h => h.theme).filter(Boolean);
+  } catch (_) { return []; }
+}
+
 async function callClaude(theme, context, tone, weekDate) {
+  const previousThemes = getPreviousThemes();
   const response = await fetch('/api/generate-posts', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({ theme, context, tone, weekDate })
+    body:    JSON.stringify({ theme, context, tone, weekDate, previousThemes })
   });
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
@@ -1216,6 +1242,7 @@ async function sendToSocial() {
   if (failCount === 0) {
     addLog(slog, `> ✓ Done — ${successCount} queued in Buffer${skippedNote}`, 0, 'done');
     setStep(5);
+    archiveSentPosts();
     clearSession();
     showToast(`🎉 ${successCount} posts queued in Buffer!`, 'make');
   } else {

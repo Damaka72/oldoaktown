@@ -9,6 +9,9 @@
  * Required env var: ANTHROPIC_API_KEY
  */
 
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -20,8 +23,25 @@ export default async function handler(req, res) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY not configured' });
 
-  const { theme, context, tone, weekDate } = req.body;
+  const { theme, context, tone, weekDate, previousThemes } = req.body;
   if (!theme) return res.status(400).json({ error: 'Missing theme' });
+
+  // Load latest news headlines from the daily-updated ticker cache
+  let newsSnippet = '';
+  try {
+    const ticker = JSON.parse(readFileSync(join(process.cwd(), 'data/ticker-news.json'), 'utf8'));
+    if (ticker.items?.length) {
+      const headlines = ticker.items.slice(0, 6)
+        .map(i => `- ${i.title} (${i.source})`)
+        .join('\n');
+      newsSnippet = `\nCURRENT NEWS HEADLINES (weave relevant ones into post content to keep it timely and grounded):\n${headlines}\n`;
+    }
+  } catch (_) {}
+
+  // Build a "previously covered" note if history was passed in
+  const previousNote = previousThemes?.length
+    ? `\nPREVIOUSLY COVERED THEMES (avoid repeating these angles — find fresh perspectives):\n${previousThemes.slice(0, 6).map(t => `- ${t}`).join('\n')}\n`
+    : '';
 
   const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 9,000 new homes and 11,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
 
@@ -30,7 +50,7 @@ Week commencing: ${weekDate || 'this week'}
 Theme: ${theme}
 Additional context: ${context || 'None'}
 Tone: ${tone}
-
+${newsSnippet}${previousNote}
 PLATFORM WRITING RULES — follow these strictly, each platform must read completely differently:
 
 FACEBOOK (community notice board):
