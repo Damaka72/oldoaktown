@@ -28,114 +28,52 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(500).json({ error: 'BUFFER_API_KEY not set' });
 
   try {
-    // Step 1: introspect root Query fields to find the org/account query
-    const schemaData = await bufferQuery(apiKey, `
-      {
-        __schema {
-          queryType {
-            fields {
-              name
-              args { name type { name kind ofType { name kind } } }
-            }
-          }
-        }
-      }
+    // Step 1: introspect Account type fields so we know what we can query
+    const accountTypeData = await bufferQuery(apiKey, `
+      { __type(name: "Account") { fields { name } } }
     `);
-    const queryFields = schemaData?.data?.__schema?.queryType?.fields || [];
+    const accountFields = accountTypeData?.data?.__type?.fields?.map(f => f.name) ?? [];
 
-    // Step 2: look for an organization or account field
-    const orgField = queryFields.find(f =>
-      ['organization', 'organizations', 'account', 'viewer', 'currentUser', 'user'].includes(f.name)
-    );
+    // Step 2: build account query — always request id, add channels if available
+    const accountSubfields = ['id', accountFields.includes('channels') && 'channels { id name service serviceId serviceUsername isDisconnected }']
+      .filter(Boolean).join(' ');
+    const accountData = await bufferQuery(apiKey, `{ account { ${accountSubfields} } }`);
+    const account = accountData?.data?.account;
+    const organizationId = req.query.orgId ?? account?.id ?? null;
+    const accountChannels = account?.channels ?? null;
 
-    if (!orgField) {
-      return res.status(200).json({
-        hint: 'Could not find org field — pick one from the list below and pass ?orgId=YOUR_ORG_ID',
-        queryFields: queryFields.map(f => f.name),
-      });
-    }
-
-    // Step 3: fetch organizationId via whichever field exists
-    let organizationId = req.query.orgId;
-    if (!organizationId) {
-      // Also fetch channelCount to compare against channels list result
-      const orgData = await bufferQuery(apiKey, `{ ${orgField.name} { id channelCount } }`);
-      const orgObj = orgData?.data?.[orgField.name];
-      organizationId = orgObj?.id ?? orgObj?.[0]?.id;
-      var channelCount = orgObj?.channelCount ?? orgObj?.[0]?.channelCount ?? null;
-    }
-
-    if (!organizationId) {
-      return res.status(500).json({
-        error: 'Could not resolve organizationId automatically. Pass ?orgId=YOUR_ORG_ID',
-        queryFields: queryFields.map(f => f.name),
-      });
-    }
-
-    // Step 4: introspect ChannelsInput.filter to find disconnected/hidden channel options
-    const filterTypeData = await bufferQuery(apiKey, `
-      {
-        __type(name: "ChannelsInput") {
-          inputFields {
-            name
-            type { name kind ofType { name kind } }
-          }
-        }
-      }
+    // Step 3: try top-level channels query — first without input, then with orgId
+    const channelsNoInput = await bufferQuery(apiKey, `
+      { channels { id name service serviceId serviceUsername isDisconnected } }
     `);
-    const channelsInputFields = filterTypeData?.data?.__type?.inputFields ?? [];
-    const filterField = channelsInputFields.find(f => f.name === 'filter');
-    let filterTypeName = filterField?.type?.name ?? filterField?.type?.ofType?.name ?? null;
+    const channelsDirect = channelsNoInput?.data?.channels ?? null;
 
-    // Introspect the filter type to find all available filter options
-    let filterOptions = null;
-    if (filterTypeName) {
-      const filterTypeDetail = await bufferQuery(apiKey, `
-        {
-          __type(name: "${filterTypeName}") {
-            inputFields { name type { name kind } }
-          }
-        }
+    let channelsWithOrg = null;
+    if (organizationId) {
+      const d = await bufferQuery(apiKey, `
+        { channels(input: { organizationId: "${organizationId}" }) { id name service serviceId serviceUsername isDisconnected } }
       `);
-      filterOptions = filterTypeDetail?.data?.__type?.inputFields?.map(f => f.name) ?? null;
+      channelsWithOrg = d?.data?.channels ?? null;
     }
 
-    // Step 5: list channels — try plain query first
-    const channelsData = await bufferQuery(apiKey, `
-      {
-        channels(input: { organizationId: "${organizationId}" }) {
-          id name service serviceId serviceUsername isDisconnected
-        }
-      }
-    `);
-    const channels = channelsData?.data?.channels ?? [];
-
-    // Step 6: if empty, try with includeDisconnected or paused filter variants
-    let channelsWithDisconnected = null;
-    if (channels.length === 0 && filterOptions?.includes('includeDisconnected')) {
-      const dcData = await bufferQuery(apiKey, `
-        {
-          channels(input: { organizationId: "${organizationId}", filter: { includeDisconnected: true } }) {
-            id name service serviceId serviceUsername isDisconnected
-          }
-        }
-      `);
-      channelsWithDisconnected = dcData?.data?.channels ?? dcData;
-    }
-
-    const allChannels = channelsWithDisconnected ?? channels;
-    const note = allChannels.length === 0
-      ? 'No channels found even with disconnected filter. The Instagram/Facebook accounts may need to be re-connected at buffer.com under Channels. Once reconnected, call this endpoint again to get the updated IDs to put in buffer-post.js.'
-      : undefined;
+    // Collect all found channels from any source
+    const allChannels = [
+      ...(Array.isArray(channelsDirect) ? channelsDirect : []),
+      ...(Array.isArray(channelsWithOrg) ? channelsWithOrg : []),
+      ...(Array.isArray(accountChannels) ? accountChannels : []),
+    ];
+    // Deduplicate by id
+    const seen = new Set();
+    const channels = allChannels.filter(c => c?.id && !seen.has(c.id) && seen.add(c.id));
 
     return res.status(200).json({
       organizationId,
-      channelCount,
+      accountFields,
       channels,
-      filterTypeName,
-      filterOptions,
-      channelsWithDisconnected,
-      note,
+      sources: { channelsDirect, channelsWithOrg, accountChannels },
+      note: channels.length === 0
+        ? 'No channels found via any query path. Instagram/Facebook may need to be reconnected at buffer.com → Channels, or the API key may lack channel read permission.'
+        : undefined,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
