@@ -70,38 +70,43 @@ export default async function handler(req, res) {
       });
     }
 
-    // Step 4: introspect ChannelsInput to find the correct field names
-    const inputTypeData = await bufferQuery(apiKey, `
+    // Step 4: list channels via top-level channels query
+    const channelsData = await bufferQuery(apiKey, `
       {
-        __type(name: "ChannelsInput") {
-          inputFields { name type { name kind ofType { name kind } } }
+        channels(input: { organizationId: "${organizationId}" }) {
+          id name service serviceId serviceUsername isDisconnected
         }
       }
     `);
-    const inputFields = inputTypeData?.data?.__type?.inputFields ?? [];
+    const channels = channelsData?.data?.channels ?? [];
 
-    // Step 5: build the input object using whatever fields ChannelsInput exposes
-    //   Common candidates: organizationId, orgId, accountId, userId
-    const orgField2 = inputFields.find(f =>
-      ['organizationId', 'orgId', 'accountId', 'userId'].includes(f.name)
-    );
-    let channelsData, channelsInput;
-    if (orgField2) {
-      channelsInput = { [orgField2.name]: organizationId };
-      channelsData = await bufferQuery(apiKey, `
+    // Step 5: also try fetching via the organization type's channels sub-field
+    const orgTypeData = await bufferQuery(apiKey, `
+      {
+        __type(name: "Organization") {
+          fields { name }
+        }
+      }
+    `);
+    const orgFields = orgTypeData?.data?.__type?.fields?.map(f => f.name) ?? [];
+    let orgChannels = null;
+    if (orgFields.includes('channels')) {
+      const orgChData = await bufferQuery(apiKey, `
         {
-          channels(input: { ${orgField2.name}: "${organizationId}" }) {
-            id name service serviceId
-          }
+          ${orgField.name} { channels { id name service serviceId serviceUsername isDisconnected } }
         }
       `);
+      orgChannels = orgChData?.data?.[orgField.name]?.channels ?? orgChData;
     }
 
     return res.status(200).json({
       organizationId,
-      channelsInputFields: inputFields.map(f => f.name),
-      channelsInput,
-      channels: channelsData?.data?.channels ?? channelsData,
+      channels,
+      orgTypeFields: orgFields,
+      orgChannels,
+      note: channels.length === 0
+        ? 'No channels found — the Instagram/Facebook accounts may be disconnected in Buffer. Re-connect them at buffer.com and run this endpoint again to get the new channel IDs.'
+        : undefined,
     });
   } catch (err) {
     return res.status(500).json({ error: err.message });
