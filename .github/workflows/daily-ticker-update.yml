@@ -8,6 +8,8 @@ on:
 jobs:
   update-ticker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -19,7 +21,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund rss-parser
+        run: npm install --no-audit --no-fund --ignore-scripts --omit=dev
 
       - name: Update ticker news
         run: node scripts/update-ticker.js
