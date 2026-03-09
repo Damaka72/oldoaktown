@@ -12,7 +12,7 @@ const Parser = require('rss-parser');
 const fs = require('fs');
 const path = require('path');
 
-const parser = new Parser();
+const parser = new Parser({ timeout: 10000 }); // 10s per feed, prevents hanging
 
 const TICKER_FILE = path.join(__dirname, '../data/ticker-news.json');
 const MAX_ITEMS = 10;
