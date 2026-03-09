@@ -8,6 +8,7 @@ on:
 jobs:
   update-ticker:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: write
 
@@ -21,7 +22,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund --ignore-scripts --omit=dev
+        run: npm ci --no-audit --no-fund --ignore-scripts --omit=dev
 
       - name: Update ticker news
         run: node scripts/update-ticker.js
