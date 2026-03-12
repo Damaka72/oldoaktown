@@ -1,6 +1,13 @@
 {
-  "updatedAt": "2026-03-11T07:44:15.311Z",
+  "updatedAt": "2026-03-12T07:46:58.367Z",
   "items": [
+    {
+      "title": "Birmingham sets out high-rise city centre vision",
+      "url": "https://www.constructionenquirer.com/2026/03/11/birmingham-sets-out-high-rise-city-centre-vision/",
+      "source": "Construction Enquirer",
+      "category": "construction",
+      "publishDate": "Wed, 11 Mar 2026 08:16:32 +0000"
+    },
     {
       "title": "Learning Legacy Podcast: Episode Five – How to swim in a sea of data",
       "url": "https://www.hs2.org.uk/podcast/learning-legacy-podcast-episode-five-how-to-swim-in-a-sea-of-data/",
@@ -63,13 +70,6 @@
       "source": "HS2 Ltd",
       "category": "hs2",
       "publishDate": "Tue, 06 Jun 2023 08:41:24 +0000"
-    },
-    {
-      "title": "Episode Eleven: Safe at Heart (transcript)",
-      "url": "https://www.hs2.org.uk/transcript/episode-eleven-safe-at-heart-transcript/",
-      "source": "HS2 Ltd",
-      "category": "hs2",
-      "publishDate": "Tue, 06 Jun 2023 08:40:44 +0000"
     }
   ]
 }
