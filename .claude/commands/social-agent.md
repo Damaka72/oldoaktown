@@ -1,148 +1,178 @@
-# Social Command Centre — Setup Skill
+# /social-agent — Social Command Centre Setup
 
-You are setting up a **Social Command Centre** for a website. This is a self-contained, single-file HTML dashboard that lets the site owner research, draft, approve, and schedule social media posts to **Facebook**, **Instagram**, and **LinkedIn** via **Buffer**.
+Generates a pixel-perfect clone of the oldoaktown Social Command Centre for any site. Uses a config-driven generator script — no manual HTML editing required.
 
-## What you must do
+---
 
-### Step 1 — Read the project
-Before generating anything, read the following to understand the site's identity:
-- `README.md` or `index.html` — for the site name, tagline, and description
-- Any existing CSS or design tokens — for brand colours, fonts, and visual style
-- `CLAUDE.md` (if present) — for strategic context and tone guidance
-- Any existing `social-agent.html` — to understand what's already built
+## How it works
 
-### Step 2 — Gather these details (ask the user if not found in files)
-- **Site name** (e.g. "Old Oak Town")
-- **Site tagline / one-liner**
-- **Primary brand colour** (dark hero colour for the header)
-- **Secondary / accent colour** (used for buttons and highlights)
-- **Pale / ghost colour** (used for backgrounds and chips)
-- **Google Fonts** — serif font for headings, sans-serif for body (match existing or choose appropriate)
-- **Tone options** — 4 tone labels appropriate to the site's voice (e.g. Warm / Bold / Witty / Expert)
-- **Research sources** — what sources should the social agent monitor when drafting posts? (e.g. "Latest news", "Community events", "Business updates")
-- **Content themes** — what topics does this site cover?
-- **Buffer API endpoint** — confirm the site already has `/api/buffer-post` or will need one created
+A Node.js script (`scripts/generate-social-agent.js`) reads the master `social-agent.html` template and applies site-specific substitutions from a JSON config file. The output is a complete, self-contained `social-agent.html` ready to deploy.
 
-### Step 3 — Generate `social-agent.html`
+**The script handles:**
+- Brand colours (renames CSS variables + replaces all values)
+- Site name, icon letter, page title
+- Google Fonts swap
+- Research source toggles (any number, with emoji labels)
+- localStorage keys (isolated per site)
+- Admin password hash
+- Pipeline log messages
+- Weekly theme placeholder text
 
-Create a complete, self-contained `social-agent.html` file with the following features:
+**Nothing else changes** — layout, pipeline logic, approval board, Buffer integration, session persistence, and stats are identical to oldoaktown.
 
-#### Auth gate
-- Password protected with a SHA-256 hash check (client-side, sessionStorage)
-- Styled login screen using the site's brand colours
-- Default password hash can be a placeholder — tell the user to replace it
+---
 
-#### Header
-- Sticky header with site brand icon + name + tagline
-- Pipeline progress indicator: `Research → Draft → Approve → Schedule`
-- Status indicator showing Buffer connection
+## Step 1 — Create a config file
 
-#### Sidebar (left panel, ~290px)
-- **Week date picker** (defaults to next Monday)
-- **Weekly theme** text input
-- **Extra context** textarea
-- **Tone selector** — 4 buttons in a 2×2 grid (site-appropriate labels)
-- **Research sources** toggle switches (site-specific sources)
-- **"Research & Draft"** primary action button
+Copy `scripts/sites/example.json` to `scripts/sites/[siteSlug].json` and fill it in.
 
-#### Main content area (right panel)
+Ask the user for:
 
-**Phase 1–2: Research & Draft**
-- Terminal-style animated log showing research steps
-- Research findings displayed as chips
+| Field | Description | Example |
+|---|---|---|
+| `siteName` | Full site name | `"Didiani Olue"` |
+| `siteSlug` | Short lowercase identifier (no spaces) | `"didiani"` |
+| `iconLetter` | Single letter or emoji for brand icon box | `"D"` |
+| `colors.primary` | Dark header/hero colour | `"#2C1A4E"` |
+| `colors.primaryMid` | Mid tone (hover states) | `"#4A2D7A"` |
+| `colors.accent` | Buttons and highlights | `"#8B5CF6"` |
+| `colors.accentPale` | Chips and light accents | `"#E9D5FF"` |
+| `colors.ghost` | Input/card backgrounds | `"#F5F0FF"` |
+| `colors.border` | Border lines | `"#DDD6FE"` |
+| `colors.muted` | Labels, subtext | `"#6B7280"` |
+| `colors.ink` | Body text | `"#1F1235"` |
+| `colors.cream` | Page background | `"#FDFBFF"` |
+| `researchSources` | Array of toggle rows (see below) | — |
+| `themePlaceholder` | Hint text for the weekly theme input | `"Restaurant opening, event…"` |
+| `idleDescription` | Text shown before the user starts | One sentence |
+| `pipelineLogs` | 4–5 log lines during research phase | Array of strings |
+| `passwordHash` | SHA-256 of admin password (optional, set later) | `""` |
 
-**Phase 3: Approve**
-- Stats bar: Total / Approved / Rejected / Pending
-- Filter buttons: All / Pending / Approved / Rejected + Approve All
-- Post cards — one per day per platform:
-  - Platform tabs: Facebook / Instagram / LinkedIn
-  - Editable post text (textarea)
-  - Scheduled time input
-  - Image URL input
-  - Approve / Reject buttons with visual state
-  - Character counter appropriate to each platform (FB: 63,206 / IG: 2,200 / LI: 3,000)
+Check `index.html`, `CLAUDE.md`, and `README.md` in the target project for colours and branding before asking.
 
-**Phase 4: Schedule**
-- Animated sending log
-- Result grid showing success/skip/fail per post
-- "Plan Another Week" restart button
+### Research sources format
 
-#### Session persistence
-- Save drafts to `localStorage` with the key `[site-slug]_drafts_v2`
-- Show "Saved session" banner on reload with Resume / Discard options
+```json
+"researchSources": [
+  { "emoji": "🍽", "label": "Restaurant & food news", "defaultOn": true  },
+  { "emoji": "🎭", "label": "Events & culture",        "defaultOn": true  },
+  { "emoji": "🏘",  "label": "Community updates",       "defaultOn": true  },
+  { "emoji": "💼", "label": "Business spotlights",     "defaultOn": false },
+  { "emoji": "🎵", "label": "Music & arts",             "defaultOn": false }
+]
+```
 
-#### Buffer API integration
-- POST to `/api/buffer-post` with `{ platform, text, scheduledAt, mediaUrl, day }`
-- Handle success, skip (platform not connected), and error states
-- Show per-post result cards with platform, status, and Buffer post ID
+Up to 6 sources. `defaultOn: true` means the toggle starts enabled.
 
-#### Simulated AI drafting
-- `runResearch()` function that simulates multi-step research with timed log entries
-- `generateDrafts()` function that produces realistic sample posts for each day/platform
-- Posts should reflect the site's content themes, tone, and current week theme
-- 5 days × 3 platforms = 15 posts per session
+---
 
-#### Visual design requirements
-- Match the site's exact brand colours using CSS custom properties
-- Use the same Google Fonts as the site
-- Green-terminal aesthetic for the research log (`#A3E635` text on dark background)
-- Platform brand colours: FB `#1877F2` / IG `#C13584` / LI `#0A66C2`
-- Responsive sidebar + main layout with sticky header
-- Toast notifications for actions
+## Step 2 — Run the generator
 
-### Step 4 — Create the Buffer API endpoint (if it doesn't exist)
+From the oldoaktown project root:
 
-If the site doesn't already have `/api/buffer-post`, create it. The platform/language depends on the site's stack:
+```bash
+node scripts/generate-social-agent.js \
+  --config scripts/sites/[siteSlug].json \
+  --output ../[target-project]/social-agent.html
+```
 
-**For Netlify Functions** — create `netlify/functions/buffer-post.js`:
+Or to generate in the current directory first and review:
+
+```bash
+node scripts/generate-social-agent.js --config scripts/sites/[siteSlug].json
+# outputs social-agent.html in the current directory
+```
+
+Run this command now and show the user the output. Fix any errors before continuing.
+
+---
+
+## Step 3 — Check `/api/buffer-post` in the target project
+
+If the target project already has `api/buffer-post.js` or `netlify/functions/buffer-post.js`, skip this step.
+
+Otherwise create `api/buffer-post.js` in the target project:
+
 ```javascript
-// Accepts: { platform, text, scheduledAt, mediaUrl, day }
-// Maps platform to Buffer profile ID from env vars
-// POSTs to https://api.bufferapp.com/1/updates/create.json
-// Returns: { postId } or { skipped: true, reason } or error
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  const { platform, text, scheduledAt, mediaUrl } = req.body;
+
+  const profileMap = {
+    facebook:  process.env.BUFFER_FB_PROFILE_ID,
+    instagram: process.env.BUFFER_IG_PROFILE_ID,
+    linkedin:  process.env.BUFFER_LI_PROFILE_ID,
+  };
+
+  const profile_id = profileMap[platform];
+  if (!profile_id) return res.status(400).json({ error: `Unknown platform: ${platform}` });
+
+  if (platform === 'instagram' && !mediaUrl) {
+    return res.status(200).json({ skipped: true, reason: 'Instagram requires an image URL' });
+  }
+
+  const params = new URLSearchParams();
+  params.append('access_token', process.env.BUFFER_ACCESS_TOKEN);
+  params.append('profile_ids[]', profile_id);
+  params.append('text', text);
+  if (scheduledAt) { params.append('scheduled_at', scheduledAt); params.append('now', 'false'); }
+  else { params.append('now', 'true'); }
+  if (mediaUrl) params.append('media[photo]', mediaUrl);
+
+  const r = await fetch('https://api.bufferapp.com/1/updates/create.json', { method: 'POST', body: params });
+  const data = await r.json();
+  if (!r.ok || !data.success) return res.status(502).json({ error: data.message || 'Buffer API error' });
+  return res.status(200).json({ postId: data.updates?.[0]?.id || 'ok' });
+}
 ```
 
-**For Vercel** — create `api/buffer-post.js` (same logic)
+Also check if the target project has `api/generate-posts.js` — this powers the "Research & Draft" button. If it doesn't exist, note this in the checklist as a required step.
 
-**For Node/Express** — add a route to `server.js`
+---
 
-Require these environment variables:
-- `BUFFER_ACCESS_TOKEN`
-- `BUFFER_FB_PROFILE_ID`
-- `BUFFER_IG_PROFILE_ID`
-- `BUFFER_LI_PROFILE_ID`
-
-### Step 5 — Tell the user what to do next
-
-After generating the files, output a clear checklist:
+## Step 4 — Output the setup checklist
 
 ```
-## Setup Checklist
+## Setup Checklist — [Site Name] Social Command Centre
 
-### 1. Set your admin password
-In social-agent.html, replace ADMIN_PASSWORD_HASH with the SHA-256 of your chosen password.
-Generate it at: https://emn178.github.io/online-tools/sha256.html
+### Done ✓
+- social-agent.html generated and placed in project root
+- api/buffer-post.js created (or confirmed present)
 
-### 2. Connect Buffer
-Add these to your environment variables (.env / Netlify / Vercel settings):
-  BUFFER_ACCESS_TOKEN=your_token_here
-  BUFFER_FB_PROFILE_ID=your_fb_profile_id
-  BUFFER_IG_PROFILE_ID=your_ig_profile_id
-  BUFFER_LI_PROFILE_ID=your_li_profile_id
+### Still needed
 
-Find your Buffer profile IDs at: https://buffer.com/developers/api
+**1. Set your admin password**
+Generate a SHA-256 hash of your chosen password:
+  https://emn178.github.io/online-tools/sha256.html
+Then add it to scripts/sites/[siteSlug].json → "passwordHash"
+and re-run the generator, OR edit social-agent.html directly.
 
-### 3. Deploy
-Commit and deploy. The social-agent.html file is at [path].
+**2. Buffer credentials**
+Add to your environment variables (Vercel / Netlify / .env):
+  BUFFER_ACCESS_TOKEN=your_token
+  BUFFER_FB_PROFILE_ID=your_fb_id
+  BUFFER_IG_PROFILE_ID=your_ig_id
+  BUFFER_LI_PROFILE_ID=your_li_id
 
-### 4. Access
-Visit [site-url]/social-agent.html — it's password-protected.
+Find profile IDs: https://buffer.com/developers/api
+
+**3. AI post generation**
+The "Research & Draft" button calls POST /api/generate-posts.
+Copy api/generate-posts.js from oldoaktown (or create a new one).
+
+**4. Deploy**
+Commit and deploy. Visit /social-agent.html to test.
 ```
 
-## Key principles
+---
 
-- **Self-contained** — one HTML file, no external dependencies beyond Google Fonts and the Buffer API
-- **Brand-faithful** — colours, fonts, and tone must match the site exactly
-- **Content-aware** — simulated drafts should feel real for that site's niche
-- **Buffer-first** — always use Buffer, never direct platform APIs
-- **HITL** — the approval step is mandatory, never auto-schedule without human review
+## Re-generating after config changes
+
+If the user wants to update colours, sources, or any config after initial setup:
+
+1. Edit `scripts/sites/[siteSlug].json`
+2. Re-run `node scripts/generate-social-agent.js --config scripts/sites/[siteSlug].json --output <path>`
+3. The file is replaced — no manual editing needed
+
+This makes the config file the single source of truth for each site's Social Command Centre.

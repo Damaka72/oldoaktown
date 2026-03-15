@@ -1,0 +1,48 @@
+{
+  "_comment": "Copy this file to scripts/sites/mysite.json and fill it in. Then run:",
+  "_command": "node scripts/generate-social-agent.js --config scripts/sites/mysite.json --output ../mysite/social-agent.html",
+
+  "siteName":   "My Site Name",
+  "siteSlug":   "mysite",
+  "iconLetter": "M",
+
+  "colors": {
+    "primary":    "#1C3A0E",
+    "primaryMid": "#2F6020",
+    "accent":     "#4C8A35",
+    "accentPale": "#D4E8C8",
+    "ghost":      "#F0F7EB",
+    "border":     "#DDE8D4",
+    "muted":      "#6B7B5E",
+    "ink":        "#0F1A0A",
+    "cream":      "#FAF8F4"
+  },
+
+  "fonts": {
+    "heading":       "Instrument Serif",
+    "body":          "DM Sans",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+  },
+
+  "passwordHash": "",
+
+  "researchSources": [
+    { "emoji": "📰", "label": "Latest news",        "defaultOn": true  },
+    { "emoji": "📅", "label": "Events & calendar",  "defaultOn": true  },
+    { "emoji": "💼", "label": "Business spotlights", "defaultOn": true  },
+    { "emoji": "🏘",  "label": "Community updates",  "defaultOn": true  },
+    { "emoji": "🔍", "label": "Industry news",       "defaultOn": false }
+  ],
+
+  "themePlaceholder": "Weekly theme or focus…",
+
+  "idleDescription": "Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to Buffer.",
+
+  "pipelineLogs": [
+    "> Initialising research pipeline…",
+    "> Searching: latest news…",
+    "> Fetching: site content…",
+    "> Searching: community updates…",
+    "> Research complete. Passing to drafting engine…"
+  ]
+}
