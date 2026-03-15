@@ -1,0 +1,45 @@
+{
+  "siteName":   "Didi Anolue Consulting",
+  "siteSlug":   "didi",
+  "iconLetter": "D",
+
+  "colors": {
+    "primary":    "#1d4ed8",
+    "primaryMid": "#2563eb",
+    "accent":     "#3b82f6",
+    "accentPale": "#dbeafe",
+    "ghost":      "#eff6ff",
+    "border":     "#e5e7eb",
+    "muted":      "#6b7280",
+    "ink":        "#111827",
+    "cream":      "#f9fafb"
+  },
+
+  "fonts": {
+    "heading":        "Inter",
+    "body":           "Inter",
+    "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap"
+  },
+
+  "passwordHash": "",
+
+  "researchSources": [
+    { "emoji": "📋", "label": "Procurement & contracts news",   "defaultOn": true  },
+    { "emoji": "🏛",  "label": "Public sector updates",          "defaultOn": true  },
+    { "emoji": "💼", "label": "Commercial leadership insights", "defaultOn": true  },
+    { "emoji": "📊", "label": "Industry & market trends",       "defaultOn": true  },
+    { "emoji": "🔗", "label": "LinkedIn thought leadership",    "defaultOn": false }
+  ],
+
+  "themePlaceholder": "Procurement trend, client success story, industry insight…",
+
+  "idleDescription": "Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to Buffer via the Didi Anolue Consulting API.",
+
+  "pipelineLogs": [
+    "> Initialising Didi Anolue Consulting research pipeline…",
+    "> Searching: UK procurement & contracts news…",
+    "> Fetching: didianolue.co.uk content…",
+    "> Searching: public sector commercial leadership updates…",
+    "> Research complete. Passing to drafting engine…"
+  ]
+}
