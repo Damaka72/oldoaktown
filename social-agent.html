@@ -490,6 +490,46 @@ textarea { min-height: 68px; }
   .day-platform-row { grid-template-columns: 1fr; }
   .stats-bar { grid-template-columns: repeat(2,1fr); }
 }
+
+/* ── UPLOAD CSV ── */
+.idle-upload-wrapper { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; max-width: 460px; }
+.import-or {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; margin: 4px 0; color: var(--muted); font-size: 12px;
+}
+.import-or::before, .import-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.upload-card {
+  width: 100%; background: white; border: 2px dashed var(--border);
+  border-radius: 13px; padding: 22px 24px; text-align: center;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+}
+.upload-card:hover { border-color: var(--green-bright); background: var(--green-ghost); }
+.upload-card h3 { font-family: 'Instrument Serif', serif; font-size: 17px; color: var(--ink); margin-bottom: 5px; }
+.upload-card p  { font-size: 12px; color: var(--muted); margin-bottom: 14px; max-width: 100%; }
+.upload-card-btns { display: flex; gap: 9px; justify-content: center; flex-wrap: wrap; }
+.upload-csv-btn {
+  padding: 8px 18px; background: var(--green-deep); color: white;
+  border: none; border-radius: 7px; font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background 0.2s;
+}
+.upload-csv-btn:hover { background: var(--green-mid); }
+.sample-csv-btn {
+  padding: 8px 18px; background: white; color: var(--muted);
+  border: 1.5px solid var(--border); border-radius: 7px; font-size: 13px;
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s;
+}
+.sample-csv-btn:hover { border-color: var(--green-bright); color: var(--green-bright); }
+.import-error-banner {
+  display: none; background: var(--amber-pale); border: 1.5px solid #f0c060;
+  border-radius: 9px; padding: 12px 16px; font-size: 12px; color: #7a4f00;
+  line-height: 1.8; max-width: 460px; width: 100%;
+}
+.import-error-banner.show { display: block; }
+.import-error-banner strong { color: var(--ink); }
+.import-error-close {
+  float: right; background: none; border: none; font-size: 15px;
+  cursor: pointer; color: #7a4f00; margin-left: 8px; line-height: 1;
+}
 </style>
 </head>
 <body>
@@ -607,6 +647,28 @@ textarea { min-height: 68px; }
       <div class="idle-icon">🌳</div>
       <h2>Ready when you are</h2>
       <p>Enter your weekly theme, toggle your research sources, then hit Research & Draft. Approved posts go directly to Buffer via the Old Oak Town API.</p>
+
+      <div class="import-or">or upload a spreadsheet</div>
+
+      <div class="idle-upload-wrapper">
+        <div id="importErrorBanner" class="import-error-banner">
+          <button class="import-error-close" onclick="document.getElementById('importErrorBanner').classList.remove('show')">✕</button>
+          <strong>Some rows were skipped:</strong>
+          <div id="importErrorList"></div>
+        </div>
+        <div class="upload-card" onclick="document.getElementById('csvFileInput').click()">
+          <div style="font-size:28px;margin-bottom:8px">📊</div>
+          <h3>Upload from spreadsheet</h3>
+          <p>Upload a pre-written CSV to skip AI drafting and jump straight to review &amp; approval.<br>
+             <em>day · platform · caption · hashtags · best_time · media_url · day_theme</em></p>
+          <div class="upload-card-btns" onclick="event.stopPropagation()">
+            <button class="upload-csv-btn" onclick="document.getElementById('csvFileInput').click()">⬆ Upload CSV</button>
+            <button class="sample-csv-btn" onclick="downloadSampleCSV()">⬇ Download Sample</button>
+          </div>
+        </div>
+        <input type="file" id="csvFileInput" accept=".csv" style="display:none"
+               onchange="loadFromSpreadsheet(this.files[0])">
+      </div>
     </div>
 
     <!-- RESEARCH -->
@@ -1326,6 +1388,161 @@ function showToast(msg, type = '') {
   t.textContent = msg;
   t.className   = `toast show ${type}`;
   setTimeout(() => { t.className = 'toast'; }, 3800);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SPREADSHEET UPLOAD
+// ═══════════════════════════════════════════════════════════════
+const VALID_DAYS      = ['monday','tuesday','wednesday','thursday','friday'];
+const VALID_PLATFORMS = ['facebook','instagram','linkedin'];
+const PLATFORM_TIMES  = { facebook: '9:00am', instagram: '11:00am', linkedin: '8:00am' };
+
+// Minimal RFC-4180 CSV row parser (handles quoted fields with commas / escaped quotes)
+function parseCSVRow(line) {
+  const fields = [];
+  let cur = '', inQuote = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (ch === '"') {
+      if (inQuote && line[i + 1] === '"') { cur += '"'; i++; }
+      else { inQuote = !inQuote; }
+    } else if (ch === ',' && !inQuote) {
+      fields.push(cur); cur = '';
+    } else {
+      cur += ch;
+    }
+  }
+  fields.push(cur);
+  return fields;
+}
+
+function parseCSV(text) {
+  const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  let headers = null;
+  const rows  = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line || line.startsWith('#')) continue;
+    const fields = parseCSVRow(line);
+    if (!headers) {
+      headers = fields.map(h => h.trim().toLowerCase().replace(/\s+/g, '_'));
+    } else {
+      if (fields.every(f => !f.trim())) continue;
+      const obj = {};
+      headers.forEach((h, idx) => { obj[h] = (fields[idx] || '').trim(); });
+      rows.push(obj);
+    }
+  }
+  return rows;
+}
+
+function getScheduledDateForDay(dayName) {
+  const weekDate = document.getElementById('weekDate').value;
+  const dayOffset = DAYS.indexOf(dayName);
+  const d = new Date(weekDate + 'T00:00:00');
+  d.setDate(d.getDate() + Math.max(0, dayOffset));
+  return d.toISOString().split('T')[0];
+}
+
+function loadFromSpreadsheet(file) {
+  if (!file) return;
+  document.getElementById('csvFileInput').value = ''; // allow re-upload of same file
+  document.getElementById('importErrorBanner').classList.remove('show');
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const rows   = parseCSV(e.target.result);
+    const errors = [];
+    const posts  = [];
+
+    rows.forEach((row, idx) => {
+      const rowNum   = idx + 2; // 1-indexed, account for header
+      const day      = (row.day || '').trim();
+      const platform = (row.platform || '').trim().toLowerCase();
+      const caption  = (row.caption || '').trim();
+
+      if (!VALID_DAYS.includes(day.toLowerCase())) {
+        errors.push(`Row ${rowNum}: "day" value "${escHtml(day)}" not recognised — must be Monday–Friday`);
+        return;
+      }
+      if (!VALID_PLATFORMS.includes(platform)) {
+        errors.push(`Row ${rowNum}: "platform" value "${escHtml(platform)}" not recognised — must be facebook, instagram, or linkedin`);
+        return;
+      }
+      if (!caption) {
+        errors.push(`Row ${rowNum}: "caption" is empty`);
+        return;
+      }
+
+      const dayNorm = day.charAt(0).toUpperCase() + day.slice(1).toLowerCase();
+      posts.push({
+        id:            `${dayNorm}-${platform}-${Date.now()}-${Math.random().toString(36).slice(2,5)}`,
+        day:           dayNorm,
+        dayTheme:      (row.day_theme || '').trim(),
+        platform,
+        caption,
+        hashtags:      (row.hashtags || '').trim(),
+        bestTime:      (row.best_time || '').trim() || PLATFORM_TIMES[platform],
+        scheduledDate: getScheduledDateForDay(dayNorm),
+        status:        'pending',
+        mediaUrl:      (row.media_url || '').trim()
+      });
+    });
+
+    if (errors.length) {
+      document.getElementById('importErrorList').innerHTML =
+        errors.map(msg => `<div>• ${msg}</div>`).join('');
+      document.getElementById('importErrorBanner').classList.add('show');
+    }
+
+    if (!posts.length) {
+      showToast('No valid posts found in CSV', 'error');
+      return;
+    }
+
+    state.posts = posts;
+    saveSession();
+    setStep(3);
+    renderApprovalBoard();
+    updateStats();
+    showPhase('approval');
+    showToast(`✓ ${posts.length} post${posts.length !== 1 ? 's' : ''} imported from CSV`, 'success');
+  };
+
+  reader.onerror = () => showToast('Failed to read file', 'error');
+  reader.readAsText(file);
+}
+
+function downloadSampleCSV() {
+  const sample = [
+    'day,platform,caption,hashtags,best_time,media_url,day_theme',
+    'Monday,facebook,"Big news from Old Oak Common — construction reaches a new milestone this week! 🏗️",#OldOak #HS2 #WestLondon,9:00am,,Week in Review',
+    'Monday,instagram,"Construction update 🏗️ — things are moving fast at Old Oak Common. Watch this space!",#OldOakCommon #HS2 #London,11:00am,https://example.com/image.jpg,Week in Review',
+    'Monday,linkedin,"OPDC publishes Q1 planning update for Old Oak Common — key figures and milestones inside.",#UrbanRegeneration #HS2 #OldOak,8:00am,,Week in Review',
+    'Tuesday,facebook,"Did you know 25,500 new homes are planned for Old Oak Common? Here\'s what that means for local residents.",#OldOak #Housing #WestLondon,9:00am,,Community Focus',
+    'Tuesday,instagram,"Community garden project blooms in Old Oak 🌱 — residents take ownership of shared green spaces.",#OldOakCommunity #GreenSpaces,11:00am,,Community Focus',
+    'Tuesday,linkedin,"65,000 jobs expected at Old Oak Common by 2039 — what sectors are driving regeneration growth?",#Jobs #Regeneration #HS2,8:00am,,Community Focus',
+    'Wednesday,facebook,"Planning applications up 18% in the Old Oak area — here\'s what\'s in the pipeline.",#OldOak #Planning #WestLondon,9:00am,,Planning Watch',
+    'Wednesday,instagram,"New local business spotlight: meet the entrepreneurs setting up shop in Old Oak 🛍️",#OldOakBusiness #WestLondon,11:00am,,Planning Watch',
+    'Wednesday,linkedin,"How Old Oak Common\'s HS2 interchange will reshape commuter patterns across West London.",#HS2 #Transport #OldOak,8:00am,,Planning Watch',
+    'Thursday,facebook,"Community event this weekend: Old Oak Common residents open day — all welcome 🌳",#OldOak #Community #WestLondon,9:00am,,Community Events',
+    'Thursday,instagram,"Behind the scenes at Old Oak Common 📸 — our photographer captures the scale of regeneration.",#OldOakCommon #Photography,11:00am,,Community Events',
+    'Thursday,linkedin,"OPDC announces new infrastructure investment for Park Royal — details and timeline.",#ParkRoyal #Infrastructure #OPDC,8:00am,,Community Events',
+    'Friday,facebook,"Week in review: the top 5 Old Oak Common stories you need to know 📰",#OldOak #WeeklyRoundup #HS2,9:00am,,Week Wrap',
+    'Friday,instagram,"Friday vibes from Old Oak Common 🌳 — have a great weekend from the team!",#OldOakCommon #WeekendVibes,11:00am,,Week Wrap',
+    'Friday,linkedin,"Weekly digest: Old Oak Common development highlights and what\'s coming next.",#OldOak #UrbanDevelopment #WeeklyDigest,8:00am,,Week Wrap'
+  ].join('\n');
+
+  const blob = new Blob([sample], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'social-posts-sample.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Sample CSV downloaded ✓', 'success');
 }
 </script>
 </body>
