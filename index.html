@@ -380,6 +380,27 @@
             gap: 2rem;
         }
 
+        /* Skeleton loading state */
+        @keyframes shimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+        }
+        .skeleton-card {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 280px;
+            background: linear-gradient(90deg, #ece8e0 25%, #e0dbd2 50%, #ece8e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+        .skeleton-dir {
+            border-radius: 10px;
+            height: 180px;
+            background: linear-gradient(90deg, #ece8e0 25%, #e0dbd2 50%, #ece8e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
         .news-card {
             background: white;
             border-radius: 10px;
@@ -1443,15 +1464,15 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <h2>9,000</h2>
+                    <h2 data-target="9000" data-prefix="" data-suffix="" data-decimals="0">9,000</h2>
                     <p>New & Affordable Homes</p>
                 </div>
                 <div class="stat-item">
-                    <h2>11,000</h2>
+                    <h2 data-target="11000" data-prefix="" data-suffix="" data-decimals="0">11,000</h2>
                     <p>New Jobs Created</p>
                 </div>
                 <div class="stat-item">
-                    <h2>£1.7bn</h2>
+                    <h2 data-target="1.7" data-prefix="£" data-suffix="bn" data-decimals="1">£1.7bn</h2>
                     <p>Infrastructure Investment</p>
                 </div>
             </div>
@@ -1462,63 +1483,15 @@
     <section id="news">
         <div class="container">
             <h2>Latest News & Updates</h2>
-            <div class="news-grid">
-                <div class="news-card" data-article="1">
-                    <img src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop" alt="HS2 Construction">
-                    <div class="news-card-content">
-                        <div class="news-meta">3 days ago • HS2 Updates</div>
-                        <h3>Old Oak Common Station Construction Progresses</h3>
-                        <p>Foundation work completed for the UK's largest newly built station, with platform installation underway.</p>
-                        <a href="#" class="btn" onclick="openArticle(event, 1)">Read More</a>
-                    </div>
-                </div>
-                <div class="news-card" data-article="2">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" alt="New Housing">
-                    <div class="news-card-content">
-                        <div class="news-meta">5 days ago • Housing</div>
-                        <h3>First Phase Housing Development Approved</h3>
-                        <p>OPDC approves 500 new homes including 50% affordable housing in the Old Oak Mile development.</p>
-                        <a href="#" class="btn" onclick="openArticle(event, 2)">Read More</a>
-                    </div>
-                </div>
-                <div class="news-card" data-article="3">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="Community">
-                    <div class="news-card-content">
-                        <div class="news-meta">1 week ago • Community</div>
-                        <h3>Local Business Forum Launches</h3>
-                        <p>New initiative connects existing Park Royal businesses with incoming developments and opportunities.</p>
-                        <a href="#" class="btn" onclick="openArticle(event, 3)">Read More</a>
-                    </div>
-                </div>
-                <div class="news-card" data-article="4">
-                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop" alt="Transport">
-                    <div class="news-card-content">
-                        <div class="news-meta">2 weeks ago • Transport</div>
-                        <h3>New Bus Routes Connect Old Oak to Central London</h3>
-                        <p>Transport for London announces enhanced bus services ahead of station opening, improving local connectivity.</p>
-                        <a href="#" class="btn" onclick="openArticle(event, 4)">Read More</a>
-                    </div>
-                </div>
-                <div class="news-card" data-article="5">
-                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop" alt="Affordable Housing">
-                    <div class="news-card-content">
-                        <div class="news-meta">3 weeks ago • Housing</div>
-                        <h3>Affordable Housing Initiative Reaches Milestone</h3>
-                        <p>OPDC confirms commitment to deliver 50% affordable homes across all new developments in the area.</p>
-                        <a href="#" class="btn" onclick="openArticle(event, 5)">Read More</a>
-                    </div>
-                </div>
-                <div class="news-card" data-article="6">
-                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop" alt="Jobs">
-                    <div class="news-card-content">
-                        <div class="news-meta">1 month ago • Employment</div>
-                        <h3>Job Centre Opens to Support Local Employment</h3>
-                        <p>New dedicated employment hub launched to connect residents with thousands of upcoming job opportunities.</p>
-                        <a href="#" class="btn" onclick="openArticle(event, 6)">Read More</a>
-                    </div>
-                </div>
+            <div class="news-grid" id="newsGrid">
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
+                <div class="skeleton-card"></div>
             </div>
-            <div style="text-align: center; margin-top: 2rem;">
+            <div style="text-align: center; margin-top: 2rem;" id="newsFooter" style="display:none;">
                 <p style="color: #666; font-style: italic;">More articles coming soon as the development progresses</p>
             </div>
         </div>
@@ -1619,40 +1592,14 @@
         <div class="container">
             <h2>Local Business Directory</h2>
             <p style="margin-bottom: 2rem;">Discover services, shops, and businesses in the Old Oak area</p>
-            <div class="directory-grid">
-                <div class="directory-card featured">
-                    <span class="directory-tag">FEATURED</span>
-                    <h3>Old Oak Coffee House</h3>
-                    <p>Independent coffee shop serving locally roasted beans and homemade pastries.</p>
-                    <p><strong>📍</strong> 45 Park Royal Road, NW10</p>
-                    <p><strong>📞</strong> 020 1234 5678</p>
-                    <a href="business-directory.html" class="btn" style="margin-top: 1rem;">Visit Website</a>
-                </div>
-                <div class="directory-card">
-                    <span class="directory-tag">Property</span>
-                    <h3>Oak Properties</h3>
-                    <p>Specialists in Old Oak Common new builds and rentals.</p>
-                    <p><strong>📍</strong> 12 Station Approach, NW10</p>
-                    <p><strong>📞</strong> 020 8765 4321</p>
-                </div>
-                <div class="directory-card">
-                    <span class="directory-tag">Services</span>
-                    <h3>North West Solicitors</h3>
-                    <p>Legal services for property, business, and residents.</p>
-                    <p><strong>📍</strong> 89 High Street, NW10</p>
-                    <p><strong>📞</strong> 020 3456 7890</p>
-                </div>
-                <div class="directory-card featured">
-                    <span class="directory-tag">FEATURED</span>
-                    <h3>Park Royal Fitness</h3>
-                    <p>State-of-the-art gym with personal training and classes.</p>
-                    <p><strong>📍</strong> 34 Victoria Road, NW10</p>
-                    <p><strong>📞</strong> 020 7890 1234</p>
-                    <a href="business-directory.html" class="btn" style="margin-top: 1rem;">Book Now</a>
-                </div>
+            <div class="directory-grid" id="dirGrid">
+                <div class="skeleton-dir"></div>
+                <div class="skeleton-dir"></div>
+                <div class="skeleton-dir"></div>
+                <div class="skeleton-dir"></div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
-                <a href="business-directory.html" class="btn btn-primary">View Full Directory - 200+ Businesses</a>
+                <a href="business-directory.html" class="btn btn-primary" id="dirCta">View Full Directory</a>
                 <a href="#advertise" class="btn">List Your Business</a>
             </div>
         </div>
@@ -2477,8 +2424,9 @@
         var liIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
         var copyIcon = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.news-card').forEach(function(card) {
+        function initShareBars(container) {
+            (container || document).querySelectorAll('.news-card').forEach(function(card) {
+                if (card.querySelector('.share-bar')) return; // already initialised
                 var content = card.querySelector('.news-card-content');
                 if (!content) return;
                 var bar = document.createElement('div');
@@ -2490,7 +2438,7 @@
                     + '<button class="share-btn share-copy" onclick="shareArticle(\'copy\', this)">' + copyIcon + ' Copy link</button>';
                 content.appendChild(bar);
             });
-        });
+        }
 
         // ─────────────────────────────────────────
         // MOBILE MENU
@@ -2552,53 +2500,99 @@
         // ─────────────────────────────────────────
         // ARTICLE MODAL
         // ─────────────────────────────────────────
-        var articles = {
-            1: {
-                title: 'Old Oak Common Station Construction Progresses',
-                meta: '3 days ago • HS2 Updates',
-                image: 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop',
-                body: '<p>Foundation work has been completed for the UK\'s largest newly built station at Old Oak Common, with platform installation now underway.</p><p>HS2 Ltd confirmed that the first platform sections have been installed, marking a significant milestone in the construction programme. The station will have 14 platforms serving HS2 high-speed services, the Elizabeth Line, Great Western Mainline, and Heathrow Express.</p>'
-            },
-            2: {
-                title: 'First Phase Housing Development Approved',
-                meta: '5 days ago • Housing',
-                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop',
-                body: '<p>The Old Oak and Park Royal Development Corporation (OPDC) has approved the first phase of housing in the Old Oak Mile development, comprising 500 new homes with 50% designated as affordable housing.</p><p>Construction is expected to begin in 2026 with first residents moving in by 2028.</p>'
-            },
-            3: {
-                title: 'Local Business Forum Launches',
-                meta: '1 week ago • Community',
-                image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop',
-                body: '<p>A new initiative connecting existing Park Royal businesses with incoming developments and opportunities has launched, bringing together over 200 local employers for the first time.</p>'
-            },
-            4: {
-                title: 'New Bus Routes Connect Old Oak to Central London',
-                meta: '2 weeks ago • Transport',
-                image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop',
-                body: '<p>Transport for London has announced enhanced bus services connecting Old Oak Common to Central London ahead of the station opening, significantly improving connectivity for existing residents.</p>'
-            },
-            5: {
-                title: 'Affordable Housing Initiative Reaches Milestone',
-                meta: '3 weeks ago • Housing',
-                image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop',
-                body: '<p>OPDC has reconfirmed its commitment to delivering 50% affordable homes across all new developments in the area, a target that puts Old Oak Common ahead of most major London regeneration schemes.</p>'
-            },
-            6: {
-                title: 'Job Centre Opens to Support Local Employment',
-                meta: '1 month ago • Employment',
-                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop',
-                body: '<p>A new dedicated employment hub has launched in the Old Oak area to connect local residents with the thousands of job opportunities expected from the regeneration project over the coming decade.</p>'
-            }
+        var articlesMap = {}; // populated by loadNews()
+
+        function formatRelativeDate(dateStr) {
+            var now = new Date();
+            var d = new Date(dateStr);
+            var diff = Math.round((now - d) / 86400000);
+            if (diff === 0) return 'Today';
+            if (diff === 1) return '1 day ago';
+            if (diff < 7)  return diff + ' days ago';
+            if (diff < 14) return '1 week ago';
+            if (diff < 21) return '2 weeks ago';
+            if (diff < 28) return '3 weeks ago';
+            if (diff < 60) return '1 month ago';
+            return Math.floor(diff / 30) + ' months ago';
+        }
+
+        function renderNewsCards(articles) {
+            var grid = document.getElementById('newsGrid');
+            if (!grid) return;
+            articlesMap = {};
+            var html = '';
+            articles.forEach(function(a) {
+                articlesMap[a.id] = a;
+                var relDate = formatRelativeDate(a.date);
+                var imgSrc = (a.image || 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop').replace('w=900&h=400', 'w=600&h=400');
+                html += '<div class="news-card" data-article="' + a.id + '">'
+                    + '<img src="' + imgSrc + '" alt="' + (a.imageAlt || a.title) + '" loading="lazy">'
+                    + '<div class="news-card-content">'
+                    + '<div class="news-meta">' + relDate + ' \u2022 ' + (a.category || 'News') + '</div>'
+                    + '<h3>' + a.title + '</h3>'
+                    + '<p>' + a.excerpt + '</p>'
+                    + '<a href="#" class="btn" onclick="openArticle(event,\'' + a.id + '\')">Read More</a>'
+                    + '</div></div>';
+            });
+            grid.innerHTML = html;
+            var footer = document.getElementById('newsFooter');
+            if (footer) footer.style.display = '';
+            initShareBars(grid);
+        }
+
+        function loadNews() {
+            fetch('/api/get-news?limit=6')
+                .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+                .then(function(data) {
+                    if (data.articles && data.articles.length) {
+                        renderNewsCards(data.articles);
+                    }
+                })
+                .catch(function() {
+                    // Fallback: restore static cards if API unavailable
+                    var grid = document.getElementById('newsGrid');
+                    if (grid) grid.innerHTML = FALLBACK_NEWS_HTML;
+                    initShareBars(grid);
+                    var footer = document.getElementById('newsFooter');
+                    if (footer) footer.style.display = '';
+                });
+        }
+
+        // Static fallback HTML (mirrors original hardcoded cards)
+        var FALLBACK_NEWS_HTML = [
+            '<div class="news-card" data-article="1"><img src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop" alt="HS2 Construction"><div class="news-card-content"><div class="news-meta">3 days ago \u2022 HS2 Updates</div><h3>Old Oak Common Station Construction Progresses</h3><p>Foundation work completed for the UK\'s largest newly built station, with platform installation underway.</p><a href="#" class="btn" onclick="openArticle(event,\'1\')">Read More</a></div></div>',
+            '<div class="news-card" data-article="2"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop" alt="New Housing"><div class="news-card-content"><div class="news-meta">5 days ago \u2022 Housing</div><h3>First Phase Housing Development Approved</h3><p>OPDC approves 500 new homes including 50% affordable housing in the Old Oak Mile development.</p><a href="#" class="btn" onclick="openArticle(event,\'2\')">Read More</a></div></div>',
+            '<div class="news-card" data-article="3"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" alt="Community"><div class="news-card-content"><div class="news-meta">1 week ago \u2022 Community</div><h3>Local Business Forum Launches</h3><p>New initiative connects existing Park Royal businesses with incoming developments and opportunities.</p><a href="#" class="btn" onclick="openArticle(event,\'3\')">Read More</a></div></div>',
+            '<div class="news-card" data-article="4"><img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&h=400&fit=crop" alt="Transport"><div class="news-card-content"><div class="news-meta">2 weeks ago \u2022 Transport</div><h3>New Bus Routes Connect Old Oak to Central London</h3><p>Transport for London announces enhanced bus services ahead of station opening, improving local connectivity.</p><a href="#" class="btn" onclick="openArticle(event,\'4\')">Read More</a></div></div>',
+            '<div class="news-card" data-article="5"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop" alt="Affordable Housing"><div class="news-card-content"><div class="news-meta">3 weeks ago \u2022 Housing</div><h3>Affordable Housing Initiative Reaches Milestone</h3><p>OPDC confirms commitment to deliver 50% affordable homes across all new developments in the area.</p><a href="#" class="btn" onclick="openArticle(event,\'5\')">Read More</a></div></div>',
+            '<div class="news-card" data-article="6"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop" alt="Jobs"><div class="news-card-content"><div class="news-meta">1 month ago \u2022 Employment</div><h3>Job Centre Opens to Support Local Employment</h3><p>New dedicated employment hub launched to connect residents with thousands of upcoming job opportunities.</p><a href="#" class="btn" onclick="openArticle(event,\'6\')">Read More</a></div></div>'
+        ].join('');
+
+        // Fallback article data for modal (used when API is unavailable)
+        var FALLBACK_ARTICLE_DATA = {
+            '1': { title: 'Old Oak Common Station Construction Progresses', meta: '3 days ago \u2022 HS2 Updates', date: '2026-04-01', image: 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=900&h=400&fit=crop', body: '<p>Foundation work has been completed for the UK\'s largest newly built station at Old Oak Common, with platform installation now underway.</p><p>HS2 Ltd confirmed that the first platform sections have been installed, marking a significant milestone in the construction programme. The station will have 14 platforms serving HS2 high-speed services, the Elizabeth Line, Great Western Mainline, and Heathrow Express.</p>' },
+            '2': { title: 'First Phase Housing Development Approved', meta: '5 days ago \u2022 Housing', date: '2026-03-30', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&h=400&fit=crop', body: '<p>The Old Oak and Park Royal Development Corporation (OPDC) has approved the first phase of housing in the Old Oak Mile development, comprising 500 new homes with 50% designated as affordable housing.</p><p>Construction is expected to begin in 2026 with first residents moving in by 2028.</p>' },
+            '3': { title: 'Local Business Forum Launches', meta: '1 week ago \u2022 Community', date: '2026-03-27', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=400&fit=crop', body: '<p>A new initiative connecting existing Park Royal businesses with incoming developments and opportunities has launched, bringing together over 200 local employers for the first time.</p>' },
+            '4': { title: 'New Bus Routes Connect Old Oak to Central London', meta: '2 weeks ago \u2022 Transport', date: '2026-03-20', image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&h=400&fit=crop', body: '<p>Transport for London has announced enhanced bus services connecting Old Oak Common to Central London ahead of the station opening, significantly improving connectivity for existing residents.</p>' },
+            '5': { title: 'Affordable Housing Initiative Reaches Milestone', meta: '3 weeks ago \u2022 Housing', date: '2026-03-13', image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&h=400&fit=crop', body: '<p>OPDC has reconfirmed its commitment to delivering 50% affordable homes across all new developments in the area, a target that puts Old Oak Common ahead of most major London regeneration schemes.</p>' },
+            '6': { title: 'Job Centre Opens to Support Local Employment', meta: '1 month ago \u2022 Employment', date: '2026-03-04', image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=900&h=400&fit=crop', body: '<p>A new dedicated employment hub has launched in the Old Oak area to connect local residents with the thousands of job opportunities expected from the regeneration project over the coming decade.</p>' }
         };
 
         function openArticle(e, id) {
             e.preventDefault();
-            var article = articles[id];
+            var article = articlesMap[id] || FALLBACK_ARTICLE_DATA[id];
             if (!article) return;
-            document.getElementById('modalTitle').textContent = article.title;
-            document.getElementById('modalMeta').textContent = article.meta;
-            document.getElementById('modalImage').src = article.image;
-            document.getElementById('modalBody').innerHTML = article.body;
+
+            var title = article.title;
+            var meta = article.meta || (formatRelativeDate(article.date) + ' \u2022 ' + (article.category || 'News'));
+            var image = (article.image || '').replace('w=600&h=400', 'w=900&h=400');
+            var body = article.body || ('<p>' + (article.excerpt || '') + '</p>');
+            var pubDate = article.date || new Date().toISOString().split('T')[0];
+
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMeta').textContent = meta;
+            document.getElementById('modalImage').src = image;
+            document.getElementById('modalBody').innerHTML = body;
 
             // Permalink
             history.pushState({ articleId: id }, '', '#article-' + id);
@@ -2609,26 +2603,29 @@
                 ld.textContent = JSON.stringify({
                     '@context': 'https://schema.org',
                     '@type': 'NewsArticle',
-                    'headline': article.title,
-                    'image': [article.image],
-                    'datePublished': new Date().toISOString().split('T')[0],
+                    'headline': title,
+                    'image': [image],
+                    'datePublished': pubDate,
                     'publisher': { '@id': 'https://www.oldoaktown.co.uk/#organization' },
                     'mainEntityOfPage': { '@type': 'WebPage', '@id': 'https://www.oldoaktown.co.uk/#article-' + id }
                 });
             }
 
-            // Related articles (3 others, cycled from sorted list)
-            var allIds = Object.keys(articles).map(Number);
-            var others = allIds.filter(function(i) { return i !== id; });
+            // Related articles (3 others from articlesMap or fallback)
+            var allIds = Object.keys(Object.keys(articlesMap).length ? articlesMap : FALLBACK_ARTICLE_DATA);
+            var others = allIds.filter(function(i) { return i !== String(id); });
             var related = others.slice(0, 3);
             var relDiv = document.getElementById('modalRelated');
             if (relDiv && related.length) {
                 var html = '<h4>More Stories</h4><div class="related-grid">';
                 related.forEach(function(rid) {
-                    var a = articles[rid];
-                    html += '<a class="related-card" href="#" onclick="openArticle(event,' + rid + ')">'
-                        + '<img src="' + a.image.replace('w=900&h=400', 'w=300&h=160') + '" alt="">'
-                        + '<div class="related-card-body"><div class="news-meta">' + a.meta + '</div>'
+                    var a = articlesMap[rid] || FALLBACK_ARTICLE_DATA[rid];
+                    if (!a) return;
+                    var rMeta = a.meta || (formatRelativeDate(a.date) + ' \u2022 ' + (a.category || 'News'));
+                    var rImg = (a.image || '').replace('w=900&h=400', 'w=300&h=160').replace('w=600&h=400', 'w=300&h=160');
+                    html += '<a class="related-card" href="#" onclick="openArticle(event,\'' + rid + '\')">'
+                        + '<img src="' + rImg + '" alt="" loading="lazy">'
+                        + '<div class="related-card-body"><div class="news-meta">' + rMeta + '</div>'
                         + '<h5>' + a.title + '</h5></div></a>';
                 });
                 html += '</div>';
@@ -2662,38 +2659,53 @@
         // ─────────────────────────────────────────
         // EVENTS CALENDAR
         // ─────────────────────────────────────────
+
+        // Fallback events (shown immediately while JSON loads)
         var calendarEvents = [
-            {
-                title: 'OPDC Public Consultation — Old Oak North',
-                date: new Date(2026, 2, 5),
-                time: '6:00 PM – 8:00 PM',
-                location: 'Old Oak Community Centre',
-                address: 'Braybrook Street, London W12 0AP',
-                description: 'OPDC invites residents to share views on the latest planning proposals for Old Oak North.',
-                registerUrl: 'https://www.eventbrite.co.uk/o/old-oak-and-park-royal-development-corporation-10724173382'
-            },
-            {
-                title: 'Park Royal Business Networking Evening',
-                date: new Date(2026, 2, 12),
-                time: '5:30 PM – 7:30 PM',
-                location: 'Park Royal Business Centre',
-                address: 'Victoria Road, London NW10 6NY',
-                description: 'Monthly networking for businesses in and around Park Royal. All welcome.',
-                registerUrl: '#'
-            },
-            {
-                title: 'Old Oak Neighbourhood Forum Monthly Meeting',
-                date: new Date(2026, 2, 18),
-                time: '7:00 PM – 9:00 PM',
-                location: 'St Mary Magdalene Church Hall',
-                address: 'Woodfield Road, London W9 2BA',
-                description: 'Monthly open meeting of the Old Oak Neighbourhood Forum.',
-                registerUrl: 'http://oldoakneighbourhoodforum.org/'
-            }
+            { title: 'OPDC Public Consultation \u2014 Old Oak North', date: new Date(2026, 3, 10), time: '6:00 PM \u2013 8:00 PM', location: 'Old Oak Community Centre', address: 'Braybrook Street, London W12 0AP', description: 'OPDC invites residents to share views on the latest planning proposals for Old Oak North.', registerUrl: 'https://www.eventbrite.co.uk/o/old-oak-and-park-royal-development-corporation-10724173382' },
+            { title: 'Park Royal Business Networking Evening', date: new Date(2026, 3, 17), time: '5:30 PM \u2013 7:30 PM', location: 'Park Royal Business Centre', address: 'Victoria Road, London NW10 6NY', description: 'Monthly networking for businesses in and around Park Royal. All welcome.', registerUrl: '#' },
+            { title: 'Old Oak Neighbourhood Forum Monthly Meeting', date: new Date(2026, 3, 23), time: '7:00 PM \u2013 9:00 PM', location: 'St Mary Magdalene Church Hall', address: 'Woodfield Road, London W9 2BA', description: 'Monthly open meeting of the Old Oak Neighbourhood Forum.', registerUrl: 'http://oldoakneighbourhoodforum.org/' }
         ];
+
+        function normaliseEvent(ev) {
+            var parts = ev.date.split('-');
+            var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+            function fmt24(t) {
+                var p = t.split(':'), h = parseInt(p[0]), m = p[1];
+                var ampm = h >= 12 ? 'PM' : 'AM';
+                h = h % 12 || 12;
+                return h + ':' + m + ' ' + ampm;
+            }
+            return {
+                title: ev.title,
+                date: d,
+                time: fmt24(ev.startTime) + ' \u2013 ' + fmt24(ev.endTime),
+                location: ev.location.name,
+                address: ev.location.address,
+                description: ev.description,
+                registerUrl: ev.registrationUrl || '#'
+            };
+        }
+
+        // Load live events from JSON, fall back silently to calendarEvents above
+        fetch('/data/events.json')
+            .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function(data) {
+                if (data.events && data.events.length) {
+                    calendarEvents = data.events.map(normaliseEvent);
+                    renderCalendar();
+                }
+            })
+            .catch(function() {});
 
         var currentMonth = new Date().getMonth();
         var currentYear  = new Date().getFullYear();
+
+        function jumpToEvent(year, month) {
+            currentYear = year;
+            currentMonth = month;
+            renderCalendar();
+        }
 
         function renderCalendar() {
             var container = document.getElementById('calendar-container');
@@ -2710,7 +2722,19 @@
             html += '</div>';
 
             if (monthEvents.length === 0) {
-                html += '<div class="no-events"><p>No events scheduled for ' + monthNames[currentMonth] + '. Check back soon!</p></div>';
+                var now = new Date();
+                var futureEvents = calendarEvents
+                    .filter(function(ev) { return ev.date >= now; })
+                    .sort(function(a, b) { return a.date - b.date; });
+                if (futureEvents.length) {
+                    var next = futureEvents[0];
+                    html += '<div class="no-events"><p>No events in ' + monthNames[currentMonth] + '.</p>'
+                        + '<p>Next: <strong>' + next.title + '</strong> &mdash; '
+                        + '<button class="calendar-nav-btn" style="display:inline-block;" onclick="jumpToEvent(' + next.date.getFullYear() + ',' + next.date.getMonth() + ')">'
+                        + 'View in ' + monthNames[next.date.getMonth()] + ' ' + next.date.getFullYear() + ' &rarr;</button></p></div>';
+                } else {
+                    html += '<div class="no-events"><p>No events scheduled for ' + monthNames[currentMonth] + '. Check back soon!</p></div>';
+                }
             } else {
                 html += '<div class="events-grid">';
                 monthEvents.forEach(function(ev) {
@@ -2745,6 +2769,99 @@
         renderCalendar();
 
         // ─────────────────────────────────────────
+        // DYNAMIC NEWS GRID
+        // ─────────────────────────────────────────
+        loadNews();
+
+        // ─────────────────────────────────────────
+        // BUSINESS DIRECTORY PREVIEW
+        // ─────────────────────────────────────────
+        (function loadBusinessPreview() {
+            var STATIC_FALLBACK = [
+                { tier: 'featured', category: 'Café', name: 'Old Oak Coffee House', description: 'Independent coffee shop serving locally roasted beans and homemade pastries.', address: '45 Park Royal Road, NW10', phone: '020 1234 5678', website: 'business-directory.html', ctaLabel: 'Visit Website' },
+                { tier: 'standard', category: 'Property', name: 'Oak Properties', description: 'Specialists in Old Oak Common new builds and rentals.', address: '12 Station Approach, NW10', phone: '020 8765 4321' },
+                { tier: 'standard', category: 'Services', name: 'North West Solicitors', description: 'Legal services for property, business, and residents.', address: '89 High Street, NW10', phone: '020 3456 7890' },
+                { tier: 'featured', category: 'Fitness', name: 'Park Royal Fitness', description: 'State-of-the-art gym with personal training and classes.', address: '34 Victoria Road, NW10', phone: '020 7890 1234', website: 'business-directory.html', ctaLabel: 'Book Now' }
+            ];
+
+            function renderDirCard(b) {
+                var isFeatured = b.tier === 'featured' || b.tier === 'premium';
+                var cat = b.category || 'Business';
+                var name = b.business_name || b.name || '';
+                var html = '<div class="directory-card' + (isFeatured ? ' featured' : '') + '">'
+                    + '<span class="directory-tag">' + (isFeatured ? 'FEATURED' : cat) + '</span>'
+                    + '<h3>' + name + '</h3>'
+                    + '<p>' + (b.description || '') + '</p>';
+                var addr = b.address || '';
+                if (addr) html += '<p><strong>\uD83D\uDCCD</strong> ' + addr + (b.postcode ? ', ' + b.postcode : '') + '</p>';
+                if (b.phone) html += '<p><strong>\uD83D\uDCDE</strong> ' + b.phone + '</p>';
+                if (isFeatured && (b.website || b.ctaLabel)) {
+                    html += '<a href="' + (b.website || 'business-directory.html') + '" class="btn" style="margin-top:1rem;">' + (b.ctaLabel || 'View Listing') + '</a>';
+                }
+                html += '</div>';
+                return html;
+            }
+
+            function renderFallback() {
+                var grid = document.getElementById('dirGrid');
+                if (!grid) return;
+                grid.innerHTML = STATIC_FALLBACK.map(renderDirCard).join('');
+            }
+
+            fetch('/api/get-businesses?limit=4')
+                .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+                .then(function(data) {
+                    var grid = document.getElementById('dirGrid');
+                    var cta  = document.getElementById('dirCta');
+                    if (!grid) return;
+                    var businesses = (data.businesses || data.data || []).slice(0, 4);
+                    if (!businesses.length) { renderFallback(); return; }
+                    grid.innerHTML = businesses.map(renderDirCard).join('');
+                    var total = data.total || data.count;
+                    if (cta && total > 0) {
+                        cta.textContent = 'View Full Directory \u2014 ' + total + ' Business' + (total !== 1 ? 'es' : '');
+                    }
+                })
+                .catch(renderFallback);
+        })();
+
+        // ─────────────────────────────────────────
+        // ANIMATED STATS COUNTER
+        // ─────────────────────────────────────────
+        (function() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            if (!('IntersectionObserver' in window)) return;
+            var statHeadings = document.querySelectorAll('.stat-item h2[data-target]');
+            if (!statHeadings.length) return;
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (!entry.isIntersecting) return;
+                    observer.unobserve(entry.target);
+                    var el = entry.target;
+                    var target   = parseFloat(el.dataset.target);
+                    var prefix   = el.dataset.prefix  || '';
+                    var suffix   = el.dataset.suffix  || '';
+                    var decimals = parseInt(el.dataset.decimals) || 0;
+                    var duration = 1500;
+                    var startTime = null;
+                    function tick(now) {
+                        if (!startTime) startTime = now;
+                        var progress = Math.min((now - startTime) / duration, 1);
+                        var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+                        var value = target * eased;
+                        var formatted = decimals > 0
+                            ? value.toFixed(decimals)
+                            : Math.round(value).toLocaleString();
+                        el.textContent = prefix + formatted + suffix;
+                        if (progress < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                });
+            }, { threshold: 0.5 });
+            statHeadings.forEach(function(h) { observer.observe(h); });
+        })();
+
+        // ─────────────────────────────────────────
         // COOKIE CONSENT BANNER
         // ─────────────────────────────────────────
         (function() {
@@ -2769,16 +2886,18 @@
         // ─────────────────────────────────────────
         // ARTICLE PERMALINKS
         // ─────────────────────────────────────────
-        // On page load: open article if hash matches #article-N
+        // On page load: open article if hash matches #article-{id}
         (function() {
             var hash = window.location.hash;
-            var match = hash.match(/^#article-(\d+)$/);
+            var match = hash.match(/^#article-(.+)$/);
             if (match) {
-                var id = parseInt(match[1], 10);
-                if (articles[id]) {
-                    // Defer slightly so the page renders first
-                    setTimeout(function() { openArticle({ preventDefault: function(){} }, id); }, 200);
-                }
+                var id = match[1];
+                // Defer to allow dynamic cards to render first
+                setTimeout(function() {
+                    if (articlesMap[id] || FALLBACK_ARTICLE_DATA[id]) {
+                        openArticle({ preventDefault: function(){} }, id);
+                    }
+                }, 400);
             }
         })();
 
