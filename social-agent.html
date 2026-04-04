@@ -631,6 +631,10 @@ textarea { min-height: 68px; }
           <span>🏗 Planning updates</span>
           <button class="toggle" onclick="this.classList.toggle('on')"></button>
         </div>
+        <div class="toggle-row">
+          <span>🔎 Web search (Brave)</span>
+          <button class="toggle on" id="webSearchToggle" onclick="this.classList.toggle('on')" title="Requires BRAVE_SEARCH_API_KEY on the server"></button>
+        </div>
       </div>
     </div>
 
@@ -888,14 +892,46 @@ async function runPipeline() {
   const log = document.getElementById('researchLog');
   log.innerHTML = '';
   addLog(log, '> Initialising Old Oak Town research pipeline…', 0);
-  addLog(log, '> Searching: HS2 Old Oak Common latest news…', 600, 'info');
-  addLog(log, '> Fetching: oldoaktown.co.uk content…', 1100, 'info');
-  addLog(log, '> Searching: West London regeneration community news…', 1600, 'info');
-  addLog(log, '> Searching: OPDC planning updates Park Royal…', 2000, 'info');
-  addLog(log, '> Research complete. Passing to drafting engine…', 2600, 'done');
-  addLog(log, '> Generating 15 posts: 5 days × 3 platforms…', 3000, 'info');
 
-  await delay(3400);
+  // ── Fetch real data from site sources ──────────────────────────
+  let liveHeadlineCount = 0;
+  let liveNewsCount = 0;
+
+  try {
+    addLog(log, '> Fetching live headlines from RSS sources…', 300, 'info');
+    const tickerRes = await fetch('/data/ticker-news.json');
+    if (tickerRes.ok) {
+      const ticker = await tickerRes.json();
+      const items = ticker.items || [];
+      liveHeadlineCount = items.length;
+      addLog(log, `> ✓ ${liveHeadlineCount} headlines loaded (updated ${ticker.updatedAt ? new Date(ticker.updatedAt).toLocaleDateString('en-GB') : 'today'})`, 0, 'done');
+      items.slice(0, 4).forEach(item => {
+        addLog(log, `  · ${item.title.length > 72 ? item.title.slice(0, 72) + '…' : item.title}`, 0, 'info');
+      });
+    }
+  } catch (_) {
+    addLog(log, '> ⚠ Could not reach ticker feed — using cached context', 0, 'info');
+  }
+
+  try {
+    addLog(log, '> Fetching published site articles…', 0, 'info');
+    const newsRes = await fetch('/data/news.json');
+    if (newsRes.ok) {
+      const news = await newsRes.json();
+      liveNewsCount = (news.articles || []).length;
+      addLog(log, `> ✓ ${liveNewsCount} site articles loaded for context`, 0, 'done');
+    }
+  } catch (_) {}
+
+  const useWebSearch = document.getElementById('webSearchToggle')?.classList.contains('on') ?? true;
+  if (useWebSearch) {
+    addLog(log, '> Web search enabled — server will query Brave Search if configured…', 0, 'info');
+  }
+
+  addLog(log, '> Research complete. Passing context to drafting engine…', 0, 'done');
+  addLog(log, '> Generating 15 posts: 5 days × 3 platforms…', 200, 'info');
+
+  await delay(400);
   setStep(2);
 
   const weekDate = document.getElementById('weekDate').value;
@@ -904,7 +940,7 @@ async function runPipeline() {
 
   let plan;
   try {
-    plan = await callClaude(theme, context, tone, weekDate);
+    plan = await callClaude(theme, context, tone, weekDate, useWebSearch);
   } catch (e) {
     showToast('Generation failed: ' + e.message, 'error');
     document.getElementById('runBtn').disabled = false;
@@ -970,12 +1006,12 @@ function getPreviousThemes() {
   } catch (_) { return []; }
 }
 
-async function callClaude(theme, context, tone, weekDate) {
+async function callClaude(theme, context, tone, weekDate, useWebSearch = true) {
   const previousThemes = getPreviousThemes();
   const response = await fetch('/api/generate-posts', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({ theme, context, tone, weekDate, previousThemes })
+    body:    JSON.stringify({ theme, context, tone, weekDate, previousThemes, useWebSearch })
   });
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));

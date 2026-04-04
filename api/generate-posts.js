@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY not configured' });
 
-  const { theme, context, tone, weekDate, previousThemes } = req.body;
+  const { theme, context, tone, weekDate, previousThemes, useWebSearch } = req.body;
   if (!theme) return res.status(400).json({ error: 'Missing theme' });
 
   // Load latest news headlines from the daily-updated ticker cache
@@ -31,12 +31,46 @@ export default async function handler(req, res) {
   try {
     const ticker = JSON.parse(readFileSync(join(process.cwd(), 'data/ticker-news.json'), 'utf8'));
     if (ticker.items?.length) {
-      const headlines = ticker.items.slice(0, 6)
+      const headlines = ticker.items.slice(0, 8)
         .map(i => `- ${i.title} (${i.source})`)
         .join('\n');
       newsSnippet = `\nCURRENT NEWS HEADLINES (weave relevant ones into post content to keep it timely and grounded):\n${headlines}\n`;
     }
   } catch (_) {}
+
+  // Load recently published site articles (avoid re-covering same stories)
+  let publishedSnippet = '';
+  try {
+    const news = JSON.parse(readFileSync(join(process.cwd(), 'data/news.json'), 'utf8'));
+    if (news.articles?.length) {
+      const recent = news.articles.slice(0, 4)
+        .map(a => `- ${a.title} (${a.category}, ${a.date})`)
+        .join('\n');
+      publishedSnippet = `\nRECENTLY PUBLISHED ON SITE (find fresh angles — don't simply repeat these):\n${recent}\n`;
+    }
+  } catch (_) {}
+
+  // Optional Brave Search for live web results (requires BRAVE_SEARCH_API_KEY env var)
+  let webSearchSnippet = '';
+  const braveKey = process.env.BRAVE_SEARCH_API_KEY;
+  if (braveKey && useWebSearch !== false) {
+    try {
+      const month = new Date().toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+      const q = encodeURIComponent(`Old Oak Common HS2 Park Royal ${month}`);
+      const braveRes = await fetch(
+        `https://api.search.brave.com/res/v1/news/search?q=${q}&count=6&country=gb&search_lang=en&freshness=pw`,
+        { headers: { 'Accept': 'application/json', 'X-Subscription-Token': braveKey } }
+      );
+      if (braveRes.ok) {
+        const braveData = await braveRes.json();
+        const hits = (braveData.results || []).slice(0, 6);
+        if (hits.length) {
+          const lines = hits.map(r => `- ${r.title} (${r.meta_url?.netloc || new URL(r.url).hostname})`).join('\n');
+          webSearchSnippet = `\nLIVE WEB NEWS — ${month}:\n${lines}\n`;
+        }
+      }
+    } catch (_) {}
+  }
 
   // Build a "previously covered" note if history was passed in
   const previousNote = previousThemes?.length
@@ -50,7 +84,7 @@ Week commencing: ${weekDate || 'this week'}
 Theme: ${theme}
 Additional context: ${context || 'None'}
 Tone: ${tone}
-${newsSnippet}${previousNote}
+${newsSnippet}${webSearchSnippet}${publishedSnippet}${previousNote}
 PLATFORM WRITING RULES — follow these strictly, each platform must read completely differently:
 
 FACEBOOK (community notice board):

@@ -62,6 +62,22 @@ const RSS_SOURCES = [
     category: 'planning',
     priority: 'high',
     tags: ['planning', 'development', 'opdc']
+  },
+  // Google News search feeds — no API key required
+  {
+    name: 'Google News — Old Oak Common',
+    url: 'https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en',
+    category: 'general',
+    priority: 'high',
+    tags: ['news', 'regeneration', 'community']
+  },
+  {
+    name: 'Google News — HS2',
+    url: 'https://news.google.com/rss/search?q=HS2+%22Old+Oak%22+OR+%22Euston%22&hl=en-GB&gl=GB&ceid=GB:en',
+    category: 'hs2',
+    priority: 'medium',
+    tags: ['hs2', 'transport', 'infrastructure'],
+    filter: ['old oak', 'hs2', 'euston', 'park royal']
   }
 ];
 
