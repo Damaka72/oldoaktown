@@ -3,18 +3,53 @@
  * POST /api/buffer-post
  *
  * Routes each post to the correct Buffer channel by platform.
- * Uses Buffer's REST API v1 — simple, documented, no GraphQL.
+ * Channel IDs are read from environment variables:
+ *   BUFFER_CHANNEL_FACEBOOK, BUFFER_CHANNEL_INSTAGRAM, BUFFER_CHANNEL_LINKEDIN,
+ *   BUFFER_CHANNEL_TWITTER, BUFFER_CHANNEL_TIKTOK, BUFFER_CHANNEL_PINTEREST,
+ *   BUFFER_CHANNEL_YOUTUBE
  *
  * Required env var: BUFFER_API_KEY
  */
 
 const BUFFER_GRAPHQL = 'https://api.buffer.com/graphql';
 
-const CHANNEL_IDS = {
-  linkedin:  '69a213f74be271803d75d07e',
-  instagram: '69aca3e03f3b94a1212866bf',
-  facebook:  '69a4431d3f3b94a12105386d',
+// Channel IDs loaded from env vars per platform.
+// Falls back to legacy hardcoded IDs for FB/IG/LI (oldoaktown defaults).
+function getChannelId(platformKey) {
+  const envKey = `BUFFER_CHANNEL_${platformKey.toUpperCase()}`;
+  if (process.env[envKey]) return process.env[envKey];
+  // Legacy fallback for oldoaktown original channels
+  const legacy = {
+    linkedin:  '69a213f74be271803d75d07e',
+    instagram: '69aca3e03f3b94a1212866bf',
+    facebook:  '69a4431d3f3b94a12105386d',
+  };
+  return legacy[platformKey] || null;
+}
+
+// Platforms that require at least one media item
+const REQUIRES_MEDIA = new Set(['instagram', 'tiktok', 'pinterest', 'youtube']);
+
+// Per-platform character limits (Buffer enforces some server-side too)
+const CHAR_LIMITS = {
+  twitter:   280,
+  linkedin:  1248,
+  instagram: 2200,
+  facebook:  63206,
+  tiktok:    2200,
+  pinterest: 500,
+  youtube:   5000,
 };
+
+// Platform-specific metadata for Buffer's GraphQL API
+function buildMetadata(platformKey) {
+  switch (platformKey) {
+    case 'facebook':  return { facebook:  { type: 'post' } };
+    case 'instagram': return { instagram: { type: 'post', shouldShareToFeed: true } };
+    case 'tiktok':    return { tiktok:    { privacy: 'PUBLIC_TO_EVERYONE' } };
+    default:          return undefined;
+  }
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,39 +61,38 @@ export default async function handler(req, res) {
 
   const apiKey = req.headers['x-buffer-key'] || process.env.BUFFER_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: 'No Buffer API key — set BUFFER_API_KEY in Vercel env vars' });
+    return res.status(500).json({ error: 'No Buffer API key — set BUFFER_API_KEY in env vars' });
   }
 
   const { text, scheduledAt, platform, day, mediaUrl } = req.body;
   if (!text) return res.status(400).json({ error: 'Missing required field: text' });
 
   const platformKey = (platform || '').toLowerCase();
-  const channelId = CHANNEL_IDS[platformKey];
+  const channelId = getChannelId(platformKey);
   if (!channelId) {
     return res.status(400).json({
-      error: `Unknown platform: "${platform}". Must be linkedin, instagram, or facebook.`
+      error: `Unknown platform: "${platform}". Set BUFFER_CHANNEL_${(platform || '').toUpperCase()} in env vars.`
     });
   }
 
-  // Instagram requires at least one media item — skip if no URL was provided
-  if (platformKey === 'instagram' && !mediaUrl) {
+  // Platforms that require media — skip gracefully if no URL provided
+  if (REQUIRES_MEDIA.has(platformKey) && !mediaUrl) {
     return res.status(200).json({
       success: false,
       skipped: true,
       platform: platformKey,
-      reason: 'Instagram posts require an image or video. Add a photo/video URL to the card and re-send.',
+      reason: `${platform} posts require an image or video. Add a media URL to the card and re-send.`,
       day
     });
   }
 
   try {
-    // If no scheduled time provided, default to 1 hour from now
     const dueAt = scheduledAt || new Date(Date.now() + 3600 * 1000).toISOString();
 
-    // LinkedIn hard cap
-    const LINKEDIN_CHAR_LIMIT = 1248;
-    const postText = platformKey === 'linkedin' && text.length > LINKEDIN_CHAR_LIMIT
-      ? text.slice(0, LINKEDIN_CHAR_LIMIT - 1) + '…'
+    // Enforce character limits
+    const limit = CHAR_LIMITS[platformKey];
+    const postText = limit && text.length > limit
+      ? text.slice(0, limit - 1) + '…'
       : text;
 
     const mutation = `
@@ -74,14 +108,7 @@ export default async function handler(req, res) {
       }
     `;
 
-    // Platform-specific metadata: Facebook and Instagram require a post type
-    // in metadata.<platform>.type (NOT at top-level input).
-    // Instagram also requires shouldShareToFeed (NON_NULL Boolean).
-    const metadata = platformKey === 'facebook'
-      ? { facebook: { type: 'post' } }
-      : platformKey === 'instagram'
-        ? { instagram: { type: 'post', shouldShareToFeed: true } }
-        : undefined;
+    const metadata = buildMetadata(platformKey);
 
     const variables = {
       input: {

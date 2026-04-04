@@ -203,6 +203,18 @@ if (config.pipelineLogs?.length) {
   );
 }
 
+// ── 14. Platform config block ─────────────────────────────────────────────────
+if (config.platforms?.length) {
+  const platLines = config.platforms.map(p => {
+    return `  { id: '${p.id}', label: '${p.label}', emoji: '${p.emoji}', css: '${p.css}', color: '${p.color}', bg: '${p.bg}', charLimit: ${p.charLimit}, requiresMedia: ${p.requiresMedia}, defaultTime: '${p.defaultTime}' },`;
+  }).join('\n');
+
+  html = html.replace(
+    /const PLATFORMS = \[[\s\S]*?\];(\s*\/\/ ═══[^\n]*END PLATFORM CONFIG[^\n]*)?/,
+    `const PLATFORMS = [\n${platLines}\n];`
+  );
+}
+
 // ── Write output ──────────────────────────────────────────────────────────────
 const outDir = path.dirname(path.resolve(outputPath));
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
@@ -213,6 +225,9 @@ console.log(`\n✓  Generated: ${outputPath}`);
 console.log(`   Site:      ${config.siteName} (${config.siteSlug})`);
 if (config.researchSources?.length) {
   console.log(`   Sources:   ${config.researchSources.map(s => s.label).join(', ')}`);
+}
+if (config.platforms?.length) {
+  console.log(`   Platforms: ${config.platforms.map(p => p.label).join(', ')}`);
 }
 
 if (!config.passwordHash) {
