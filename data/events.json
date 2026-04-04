@@ -1,51 +1,83 @@
 {
   "events": [
     {
-      "id": "old-oak-community-forum-2025-11-15",
-      "title": "Old Oak Community Forum",
-      "date": "2025-11-15",
-      "startTime": "18:30",
-      "endTime": "20:30",
+      "id": "opdc-consultation-2026-04-10",
+      "title": "OPDC Public Consultation — Old Oak North",
+      "date": "2026-04-10",
+      "startTime": "18:00",
+      "endTime": "20:00",
       "location": {
-        "name": "Harlesden Library",
-        "address": "High Street, Harlesden"
+        "name": "Old Oak Community Centre",
+        "address": "Braybrook Street, London W12 0AP"
       },
-      "description": "Monthly community meeting to discuss development updates and local concerns.",
-      "category": "community",
-      "registrationUrl": "https://www.brent.gov.uk/your-community/community-events",
-      "sourceUrl": "https://www.brent.gov.uk/your-community/community-events",
+      "description": "OPDC invites residents to share views on the latest planning proposals for Old Oak North.",
+      "category": "consultation",
+      "registrationUrl": "https://www.eventbrite.co.uk/o/old-oak-and-park-royal-development-corporation-10724173382",
+      "sourceUrl": "https://www.london.gov.uk/opdc",
       "status": "upcoming"
     },
     {
-      "id": "hs2-station-tour-2025-11-22",
-      "title": "HS2 Station Tour",
-      "date": "2025-11-22",
+      "id": "park-royal-networking-2026-04-17",
+      "title": "Park Royal Business Networking Evening",
+      "date": "2026-04-17",
+      "startTime": "17:30",
+      "endTime": "19:30",
+      "location": {
+        "name": "Park Royal Business Centre",
+        "address": "Victoria Road, London NW10 6NY"
+      },
+      "description": "Monthly networking for businesses in and around Park Royal. All welcome.",
+      "category": "networking",
+      "registrationUrl": "",
+      "sourceUrl": "",
+      "status": "upcoming"
+    },
+    {
+      "id": "old-oak-forum-2026-04-23",
+      "title": "Old Oak Neighbourhood Forum Monthly Meeting",
+      "date": "2026-04-23",
+      "startTime": "19:00",
+      "endTime": "21:00",
+      "location": {
+        "name": "St Mary Magdalene Church Hall",
+        "address": "Woodfield Road, London W9 2BA"
+      },
+      "description": "Monthly open meeting of the Old Oak Neighbourhood Forum. Residents welcome.",
+      "category": "community",
+      "registrationUrl": "http://oldoakneighbourhoodforum.org/",
+      "sourceUrl": "http://oldoakneighbourhoodforum.org/",
+      "status": "upcoming"
+    },
+    {
+      "id": "hs2-site-tour-2026-05-10",
+      "title": "HS2 Station Construction Site Tour",
+      "date": "2026-05-10",
       "startTime": "14:00",
       "endTime": "16:00",
       "location": {
         "name": "Old Oak Common Station Site",
-        "address": "Meet at Victoria Gate"
+        "address": "Meet at Victoria Gate, London NW10"
       },
-      "description": "Guided tour of the new HS2 station construction site with Q&A session.",
+      "description": "Guided tour of the HS2 station construction site with engineer Q&A. Hard hats provided.",
       "category": "tour",
       "registrationUrl": "https://www.hs2.org.uk/events/old-oak-common-tours",
-      "sourceUrl": "https://www.hs2.org.uk/events/old-oak-common-tours",
+      "sourceUrl": "https://www.hs2.org.uk/events",
       "status": "upcoming"
     },
     {
-      "id": "christmas-market-2025-12-01",
-      "title": "Old Oak Christmas Market",
-      "date": "2025-12-01",
-      "startTime": "10:00",
-      "endTime": "16:00",
+      "id": "opdc-forum-2026-05-21",
+      "title": "OPDC Community Forum — Spring Update",
+      "date": "2026-05-21",
+      "startTime": "18:30",
+      "endTime": "20:30",
       "location": {
-        "name": "Wormholt Park",
-        "address": "Wormholt Park, W12"
+        "name": "Hammersmith Town Hall",
+        "address": "King Street, London W6 9JU"
       },
-      "description": "Annual Christmas market featuring local vendors, food, and entertainment.",
-      "category": "market",
-      "registrationUrl": "https://www.lbhf.gov.uk/events",
-      "sourceUrl": "https://www.lbhf.gov.uk/events",
+      "description": "Quarterly OPDC community forum with project updates, housing progress, and resident Q&A.",
+      "category": "community",
+      "registrationUrl": "https://www.london.gov.uk/opdc",
+      "sourceUrl": "https://www.london.gov.uk/opdc",
       "status": "upcoming"
     }
   ]

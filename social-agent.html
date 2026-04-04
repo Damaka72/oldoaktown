@@ -157,6 +157,21 @@ textarea { min-height: 68px; }
 .tone-opt.active { background: var(--green-deep); border-color: var(--green-deep); color: white; }
 .tone-opt:hover:not(.active) { border-color: var(--green-bright); color: var(--green-bright); }
 
+/* ── CAMPAIGN OBJECTIVE ── */
+.obj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 10px; }
+.obj-card {
+  background: white; border: 2px solid var(--border); border-radius: 10px;
+  padding: 11px 6px 9px; cursor: pointer; text-align: center;
+  transition: all 0.15s; display: flex; flex-direction: column; gap: 4px;
+  font-family: 'DM Sans', sans-serif;
+}
+.obj-card:hover { border-color: var(--green-bright); }
+.obj-card.active { border-color: var(--green-bright); background: var(--green-ghost); }
+.obj-icon { font-size: 18px; line-height: 1; }
+.obj-label { font-size: 10.5px; font-weight: 600; color: var(--ink); }
+.obj-desc { font-size: 11.5px; color: var(--muted); line-height: 1.45; margin: 0; }
+.obj-card.active .obj-label { color: var(--green-mid); }
+
 .research-toggles { display: flex; flex-direction: column; gap: 7px; }
 .toggle-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -586,6 +601,30 @@ textarea { min-height: 68px; }
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
+
+    <div class="sidebar-section">
+      <h3>Campaign Objective</h3>
+      <div class="obj-grid" id="objGrid">
+        <button class="obj-card active" data-obj="newsletter" onclick="selectObjective(this)">
+          <span class="obj-icon">🎯</span>
+          <span class="obj-label">Grow Newsletter</span>
+        </button>
+        <button class="obj-card" data-obj="directory" onclick="selectObjective(this)">
+          <span class="obj-icon">🏢</span>
+          <span class="obj-label">Fill Directory</span>
+        </button>
+        <button class="obj-card" data-obj="reach" onclick="selectObjective(this)">
+          <span class="obj-icon">📣</span>
+          <span class="obj-label">Grow Audience</span>
+        </button>
+        <button class="obj-card" data-obj="trust" onclick="selectObjective(this)">
+          <span class="obj-icon">🤝</span>
+          <span class="obj-label">Build Authority</span>
+        </button>
+      </div>
+      <p class="obj-desc" id="objDesc">Drive sign-ups to The Old Oak Weekly. 3 of 5 days include a natural newsletter CTA woven into the post.</p>
+    </div>
+
     <div class="sidebar-section">
       <h3>Campaign Brief</h3>
       <div class="form-group">
@@ -630,6 +669,10 @@ textarea { min-height: 68px; }
         <div class="toggle-row">
           <span>🏗 Planning updates</span>
           <button class="toggle" onclick="this.classList.toggle('on')"></button>
+        </div>
+        <div class="toggle-row">
+          <span>🔎 Web search (Brave)</span>
+          <button class="toggle on" id="webSearchToggle" onclick="this.classList.toggle('on')" title="Requires BRAVE_SEARCH_API_KEY on the server"></button>
         </div>
       </div>
     </div>
@@ -874,6 +917,73 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ═══════════════════════════════════════════════════════════════
+// CAMPAIGN OBJECTIVES
+// ═══════════════════════════════════════════════════════════════
+const OBJECTIVES = {
+  newsletter: {
+    desc: 'Drive sign-ups to The Old Oak Weekly. 3 of 5 days include a natural newsletter CTA woven into the post.',
+    prompt: `CAMPAIGN OBJECTIVE — Grow Newsletter Sign-ups:
+The overarching goal this week is to convert followers into subscribers of The Old Oak Weekly (sign-up at oldoaktown.co.uk).
+STRATEGIC RULES:
+- Exactly 3 of the 5 days must include a newsletter call-to-action woven naturally into the post — never bolted on as a last line
+- The remaining 2 days are pure value content with no CTA — these build the trust that makes the CTA days work
+- CTAs to rotate (use each at most once): "Get the full story every week — sign up free at oldoaktown.co.uk", "Join thousands of West Londoners who get the briefing before anyone else", "Inside The Old Oak Weekly this week: [tease something specific to the theme]", "Never miss an update — it's free, it's local, it's yours"
+- FACEBOOK: The closing question on CTA days should transition naturally into the sign-up mention
+- INSTAGRAM: On CTA days, the final line should reference the newsletter link in bio
+- LINKEDIN: Position the newsletter as the essential weekly briefing for anyone with professional interest in Old Oak — developers, planners, investors`
+  },
+  directory: {
+    desc: 'Spotlight local businesses and drive free listings. Builds both revenue and community value.',
+    prompt: `CAMPAIGN OBJECTIVE — Grow the Business Directory:
+The overarching goal this week is to drive local business owners to list on the Old Oak Town directory (oldoaktown.co.uk/business-directory).
+STRATEGIC RULES:
+- At least 2 days should feature a warm spotlight on a local business — write it as community celebration, not advertising
+- At least 2 days should include a soft CTA for business owners: "Is your business on the directory? It's free — oldoaktown.co.uk", "Know a local business that deserves more visibility? Tag them below"
+- 1 day should be pure community content with no business CTA — earn trust before asking
+- FACEBOOK: "Tag a local business owner who should see this" is a highly effective closing call-to-action this week
+- INSTAGRAM: Lead with local pride and community identity, not sales language
+- LINKEDIN: Direct appeal to business owners and entrepreneurs: "If you serve West London, you should be here. Free listing at oldoaktown.co.uk"`
+  },
+  reach: {
+    desc: 'Maximise shares, tags, and new follows. Content designed to travel beyond existing followers.',
+    prompt: `CAMPAIGN OBJECTIVE — Maximise Reach & Audience Growth:
+The overarching goal this week is to grow total reach — new followers, organic shares, and people tagging friends.
+STRATEGIC RULES:
+- Every post needs a "forward momentum" hook that makes existing followers want to show it to someone who doesn't follow yet
+- Use surprising stats, before/after contrasts, local nostalgia, or vivid future vision to trigger saves and shares
+- Explicit sharing prompts: "Share this with a neighbour", "Tag someone who commutes through this area", "Save this — Old Oak Common is the biggest change to West London in a generation"
+- Write as if explaining to someone who's never heard of the project — that's who gets tagged in
+- FACEBOOK: The closing question should invite people to tag a specific type of person (a neighbour, someone flat-hunting in West London, a friend who works in construction)
+- INSTAGRAM: Strong hook lines, emotionally vivid, designed for saves — saves signal reach to the algorithm
+- LINKEDIN: Hook the professional who will share with their network: urban planners, architects, investors, developers`
+  },
+  trust: {
+    desc: 'No CTAs — pure value content. Establishes Old Oak Town as the definitive go-to local source.',
+    prompt: `CAMPAIGN OBJECTIVE — Build Community Authority & Trust:
+The overarching goal this week is depth and credibility. Zero conversion CTAs. This is the long-term investment that makes every other objective easier.
+STRATEGIC RULES:
+- Every post must deliver specific, useful, hard-to-find information — dates, planning references, named sources, real numbers
+- Do not include any sign-up prompts, directory pushes, or conversion CTAs of any kind this week
+- Position Old Oak Town as the most informed, most reliable, most local voice on the regeneration — not a social media account, but a trusted institution
+- When in doubt, go deeper — more detail is better than less this week
+- FACEBOOK: Long-form posts this week. Give people something to save, return to, and share in local Facebook groups
+- INSTAGRAM: Structure captions like mini-infographics — numbered facts, clear headers, dense useful content
+- LINKEDIN: Write the 200–250 word analysis posts that get shared by planners, journalists, and property professionals`
+  }
+};
+
+function selectObjective(btn) {
+  document.querySelectorAll('.obj-card').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('objDesc').textContent = OBJECTIVES[btn.dataset.obj].desc;
+}
+
+function getObjectivePrompt() {
+  const active = document.querySelector('.obj-card.active');
+  return active ? (OBJECTIVES[active.dataset.obj]?.prompt || '') : '';
+}
+
+// ═══════════════════════════════════════════════════════════════
 // PIPELINE — research, draft, flatten
 // ═══════════════════════════════════════════════════════════════
 async function runPipeline() {
@@ -887,15 +997,50 @@ async function runPipeline() {
 
   const log = document.getElementById('researchLog');
   log.innerHTML = '';
+  const activeObj = document.querySelector('.obj-card.active');
+  const objLabel = activeObj ? OBJECTIVES[activeObj.dataset.obj].desc.split('.')[0] : '';
   addLog(log, '> Initialising Old Oak Town research pipeline…', 0);
-  addLog(log, '> Searching: HS2 Old Oak Common latest news…', 600, 'info');
-  addLog(log, '> Fetching: oldoaktown.co.uk content…', 1100, 'info');
-  addLog(log, '> Searching: West London regeneration community news…', 1600, 'info');
-  addLog(log, '> Searching: OPDC planning updates Park Royal…', 2000, 'info');
-  addLog(log, '> Research complete. Passing to drafting engine…', 2600, 'done');
-  addLog(log, `> Generating ${DAYS.length * PLATFORMS.length} posts: ${DAYS.length} days × ${PLATFORMS.length} platforms…`, 3000, 'info');
+  if (objLabel) addLog(log, `> Objective: ${objLabel}`, 0, 'info');
 
-  await delay(3400);
+  // ── Fetch real data from site sources ──────────────────────────
+  let liveHeadlineCount = 0;
+  let liveNewsCount = 0;
+
+  try {
+    addLog(log, '> Fetching live headlines from RSS sources…', 300, 'info');
+    const tickerRes = await fetch('/data/ticker-news.json');
+    if (tickerRes.ok) {
+      const ticker = await tickerRes.json();
+      const items = ticker.items || [];
+      liveHeadlineCount = items.length;
+      addLog(log, `> ✓ ${liveHeadlineCount} headlines loaded (updated ${ticker.updatedAt ? new Date(ticker.updatedAt).toLocaleDateString('en-GB') : 'today'})`, 0, 'done');
+      items.slice(0, 4).forEach(item => {
+        addLog(log, `  · ${item.title.length > 72 ? item.title.slice(0, 72) + '…' : item.title}`, 0, 'info');
+      });
+    }
+  } catch (_) {
+    addLog(log, '> ⚠ Could not reach ticker feed — using cached context', 0, 'info');
+  }
+
+  try {
+    addLog(log, '> Fetching published site articles…', 0, 'info');
+    const newsRes = await fetch('/data/news.json');
+    if (newsRes.ok) {
+      const news = await newsRes.json();
+      liveNewsCount = (news.articles || []).length;
+      addLog(log, `> ✓ ${liveNewsCount} site articles loaded for context`, 0, 'done');
+    }
+  } catch (_) {}
+
+  const useWebSearch = document.getElementById('webSearchToggle')?.classList.contains('on') ?? true;
+  if (useWebSearch) {
+    addLog(log, '> Web search enabled — server will query Brave Search if configured…', 0, 'info');
+  }
+
+  addLog(log, '> Research complete. Passing context to drafting engine…', 0, 'done');
+  addLog(log, `> Generating ${DAYS.length * PLATFORMS.length} posts: ${DAYS.length} days \u00d7 ${PLATFORMS.length} platforms\u2026`, 200, 'info');
+
+  await delay(400);
   setStep(2);
 
   const weekDate = document.getElementById('weekDate').value;
@@ -904,7 +1049,7 @@ async function runPipeline() {
 
   let plan;
   try {
-    plan = await callClaude(theme, context, tone, weekDate);
+    plan = await callClaude(theme, context, tone, weekDate, useWebSearch);
   } catch (e) {
     showToast('Generation failed: ' + e.message, 'error');
     document.getElementById('runBtn').disabled = false;
@@ -970,12 +1115,12 @@ function getPreviousThemes() {
   } catch (_) { return []; }
 }
 
-async function callClaude(theme, context, tone, weekDate) {
+async function callClaude(theme, context, tone, weekDate, useWebSearch = true) {
   const previousThemes = getPreviousThemes();
   const response = await fetch('/api/generate-posts', {
     method:  'POST',
     headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({ theme, context, tone, weekDate, previousThemes })
+    body:    JSON.stringify({ theme, context, tone, weekDate, previousThemes, useWebSearch, objectivePrompt: getObjectivePrompt() })
   });
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
