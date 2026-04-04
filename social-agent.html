@@ -893,7 +893,7 @@ async function runPipeline() {
   addLog(log, '> Searching: West London regeneration community news…', 1600, 'info');
   addLog(log, '> Searching: OPDC planning updates Park Royal…', 2000, 'info');
   addLog(log, '> Research complete. Passing to drafting engine…', 2600, 'done');
-  addLog(log, '> Generating 15 posts: 5 days × 3 platforms…', 3000, 'info');
+  addLog(log, `> Generating ${DAYS.length * PLATFORMS.length} posts: ${DAYS.length} days × ${PLATFORMS.length} platforms…`, 3000, 'info');
 
   await delay(3400);
   setStep(2);
@@ -913,7 +913,7 @@ async function runPipeline() {
     return;
   }
 
-  addLog(log, '> ✓ 15 posts drafted successfully', 0, 'done');
+  addLog(log, `> ✓ ${DAYS.length * PLATFORMS.length} posts drafted successfully`, 0, 'done');
   addLog(log, '> Building approval board…', 400, 'done');
   await delay(700);
 
@@ -1010,13 +1010,34 @@ function flattenPosts(plan, weekDate) {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// PLATFORM CONFIG — edit or regenerate via social-agent-generator.html
+// ═══════════════════════════════════════════════════════════════
+const PLATFORMS = [
+  { id: 'facebook',  label: 'Facebook',  emoji: '📘', css: 'fb', color: '#1877F2', bg: '#E7F0FD', charLimit: 63206, requiresMedia: false, defaultTime: '9:00am'  },
+  { id: 'instagram', label: 'Instagram', emoji: '📸', css: 'ig', color: '#C13584', bg: '#FEE9F3', charLimit: 2200,  requiresMedia: true,  defaultTime: '11:00am' },
+  { id: 'linkedin',  label: 'LinkedIn',  emoji: '💼', css: 'li', color: '#0A66C2', bg: '#E8F0FA', charLimit: 1248,  requiresMedia: false, defaultTime: '8:00am'  },
+];
+// ═══════════════════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════════════════
 // APPROVAL BOARD
 // ═══════════════════════════════════════════════════════════════
-const PLAT_CLS   = { facebook:'fb',        instagram:'ig',        linkedin:'li' };
-const PLAT_LABEL = { facebook:'📘 Facebook', instagram:'📸 Instagram', linkedin:'💼 LinkedIn' };
-const PLAT_ORDER = ['facebook','instagram','linkedin'];
+// Derived lookups — do not edit
+const PLAT_ORDER = PLATFORMS.map(p => p.id);
+const PLAT_CLS   = Object.fromEntries(PLATFORMS.map(p => [p.id, p.css]));
+const PLAT_LABEL = Object.fromEntries(PLATFORMS.map(p => [p.id, `${p.emoji} ${p.label}`]));
 const STATUS_TXT = { pending:'Pending', approved:'Approved ✓', rejected:'Rejected ✗', sent:'Sent ✓' };
 const DAYS       = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+
+// Inject per-platform CSS from config
+(function injectPlatformCSS() {
+  const css = PLATFORMS.map(p => `
+.post-card.${p.css}-card { border-top-color: ${p.color}; }
+.plat-pill.${p.css} { background: ${p.bg}; color: ${p.color}; }`).join('');
+  const s = document.createElement('style');
+  s.textContent = css;
+  document.head.appendChild(s);
+})();
 
 function renderApprovalBoard(filter) {
   filter = filter || state.currentFilter;
@@ -1056,7 +1077,8 @@ function renderApprovalBoard(filter) {
         row.appendChild(document.createElement('div'));
         return;
       }
-      const isIg = plat === 'instagram';
+      const platDef = PLATFORMS.find(p => p.id === plat) || {};
+      const requiresMedia = platDef.requiresMedia ?? false;
       const card = document.createElement('div');
       card.className = `post-card ${PLAT_CLS[plat]}-card ${post.status !== 'pending' ? post.status : ''}`;
       card.id        = `card-${post.id}`;
@@ -1070,14 +1092,14 @@ function renderApprovalBoard(filter) {
         <div class="card-body">
           <div class="card-caption" id="cap-${post.id}">${escHtml(post.caption)}</div>
           <textarea class="caption-edit" id="edit-${post.id}">${post.caption}</textarea>
-          <div class="card-media${isIg ? ' ig-media' : ''}">
+          <div class="card-media${requiresMedia ? ' ig-media' : ''}">
             <div class="media-label">
-              ${isIg
+              ${requiresMedia
                 ? '📸 Image / Video URL <span class="media-req">Required</span>'
                 : '🖼 Photo / Video (optional)'}
             </div>
             <input class="media-input" id="media-${post.id}" type="url"
-              placeholder="${isIg ? 'Paste image or video URL…' : 'Paste image or video URL (optional)'}"
+              placeholder="${requiresMedia ? 'Paste image or video URL…' : 'Paste image or video URL (optional)'}"
               value="${escHtml(post.mediaUrl || '')}"
               oninput="updateMediaUrl('${post.id}', this.value)">
             <img class="media-preview" id="thumb-${post.id}"
@@ -1245,7 +1267,7 @@ async function sendToSocial() {
   addLog(slog, `> Connecting to Buffer API…`, 500, 'info');
   await delay(800);
 
-  const icons = { facebook:'📘', instagram:'📸', linkedin:'💼' };
+  const icons = Object.fromEntries(PLATFORMS.map(p => [p.id, p.emoji]));
   let successCount = 0, failCount = 0, skippedCount = 0;
 
   for (let i = 0; i < approved.length; i++) {
@@ -1394,8 +1416,8 @@ function showToast(msg, type = '') {
 // SPREADSHEET UPLOAD
 // ═══════════════════════════════════════════════════════════════
 const VALID_DAYS      = ['monday','tuesday','wednesday','thursday','friday'];
-const VALID_PLATFORMS = ['facebook','instagram','linkedin'];
-const PLATFORM_TIMES  = { facebook: '9:00am', instagram: '11:00am', linkedin: '8:00am' };
+const VALID_PLATFORMS = PLAT_ORDER;
+const PLATFORM_TIMES  = Object.fromEntries(PLATFORMS.map(p => [p.id, p.defaultTime]));
 
 // Minimal RFC-4180 CSV row parser (handles quoted fields with commas / escaped quotes)
 function parseCSVRow(line) {
@@ -1466,7 +1488,7 @@ function loadFromSpreadsheet(file) {
         return;
       }
       if (!VALID_PLATFORMS.includes(platform)) {
-        errors.push(`Row ${rowNum}: "platform" value "${escHtml(platform)}" not recognised — must be facebook, instagram, or linkedin`);
+        errors.push(`Row ${rowNum}: "platform" value "${escHtml(platform)}" not recognised — must be ${VALID_PLATFORMS.join(', ')}`);
         return;
       }
       if (!caption) {

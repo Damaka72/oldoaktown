@@ -26,12 +26,27 @@
 
   "passwordHash": "",
 
+  "platforms": [
+    { "id": "facebook",  "label": "Facebook",  "emoji": "📘", "css": "fb", "color": "#1877F2", "bg": "#E7F0FD", "charLimit": 63206, "requiresMedia": false, "defaultTime": "9:00am"  },
+    { "id": "instagram", "label": "Instagram", "emoji": "📸", "css": "ig", "color": "#C13584", "bg": "#FEE9F3", "charLimit": 2200,  "requiresMedia": true,  "defaultTime": "11:00am" },
+    { "id": "linkedin",  "label": "LinkedIn",  "emoji": "💼", "css": "li", "color": "#0A66C2", "bg": "#E8F0FA", "charLimit": 1248,  "requiresMedia": false, "defaultTime": "8:00am"  }
+  ],
+
+  "_platformOptions": {
+    "_comment": "Add any of these to the platforms array above. Set BUFFER_CHANNEL_<PLATFORM_ID_UPPER> env var for each.",
+    "twitter":   { "id": "twitter",   "label": "Twitter / X", "emoji": "🐦", "css": "tw", "color": "#000000", "bg": "#E8E8E8", "charLimit": 280,  "requiresMedia": false, "defaultTime": "10:00am" },
+    "tiktok":    { "id": "tiktok",    "label": "TikTok",      "emoji": "🎵", "css": "tt", "color": "#010101", "bg": "#EAEAEA", "charLimit": 2200, "requiresMedia": true,  "defaultTime": "7:00pm"  },
+    "pinterest": { "id": "pinterest", "label": "Pinterest",   "emoji": "📌", "css": "pn", "color": "#E60023", "bg": "#FDECEA", "charLimit": 500,  "requiresMedia": true,  "defaultTime": "2:00pm"  },
+    "youtube":   { "id": "youtube",   "label": "YouTube",     "emoji": "▶️",  "css": "yt", "color": "#FF0000", "bg": "#FFEEEE", "charLimit": 5000, "requiresMedia": true,  "defaultTime": "3:00pm"  }
+  },
+
   "researchSources": [
-    { "emoji": "📰", "label": "Latest news",        "defaultOn": true  },
-    { "emoji": "📅", "label": "Events & calendar",  "defaultOn": true  },
-    { "emoji": "💼", "label": "Business spotlights", "defaultOn": true  },
-    { "emoji": "🏘",  "label": "Community updates",  "defaultOn": true  },
-    { "emoji": "🔍", "label": "Industry news",       "defaultOn": false }
+    { "type": "custom",  "emoji": "📰", "label": "Latest news",        "defaultOn": true  },
+    { "type": "custom",  "emoji": "📅", "label": "Events & calendar",  "defaultOn": true  },
+    { "type": "custom",  "emoji": "💼", "label": "Business spotlights", "defaultOn": true  },
+    { "type": "website", "emoji": "🌐", "label": "Our website",        "url": "https://example.com", "defaultOn": true  },
+    { "type": "google",  "emoji": "🔍", "label": "Google News",        "keyword": "your topic here", "defaultOn": false },
+    { "type": "rss",     "emoji": "📡", "label": "Industry RSS feed",  "url": "https://example.com/feed", "defaultOn": false }
   ],
 
   "themePlaceholder": "Weekly theme or focus…",
