@@ -23,7 +23,7 @@ export default async function handler(req, res) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'ANTHROPIC_API_KEY not configured' });
 
-  const { theme, context, tone, weekDate, previousThemes, useWebSearch } = req.body;
+  const { theme, context, tone, weekDate, previousThemes, useWebSearch, objectivePrompt } = req.body;
   if (!theme) return res.status(400).json({ error: 'Missing theme' });
 
   // Load latest news headlines from the daily-updated ticker cache
@@ -77,8 +77,10 @@ export default async function handler(req, res) {
     ? `\nPREVIOUSLY COVERED THEMES (avoid repeating these angles — find fresh perspectives):\n${previousThemes.slice(0, 6).map(t => `- ${t}`).join('\n')}\n`
     : '';
 
-  const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 9,000 new homes and 11,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
+  const objectiveBlock = objectivePrompt ? `\n${objectivePrompt}\n` : '';
 
+  const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 9,000 new homes and 11,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
+${objectiveBlock}
 CAMPAIGN BRIEF:
 Week commencing: ${weekDate || 'this week'}
 Theme: ${theme}
