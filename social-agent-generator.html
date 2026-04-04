@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Command Centre Generator — Old Oak Town</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+:root {
+  --primary: #1C3A0E;
+  --accent:  #4C8A35;
+  --ghost:   #F0F7EB;
+  --cream:   #FAF8F4;
+  --ink:     #0F1A0A;
+  --muted:   #6B7B5E;
+  --border:  #DDE8D4;
+  --amber:   #D4860A;
+  --red:     #C0392B;
+  --white:   #FFFFFF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"DM Sans",sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;line-height:1.5;}
+.header{background:var(--primary);padding:0 24px;display:flex;align-items:center;gap:12px;height:58px;position:sticky;top:0;z-index:100;}
+.brand-icon{width:32px;height:32px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:"Instrument Serif",serif;font-size:18px;color:#fff;font-style:italic;}
+.brand-wrap{display:flex;flex-direction:column;}
+.brand-name{font-family:"Instrument Serif",serif;font-size:18px;color:#fff;line-height:1.1;}
+.brand-sub{font-size:10px;color:rgba(255,255,255,0.55);letter-spacing:.1em;text-transform:uppercase;}
+.main{max-width:780px;margin:0 auto;padding:28px 20px 80px;}
+.page-title{font-family:"Instrument Serif",serif;font-size:28px;font-style:italic;color:var(--primary);margin-bottom:6px;}
+.page-sub{font-size:14px;color:var(--muted);margin-bottom:32px;}
+.card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:26px 24px;margin-bottom:20px;}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.step-badge{width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.card-title{font-family:"Instrument Serif",serif;font-size:18px;color:var(--primary);}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;}
+input[type=text],input[type=password],textarea,select{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-family:"DM Sans",sans-serif;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .2s;}
+input[type=text]:focus,input[type=password]:focus,textarea:focus,select:focus{border-color:var(--accent);}
+textarea{resize:vertical;min-height:80px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr 80px;gap:14px;margin-bottom:16px;}
+.field-row-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.field{margin-bottom:16px;}
+.note{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.4;}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+.preset-btn{padding:7px 13px;border:1.5px solid var(--border);border-radius:7px;background:#fff;font-size:13px;cursor:pointer;transition:all .15s;font-family:"DM Sans",sans-serif;}
+.preset-btn:hover{border-color:var(--accent);color:var(--accent);}
+.color-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.color-field{display:flex;flex-direction:column;gap:5px;}
+.color-field label{margin-bottom:2px;}
+.color-row{display:flex;align-items:center;gap:8px;}
+input[type=color]{width:38px;height:38px;border:1.5px solid var(--border);border-radius:7px;padding:2px;cursor:pointer;background:#fff;}
+.color-hex{flex:1;min-width:0;font-family:"Geist Mono",monospace;font-size:12px;}
+.platform-list{display:flex;flex-direction:column;gap:8px;}
+.platform-row{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;}
+.platform-top{display:flex;align-items:center;gap:12px;padding:12px 14px;cursor:pointer;user-select:none;}
+.platform-top:hover{background:var(--ghost);}
+.platform-check{width:20px;height:20px;accent-color:var(--accent);cursor:pointer;flex-shrink:0;}
+.platform-emoji{font-size:18px;flex-shrink:0;}
+.platform-name{font-weight:500;font-size:14px;flex:1;}
+.char-badge{font-size:11px;color:var(--muted);background:var(--ghost);padding:2px 7px;border-radius:4px;font-family:"Geist Mono",monospace;}
+.media-badge{font-size:10px;color:var(--amber);background:#FEF3DC;padding:2px 6px;border-radius:4px;}
+.channel-row{padding:10px 14px;background:var(--ghost);border-top:1px solid var(--border);display:none;}
+.channel-row.visible{display:block;}
+.channel-row input{font-family:"Geist Mono",monospace;font-size:12px;}
+.sources-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.source-row{display:flex;gap:8px;align-items:center;padding:10px 12px;background:var(--ghost);border:1px solid var(--border);border-radius:9px;flex-wrap:wrap;}
+.source-type{min-width:130px;font-size:13px;}
+.source-emoji{width:54px;font-size:14px;}
+.source-label{flex:1;min-width:120px;font-size:13px;}
+.source-url{flex:2;min-width:160px;font-size:13px;font-family:"Geist Mono",monospace;}
+.src-toggle{width:36px;height:20px;background:var(--border);border-radius:10px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;}
+.src-toggle.on{background:var(--accent);}
+.src-toggle::after{content:"";position:absolute;width:14px;height:14px;background:#fff;border-radius:50%;top:3px;left:3px;transition:left .2s;}
+.src-toggle.on::after{left:19px;}
+.src-remove{width:30px;height:30px;border:none;background:none;color:var(--muted);font-size:16px;cursor:pointer;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.src-remove:hover{background:#FDECEA;color:var(--red);}
+.add-source-btn{font-size:13px;padding:8px 14px;background:var(--ghost);border:1.5px dashed var(--border);border-radius:8px;color:var(--accent);cursor:pointer;font-family:"DM Sans",sans-serif;font-weight:500;width:100%;}
+.add-source-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.pw-wrap{position:relative;}
+.pw-wrap input{padding-right:48px;}
+.pw-show{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:none;background:none;color:var(--muted);cursor:pointer;font-size:13px;padding:4px;}
+.generate-btn{width:100%;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-family:"Instrument Serif",serif;font-size:20px;font-style:italic;cursor:pointer;transition:background .2s;margin-top:8px;}
+.generate-btn:hover{background:var(--accent);}
+.generate-btn:disabled{opacity:.6;cursor:not-allowed;}
+.success-panel{display:none;background:#F0F7EB;border:2px solid var(--accent);border-radius:12px;padding:22px 24px;margin-top:20px;}
+.success-panel h3{font-family:"Instrument Serif",serif;font-size:18px;color:var(--primary);margin-bottom:14px;}
+.success-panel ol{padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14px;}
+.success-panel code{background:rgba(76,138,53,.12);padding:1px 5px;border-radius:4px;font-family:"Geist Mono",monospace;font-size:12px;}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:11px 20px;border-radius:9px;font-size:13px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center;}
+.toast.show{opacity:1;}
+.info-note{font-size:12px;color:var(--muted);background:var(--ghost);border:1px solid var(--border);border-radius:7px;padding:9px 12px;margin-top:10px;line-height:1.5;}
+@media(max-width:600px){
+  .field-row{grid-template-columns:1fr;}.field-row-2{grid-template-columns:1fr;}
+  .color-grid{grid-template-columns:repeat(2,1fr);}
+  .source-row{gap:6px;}.source-type{min-width:100%;}.source-url{min-width:100%;}
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="brand-icon">O</div>
+  <div class="brand-wrap">
+    <div class="brand-name">Old Oak Town</div>
+    <div class="brand-sub">Social Command Centre Generator</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="page-title">Social Command Centre Generator</div>
+  <div class="page-sub">Configure and download a branded Social Command Centre for any website.</div>
+
+  <!-- Section 1: Site Identity -->
+  <div class="card">
+    <div class="card-header"><div class="step-badge">1</div><div class="card-title">Site Identity</div></div>
+    <div class="field-row">
+      <div class="field">
+        <label for="siteName">Site name *</label>
+        <input type="text" id="siteName" placeholder="My Website" oninput="onNameInput()">
+      </div>
+      <div class="field">
+        <label for="siteSlug">Site slug</label>
+        <input type="text" id="siteSlug" placeholder="my-website">
+        <div class="note">Used for localStorage keys — lowercase, hyphens only</div>
+      </div>
+      <div class="field">
+        <label for="iconLetter">Icon</label>
+        <input type="text" id="iconLetter" placeholder="M" maxlength="1" style="text-align:center;font-size:18px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Brand Colours -->
+  <div class="card">
+    <div class="card-header"><div class="step-badge">2</div><div class="card-title">Brand Colours</div></div>
+    <div class="presets">
+      <button class="preset-btn" onclick="applyPreset('greens')">🌿 Greens</button>
+      <button class="preset-btn" onclick="applyPreset('ocean')">🌊 Ocean</button>
+      <button class="preset-btn" onclick="applyPreset('red')">🔥 Red</button>
+      <button class="preset-btn" onclick="applyPreset('purple')">💜 Purple</button>
+    </div>
+    <div class="color-grid" id="colorGrid"></div>
+  </div>
+
+  <!-- Section 3: Platforms -->
+  <div class="card">
+    <div class="card-header"><div class="step-badge">3</div><div class="card-title">Social Platforms</div></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Select the platforms this site will post to. Channel IDs are optional — you can set them as env vars instead.</p>
+    <div class="platform-list" id="platformList"></div>
+    <div class="info-note">Buffer Channel IDs: <strong>Buffer → Channels → [Platform] → Settings</strong>. Or set <code style="font-family:monospace;font-size:12px">BUFFER_CHANNEL_FACEBOOK</code> etc. as environment variables on Vercel/Netlify.</div>
+  </div>
+
+  <!-- Section 4: Research Sources -->
+  <div class="card">
+    <div class="card-header"><div class="step-badge">4</div><div class="card-title">Research Sources</div></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">These appear as toggles in the sidebar. The AI will use enabled sources as context when drafting posts.</p>
+    <div class="sources-list" id="sourcesList"></div>
+    <button class="add-source-btn" id="addSourceBtn" onclick="addSourceRow()">+ Add research source</button>
+  </div>
+
+  <!-- Section 5: Password & Content -->
+  <div class="card">
+    <div class="card-header"><div class="step-badge">5</div><div class="card-title">Password &amp; Content</div></div>
+    <div class="field">
+      <label for="adminPassword">Admin password</label>
+      <div class="pw-wrap">
+        <input type="password" id="adminPassword" placeholder="Enter a secure password">
+        <button class="pw-show" onclick="togglePw()" id="pwShowBtn">Show</button>
+      </div>
+      <div class="note">Hashed with SHA-256 in your browser. Your plain password is never stored or sent.</div>
+    </div>
+    <div class="field-row-2">
+      <div class="field">
+        <label for="themePlaceholder">Theme input placeholder</label>
+        <input type="text" id="themePlaceholder" value="Weekly theme or focus…">
+      </div>
+    </div>
+    <div class="field">
+      <label for="idleDesc">Idle screen description</label>
+      <textarea id="idleDesc" rows="2">Enter your weekly theme, toggle your research sources, then hit Research &amp; Draft. Approved posts go directly to Buffer.</textarea>
+    </div>
+    <div class="field">
+      <label for="pipelineLogs">Pipeline log messages <span style="font-weight:400;text-transform:none;letter-spacing:0">(one per line)</span></label>
+      <textarea id="pipelineLogs" rows="5" style="font-family:'Geist Mono',monospace;font-size:12px;">> Initialising research pipeline…
+> Searching: latest news…
+> Fetching: site content…
+> Searching: community updates…
+> Research complete. Passing to drafting engine…</textarea>
+    </div>
+  </div>
+
+  <button class="generate-btn" id="generateBtn" onclick="generate()">&#8659; Generate &amp; Download social-agent.html</button>
+
+  <div class="success-panel" id="successPanel">
+    <h3>&#10003; Downloaded! Next steps:</h3>
+    <ol>
+      <li>Copy <code>api/generate-posts.js</code> to your target project&#39;s <code>api/</code> folder</li>
+      <li>Copy <code>api/buffer-post.js</code> to your target project&#39;s <code>api/</code> folder</li>
+      <li>Set env vars on Vercel/Netlify: <code>BUFFER_API_KEY</code>, <code>ANTHROPIC_API_KEY</code>, and <code>BUFFER_CHANNEL_FACEBOOK</code> (etc.) for each platform</li>
+      <li>Deploy to Vercel or Netlify</li>
+      <li>Visit <code>/social-agent.html</code> on your new site and log in with your password</li>
+    </ol>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+// ── Platform presets ──────────────────────────────────────────
+const PLATFORM_PRESETS = [
+  { id:'facebook',  label:'Facebook',  emoji:'📘', css:'fb', color:'#1877F2', bg:'#E7F0FD', charLimit:63206, requiresMedia:false, defaultTime:'9:00am',  checked:true  },
+  { id:'instagram', label:'Instagram', emoji:'📸', css:'ig', color:'#C13584', bg:'#FEE9F3', charLimit:2200,  requiresMedia:true,  defaultTime:'11:00am', checked:true  },
+  { id:'linkedin',  label:'LinkedIn',  emoji:'💼', css:'li', color:'#0A66C2', bg:'#E8F0FA', charLimit:1248,  requiresMedia:false, defaultTime:'8:00am',  checked:true  },
+  { id:'twitter',   label:'Twitter/X', emoji:'🐦', css:'tw', color:'#000000', bg:'#E8E8E8', charLimit:280,   requiresMedia:false, defaultTime:'10:00am', checked:false },
+  { id:'tiktok',    label:'TikTok',    emoji:'🎵', css:'tt', color:'#010101', bg:'#EAEAEA', charLimit:2200,  requiresMedia:true,  defaultTime:'7:00pm',  checked:false },
+  { id:'pinterest', label:'Pinterest', emoji:'📌', css:'pn', color:'#E60023', bg:'#FDECEA', charLimit:500,   requiresMedia:true,  defaultTime:'2:00pm',  checked:false },
+  { id:'youtube',   label:'YouTube',   emoji:'▶️', css:'yt', color:'#FF0000', bg:'#FFEEEE', charLimit:5000,  requiresMedia:true,  defaultTime:'3:00pm',  checked:false },
+];
+
+// ── Colour presets ────────────────────────────────────────────
+const COLOR_PRESETS = {
+  greens: { primary:'#1C3A0E', primaryMid:'#2F6020', accent:'#4C8A35', accentPale:'#D4E8C8', ghost:'#F0F7EB', border:'#DDE8D4', muted:'#6B7B5E', ink:'#0F1A0A', cream:'#FAF8F4' },
+  ocean:  { primary:'#0D2B4E', primaryMid:'#1A4A7A', accent:'#1E88E5', accentPale:'#BBDEFB', ghost:'#E3F2FD', border:'#C5D8F0', muted:'#607D8B', ink:'#0A1929', cream:'#F5F8FC' },
+  red:    { primary:'#4A0E0E', primaryMid:'#7B2020', accent:'#D32F2F', accentPale:'#FFCDD2', ghost:'#FFEBEE', border:'#FFCDD2', muted:'#795548', ink:'#1A0505', cream:'#FFF8F8' },
+  purple: { primary:'#2D1B4E', primaryMid:'#4A2E7A', accent:'#7B1FD4', accentPale:'#E1D5F8', ghost:'#F3EEFF', border:'#DDD0F5', muted:'#6E5F82', ink:'#120924', cream:'#F8F5FF' },
+};
+
+const COLOR_FIELDS = [
+  { id:'colorPrimary',    key:'primary',    label:'Primary (header)' },
+  { id:'colorPrimaryMid', key:'primaryMid', label:'Primary Mid'      },
+  { id:'colorAccent',     key:'accent',     label:'Accent (buttons)' },
+  { id:'colorAccentPale', key:'accentPale', label:'Accent Pale'      },
+  { id:'colorGhost',      key:'ghost',      label:'Ghost BG'         },
+  { id:'colorBorder',     key:'border',     label:'Border'           },
+  { id:'colorMuted',      key:'muted',      label:'Muted text'       },
+  { id:'colorInk',        key:'ink',        label:'Ink (body)'       },
+  { id:'colorCream',      key:'cream',      label:'Cream (page bg)'  },
+];
+
+// ── Init ──────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  buildColorGrid();
+  buildPlatformList();
+  addSourceRow({ type:'custom',  emoji:'📰', label:'Latest news',   defaultOn:true  });
+  addSourceRow({ type:'website', emoji:'🌐', label:'Our website',   url:'',          defaultOn:true  });
+  addSourceRow({ type:'google',  emoji:'🔍', label:'Industry news', keyword:'',      defaultOn:false });
+  applyPreset('greens');
+});
+
+// ── Color grid ────────────────────────────────────────────────
+function buildColorGrid() {
+  const grid = document.getElementById('colorGrid');
+  COLOR_FIELDS.forEach(f => {
+    const div = document.createElement('div');
+    div.className = 'color-field';
+    div.innerHTML = `<label for="${f.id}">${f.label}</label>
+      <div class="color-row">
+        <input type="color" id="${f.id}" value="#ffffff" oninput="syncHex('${f.id}','${f.id}hex')">
+        <input type="text"  id="${f.id}hex" class="color-hex" maxlength="7" placeholder="#000000"
+          oninput="syncColor('${f.id}hex','${f.id}')" value="#ffffff">
+      </div>`;
+    grid.appendChild(div);
+  });
+}
+
+function syncHex(colorId, hexId) {
+  document.getElementById(hexId).value = document.getElementById(colorId).value;
+}
+function syncColor(hexId, colorId) {
+  const v = document.getElementById(hexId).value.trim();
+  if (/^#[0-9a-fA-F]{6}$/.test(v)) document.getElementById(colorId).value = v;
+}
+
+function applyPreset(name) {
+  const p = COLOR_PRESETS[name];
+  if (!p) return;
+  COLOR_FIELDS.forEach(f => {
+    const val = p[f.key];
+    if (val) {
+      document.getElementById(f.id).value = val;
+      document.getElementById(f.id + 'hex').value = val;
+    }
+  });
+}
+
+// ── Platform list ─────────────────────────────────────────────
+function buildPlatformList() {
+  const list = document.getElementById('platformList');
+  PLATFORM_PRESETS.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'platform-row';
+    const mediaTag = p.requiresMedia ? '<span class="media-badge">needs media</span>' : '';
+    const charStr = p.charLimit >= 10000 ? '∞' : p.charLimit.toLocaleString();
+    row.innerHTML = `
+      <div class="platform-top" onclick="togglePlatform('${p.id}')">
+        <input type="checkbox" class="platform-check" id="plat-${p.id}" ${p.checked ? 'checked' : ''}
+          onclick="event.stopPropagation(); togglePlatform('${p.id}')">
+        <span class="platform-emoji">${p.emoji}</span>
+        <span class="platform-name">${p.label}</span>
+        <span class="char-badge">${charStr} chars</span>
+        ${mediaTag}
+      </div>
+      <div class="channel-row ${p.checked ? 'visible' : ''}" id="channel-wrap-${p.id}">
+        <input type="text" id="channel-${p.id}" placeholder="Buffer Channel ID (optional — use env var BUFFER_CHANNEL_${p.id.toUpperCase()} instead)"
+          style="font-family:'Geist Mono',monospace;font-size:12px;">
+      </div>`;
+    list.appendChild(row);
+  });
+}
+
+function togglePlatform(id) {
+  const cb = document.getElementById('plat-' + id);
+  const wrap = document.getElementById('channel-wrap-' + id);
+  wrap.classList.toggle('visible', cb.checked);
+}
+
+// ── Research sources ──────────────────────────────────────────
+let sourceCount = 0;
+const MAX_SOURCES = 8;
+
+function addSourceRow(defaults) {
+  defaults = defaults || {};
+  if (sourceCount >= MAX_SOURCES) return;
+  sourceCount++;
+
+  const row = document.createElement('div');
+  row.className = 'source-row';
+  const rowId = 'src-' + Date.now();
+  row.id = rowId;
+
+  const type = defaults.type || 'custom';
+  const emoji = defaults.emoji || '📰';
+  const label = defaults.label || '';
+  const url = defaults.url !== undefined ? defaults.url : '';
+  const keyword = defaults.keyword !== undefined ? defaults.keyword : '';
+  const urlVal = type === 'google' ? keyword : url;
+  const onCls = defaults.defaultOn !== false ? ' on' : '';
+  const urlHidden = type === 'custom' ? 'style="display:none"' : '';
+  const urlPh = urlPlaceholder(type);
+
+  row.innerHTML = `
+    <select class="source-type" onchange="onTypeChange(this,'${rowId}')">
+      <option value="custom"  ${type==='custom'  ? 'selected':''}>Custom</option>
+      <option value="website" ${type==='website' ? 'selected':''}>Website URL</option>
+      <option value="google"  ${type==='google'  ? 'selected':''}>Google News</option>
+      <option value="rss"     ${type==='rss'     ? 'selected':''}>RSS Feed</option>
+    </select>
+    <input type="text" class="source-emoji" value="${escHtml(emoji)}" maxlength="2" placeholder="📰">
+    <input type="text" class="source-label" value="${escHtml(label)}" placeholder="Source name">
+    <input type="text" class="source-url" value="${escHtml(urlVal)}" placeholder="${urlPh}" ${urlHidden}>
+    <button class="src-toggle${onCls}" onclick="this.classList.toggle('on')" title="Toggle on/off"></button>
+    <button class="src-remove" onclick="removeSource('${rowId}')" title="Remove">&#215;</button>`;
+
+  document.getElementById('sourcesList').appendChild(row);
+  if (sourceCount >= MAX_SOURCES) document.getElementById('addSourceBtn').style.display = 'none';
+}
+
+function removeSource(id) {
+  document.getElementById(id)?.remove();
+  sourceCount--;
+  document.getElementById('addSourceBtn').style.display = '';
+}
+
+function urlPlaceholder(type) {
+  if (type === 'website') return 'https://yoursite.com';
+  if (type === 'google')  return 'Search keyword\u2026';
+  if (type === 'rss')     return 'https://yoursite.com/feed';
+  return '';
+}
+
+function onTypeChange(sel, rowId) {
+  const row = document.getElementById(rowId);
+  const urlInput = row.querySelector('.source-url');
+  const type = sel.value;
+  if (type === 'custom') {
+    urlInput.style.display = 'none';
+  } else {
+    urlInput.style.display = '';
+    urlInput.placeholder = urlPlaceholder(type);
+  }
+}
+
+// ── Misc UI ───────────────────────────────────────────────────
+function onNameInput() {
+  const name = document.getElementById('siteName').value;
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/, '');
+  document.getElementById('siteSlug').value = slug;
+  document.getElementById('iconLetter').value = name.charAt(0).toUpperCase() || '';
+}
+
+function togglePw() {
+  const inp = document.getElementById('adminPassword');
+  const btn = document.getElementById('pwShowBtn');
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = 'Hide'; }
+  else { inp.type = 'password'; btn.textContent = 'Show'; }
+}
+
+function showToast(msg, dur) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), dur || 4000);
+}
+
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function escAttr(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── SHA-256 ───────────────────────────────────────────────────
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ── Collect form values ───────────────────────────────────────
+function collectConfig() {
+  const siteName = document.getElementById('siteName').value.trim();
+  const siteSlug = document.getElementById('siteSlug').value.trim() ||
+    siteName.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const iconLetter = document.getElementById('iconLetter').value.trim().charAt(0) ||
+    siteName.charAt(0).toUpperCase();
+
+  const colors = {};
+  COLOR_FIELDS.forEach(f => { colors[f.key] = document.getElementById(f.id).value; });
+
+  const platforms = PLATFORM_PRESETS.filter(p => document.getElementById('plat-'+p.id)?.checked)
+    .map(p => ({ ...p }));
+
+  const rows = document.querySelectorAll('#sourcesList .source-row');
+  const sources = Array.from(rows).map(row => {
+    const type    = row.querySelector('.source-type').value;
+    const emoji   = row.querySelector('.source-emoji').value.trim() || '📰';
+    const label   = row.querySelector('.source-label').value.trim() || 'Source';
+    const urlVal  = row.querySelector('.source-url').value.trim();
+    const defaultOn = row.querySelector('.src-toggle').classList.contains('on');
+    const src = { type, emoji, label, defaultOn };
+    if (type === 'website' || type === 'rss') src.url = urlVal;
+    if (type === 'google') src.keyword = urlVal;
+    return src;
+  });
+
+  const password       = document.getElementById('adminPassword').value;
+  const themePlaceholder = document.getElementById('themePlaceholder').value.trim() || 'Weekly theme or focus\u2026';
+  const idleDesc       = document.getElementById('idleDesc').value.trim();
+  const logMessages    = document.getElementById('pipelineLogs').value.split('\n').map(l => l.trim()).filter(Boolean);
+
+  return { siteName, siteSlug, iconLetter, colors, platforms, sources, password, themePlaceholder, idleDesc, logMessages };
+}
+
+// ── Apply substitutions ───────────────────────────────────────
+async function applySubstitutions(html, cfg) {
+  const { siteName, siteSlug, iconLetter, colors, platforms, sources, password, themePlaceholder, idleDesc, logMessages } = cfg;
+
+  // 1. Page title
+  html = html.replace('<title>Old Oak Town \u2014 Social Command Centre</title>',
+    `<title>${escHtml(siteName)} \u2014 Social Command Centre</title>`);
+
+  // 2. CSS color variables
+  const colorMap = {
+    '--ink':          colors.ink,
+    '--green-deep':   colors.primary,
+    '--green-mid':    colors.primaryMid,
+    '--green-bright': colors.accent,
+    '--green-pale':   colors.accentPale,
+    '--green-ghost':  colors.ghost,
+    '--cream':        colors.cream,
+    '--border':       colors.border,
+    '--muted':        colors.muted,
+  };
+  for (const [varName, value] of Object.entries(colorMap)) {
+    if (value) {
+      const esc = varName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      html = html.replace(new RegExp(`(${esc}:\\s*)[^;]+;`), `$1${value};`);
+    }
+  }
+
+  // 3. Brand icon letter
+  html = html.replace('<div class="brand-icon">O</div>', `<div class="brand-icon">${escHtml(iconLetter)}</div>`);
+
+  // 4. Brand name
+  html = html.split('<div class="brand-name">Old Oak Town</div>').join(`<div class="brand-name">${escHtml(siteName)}</div>`);
+
+  // 5. Logo alt text
+  html = html.replace('alt="Old Oak Town"', `alt="${escAttr(siteName)}"`);
+
+  // 6. localStorage keys  (note: SESSION_KEY has 2 spaces before =, HISTORY_KEY has 1)
+  html = html.replace(`const SESSION_KEY  = 'oot_drafts_v2';`, `const SESSION_KEY  = '${siteSlug}_drafts_v2';`);
+  html = html.replace(`const HISTORY_KEY = 'oot_post_history';`, `const HISTORY_KEY = '${siteSlug}_post_history';`);
+
+  // 7. Password hash
+  if (password) {
+    const hash = await sha256(password);
+    html = html.replace(
+      `'924325fbd85f063f2439544a4bd4cbe61433c2c83eb3e5a7ead42b984b7a2223'`,
+      `'${hash}'`
+    );
+  }
+
+  // 8. Research source toggles
+  if (sources.length) {
+    const indent = '        ';
+    const togglesHtml = sources.map(s => {
+      const on      = s.defaultOn ? ' on' : '';
+      const typeAttr = s.type && s.type !== 'custom' ? ` data-type="${s.type}"` : '';
+      const urlAttr  = s.url     ? ` data-url="${escAttr(s.url)}"` : '';
+      const kwAttr   = s.keyword ? ` data-keyword="${escAttr(s.keyword)}"` : '';
+      return `${indent}<div class="toggle-row"${typeAttr}${urlAttr}${kwAttr}>\n${indent}  <span>${s.emoji} ${escHtml(s.label)}</span>\n${indent}  <button class="toggle${on}" onclick="this.classList.toggle('on')"></button>\n${indent}</div>`;
+    }).join('\n');
+    html = html.replace(
+      /<div class="research-toggles">[\s\S]*?<\/div>\s*(?=\s*<\/div>\s*\n\s*<button class="run-btn")/,
+      `<div class="research-toggles">\n${togglesHtml}\n      </div>\n      `
+    );
+  }
+
+  // 9. Theme placeholder
+  html = html.replace('placeholder="HS2 update, new business spotlight\u2026"', `placeholder="${escAttr(themePlaceholder)}"`);
+
+  // 10. PLATFORMS config block
+  if (platforms.length) {
+    const platLines = platforms.map(p =>
+      `  { id: '${p.id}', label: '${p.label}', emoji: '${p.emoji}', css: '${p.css}', color: '${p.color}', bg: '${p.bg}', charLimit: ${p.charLimit}, requiresMedia: ${p.requiresMedia}, defaultTime: '${p.defaultTime}' },`
+    ).join('\n');
+    html = html.replace(/const PLATFORMS = \[[\s\S]*?\];/, `const PLATFORMS = [\n${platLines}\n];`);
+  }
+
+  // 11. Pipeline log messages
+  const logs = logMessages.filter(l => l.trim());
+  if (logs.length >= 2) {
+    const delays = logs.map((_, i) => i === 0 ? 0 : 400 + i * 500);
+    const logsBlock = logs.map((msg, i) => {
+      const isLast = i === logs.length - 1;
+      const cls = i === 0 ? '' : isLast ? `, 'done'` : `, 'info'`;
+      return `  addLog(log, '${msg.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}', ${delays[i]}${cls});`;
+    }).join('\n');
+    html = html.replace(
+      /addLog\(log, '> Initialising [^']*\u2026', 0\);[\s\S]*?addLog\(log, '> Research complete[^;]+;/,
+      logsBlock
+    );
+  }
+
+  // 12. Idle description
+  if (idleDesc) {
+    html = html.replace(
+      /(<div id="idleState"[^>]*>[\s\S]*?<p>)[^<]+(<\/p>)/,
+      `$1${escHtml(idleDesc)}$2`
+    );
+  }
+
+  return html;
+}
+
+// ── Main generate function ────────────────────────────────────
+async function generate() {
+  const cfg = collectConfig();
+
+  if (!cfg.siteName) { showToast('Please enter a site name'); return; }
+  if (!cfg.platforms.length) { showToast('Please select at least one platform'); return; }
+
+  const btn = document.getElementById('generateBtn');
+  btn.disabled = true;
+  btn.textContent = 'Generating\u2026';
+
+  try {
+    const res = await fetch('/social-agent.html');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    let html = await res.text();
+
+    html = await applySubstitutions(html, cfg);
+
+    const blob = new Blob([html], { type: 'text/html' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `social-agent-${cfg.siteSlug || 'site'}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+    document.getElementById('successPanel').style.display = 'block';
+    document.getElementById('successPanel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    showToast('\u2713 social-agent-' + (cfg.siteSlug||'site') + '.html downloaded!');
+
+  } catch (err) {
+    console.error(err);
+    showToast('Could not load template. Visit this page on oldoaktown.co.uk (not as a local file).', 6000);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '&#8659; Generate &amp; Download social-agent.html';
+  }
+}
+</script>
+</body>
+</html>
