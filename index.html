@@ -2541,7 +2541,7 @@
         }
 
         function loadNews() {
-            fetch('/api/get-news?limit=6')
+            fetch('/data/news.json')
                 .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
                 .then(function(data) {
                     if (data.articles && data.articles.length) {
