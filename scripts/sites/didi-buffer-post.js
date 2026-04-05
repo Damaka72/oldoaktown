@@ -89,7 +89,7 @@ export default async function handler(req, res) {
       input: {
         channelId,
         text: postText,
-        schedulingType: 'scheduled',
+        schedulingType: 'automatic',
         dueAt,
         ...(metadata && { metadata }),
         ...(mediaUrl && { assets: { images: [{ url: mediaUrl }] } }),
