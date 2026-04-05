@@ -32,9 +32,13 @@ export default async function handler(req, res) {
     const ticker = JSON.parse(readFileSync(join(process.cwd(), 'data/ticker-news.json'), 'utf8'));
     if (ticker.items?.length) {
       const headlines = ticker.items.slice(0, 8)
-        .map(i => `- ${i.title} (${i.source})`)
+        .map(i => {
+          const date = i.publishDate ? new Date(i.publishDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+          const snippet = i.contentSnippet ? ` — "${i.contentSnippet}"` : '';
+          return `- ${i.title} (${i.source}${date ? ', ' + date : ''})${snippet}`;
+        })
         .join('\n');
-      newsSnippet = `\nCURRENT NEWS HEADLINES (weave relevant ones into post content to keep it timely and grounded):\n${headlines}\n`;
+      newsSnippet = `\nCURRENT NEWS HEADLINES (only reference facts from these — see accuracy rule below):\n${headlines}\n`;
     }
   } catch (_) {}
 
@@ -80,6 +84,8 @@ export default async function handler(req, res) {
   const objectiveBlock = objectivePrompt ? `\n${objectivePrompt}\n` : '';
 
   const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 9,000 new homes and 11,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
+
+STRICT ACCURACY RULE: Do NOT invent, fabricate, or extrapolate specific statistics, dates, quotes, project milestones, or named facts beyond the established background above. Every specific factual claim in a post must come directly from the CURRENT NEWS HEADLINES provided below. If the headlines do not support a specific claim, write the post with general community-focused framing instead — it is far better to be thematic and accurate than to invent details. Never present invented information as fact.
 ${objectiveBlock}
 CAMPAIGN BRIEF:
 Week commencing: ${weekDate || 'this week'}
@@ -117,9 +123,9 @@ Return ONLY valid JSON in exactly this structure (no markdown, no code fences):
 
 {
   "findings": [
-    "Specific current fact or news item about Old Oak/HS2/OPDC relevant to this theme",
-    "Second relevant research finding",
-    "Third relevant finding"
+    "Finding grounded in the provided news headlines above — include the source name. Write 'No specific current news this week' if the headlines do not cover this theme.",
+    "Second finding from the provided headlines, or 'No specific current news this week'",
+    "Third finding from the provided headlines, or 'No specific current news this week'"
   ],
   "days": [
     {
