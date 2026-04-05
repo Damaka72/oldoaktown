@@ -834,29 +834,38 @@ async function testBufferConnection() {
   box.style.display = 'block';
   box.textContent = 'Testing Buffer connection…';
   try {
-    const res = await fetch('/api/buffer-channels');
-    const data = await res.json();
-    if (!res.ok) {
+    // Run channels check and schema check in parallel
+    const [chanRes, schemaRes] = await Promise.all([
+      fetch('/api/buffer-channels'),
+      fetch('/api/buffer-schema?type=SchedulingType'),
+    ]);
+    const data = await chanRes.json();
+    const schemaData = await schemaRes.json().catch(() => null);
+
+    if (!chanRes.ok) {
       box.style.borderColor = '#C0392B';
-      box.textContent = '✗ ' + (data.error || `HTTP ${res.status}`);
+      box.textContent = '✗ ' + (data.error || `HTTP ${chanRes.status}`);
       return;
     }
     const channels = data.channels || [];
     const lines = [
       `✓ Connected — ${channels.length} channel(s) found`,
       '',
-      ...channels.map(c => `  ${c.service?.padEnd(12) || '?'.padEnd(12)} id: ${c.id}  name: ${c.name || '—'}`),
+      ...channels.map(c => `  ${(c.service || '?').padEnd(12)} id: ${c.id}  name: ${c.name || '—'}`),
     ];
     if (channels.length === 0) {
       lines.push('  No channels returned. Re-authorise Facebook/Instagram/LinkedIn at buffer.com → Channels.');
     }
-    if (data.knownChannelResults) {
-      lines.push('', 'Known channel ID check:');
-      for (const [plat, result] of Object.entries(data.knownChannelResults)) {
-        const ok = result?.id ? `✓ valid  (${result.service || result.id})` : `✗ NOT FOUND — id needs updating`;
-        lines.push(`  ${plat.padEnd(12)} ${ok}`);
-      }
+
+    // Show valid schedulingType enum values from schema
+    const enumVals = schemaData?.data?.__type?.enumValues;
+    if (enumVals?.length) {
+      lines.push('', `SchedulingType enum values (valid options):`);
+      enumVals.forEach(v => lines.push(`  · ${v.name}`));
+    } else {
+      lines.push('', 'SchedulingType schema: could not retrieve');
     }
+
     box.style.borderColor = channels.length ? '#4C8A35' : '#D4860A';
     box.textContent = lines.join('\n');
   } catch (err) {
@@ -873,7 +882,10 @@ async function postOneToSocial({ platform, text, scheduledAt, mediaUrl, day }) {
   });
 
   const data = await res.json();
-  if (!res.ok) throw new Error((data?.error || `HTTP ${res.status}`) + (data?.hint ? ` | ${data.hint}` : ''));
+  if (!res.ok) {
+    const detail = data?.details ? ` | details: ${JSON.stringify(data.details).slice(0, 200)}` : '';
+    throw new Error((data?.error || `HTTP ${res.status}`) + (data?.hint ? ` | ${data.hint}` : '') + detail);
+  }
   if (data.skipped) return { skipped: true, reason: data.reason };
 
   return { success: true, postId: data.postId };
