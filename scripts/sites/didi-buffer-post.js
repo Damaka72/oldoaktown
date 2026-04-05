@@ -89,8 +89,7 @@ export default async function handler(req, res) {
       input: {
         channelId,
         text: postText,
-        schedulingType: 'automatic',
-        mode: 'customScheduled',
+        schedulingType: 'scheduled',
         dueAt,
         ...(metadata && { metadata }),
         ...(mediaUrl && { assets: { images: [{ url: mediaUrl }] } }),
@@ -115,7 +114,7 @@ export default async function handler(req, res) {
 
     const result = postData?.data?.createPost;
     if (result?.message) {
-      return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
+      return res.status(502).json({ error: 'Buffer rejected post', hint: result.message });
     }
 
     const postId = result?.post?.id;
