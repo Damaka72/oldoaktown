@@ -90,7 +90,7 @@ export default async function handler(req, res) {
         channelId,
         text: postText,
         schedulingType: 'scheduled',
-        scheduledAt: dueAt,
+        dueAt,
         ...(metadata && { metadata }),
         ...(mediaUrl && { assets: { images: [{ url: mediaUrl }] } }),
       }
@@ -105,11 +105,15 @@ export default async function handler(req, res) {
       body: JSON.stringify({ query: mutation, variables })
     });
 
-    const postData = await postRes.json();
-    console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
+    const rawText = await postRes.text();
+    console.log(`Buffer [${platformKey}] HTTP ${postRes.status}:`, rawText.slice(0, 500));
+    const postData = JSON.parse(rawText);
 
     if (!postRes.ok) {
-      return res.status(502).json({ error: 'Buffer API error', details: postData });
+      return res.status(502).json({
+        error: 'Buffer API error',
+        hint: `HTTP ${postRes.status} — ${rawText.slice(0, 300)}`,
+      });
     }
 
     const result = postData?.data?.createPost;
