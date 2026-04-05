@@ -80,6 +80,25 @@ export default async function handler(req, res) {
   const objectiveBlock = objectivePrompt ? `\n${objectivePrompt}\n` : '';
 
   const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 9,000 new homes and 11,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
+
+RULES — CRITICAL — READ BEFORE WRITING ANYTHING:
+1. Only write about real, verifiable businesses, people, events, or developments. Never invent company names, founders, addresses, employee counts, contracts, or quotes.
+2. If you are not certain a fact is true, do not include it. Omit rather than invent.
+3. Do not fabricate stories that sound plausible. A compelling fiction is worse than a shorter truth.
+4. If the theme or context mentions a specific business you do not recognise, write around the area and regeneration story instead — do not guess or infer details about it.
+5. Use UK English spelling and grammar throughout.
+
+VERIFIED AREA FACTS — use these confidently; do not extrapolate beyond them:
+- Old Oak Common and Park Royal is London's largest regeneration project
+- Old Oak Common Station (projected opening 2029–2033) will be the UK's largest newly built station, with up to 14 platforms
+- The main station construction contractor is the Balfour Beatty VINCI SYSTRA (BBVS) joint venture
+- OPDC (Old Oak and Park Royal Development Corporation) is the planning authority, established by the Mayor of London in 2015
+- The development is projected to create 65,000 new jobs and 25,000 new homes over 20+ years
+- Park Royal is London's largest industrial estate — home to 1,700+ businesses employing 43,000+ people
+- The area spans three London boroughs: Ealing, Brent, and Hammersmith & Fulham
+- Notable verified area businesses include: McVitie's (baking at Park Royal since 1902), Preedy Glass (since 1913), Maroush Park Royal (Lebanese restaurant), Dina Foods (Mediterranean food producer since 1992)
+- Park Royal has a significant Lebanese community with a vibrant food scene, established since the 1970s
+- The Elizabeth line (Crossrail) already serves the area at Acton Main Line and Ealing Broadway
 ${objectiveBlock}
 CAMPAIGN BRIEF:
 Week commencing: ${weekDate || 'this week'}
@@ -117,7 +136,7 @@ Return ONLY valid JSON in exactly this structure (no markdown, no code fences):
 
 {
   "findings": [
-    "Specific current fact or news item about Old Oak/HS2/OPDC relevant to this theme",
+    "A real, verifiable fact from the news headlines or verified context above",
     "Second relevant research finding",
     "Third relevant finding"
   ],
