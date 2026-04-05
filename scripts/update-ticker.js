@@ -15,7 +15,10 @@ const path = require('path');
 const parser = new Parser({ timeout: 10000 }); // 10s per feed, prevents hanging
 
 const TICKER_FILE = path.join(__dirname, '../data/ticker-news.json');
-const MAX_ITEMS = 10;
+const MAX_ITEMS = 15;
+
+// Exclude non-news content types (podcasts, transcripts, episode listings)
+const EXCLUDE_PATTERNS = ['podcast', 'transcript', 'episode'];
 
 // High-priority sources for the ticker (headlines only, no approval needed)
 const TICKER_SOURCES = [
@@ -87,14 +90,23 @@ async function fetchHeadlines(source) {
     for (const item of feed.items) {
       const title = cleanTitle(item.title);
       if (!title) continue;
+
+      // Skip podcasts, transcripts, and episode listings — they're not news articles
+      const titleLower = title.toLowerCase();
+      if (EXCLUDE_PATTERNS.some(p => titleLower.includes(p))) continue;
+
       if (!matchesFilter(title, item.contentSnippet || '', source.filter)) continue;
+
+      const rawSnippet = item.contentSnippet || item.summary || '';
+      const contentSnippet = rawSnippet.replace(/\s+/g, ' ').trim().slice(0, 150) || null;
 
       items.push({
         title,
         url: item.link || item.guid || null,
         source: source.name,
         category: source.category,
-        publishDate: item.pubDate || item.isoDate || new Date().toISOString()
+        publishDate: item.pubDate || item.isoDate || new Date().toISOString(),
+        contentSnippet
       });
     }
 

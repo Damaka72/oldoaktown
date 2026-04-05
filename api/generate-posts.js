@@ -32,9 +32,13 @@ export default async function handler(req, res) {
     const ticker = JSON.parse(readFileSync(join(process.cwd(), 'data/ticker-news.json'), 'utf8'));
     if (ticker.items?.length) {
       const headlines = ticker.items.slice(0, 8)
-        .map(i => `- ${i.title} (${i.source})`)
+        .map(i => {
+          const date = i.publishDate ? new Date(i.publishDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+          const snippet = i.contentSnippet ? ` — "${i.contentSnippet}"` : '';
+          return `- ${i.title} (${i.source}${date ? ', ' + date : ''})${snippet}`;
+        })
         .join('\n');
-      newsSnippet = `\nCURRENT NEWS HEADLINES (weave relevant ones into post content to keep it timely and grounded):\n${headlines}\n`;
+      newsSnippet = `\nCURRENT NEWS HEADLINES (only reference facts from these — see accuracy rule below):\n${headlines}\n`;
     }
   } catch (_) {}
 
@@ -79,13 +83,13 @@ export default async function handler(req, res) {
 
   const objectiveBlock = objectivePrompt ? `\n${objectivePrompt}\n` : '';
 
-  const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 9,000 new homes and 11,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
+  const prompt = `You are the social media editor for Old Oak Town, a hyperlocal news platform covering the Old Oak Common regeneration in West London — a £1.7 billion project bringing HS2, the Elizabeth Line, and Great Western Mainline together, with 25,000 new homes and 65,000 new jobs planned. Audience: 39% aged 20–39, diverse, community-minded West Londoners across North Acton, Harlesden, and Park Royal.
 
 RULES — CRITICAL — READ BEFORE WRITING ANYTHING:
-1. Only write about real, verifiable businesses, people, events, or developments. Never invent company names, founders, addresses, employee counts, contracts, or quotes.
+1. Only write about real, verifiable businesses, people, events, or developments. Never invent company names, founders, addresses, employee counts, contracts, or quotes. If the provided news headlines do not support a specific claim, write with general community-focused framing instead — it is far better to be thematic and accurate than to invent details.
 2. If you are not certain a fact is true, do not include it. Omit rather than invent.
 3. Do not fabricate stories that sound plausible. A compelling fiction is worse than a shorter truth.
-4. If the theme or context mentions a specific business you do not recognise, write around the area and regeneration story instead — do not guess or infer details about it.
+4. If the theme or context mentions a specific business you do not recognise from the verified facts below, write around the area and regeneration story instead — do not guess or infer details about it.
 5. Use UK English spelling and grammar throughout.
 
 VERIFIED AREA FACTS — use these confidently; do not extrapolate beyond them:
@@ -136,9 +140,9 @@ Return ONLY valid JSON in exactly this structure (no markdown, no code fences):
 
 {
   "findings": [
-    "A real, verifiable fact from the news headlines or verified context above",
-    "Second relevant research finding",
-    "Third relevant finding"
+    "Finding grounded in the provided news headlines above — include the source name. Write 'No specific current news this week' if the headlines do not cover this theme.",
+    "Second finding from the provided headlines, or 'No specific current news this week'",
+    "Third finding from the provided headlines, or 'No specific current news this week'"
   ],
   "days": [
     {
