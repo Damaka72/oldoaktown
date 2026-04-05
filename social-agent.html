@@ -418,6 +418,12 @@ textarea { min-height: 68px; }
 }
 .send-btn:hover    { background: #5800aa; }
 .send-btn:disabled { background: #9CA3AF; cursor: not-allowed; }
+.test-conn-btn {
+  padding: 11px 16px; background: transparent; color: var(--muted);
+  border: 1px solid var(--border); border-radius: 9px; font-size: 13px;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.test-conn-btn:hover { border-color: var(--green-accent); color: var(--green-accent); }
 
 /* ── SENDING PHASE ── */
 .sending-phase { display: none; }
@@ -763,10 +769,14 @@ textarea { min-height: 68px; }
           <h3>Send to Buffer</h3>
           <p id="sendBarDesc">Approve posts above, then send them directly to Buffer.</p>
         </div>
+        <button class="test-conn-btn" onclick="testBufferConnection()" title="Check API key and channel IDs">
+          🔌 Test Connection
+        </button>
         <button class="send-btn" id="sendBtn" onclick="sendToSocial()">
           📤 Schedule via Buffer
         </button>
       </div>
+      <div id="bufferTestResult" style="display:none; margin-top:12px; padding:12px 16px; border-radius:8px; font-size:12px; font-family: 'Geist Mono', monospace; white-space:pre-wrap; word-break:break-all; background:#0F1A0A; border:1px solid var(--border); color:#D4E8C8;"></div>
     </div>
 
     <!-- SENDING -->
@@ -818,6 +828,42 @@ if (sessionStorage.getItem('adminAuth') === 'true') {
 // ═══════════════════════════════════════════════════════════════
 const SESSION_KEY  = 'oot_drafts_v2';
 
+
+async function testBufferConnection() {
+  const box = document.getElementById('bufferTestResult');
+  box.style.display = 'block';
+  box.textContent = 'Testing Buffer connection…';
+  try {
+    const res = await fetch('/api/buffer-channels');
+    const data = await res.json();
+    if (!res.ok) {
+      box.style.borderColor = '#C0392B';
+      box.textContent = '✗ ' + (data.error || `HTTP ${res.status}`);
+      return;
+    }
+    const channels = data.channels || [];
+    const lines = [
+      `✓ Connected — ${channels.length} channel(s) found`,
+      '',
+      ...channels.map(c => `  ${c.service?.padEnd(12) || '?'.padEnd(12)} id: ${c.id}  name: ${c.name || '—'}`),
+    ];
+    if (channels.length === 0) {
+      lines.push('  No channels returned. Re-authorise Facebook/Instagram/LinkedIn at buffer.com → Channels.');
+    }
+    if (data.knownChannelResults) {
+      lines.push('', 'Known channel ID check:');
+      for (const [plat, result] of Object.entries(data.knownChannelResults)) {
+        const ok = result?.id ? `✓ valid  (${result.service || result.id})` : `✗ NOT FOUND — id needs updating`;
+        lines.push(`  ${plat.padEnd(12)} ${ok}`);
+      }
+    }
+    box.style.borderColor = channels.length ? '#4C8A35' : '#D4860A';
+    box.textContent = lines.join('\n');
+  } catch (err) {
+    box.style.borderColor = '#C0392B';
+    box.textContent = '✗ Could not reach /api/buffer-channels: ' + err.message;
+  }
+}
 
 async function postOneToSocial({ platform, text, scheduledAt, mediaUrl, day }) {
   const res = await fetch('/api/buffer-post', {
