@@ -1223,7 +1223,7 @@ function flattenPosts(plan, weekDate) {
         caption:       post.caption,
         hashtags:      post.hashtags,
         bestTime:      post.bestTime,
-        scheduledDate: d.toISOString().split('T')[0],
+        scheduledDate: `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`,
         status:        'pending',
         mediaUrl:      ''
       });
