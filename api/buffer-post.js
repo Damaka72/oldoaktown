@@ -21,7 +21,7 @@ function getChannelId(platformKey) {
   // Legacy fallback for oldoaktown original channels
   const legacy = {
     linkedin:  '69a213f74be271803d75d07e',
-    instagram: '69aca3e03f3b94a1212866bf',
+    instagram: '69a43f953f3b94a121052f11',
     facebook:  '69a4431d3f3b94a12105386d',
   };
   return legacy[platformKey] || null;
@@ -135,12 +135,19 @@ export default async function handler(req, res) {
     console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
 
     if (!postRes.ok) {
-      return res.status(502).json({ error: 'Buffer API error', details: postData });
+      const detail = postData?.message || postData?.errors?.[0]?.message || JSON.stringify(postData).slice(0, 200);
+      return res.status(502).json({ error: `Buffer API error (HTTP ${postRes.status}): ${detail}`, details: postData });
+    }
+
+    // GraphQL errors land in the errors array even on HTTP 200
+    if (postData?.errors?.length) {
+      const msg = postData.errors.map(e => e.message).join('; ');
+      return res.status(502).json({ error: `Buffer GraphQL error: ${msg}`, details: postData.errors });
     }
 
     const result = postData?.data?.createPost;
     if (result?.message) {
-      return res.status(502).json({ error: 'Buffer rejected post', details: result.message });
+      return res.status(502).json({ error: `Buffer rejected post: ${result.message}`, details: result });
     }
 
     const postId = result?.post?.id;
