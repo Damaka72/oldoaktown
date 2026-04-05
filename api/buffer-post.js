@@ -115,7 +115,7 @@ export default async function handler(req, res) {
         channelId,
         text: postText,
         schedulingType: 'scheduled',
-        scheduledAt: dueAt,
+        dueAt,
         ...(metadata && { metadata }),
         ...(mediaUrl && { assets: { images: [{ url: mediaUrl }] } }),
       }
@@ -130,18 +130,22 @@ export default async function handler(req, res) {
       body: JSON.stringify({ query: mutation, variables })
     });
 
-    const postData = await postRes.json();
-    console.log(`Buffer [${platformKey}] response:`, JSON.stringify(postData).slice(0, 300));
+    const rawText = await postRes.text();
+    console.log(`Buffer [${platformKey}] HTTP ${postRes.status}:`, rawText.slice(0, 500));
+    const postData = JSON.parse(rawText);
 
     if (!postRes.ok) {
-      const detail = postData?.message || postData?.errors?.[0]?.message || JSON.stringify(postData).slice(0, 200);
-      return res.status(502).json({ error: `Buffer API error (HTTP ${postRes.status}): ${detail}`, details: postData });
+      const detail = postData?.message || postData?.errors?.[0]?.message || rawText.slice(0, 200);
+      return res.status(502).json({
+        error: 'Buffer API error',
+        hint: `HTTP ${postRes.status} — ${detail}`,
+      });
     }
 
     // GraphQL errors land in the errors array even on HTTP 200
     if (postData?.errors?.length) {
       const msg = postData.errors.map(e => e.message).join('; ');
-      return res.status(502).json({ error: `Buffer GraphQL error: ${msg}`, details: postData.errors });
+      return res.status(502).json({ error: 'Buffer GraphQL error', hint: msg });
     }
 
     const result = postData?.data?.createPost;
@@ -151,7 +155,7 @@ export default async function handler(req, res) {
 
     const postId = result?.post?.id;
     if (!postId) {
-      return res.status(502).json({ error: 'Buffer returned no post ID', details: postData });
+      return res.status(502).json({ error: 'Buffer returned no post ID', hint: JSON.stringify(postData).slice(0, 300) });
     }
 
     console.log(`✓ ${platformKey} post queued: ${postId} | ${day}`);
