@@ -135,15 +135,22 @@ export default async function handler(req, res) {
     const postData = JSON.parse(rawText);
 
     if (!postRes.ok) {
+      const detail = postData?.message || postData?.errors?.[0]?.message || rawText.slice(0, 200);
       return res.status(502).json({
         error: 'Buffer API error',
-        hint: `HTTP ${postRes.status} — ${rawText.slice(0, 300)}`,
+        hint: `HTTP ${postRes.status} — ${detail}`,
       });
+    }
+
+    // GraphQL errors land in the errors array even on HTTP 200
+    if (postData?.errors?.length) {
+      const msg = postData.errors.map(e => e.message).join('; ');
+      return res.status(502).json({ error: 'Buffer GraphQL error', hint: msg });
     }
 
     const result = postData?.data?.createPost;
     if (result?.message) {
-      return res.status(502).json({ error: 'Buffer rejected post', hint: result.message });
+      return res.status(502).json({ error: `Buffer rejected post: ${result.message}`, hint: result.message, details: result });
     }
 
     const postId = result?.post?.id;
