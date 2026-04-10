@@ -1443,7 +1443,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <video class="hero-video" autoplay muted loop playsinline>
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
             <source src="https://mvttihozhozigtrwqsyy.supabase.co/storage/v1/object/public/Oldoaktown/gemini_generated_video_20d7918a.mp4" type="video/mp4">
         </video>
         <div class="container">
@@ -2957,6 +2957,28 @@
                 setTimeout(function() { btn.disabled = false; }, 3000);
             });
         });
+
+        // ─────────────────────────────────────────
+        // HERO VIDEO — force play on every page show
+        // Handles fresh loads, back/forward cache, and tab refocus
+        // ─────────────────────────────────────────
+        (function() {
+            function playHero() {
+                var v = document.getElementById('heroVideo');
+                if (!v) return;
+                v.muted = true;
+                var p = v.play();
+                if (p && p.catch) p.catch(function() { /* blocked by browser policy */ });
+            }
+            // Fire on initial load
+            document.addEventListener('DOMContentLoaded', playHero);
+            // Fire when page is restored from back/forward cache
+            window.addEventListener('pageshow', playHero);
+            // Fire when tab becomes visible again
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'visible') playHero();
+            });
+        })();
 
         // ─────────────────────────────────────────
         // VIDEO GALLERY — dynamic load
