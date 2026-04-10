@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Hub | Old Oak Town</title>
+<link rel="icon" type="image/png" href="../images/logo.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+/* ── Brand tokens (swap for other sites) ── */
+:root {
+  --ink:          #0F1A0A;
+  --green-deep:   #1C3A0E;
+  --green-mid:    #2F6020;
+  --green-bright: #4C8A35;
+  --green-pale:   #D4E8C8;
+  --green-ghost:  #F0F7EB;
+  --amber:        #D4860A;
+  --amber-pale:   #FEF3DC;
+  --red:          #C0392B;
+  --red-pale:     #FDECEA;
+  --blue:         #1A5CB8;
+  --blue-pale:    #E8F0FC;
+  --cream:        #FAF8F4;
+  --white:        #FFFFFF;
+  --border:       #DDE8D4;
+  --muted:        #6B7B5E;
+  --sidebar-w:    240px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ══ LOGIN SCREEN ══════════════════════════════════════════════ */
+#loginScreen {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--green-deep);
+}
+.login-card {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  width: 100%; max-width: 420px;
+  text-align: center;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+}
+.login-logo {
+  height: 72px;
+  margin-bottom: 1.25rem;
+}
+.login-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.75rem;
+  color: var(--green-deep);
+  margin-bottom: 0.25rem;
+}
+.login-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+.login-field label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.login-field input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--cream);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.login-field input:focus { border-color: var(--green-bright); background: var(--white); }
+.login-btn {
+  width: 100%;
+  background: var(--green-deep);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 0.95rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background 0.2s;
+}
+.login-btn:hover { background: var(--green-mid); }
+.login-error {
+  display: none;
+  color: var(--red);
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+  background: var(--red-pale);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+}
+.login-error.show { display: block; }
+
+/* ══ APP SHELL ════════════════════════════════════════════════ */
+#hubApp {
+  display: none;
+  min-height: 100vh;
+}
+#hubApp.visible { display: flex; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--green-deep);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 100;
+}
+.sidebar-brand {
+  padding: 1.5rem 1.25rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sidebar-brand-icon {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.sidebar-brand-name {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+.sidebar-brand-sub {
+  font-size: 0.7rem;
+  opacity: 0.55;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.sidebar-section {
+  padding: 1.25rem 0.75rem 0.5rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 9px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.nav-item:hover, .nav-item.active {
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+}
+.nav-item-icon {
+  width: 20px;
+  text-align: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.nav-badge {
+  margin-left: auto;
+  background: var(--amber);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  min-width: 20px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 1rem 0.75rem 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.85rem;
+}
+.sidebar-avatar {
+  width: 30px; height: 30px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.sidebar-username {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.8);
+}
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 9px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: color 0.15s, background 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+
+/* ── Main Content ── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.35rem;
+  color: var(--green-deep);
+}
+.topbar-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.content {
+  padding: 2rem;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* ── Stats Row ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--stat-color, var(--green-bright));
+  border-radius: 14px 14px 0 0;
+}
+.stat-card.pending { --stat-color: var(--amber); }
+.stat-card.revenue { --stat-color: var(--green-bright); }
+.stat-card.videos  { --stat-color: var(--blue); }
+.stat-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.25rem;
+}
+.stat-value {
+  font-family: 'Instrument Serif', serif;
+  font-size: 2rem;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+.stat-loading { color: var(--border); }
+
+/* ── Module Tiles ── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.25rem;
+  color: var(--green-deep);
+}
+.section-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.module-tile {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+.module-tile:hover {
+  border-color: var(--tile-accent, var(--green-bright));
+  box-shadow: 0 8px 32px rgba(28,58,14,0.10);
+  transform: translateY(-2px);
+}
+.module-tile::after {
+  content: '→';
+  position: absolute;
+  bottom: 1.25rem; right: 1.5rem;
+  font-size: 1.1rem;
+  color: var(--tile-accent, var(--green-bright));
+  opacity: 0;
+  transition: opacity 0.2s, right 0.2s;
+}
+.module-tile:hover::after { opacity: 1; right: 1.25rem; }
+.tile-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: var(--tile-bg, var(--green-ghost));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+}
+.tile-label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.tile-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: var(--tile-badge-bg, var(--green-ghost));
+  color: var(--tile-badge-color, var(--green-mid));
+  width: fit-content;
+}
+
+/* ── Attention Panel ── */
+.attention-panel {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.attention-header {
+  background: var(--green-ghost);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.attention-header-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--green-deep);
+}
+.attention-list {
+  list-style: none;
+  padding: 0;
+}
+.attention-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.attention-item:last-child { border-bottom: none; }
+.attention-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--amber);
+  flex-shrink: 0;
+}
+.attention-dot.red { background: var(--red); }
+.attention-dot.green { background: var(--green-bright); }
+.attention-text { flex: 1; color: var(--ink); }
+.attention-action {
+  font-size: 0.8rem;
+  color: var(--green-bright);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.attention-action:hover { text-decoration: underline; }
+.attention-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ── Site Vitals ── */
+.vitals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.vital-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+.vital-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+.vital-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.vital-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--green-bright);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .modules-grid { grid-template-columns: 1fr; }
+  .vitals-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN SCREEN ══════════════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <img src="../images/logo.png" alt="Old Oak Town" class="login-logo">
+    <div class="login-title">Admin Hub</div>
+    <div class="login-sub">Old Oak Town — Back Office</div>
+
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="usernameInput" placeholder="admin" autocomplete="username"
+             onkeypress="if(event.key==='Enter') document.getElementById('passwordInput').focus()">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password"
+             onkeypress="if(event.key==='Enter') hubLogin()">
+    </div>
+
+    <button class="login-btn" onclick="hubLogin()">Sign In</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ══ HUB APP ════════════════════════════════════════════════ -->
+<div id="hubApp">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-icon">🌳</div>
+      <div>
+        <div class="sidebar-brand-name">Old Oak Town</div>
+        <div class="sidebar-brand-sub">Admin Hub</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">Navigate</div>
+    <div class="sidebar-nav">
+      <div class="nav-item active" onclick="scrollToTop()">
+        <span class="nav-item-icon">📊</span> Overview
+      </div>
+      <a class="nav-item" href="/social-agent.html">
+        <span class="nav-item-icon">📱</span> Social
+      </a>
+      <a class="nav-item" href="/admin/dashboard.html">
+        <span class="nav-item-icon">🏪</span> Directory
+        <span class="nav-badge" id="sidebarPendingBadge" style="display:none;"></span>
+      </a>
+      <a class="nav-item" href="/admin/review.html">
+        <span class="nav-item-icon">📰</span> Content Review
+      </a>
+      <a class="nav-item" href="/admin/dashboard.html?tab=videos">
+        <span class="nav-item-icon">🎬</span> Videos
+      </a>
+    </div>
+
+    <div class="sidebar-section">Site</div>
+    <div class="sidebar-nav">
+      <a class="nav-item" href="https://oldoaktown.co.uk" target="_blank">
+        <span class="nav-item-icon">🌐</span> View Site
+      </a>
+      <a class="nav-item" href="/business-directory.html" target="_blank">
+        <span class="nav-item-icon">📋</span> Directory Page
+      </a>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebarAvatar">A</div>
+        <div class="sidebar-username" id="sidebarUsername">admin</div>
+      </div>
+      <button class="btn-logout" onclick="logout()">
+        <span>↩</span> Sign Out
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title">Overview</div>
+      <div class="topbar-date" id="topbarDate"></div>
+    </div>
+
+    <div class="content">
+
+      <!-- Stats Row -->
+      <div class="stats-grid">
+        <div class="stat-card pending">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-value stat-loading" id="statPending"><span class="spinner"></span></div>
+          <div class="stat-label">Pending Approvals</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value stat-loading" id="statApproved"><span class="spinner"></span></div>
+          <div class="stat-label">Live Listings</div>
+        </div>
+        <div class="stat-card revenue">
+          <div class="stat-icon">💷</div>
+          <div class="stat-value stat-loading" id="statRevenue"><span class="spinner"></span></div>
+          <div class="stat-label">Est. Monthly Revenue</div>
+        </div>
+        <div class="stat-card videos">
+          <div class="stat-icon">🎬</div>
+          <div class="stat-value stat-loading" id="statVideos"><span class="spinner"></span></div>
+          <div class="stat-label">Videos Live</div>
+        </div>
+      </div>
+
+      <!-- Needs Attention -->
+      <div class="section-header">
+        <div class="section-title">Needs Attention</div>
+        <div class="section-sub" id="attentionSub">Loading…</div>
+      </div>
+      <div class="attention-panel" id="attentionPanel">
+        <div class="attention-header">
+          <span>🔔</span>
+          <span class="attention-header-title">Action Required</span>
+        </div>
+        <div class="attention-empty" id="attentionLoading">
+          <span class="spinner"></span> Checking for items…
+        </div>
+        <ul class="attention-list" id="attentionList" style="display:none;"></ul>
+      </div>
+
+      <!-- Module Tiles -->
+      <div class="section-header">
+        <div class="section-title">Tools</div>
+        <div class="section-sub">Click any tile to open</div>
+      </div>
+      <div class="modules-grid">
+
+        <a class="module-tile" href="/social-agent.html"
+           style="--tile-accent:#4C8A35; --tile-bg:#F0F7EB;">
+          <div class="tile-icon">📱</div>
+          <div class="tile-label">Social Command Centre</div>
+          <div class="tile-desc">Plan, draft, and schedule this week's social posts across Facebook, Instagram, and LinkedIn.</div>
+          <div class="tile-badge" style="--tile-badge-bg:#F0F7EB; --tile-badge-color:#2F6020;">
+            5 posts / week
+          </div>
+        </a>
+
+        <a class="module-tile" href="/admin/dashboard.html"
+           style="--tile-accent:#D4860A; --tile-bg:#FEF3DC;">
+          <div class="tile-icon">🏪</div>
+          <div class="tile-label">Business Directory</div>
+          <div class="tile-desc">Review, approve, or reject business listing submissions. Manage payment tiers.</div>
+          <div class="tile-badge" id="dirBadge"
+               style="--tile-badge-bg:#FEF3DC; --tile-badge-color:#8B5A02;">
+            Loading…
+          </div>
+        </a>
+
+        <a class="module-tile" href="/admin/review.html"
+           style="--tile-accent:#1A5CB8; --tile-bg:#E8F0FC;">
+          <div class="tile-icon">📰</div>
+          <div class="tile-label">Content Review</div>
+          <div class="tile-desc">Approve or reject RSS-aggregated news articles before they go live on the homepage.</div>
+          <div class="tile-badge"
+               style="--tile-badge-bg:#E8F0FC; --tile-badge-color:#1A5CB8;">
+            HITL queue
+          </div>
+        </a>
+
+        <a class="module-tile" href="/admin/dashboard.html?tab=videos"
+           style="--tile-accent:#6B7B5E; --tile-bg:#F0F7EB;">
+          <div class="tile-icon">🎬</div>
+          <div class="tile-label">Video Management</div>
+          <div class="tile-desc">Add YouTube or Vimeo videos to the homepage. Preview, reorder, and remove clips.</div>
+          <div class="tile-badge" id="videoBadge"
+               style="--tile-badge-bg:#F0F7EB; --tile-badge-color:#6B7B5E;">
+            Loading…
+          </div>
+        </a>
+
+      </div>
+
+      <!-- Site Vitals -->
+      <div class="section-header">
+        <div class="section-title">Revenue Breakdown</div>
+        <div class="section-sub">Estimated from active paid tiers</div>
+      </div>
+      <div class="vitals-grid">
+        <div class="vital-card">
+          <div class="vital-label">Featured Listings</div>
+          <div class="vital-value" id="vitalFeatured">—</div>
+          <div class="vital-sub">£35/month each</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">Premium Listings</div>
+          <div class="vital-value" id="vitalPremium">—</div>
+          <div class="vital-sub">£75/month each</div>
+        </div>
+        <div class="vital-card">
+          <div class="vital-label">Est. Monthly Revenue</div>
+          <div class="vital-value" id="vitalRevenue">—</div>
+          <div class="vital-sub">Featured + Premium tiers</div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /hubApp -->
+
+<script>
+// ══ CONFIG — swap these for other sites ════════════════════════
+const HUB_CONFIG = {
+  siteName:      'Old Oak Town',
+  siteIcon:      '🌳',
+  adminUsername: 'admin',
+  statsEndpoint: '/api/admin-stats'
+};
+
+// ══ AUTH ═══════════════════════════════════════════════════════
+const ADMIN_PASSWORD_HASH = '924325fbd85f063f2439544a4bd4cbe61433c2c83eb3e5a7ead42b984b7a2223';
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function hubLogin() {
+  const username = document.getElementById('usernameInput').value.trim();
+  const password = document.getElementById('passwordInput').value;
+  const errEl    = document.getElementById('loginError');
+
+  errEl.classList.remove('show');
+
+  if (!username) {
+    errEl.textContent = 'Please enter your username.';
+    errEl.classList.add('show');
+    document.getElementById('usernameInput').focus();
+    return;
+  }
+
+  if (username.toLowerCase() !== HUB_CONFIG.adminUsername) {
+    errEl.textContent = 'Username not recognised.';
+    errEl.classList.add('show');
+    return;
+  }
+
+  if (!password) {
+    errEl.textContent = 'Please enter your password.';
+    errEl.classList.add('show');
+    document.getElementById('passwordInput').focus();
+    return;
+  }
+
+  const hash = await sha256(password);
+  if (hash === ADMIN_PASSWORD_HASH) {
+    sessionStorage.setItem('adminAuth',     'true');
+    sessionStorage.setItem('adminPassword', password);
+    sessionStorage.setItem('adminUser',     username);
+    showDashboard(username);
+  } else {
+    errEl.textContent = 'Incorrect password. Please try again.';
+    errEl.classList.add('show');
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('adminAuth');
+  sessionStorage.removeItem('adminPassword');
+  sessionStorage.removeItem('adminUser');
+  location.reload();
+}
+
+function showDashboard(username) {
+  document.getElementById('loginScreen').style.display = 'none';
+  const app = document.getElementById('hubApp');
+  app.classList.add('visible');
+
+  const user = username || sessionStorage.getItem('adminUser') || 'admin';
+  document.getElementById('sidebarUsername').textContent = user;
+  document.getElementById('sidebarAvatar').textContent   = user[0].toUpperCase();
+
+  setDate();
+  loadStats();
+}
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+function setDate() {
+  const now = new Date();
+  document.getElementById('topbarDate').textContent = now.toLocaleDateString('en-GB', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
+// Auto-restore session within same tab
+if (sessionStorage.getItem('adminAuth') === 'true') {
+  showDashboard();
+}
+
+// ══ STATS ═════════════════════════════════════════════════════
+async function loadStats() {
+  const password = sessionStorage.getItem('adminPassword');
+  if (!password) {
+    showStatsError();
+    return;
+  }
+
+  try {
+    const resp = await fetch(HUB_CONFIG.statsEndpoint, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ password })
+    });
+
+    if (!resp.ok) throw new Error('Stats API returned ' + resp.status);
+    const d = await resp.json();
+
+    // Stats cards
+    setText('statPending',  d.pendingBusinesses  ?? '—');
+    setText('statApproved', d.approvedBusinesses ?? '—');
+    setText('statRevenue',  d.monthlyRevenue != null ? '£' + d.monthlyRevenue.toLocaleString() : '—');
+    setText('statVideos',   d.videosLive ?? '—');
+
+    // Revenue breakdown
+    setText('vitalFeatured', (d.featuredBusinesses ?? '—') + (d.featuredBusinesses != null ? ' listings' : ''));
+    setText('vitalPremium',  (d.premiumBusinesses ?? '—')  + (d.premiumBusinesses  != null ? ' listings' : ''));
+    setText('vitalRevenue',  d.monthlyRevenue != null ? '£' + d.monthlyRevenue.toLocaleString() + '/mo' : '—');
+
+    // Directory tile badge
+    const pending = d.pendingBusinesses ?? 0;
+    const dirBadge = document.getElementById('dirBadge');
+    if (pending > 0) {
+      dirBadge.textContent = pending + ' pending approval';
+      dirBadge.style.setProperty('--tile-badge-bg',    '#FEF3DC');
+      dirBadge.style.setProperty('--tile-badge-color', '#8B5A02');
+    } else {
+      dirBadge.textContent = d.approvedBusinesses + ' live listings';
+    }
+
+    // Video tile badge
+    setText('videoBadge', (d.videosLive ?? 0) + ' videos live');
+
+    // Sidebar badge
+    const badge = document.getElementById('sidebarPendingBadge');
+    if (pending > 0) {
+      badge.textContent = pending;
+      badge.style.display = 'inline-flex';
+    }
+
+    // Attention panel
+    buildAttentionPanel(d);
+
+  } catch (err) {
+    console.warn('Stats load failed:', err.message);
+    showStatsError();
+  }
+}
+
+function showStatsError() {
+  ['statPending', 'statApproved', 'statRevenue', 'statVideos'].forEach(id => setText(id, '—'));
+  document.getElementById('attentionLoading').innerHTML = 'Could not load stats — password may not be stored in this session.';
+  document.getElementById('attentionSub').textContent = '';
+}
+
+function buildAttentionPanel(d) {
+  const items = [];
+
+  if ((d.pendingBusinesses ?? 0) > 0) {
+    items.push({
+      dot:    'amber',
+      text:   `${d.pendingBusinesses} business listing${d.pendingBusinesses > 1 ? 's' : ''} awaiting your approval`,
+      action: 'Review →',
+      href:   '/admin/dashboard.html'
+    });
+  }
+
+  if ((d.videosLive ?? 0) === 0) {
+    items.push({
+      dot:    'amber',
+      text:   'No videos on homepage — add a YouTube or Vimeo clip',
+      action: 'Add video →',
+      href:   '/admin/dashboard.html?tab=videos'
+    });
+  }
+
+  const loading = document.getElementById('attentionLoading');
+  const list    = document.getElementById('attentionList');
+
+  if (items.length === 0) {
+    loading.innerHTML = '✅ All clear — nothing needs attention right now.';
+    document.getElementById('attentionSub').textContent = 'All clear';
+    return;
+  }
+
+  document.getElementById('attentionSub').textContent = items.length + ' item' + (items.length > 1 ? 's' : '');
+  loading.style.display = 'none';
+  list.style.display = 'block';
+  list.innerHTML = items.map(item => `
+    <li class="attention-item">
+      <span class="attention-dot ${item.dot === 'red' ? 'red' : ''}"></span>
+      <span class="attention-text">${item.text}</span>
+      <a class="attention-action" href="${item.href}">${item.action}</a>
+    </li>
+  `).join('');
+}
+
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+</script>
+</body>
+</html>

@@ -232,6 +232,7 @@
         <div class="admin-header">
             <h1>🌳 Old Oak Town — Admin Dashboard</h1>
             <div>
+                <a href="/admin/" style="color:rgba(255,255,255,0.65); margin-right:1.5rem; text-decoration:none; font-size:0.9rem;">← Hub</a>
                 <a href="../business-directory.html" style="color:rgba(255,255,255,0.8); margin-right:1.5rem; text-decoration:none;">View Directory →</a>
                 <button onclick="logout()" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:0.5rem 1rem; border-radius:5px; cursor:pointer;">Sign Out</button>
             </div>
@@ -365,12 +366,26 @@
         function logout() {
             _adminPassword = '';
             sessionStorage.removeItem('adminAuth');
-            location.reload();
+            sessionStorage.removeItem('adminPassword');
+            sessionStorage.removeItem('adminUser');
+            location.href = '/admin/';
         }
 
-        // Returning session: still requires re-entering password on hard reload
-        // sessionStorage cleared on tab close, so this only persists within the same tab session
-        if (sessionStorage.getItem('adminAuth') === 'true') {
+        // If navigating from the hub, adminPassword is already in sessionStorage
+        if (sessionStorage.getItem('adminAuth') === 'true' && sessionStorage.getItem('adminPassword')) {
+            _adminPassword = sessionStorage.getItem('adminPassword');
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').style.display = 'block';
+            loadDashboard();
+            // Auto-switch to Videos tab if URL requests it
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('tab') === 'videos') {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                const videoTab = document.querySelector('.tab[onclick*="videos"]');
+                if (videoTab) videoTab.classList.add('active');
+                switchTab('videos', videoTab);
+            }
+        } else if (sessionStorage.getItem('adminAuth') === 'true') {
             // Prompt for password again to repopulate _adminPassword (needed for API calls)
             document.getElementById('loginScreen').style.display = 'flex';
         }
