@@ -592,7 +592,7 @@
             if (list) list.innerHTML = '<div class="loading">Loading videos...</div>';
 
             try {
-                var resp = await fetch('/api/get-videos');
+                var resp = await fetch('/api/videos');
                 var data = await resp.json();
                 var videos = data.videos || [];
 
@@ -648,7 +648,7 @@
             msg.textContent = '';
 
             try {
-                var resp = await fetch('/api/manage-video', {
+                var resp = await fetch('/api/videos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password: _adminPassword, url: url, title: title, description: desc, tags: tags })
@@ -681,7 +681,7 @@
             if (!confirm('Delete "' + title + '"? This will remove it from the homepage immediately.')) return;
 
             try {
-                var resp = await fetch('/api/manage-video', {
+                var resp = await fetch('/api/videos', {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ password: _adminPassword, id: id })
