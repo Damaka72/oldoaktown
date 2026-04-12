@@ -2989,7 +2989,7 @@
 
             if (!grid) return;
 
-            fetch('/api/get-videos')
+            fetch('/api/videos')
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
                     var videos = data.videos || [];

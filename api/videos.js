@@ -1,7 +1,8 @@
-// api/manage-video.js
-// Admin endpoint to add or delete videos
-// POST /api/manage-video  { password, title, description, url, tags, display_order }
-// DELETE /api/manage-video  { password, id }
+// api/videos.js
+// Unified video endpoint — public reads, admin writes
+// GET    /api/videos               → return all active videos ordered for display
+// POST   /api/videos  { password, title, description, url, tags, display_order }  → add video
+// DELETE /api/videos  { password, id }  → delete video
 
 const { createClient } = require('@supabase/supabase-js');
 
@@ -38,7 +39,26 @@ function parseVideoUrl(rawUrl) {
 // ─── Handler ─────────────────────────────────────────────────────────────────
 
 module.exports = async function handler(req, res) {
-    // Auth — same pattern as approve-listing.js
+    // GET — public, no auth required
+    if (req.method === 'GET') {
+        try {
+            const { data, error } = await supabase
+                .from('videos')
+                .select('id, title, description, platform, embed_url, tags, display_order, created_at')
+                .eq('active', true)
+                .order('display_order', { ascending: true })
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            return res.status(200).json({ videos: data || [] });
+        } catch (err) {
+            console.error('videos GET error:', err);
+            return res.status(500).json({ error: 'Failed to load videos' });
+        }
+    }
+
+    // POST / DELETE — admin auth required
     const body = req.body || {};
     const adminPassword = process.env.ADMIN_PASSWORD;
     if (!adminPassword || body.password !== adminPassword) {
@@ -79,9 +99,8 @@ module.exports = async function handler(req, res) {
 
             console.log('Video added:', data.title, '(', data.id, ')');
             return res.status(200).json({ success: true, video: data });
-
         } catch (err) {
-            console.error('manage-video insert error:', err);
+            console.error('videos POST error:', err);
             return res.status(500).json({ error: 'Failed to save video' });
         }
     }
@@ -104,12 +123,11 @@ module.exports = async function handler(req, res) {
 
             console.log('Video deleted:', id);
             return res.status(200).json({ success: true });
-
         } catch (err) {
-            console.error('manage-video delete error:', err);
+            console.error('videos DELETE error:', err);
             return res.status(500).json({ error: 'Failed to delete video' });
         }
     }
 
-    return res.status(405).json({ error: 'Method not allowed. Use POST to add or DELETE to remove.' });
+    return res.status(405).json({ error: 'Method not allowed. Use GET to list, POST to add, or DELETE to remove.' });
 };
