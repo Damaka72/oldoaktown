@@ -745,7 +745,7 @@ const HUB_CONFIG = {
   siteName:      'Old Oak Town',
   siteIcon:      '🌳',
   adminUsername: 'admin',
-  statsEndpoint: '/api/admin-stats'
+  statsEndpoint: '/api/approve-listing'
 };
 
 // ══ AUTH ═══════════════════════════════════════════════════════
@@ -843,7 +843,7 @@ async function loadStats() {
     const resp = await fetch(HUB_CONFIG.statsEndpoint, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ password })
+      body:    JSON.stringify({ password, action: 'stats' })
     });
 
     if (!resp.ok) throw new Error('Stats API returned ' + resp.status);
