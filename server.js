@@ -107,8 +107,8 @@ app.post('/api/subscribe', rateLimit(60_000, 5), async (req, res) => {
 // ─────────────────────────────────────────────
 
 const submitBusiness = require('./api/submit-business');
-const approveBusiness = require('./approve-business');
-const getBusinesses = require('./get-businesses');
+const approveBusiness = require('./api/approve-business');
+const getBusinesses = require('./api/get-businesses');
 const stripeWebhook = require('./api/stripe-webhook');
 const getPending = require('./api/get-pending');
 const approveListing = require('./api/approve-listing');
