@@ -836,17 +836,12 @@ async function testBufferConnection() {
   box.style.display = 'block';
   box.textContent = 'Testing Buffer connection…';
   try {
-    // Run channels check and schema check in parallel
-    const [chanRes, schemaRes] = await Promise.all([
-      fetch('/api/buffer-channels'),
-      fetch('/api/buffer-schema?type=SchedulingType'),
-    ]);
-    const data = await chanRes.json();
-    const schemaData = await schemaRes.json().catch(() => null);
+    const res = await fetch('/api/buffer-diagnostics');
+    const data = await res.json();
 
-    if (!chanRes.ok) {
+    if (!res.ok) {
       box.style.borderColor = '#C0392B';
-      box.textContent = '✗ ' + (data.error || `HTTP ${chanRes.status}`);
+      box.textContent = '✗ ' + (data.error || `HTTP ${res.status}`) + (data.hint ? `\n${data.hint}` : '');
       return;
     }
     const channels = data.channels || [];
@@ -859,20 +854,11 @@ async function testBufferConnection() {
       lines.push('  No channels returned. Re-authorise Facebook/Instagram/LinkedIn at buffer.com → Channels.');
     }
 
-    // Show valid schedulingType enum values from schema
-    const enumVals = schemaData?.data?.__type?.enumValues;
-    if (enumVals?.length) {
-      lines.push('', `SchedulingType enum values (valid options):`);
-      enumVals.forEach(v => lines.push(`  · ${v.name}`));
-    } else {
-      lines.push('', 'SchedulingType schema: could not retrieve');
-    }
-
     box.style.borderColor = channels.length ? '#4C8A35' : '#D4860A';
     box.textContent = lines.join('\n');
   } catch (err) {
     box.style.borderColor = '#C0392B';
-    box.textContent = '✗ Could not reach /api/buffer-channels: ' + err.message;
+    box.textContent = '✗ Could not reach /api/buffer-diagnostics: ' + err.message;
   }
 }
 
