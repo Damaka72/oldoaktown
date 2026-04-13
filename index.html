@@ -167,6 +167,7 @@
             position: relative;
             overflow: hidden;
             color: white;
+            background-color: #1C3A0E;
             padding: 12rem 0;
             text-align: center;
             min-height: 500px;
@@ -1443,7 +1444,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
             <source src="https://mvttihozhozigtrwqsyy.supabase.co/storage/v1/object/public/Oldoaktown/gemini_generated_video_20d7918a.mp4" type="video/mp4">
         </video>
         <div class="container">
@@ -2967,11 +2968,13 @@
                 var v = document.getElementById('heroVideo');
                 if (!v) return;
                 v.muted = true;
+                // If the video hasn't started loading at all, trigger a load first
+                if (v.readyState === 0) v.load();
                 var p = v.play();
                 if (p && p.catch) p.catch(function() { /* blocked by browser policy */ });
             }
-            // Fire on initial load
-            document.addEventListener('DOMContentLoaded', playHero);
+            // Fire immediately — DOM is already parsed at this point in the page
+            playHero();
             // Fire when page is restored from back/forward cache
             window.addEventListener('pageshow', playHero);
             // Fire when tab becomes visible again
