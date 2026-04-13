@@ -1464,8 +1464,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
-            <source src="https://mvttihozhozigtrwqsyy.supabase.co/storage/v1/object/public/Oldoaktown/gemini_generated_video_20d7918a.mp4" type="video/mp4">
+        <video class="hero-video" id="heroVideo" muted loop playsinline preload="auto">
         </video>
         <!-- Shown only when browser blocks autoplay -->
         <button class="hero-play-btn" id="heroPlayBtn" aria-label="Play background video">&#9654;</button>
@@ -2982,46 +2981,66 @@
         });
 
         // ─────────────────────────────────────────
-        // HERO VIDEO — autoplay with click-to-play fallback
+        // HERO VIDEO — load via JS for full error control
         // ─────────────────────────────────────────
         (function() {
+            var VIDEO_SRC = 'https://mvttihozhozigtrwqsyy.supabase.co/storage/v1/object/public/Oldoaktown/gemini_generated_video_20d7918a.mp4';
             var v   = document.getElementById('heroVideo');
             var btn = document.getElementById('heroPlayBtn');
             if (!v) return;
 
-            function showBtn() {
-                if (btn) { btn.style.display = 'flex'; }
-            }
-            function hideBtn() {
-                if (btn) { btn.style.display = 'none'; }
+            function showBtn() { if (btn) btn.style.display = 'flex'; }
+            function hideBtn() { if (btn) btn.style.display = 'none'; }
+
+            function startLoad() {
+                v.src = VIDEO_SRC;
+                v.load();
             }
 
-            function tryPlay() {
+            // Once the browser has enough data, try to play
+            v.addEventListener('canplay', function() {
                 v.muted = true;
-                var p = v.play();
-                if (p) {
-                    p.then(hideBtn).catch(showBtn);
-                }
-            }
+                v.play().then(hideBtn).catch(showBtn);
+            }, { once: true });
 
-            // Manual play when user clicks the button
+            // If the source fails to load, show the button so user can retry
+            v.addEventListener('error', function() {
+                var codes = {1:'ABORTED', 2:'NETWORK', 3:'DECODE', 4:'NOT_SUPPORTED'};
+                var code = v.error ? codes[v.error.code] || v.error.code : 'UNKNOWN';
+                console.warn('Hero video error:', code, v.error && v.error.message);
+                showBtn();
+            });
+
+            // Click: if errored, reload from scratch; otherwise just play
             if (btn) {
                 btn.addEventListener('click', function() {
-                    v.muted = true;
-                    v.play().then(hideBtn).catch(function() {});
+                    if (v.error || v.networkState === 3) {
+                        // Re-attach canplay listener before reloading
+                        v.addEventListener('canplay', function() {
+                            v.muted = true;
+                            v.play().then(hideBtn).catch(showBtn);
+                        }, { once: true });
+                        startLoad();
+                    } else {
+                        v.muted = true;
+                        v.play().then(hideBtn).catch(showBtn);
+                    }
                 });
             }
 
-            // Play as soon as metadata is ready (most reliable trigger)
-            v.addEventListener('loadedmetadata', tryPlay, { once: true });
-            // Also try immediately if already buffered (bfcache restore)
-            if (v.readyState >= 1) tryPlay();
-            // Fire when page is restored from back/forward cache
-            window.addEventListener('pageshow', tryPlay);
-            // Fire when tab becomes visible again
-            document.addEventListener('visibilitychange', function() {
-                if (document.visibilityState === 'visible') tryPlay();
+            // Back/forward cache restore
+            window.addEventListener('pageshow', function() {
+                if (v.paused) { v.muted = true; v.play().catch(function(){}); }
             });
+            // Tab refocus
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'visible' && v.paused) {
+                    v.muted = true; v.play().catch(function(){});
+                }
+            });
+
+            // Kick off the load
+            startLoad();
         })();
 
         // ─────────────────────────────────────────
