@@ -2964,22 +2964,24 @@
         // Handles fresh loads, back/forward cache, and tab refocus
         // ─────────────────────────────────────────
         (function() {
-            function playHero() {
-                var v = document.getElementById('heroVideo');
-                if (!v) return;
+            var v = document.getElementById('heroVideo');
+            if (!v) return;
+
+            function tryPlay() {
                 v.muted = true;
-                // If the video hasn't started loading at all, trigger a load first
-                if (v.readyState === 0) v.load();
                 var p = v.play();
                 if (p && p.catch) p.catch(function() { /* blocked by browser policy */ });
             }
-            // Fire immediately — DOM is already parsed at this point in the page
-            playHero();
+
+            // Play as soon as metadata is ready (most reliable trigger)
+            v.addEventListener('loadedmetadata', tryPlay, { once: true });
+            // Also try immediately in case the video is already buffered (bfcache)
+            if (v.readyState >= 1) tryPlay();
             // Fire when page is restored from back/forward cache
-            window.addEventListener('pageshow', playHero);
+            window.addEventListener('pageshow', tryPlay);
             // Fire when tab becomes visible again
             document.addEventListener('visibilitychange', function() {
-                if (document.visibilityState === 'visible') playHero();
+                if (document.visibilityState === 'visible') tryPlay();
             });
         })();
 
