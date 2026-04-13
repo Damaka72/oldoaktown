@@ -167,27 +167,6 @@
 
         if (submissionData) {
             console.log('Submission data preserved for retry');
-            // Optionally send to backend to save as draft
-            // sendDraftToBackend(JSON.parse(submissionData));
-        }
-
-        async function sendDraftToBackend(data) {
-            try {
-                await fetch('/api/business-draft', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        ...data,
-                        status: 'draft',
-                        paymentAttempted: true,
-                        createdAt: new Date().toISOString()
-                    })
-                });
-            } catch (error) {
-                console.error('Error saving draft:', error);
-            }
         }
     </script>
 </body>
