@@ -195,6 +195,26 @@
             z-index: 2;
         }
 
+        .hero-play-btn {
+            display: none; /* hidden until autoplay fails */
+            position: absolute;
+            bottom: 1.25rem;
+            right: 1.25rem;
+            z-index: 3;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1.5px solid rgba(255, 255, 255, 0.45);
+            border-radius: 50%;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .hero-play-btn:hover { background: rgba(255, 255, 255, 0.28); }
+
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
@@ -1447,6 +1467,8 @@
         <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
             <source src="https://mvttihozhozigtrwqsyy.supabase.co/storage/v1/object/public/Oldoaktown/gemini_generated_video_20d7918a.mp4" type="video/mp4">
         </video>
+        <!-- Shown only when browser blocks autoplay -->
+        <button class="hero-play-btn" id="heroPlayBtn" aria-label="Play background video">&#9654;</button>
         <div class="container">
             <h1>Welcome to Old Oak Town</h1>
             <p>Your comprehensive guide to West London's largest regeneration project - tracking HS2, housing, jobs, and community developments</p>
@@ -2960,22 +2982,39 @@
         });
 
         // ─────────────────────────────────────────
-        // HERO VIDEO — force play on every page show
-        // Handles fresh loads, back/forward cache, and tab refocus
+        // HERO VIDEO — autoplay with click-to-play fallback
         // ─────────────────────────────────────────
         (function() {
-            var v = document.getElementById('heroVideo');
+            var v   = document.getElementById('heroVideo');
+            var btn = document.getElementById('heroPlayBtn');
             if (!v) return;
+
+            function showBtn() {
+                if (btn) { btn.style.display = 'flex'; }
+            }
+            function hideBtn() {
+                if (btn) { btn.style.display = 'none'; }
+            }
 
             function tryPlay() {
                 v.muted = true;
                 var p = v.play();
-                if (p && p.catch) p.catch(function() { /* blocked by browser policy */ });
+                if (p) {
+                    p.then(hideBtn).catch(showBtn);
+                }
+            }
+
+            // Manual play when user clicks the button
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    v.muted = true;
+                    v.play().then(hideBtn).catch(function() {});
+                });
             }
 
             // Play as soon as metadata is ready (most reliable trigger)
             v.addEventListener('loadedmetadata', tryPlay, { once: true });
-            // Also try immediately in case the video is already buffered (bfcache)
+            // Also try immediately if already buffered (bfcache restore)
             if (v.readyState >= 1) tryPlay();
             // Fire when page is restored from back/forward cache
             window.addEventListener('pageshow', tryPlay);
