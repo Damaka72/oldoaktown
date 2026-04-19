@@ -8,7 +8,6 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
 
-/* ── Brand tokens (swap for other sites) ── */
 :root {
   --ink:          #0F1A0A;
   --green-deep:   #1C3A0E;
@@ -31,516 +30,235 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  min-height: 100vh;
-  line-height: 1.5;
-}
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); min-height: 100vh; line-height: 1.5; }
 
-/* ══ LOGIN SCREEN ══════════════════════════════════════════════ */
-#loginScreen {
-  position: fixed; inset: 0; z-index: 9999;
-  display: flex; align-items: center; justify-content: center;
-  background: var(--green-deep);
-}
-.login-card {
-  background: var(--white);
-  border-radius: 20px;
-  padding: 3rem 2.5rem;
-  width: 100%; max-width: 420px;
-  text-align: center;
-  box-shadow: 0 24px 64px rgba(0,0,0,0.3);
-}
-.login-logo {
-  height: 72px;
-  margin-bottom: 1.25rem;
-}
-.login-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.75rem;
-  color: var(--green-deep);
-  margin-bottom: 0.25rem;
-}
-.login-sub {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
-}
-.login-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  text-align: left;
-  margin-bottom: 1rem;
-}
-.login-field label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-.login-field input {
-  width: 100%;
-  padding: 0.85rem 1rem;
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
-  color: var(--ink);
-  background: var(--cream);
-  transition: border-color 0.2s;
-  outline: none;
-}
+/* ══ LOGIN ══════════════════════════════════════════════ */
+#loginScreen { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--green-deep); }
+.login-card { background: var(--white); border-radius: 20px; padding: 3rem 2.5rem; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,0.3); }
+.login-logo { height: 72px; margin-bottom: 1.25rem; }
+.login-title { font-family: 'Instrument Serif', serif; font-size: 1.75rem; color: var(--green-deep); margin-bottom: 0.25rem; }
+.login-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+.login-field { display: flex; flex-direction: column; gap: 0.4rem; text-align: left; margin-bottom: 1rem; }
+.login-field label { font-size: 0.8rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.login-field input { width: 100%; padding: 0.85rem 1rem; border: 2px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--ink); background: var(--cream); transition: border-color 0.2s; outline: none; }
 .login-field input:focus { border-color: var(--green-bright); background: var(--white); }
-.login-btn {
-  width: 100%;
-  background: var(--green-deep);
-  color: var(--white);
-  border: none;
-  border-radius: 10px;
-  padding: 0.95rem;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 0.5rem;
-  transition: background 0.2s;
-}
+.login-btn { width: 100%; background: var(--green-deep); color: var(--white); border: none; border-radius: 10px; padding: 0.95rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s; }
 .login-btn:hover { background: var(--green-mid); }
-.login-error {
-  display: none;
-  color: var(--red);
-  font-size: 0.875rem;
-  margin-top: 0.75rem;
-  background: var(--red-pale);
-  border-radius: 8px;
-  padding: 0.6rem 0.9rem;
-}
+.login-error { display: none; color: var(--red); font-size: 0.875rem; margin-top: 0.75rem; background: var(--red-pale); border-radius: 8px; padding: 0.6rem 0.9rem; }
 .login-error.show { display: block; }
 
 /* ══ APP SHELL ════════════════════════════════════════════════ */
-#hubApp {
-  display: none;
-  min-height: 100vh;
-}
+#hubApp { display: none; min-height: 100vh; }
 #hubApp.visible { display: flex; }
 
 /* ── Sidebar ── */
-.sidebar {
-  width: var(--sidebar-w);
-  min-height: 100vh;
-  background: var(--green-deep);
-  color: var(--white);
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0; left: 0;
-  z-index: 100;
-}
-.sidebar-brand {
-  padding: 1.5rem 1.25rem 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.sidebar-brand-icon {
-  width: 38px; height: 38px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem;
-  flex-shrink: 0;
-}
-.sidebar-brand-name {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1rem;
-  line-height: 1.2;
-}
-.sidebar-brand-sub {
-  font-size: 0.7rem;
-  opacity: 0.55;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-.sidebar-section {
-  padding: 1.25rem 0.75rem 0.5rem;
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: rgba(255,255,255,0.4);
-}
-.sidebar-nav {
-  flex: 1;
-  padding: 0.25rem 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 0.85rem;
-  border-radius: 9px;
-  color: rgba(255,255,255,0.75);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: background 0.15s, color 0.15s;
-  cursor: pointer;
-}
-.nav-item:hover, .nav-item.active {
-  background: rgba(255,255,255,0.1);
-  color: var(--white);
-}
-.nav-item-icon {
-  width: 20px;
-  text-align: center;
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-.nav-badge {
-  margin-left: auto;
-  background: var(--amber);
-  color: var(--white);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.1rem 0.45rem;
-  border-radius: 999px;
-  min-width: 20px;
-  text-align: center;
-}
-.sidebar-footer {
-  padding: 1rem 0.75rem 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-.sidebar-user {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.5rem 0.85rem;
-}
-.sidebar-avatar {
-  width: 30px; height: 30px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-.sidebar-username {
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.8);
-}
-.btn-logout {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.55rem 0.85rem;
-  border-radius: 9px;
-  color: rgba(255,255,255,0.5);
-  font-size: 0.85rem;
-  font-weight: 500;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: color 0.15s, background 0.15s;
-  text-align: left;
-  width: 100%;
-}
+.sidebar { width: var(--sidebar-w); min-height: 100vh; background: var(--green-deep); color: var(--white); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; z-index: 100; overflow-y: auto; }
+.sidebar-brand { padding: 1.5rem 1.25rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 0.75rem; }
+.sidebar-brand-icon { width: 38px; height: 38px; background: rgba(255,255,255,0.12); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+.sidebar-brand-name { font-family: 'Instrument Serif', serif; font-size: 1rem; line-height: 1.2; }
+.sidebar-brand-sub { font-size: 0.7rem; opacity: 0.55; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; }
+.sidebar-section { padding: 1.25rem 0.75rem 0.5rem; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.4); }
+.sidebar-nav { padding: 0.25rem 0.75rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.nav-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0.85rem; border-radius: 9px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: background 0.15s, color 0.15s; cursor: pointer; border: none; background: none; font-family: 'DM Sans', sans-serif; width: 100%; text-align: left; }
+.nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: var(--white); }
+.nav-item-icon { width: 20px; text-align: center; font-size: 1rem; flex-shrink: 0; }
+.nav-badge { margin-left: auto; background: var(--amber); color: var(--white); font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.45rem; border-radius: 999px; min-width: 20px; text-align: center; }
+.nav-badge.green { background: var(--green-bright); }
+.nav-badge.red { background: var(--red); }
+.sidebar-footer { padding: 1rem 0.75rem 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; }
+.sidebar-user { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.85rem; }
+.sidebar-avatar { width: 30px; height: 30px; background: rgba(255,255,255,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; }
+.sidebar-username { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+.btn-logout { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.85rem; border-radius: 9px; color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 500; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: color 0.15s, background 0.15s; text-align: left; width: 100%; }
 .btn-logout:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
 
 /* ── Main Content ── */
-.main {
-  margin-left: var(--sidebar-w);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-.topbar {
-  background: var(--white);
-  border-bottom: 1px solid var(--border);
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-}
-.topbar-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.35rem;
-  color: var(--green-deep);
-}
-.topbar-date {
-  font-size: 0.85rem;
-  color: var(--muted);
-}
-.content {
-  padding: 2rem;
-  max-width: 1100px;
-  width: 100%;
-}
+.main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+.topbar { background: var(--white); border-bottom: 1px solid var(--border); padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+.topbar-title { font-family: 'Instrument Serif', serif; font-size: 1.35rem; color: var(--green-deep); }
+.topbar-actions { display: flex; align-items: center; gap: 0.75rem; }
+.topbar-date { font-size: 0.85rem; color: var(--muted); }
+.content { padding: 2rem; max-width: 1100px; width: 100%; }
+
+/* ── Panel system ── */
+.panel { display: none; }
+.panel.active { display: block; }
 
 /* ── Stats Row ── */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.stat-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  position: relative;
-  overflow: hidden;
-}
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--stat-color, var(--green-bright));
-  border-radius: 14px 14px 0 0;
-}
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.stat-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 0.3rem; position: relative; overflow: hidden; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--stat-color, var(--green-bright)); border-radius: 14px 14px 0 0; }
 .stat-card.pending { --stat-color: var(--amber); }
 .stat-card.revenue { --stat-color: var(--green-bright); }
 .stat-card.videos  { --stat-color: var(--blue); }
-.stat-icon {
-  font-size: 1.4rem;
-  margin-bottom: 0.25rem;
-}
-.stat-value {
-  font-family: 'Instrument Serif', serif;
-  font-size: 2rem;
-  color: var(--ink);
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.8rem;
-  color: var(--muted);
-  font-weight: 500;
-}
-.stat-loading { color: var(--border); }
+.stat-icon { font-size: 1.4rem; margin-bottom: 0.25rem; }
+.stat-value { font-family: 'Instrument Serif', serif; font-size: 2rem; color: var(--ink); line-height: 1; }
+.stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+/* ── Section headers ── */
+.section-header { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem; }
+.section-header-left { display: flex; align-items: baseline; gap: 0.5rem; }
+.section-title { font-family: 'Instrument Serif', serif; font-size: 1.25rem; color: var(--green-deep); }
+.section-sub { font-size: 0.8rem; color: var(--muted); }
 
 /* ── Module Tiles ── */
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.section-title {
-  font-family: 'Instrument Serif', serif;
-  font-size: 1.25rem;
-  color: var(--green-deep);
-}
-.section-sub {
-  font-size: 0.8rem;
-  color: var(--muted);
-}
-.modules-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-.module-tile {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
-  padding: 1.5rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  text-decoration: none;
-  color: var(--ink);
-  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
-  position: relative;
-  overflow: hidden;
-}
-.module-tile:hover {
-  border-color: var(--tile-accent, var(--green-bright));
-  box-shadow: 0 8px 32px rgba(28,58,14,0.10);
-  transform: translateY(-2px);
-}
-.module-tile::after {
-  content: '→';
-  position: absolute;
-  bottom: 1.25rem; right: 1.5rem;
-  font-size: 1.1rem;
-  color: var(--tile-accent, var(--green-bright));
-  opacity: 0;
-  transition: opacity 0.2s, right 0.2s;
-}
+.modules-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.module-tile { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; text-decoration: none; color: var(--ink); transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s; position: relative; overflow: hidden; cursor: pointer; }
+.module-tile:hover { border-color: var(--tile-accent, var(--green-bright)); box-shadow: 0 8px 32px rgba(28,58,14,0.10); transform: translateY(-2px); }
+.module-tile::after { content: '→'; position: absolute; bottom: 1.25rem; right: 1.5rem; font-size: 1.1rem; color: var(--tile-accent, var(--green-bright)); opacity: 0; transition: opacity 0.2s, right 0.2s; }
 .module-tile:hover::after { opacity: 1; right: 1.25rem; }
-.tile-icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: var(--tile-bg, var(--green-ghost));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem;
-}
-.tile-label {
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--ink);
-}
-.tile-desc {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-.tile-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.25rem 0.65rem;
-  border-radius: 999px;
-  background: var(--tile-badge-bg, var(--green-ghost));
-  color: var(--tile-badge-color, var(--green-mid));
-  width: fit-content;
-}
+.tile-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--tile-bg, var(--green-ghost)); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+.tile-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
+.tile-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+.tile-badge { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 999px; background: var(--tile-badge-bg, var(--green-ghost)); color: var(--tile-badge-color, var(--green-mid)); width: fit-content; }
 
 /* ── Attention Panel ── */
-.attention-panel {
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  margin-bottom: 2rem;
-}
-.attention-header {
-  background: var(--green-ghost);
-  padding: 1rem 1.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  border-bottom: 1px solid var(--border);
-}
-.attention-header-title {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--green-deep);
-}
-.attention-list {
-  list-style: none;
-  padding: 0;
-}
-.attention-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.9rem;
-}
+.attention-panel { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 2rem; }
+.attention-header { background: var(--green-ghost); padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid var(--border); }
+.attention-header-title { font-weight: 600; font-size: 0.95rem; color: var(--green-deep); }
+.attention-list { list-style: none; }
+.attention-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
 .attention-item:last-child { border-bottom: none; }
-.attention-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--amber);
-  flex-shrink: 0;
-}
+.attention-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
 .attention-dot.red { background: var(--red); }
 .attention-dot.green { background: var(--green-bright); }
 .attention-text { flex: 1; color: var(--ink); }
-.attention-action {
-  font-size: 0.8rem;
-  color: var(--green-bright);
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-}
+.attention-action { font-size: 0.8rem; color: var(--green-bright); font-weight: 600; text-decoration: none; cursor: pointer; white-space: nowrap; border: none; background: none; font-family: 'DM Sans', sans-serif; }
 .attention-action:hover { text-decoration: underline; }
-.attention-empty {
-  padding: 1.5rem;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
+.attention-empty { padding: 1.5rem; text-align: center; color: var(--muted); font-size: 0.9rem; }
 
-/* ── Site Vitals ── */
-.vitals-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-.vital-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.25rem;
-}
-.vital-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  color: var(--muted);
-  margin-bottom: 0.5rem;
-}
-.vital-value {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--ink);
-}
-.vital-sub {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 0.2rem;
-}
+/* ── Vitals Grid ── */
+.vitals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
+.vital-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+.vital-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 0.5rem; }
+.vital-value { font-size: 1.1rem; font-weight: 600; color: var(--ink); }
+.vital-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
 
-/* ── Spinner ── */
-.spinner {
-  display: inline-block;
-  width: 16px; height: 16px;
-  border: 2px solid var(--border);
-  border-top-color: var(--green-bright);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  vertical-align: middle;
-}
+/* ══ AGENT PANELS ═══════════════════════════════════════════════ */
+
+/* Agent status grid on overview */
+.agent-status-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
+.agent-status-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; cursor: pointer; transition: border-color 0.2s, transform 0.15s; }
+.agent-status-card:hover { border-color: var(--green-bright); transform: translateY(-1px); }
+.agent-status-card.status-ok    { border-top: 3px solid var(--green-bright); }
+.agent-status-card.status-warning { border-top: 3px solid var(--amber); }
+.agent-status-card.status-error { border-top: 3px solid var(--red); }
+.agent-status-card.status-never_run, .agent-status-card.status-empty { border-top: 3px solid #ccc; }
+.asc-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+.asc-name { font-size: 0.8rem; font-weight: 700; color: var(--ink); }
+.asc-status { font-size: 0.72rem; margin-top: 0.2rem; }
+.asc-status.ok      { color: var(--green-bright); }
+.asc-status.warning { color: var(--amber); }
+.asc-status.error   { color: var(--red); }
+.asc-status.never_run, .asc-status.empty { color: var(--muted); }
+.asc-meta { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.4; }
+
+/* Agent panel chrome */
+.agent-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
+.agent-panel-title { font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: var(--green-deep); }
+.agent-panel-meta { font-size: 0.85rem; color: var(--muted); }
+.agent-btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem; border-radius: 9px; border: none; font-family: 'DM Sans', sans-serif; font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.agent-btn.primary { background: var(--green-deep); color: white; }
+.agent-btn.primary:hover { background: var(--green-mid); }
+.agent-btn.secondary { background: var(--green-ghost); color: var(--green-deep); }
+.agent-btn.secondary:hover { background: var(--green-pale); }
+.agent-btn.amber { background: var(--amber-pale); color: #7a4d00; }
+.agent-btn.amber:hover { background: #f5e0b0; }
+
+/* Article / content cards */
+.content-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.content-card-header { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 0.75rem; }
+.content-card-score { min-width: 44px; height: 44px; background: var(--green-ghost); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--green-deep); flex-shrink: 0; flex-direction: column; line-height: 1.1; text-align: center; }
+.content-card-title { font-weight: 600; font-size: 0.95rem; color: var(--ink); line-height: 1.4; }
+.content-card-meta { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+.editorial-note { background: var(--amber-pale); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 0.875rem; color: #5a3800; line-height: 1.5; }
+.editorial-note strong { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; color: var(--amber); }
+.content-card-actions { display: flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; }
+
+/* Business review cards */
+.biz-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.biz-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem; }
+.biz-card-name { font-weight: 700; font-size: 1rem; color: var(--ink); }
+.biz-card-meta { font-size: 0.8rem; color: var(--muted); }
+.recommendation-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.7rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; }
+.recommendation-badge.approve { background: #d4edda; color: #155724; }
+.recommendation-badge.request_info { background: var(--amber-pale); color: #7a4d00; }
+.recommendation-badge.reject { background: var(--red-pale); color: var(--red); }
+.email-draft { background: var(--cream); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; margin-top: 0.75rem; font-size: 0.85rem; }
+.email-draft-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; margin-bottom: 0.4rem; }
+.email-draft-subject { font-weight: 600; margin-bottom: 0.3rem; }
+.email-draft-body { color: var(--muted); white-space: pre-wrap; font-size: 0.82rem; line-height: 1.5; }
+.completeness-bar { height: 6px; background: var(--border); border-radius: 3px; margin: 0.5rem 0; overflow: hidden; }
+.completeness-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+
+/* SEO gap cards */
+.gap-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.1rem 1.5rem; display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+.gap-card.urgent { border-left: 4px solid var(--red); }
+.gap-card.overdue { border-left: 4px solid var(--amber); }
+.gap-label { flex: 1; }
+.gap-topic { font-weight: 600; font-size: 0.9rem; }
+.gap-days { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+.gap-pillar { font-size: 0.75rem; background: var(--green-ghost); color: var(--green-deep); border-radius: 999px; padding: 0.2rem 0.6rem; font-weight: 600; white-space: nowrap; }
+.brief-card { background: var(--white); border: 1.5px solid var(--green-pale); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.brief-title { font-weight: 700; font-size: 0.95rem; color: var(--green-deep); margin-bottom: 0.35rem; }
+.brief-angle { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 0.75rem; }
+.brief-outline { list-style: disc; padding-left: 1.25rem; font-size: 0.875rem; color: var(--ink); line-height: 1.6; margin-bottom: 0.75rem; }
+.brief-keywords { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.kw-tag { background: var(--green-ghost); color: var(--green-deep); font-size: 0.72rem; padding: 0.2rem 0.55rem; border-radius: 999px; font-weight: 600; }
+
+/* Health cards */
+.health-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.health-metric { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.health-metric-value { font-family: 'Instrument Serif', serif; font-size: 1.8rem; color: var(--ink); }
+.health-metric-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+.page-health-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+.page-health-card.ok      { border-left: 4px solid var(--green-bright); }
+.page-health-card.warning { border-left: 4px solid var(--amber); }
+.page-health-card.error   { border-left: 4px solid var(--red); }
+.page-health-card.down    { border-left: 4px solid var(--red); }
+.page-health-name { font-weight: 600; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+.page-health-url { font-size: 0.78rem; color: var(--muted); }
+.page-health-checks { margin-top: 0.5rem; }
+.check-item { font-size: 0.8rem; color: var(--muted); padding: 0.2rem 0; }
+
+/* Newsletter */
+.newsletter-draft-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.draft-info { display: flex; flex-direction: column; gap: 0.2rem; }
+.draft-date { font-weight: 700; font-size: 0.95rem; }
+.draft-size { font-size: 0.8rem; color: var(--muted); }
+
+/* Spinner */
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--green-bright); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* Toast */
+.toast { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; padding: 0.9rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 4px 20px rgba(0,0,0,0.2); animation: slideUp 0.3s ease; }
+.toast.success { background: var(--green-deep); color: white; }
+.toast.error   { background: var(--red); color: white; }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* Empty states */
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+.empty-state .empty-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+.empty-state p { font-size: 0.9rem; }
 
 @media (max-width: 900px) {
   :root { --sidebar-w: 0px; }
   .sidebar { display: none; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .modules-grid { grid-template-columns: 1fr; }
-  .vitals-grid { grid-template-columns: 1fr; }
+  .modules-grid, .health-grid, .vitals-grid { grid-template-columns: 1fr; }
+  .agent-status-grid { grid-template-columns: repeat(3, 1fr); }
 }
 </style>
 </head>
 <body>
 
-<!-- ══ LOGIN SCREEN ══════════════════════════════════════════════ -->
+<!-- ══ LOGIN ═════════════════════════════════════════════════ -->
 <div id="loginScreen">
   <div class="login-card">
     <img src="../images/logo.png" alt="Old Oak Town" class="login-logo">
     <div class="login-title">Admin Hub</div>
     <div class="login-sub">Old Oak Town — Back Office</div>
-
     <div class="login-field">
       <label>Username</label>
       <input type="text" id="usernameInput" placeholder="admin" autocomplete="username"
@@ -551,7 +269,6 @@ body {
       <input type="password" id="passwordInput" placeholder="••••••••" autocomplete="current-password"
              onkeypress="if(event.key==='Enter') hubLogin()">
     </div>
-
     <button class="login-btn" onclick="hubLogin()">Sign In</button>
     <div class="login-error" id="loginError"></div>
   </div>
@@ -570,11 +287,15 @@ body {
       </div>
     </div>
 
-    <div class="sidebar-section">Navigate</div>
+    <div class="sidebar-section">Overview</div>
     <div class="sidebar-nav">
-      <div class="nav-item active" onclick="scrollToTop()">
-        <span class="nav-item-icon">📊</span> Overview
-      </div>
+      <button class="nav-item active" onclick="showPanel('overview', this)">
+        <span class="nav-item-icon">📊</span> Dashboard
+      </button>
+    </div>
+
+    <div class="sidebar-section">Tools</div>
+    <div class="sidebar-nav">
       <a class="nav-item" href="/social-agent.html">
         <span class="nav-item-icon">📱</span> Social
       </a>
@@ -590,13 +311,34 @@ body {
       </a>
     </div>
 
+    <div class="sidebar-section">Agents</div>
+    <div class="sidebar-nav">
+      <button class="nav-item" onclick="showPanel('curator', this)">
+        <span class="nav-item-icon">🎯</span> Content Curator
+        <span class="nav-badge green" id="navBadgeCurator" style="display:none;"></span>
+      </button>
+      <button class="nav-item" onclick="showPanel('newsletter', this)">
+        <span class="nav-item-icon">📰</span> Newsletter
+        <span class="nav-badge" id="navBadgeNewsletter" style="display:none;"></span>
+      </button>
+      <button class="nav-item" onclick="showPanel('business', this)">
+        <span class="nav-item-icon">🏪</span> Biz Manager
+        <span class="nav-badge" id="navBadgeBusiness" style="display:none;"></span>
+      </button>
+      <button class="nav-item" onclick="showPanel('seo', this)">
+        <span class="nav-item-icon">🔍</span> SEO Gaps
+        <span class="nav-badge" id="navBadgeSeo" style="display:none;"></span>
+      </button>
+      <button class="nav-item" onclick="showPanel('health', this)">
+        <span class="nav-item-icon">🏥</span> Site Health
+        <span class="nav-badge" id="navBadgeHealth" style="display:none;"></span>
+      </button>
+    </div>
+
     <div class="sidebar-section">Site</div>
     <div class="sidebar-nav">
       <a class="nav-item" href="https://oldoaktown.co.uk" target="_blank">
         <span class="nav-item-icon">🌐</span> View Site
-      </a>
-      <a class="nav-item" href="/business-directory.html" target="_blank">
-        <span class="nav-item-icon">📋</span> Directory Page
       </a>
     </div>
 
@@ -605,134 +347,182 @@ body {
         <div class="sidebar-avatar" id="sidebarAvatar">A</div>
         <div class="sidebar-username" id="sidebarUsername">admin</div>
       </div>
-      <button class="btn-logout" onclick="logout()">
-        <span>↩</span> Sign Out
-      </button>
+      <button class="btn-logout" onclick="logout()"><span>↩</span> Sign Out</button>
     </div>
   </nav>
 
   <!-- Main -->
   <div class="main">
     <div class="topbar">
-      <div class="topbar-title">Overview</div>
-      <div class="topbar-date" id="topbarDate"></div>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="topbar-date" id="topbarDate"></div>
+        <button class="agent-btn secondary" onclick="sendNotification()" id="notifyBtn" title="Send agent status email">📧 Notify</button>
+      </div>
     </div>
 
     <div class="content">
 
-      <!-- Stats Row -->
-      <div class="stats-grid">
-        <div class="stat-card pending">
-          <div class="stat-icon">⏳</div>
-          <div class="stat-value stat-loading" id="statPending"><span class="spinner"></span></div>
-          <div class="stat-label">Pending Approvals</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">✅</div>
-          <div class="stat-value stat-loading" id="statApproved"><span class="spinner"></span></div>
-          <div class="stat-label">Live Listings</div>
-        </div>
-        <div class="stat-card revenue">
-          <div class="stat-icon">💷</div>
-          <div class="stat-value stat-loading" id="statRevenue"><span class="spinner"></span></div>
-          <div class="stat-label">Est. Monthly Revenue</div>
-        </div>
-        <div class="stat-card videos">
-          <div class="stat-icon">🎬</div>
-          <div class="stat-value stat-loading" id="statVideos"><span class="spinner"></span></div>
-          <div class="stat-label">Videos Live</div>
-        </div>
-      </div>
+      <!-- ══ OVERVIEW PANEL ══ -->
+      <div class="panel active" id="panel-overview">
 
-      <!-- Needs Attention -->
-      <div class="section-header">
-        <div class="section-title">Needs Attention</div>
-        <div class="section-sub" id="attentionSub">Loading…</div>
-      </div>
-      <div class="attention-panel" id="attentionPanel">
-        <div class="attention-header">
-          <span>🔔</span>
-          <span class="attention-header-title">Action Required</span>
-        </div>
-        <div class="attention-empty" id="attentionLoading">
-          <span class="spinner"></span> Checking for items…
-        </div>
-        <ul class="attention-list" id="attentionList" style="display:none;"></ul>
-      </div>
-
-      <!-- Module Tiles -->
-      <div class="section-header">
-        <div class="section-title">Tools</div>
-        <div class="section-sub">Click any tile to open</div>
-      </div>
-      <div class="modules-grid">
-
-        <a class="module-tile" href="/social-agent.html"
-           style="--tile-accent:#4C8A35; --tile-bg:#F0F7EB;">
-          <div class="tile-icon">📱</div>
-          <div class="tile-label">Social Command Centre</div>
-          <div class="tile-desc">Plan, draft, and schedule this week's social posts across Facebook, Instagram, and LinkedIn.</div>
-          <div class="tile-badge" style="--tile-badge-bg:#F0F7EB; --tile-badge-color:#2F6020;">
-            5 posts / week
+        <!-- Business stats -->
+        <div class="stats-grid">
+          <div class="stat-card pending">
+            <div class="stat-icon">⏳</div>
+            <div class="stat-value" id="statPending"><span class="spinner"></span></div>
+            <div class="stat-label">Pending Approvals</div>
           </div>
-        </a>
-
-        <a class="module-tile" href="/admin/dashboard.html"
-           style="--tile-accent:#D4860A; --tile-bg:#FEF3DC;">
-          <div class="tile-icon">🏪</div>
-          <div class="tile-label">Business Directory</div>
-          <div class="tile-desc">Review, approve, or reject business listing submissions. Manage payment tiers.</div>
-          <div class="tile-badge" id="dirBadge"
-               style="--tile-badge-bg:#FEF3DC; --tile-badge-color:#8B5A02;">
-            Loading…
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-value" id="statApproved"><span class="spinner"></span></div>
+            <div class="stat-label">Live Listings</div>
           </div>
-        </a>
-
-        <a class="module-tile" href="/admin/review.html"
-           style="--tile-accent:#1A5CB8; --tile-bg:#E8F0FC;">
-          <div class="tile-icon">📰</div>
-          <div class="tile-label">Content Review</div>
-          <div class="tile-desc">Approve or reject RSS-aggregated news articles before they go live on the homepage.</div>
-          <div class="tile-badge"
-               style="--tile-badge-bg:#E8F0FC; --tile-badge-color:#1A5CB8;">
-            HITL queue
+          <div class="stat-card revenue">
+            <div class="stat-icon">💷</div>
+            <div class="stat-value" id="statRevenue"><span class="spinner"></span></div>
+            <div class="stat-label">Est. Monthly Revenue</div>
           </div>
-        </a>
-
-        <a class="module-tile" href="/admin/dashboard.html?tab=videos"
-           style="--tile-accent:#6B7B5E; --tile-bg:#F0F7EB;">
-          <div class="tile-icon">🎬</div>
-          <div class="tile-label">Video Management</div>
-          <div class="tile-desc">Add YouTube or Vimeo videos to the homepage. Preview, reorder, and remove clips.</div>
-          <div class="tile-badge" id="videoBadge"
-               style="--tile-badge-bg:#F0F7EB; --tile-badge-color:#6B7B5E;">
-            Loading…
+          <div class="stat-card videos">
+            <div class="stat-icon">🎬</div>
+            <div class="stat-value" id="statVideos"><span class="spinner"></span></div>
+            <div class="stat-label">Videos Live</div>
           </div>
-        </a>
+        </div>
 
+        <!-- Agent status row -->
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-title">Agent Status</div>
+            <div class="section-sub">Click to view details</div>
+          </div>
+          <button class="agent-btn secondary" onclick="loadAgentData(true)">↺ Refresh</button>
+        </div>
+        <div class="agent-status-grid" id="agentStatusGrid">
+          <div class="agent-status-card"><div class="spinner"></div></div>
+          <div class="agent-status-card"><div class="spinner"></div></div>
+          <div class="agent-status-card"><div class="spinner"></div></div>
+          <div class="agent-status-card"><div class="spinner"></div></div>
+          <div class="agent-status-card"><div class="spinner"></div></div>
+        </div>
+
+        <!-- Needs Attention -->
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-title">Needs Attention</div>
+            <div class="section-sub" id="attentionSub">Loading…</div>
+          </div>
+        </div>
+        <div class="attention-panel">
+          <div class="attention-header">
+            <span>🔔</span>
+            <span class="attention-header-title">Action Required</span>
+          </div>
+          <div class="attention-empty" id="attentionLoading"><span class="spinner"></span> Checking…</div>
+          <ul class="attention-list" id="attentionList" style="display:none;"></ul>
+        </div>
+
+        <!-- Tools -->
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-title">Tools</div>
+          </div>
+        </div>
+        <div class="modules-grid">
+          <a class="module-tile" href="/social-agent.html" style="--tile-accent:#4C8A35; --tile-bg:#F0F7EB;">
+            <div class="tile-icon">📱</div>
+            <div class="tile-label">Social Command Centre</div>
+            <div class="tile-desc">Plan, draft, and schedule social posts across Facebook, Instagram, and LinkedIn.</div>
+            <div class="tile-badge" style="--tile-badge-bg:#F0F7EB; --tile-badge-color:#2F6020;">5 posts / week</div>
+          </a>
+          <a class="module-tile" href="/admin/dashboard.html" style="--tile-accent:#D4860A; --tile-bg:#FEF3DC;">
+            <div class="tile-icon">🏪</div>
+            <div class="tile-label">Business Directory</div>
+            <div class="tile-desc">Review, approve, or reject business listing submissions. Manage payment tiers.</div>
+            <div class="tile-badge" id="dirBadge" style="--tile-badge-bg:#FEF3DC; --tile-badge-color:#8B5A02;">Loading…</div>
+          </a>
+          <a class="module-tile" href="/admin/review.html" style="--tile-accent:#1A5CB8; --tile-bg:#E8F0FC;">
+            <div class="tile-icon">📰</div>
+            <div class="tile-label">Content Review</div>
+            <div class="tile-desc">Approve or reject RSS-aggregated news articles before they go live.</div>
+            <div class="tile-badge" style="--tile-badge-bg:#E8F0FC; --tile-badge-color:#1A5CB8;">HITL queue</div>
+          </a>
+          <a class="module-tile" href="/admin/dashboard.html?tab=videos" style="--tile-accent:#6B7B5E; --tile-bg:#F0F7EB;">
+            <div class="tile-icon">🎬</div>
+            <div class="tile-label">Video Management</div>
+            <div class="tile-desc">Add YouTube or Vimeo videos to the homepage. Preview, reorder, and remove.</div>
+            <div class="tile-badge" id="videoBadge" style="--tile-badge-bg:#F0F7EB; --tile-badge-color:#6B7B5E;">Loading…</div>
+          </a>
+        </div>
+
+        <!-- Revenue Breakdown -->
+        <div class="section-header">
+          <div class="section-header-left">
+            <div class="section-title">Revenue Breakdown</div>
+            <div class="section-sub">Estimated from active paid tiers</div>
+          </div>
+        </div>
+        <div class="vitals-grid">
+          <div class="vital-card"><div class="vital-label">Featured Listings</div><div class="vital-value" id="vitalFeatured">—</div><div class="vital-sub">£35/month each</div></div>
+          <div class="vital-card"><div class="vital-label">Premium Listings</div><div class="vital-value" id="vitalPremium">—</div><div class="vital-sub">£75/month each</div></div>
+          <div class="vital-card"><div class="vital-label">Est. Monthly Revenue</div><div class="vital-value" id="vitalRevenue">—</div><div class="vital-sub">Featured + Premium tiers</div></div>
+        </div>
       </div>
 
-      <!-- Site Vitals -->
-      <div class="section-header">
-        <div class="section-title">Revenue Breakdown</div>
-        <div class="section-sub">Estimated from active paid tiers</div>
+      <!-- ══ CONTENT CURATOR PANEL ══ -->
+      <div class="panel" id="panel-curator">
+        <div class="agent-panel-header">
+          <div>
+            <div class="agent-panel-title">🎯 Content Curator</div>
+            <div class="agent-panel-meta" id="curatorMeta">Runs daily at 8:30 AM UTC after RSS aggregation</div>
+          </div>
+        </div>
+        <div id="curatorContent"><div class="empty-state"><div class="spinner"></div><p>Loading…</p></div></div>
       </div>
-      <div class="vitals-grid">
-        <div class="vital-card">
-          <div class="vital-label">Featured Listings</div>
-          <div class="vital-value" id="vitalFeatured">—</div>
-          <div class="vital-sub">£35/month each</div>
+
+      <!-- ══ NEWSLETTER PANEL ══ -->
+      <div class="panel" id="panel-newsletter">
+        <div class="agent-panel-header">
+          <div>
+            <div class="agent-panel-title">📰 Newsletter Drafter</div>
+            <div class="agent-panel-meta">Runs Mondays at 9 AM UTC — drafts weekly newsletter from approved articles</div>
+          </div>
         </div>
-        <div class="vital-card">
-          <div class="vital-label">Premium Listings</div>
-          <div class="vital-value" id="vitalPremium">—</div>
-          <div class="vital-sub">£75/month each</div>
+        <div id="newsletterContent"><div class="empty-state"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+
+      <!-- ══ BUSINESS MANAGER PANEL ══ -->
+      <div class="panel" id="panel-business">
+        <div class="agent-panel-header">
+          <div>
+            <div class="agent-panel-title">🏪 Business Directory Manager</div>
+            <div class="agent-panel-meta">Runs at 9 AM and 5 PM UTC — reviews submissions and drafts approval emails</div>
+          </div>
+          <a class="agent-btn primary" href="/admin/dashboard.html">Open Directory →</a>
         </div>
-        <div class="vital-card">
-          <div class="vital-label">Est. Monthly Revenue</div>
-          <div class="vital-value" id="vitalRevenue">—</div>
-          <div class="vital-sub">Featured + Premium tiers</div>
+        <div id="businessContent"><div class="empty-state"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+
+      <!-- ══ SEO GAP PANEL ══ -->
+      <div class="panel" id="panel-seo">
+        <div class="agent-panel-header">
+          <div>
+            <div class="agent-panel-title">🔍 SEO Gap Finder</div>
+            <div class="agent-panel-meta" id="seoMeta">Runs Sundays at 8 AM UTC</div>
+          </div>
         </div>
+        <div id="seoContent"><div class="empty-state"><div class="spinner"></div><p>Loading…</p></div></div>
+      </div>
+
+      <!-- ══ SITE HEALTH PANEL ══ -->
+      <div class="panel" id="panel-health">
+        <div class="agent-panel-header">
+          <div>
+            <div class="agent-panel-title">🏥 Site Health Monitor</div>
+            <div class="agent-panel-meta" id="healthMeta">Runs Saturdays at 7 AM UTC</div>
+          </div>
+        </div>
+        <div id="healthContent"><div class="empty-state"><div class="spinner"></div><p>Loading…</p></div></div>
       </div>
 
     </div><!-- /content -->
@@ -740,17 +530,15 @@ body {
 </div><!-- /hubApp -->
 
 <script>
-// ══ CONFIG — swap these for other sites ════════════════════════
-const HUB_CONFIG = {
-  siteName:      'Old Oak Town',
-  siteIcon:      '🌳',
-  adminUsername: 'admin',
-  statsEndpoint: '/api/approve-listing'
-};
-
-// ══ AUTH ═══════════════════════════════════════════════════════
+// ══ CONFIG ════════════════════════════════════════════════════
 const ADMIN_PASSWORD_HASH = '924325fbd85f063f2439544a4bd4cbe61433c2c83eb3e5a7ead42b984b7a2223';
+const SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
 
+let _agentData = null;
+let _currentPanel = 'overview';
+
+// ══ AUTH ══════════════════════════════════════════════════════
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
@@ -759,188 +547,415 @@ async function sha256(str) {
 async function hubLogin() {
   const username = document.getElementById('usernameInput').value.trim();
   const password = document.getElementById('passwordInput').value;
-  const errEl    = document.getElementById('loginError');
-
+  const errEl = document.getElementById('loginError');
   errEl.classList.remove('show');
 
-  if (!username) {
-    errEl.textContent = 'Please enter your username.';
-    errEl.classList.add('show');
-    document.getElementById('usernameInput').focus();
-    return;
-  }
-
-  if (username.toLowerCase() !== HUB_CONFIG.adminUsername) {
-    errEl.textContent = 'Username not recognised.';
-    errEl.classList.add('show');
-    return;
-  }
-
-  if (!password) {
-    errEl.textContent = 'Please enter your password.';
-    errEl.classList.add('show');
-    document.getElementById('passwordInput').focus();
-    return;
-  }
+  if (!username) { errEl.textContent = 'Please enter your username.'; errEl.classList.add('show'); return; }
+  if (username.toLowerCase() !== 'admin') { errEl.textContent = 'Username not recognised.'; errEl.classList.add('show'); return; }
+  if (!password) { errEl.textContent = 'Please enter your password.'; errEl.classList.add('show'); return; }
 
   const hash = await sha256(password);
   if (hash === ADMIN_PASSWORD_HASH) {
-    sessionStorage.setItem('adminAuth',     'true');
+    sessionStorage.setItem('adminAuth', 'true');
     sessionStorage.setItem('adminPassword', password);
-    sessionStorage.setItem('adminUser',     username);
+    sessionStorage.setItem('adminUser', username);
     showDashboard(username);
   } else {
     errEl.textContent = 'Incorrect password. Please try again.';
     errEl.classList.add('show');
     document.getElementById('passwordInput').value = '';
-    document.getElementById('passwordInput').focus();
   }
 }
 
 function logout() {
-  sessionStorage.removeItem('adminAuth');
-  sessionStorage.removeItem('adminPassword');
-  sessionStorage.removeItem('adminUser');
+  sessionStorage.clear();
   location.reload();
 }
 
 function showDashboard(username) {
   document.getElementById('loginScreen').style.display = 'none';
-  const app = document.getElementById('hubApp');
-  app.classList.add('visible');
-
+  document.getElementById('hubApp').classList.add('visible');
   const user = username || sessionStorage.getItem('adminUser') || 'admin';
   document.getElementById('sidebarUsername').textContent = user;
-  document.getElementById('sidebarAvatar').textContent   = user[0].toUpperCase();
-
-  setDate();
-  loadStats();
+  document.getElementById('sidebarAvatar').textContent = user[0].toUpperCase();
+  document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('en-GB', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+  loadBusinessStats();
+  loadAgentData(false);
 }
 
-function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+if (sessionStorage.getItem('adminAuth') === 'true') showDashboard();
 
-function setDate() {
-  const now = new Date();
-  document.getElementById('topbarDate').textContent = now.toLocaleDateString('en-GB', {
-    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-  });
+// ══ PANEL ROUTING ══════════════════════════════════════════════
+const PANEL_TITLES = {
+  overview: 'Dashboard', curator: 'Content Curator',
+  newsletter: 'Newsletter', business: 'Business Manager',
+  seo: 'SEO Gaps', health: 'Site Health'
+};
+
+function showPanel(name, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.getElementById('topbarTitle').textContent = PANEL_TITLES[name] || name;
+  _currentPanel = name;
+  if (_agentData) renderPanel(name, _agentData);
 }
 
-// Auto-restore session within same tab
-if (sessionStorage.getItem('adminAuth') === 'true') {
-  showDashboard();
-}
-
-// ══ STATS ═════════════════════════════════════════════════════
-async function loadStats() {
-  const password = sessionStorage.getItem('adminPassword');
-  if (!password) {
-    showStatsError();
-    return;
-  }
-
+// ══ BUSINESS STATS ═════════════════════════════════════════════
+async function loadBusinessStats() {
   try {
-    const resp = await fetch(HUB_CONFIG.statsEndpoint, {
-      method:  'POST',
+    const resp = await fetch('/api/approve-listing', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify({ password, action: 'stats' })
+      body: JSON.stringify({ password: sessionStorage.getItem('adminPassword'), action: 'stats' })
     });
-
-    if (!resp.ok) throw new Error('Stats API returned ' + resp.status);
+    if (!resp.ok) throw new Error();
     const d = await resp.json();
-
-    // Stats cards
-    setText('statPending',  d.pendingBusinesses  ?? '—');
+    setText('statPending', d.pendingBusinesses ?? '—');
     setText('statApproved', d.approvedBusinesses ?? '—');
-    setText('statRevenue',  d.monthlyRevenue != null ? '£' + d.monthlyRevenue.toLocaleString() : '—');
-    setText('statVideos',   d.videosLive ?? '—');
-
-    // Revenue breakdown
+    setText('statRevenue', d.monthlyRevenue != null ? '£' + d.monthlyRevenue.toLocaleString() : '—');
+    setText('statVideos', d.videosLive ?? '—');
     setText('vitalFeatured', (d.featuredBusinesses ?? '—') + (d.featuredBusinesses != null ? ' listings' : ''));
-    setText('vitalPremium',  (d.premiumBusinesses ?? '—')  + (d.premiumBusinesses  != null ? ' listings' : ''));
-    setText('vitalRevenue',  d.monthlyRevenue != null ? '£' + d.monthlyRevenue.toLocaleString() + '/mo' : '—');
-
-    // Directory tile badge
+    setText('vitalPremium', (d.premiumBusinesses ?? '—') + (d.premiumBusinesses != null ? ' listings' : ''));
+    setText('vitalRevenue', d.monthlyRevenue != null ? '£' + d.monthlyRevenue.toLocaleString() + '/mo' : '—');
     const pending = d.pendingBusinesses ?? 0;
-    const dirBadge = document.getElementById('dirBadge');
-    if (pending > 0) {
-      dirBadge.textContent = pending + ' pending approval';
-      dirBadge.style.setProperty('--tile-badge-bg',    '#FEF3DC');
-      dirBadge.style.setProperty('--tile-badge-color', '#8B5A02');
-    } else {
-      dirBadge.textContent = d.approvedBusinesses + ' live listings';
-    }
-
-    // Video tile badge
-    setText('videoBadge', (d.videosLive ?? 0) + ' videos live');
-
-    // Sidebar badge
     const badge = document.getElementById('sidebarPendingBadge');
-    if (pending > 0) {
-      badge.textContent = pending;
-      badge.style.display = 'inline-flex';
-    }
+    if (pending > 0) { badge.textContent = pending; badge.style.display = 'inline-flex'; }
+    const dirBadge = document.getElementById('dirBadge');
+    dirBadge.textContent = pending > 0 ? pending + ' pending approval' : (d.approvedBusinesses ?? 0) + ' live listings';
+    setText('videoBadge', (d.videosLive ?? 0) + ' videos live');
+  } catch {
+    ['statPending','statApproved','statRevenue','statVideos'].forEach(id => setText(id, '—'));
+  }
+}
 
-    // Attention panel
-    buildAttentionPanel(d);
-
+// ══ AGENT DATA ═════════════════════════════════════════════════
+async function loadAgentData(forceRefresh) {
+  if (_agentData && !forceRefresh) { renderAgentOverview(_agentData); return; }
+  try {
+    const resp = await fetch('/api/agent-data', {
+      headers: { 'Authorization': 'Bearer ' + (sessionStorage.getItem('adminPassword') || '') }
+    });
+    if (!resp.ok) throw new Error('API ' + resp.status);
+    _agentData = await resp.json();
+    renderAgentOverview(_agentData);
+    buildAttentionPanel(_agentData);
+    if (_currentPanel !== 'overview') renderPanel(_currentPanel, _agentData);
   } catch (err) {
-    console.warn('Stats load failed:', err.message);
-    showStatsError();
+    console.warn('Agent data unavailable:', err.message);
+    renderAgentFallback();
   }
 }
 
-function showStatsError() {
-  ['statPending', 'statApproved', 'statRevenue', 'statVideos'].forEach(id => setText(id, '—'));
-  document.getElementById('attentionLoading').innerHTML = 'Could not load stats — password may not be stored in this session.';
-  document.getElementById('attentionSub').textContent = '';
+const STATUS_EMOJI  = { ok: '🟢', warning: '🟡', error: '🔴', never_run: '⚪', empty: '⚪' };
+const STATUS_LABELS = { ok: 'All good', warning: 'Attention needed', error: 'Issue detected', never_run: 'Not yet run', empty: 'No data' };
+
+function renderAgentOverview(data) {
+  const agents = [
+    { key: 'curator',        icon: '🎯', name: 'Content Curator',    panel: 'curator',      meta: d => d.stats ? `${d.stats.topPicks} top picks` : 'No data' },
+    { key: 'newsletter',     icon: '📰', name: 'Newsletter',         panel: 'newsletter',   meta: d => d.latestDate ? `Draft: ${d.latestDate}` : 'No drafts' },
+    { key: 'businessReview', icon: '🏪', name: 'Biz Manager',        panel: 'business',     meta: d => `${d.total} review${d.total !== 1 ? 's' : ''}` },
+    { key: 'seo',            icon: '🔍', name: 'SEO Gaps',           panel: 'seo',          meta: d => d.date ? `${d.gaps.length} gap${d.gaps.length !== 1 ? 's' : ''}` : 'No data' },
+    { key: 'health',         icon: '🏥', name: 'Site Health',        panel: 'health',       meta: d => d.date ? `${d.pagesOk}/${d.pages.length} pages OK` : 'No data' },
+  ];
+
+  const grid = document.getElementById('agentStatusGrid');
+  grid.innerHTML = agents.map(a => {
+    const d = data[a.key];
+    const st = d.status;
+    return `<div class="agent-status-card status-${st}" onclick="showPanel('${a.panel}', null)">
+      <div class="asc-icon">${a.icon}</div>
+      <div class="asc-name">${a.name}</div>
+      <div class="asc-status ${st}">${STATUS_LABELS[st]}</div>
+      <div class="asc-meta">${a.meta(d)}</div>
+    </div>`;
+  }).join('');
+
+  // Sidebar badges
+  updateNavBadge('navBadgeCurator', data.curator.stats?.topPicks > 0 ? data.curator.stats.topPicks : null, 'green');
+  updateNavBadge('navBadgeNewsletter', data.newsletter.drafts?.length > 0 ? data.newsletter.drafts.length : null);
+  updateNavBadge('navBadgeBusiness', data.businessReview.total > 0 ? data.businessReview.total : null);
+  updateNavBadge('navBadgeSeo', data.seo.gaps?.length > 0 ? data.seo.gaps.length : null);
+  updateNavBadge('navBadgeHealth', data.health.criticalDown?.length > 0 ? '!' : (data.health.warnings > 0 ? data.health.warnings : null), data.health.criticalDown?.length > 0 ? 'red' : '');
 }
 
-function buildAttentionPanel(d) {
+function updateNavBadge(id, value, cls) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (value) { el.textContent = value; el.style.display = 'inline-flex'; if (cls) el.classList.add(cls); }
+  else { el.style.display = 'none'; }
+}
+
+function renderAgentFallback() {
+  document.getElementById('agentStatusGrid').innerHTML = `
+    <div class="agent-status-card" style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:0.85rem;padding:1.5rem">
+      Agent data unavailable — <code>/api/agent-data</code> not yet deployed or ANTHROPIC_API_KEY not set.
+      <br>Agents will appear here once their GitHub Actions workflows have run.
+    </div>`;
+}
+
+function buildAttentionPanel(data) {
   const items = [];
-
-  if ((d.pendingBusinesses ?? 0) > 0) {
-    items.push({
-      dot:    'amber',
-      text:   `${d.pendingBusinesses} business listing${d.pendingBusinesses > 1 ? 's' : ''} awaiting your approval`,
-      action: 'Review →',
-      href:   '/admin/dashboard.html'
-    });
-  }
-
-  if ((d.videosLive ?? 0) === 0) {
-    items.push({
-      dot:    'amber',
-      text:   'No videos on homepage — add a YouTube or Vimeo clip',
-      action: 'Add video →',
-      href:   '/admin/dashboard.html?tab=videos'
-    });
-  }
+  if (data.curator.stats?.topPicks > 0)
+    items.push({ dot: 'green', text: `${data.curator.stats.topPicks} curated articles ready to review`, action: 'Review →', panel: 'curator' });
+  if (data.businessReview.approve > 0)
+    items.push({ dot: 'amber', text: `${data.businessReview.approve} business submission${data.businessReview.approve > 1 ? 's' : ''} recommended for approval`, action: 'View →', panel: 'business' });
+  if (data.health.criticalDown?.length > 0)
+    items.push({ dot: 'red', text: `Critical: ${data.health.criticalDown.join(', ')} page${data.health.criticalDown.length > 1 ? 's' : ''} down`, action: 'Check →', panel: 'health' });
+  if (data.seo.gaps?.filter(g => g.urgent).length > 0)
+    items.push({ dot: 'amber', text: `${data.seo.gaps.filter(g => g.urgent).length} overdue content topic${data.seo.gaps.filter(g => g.urgent).length > 1 ? 's' : ''}`, action: 'Plan →', panel: 'seo' });
+  if (data.newsletter.drafts?.length > 0)
+    items.push({ dot: 'amber', text: `Newsletter draft ready: ${data.newsletter.latestDate}`, action: 'View →', panel: 'newsletter' });
 
   const loading = document.getElementById('attentionLoading');
-  const list    = document.getElementById('attentionList');
+  const list = document.getElementById('attentionList');
+  const sub = document.getElementById('attentionSub');
 
   if (items.length === 0) {
     loading.innerHTML = '✅ All clear — nothing needs attention right now.';
-    document.getElementById('attentionSub').textContent = 'All clear';
+    sub.textContent = 'All clear';
     return;
   }
-
-  document.getElementById('attentionSub').textContent = items.length + ' item' + (items.length > 1 ? 's' : '');
+  sub.textContent = items.length + ' item' + (items.length > 1 ? 's' : '');
   loading.style.display = 'none';
   list.style.display = 'block';
   list.innerHTML = items.map(item => `
     <li class="attention-item">
-      <span class="attention-dot ${item.dot === 'red' ? 'red' : ''}"></span>
+      <span class="attention-dot ${item.dot === 'red' ? 'red' : item.dot === 'green' ? 'green' : ''}"></span>
       <span class="attention-text">${item.text}</span>
-      <a class="attention-action" href="${item.href}">${item.action}</a>
-    </li>
-  `).join('');
+      <button class="attention-action" onclick="showPanel('${item.panel}', null)">${item.action}</button>
+    </li>`).join('');
 }
 
+// ══ PANEL RENDERERS ════════════════════════════════════════════
+function renderPanel(name, data) {
+  const renderers = { curator: renderCurator, newsletter: renderNewsletter, business: renderBusiness, seo: renderSeo, health: renderHealth };
+  if (renderers[name]) renderers[name](data[name === 'business' ? 'businessReview' : name === 'curator' ? 'curator' : name]);
+}
+
+// ── Curator ──────────────────────────────────────────────────
+function renderCurator(d) {
+  const el = document.getElementById('curatorContent');
+  if (d.status === 'never_run' || d.status === 'empty' || !d.topPicks?.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🎯</div><p>No curator digest yet.<br>The Content Curator runs daily at 8:30 AM after RSS aggregation.</p></div>`;
+    return;
+  }
+  if (d.date) document.getElementById('curatorMeta').textContent = `Last run: ${d.date} · ${d.stats.totalInQueue} articles scored · ${d.stats.topPicks} top picks · ${d.stats.skipped} skipped`;
+
+  el.innerHTML = `
+    <div class="section-header"><div class="section-header-left"><div class="section-title">Top Picks</div><div class="section-sub">${d.topPicks.length} articles with editorial context</div></div></div>
+    ${d.topPicks.map((a, i) => `
+      <div class="content-card">
+        <div class="content-card-header">
+          <div class="content-card-score">${a.curatorScore}<div style="font-size:0.65rem">pts</div></div>
+          <div>
+            <div class="content-card-title">${a.title}</div>
+            <div class="content-card-meta">${a.source?.name || ''} · ${a.source?.category || ''} · ${new Date(a.publishDate).toLocaleDateString('en-GB')}</div>
+          </div>
+        </div>
+        ${a.editorialNote ? `<div class="editorial-note"><strong>Editor's note</strong>${escHtml(a.editorialNote)}</div>` : ''}
+        <div style="font-size:0.85rem;color:var(--muted);line-height:1.5;">${escHtml((a.contentSnippet || '').substring(0, 200))}${(a.contentSnippet || '').length > 200 ? '…' : ''}</div>
+        <div class="content-card-actions">
+          <a class="agent-btn primary" href="${a.url}" target="_blank">View source →</a>
+          <button class="agent-btn secondary" onclick="copyToClipboard('${escAttr(a.url)}', this)">Copy URL</button>
+        </div>
+      </div>`).join('')}
+    ${d.skipped?.length ? `<div style="margin-top:1.5rem"><div class="section-title" style="font-size:1rem;margin-bottom:0.75rem">Skipped (${d.skipped.length})</div>
+    <div style="background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+      ${d.skipped.map(s => `<div style="padding:0.75rem 1rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:0.85rem">
+        <span style="color:var(--muted)">[${s.curatorScore}pts] ${escHtml(s.title)}</span>
+        <span style="color:var(--muted)">${s.source || ''}</span>
+      </div>`).join('')}
+    </div></div>` : ''}`;
+}
+
+// ── Newsletter ───────────────────────────────────────────────
+function renderNewsletter(d) {
+  const el = document.getElementById('newsletterContent');
+  if (d.status === 'never_run' || !d.drafts?.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">📰</div><p>No newsletter drafts yet.<br>The Newsletter Drafter runs Mondays at 9 AM UTC from approved articles.</p></div>`;
+    return;
+  }
+  el.innerHTML = `
+    <div class="section-header"><div class="section-header-left"><div class="section-title">Drafts</div><div class="section-sub">${d.drafts.length} saved</div></div></div>
+    ${d.drafts.map(draft => `
+      <div class="newsletter-draft-card">
+        <div class="draft-info">
+          <div class="draft-date">📰 Week of ${draft.date}</div>
+          <div class="draft-size">${(draft.size / 1024).toFixed(1)} KB</div>
+        </div>
+        <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+          <a class="agent-btn primary" href="/data/drafts/newsletter-${draft.date}.html" target="_blank">Preview →</a>
+          <button class="agent-btn secondary" onclick="copyDraftLink('${draft.date}')">Copy link</button>
+        </div>
+      </div>`).join('')}
+    <div style="background:var(--green-ghost);border-radius:12px;padding:1.25rem;margin-top:1rem;font-size:0.875rem;color:var(--green-deep)">
+      <strong>Next steps:</strong> Preview the draft above, then copy and paste it into your Beehiiv or email platform. Edit before sending.
+    </div>`;
+}
+
+// ── Business ─────────────────────────────────────────────────
+function renderBusiness(d) {
+  const el = document.getElementById('businessContent');
+  if (!d.cards?.length) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🏪</div><p>No business submissions reviewed yet.<br>The Business Manager runs at 9 AM and 5 PM UTC.</p></div>`;
+    return;
+  }
+  const byRec = { approve: d.cards.filter(c => c.aiRecommendation === 'approve'), request_info: d.cards.filter(c => c.aiRecommendation === 'request_info'), reject: d.cards.filter(c => c.aiRecommendation === 'reject') };
+  el.innerHTML = `
+    <div style="display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap">
+      <div class="vital-card" style="flex:1"><div class="vital-label">Approve</div><div class="vital-value" style="color:var(--green-bright)">${d.approve}</div></div>
+      <div class="vital-card" style="flex:1"><div class="vital-label">Need Info</div><div class="vital-value" style="color:var(--amber)">${d.requestInfo}</div></div>
+      <div class="vital-card" style="flex:1"><div class="vital-label">Reject</div><div class="vital-value" style="color:var(--red)">${d.reject}</div></div>
+    </div>
+    ${d.cards.map(c => `
+      <div class="biz-card">
+        <div class="biz-card-header">
+          <div>
+            <div class="biz-card-name">${escHtml(c.businessName)}</div>
+            <div class="biz-card-meta">${escHtml(c.submission?.category || '')} · Submitted ${new Date(c.submittedAt).toLocaleDateString('en-GB')}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.5rem">
+            <span class="recommendation-badge ${c.aiRecommendation}">${c.aiRecommendation === 'request_info' ? 'Need Info' : c.aiRecommendation.charAt(0).toUpperCase() + c.aiRecommendation.slice(1)}</span>
+          </div>
+        </div>
+        <div class="completeness-bar"><div class="completeness-fill" style="width:${c.completeness?.score || 0}%;background:${c.completeness?.score > 70 ? 'var(--green-bright)' : c.completeness?.score > 40 ? 'var(--amber)' : 'var(--red)'}"></div></div>
+        <div style="font-size:0.78rem;color:var(--muted);margin-bottom:0.75rem">Completeness: ${c.completeness?.score || 0}/100 · ${c.reason}</div>
+        ${c.draftEmails?.approval ? `<div class="email-draft">
+          <div class="email-draft-label">✅ Approval Email Draft</div>
+          <div class="email-draft-subject">${escHtml(c.draftEmails.approval.subject || '')}</div>
+          <div class="email-draft-body">${escHtml(c.draftEmails.approval.body || '')}</div>
+        </div>` : ''}
+        ${c.draftEmails?.requestInfo ? `<div class="email-draft" style="margin-top:0.5rem">
+          <div class="email-draft-label">⚠️ Info Request Draft</div>
+          <div class="email-draft-subject">${escHtml(c.draftEmails.requestInfo.subject || '')}</div>
+          <div class="email-draft-body">${escHtml(c.draftEmails.requestInfo.body || '')}</div>
+        </div>` : ''}
+        <div class="content-card-actions" style="margin-top:0.75rem">
+          <a class="agent-btn primary" href="/admin/dashboard.html">Review in Directory →</a>
+        </div>
+      </div>`).join('')}`;
+}
+
+// ── SEO ──────────────────────────────────────────────────────
+function renderSeo(d) {
+  const el = document.getElementById('seoContent');
+  if (d.status === 'never_run' || !d.date) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>No SEO gap report yet.<br>The SEO Gap Finder runs Sundays at 8 AM UTC.</p></div>`;
+    return;
+  }
+  if (d.date) document.getElementById('seoMeta').textContent = `Last run: ${d.date} · ${d.totalPublished} articles published · ${d.topicsOnTrack} topics on track`;
+
+  el.innerHTML = `
+    <div style="display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap">
+      <div class="vital-card" style="flex:1"><div class="vital-label">Published</div><div class="vital-value">${d.totalPublished}</div></div>
+      <div class="vital-card" style="flex:1"><div class="vital-label">On Track</div><div class="vital-value" style="color:var(--green-bright)">${d.topicsOnTrack}</div></div>
+      <div class="vital-card" style="flex:1"><div class="vital-label">Gaps</div><div class="vital-value" style="color:${d.gaps.length > 0 ? 'var(--amber)' : 'var(--green-bright)'}">${d.gaps.length}</div></div>
+    </div>
+    ${d.gaps.length > 0 ? `
+      <div class="section-header"><div class="section-header-left"><div class="section-title">Overdue Topics</div></div></div>
+      ${d.gaps.map(g => `
+        <div class="gap-card ${g.urgent ? 'urgent' : 'overdue'}">
+          <div class="gap-label">
+            <div class="gap-topic">${g.urgent ? '🔴' : '🟡'} ${escHtml(g.topic)}</div>
+            <div class="gap-days">${g.daysSince === 'Infinity' || g.daysSince > 9000 ? 'Never covered' : `${g.daysSince} days since last article (target: ${g.targetDays}d)`}</div>
+          </div>
+          <div class="gap-pillar">Pillar ${g.pillar}</div>
+        </div>`).join('')}` : '<div style="color:var(--green-bright);font-weight:600;padding:1rem 0">✅ All topics are on track!</div>'}
+    ${d.briefs?.length > 0 ? `
+      <div class="section-header" style="margin-top:1.5rem"><div class="section-header-left"><div class="section-title">Article Briefs</div><div class="section-sub">Write these this week</div></div></div>
+      ${d.briefs.map(b => `
+        <div class="brief-card">
+          <div class="brief-title">${escHtml(b.title)}</div>
+          <div class="brief-angle">${escHtml(b.angle)}</div>
+          <ul class="brief-outline">${b.outline.map(o => `<li>${escHtml(o)}</li>`).join('')}</ul>
+          <div class="brief-keywords">${b.targetKeywords.map(k => `<span class="kw-tag">${escHtml(k)}</span>`).join('')}
+            <span class="kw-tag" style="background:var(--cream)">~${b.estimatedWords}w</span>
+            <span class="kw-tag" style="background:var(--cream)">Pillar ${b.pillar}</span>
+          </div>
+        </div>`).join('')}` : ''}`;
+}
+
+// ── Health ───────────────────────────────────────────────────
+function renderHealth(d) {
+  const el = document.getElementById('healthContent');
+  if (d.status === 'never_run' || !d.date) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🏥</div><p>No health report yet.<br>The Site Health Monitor runs Saturdays at 7 AM UTC.</p></div>`;
+    return;
+  }
+  if (d.date) document.getElementById('healthMeta').textContent = `Last run: ${d.date} · ${d.siteUrl}`;
+  const si = { ok: '🟢', warning: '🟡', error: '🔴', down: '🔴' };
+
+  el.innerHTML = `
+    <div class="health-grid">
+      <div class="health-metric"><div class="health-metric-value">${d.pagesOk}/${d.pages?.length || 0}</div><div class="health-metric-label">Pages OK</div></div>
+      <div class="health-metric"><div class="health-metric-value" style="color:${d.warnings > 0 ? 'var(--amber)' : 'var(--green-bright)'}">${d.warnings}</div><div class="health-metric-label">Warnings</div></div>
+      <div class="health-metric"><div class="health-metric-value" style="color:${d.criticalDown?.length > 0 ? 'var(--red)' : 'var(--green-bright)'}">${d.criticalDown?.length || 0}</div><div class="health-metric-label">Critical Down</div></div>
+    </div>
+    <div class="section-header"><div class="section-header-left"><div class="section-title">Pages</div></div></div>
+    ${(d.pages || []).map(p => `
+      <div class="page-health-card ${p.status}">
+        <div class="page-health-name">${si[p.status]} ${escHtml(p.name)} <span style="font-size:0.75rem;color:var(--muted);font-weight:400">HTTP ${p.httpStatus}</span></div>
+        <div class="page-health-url">${escHtml(p.url)}</div>
+        ${p.failedChecks?.length ? `<div class="page-health-checks">${p.failedChecks.map(c => `<div class="check-item">↳ ${escHtml(c.check)}: ${escHtml(c.fix)}</div>`).join('')}</div>` : ''}
+      </div>`).join('')}
+    <div class="section-header" style="margin-top:1.5rem"><div class="section-header-left"><div class="section-title">API Endpoints</div></div></div>
+    ${(d.endpoints || []).map(e => `
+      <div class="page-health-card ${e.status}">
+        <div class="page-health-name">${si[e.status]} ${escHtml(e.name)} <span style="font-size:0.75rem;color:var(--muted);font-weight:400">HTTP ${e.httpStatus}</span></div>
+        <div class="page-health-url">${escHtml(e.url)}</div>
+        ${e.error ? `<div class="page-health-checks"><div class="check-item">Error: ${escHtml(e.error)}</div></div>` : ''}
+      </div>`).join('')}`;
+}
+
+// ══ NOTIFICATIONS ══════════════════════════════════════════════
+async function sendNotification() {
+  const btn = document.getElementById('notifyBtn');
+  btn.textContent = '⏳ Sending…';
+  btn.disabled = true;
+  try {
+    const resp = await fetch('/api/agent-data', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + (sessionStorage.getItem('adminPassword') || '') },
+      body: JSON.stringify({ action: 'notify' })
+    });
+    const d = await resp.json();
+    if (d.ok) { showToast('Email sent! Check your inbox.', 'success'); }
+    else { showToast('Failed: ' + (d.error || 'Unknown error'), 'error'); }
+  } catch { showToast('Network error — is the API deployed?', 'error'); }
+  finally { btn.textContent = '📧 Notify'; btn.disabled = false; }
+}
+
+// ══ UTILITIES ══════════════════════════════════════════════════
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(str) {
+  return String(str || '').replace(/'/g, "\\'");
+}
 function setText(id, val) {
   const el = document.getElementById(id);
   if (el) el.textContent = val;
+}
+function showToast(msg, type = 'success') {
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+function copyToClipboard(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copied';
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+function copyDraftLink(date) {
+  copyToClipboard(location.origin + '/data/drafts/newsletter-' + date + '.html', { textContent: '' });
+  showToast('Link copied!', 'success');
 }
 </script>
 </body>
