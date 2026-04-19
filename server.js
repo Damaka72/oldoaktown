@@ -110,13 +110,11 @@ const submitBusiness = require('./api/submit-business');
 const approveBusiness = require('./api/approve-business');
 const getBusinesses = require('./api/get-businesses');
 const stripeWebhook = require('./api/stripe-webhook');
-const getPending = require('./api/get-pending');
 const approveListing = require('./api/approve-listing');
 app.post('/api/submit-business', rateLimit(60_000, 10), submitBusiness);
 app.get('/api/approve-business', approveBusiness);
 app.get('/api/get-businesses', getBusinesses);
 app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), stripeWebhook);
-app.get('/api/get-pending', getPending);
 app.post('/api/approve-listing', approveListing);
 
 app.listen(PORT, () => {
