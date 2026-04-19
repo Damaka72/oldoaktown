@@ -1,0 +1,37 @@
+name: Site Health Monitor
+
+on:
+  schedule:
+    - cron: '0 7 * * 6'   # Saturdays at 7 AM UTC
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund nodemailer
+
+      - name: Run health monitor
+        env:
+          SITE_URL: ${{ secrets.SITE_URL }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: node scripts/site-health-monitor.js
+
+      - name: Commit health report
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/reports/
+          git diff --staged --quiet || git commit -m "chore: health report $(date +%Y-%m-%d)"
+          git push

@@ -1,0 +1,32 @@
+name: Content Curator Agent
+
+on:
+  schedule:
+    - cron: '30 8 * * *'   # 8:30 AM UTC daily — 30 min after RSS aggregation
+  workflow_dispatch:
+
+jobs:
+  curate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund @anthropic-ai/sdk
+
+      - name: Run content curator
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/content-curator.js
+
+      - name: Commit curator digest
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/curator-digest/
+          git diff --staged --quiet || git commit -m "chore: curator digest $(date +%Y-%m-%d)"
+          git push

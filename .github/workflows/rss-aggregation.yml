@@ -1,0 +1,30 @@
+name: Daily RSS Aggregation
+
+on:
+  schedule:
+    - cron: '0 8 * * *'   # 8:00 AM UTC daily
+  workflow_dispatch:
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run RSS aggregator
+        run: node scripts/rss-aggregator.js
+
+      - name: Commit new articles to review queue
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/review-queue/ data/archive/
+          git diff --staged --quiet || git commit -m "chore: rss aggregation $(date +%Y-%m-%d)"
+          git push

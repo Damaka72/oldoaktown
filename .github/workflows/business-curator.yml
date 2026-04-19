@@ -1,0 +1,38 @@
+name: Business Directory Manager
+
+on:
+  schedule:
+    - cron: '0 9,17 * * *'   # 9 AM and 5 PM UTC daily
+  workflow_dispatch:
+
+jobs:
+  review-submissions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund @anthropic-ai/sdk nodemailer
+
+      - name: Review business submissions
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: node scripts/business-curator.js
+
+      - name: Commit review cards
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/business-review/
+          git diff --staged --quiet || git commit -m "chore: business review $(date +%Y-%m-%d-%H%M)"
+          git push

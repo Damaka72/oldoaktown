@@ -1,0 +1,37 @@
+name: SEO Gap Finder Agent
+
+on:
+  schedule:
+    - cron: '0 8 * * 0'   # Sundays at 8 AM UTC
+  workflow_dispatch:
+
+jobs:
+  find-gaps:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund @anthropic-ai/sdk nodemailer
+
+      - name: Run SEO gap finder
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: node scripts/seo-gap-finder.js
+
+      - name: Commit reports
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/reports/
+          git diff --staged --quiet || git commit -m "chore: seo gap report $(date +%Y-%m-%d)"
+          git push
