@@ -1365,7 +1365,8 @@ function renderApprovalBoard(filter) {
             </div>
             <button class="img-picker-btn ${post.mediaUrl ? 'has-image' : ''}"
               id="picker-btn-${post.id}"
-              onclick="imgPicker.open('${post.id}', ${JSON.stringify(post.dayTheme || post.caption.slice(0,40))})">
+              data-query="${escHtml(post.dayTheme || post.caption.slice(0,40))}"
+              onclick="imgPicker.open('${post.id}', this.dataset.query)">
               ${post.mediaUrl ? '🖼 Change image' : '🔍 Find image'}
             </button>
             <input class="media-input" id="media-${post.id}" type="url"
