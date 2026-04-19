@@ -836,7 +836,7 @@ async function testBufferConnection() {
   box.style.display = 'block';
   box.textContent = 'Testing Buffer connection…';
   try {
-    const res = await fetch('/api/buffer-diagnostics');
+    const res = await fetch('/api/buffer-post');
     const data = await res.json();
 
     if (!res.ok) {
@@ -858,7 +858,7 @@ async function testBufferConnection() {
     box.textContent = lines.join('\n');
   } catch (err) {
     box.style.borderColor = '#C0392B';
-    box.textContent = '✗ Could not reach /api/buffer-diagnostics: ' + err.message;
+    box.textContent = '✗ Could not reach /api/buffer-post: ' + err.message;
   }
 }
 

@@ -53,10 +53,34 @@ function buildMetadata(platformKey) {
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // GET → diagnostics (replaces /api/buffer-diagnostics)
+  if (req.method === 'GET') {
+    const apiKey = process.env.BUFFER_API_KEY;
+    if (!apiKey) return res.status(500).json({ error: 'No Buffer API key — set BUFFER_API_KEY in env vars' });
+    const query = `{ channels { id name service serviceId avatar } }`;
+    try {
+      const bufRes = await fetch(BUFFER_GRAPHQL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({ query }),
+      });
+      const rawText = await bufRes.text();
+      const data = JSON.parse(rawText);
+      if (!bufRes.ok || data?.errors?.length) {
+        const msg = data?.errors?.map(e => e.message).join('; ') || rawText.slice(0, 200);
+        return res.status(502).json({ error: 'Buffer API error', hint: msg });
+      }
+      return res.status(200).json({ channels: data?.data?.channels || [] });
+    } catch (err) {
+      return res.status(500).json({ error: 'Internal error', message: err.message });
+    }
+  }
+
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const apiKey = req.headers['x-buffer-key'] || process.env.BUFFER_API_KEY;
