@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmi7afbvv95cux",
+  "title": "The Chair of OPDC - London City Hall",
+  "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxONUU0eUZTdlNVNkpwVmNnbUs2ZHJYQnFHSXNjejN6MEpBQnVVc3hxTGFacTUzRGhuSzVfMDk5NEZIQTBXbVpUTUh1S0xuSEFWckRxR0hoZEFjWllYdjFab3BmajNxMUpudGhNeVhEcVllb0VHcnhkMld4NFYwLVpkelJCcWFaZ3htUTRsYjVMNXgzOXk1emw2X2JnaDFHa09PbFREdDUyY245c3N5OVkzSnVtUnhLMlhJSDNYaWlTbzV3Vmw3WEF1UFhmSkJSWTFodmRuZV9Udi1aTVJiLWx2OG4yRzNfMXdyTjlCbQ?oc=5",
+  "content": "The Chair of OPDC London City Hall",
+  "contentSnippet": "The Chair of OPDC London City Hall",
+  "publishDate": "Mon, 31 Oct 2022 05:54:32 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:52:00.969Z",
+    "status": "pending_review"
+  }
+}

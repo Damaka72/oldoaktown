@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmigwfbvv95cux",
+  "title": "Introducing Old Oak and Park Royal - London City Hall",
+  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPU1hBeUZ3d2VjaUJFM0xaSmJJTjhoMXdaV0V2V18zMF9UbEQ3a3BXbUtoRHBQTThMVEVobWFBcGJ4QmtBTVFMZGhvSkh4RlZBdURjT1E1cTlnM0J5Ni01czZRaVpnS0VnUWEzWHByOGhySkRlMUZqNXpWT3U5U2tTMDJJSQ?oc=5",
+  "content": "Introducing Old Oak and Park Royal London City Hall",
+  "contentSnippet": "Introducing Old Oak and Park Royal London City Hall",
+  "publishDate": "Wed, 23 Nov 2016 16:23:08 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:52:00.969Z",
+    "status": "pending_review"
+  }
+}

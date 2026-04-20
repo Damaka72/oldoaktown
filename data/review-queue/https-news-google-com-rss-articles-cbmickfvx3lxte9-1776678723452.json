@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmickfvx3lxte9",
+  "title": "HS2 starts Euston tunnels - Modern Railways",
+  "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE94SkdITVl4eEpnaWtEbFZuaVFFNktuVTQ4SXlxV2tKcldZenM2eEZaY19VcDBmXzNmMW1YYzZaLU5SVkdhRVNESmx3YThWZlh3dFE0OGVuUTNrRUZWZ3Rmb3pYRlE0YUpQLUVyYW1VbFRhUQ?oc=5",
+  "content": "HS2 starts Euston tunnels Modern Railways",
+  "contentSnippet": "HS2 starts Euston tunnels Modern Railways",
+  "publishDate": "Tue, 27 Jan 2026 08:00:00 GMT",
+  "author": "Google News — HS2",
+  "source": {
+    "name": "Google News — HS2",
+    "url": "https://news.google.com/rss/search?q=HS2+%22Old+Oak%22+OR+%22Euston%22&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "hs2",
+    "priority": "medium"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:52:02.431Z",
+    "status": "pending_review"
+  }
+}

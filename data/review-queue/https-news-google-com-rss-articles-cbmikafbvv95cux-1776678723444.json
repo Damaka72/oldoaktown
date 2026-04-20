@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmikafbvv95cux",
+  "title": "Welcome to Park Royal, Built on Asphalt and Man’oushe - Eater London",
+  "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPN091cUJtaVMwSDhocUlnWHZqakFNZHFZVEFHTHdteXdaNVhfUHNMX2NkblRfUTVTdXJ5S1Jqa1RhbFBxSnprbnEyLVZpSjBUaU5Pakg0RXh5YmVUZE96eEVYNDhMbFdleHVTWUEyalc3RW5ubk9oQW5DeG1lVEVsUlZBUnBUV2hJeHVmUFp0Wlo?oc=5",
+  "content": "Welcome to Park Royal, Built on Asphalt and Man’oushe Eater London",
+  "contentSnippet": "Welcome to Park Royal, Built on Asphalt and Man’oushe Eater London",
+  "publishDate": "Thu, 23 Jun 2022 07:00:00 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:52:00.969Z",
+    "status": "pending_review"
+  }
+}

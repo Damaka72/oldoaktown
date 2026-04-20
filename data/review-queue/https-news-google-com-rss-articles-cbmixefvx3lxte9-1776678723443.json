@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmixefvx3lxte9",
+  "title": "'New town' planned for west London brownfield land - BBC",
+  "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9OUThQRXFrMTB4TmhZR0dJQklQQVR5YzNGcVUwM1NoUVVHM2dXY3NHSDZZbFFpdzY5RlBnNC1YdUxsX2NXd3FlOW82RWx5djY4NWYwdWFJck9MRS0x?oc=5",
+  "content": "'New town' planned for west London brownfield land BBC",
+  "contentSnippet": "'New town' planned for west London brownfield land BBC",
+  "publishDate": "Thu, 26 Jun 2025 07:00:00 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:52:00.968Z",
+    "status": "pending_review"
+  }
+}

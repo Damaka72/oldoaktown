@@ -1,0 +1,25 @@
+{
+  "id": "https-www-hs2-org-uk-podcast-learning-legacy-podca",
+  "title": "Learning Legacy Podcast: Episode Four – Being safe and inclusive every step of the way",
+  "url": "https://www.hs2.org.uk/podcast/learning-legacy-podcast-episode-four-being-safe-and-inclusive-every-step-of-the-way/",
+  "content": "",
+  "contentSnippet": "",
+  "publishDate": "Thu, 28 Mar 2024 00:05:49 +0000",
+  "author": "Tom Lawson",
+  "source": {
+    "name": "HS2 Ltd",
+    "url": "https://www.hs2.org.uk/feed/",
+    "category": "hs2",
+    "priority": "high"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": "https://media.blubrry.com/1471694/content.blubrry.com/1471694/Ep_4-Final_Version.mp3",
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:51:53.091Z",
+    "status": "pending_review"
+  }
+}

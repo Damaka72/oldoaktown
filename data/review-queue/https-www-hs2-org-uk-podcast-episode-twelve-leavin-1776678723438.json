@@ -1,0 +1,25 @@
+{
+  "id": "https-www-hs2-org-uk-podcast-episode-twelve-leavin",
+  "title": "Episode Twelve: Leaving a legacy",
+  "url": "https://www.hs2.org.uk/podcast/episode-twelve-leaving-a-legacy/",
+  "content": "",
+  "contentSnippet": "",
+  "publishDate": "Mon, 12 Jun 2023 23:01:29 +0000",
+  "author": "Tom Lawson",
+  "source": {
+    "name": "HS2 Ltd",
+    "url": "https://www.hs2.org.uk/feed/",
+    "category": "hs2",
+    "priority": "high"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": "https://media.blubrry.com/1471694/content.blubrry.com/1471694/HS2_EP_12_mixdown_mp3_ver_4.mp3",
+  "metadata": {
+    "fetchedAt": "2026-04-20T09:51:53.092Z",
+    "status": "pending_review"
+  }
+}
