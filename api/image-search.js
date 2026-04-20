@@ -1,9 +1,10 @@
 export const config = { maxDuration: 30 };
 
-const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
-const SUPABASE_URL        = process.env.SUPABASE_URL;
-const SUPABASE_ANON_KEY   = process.env.SUPABASE_ANON_KEY;
-const BUCKET              = 'oldoaktown';
+const UNSPLASH_ACCESS_KEY  = process.env.UNSPLASH_ACCESS_KEY;
+const SUPABASE_URL         = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY    = process.env.SUPABASE_ANON_KEY;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const BUCKET               = 'oldoaktown';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -34,7 +35,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { unsplashUrl, filename } = req.body || {};
     if (!unsplashUrl) return res.status(400).json({ error: 'unsplashUrl is required' });
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return res.status(500).json({ error: 'Supabase env vars not configured' });
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) return res.status(500).json({ error: 'Supabase env vars not configured' });
     try {
       const imgRes = await fetch(unsplashUrl);
       if (!imgRes.ok) throw new Error(`Failed to fetch image: ${imgRes.status}`);
@@ -47,7 +48,7 @@ export default async function handler(req, res) {
       const uploadUrl = `${SUPABASE_URL}/storage/v1/object/${BUCKET}/${path}`;
       const uploadRes = await fetch(uploadUrl, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': contentType, 'x-upsert': 'true' },
+        headers: { 'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`, 'Content-Type': contentType, 'x-upsert': 'true' },
         body: buffer,
       });
       if (!uploadRes.ok) { const e = await uploadRes.text(); throw new Error(`Supabase upload failed (${uploadRes.status}): ${e}`); }
