@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte9",
+  "title": "Residents fight to protect historic square near Euston - BBC",
+  "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9MLTFzTHFWcUU4SUFoSmowanVhcDQ2cEZ1NHZEV29FRHZ4Y1h5NlV3Vkc5VzhERG9rWW56bkJnbWlxVWJ3NDVqT3Y2X0dXSV9YTzFvNV9CYmUzdw?oc=5",
+  "content": "Residents fight to protect historic square near Euston BBC",
+  "contentSnippet": "Residents fight to protect historic square near Euston BBC",
+  "publishDate": "Sun, 01 Mar 2026 08:00:00 GMT",
+  "author": "Google News — HS2",
+  "source": {
+    "name": "Google News — HS2",
+    "url": "https://news.google.com/rss/search?q=HS2+%22Old+Oak%22+OR+%22Euston%22&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "hs2",
+    "priority": "medium"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-21T09:19:09.975Z",
+    "status": "pending_review"
+  }
+}
