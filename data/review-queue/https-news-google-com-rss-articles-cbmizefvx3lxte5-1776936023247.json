@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmizefvx3lxte5",
+  "title": "HS2 Euston Station - Mace",
+  "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5lTFNEdE56bjdQNVNTYzJxMngxVE9Wa0F5VEZnaHJTcE1RNEtyWUJfTU5uN2lsVWN2Ulk0ZkVNajFvSUJlZXoyZ2FzWk8zSHAzaXlVdngtcEYzdllJM0s5R3NzcTc?oc=5",
+  "content": "HS2 Euston Station Mace",
+  "contentSnippet": "HS2 Euston Station Mace",
+  "publishDate": "Tue, 21 Apr 2026 18:23:45 GMT",
+  "author": "Google News — HS2",
+  "source": {
+    "name": "Google News — HS2",
+    "url": "https://news.google.com/rss/search?q=HS2+%22Old+Oak%22+OR+%22Euston%22&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "hs2",
+    "priority": "medium"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-23T09:20:22.221Z",
+    "status": "pending_review"
+  }
+}
