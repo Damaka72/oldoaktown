@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmiy0fvx3lxte8",
+  "title": "HS2: Old Oak Common construction work begins - BBC",
+  "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE80d1gwWndkLTlITm9IWGJMbXo0VklCamIyUWc3LThIMW1DdDJvY1laZ0NkUE1jSW9JeC1LVmFoX0lGeGJPVGljVWpud2V3ZjdmRUlJZ3lXZlBGcUZSR0NRcUZjbw?oc=5",
+  "content": "HS2: Old Oak Common construction work begins BBC",
+  "contentSnippet": "HS2: Old Oak Common construction work begins BBC",
+  "publishDate": "Wed, 23 Jun 2021 07:00:00 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-04-25T08:43:59.910Z",
+    "status": "pending_review"
+  }
+}
