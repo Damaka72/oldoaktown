@@ -1,0 +1,158 @@
+{
+  "date": "2026-04-26",
+  "totalPublished": 0,
+  "gaps": [
+    {
+      "topic": "HS2 construction progress",
+      "keywords": [
+        "hs2",
+        "construction",
+        "station",
+        "platform",
+        "tunnelling"
+      ],
+      "pillar": 1,
+      "targetDays": 14,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "OPDC planning decisions",
+      "keywords": [
+        "opdc",
+        "planning",
+        "masterplan",
+        "application",
+        "consent"
+      ],
+      "pillar": 1,
+      "targetDays": 21,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Housing development updates",
+      "keywords": [
+        "housing",
+        "homes",
+        "residential",
+        "development",
+        "build"
+      ],
+      "pillar": 1,
+      "targetDays": 21,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Transport & Elizabeth Line",
+      "keywords": [
+        "elizabeth line",
+        "transport",
+        "tfl",
+        "crossrail",
+        "westbourne park"
+      ],
+      "pillar": 1,
+      "targetDays": 30,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Old Oak community events",
+      "keywords": [
+        "event",
+        "community",
+        "consultation",
+        "meeting",
+        "forum"
+      ],
+      "pillar": 2,
+      "targetDays": 14,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Local business spotlights",
+      "keywords": [
+        "business",
+        "local",
+        "restaurant",
+        "shop",
+        "cafe"
+      ],
+      "pillar": 2,
+      "targetDays": 21,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Living in Old Oak guides",
+      "keywords": [
+        "guide",
+        "living",
+        "area",
+        "park royal",
+        "acton"
+      ],
+      "pillar": 2,
+      "targetDays": 30,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "HS2 delay & budget analysis",
+      "keywords": [
+        "delay",
+        "budget",
+        "overspend",
+        "2039",
+        "timeline"
+      ],
+      "pillar": 3,
+      "targetDays": 60,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Property & housing market",
+      "keywords": [
+        "property",
+        "price",
+        "market",
+        "rent",
+        "landlord"
+      ],
+      "pillar": 2,
+      "targetDays": 30,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Jobs & employment",
+      "keywords": [
+        "jobs",
+        "employment",
+        "careers",
+        "opportunity",
+        "workforce"
+      ],
+      "pillar": 1,
+      "targetDays": 30,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    }
+  ],
+  "briefs": [],
+  "topicsOnTrack": 0
+}
