@@ -170,7 +170,7 @@ Return ONLY the JSON object.`;
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-sonnet-4-6',
         max_tokens: 8000,
         system: systemPrompt,
         messages: [{ role: 'user', content: userPrompt }],
