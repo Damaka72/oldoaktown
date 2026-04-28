@@ -1,0 +1,1444 @@
+{
+  "date": "2026-04-28",
+  "generatedAt": "2026-04-28T10:31:49.569Z",
+  "stats": {
+    "totalInQueue": 221,
+    "topPicks": 5,
+    "skipped": 216
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmifefvx3lxte5",
+      "title": "What Is Old Oak Common? A Guide To The Future HS2 And Elizabeth Line Station - Londonist",
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5jc1hrU0NwdEg3Nko1T0Q4RUgtMUpGRnhxMWpuNmtuZjRSRzhMZG1ENlFkNW9OY2gzenhoblpzUmRORGtHMURnNkY1MU1NMldWU3d3SGZiRDhwc1U3SVVva3dmaVlpN2c5Y0xaSGR0NFg0eW84d1pKOVpyZWQ?oc=5",
+      "content": "What Is Old Oak Common? A Guide To The Future HS2 And Elizabeth Line Station Londonist",
+      "contentSnippet": "What Is Old Oak Common? A Guide To The Future HS2 And Elizabeth Line Station Londonist",
+      "publishDate": "Wed, 01 May 2024 07:00:00 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-04-20T09:52:00.972Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 25,
+      "editorialNote": "**Editorial Note:**\n\nThis overview helps residents understand the transformation reshaping their neighbourhood. We should add: local impact timelines, affordable housing commitments, and how construction affects current businesses. Verify: station opening dates, job creation figures, and transport links. Strong story—let's localise it with resident voices and concrete details about *their* Old Oak."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi8wfbvv95cux",
+      "title": "Start of construction at HS2’s London super-hub moves a step closer as Old Oak Common station planning submission is submitted - mediacentre.hs2.org.uk",
+      "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNWi1WU2ExQ25nNGRUcmRCSlRhNEh4WEliQ1lOVUFCdVNlN1R1SC0tcXNhbEpjbVVxNjJwc09tTXE4cGFMZF8yZUZyREhCNkg0YWlITG4zTnVfZ08xWXEzRFRHcFpCSmFDbkh4RXBEYkJmVWdSQjl6QWpmRXhRdmNhaElsbWxWQS1jRmk3NnVyNUVQT3ZUdHo1ZjU2a0p5TFJGSTRzZnkxTHRab1RxT0VXajNCdVlpdmFHdGY4Sml5SFVZZ2xpRnlkdU1wTkZ0SVpfd3ZXcDMwbEZhQThEaDFnODc3SGhfa3dpNnF1djhDejhjWUE?oc=5",
+      "content": "Start of construction at HS2’s London super-hub moves a step closer as Old Oak Common station planning submission is submitted mediacentre.hs2.org.uk",
+      "contentSnippet": "Start of construction at HS2’s London super-hub moves a step closer as Old Oak Common station planning submission is submitted mediacentre.hs2.org.uk",
+      "publishDate": "Wed, 19 Feb 2020 08:00:00 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-04-20T09:52:00.972Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 23,
+      "editorialNote": "**Editorial Note**\n\nThis planning submission is a major milestone—construction could start within months, reshaping our neighbourhood. Dig into: local job timelines, traffic management during building, and how the 65,000 promised jobs break down by sector and timeline. Verify the \"super-hub\" claims against council regeneration targets and compare Old Oak's plans with similar projects."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi-wfbvv95cux",
+      "title": "HS2 Old Oak Common Station design - London City Hall",
+      "url": "https://news.google.com/rss/articles/CBMi_wFBVV95cUxNY2xMMkkta3hIWC02LTljZE02T1dhUTUwaW1RX0ROVE9PWlJBbHdTU1dPTHAzclJRRXMwalFONFp0a3dya1NjQ1p3SWJlVjZYVGFwYnp5ZWpOSGVBMk5xZUowVWJSc1daOUpJU1lSc0ZMZnZ5aXIwQ3NMSGhCRHZTVmVYa2NsOVZaQm54bVlKalVWNHR6ajlKSTN3Y2ZzMFpNTUJlRnh3UkMtWmx5MWJoM1BTUFF2WTRaNjVmOXVpVlhqblotYXFSRlVPMG12S0N2cDJGbHhNc1JGNG9pbTkySFA3VEVNQzhZNWNTYjBiR1MwNGVZeTlUSlE4ZzRPY3M?oc=5",
+      "content": "HS2 Old Oak Common Station design London City Hall",
+      "contentSnippet": "HS2 Old Oak Common Station design London City Hall",
+      "publishDate": "Tue, 05 Mar 2019 08:00:00 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-04-20T09:52:00.970Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 22,
+      "editorialNote": "**Editorial Note:**\n\nThis design update directly shapes the transport hub serving 65,000 local jobs and 25,500 homes. We need specifics: completion timeline, accessibility features, and impact on existing communities during construction. Verify claims against TfL's latest masterplan—designs shift frequently. Reach out to local ward councillors for resident concerns already flagged."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmioafbvv95cux",
+      "title": "HS2 confirms London Euston and Old Oak Common construction teams - GOV.UK",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPMjlram5XOEtqZklXS3BWa0R1azBkeHEtOWVSOXgxdk5wOTVVamZaVC1VWHl0UlR3R0F5dnRWX28xS0o0TzV5T2N4bV9HTklRRUVKMEFBZlBKZ1NpODl0aElyWW5iVDNNRmlGVkJJMUU0d0p1X2tvdTduRWZsT3B0Uzk0QjJaWFB6S1pkd3FZb3lKOW8ySmhlSkZRRnJzQkhU?oc=5",
+      "content": "HS2 confirms London Euston and Old Oak Common construction teams GOV.UK",
+      "contentSnippet": "HS2 confirms London Euston and Old Oak Common construction teams GOV.UK",
+      "publishDate": "Wed, 06 Feb 2019 08:00:00 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-04-20T09:52:00.971Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 22,
+      "editorialNote": "**Editorial Note:**\n\nThis announcement matters because construction teams directly affect local disruption timelines and job opportunities for residents. Verify: exact start dates, how many local jobs are promised vs. delivered, and noise/traffic impact plans. Add context: Old Oak's role as UK's biggest transport hub and how this compares to similar regeneration projects locally."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuwfbvv95cux",
+      "title": "HS2 reveals Old Oak Common station designs as work ramps up on west London super-hub - GOV.UK",
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZWJpYVRpalFiREoybEx1ckhnNDh1ZXdNdFJvMGZUVzlndVpTVkEwa1ZrT0VMM3djaVFNM1FyRm9BWmRXaVpNV3NrcmhBLUVJcFhtQThSZENNVWtrT2dZdEtRNTNhdzA1RDcwci1HUUdCSUNjeU5qTjdiSWl4VWlscld2SHh6S1c0cXpuRnFZdE9IWTNKeXFEQnJpOU1PdnlaQV83MWdPVUh3LUhjcTRCTzJmYTgzOHFPd2dn?oc=5",
+      "content": "HS2 reveals Old Oak Common station designs as work ramps up on west London super-hub GOV.UK",
+      "contentSnippet": "HS2 reveals Old Oak Common station designs as work ramps up on west London super-hub GOV.UK",
+      "publishDate": "Tue, 05 Feb 2019 08:00:00 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-04-20T09:52:00.971Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 22,
+      "editorialNote": "**Editorial Note:**\n\nThis station design reveal directly impacts 65,000 local jobs and 25,500 homes. Before publishing, verify: construction timeline, property acquisition details, and transport links to existing neighborhoods. Localize by interviewing residents about commute expectations and asking council for traffic/congestion mitigation plans during build phases."
+    }
+  ],
+  "skipped": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmi2wfbvv95cux",
+      "title": "Balfour Beatty VINCI SYSTRA completes foundations for HS2's Old Oak Common high speed station - Balfour Beatty",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi6afbvv95cux",
+      "title": "Old Oak Common HS2 station gains planning approval and is set to be the largest newly built railway station in the UK - mediacentre.hs2.org.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiiafbvv95cux",
+      "title": "HS2 Will Now Only Run Between Euston And Old Oak Common - Londonist",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmijafbvv95cux",
+      "title": "Foundations completed for HS2’s Old Oak Common station - Railway PRO",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikwfbvv95cux",
+      "title": "HS2 Begins Tunnelling Between Old Oak Common and Euston Station - Railway-News",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "First platform for HS2 revealed at Old Oak Common | ITV News London - ITVX",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "Inside Old Oak Common: London's Big HS2 Hub - Londonist",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimafbvv95cux",
+      "title": "See inside HS2’s new Old Oak Common railway station - ianVisits",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmioafbvv95cux",
+      "title": "Foundations complete for HS2's Old Oak Common high speed station - mediacentre.hs2.org.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "HS2 | Foundations complete at Old Oak Common station - New Civil Engineer",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwwfbvv95cux",
+      "title": "HS2’s Old Oak Common station could boost local economy by £10 billion over a decade - ianVisits",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiy0fvx3lxte8",
+      "title": "HS2: Old Oak Common construction work begins - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 21
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi2afbvv95cux",
+      "title": "GWR announces impact on services into Paddington up to 2028 for HS2 Old Oak Common works - New Civil Engineer",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmif0fvx3lxte1",
+      "title": "Old Oak Common marks major HS2 milestone - EALING.NEWS",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikgfbvv95cux",
+      "title": "HS2: how new platforms above and below ground at Old Oak Common are shaping up - Rail Magazine",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimgfbvv95cux",
+      "title": "Revealed: the vision for Old Oak Common – HS2's new super-hub - mediacentre.hs2.org.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwafbvv95cux",
+      "title": "First platforms for Britain’s new high speed railway installed at Old Oak Common - mediacentre.hs2.org.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxte1",
+      "title": "HS2: Old Oak Common progresses amidst Euston uncertainty - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiywfbvv95cux",
+      "title": "From backwater to hotspot: how HS2 could bring £10bn economic boost to Old Oak Common - The Guardian",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 20
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwafbvv95cux",
+      "title": "Mayor shakes up board of Old Oak and Park Royal Development Corporation - Housing Today",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 19
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiiafbvv95cux",
+      "title": "HS2 Will Now Only Run Between Euston And Old Oak Common - Londonist",
+      "source": "Google News — HS2",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikafbvv95cux",
+      "title": "HS2’s Old Oak Common station box excavation complete! - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "First platform for HS2 revealed at Old Oak Common | ITV News London - ITVX",
+      "source": "Google News — HS2",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmingfbvv95cux",
+      "title": "HS2 Euston tunnel begins dig from Old Oak Common - Planning, Building & Construction Today",
+      "source": "Google News — HS2",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmioafbvv95cux",
+      "title": "Foundations complete for HS2's Old Oak Common high speed station - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiogfbvv95cux",
+      "title": "Old Oak Common station to boost London economy by £10bn - Planning, Building & Construction Today",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixgfbvv95cux",
+      "title": "HS2 ‘super-hub’ station at Old Oak Common recognised as ‘outstanding’ for environmental designs - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixwfbvv95cux",
+      "title": "The Elizabeth line that never was: The Watford Junction extension from Old Oak Common - ianVisits",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 18
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi0wfbvv95cux",
+      "title": "HS2 | Euston tunnel TBMs to be buried under Old Oak Common until government green light - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi2ajbvv95cux",
+      "title": "Mayor appoints new Board and Planning Committee members to Old Oak and Park Royal Development Corporation - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi4ajbvv95cux",
+      "title": "Mayor’s Old Oak and Park Royal Development Corporation appoints Gareth Blacker as Executive Director for Delivery - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimgfbvv95cux",
+      "title": "Revealed: the vision for Old Oak Common – HS2's new super-hub - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiqafbvv95cux",
+      "title": "Potential sites for new Old Oak Common London Overground stations presented - railuk.com",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuwfbvv95cux",
+      "title": "HS2 sees installation of project’s first platforms at Old Oak Common - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwafbvv95cux",
+      "title": "First platforms for Britain’s new high speed railway installed at Old Oak Common - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiywfbvv95cux",
+      "title": "From backwater to hotspot: how HS2 could bring £10bn economic boost to Old Oak Common - The Guardian",
+      "source": "Google News — HS2",
+      "curatorScore": 17
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmic0fvx3lxte5",
+      "title": "Old Oak Common Station - The House of Commons Library",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxte5",
+      "title": "Old Oak Common station - Balfour Beatty",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmigwfbvv95cux",
+      "title": "Introducing Old Oak and Park Royal - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiigjbvv95cux",
+      "title": "Old Oak Common Depot celebrates 111 years - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilgfbvv95cux",
+      "title": "Major milestone for HS2 railway as tunnel work starts in Old Oak - London Borough of Hammersmith & Fulham",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiowjbvv95cux",
+      "title": "Mayor's plan for Old Oak Park Royal opportunity area gets green light - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxte4",
+      "title": "Old Oak Common - mega station starts to grow - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxte5",
+      "title": "MP warns Old Oak Common station means a 'decade of disruption' - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 16
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmijafbvv95cux",
+      "title": "Euston Tunnel TBM launch links Old Oak Common and Euston - Railway Supply",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 15
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilgfbvv95cux",
+      "title": "Major milestone for HS2 railway as tunnel work starts in Old Oak - London Borough of Hammersmith & Fulham",
+      "source": "Google News — HS2",
+      "curatorScore": 13
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmidefvx3lxte5",
+      "title": "HS2 and your community - London Borough of Hammersmith & Fulham",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 12
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmigafbvv95cux",
+      "title": "First platforms installed at Old Oak Common - Rail Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 12
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiqafbvv95cux",
+      "title": "North-west London development company snaps up Park Royal site for energy centre - Property Week",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 12
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivgfbvv95cux",
+      "title": "WATCH: First section of platform installed at London HS2 station - RailAdvent",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 12
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi1gfbvv95cux",
+      "title": "OPDC Great Place Scheme - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi1wfbvv95cux",
+      "title": "Architect appointed to design 600-home redevelopment of housing blocks hit by HS2 disruption - building.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi2gfbvv95cux",
+      "title": "Old Oak Land Assembly - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi2gfbvv95cux",
+      "title": "Park Royal Industrial Area | London City Hall - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi7afbvv95cux",
+      "title": "The Chair of OPDC - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmickfvx3lxtfa",
+      "title": "Park Royal: London Living Wage hotbed - Around Ealing",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmihafbvv95cux",
+      "title": "Pulse London given the green light in Park Royal - UK Property Forums",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmihajbvv95cux",
+      "title": "Park Royal, London Becomes Home to Chaiiwala’s New Café, Serving Authentic Indian Street Food and Beverages, Get the Details Here - Travel And Tour World",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmihgfbvv95cux",
+      "title": "Park Royal subway mural, London - The Architects’ Journal",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmihwfbvv95cux",
+      "title": "Park Royal Design District Marks Fifth Year at London Design Festival - Art Plugged",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmihwfbvv95cux",
+      "title": "Old Oak – a whole new town planned for west London - The Chiswick Calendar",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiiwfbvv95cux",
+      "title": "Photos: Huge plumes of smoke engulf Park Royal restaurant following fire - LondonWorld",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmijafbvv95cux",
+      "title": "Huge £1bn data centre for Park Royal gets go ahead from planners - London Evening Standard",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikafbvv95cux",
+      "title": "Welcome to Park Royal, Built on Asphalt and Man’oushe - Eater London",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikajbvv95cux",
+      "title": "‘We Made That’ appointed as Masterplanners for Park Royal Centre - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikwfbvv95cux",
+      "title": "New train connection to join Old Oak with Hounslow and Brent - London Borough of Hammersmith & Fulham",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilgfbvv95cux",
+      "title": "First look: HS2’s vast new rail hub in west London - Time Out Worldwide",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "Next stop Euston. HS2 begins tunnelling to central London - mediacentre.hs2.org.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimajbvv95cux",
+      "title": "Mayor appoints Aman Dalvi OBE and Jon Milward to OPDC Board - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimgfbvv95cux",
+      "title": "Brent road closures in February as streets in Park Royal set to reopen after prolonged closures - My London",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimgfbvv95cux",
+      "title": "HS2 drives £10billion west London economic boost - report - mediacentre.hs2.org.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimwfbvv95cux",
+      "title": "Garden Studios to open in Park Royal, London - broadcastnow.co.uk",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimwjbvv95cux",
+      "title": "Absolute Beginners: a new, future-proof factory for Park Royal - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbminafbvv95cux",
+      "title": "Machine begins digging HS2's tunnel to Euston - London Now",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiogfbvv95cux",
+      "title": "Flagship Farizon Park Royal dealership officially opens in north London - Van Fleet World",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "Farizon opens flagship Park Royal dealership in London - Motor Trade News",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipwfbvv95cux",
+      "title": "HS2: Euston Station regeneration can add £41bn to the national economy – report - Camden Council",
+      "source": "Google News — HS2",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiqwfbvv95cux",
+      "title": "First TBM for HS2 tunnelling to central London launched - New Civil Engineer",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirafbvv95cux",
+      "title": "Old Oak Innovation Cluster - Imperial College London",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmitafbvv95cux",
+      "title": "Giant boring machines to start HS2 tunnels from west London to Euston 'fairly soon,' says rail minister - London Evening Standard",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivafbvv95cux",
+      "title": "Euston, here we come! HS2 starts digging tunnels to central London in landmark moment for long-awaited scheme - London Evening Standard",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivgfbvv95cux",
+      "title": "Segro and Pure DC team up to build 56MW data center in Park Royal, West London - Data Center Dynamics",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte5",
+      "title": "Madeleine the boring machine poised to build HS2 tunnel in London - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxte8",
+      "title": "HS2: West London tunnel section completed with 'huge' machines - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxtfb",
+      "title": "Troubled HS2 may now run to central London, minister says - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 11
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi0wfbvv95cux",
+      "title": "Jameel Motors UK to open flagship Farizon SV site in Park Royal and signs first franchise dealers - Motor Trade News",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi0wfbvv95cux",
+      "title": "Euston station HS2 redevelopment: council wants new powers over homes and jobs - London Evening Standard",
+      "source": "Google News — HS2",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmib0fvx3lxte1",
+      "title": "Park Royal Net Zero - Brunel University",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifefvx3lxte1",
+      "title": "Sixty firefighters tackle Park Royal blaze - EALING.NEWS",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmigafbvv95cux",
+      "title": "Firefighters battle major blaze in Park Royal - EALING.NEWS",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmijgfbvv95cux",
+      "title": "Firefighters battle house fire in Park Royal - Hounslow Herald",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilafbvv95cux",
+      "title": "Chaiiwala Opens New Café in Park Royal - Hospitality & Catering News",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimafbvv95cux",
+      "title": "Euston HS2 back on track, say ministers as final tunnelling begins - The Guardian",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiogfbvv95cux",
+      "title": "Minimal relocates to Park Royal to scale electric vehicle operations - Business Motoring",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixafbvv95cux",
+      "title": "Boy, 16, among three arrested over attempted arson on Persian language media group in Park Royal - Sky News",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiy0fvx3lxtfb",
+      "title": "Asda reveals plans for giant store and 1,500 homes for Park Royal - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 10
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmidefvx3lxte5",
+      "title": "HS2 and your community - London Borough of Hammersmith & Fulham",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilgfbvv95cux",
+      "title": "First look at new designs for HS2 London Euston station - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipgfbvv95cux",
+      "title": "Euston HS2 station row: design to be 'future-proofed' to enable more trains to run - London Evening Standard",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirgfbvv95cux",
+      "title": "Euston HS2 station ‘could be cut to just seven platforms’ - Construction News",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmisgfbvv95cux",
+      "title": "DfT tests market for privately financed HS2 Euston station job - Construction Enquirer",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmitafbvv95cux",
+      "title": "HS2’s construction team at Euston tops out new structure for London Underground - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiugfbvv95cux",
+      "title": "Transport secretary working ‘at pace’ on plan for HS2 Euston station - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixwfbvv95cux",
+      "title": "News - Mayor’s development corporation buys site for energy centre that will heat 10,000 homes - Inside Housing",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 9
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi-wfbvv95cux",
+      "title": "HS2 Euston: Government does not know what it is trying to achieve with the station - UK Parliament",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi0afbvv95cux",
+      "title": "Safety review halts work on HS2 London tunnels following crane disassembly incident - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi1afbvv95cux",
+      "title": "‘It’s a magic job for us’: HS2’s final TBM launches to bore Euston tunnel to central London - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi3gfbvv95cux",
+      "title": "DfT begins early market engagement for HS2 Euston station delivery public private partnership - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi3gfbvv95cux",
+      "title": "New plan for Euston station will see one concourse for HS2 and national rail services - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi4afbvv95cux",
+      "title": "Three years after being mothballed, contractors set to be sounded out about HS2 Euston station build | News - building.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmie0fvx3lxte5",
+      "title": "HS2 Launches Final TBM Towards Euston Station - Railway-News",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxte9",
+      "title": "HS2 challenges under London - Rail Magazine",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiggfbvv95cux",
+      "title": "HS2 'not where we planned it to be' - when will digging to Euston start? - My London",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiiwfbvv95cux",
+      "title": "HS2 Euston tunnel work put on hold - Construction Enquirer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmijwfbvv95cux",
+      "title": "Birmingham to London: Major milestone for HS2 as tunnelling to Euston starts - BirminghamWorld",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "Next stop Euston. HS2 begins tunnelling to central London - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimafbvv95cux",
+      "title": "Final machine launched in HS2 Euston tunnel dig - Planning, Building & Construction Today",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimgfbvv95cux",
+      "title": "HS2 drives £10billion west London economic boost - report - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimwfbvv95cux",
+      "title": "HS2 revives Euston spoil-by-rail plan - Construction News",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimwfbvv95cux",
+      "title": "HS2 opens first temporary space for community use at Euston - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbminwfbvv95cux",
+      "title": "HS2 final tunnel drive to Euston starts next week - Construction Enquirer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiogfbvv95cux",
+      "title": "Euston’s HS2 station to feature ‘space for more platforms’ amid turmoil - The Telegraph",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiogfbvv95cux",
+      "title": "Ministers request HS2 Euston station expansion to be \"futureproofed\" - Rail Magazine",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiowfbvv95cux",
+      "title": "Barhale lands further utilities work at HS2’s Euston station - geplus.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiowfbvv95cux",
+      "title": "HS2 crew digs final tunnel between Birmingham and west London with boring machine - The Independent",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "HS2 launches final giant tunnelling machine towards Euston station - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "HS2 events announced to get feedback on new Euston station designs - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "Euston Station’s uncertain future: Six HS2 platforms or more? - ianVisits",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipgfbvv95cux",
+      "title": "Government opens talks with industry over HS2’s Euston station - geplus.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipgfbvv95cux",
+      "title": "HS2 | Cost of Euston tunnels and station to top £7.5bn - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiqwfbvv95cux",
+      "title": "HS2 tunnelling to central London set to begin next week - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiqwfbvv95cux",
+      "title": "HS2 looks at reviving Euston station spoil-by-rail plan - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirgfbvv95cux",
+      "title": "£105m Euston HS2 station design work ‘can no longer be used’, DfT admits - The Architects’ Journal",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmisafbvv95cux",
+      "title": "HS2 Euston station to be made ‘more affordable’, says government - geplus.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmisgfbvv95cux",
+      "title": "New delivery body for HS2 Euston station being formed by DfT - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiswfbvv95cux",
+      "title": "HS2 Euston chiefs expected Spending Review announcement - Construction News",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiswfbvv95cux",
+      "title": "HS2 will run to London Euston after chancellor commits to funding - The Guardian",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmitafbvv95cux",
+      "title": "Giant boring machines to start HS2 tunnels from west London to Euston 'fairly soon,' says rail minister - London Evening Standard",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmitgfbvv95cux",
+      "title": "Inside the giant machine digging HS2’s railway tunnels to Euston station - ianVisits",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmitwfbvv95cux",
+      "title": "Barhale extends HS2 Euston role with utilities infrastructure greenlight - Water Magazine",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuafbvv95cux",
+      "title": "Construction on HS2’s Euston tunnel will start ‘fairly soon’, says rail minister - The Railway Magazine",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuafbvv95cux",
+      "title": "HS2 reveals huge new tunnel at Euston station - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuafbvv95cux",
+      "title": "Euston, we have a problem: unbuilt HS2 station racks up £289m in design fees - The Architects’ Journal",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuwfbvv95cux",
+      "title": "Barhale wins approval for further HS2 utilities work at Euston - Construction News",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivafbvv95cux",
+      "title": "HS2 Euston station will only have 6 platforms, rail minister confirms - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte5",
+      "title": "Madeleine the boring machine poised to build HS2 tunnel in London - BBC",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixwfbvv95cux",
+      "title": "HS2 commissioners demand clarity on ‘unclear and undefined’ Euston plans - Construction News",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiyafbvv95cux",
+      "title": "Ministers give steer to ‘Futureproof’ Euston’s HS2 station, newly released minutes reveal - ianVisits",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmizefvx3lxte5",
+      "title": "HS2 Euston Station - Mace",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmizgfbvv95cux",
+      "title": "Started too soon: HS2 boss blames pressure for early construction start for later problems - ianVisits",
+      "source": "Google News — HS2",
+      "curatorScore": 8
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi1gfbvv95cux",
+      "title": "HS2 | Euston tunnelling works rescheduled as Long Itchington Wood tunnel civils completed - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi7wfbvv95cux",
+      "title": "Asda unveils plans for a significant Mixed-Use Redevelopment creating a new town centre and new homes in London - Asda",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmia0fvx3lxte9",
+      "title": "Stop dithering and build it: Euston is the key to making HS2 worth it - lbc.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiakfvx3lxtfb",
+      "title": "Getting HS2 back on track - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmib0fvx3lxte9",
+      "title": "Barhale extends HS2 Euston role - The Tunnelling Journal",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmic0fvx3lxte1",
+      "title": "TBM launched for HS2 Euston tunnel - Railway PRO",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmic0fvx3lxte8",
+      "title": "HS2 and Euston: Recall - UK Parliament",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmickfvx3lxte9",
+      "title": "HS2 starts Euston tunnels - Modern Railways",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxte1",
+      "title": "Significan­t constructi­on progress on HS2 - PressReader",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxte8",
+      "title": "HS2 begins tunnelling to Euston - RailAdvent",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxte9",
+      "title": "HS2 launches TBM towards Euston - geplus.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmigajbvv95cux",
+      "title": "Where now for HS2?: PAC urges Govt to set out what benefit can be salvaged for taxpayer - UK Parliament",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmihgfbvv95cux",
+      "title": "HS2 Euston Tunnel Boring Begins - Rail Technology Magazine",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiiafbvv95cux",
+      "title": "Resetting the High Speed Two (HS2) programme - GOV.UK",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiiwfbvv95cux",
+      "title": "HS2 6-monthly report to Parliament: July 2025 - GOV.UK",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmijafbvv95cux",
+      "title": "HS2: final TBM starts its journey to Euston - geplus.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikwfbvv95cux",
+      "title": "Major milestone for HS2 as tunnelling to Euston starts - GOV.UK",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikwfbvv95cux",
+      "title": "HS2 Euston tunnel associated works put on pause - geplus.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "Preparing the railway for west London’s newest station - Network Rail",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimafbvv95cux",
+      "title": "Euston HS2 back on track, say ministers as final tunnelling begins - The Guardian",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmimafbvv95cux",
+      "title": "HS2 hands over new Euston Skills Centre to Camden Council - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbminwfbvv95cux",
+      "title": "Light at the end of the tunnel in HS2’s Euston saga - Railway Gazette",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "HS2 ‘a good way off having a clear outline’ for Euston terminus - The Architects’ Journal",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiqgfbvv95cux",
+      "title": "Public invited to give feedback on HS2’s Euston Portal headhouse design - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirafbvv95cux",
+      "title": "HS2 reveals giant tunnelling machines ready for 4.5-mile drive to Euston - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirgfbvv95cux",
+      "title": "PATRIZIA buys large London residential development for EUR 45 million - patrizia se",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirgfbvv95cux",
+      "title": "Money Pit or Miracle? HS2 Tunnelling Begins Amidst Sh1.2 Trillion Cost Fears - streamlinefeed.co.ke",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirwfbvv95cux",
+      "title": "New Euston Skills Centre officially open after being completed by HS2 team - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiswfbvv95cux",
+      "title": "Explained: Why 11 platforms are needed at HS2’s Euston terminus - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiugfbvv95cux",
+      "title": "HS2 prepares to bore its final tunnels as Euston TBM launch date confirmed - ianVisits",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiv0fvx3lxte5",
+      "title": "HS2 will not go to Euston without private funds - BBC",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivgfbvv95cux",
+      "title": "HS2 remains ‘a good way off having a clear outline’ for Euston terminus - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwgfbvv95cux",
+      "title": "HS2’s Euston terminus still at risk of poor decision-making, MPs tell Treasury | News - Building Design",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwgfbvv95cux",
+      "title": "Spending watchdog concerned HS2’s Euston terminus not classed as mega-project - building.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte5",
+      "title": "HS2: Huge boring machines will make Euston final destination - BBC",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxtfb",
+      "title": "HS2 Euston link funding announced in Budget - BBC",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixafbvv95cux",
+      "title": "HS2 marks reinterment of Euston remains with memorial monument - mediacentre.hs2.org.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixgfbvv95cux",
+      "title": "Digital twin of HS2 Euston saves £700,000 and cuts 24 weeks on enabling works - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiy0fvx3lxte4",
+      "title": "HS2: Euston work carries on regardless of concerns - BBC",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiyafbvv95cux",
+      "title": "Barhale to extend utilities work around Euston as HS2 enabling works continue - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiygfbvv95cux",
+      "title": "HS2 | Euston with only 7 platforms is not fit for the future network, experts say - New Civil Engineer",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmizafbvv95cux",
+      "title": "Tunnelling begins on HS2 Euston job as scheme’s boss states line is ‘on the right path’ - building.co.uk",
+      "source": "Google News — HS2",
+      "curatorScore": 7
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmi2wfbvv95cux",
+      "title": "£2.5m awarded to Brunel-led project to help West London food manufacturers reach net zero - Brunel University",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmifefvx3lxte9",
+      "title": "Lakeside Drive hotel, Royal Park, Brent, London - e-architect",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiigfbvv95cux",
+      "title": "Huge new West London town to be built with 25,000 homes and creating 56,000 jobs - My London",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmikajbvv95cux",
+      "title": "Renowned practitioners appointed as new panel members - London City Hall",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipafbvv95cux",
+      "title": "Crime scene in place after attempted arson attack near hospital - London Now",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmipgfbvv95cux",
+      "title": "Person dies following incident on Piccadilly line in London - London Now",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmisafbvv95cux",
+      "title": "Investigation launched after smoke pours from fire at laundry in west London - East London Advertiser",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmisafbvv95cux",
+      "title": "100 firefighters tackle blaze at west London industrial estate - London Evening Standard",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmitafbvv95cux",
+      "title": "Suppliers sought for creation of £800M West London heat network - New Civil Engineer",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiuafbvv95cux",
+      "title": "West London rail line a step closer to reality after £400,000 investment confirmed - Harrow Online",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxte9",
+      "title": "'New town' planned for west London brownfield land - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixefvx3lxtfb",
+      "title": "11 Million Dots: London's largest participatory public artwork unveiled - BBC",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixgfbvv95cux",
+      "title": "Alstom welcomes pupils in West London with special educational needs and disabilities - Alstom",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 6
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivwfbvv95cux",
+      "title": "Kammoon opens new facility to expand white label and retail business - Food Manufacture",
+      "source": "Google News — Old Oak Common",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-www-hs2-org-uk-podcast-episode-eleven-safe-a",
+      "title": "Episode Eleven: Safe at Heart",
+      "source": "HS2 Ltd",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-www-hs2-org-uk-podcast-episode-twelve-leavin",
+      "title": "Episode Twelve: Leaving a legacy",
+      "source": "HS2 Ltd",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-www-hs2-org-uk-podcast-learning-legacy-podca",
+      "title": "Learning Legacy Podcast: Episode Four – Being safe and inclusive every step of the way",
+      "source": "HS2 Ltd",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-www-hs2-org-uk-podcast-learning-legacy-podca",
+      "title": "Learning Legacy Podcast: Trailer",
+      "source": "HS2 Ltd",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-www-hs2-org-uk-transcript-episode-eleven-saf",
+      "title": "Episode Eleven: Safe at Heart (transcript)",
+      "source": "HS2 Ltd",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-www-hs2-org-uk-transcript-episode-twelve-lea",
+      "title": "Episode Twelve: Leaving a legacy (transcript)",
+      "source": "HS2 Ltd",
+      "curatorScore": 5
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmilwfbvv95cux",
+      "title": "Exclusive: RSHP is working on Euston station - The Architects’ Journal",
+      "source": "Google News — HS2",
+      "curatorScore": 3
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmirgfbvv95cux",
+      "title": "Euston reset kicks off £300m design and engineering role hunt - Construction Enquirer",
+      "source": "Google News — HS2",
+      "curatorScore": 3
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte9",
+      "title": "Residents fight to protect historic square near Euston - BBC",
+      "source": "Google News — HS2",
+      "curatorScore": 2
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiy0fvx3lxte1",
+      "title": "High Speed Two: Euston - NAO report - National Audit Office",
+      "source": "Google News — HS2",
+      "curatorScore": 2
+    }
+  ]
+}
