@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmitefvx3lxte9",
+  "title": "Park Royal - BBC",
+  "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9nVVhKT1k2OUhQSTAtb2lXWmZmRGdZOUtfazJHcmEzaGEwTUtkbWNpay03T2owMWpxbTdRNFRKRGNOdkdOQnY4UTRqYjk?oc=5",
+  "content": "Park Royal BBC",
+  "contentSnippet": "Park Royal BBC",
+  "publishDate": "Sun, 03 Dec 2017 18:24:03 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-06-03T12:36:07.158Z",
+    "status": "pending_review"
+  }
+}
