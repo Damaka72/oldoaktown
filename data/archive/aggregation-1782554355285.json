@@ -1,0 +1,17 @@
+{
+  "date": "2026-06-27T09:59:15.285Z",
+  "totalItemsFetched": 2,
+  "bySource": {
+    "Construction Enquirer": 1,
+    "Google News — Old Oak Common": 1
+  },
+  "byCategory": {
+    "construction": 1,
+    "general": 1
+  },
+  "byPriority": {
+    "medium": 1,
+    "high": 1
+  },
+  "itemsInReviewQueue": 262
+}
