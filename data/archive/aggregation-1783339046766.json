@@ -1,0 +1,16 @@
+{
+  "date": "2026-07-06T11:57:26.765Z",
+  "totalItemsFetched": 2,
+  "bySource": {
+    "Construction Enquirer": 1,
+    "Google News — HS2": 1
+  },
+  "byCategory": {
+    "construction": 1,
+    "hs2": 1
+  },
+  "byPriority": {
+    "medium": 2
+  },
+  "itemsInReviewQueue": 267
+}
