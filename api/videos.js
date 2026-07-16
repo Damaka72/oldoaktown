@@ -39,6 +39,14 @@ function parseVideoUrl(rawUrl) {
 // ─── Handler ─────────────────────────────────────────────────────────────────
 
 module.exports = async function handler(req, res) {
+    // Instagram feed lives here too (kept as one function to stay under the
+    // Vercel Hobby function limit). /api/instagram-feed rewrites to
+    // /api/videos?ig=1 — see vercel.json. Real posts when a token is set,
+    // graceful empty list otherwise so the homepage keeps its fallback grid.
+    if (req.method === 'GET' && req.query && req.query.ig) {
+        return handleInstagram(req, res);
+    }
+
     // GET — public, no auth required
     if (req.method === 'GET') {
         try {
@@ -131,3 +139,120 @@ module.exports = async function handler(req, res) {
 
     return res.status(405).json({ error: 'Method not allowed. Use GET to list, POST to add, or DELETE to remove.' });
 };
+
+// ─── Instagram feed (served at /api/instagram-feed via rewrite) ──────────────
+// Latest @oldoaktown posts via the official Instagram API with Instagram Login
+// (graph.instagram.com/me/media). The old Basic Display API was retired by
+// Meta in Dec 2024. Requires env var INSTAGRAM_ACCESS_TOKEN (long-lived,
+// ~60-day life — refresh via graph.instagram.com/refresh_access_token).
+// Never hard-fails: missing token or an API error returns an empty list so
+// the homepage keeps its static fallback grid.
+
+const IG_GRAPH_BASE = 'https://graph.instagram.com';
+const IG_FIELDS = [
+    'id',
+    'caption',
+    'media_type',
+    'media_url',
+    'permalink',
+    'thumbnail_url',
+    'timestamp',
+    'children{media_url,thumbnail_url,media_type}',
+].join(',');
+
+const IG_CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
+let igCache = { at: 0, posts: null };
+
+function igImageForPost(item) {
+    if (item.media_type === 'VIDEO') {
+        return item.thumbnail_url || item.media_url || null;
+    }
+    if (item.media_type === 'CAROUSEL_ALBUM') {
+        const first = item.children && item.children.data && item.children.data[0];
+        if (first) {
+            return first.media_type === 'VIDEO'
+                ? first.thumbnail_url || first.media_url || null
+                : first.media_url || first.thumbnail_url || null;
+        }
+        return item.media_url || item.thumbnail_url || null;
+    }
+    return item.media_url || item.thumbnail_url || null;
+}
+
+function igShortCaption(caption) {
+    if (!caption) return '';
+    const firstLine = caption.split('\n')[0].trim();
+    const clean = firstLine.replace(/\s+/g, ' ');
+    return clean.length > 90 ? clean.slice(0, 87).trimEnd() + '…' : clean;
+}
+
+async function handleInstagram(req, res) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+    const limit = Math.min(parseInt(req.query.limit, 10) || 6, 12);
+    const token = process.env.INSTAGRAM_ACCESS_TOKEN;
+
+    if (!token) {
+        return res.status(200).json({
+            success: false,
+            configured: false,
+            posts: [],
+            hint: 'Set INSTAGRAM_ACCESS_TOKEN in env vars to enable the live feed.',
+        });
+    }
+
+    if (igCache.posts && Date.now() - igCache.at < IG_CACHE_TTL_MS) {
+        return res.status(200).json({ success: true, cached: true, posts: igCache.posts.slice(0, limit) });
+    }
+
+    try {
+        const url =
+            `${IG_GRAPH_BASE}/me/media?fields=${encodeURIComponent(IG_FIELDS)}` +
+            `&limit=${limit}&access_token=${encodeURIComponent(token)}`;
+
+        const igRes = await fetch(url);
+        const raw = await igRes.text();
+        let data;
+        try {
+            data = JSON.parse(raw);
+        } catch {
+            data = null;
+        }
+
+        if (!igRes.ok || !data || data.error) {
+            const detail = data?.error?.message || raw.slice(0, 200);
+            console.error('Instagram feed error:', igRes.status, detail);
+            if (igCache.posts) {
+                return res.status(200).json({ success: true, stale: true, posts: igCache.posts.slice(0, limit) });
+            }
+            return res.status(200).json({ success: false, posts: [], error: detail });
+        }
+
+        const posts = (data.data || [])
+            .map((item) => {
+                const image = igImageForPost(item);
+                if (!image) return null;
+                return {
+                    id: item.id,
+                    image,
+                    permalink: item.permalink,
+                    caption: igShortCaption(item.caption),
+                    mediaType: item.media_type,
+                    timestamp: item.timestamp,
+                };
+            })
+            .filter(Boolean);
+
+        igCache = { at: Date.now(), posts };
+
+        return res.status(200).json({ success: true, posts: posts.slice(0, limit) });
+    } catch (err) {
+        console.error('Instagram feed exception:', err);
+        if (igCache.posts) {
+            return res.status(200).json({ success: true, stale: true, posts: igCache.posts.slice(0, limit) });
+        }
+        return res.status(200).json({ success: false, posts: [], error: err.message });
+    }
+}
