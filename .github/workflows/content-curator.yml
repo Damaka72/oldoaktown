@@ -23,10 +23,13 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/content-curator.js
 
-      - name: Commit curator digest
+      - name: Publish top picks to live site
+        run: node scripts/publish-news.js
+
+      - name: Commit curator digest and published news
         run: |
           git config user.name "Old Oak Town Bot"
           git config user.email "bot@oldoaktown.co.uk"
-          git add data/curator-digest/
-          git diff --staged --quiet || git commit -m "chore: curator digest $(date +%Y-%m-%d)"
+          git add data/curator-digest/ data/news.json
+          git diff --staged --quiet || git commit -m "chore: curator digest + auto-publish $(date +%Y-%m-%d)"
           git push
