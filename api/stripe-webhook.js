@@ -178,17 +178,20 @@ const stripeWebhookHandler = async (req, res) => {
     }
 };
 
+module.exports = stripeWebhookHandler;
+
 // Tell Vercel's Node.js runtime not to pre-parse the body for this function,
 // so getRawBody() above can read the raw bytes needed for signature
-// verification. Harmless/no-op under Express — server.js never reads this
-// property, it just calls the exported function directly.
-stripeWebhookHandler.config = {
+// verification. Vercel detects this via static analysis of the literal
+// "module.exports.config" text, so it must be written exactly like this
+// (not assigned via an intermediate variable) for Vercel to pick it up.
+// Harmless/no-op under Express — server.js never reads this property, it
+// just calls the exported function directly.
+module.exports.config = {
     api: {
         bodyParser: false
     }
 };
-
-module.exports = stripeWebhookHandler;
 
 async function sendPaidApprovalEmail(business, businessId) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
