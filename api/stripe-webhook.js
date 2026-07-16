@@ -53,9 +53,18 @@ const stripeWebhookHandler = async (req, res) => {
 
     const sig = req.headers['stripe-signature'];
 
+    // TEMPORARY DIAGNOSTICS — remove once signature verification is confirmed
+    // working. Logs shape/length info only, never secret values or payload
+    // contents.
+    const secretEnv = process.env.STRIPE_WEBHOOK_SECRET || '';
+    console.log('[webhook-debug] req.body typeof:', typeof req.body, 'isBuffer:', Buffer.isBuffer(req.body));
+    console.log('[webhook-debug] signature header present:', !!sig, sig ? sig.slice(0, 15) + '...' : null);
+    console.log('[webhook-debug] STRIPE_WEBHOOK_SECRET length:', secretEnv.length, 'prefix:', secretEnv.slice(0, 8));
+
     let event;
     try {
         const buf = await getRawBody(req);
+        console.log('[webhook-debug] raw body length:', buf.length);
         event = stripe.webhooks.constructEvent(
             buf,
             sig,
