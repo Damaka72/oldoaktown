@@ -282,11 +282,92 @@
                 <div class="tab" onclick="switchTab('approved', this)">Approved</div>
                 <div class="tab" onclick="switchTab('rejected', this)">Rejected</div>
                 <div class="tab" onclick="switchTab('all', this)">All</div>
+                <div class="tab" onclick="switchTab('events', this)">
+                    Events <span class="count" id="eventsPendingCount">0</span>
+                </div>
                 <div class="tab" onclick="switchTab('videos', this)">Videos</div>
             </div>
 
             <div id="businessList" class="business-list">
                 <div class="loading">Loading listings...</div>
+            </div>
+
+            <div id="eventsPanel" style="display:none;">
+
+                <!-- Add Event Form -->
+                <div class="admin-card" style="margin-bottom: 1.5rem;">
+                    <div class="admin-card-header" style="cursor:default;">
+                        <div>
+                            <div class="admin-card-title">Add New Event</div>
+                            <div class="admin-card-meta">Adds an event directly to the calendar as approved (goes live immediately)</div>
+                        </div>
+                    </div>
+                    <div class="admin-card-body" style="display:block;">
+                        <div class="detail-grid" style="margin-bottom:1rem;">
+                            <div class="detail-item" style="grid-column: 1/-1;">
+                                <label>Title *</label>
+                                <input type="text" id="evTitle" placeholder="e.g. OPDC Community Forum"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item">
+                                <label>Date *</label>
+                                <input type="date" id="evDate"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item">
+                                <label>Category</label>
+                                <select id="evCategory" style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                                    <option value="community">Community</option>
+                                    <option value="planning">Planning &amp; consultation</option>
+                                    <option value="hs2">HS2 &amp; construction</option>
+                                    <option value="housing">Housing</option>
+                                    <option value="business">Business &amp; networking</option>
+                                    <option value="investment">Investment</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="detail-item">
+                                <label>Start time</label>
+                                <input type="time" id="evStart"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item">
+                                <label>End time</label>
+                                <input type="time" id="evEnd"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item">
+                                <label>Location</label>
+                                <input type="text" id="evLocation" placeholder="e.g. Old Oak Community Centre, or Online (Zoom)"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item">
+                                <label>Postcode</label>
+                                <input type="text" id="evPostcode" placeholder="e.g. W12 0AP"
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item" style="grid-column: 1/-1;">
+                                <label>Registration / info link</label>
+                                <input type="url" id="evUrl" placeholder="https://..."
+                                       style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem;">
+                            </div>
+                            <div class="detail-item" style="grid-column: 1/-1;">
+                                <label>Description</label>
+                                <textarea id="evDesc" rows="2" placeholder="Short description shown on the calendar card..."
+                                          style="width:100%; padding:0.8rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-top:0.3rem; resize:vertical;"></textarea>
+                            </div>
+                        </div>
+                        <button class="btn btn-approve" onclick="addEvent()" id="addEventBtn">
+                            + Add Event to Calendar
+                        </button>
+                        <span id="addEventMsg" style="margin-left:1rem; font-weight:600;"></span>
+                    </div>
+                </div>
+
+                <!-- Existing event list -->
+                <div id="eventList" class="business-list">
+                    <div class="loading">Loading events...</div>
+                </div>
             </div>
 
             <div id="videosPanel" style="display:none;">
@@ -420,6 +501,7 @@
             updateStats(allData);
             renderList(currentTab);
             loadVideos(); // populates Videos Live stat card on page load
+            loadEvents(true); // populates Events pending badge (count only, no re-render churn)
         }
 
         function updateStats(data) {
@@ -443,11 +525,15 @@
             el.classList.add('active');
 
             var isVideos = tab === 'videos';
-            document.getElementById('businessList').style.display = isVideos ? 'none' : '';
+            var isEvents = tab === 'events';
+            document.getElementById('businessList').style.display = (isVideos || isEvents) ? 'none' : '';
             document.getElementById('videosPanel').style.display  = isVideos ? 'block' : 'none';
+            document.getElementById('eventsPanel').style.display  = isEvents ? 'block' : 'none';
 
             if (isVideos) {
                 loadVideos();
+            } else if (isEvents) {
+                loadEvents();
             } else {
                 renderList(tab);
             }
@@ -702,6 +788,171 @@
                 }
             } catch (err) {
                 showToast('❌ Network error', true);
+            }
+        }
+
+        // ─── EVENT MANAGEMENT ────────────────────────────────────────────────
+
+        var allEvents = [];
+
+        function escHtml(s) {
+            return String(s == null ? '' : s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        async function loadEvents(countOnly) {
+            var list = document.getElementById('eventList');
+            if (!countOnly && list) list.innerHTML = '<div class="loading">Loading events...</div>';
+
+            try {
+                var resp = await fetch('/api/approve-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'list', password: _adminPassword })
+                });
+                var data = await resp.json();
+                allEvents = data.events || [];
+
+                var pending = allEvents.filter(function (e) { return e.status === 'pending'; }).length;
+                document.getElementById('eventsPendingCount').textContent = pending;
+
+                if (countOnly || !list) return;
+                renderEvents();
+            } catch (err) {
+                if (list) list.innerHTML = '<div class="empty-state"><p>Error loading events.</p></div>';
+            }
+        }
+
+        function renderEvents() {
+            var list = document.getElementById('eventList');
+            if (!list) return;
+            if (allEvents.length === 0) {
+                list.innerHTML = '<div class="empty-state"><p>📅</p><h3>No events yet</h3><p>Add one above, or wait for community submissions.</p></div>';
+                return;
+            }
+            // Pending first, then by date
+            var sorted = allEvents.slice().sort(function (a, b) {
+                if (a.status === 'pending' && b.status !== 'pending') return -1;
+                if (b.status === 'pending' && a.status !== 'pending') return 1;
+                return (a.event_date || '').localeCompare(b.event_date || '');
+            });
+            list.innerHTML = sorted.map(renderEventCard).join('');
+        }
+
+        function renderEventCard(e) {
+            var dateStr = e.event_date
+                ? new Date(e.event_date + 'T00:00:00').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
+                : '—';
+            var timeStr = e.start_time ? e.start_time.slice(0, 5) + (e.end_time ? ' – ' + e.end_time.slice(0, 5) : '') : 'Time TBC';
+            var srcLabel = { community_submission: 'Community submission', external_feed: 'External feed', news_scan: 'News scan', manual: 'Added by admin' }[e.source] || e.source;
+
+            return '' +
+                '<div class="admin-card">' +
+                    '<div class="admin-card-header" onclick="toggleCard(\'' + e.id + '\')">' +
+                        '<div>' +
+                            '<div class="admin-card-title">' + escHtml(e.title) + '</div>' +
+                            '<div class="admin-card-meta">' + dateStr + ' · ' + escHtml(timeStr) + ' · ' + escHtml(e.category || 'community') + ' · ' + escHtml(srcLabel) + '</div>' +
+                        '</div>' +
+                        '<div style="display:flex; gap:0.5rem; align-items:center;">' +
+                            '<span class="status-badge ' + e.status + '">' + e.status + '</span>' +
+                            '<span style="color:#999; margin-left:0.5rem;">▼</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="admin-card-body" id="card-' + e.id + '">' +
+                        '<div class="detail-grid">' +
+                            '<div class="detail-item"><label>Location</label><span>' + escHtml(e.location || '—') + ' ' + escHtml(e.postcode || '') + '</span></div>' +
+                            '<div class="detail-item"><label>Organiser</label><span>' + escHtml(e.organiser_name || '—') + '</span></div>' +
+                            '<div class="detail-item"><label>Contact</label><span>' + escHtml(e.organiser_email || '—') + '</span></div>' +
+                            '<div class="detail-item"><label>Link</label><span>' + (e.source_url ? '<a href="' + escHtml(e.source_url) + '" target="_blank" rel="noopener">Open</a>' : '—') + '</span></div>' +
+                        '</div>' +
+                        '<div class="description-box"><strong>Description:</strong><br>' + escHtml(e.description || '—') + '</div>' +
+                        '<div class="action-buttons">' +
+                            (e.status !== 'approved' ? '<button class="btn btn-approve" onclick="updateEvent(\'' + e.id + '\', \'approve\')">✅ Approve</button>' : '') +
+                            (e.status !== 'rejected' ? '<button class="btn btn-reject" onclick="updateEvent(\'' + e.id + '\', \'reject\')">❌ Reject</button>' : '') +
+                            (e.status === 'approved' ? '<button class="btn btn-edit" onclick="updateEvent(\'' + e.id + '\', \'suspend\')">⏸ Unpublish</button>' : '') +
+                            '<button class="btn btn-delete" onclick="updateEvent(\'' + e.id + '\', \'delete\')">🗑 Delete</button>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+        }
+
+        async function updateEvent(id, action) {
+            var prompts = {
+                approve: 'Approve this event? It will appear on the homepage calendar.',
+                reject:  'Reject this event? It will be hidden from the calendar.',
+                suspend: 'Unpublish this event? It will be removed from the calendar but kept for review.',
+                delete:  'Delete this event permanently? This cannot be undone.'
+            };
+            if (!confirm(prompts[action] || 'Are you sure?')) return;
+
+            try {
+                var resp = await fetch('/api/approve-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ eventId: id, action: action, password: _adminPassword })
+                });
+                var data = await resp.json();
+                if (resp.ok && data.success) {
+                    showToast(action === 'approve' ? '✅ Event approved and live!' : 'Event ' + action + 'd');
+                    await loadEvents();
+                } else {
+                    showToast('❌ ' + (data.error || 'Failed to update event'), true);
+                }
+            } catch (err) {
+                showToast('❌ Network error', true);
+            }
+        }
+
+        async function addEvent() {
+            var btn = document.getElementById('addEventBtn');
+            var msg = document.getElementById('addEventMsg');
+            var event = {
+                title:        document.getElementById('evTitle').value.trim(),
+                eventDate:    document.getElementById('evDate').value,
+                category:     document.getElementById('evCategory').value,
+                startTime:    document.getElementById('evStart').value,
+                endTime:      document.getElementById('evEnd').value,
+                location:     document.getElementById('evLocation').value.trim(),
+                postcode:     document.getElementById('evPostcode').value.trim(),
+                sourceUrl:    document.getElementById('evUrl').value.trim(),
+                description:  document.getElementById('evDesc').value.trim()
+            };
+
+            if (!event.title || !event.eventDate) {
+                msg.style.color = '#dc3545';
+                msg.textContent = 'Title and date are required.';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+            msg.textContent = '';
+
+            try {
+                var resp = await fetch('/api/approve-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'create', password: _adminPassword, event: event })
+                });
+                var data = await resp.json();
+                if (resp.ok && data.success) {
+                    msg.style.color = '#28a745';
+                    msg.textContent = '✅ Event added and live!';
+                    ['evTitle','evDate','evStart','evEnd','evLocation','evPostcode','evUrl','evDesc'].forEach(function (f) {
+                        document.getElementById(f).value = '';
+                    });
+                    await loadEvents();
+                } else {
+                    msg.style.color = '#dc3545';
+                    msg.textContent = '❌ ' + (data.error || 'Failed to add event');
+                }
+            } catch (err) {
+                msg.style.color = '#dc3545';
+                msg.textContent = '❌ Network error. Please try again.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '+ Add Event to Calendar';
             }
         }
 

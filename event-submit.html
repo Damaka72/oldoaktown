@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit an Event | Old Oak Town</title>
+    <meta name="description" content="Add your community event to the Old Oak Town events calendar. Free for local groups, businesses, and residents across Old Oak Common and Park Royal.">
+    <link rel="canonical" href="https://www.oldoaktown.co.uk/event-submit.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.oldoaktown.co.uk/event-submit.html">
+    <meta property="og:title" content="Submit an Event | Old Oak Town">
+    <meta property="og:description" content="Share your community event with residents across West London's newest neighbourhood.">
+    <meta property="og:site_name" content="Old Oak Town">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary-green: #2D5016;
+            --warm-brown: #8B4513;
+            --cream: #F5F5DC;
+            --dark-grey: #333333;
+            --light-grey: #f8f9fa;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background: var(--light-grey);
+        }
+
+        .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: var(--primary-green);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        header p { opacity: 0.9; font-size: 1.05rem; }
+
+        nav { background: #1a3009; padding: 1rem 0; }
+        nav .container { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+        nav a { color: rgba(255,255,255,0.8); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: white; }
+
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 2.5rem;
+            margin: 2.5rem 0;
+        }
+
+        .form-card h2 { color: var(--primary-green); margin-bottom: 0.4rem; font-size: 1.6rem; }
+        .form-card .intro { color: #555; margin-bottom: 2rem; }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .form-group { margin-bottom: 0; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        label { display: block; font-weight: 600; margin-bottom: 0.4rem; font-size: 0.95rem; }
+        label .req { color: #c0392b; }
+        .hint { font-weight: 400; color: #888; font-size: 0.82rem; }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-green); }
+        textarea { resize: vertical; min-height: 100px; }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 1rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 1.8rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover { background: #244012; }
+        .btn-submit:disabled { background: #9aa792; cursor: not-allowed; }
+
+        .form-message { margin-top: 1.2rem; padding: 1rem; border-radius: 6px; font-weight: 600; display: none; }
+        .form-message.success { display: block; background: #d4edda; color: #155724; }
+        .form-message.error { display: block; background: #f8d7da; color: #721c24; }
+
+        .note { background: #F0F7EB; border-left: 4px solid var(--primary-green); padding: 1rem 1.2rem; border-radius: 6px; margin-bottom: 2rem; color: #3a4a2e; font-size: 0.92rem; }
+
+        footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.9rem; }
+
+        @media (max-width: 640px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-card { padding: 1.5rem; }
+            header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>🌳 Submit an Event</h1>
+            <p>Share your community event with Old Oak Common &amp; Park Royal</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <a href="index.html">Home</a>
+            <a href="index.html#events" class="active">Events</a>
+            <a href="business-directory.html">Business Directory</a>
+            <a href="business-submit.html">List a Business</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="form-card">
+            <h2>Tell us about your event</h2>
+            <p class="intro">Free for local groups, residents, and businesses. Every submission is reviewed by our team before it appears on the calendar.</p>
+
+            <div class="note">
+                📌 We publish genuine, public events relevant to the Old Oak Common area — community meetings, consultations, markets, workshops, business networking, and more. Submissions are checked before going live, so please give accurate details.
+            </div>
+
+            <form id="eventForm">
+                <div class="form-grid">
+                    <div class="form-group full">
+                        <label for="title">Event title <span class="req">*</span></label>
+                        <input type="text" id="title" name="title" required placeholder="e.g. Old Oak Community Litter Pick">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="eventDate">Date <span class="req">*</span></label>
+                        <input type="date" id="eventDate" name="eventDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" name="category">
+                            <option value="community">Community</option>
+                            <option value="planning">Planning &amp; consultation</option>
+                            <option value="hs2">HS2 &amp; construction</option>
+                            <option value="housing">Housing</option>
+                            <option value="business">Business &amp; networking</option>
+                            <option value="investment">Investment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="startTime">Start time</label>
+                        <input type="time" id="startTime" name="startTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="endTime">End time</label>
+                        <input type="time" id="endTime" name="endTime">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Venue / location</label>
+                        <input type="text" id="location" name="location" placeholder="e.g. Old Oak Community Centre, or Online (Zoom)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postcode">Postcode <span class="hint">(if in person)</span></label>
+                        <input type="text" id="postcode" name="postcode" placeholder="e.g. W12 0AP">
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="What's happening, who it's for, and anything attendees should know."></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="sourceUrl">Registration / info link <span class="hint">(optional)</span></label>
+                        <input type="url" id="sourceUrl" name="sourceUrl" placeholder="https://...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organiserName">Your name / organisation</label>
+                        <input type="text" id="organiserName" name="organiserName" placeholder="e.g. Old Oak Neighbourhood Forum">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="organiserEmail">Your email <span class="hint">(so we can reach you)</span></label>
+                        <input type="email" id="organiserEmail" name="organiserEmail" placeholder="you@example.com">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Submit Event for Review</button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            🌳 Old Oak Town &middot; <a href="index.html" style="color:var(--primary-green);">oldoaktown.co.uk</a>
+        </div>
+    </footer>
+
+    <script>
+        // Prevent selecting a date in the past
+        document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
+
+        document.getElementById('eventForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var btn = document.getElementById('submitBtn');
+            var msg = document.getElementById('formMessage');
+            msg.className = 'form-message';
+
+            var payload = {
+                title:          document.getElementById('title').value.trim(),
+                eventDate:      document.getElementById('eventDate').value,
+                category:       document.getElementById('category').value,
+                startTime:      document.getElementById('startTime').value,
+                endTime:        document.getElementById('endTime').value,
+                location:       document.getElementById('location').value.trim(),
+                postcode:       document.getElementById('postcode').value.trim(),
+                description:    document.getElementById('description').value.trim(),
+                sourceUrl:      document.getElementById('sourceUrl').value.trim(),
+                organiserName:  document.getElementById('organiserName').value.trim(),
+                organiserEmail: document.getElementById('organiserEmail').value.trim()
+            };
+
+            if (!payload.title || !payload.eventDate) {
+                msg.className = 'form-message error';
+                msg.textContent = 'Please provide at least an event title and date.';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            try {
+                var res = await fetch('/api/submit-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                var data = await res.json();
+
+                if (res.ok && data.success) {
+                    msg.className = 'form-message success';
+                    msg.textContent = data.message || 'Thank you — your event has been submitted for review.';
+                    document.getElementById('eventForm').reset();
+                    document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
+                } else {
+                    msg.className = 'form-message error';
+                    msg.textContent = data.error || 'Something went wrong. Please try again.';
+                }
+            } catch (err) {
+                msg.className = 'form-message error';
+                msg.textContent = 'Network error. Please check your connection and try again.';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Submit Event for Review';
+            }
+        });
+    </script>
+</body>
+</html>
