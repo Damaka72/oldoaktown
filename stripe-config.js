@@ -6,16 +6,16 @@ const STRIPE_CONFIG = {
     // These are pre-built Stripe-hosted checkout pages that handle subscriptions
     paymentLinks: {
         featured: {
-            monthly: 'https://buy.stripe.com/test_3cI14p4Gz51GeGWgEUes000',  // £35/month subscription (test mode)
-            annual: 'https://buy.stripe.com/28E9AV6OHcu8cyOcoEes002'     // £126/year subscription
+            monthly: 'https://buy.stripe.com/14AaEX4RebMs6b69M20Jq00',  // £35/month subscription
+            annual: 'https://buy.stripe.com/7sYdR9fvSeYE1UQ1fw0Jq01'     // £126/year subscription
         },
         premium: {
-            monthly: 'https://buy.stripe.com/8x23cx8WP51G6aq74kes003',   // £75/month subscription
-            annual: 'https://buy.stripe.com/7sYfZj0qjdycbuK4Wces004'     // £270/year subscription
+            monthly: 'https://buy.stripe.com/eVq5kD83qaIoarm3nE0Jq02',   // £75/month subscription
+            annual: 'https://buy.stripe.com/8x228r4Re17O572f6m0Jq03'     // £270/year subscription
         },
         newsletter: {
-            monthly: 'https://buy.stripe.com/cNi3cx4Gz0Lq7eufAQes005', // £150/month subscription
-            annual: 'https://buy.stripe.com/7sYfZjeh9dyc56mcoEes006'    // £540/year subscription
+            monthly: 'https://buy.stripe.com/bJe14ndnKbMs1UQ3nE0Jq04', // £150/month subscription
+            annual: 'https://buy.stripe.com/8x228r4RecQw2YU4rI0Jq05'    // £540/year subscription
         }
     }
 };
