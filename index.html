@@ -1573,7 +1573,9 @@
     <div class="ig-feed-section">
         <div class="container">
             <p class="ig-feed-title">Latest from <a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">@oldoaktown</a></p>
-            <div class="ig-feed-grid">
+            <!-- Grid shows real posts from /api/instagram-feed when a token is
+                 configured; falls back to the static items below otherwise. -->
+            <div class="ig-feed-grid" id="igFeedGrid">
                 <a class="ig-feed-item" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">
                     <img src="https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=300&h=300&fit=crop" alt="HS2 construction at Old Oak Common">
                     <div class="ig-feed-overlay">HS2 platforms now being installed</div>
@@ -3134,6 +3136,50 @@
                 })
                 .catch(function() {
                     loading.textContent = 'Could not load videos. Please refresh the page.';
+                });
+        });
+
+        // ─────────────────────────────────────────
+        // INSTAGRAM FEED — live posts from @oldoaktown
+        // Replaces the static fallback grid with real posts when
+        // /api/instagram-feed returns any. If the token isn't set or the
+        // request fails, the hardcoded fallback items stay in place.
+        // ─────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function() {
+            var igGrid = document.getElementById('igFeedGrid');
+            if (!igGrid) return;
+
+            function escapeHtml(str) {
+                return String(str || '')
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            fetch('/api/instagram-feed?limit=6')
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    var posts = (data && data.posts) || [];
+                    if (!posts.length) return; // keep static fallback
+
+                    igGrid.innerHTML = posts.map(function(p) {
+                        var caption = escapeHtml(p.caption);
+                        var overlay = caption
+                            ? '<div class="ig-feed-overlay">' + caption + '</div>'
+                            : '';
+                        return '' +
+                            '<a class="ig-feed-item" href="' + escapeHtml(p.permalink) +
+                                '" target="_blank" rel="noopener noreferrer">' +
+                                '<img src="' + escapeHtml(p.image) + '" alt="' +
+                                    (caption || 'Instagram post from @oldoaktown') +
+                                    '" loading="lazy">' +
+                                overlay +
+                            '</a>';
+                    }).join('');
+                })
+                .catch(function() {
+                    /* keep the static fallback grid on any error */
                 });
         });
 
