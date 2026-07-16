@@ -2724,32 +2724,56 @@
             { title: 'Old Oak Neighbourhood Forum Monthly Meeting', date: new Date(2026, 3, 23), time: '7:00 PM \u2013 9:00 PM', location: 'St Mary Magdalene Church Hall', address: 'Woodfield Road, London W9 2BA', description: 'Monthly open meeting of the Old Oak Neighbourhood Forum.', registerUrl: 'http://oldoakneighbourhoodforum.org/' }
         ];
 
+        // Supabase \u2014 approved community events (public read-only key)
+        var EVENTS_SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
+        var EVENTS_SUPABASE_KEY = 'sb_publishable_VkPeyAuBApuLFpCZdvDRmg_a-klB2GX';
+
+        function escapeHtml(s) {
+            return String(s == null ? '' : s)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        // Map a Supabase `events` row to the calendar's render shape
         function normaliseEvent(ev) {
-            var parts = ev.date.split('-');
+            var parts = String(ev.event_date).split('-');
             var d = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
             function fmt24(t) {
+                if (!t) return '';
                 var p = t.split(':'), h = parseInt(p[0]), m = p[1];
                 var ampm = h >= 12 ? 'PM' : 'AM';
                 h = h % 12 || 12;
                 return h + ':' + m + ' ' + ampm;
             }
+            var start = fmt24(ev.start_time), end = fmt24(ev.end_time);
+            var time = start && end ? start + ' \u2013 ' + end : (start || 'Time TBC');
+            // Only allow safe registration links (http/https), otherwise no button
+            var url = ev.source_url || '';
+            var registerUrl = /^https?:\/\//i.test(url) ? url : '#';
             return {
-                title: ev.title,
+                title: escapeHtml(ev.title),
                 date: d,
-                time: fmt24(ev.startTime) + ' \u2013 ' + fmt24(ev.endTime),
-                location: ev.location.name,
-                address: ev.location.address,
-                description: ev.description,
-                registerUrl: ev.registrationUrl || '#'
+                time: time,
+                location: escapeHtml(ev.location || 'Old Oak Common'),
+                address: escapeHtml(ev.postcode || ''),
+                description: escapeHtml(ev.description || ''),
+                registerUrl: registerUrl
             };
         }
 
-        // Load live events from JSON, fall back silently to calendarEvents above
-        fetch('/data/events.json')
+        // Load live approved events from Supabase, fall back silently to calendarEvents above
+        fetch(EVENTS_SUPABASE_URL + '/rest/v1/events?status=eq.approved&order=event_date.asc', {
+                headers: {
+                    'apikey': EVENTS_SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + EVENTS_SUPABASE_KEY
+                }
+            })
             .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
-            .then(function(data) {
-                if (data.events && data.events.length) {
-                    calendarEvents = data.events.map(normaliseEvent);
+            .then(function(rows) {
+                if (Array.isArray(rows) && rows.length) {
+                    calendarEvents = rows
+                        .map(normaliseEvent)
+                        .filter(function(ev) { return ev.date && !isNaN(ev.date.getTime()); });
                     renderCalendar();
                 }
             })
