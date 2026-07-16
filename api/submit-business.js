@@ -3,7 +3,7 @@
 // Saves to Supabase when configured, otherwise falls back to local JSON file
 
 const { createClient } = require('@supabase/supabase-js');
-const nodemailer = require('nodemailer');
+const { sendEmail } = require('./_shared/resend');
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
@@ -105,8 +105,8 @@ module.exports = async (req, res) => {
 };
 
 async function sendApprovalEmail(business, businessId) {
-    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-        console.warn('SMTP credentials not configured — skipping approval email for submission', businessId);
+    if (!process.env.RESEND_API_KEY) {
+        console.warn('RESEND_API_KEY not configured — skipping approval email for submission', businessId);
         return;
     }
 
@@ -148,15 +148,7 @@ async function sendApprovalEmail(business, businessId) {
         </div>
     `;
 
-    const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST || 'smtp.gmail.com',
-        port: process.env.SMTP_PORT || 587,
-        secure: false,
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-    });
-
-    await transporter.sendMail({
-        from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
+    await sendEmail({
         to: ADMIN_EMAIL,
         subject: `New Free Listing Submission: ${business.business_name}`,
         html: emailHtml
