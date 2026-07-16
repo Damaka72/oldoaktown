@@ -131,7 +131,7 @@ We welcome community contributions!
 
 ## 📝 License
 
-Content: © 2025 Old Oak Town. All rights reserved.
+Content: © 2026 Old Oak Town. All rights reserved.
 
 Code: MIT License (see LICENSE file)
 
