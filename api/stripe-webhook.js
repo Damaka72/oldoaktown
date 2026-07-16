@@ -13,7 +13,7 @@
 
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
-const nodemailer = require('nodemailer');
+const { sendEmail } = require('./_shared/resend');
 
 // Returns the raw request body as a Buffer, regardless of whether it has
 // already been buffered by Express (express.raw()) or still needs to be
@@ -38,13 +38,6 @@ const supabase = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_SERVICE_KEY
 );
-
-const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT || 587,
-    secure: false,
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
-});
 
 const stripeWebhookHandler = async (req, res) => {
     if (req.method !== 'POST') {
@@ -190,8 +183,7 @@ async function sendPaidApprovalEmail(business, businessId) {
     const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
     const tierLabel = business.tier === 'premium' ? 'Premium (£75/mo)' : 'Featured (£35/mo)';
 
-    await transporter.sendMail({
-        from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
+    await sendEmail({
         to: ADMIN_EMAIL,
         subject: `💳 Payment Confirmed - ${business.business_name} [${tierLabel}] - Needs Approval`,
         html: `
@@ -224,8 +216,7 @@ async function sendPaidApprovalEmail(business, businessId) {
 async function sendCancellationEmail(business) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
     const SITE_URL = process.env.SITE_URL || 'https://www.oldoaktown.co.uk';
-    await transporter.sendMail({
-        from: `"Old Oak Town" <${ADMIN_EMAIL}>`,
+    await sendEmail({
         to: business.email,
         subject: `Your Old Oak Town subscription has been cancelled - ${business.business_name}`,
         html: `
