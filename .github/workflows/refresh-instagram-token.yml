@@ -1,0 +1,29 @@
+name: Refresh Instagram Token
+
+# Instagram long-lived tokens expire after ~60 days. Refresh monthly so the
+# homepage feed never goes stale. Can also be run on demand from the Actions
+# tab (workflow_dispatch) to test the setup or refresh early.
+on:
+  schedule:
+    - cron: '0 4 1 * *'   # 04:00 UTC on the 1st of each month
+  workflow_dispatch:
+
+jobs:
+  refresh-token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Refresh Instagram token and update Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_PROJECT_ID: prj_IGyLo0ADMJlofgrPbyrWYwMYbgPo
+          VERCEL_TEAM_ID: team_2fG7WKNEcvEFVhRPxREhEgs8
+          VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: node scripts/refresh-instagram-token.js
