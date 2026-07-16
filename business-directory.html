@@ -451,11 +451,15 @@
                 <a href="business-directory.html">Directory</a>
                 <a href="business-submit.html">Advertise</a>
             </p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">© 2026 Old Oak Town. Serving the Old Oak Common community.</p>
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">© <span class="current-year">2026</span> Old Oak Town. Serving the Old Oak Common community.</p>
         </div>
     </footer>
 
     <script>
+        document.querySelectorAll('.current-year').forEach(function (el) {
+            el.textContent = new Date().getFullYear();
+        });
+
         const SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
 

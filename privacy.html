@@ -148,8 +148,14 @@
 </div>
 
 <footer>
-    <p>&copy; 2026 Old Oak Town. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="/">Back to Home</a></p>
+    <p>&copy; <span class="current-year">2026</span> Old Oak Town. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="/">Back to Home</a></p>
 </footer>
+
+<script>
+    document.querySelectorAll('.current-year').forEach(function (el) {
+        el.textContent = new Date().getFullYear();
+    });
+</script>
 
 </body>
 </html>

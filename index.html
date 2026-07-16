@@ -2330,12 +2330,19 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Old Oak Town. All rights reserved. | <a href="privacy.html" style="color: #999;">Privacy Policy</a></p>
+                <p>&copy; <span class="current-year">2026</span> Old Oak Town. All rights reserved. | <a href="privacy.html" style="color: #999;">Privacy Policy</a></p>
             </div>
         </div>
     </footer>
 
     <script>
+        // ─────────────────────────────────────────
+        // FOOTER YEAR
+        // ─────────────────────────────────────────
+        document.querySelectorAll('.current-year').forEach(function (el) {
+            el.textContent = new Date().getFullYear();
+        });
+
         // ─────────────────────────────────────────
         // NEWSLETTER SUBSCRIPTION
         // ─────────────────────────────────────────
