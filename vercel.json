@@ -1,6 +1,12 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/api/approve-business", "destination": "/api/approve?kind=business" },
+    { "source": "/api/approve-event", "destination": "/api/approve?kind=event" },
+    { "source": "/api/approve-listing", "destination": "/api/approve?kind=listing" },
+    { "source": "/api/instagram-feed", "destination": "/api/videos?ig=1" }
+  ],
   "headers": [
     {
       "source": "/admin/(.*)",

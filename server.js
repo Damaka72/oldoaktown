@@ -107,15 +107,19 @@ app.post('/api/subscribe', rateLimit(60_000, 5), async (req, res) => {
 // ─────────────────────────────────────────────
 
 const submitBusiness = require('./api/submit-business');
-const approveBusiness = require('./api/approve-business');
+// approve-business / approve-event / approve-listing were consolidated into
+// api/approve.js (Vercel Hobby function-count limit). On Vercel the old paths
+// are preserved via rewrites in vercel.json; here we set `kind` explicitly so
+// local dev behaves the same.
+const approve = require('./api/approve');
 const getBusinesses = require('./api/get-businesses');
 const stripeWebhook = require('./api/stripe-webhook');
-const approveListing = require('./api/approve-listing');
 app.post('/api/submit-business', rateLimit(60_000, 10), submitBusiness);
-app.get('/api/approve-business', approveBusiness);
+app.get('/api/approve-business', (req, res) => { req.query.kind = 'business'; approve(req, res); });
 app.get('/api/get-businesses', getBusinesses);
 app.post('/api/stripe-webhook', express.raw({type: 'application/json'}), stripeWebhook);
-app.post('/api/approve-listing', approveListing);
+app.post('/api/approve-listing', (req, res) => { req.query.kind = 'listing'; approve(req, res); });
+app.post('/api/approve-event', (req, res) => { req.query.kind = 'event'; approve(req, res); });
 
 app.listen(PORT, () => {
     console.log(`Old Oak Town server running on port ${PORT}`);
