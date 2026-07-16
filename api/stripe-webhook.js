@@ -1,10 +1,33 @@
 // api/stripe-webhook.js
 // Listens for Stripe payment events
 // Upgrades listing tier when payment confirmed, downgrades on cancellation
+//
+// IMPORTANT: Stripe webhook signature verification requires the *raw*
+// request body. When this file runs under Express (server.js, self-hosted),
+// express.raw() already gives us req.body as a Buffer. When it runs as a
+// bare Vercel serverless function (no framework — this project is deployed
+// with framework: null), Vercel auto-parses JSON bodies unless we opt out
+// via the `config` export below, in which case we read the raw bytes off
+// the request stream ourselves. Both paths are handled so this file works
+// unmodified in either environment.
 
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
+
+// Returns the raw request body as a Buffer, regardless of whether it has
+// already been buffered by Express (express.raw()) or still needs to be
+// read directly off the incoming stream (Vercel with bodyParser disabled).
+async function getRawBody(req) {
+    if (Buffer.isBuffer(req.body)) {
+        return req.body;
+    }
+    const chunks = [];
+    for await (const chunk of req) {
+        chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    }
+    return Buffer.concat(chunks);
+}
 
 const stripe = new Stripe(
     process.env.NODE_ENV === 'production'
@@ -23,17 +46,16 @@ const transporter = nodemailer.createTransport({
     auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
 });
 
-module.exports = async (req, res) => {
+const stripeWebhookHandler = async (req, res) => {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
     }
 
-    // express.raw() (applied in server.js) already stores the raw body in req.body
-    const buf = req.body;
     const sig = req.headers['stripe-signature'];
 
     let event;
     try {
+        const buf = await getRawBody(req);
         event = stripe.webhooks.constructEvent(
             buf,
             sig,
@@ -146,6 +168,18 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'Webhook processing failed' });
     }
 };
+
+// Tell Vercel's Node.js runtime not to pre-parse the body for this function,
+// so getRawBody() above can read the raw bytes needed for signature
+// verification. Harmless/no-op under Express — server.js never reads this
+// property, it just calls the exported function directly.
+stripeWebhookHandler.config = {
+    api: {
+        bodyParser: false
+    }
+};
+
+module.exports = stripeWebhookHandler;
 
 async function sendPaidApprovalEmail(business, businessId) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
