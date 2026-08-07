@@ -28,6 +28,31 @@ const VALID_CATEGORIES = ['hs2', 'planning', 'housing', 'community', 'business',
 const FEATURED_PRICE = 35;
 const PREMIUM_PRICE  = 75;
 
+// Tell Command Hub a business was just approved, so it can draft a social +
+// newsletter spotlight within seconds instead of waiting for someone to
+// click "Promote new businesses" there. Both COMMAND_HUB_WEBHOOK_URL and
+// COMMAND_HUB_WEBHOOK_SECRET must be set — if either is missing this is a
+// silent no-op, and any failure (Command Hub down, timeout, etc.) is caught
+// and logged only. This must never affect the approval response itself.
+async function notifyCommandHub(business) {
+    const url = process.env.COMMAND_HUB_WEBHOOK_URL;
+    const secret = process.env.COMMAND_HUB_WEBHOOK_SECRET;
+    if (!url || !secret) return;
+
+    try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-webhook-secret': secret },
+            body: JSON.stringify({ businessId: business.id, businessName: business.business_name }),
+            signal: controller.signal
+        }).finally(() => clearTimeout(timeout));
+    } catch (err) {
+        console.error('Command Hub webhook notify failed:', err.message);
+    }
+}
+
 module.exports = async function handler(req, res) {
     // Resolve which sub-handler to run. `kind` is injected by the vercel.json
     // rewrites; fall back to method-based inference if hit directly.
@@ -93,6 +118,8 @@ async function handleBusiness(req, res) {
             } catch (emailErr) {
                 console.error('Failed to send approval notification:', emailErr.message);
             }
+
+            await notifyCommandHub(business);
 
             return res.send(`
                 <html><body style="font-family:sans-serif;text-align:center;padding:50px;background:#f9f9f9;">
@@ -385,6 +412,10 @@ async function handleListing(req, res) {
         if (updateError) throw updateError;
 
         console.log(`Listing ${action}d: ${business.business_name} (${submissionId})`);
+
+        if (action === 'approve') {
+            await notifyCommandHub({ id: submissionId, business_name: business.business_name });
+        }
 
         return res.status(200).json({
             success: true,
