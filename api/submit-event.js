@@ -115,7 +115,7 @@ async function sendSubmissionEmail(ev) {
                     <tr><td style="padding: 8px;"><strong>Description:</strong></td><td style="padding: 8px;">${esc(ev.description || 'Not provided')}</td></tr>
                 </table>
                 <p style="text-align: center; margin-top: 25px;">
-                    <a href="${process.env.SITE_URL || 'https://oldoaktown.co.uk'}/admin/dashboard.html" style="background: #2D5016; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                    <a href="https://oldoaktown.co.uk/admin/dashboard" style="background: #2D5016; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
                         Review in Admin Dashboard →
                     </a>
                 </p>
