@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxtfb",
+      "title": "HS2 Completes Six Platforms at Old Oak Common - Railway Supply",
+      "excerpt": "HS2 Completes Six Platforms at Old Oak Common Railway Supply",
+      "category": "HS2 Updates",
+      "date": "2026-08-16",
+      "image": "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop",
+      "imageAlt": "HS2 Completes Six Platforms at Old Oak Common - Railway Supply",
+      "body": "<p>HS2 Completes Six Platforms at Old Oak Common Railway Supply</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTFBlei1tMEFlTVNVZFloX09ZejB0TVlxRTNuMUt4a0FPYXBsWTJuN3VqWkduYVN1RzFxVDVobW5mcF84MWtla1kyNHZFQ2VDT3lzZGlBUUJBblpLVTdDOUZqTGkyRjJkelRMeVllNWdNbkt1TllCT1dCUk9oZUVQdw?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Old Oak Common</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-www-constructionenquirer-com-2026-05-15-deve",
       "title": "Developers called up for £10bn Old Oak mega-scheme",
       "excerpt": "London’s biggest brownfield regeneration scheme is being readied for take-off after public bodies struck a landmark land deal around HS2’s Old Oak Common station The Old Oak and Park Royal Development",
@@ -78,7 +89,7 @@
       "author": "Old Oak Town"
     }
   ],
-  "total": 7,
+  "total": 8,
   "source": "auto",
-  "lastPublished": "2026-07-16T15:20:13.802Z"
+  "lastPublished": "2026-08-17T09:08:45.368Z"
 }
