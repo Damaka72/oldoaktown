@@ -1,0 +1,44 @@
+name: Business Spotlight Agent
+
+on:
+  repository_dispatch:
+    types: [business-approved]
+  workflow_dispatch:
+    inputs:
+      businessId:
+        description: 'Business ID (Supabase businesses.id) to draft a spotlight for'
+        required: true
+
+jobs:
+  spotlight:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund @anthropic-ai/sdk @supabase/supabase-js nodemailer
+
+      - name: Draft business spotlight
+        env:
+          BUSINESS_ID: ${{ github.event.client_payload.businessId || github.event.inputs.businessId }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+        run: node scripts/business-spotlight-agent.js
+
+      - name: Commit spotlight draft
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/review-queue/business-spotlights/
+          git diff --staged --quiet || git commit -m "chore: business spotlight draft $(date +%Y-%m-%d-%H%M)"
+          git push

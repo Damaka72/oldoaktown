@@ -8,6 +8,10 @@
 //   /api/approve-business  → /api/approve?kind=business  (GET,  email links, signed token — see _shared/approvalToken.js)
 //   /api/approve-event     → /api/approve?kind=event     (POST, admin,       ADMIN_PASSWORD)
 //   /api/approve-listing   → /api/approve?kind=listing   (POST, admin,       ADMIN_PASSWORD)
+//
+// On approval, both handleBusiness and handleListing also (optionally) ping
+// Command Hub and dispatch the Business Spotlight Agent GitHub Action — see
+// notifyCommandHub() and triggerSpotlightAgent() below.
 
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
@@ -51,6 +55,40 @@ async function notifyCommandHub(business) {
         }).finally(() => clearTimeout(timeout));
     } catch (err) {
         console.error('Command Hub webhook notify failed:', err.message);
+    }
+}
+
+// Fire the "business-approved" GitHub Actions workflow (business-spotlight.yml)
+// so it researches the business and drafts a newsletter spotlight paragraph +
+// header image prompt for human review. Requires GITHUB_DISPATCH_TOKEN (a
+// fine-grained PAT with "Contents: write" on this repo) — if unset this is a
+// silent no-op, same pattern as notifyCommandHub above, and any failure is
+// caught and logged only. Never affects the approval response itself.
+async function triggerSpotlightAgent(business) {
+    const token = process.env.GITHUB_DISPATCH_TOKEN;
+    if (!token) return;
+
+    const repo = process.env.GITHUB_REPO || 'Damaka72/oldoaktown';
+
+    try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 8000);
+        const res = await fetch(`https://api.github.com/repos/${repo}/dispatches`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github+json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                event_type: 'business-approved',
+                client_payload: { businessId: business.id }
+            }),
+            signal: controller.signal
+        }).finally(() => clearTimeout(timeout));
+        if (!res.ok) throw new Error(`GitHub dispatch returned ${res.status}`);
+    } catch (err) {
+        console.error('Spotlight agent dispatch failed:', err.message);
     }
 }
 
@@ -121,6 +159,7 @@ async function handleBusiness(req, res) {
             }
 
             await notifyCommandHub(business);
+            await triggerSpotlightAgent(business);
 
             return res.send(`
                 <html><body style="font-family:sans-serif;text-align:center;padding:50px;background:#f9f9f9;">
@@ -415,7 +454,9 @@ async function handleListing(req, res) {
         console.log(`Listing ${action}d: ${business.business_name} (${submissionId})`);
 
         if (action === 'approve') {
-            await notifyCommandHub({ id: submissionId, business_name: business.business_name });
+            const approvedBusiness = { id: submissionId, business_name: business.business_name };
+            await notifyCommandHub(approvedBusiness);
+            await triggerSpotlightAgent(approvedBusiness);
         }
 
         return res.status(200).json({
