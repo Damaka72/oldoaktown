@@ -14,6 +14,7 @@
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
 const { sendEmail } = require('./_shared/resend');
+const { sign: signApprovalToken } = require('./_shared/approvalToken');
 
 // Returns the raw request body as a Buffer, regardless of whether it has
 // already been buffered by Express (express.raw()) or still needs to be
@@ -179,8 +180,8 @@ module.exports.config = {
 
 async function sendPaidApprovalEmail(business, businessId) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
-    const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
-    const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
+    const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${signApprovalToken(businessId, 'approve')}`;
+    const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${signApprovalToken(businessId, 'reject')}`;
     const tierLabel = business.tier === 'premium' ? 'Premium (£75/mo)' : 'Featured (£35/mo)';
 
     await sendEmail({
