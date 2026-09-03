@@ -1,0 +1,35 @@
+{
+  "businessId": "51b10368-6b22-426d-bab3-b9a2c7ee6b55",
+  "businessName": "Pure Energy Project Ltd",
+  "draftedAt": "2026-09-03T20:45:00.000Z",
+  "status": "pending_review",
+  "draftedBy": "manual (Claude Code session) — the real business-spotlight-agent.js pipeline can't run yet because business-spotlight.yml only exists on the claude/business-approval-api-96gnw4 branch; GitHub's workflow_dispatch API requires it to be on the default branch. Re-run scripts/business-spotlight-agent.js (or dispatch the workflow) after this PR merges to regenerate this file with real fetched content and candidateImages.",
+  "researchedWebsite": true,
+  "researchMethod": "web search only — direct fetch of pep-plumbing.co.uk was blocked by this session's network egress policy, so no candidateImages could be extracted this time (that requires the real pipeline's unrestricted GitHub Actions runner)",
+  "researchNotes": "Website (https://pep-plumbing.co.uk/) was missing from the original submission and has been added to their Supabase record. Confirmed via search: Gas Safe-registered plumbers, NICEIC-registered electricians, fully insured for gas/plumbing/electrical work, diagnostic-led heating repairs, full central-heating system design and installation, 2-year labour guarantee. Only facts consistent with both the submission and this research were used below.",
+  "sources": [
+    "https://pep-plumbing.co.uk/",
+    "https://pep-plumbing.co.uk/electrical",
+    "https://pep-plumbing.co.uk/boiler-repair-london-boilers-repairs-services-london.html",
+    "https://www.boilerguide.co.uk/listings/pure-energy-project",
+    "https://www.tradesmenup.co.uk/66781/pure-energy-project"
+  ],
+  "headline": "Business Spotlight: Pure Energy Project Ltd",
+  "paragraph": "Old Oak Common residents wrestling with a temperamental boiler or an overdue bathroom refit now have a trusted name on their doorstep. Pure Energy Project Ltd, based on Braemar Avenue in NW10, brings Gas Safe-registered plumbing and heating expertise to the neighbourhood — from powerflushing radiators and full central-heating installs to pipework alterations and kitchen or bathroom plumbing. Their team also covers electrical work through NICEIC-registered engineers, and the whole operation is fully insured for gas, plumbing and electrical work, backed by a two-year guarantee on labour. Whether it's a leaking radiator on a wet Tuesday or planning a full heating system redesign, it's reassuring to have certified local tradespeople covering Old Oak Common out to Chiswick. Find Pure Energy Project Ltd in our business directory, or call 07843 676 480.",
+  "social_caption": "🌳 Business Spotlight: Pure Energy Project Ltd — Gas Safe plumbing, heating & NICEIC electrical, right here on Braemar Avenue. Fully insured, 2-year labour guarantee. 📞 07843 676 480",
+  "image_prompt": "Warm, community-journalism style graphic in deep forest green (#1C3A0E) and cream tones: a friendly illustrated plumbing/heating engineer icon (radiator, boiler, spanner motif), eyebrow label '🌳 Business Spotlight', headline 'Pure Energy Project Ltd', subtext 'Trusted Gas Safe plumbing, heating & electrical — Old Oak Common to Chiswick'. Not corporate, not a stock photo.",
+  "candidateImages": [],
+  "image": {
+    "source": "canva",
+    "design_id": "DAHULDPFIdY",
+    "title": "Digital Newsletter for Pure Energy Project Ltd",
+    "edit_url": "https://www.canva.com/d/e4udCYUIAyLS199",
+    "view_url": "https://www.canva.com/d/KeHZD9dalNRocjA",
+    "alternativeCandidates": [
+      "https://design.canva.ai/voDkNj6WbJhnbbL",
+      "https://design.canva.ai/S_MVyXLPSrN047s",
+      "https://design.canva.ai/7Bj5hGKo2MHGji3"
+    ],
+    "note": "AI-generated fallback (Canva) — Higgsfield was tried first but the workspace was out of credits. Once the real pipeline can fetch pep-plumbing.co.uk directly, prefer a candidateImages entry (an actual photo of the business) over this generated graphic if one turns out to be suitable and rights-appropriate to use."
+  }
+}
