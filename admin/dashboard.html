@@ -422,9 +422,6 @@
     </div>
 
     <script>
-        const SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
-
         // Password stored as SHA-256 hash — plaintext never in source code
         const ADMIN_PASSWORD_HASH = '924325fbd85f063f2439544a4bd4cbe61433c2c83eb3e5a7ead42b984b7a2223';
         let _adminPassword = '';
@@ -478,13 +475,21 @@
         }
 
         async function fetchAllBusinesses() {
-            const response = await fetch(`${SUPABASE_URL}/rest/v1/businesses?order=created_at.desc`, {
-                headers: {
-                    'apikey': SUPABASE_ANON_KEY,
-                    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-                }
+            // Goes through /api/approve-listing (password-checked server-side,
+            // reads with the service-role key) rather than querying Supabase
+            // directly from the browser — the businesses table's RLS policy
+            // only allows public reads of approved listings, so a direct
+            // client-side fetch here would no longer see pending/rejected
+            // submissions (and, before that policy was tightened, doing this
+            // client-side meant the admin password wasn't actually gating
+            // access to this data at all).
+            const response = await fetch('/api/approve-listing', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'list', password: _adminPassword })
             });
-            return await response.json();
+            const data = await response.json();
+            return data.businesses || [];
         }
 
         async function updateBusiness(id, action) {
