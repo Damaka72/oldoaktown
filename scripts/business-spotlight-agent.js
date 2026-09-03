@@ -22,7 +22,12 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 
-const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+// Uses the anon key, not the service role key: this script only ever reads
+// a business record (never writes), and the businesses table's RLS policy
+// already permits public SELECT access, so the anon key is sufficient and
+// keeps this workflow from needing the far more powerful service-role
+// secret at all.
+const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const OUTPUT_DIR = path.join(__dirname, '../data/review-queue/business-spotlights');
