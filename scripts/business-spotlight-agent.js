@@ -37,29 +37,60 @@ async function fetchBusiness(businessId) {
     return data;
 }
 
-// Best-effort: pull a plain-text excerpt from the business's own website, if
-// they gave one. No new dependency, no search API — just extra grounding
-// for the draft when it's available. Never blocks the run if it fails.
+// Best-effort: pull a plain-text excerpt and candidate real photos from the
+// business's own website, if they gave one. No new dependency, no search
+// API — just extra grounding for the draft when it's available. Never
+// blocks the run if it fails.
 async function researchWebsite(url) {
-    if (!url) return null;
+    if (!url) return { text: null, images: [] };
     try {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 8000);
-        const res = await fetch(url.startsWith('http') ? url : `https://${url}`, { signal: controller.signal })
+        const target = url.startsWith('http') ? url : `https://${url}`;
+        const res = await fetch(target, { signal: controller.signal })
             .finally(() => clearTimeout(timeout));
-        if (!res.ok) return null;
+        if (!res.ok) return { text: null, images: [] };
         const html = await res.text();
+
         const text = html
             .replace(/<script[\s\S]*?<\/script>/gi, ' ')
             .replace(/<style[\s\S]*?<\/style>/gi, ' ')
             .replace(/<[^>]+>/g, ' ')
             .replace(/\s+/g, ' ')
-            .trim();
-        return text.slice(0, 3000) || null;
+            .trim()
+            .slice(0, 3000) || null;
+
+        return { text, images: extractImageUrls(html, target) };
     } catch (err) {
         console.warn(`Website research skipped (${url}):`, err.message);
-        return null;
+        return { text: null, images: [] };
     }
+}
+
+// Pulls the og:image and the first few <img> src attributes, resolved to
+// absolute URLs. These are surfaced as candidateImages for the human
+// reviewer to consider using instead of (or alongside) an AI-generated
+// image — a real photo of a real local business is usually better than a
+// generated one when one's available.
+function extractImageUrls(html, baseUrl) {
+    const found = new Set();
+
+    const ogMatch = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i);
+    if (ogMatch) found.add(ogMatch[1]);
+
+    const imgRegex = /<img[^>]+src=["']([^"']+)["']/gi;
+    let m;
+    while ((m = imgRegex.exec(html)) && found.size < 15) {
+        found.add(m[1]);
+    }
+
+    return [...found]
+        .map(src => {
+            try { return new URL(src, baseUrl).href; } catch { return null; }
+        })
+        .filter(Boolean)
+        .filter(src => !/\.(svg|ico)(\?|$)/i.test(src))
+        .slice(0, 8);
 }
 
 async function draftSpotlight(business, websiteExcerpt) {
@@ -86,7 +117,7 @@ Return JSON with this exact structure:
   "headline": "short, warm headline for the spotlight, e.g. 'Business Spotlight: ...'",
   "paragraph": "120-150 word newsletter paragraph in Old Oak Town's voice, ending with how readers can find/contact them",
   "social_caption": "one short caption (under 280 characters) suitable for Instagram/Facebook, tree emoji optional",
-  "image_prompt": "detailed prompt for a header/spotlight image — scene, style, mood, matching a warm community-journalism aesthetic in deep forest green (#1C3A0E) and cream tones, no text in the image"
+  "image_prompt": "detailed prompt for a header/spotlight image — scene, style, mood, matching a warm community-journalism aesthetic in deep forest green (#1C3A0E) and cream tones, no text in the image. Used as a fallback if no real photo of the business is available."
 }`
         }],
     });
@@ -98,7 +129,7 @@ Return JSON with this exact structure:
     }
 }
 
-async function notifyAdmin(business, draft) {
+async function notifyAdmin(business, draft, candidateImages) {
     if (!process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.ADMIN_EMAIL) return;
     const t = nodemailer.createTransport({
         host: process.env.SMTP_HOST || 'smtp.gmail.com',
@@ -116,6 +147,7 @@ async function notifyAdmin(business, draft) {
 <p>${draft.paragraph}</p>
 <p><em>Social caption:</em> ${draft.social_caption}</p>
 <p><em>Image prompt:</em> ${draft.image_prompt}</p>
+${candidateImages?.length ? `<p><em>Candidate real photos from their site:</em><br>${candidateImages.map(src => `<a href="${src}">${src}</a>`).join('<br>')}</p>` : ''}
 <hr>
 <p>Waiting in data/review-queue/business-spotlights/ for human review — nothing has been published.</p>`,
     });
@@ -137,10 +169,11 @@ async function main() {
         return;
     }
 
-    const websiteExcerpt = await researchWebsite(business.website);
-    console.log(websiteExcerpt ? '🔍 Pulled extra context from business website.' : '🔍 No website on file — drafting from submitted details only.');
+    const research = await researchWebsite(business.website);
+    console.log(research.text ? '🔍 Pulled extra context from business website.' : '🔍 No website on file — drafting from submitted details only.');
+    if (research.images.length) console.log(`🖼️  Found ${research.images.length} candidate photo(s) on their site.`);
 
-    const draft = await draftSpotlight(business, websiteExcerpt);
+    const draft = await draftSpotlight(business, research.text);
 
     if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
     fs.writeFileSync(outputPath, JSON.stringify({
@@ -148,12 +181,13 @@ async function main() {
         businessName: business.business_name,
         draftedAt: new Date().toISOString(),
         status: 'pending_review',
-        researchedWebsite: !!websiteExcerpt,
+        researchedWebsite: !!research.text,
+        candidateImages: research.images,
         ...draft,
     }, null, 2));
     console.log(`💾 Draft saved to ${outputPath}`);
 
-    await notifyAdmin(business, draft);
+    await notifyAdmin(business, draft, research.images);
     console.log('✅ Done.');
 }
 
