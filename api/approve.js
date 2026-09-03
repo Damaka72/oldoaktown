@@ -380,6 +380,20 @@ async function handleListing(req, res) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
 
+    if (action === 'list') {
+        try {
+            const { data, error } = await supabase
+                .from('businesses')
+                .select('*')
+                .order('created_at', { ascending: false });
+            if (error) throw error;
+            return res.status(200).json({ success: true, businesses: data || [] });
+        } catch (err) {
+            console.error('approve-listing list error:', err);
+            return res.status(500).json({ error: 'Failed to fetch businesses' });
+        }
+    }
+
     if (action === 'stats') {
         try {
             const [{ data: businesses, error: bizErr }, { data: videos, error: vidErr }] = await Promise.all([
@@ -441,7 +455,7 @@ async function handleListing(req, res) {
         } else if (action === 'suspend') {
             updates.status = 'pending';
         } else {
-            return res.status(400).json({ error: 'Invalid action. Use approve, reject, suspend, or stats.' });
+            return res.status(400).json({ error: 'Invalid action. Use list, approve, reject, suspend, or stats.' });
         }
 
         const { error: updateError } = await supabase
