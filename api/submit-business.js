@@ -4,6 +4,7 @@
 
 const { createClient } = require('@supabase/supabase-js');
 const { sendEmail } = require('./_shared/resend');
+const { sign: signApprovalToken } = require('./_shared/approvalToken');
 
 module.exports = async (req, res) => {
     if (req.method !== 'POST') {
@@ -112,8 +113,8 @@ async function sendApprovalEmail(business, businessId) {
 
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
 
-    const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
-    const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
+    const approveUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${signApprovalToken(businessId, 'approve')}`;
+    const rejectUrl = `${process.env.SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${signApprovalToken(businessId, 'reject')}`;
 
     const emailHtml = `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">

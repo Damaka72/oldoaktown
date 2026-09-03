@@ -5,12 +5,13 @@
 // vercel.json, so existing callers (admin dashboard, email approval links)
 // are unaffected:
 //
-//   /api/approve-business  → /api/approve?kind=business  (GET,  email links, ADMIN_TOKEN)
+//   /api/approve-business  → /api/approve?kind=business  (GET,  email links, signed token — see _shared/approvalToken.js)
 //   /api/approve-event     → /api/approve?kind=event     (POST, admin,       ADMIN_PASSWORD)
 //   /api/approve-listing   → /api/approve?kind=listing   (POST, admin,       ADMIN_PASSWORD)
 
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
+const { verify: verifyApprovalToken } = require('./_shared/approvalToken');
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
@@ -73,17 +74,17 @@ module.exports = async function handler(req, res) {
 async function handleBusiness(req, res) {
     const { id, action, token } = req.query;
 
-    if (!process.env.ADMIN_TOKEN || token !== process.env.ADMIN_TOKEN) {
+    if (!id || !['approve', 'reject'].includes(action)) {
+        return res.status(400).send('Invalid request');
+    }
+
+    if (!verifyApprovalToken(id, action, token)) {
         return res.status(403).send(`
             <html><body style="font-family:sans-serif;text-align:center;padding:50px;">
                 <h2 style="color:#dc3545;">❌ Unauthorised</h2>
-                <p>Invalid token. Please use the link from your email.</p>
+                <p>Invalid or expired link. Please use a current link from your email.</p>
             </body></html>
         `);
-    }
-
-    if (!id || !['approve', 'reject'].includes(action)) {
-        return res.status(400).send('Invalid request');
     }
 
     try {

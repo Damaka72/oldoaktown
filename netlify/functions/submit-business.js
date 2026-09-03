@@ -5,6 +5,18 @@
 
 const { createClient } = require('@supabase/supabase-js');
 const nodemailer = require('nodemailer');
+const crypto = require('crypto');
+
+// Signs approve/reject links so the raw ADMIN_TOKEN secret is never itself
+// placed in a URL. Mirrors api/_shared/approvalToken.js's sign() — kept in
+// sync manually since Netlify bundles each function standalone.
+function signApprovalToken(id, action, ttlMs = 30 * 24 * 60 * 60 * 1000) {
+    const secret = process.env.ADMIN_TOKEN;
+    if (!secret) throw new Error('ADMIN_TOKEN not configured');
+    const expires = Date.now() + ttlMs;
+    const hmac = crypto.createHmac('sha256', secret).update(`${id}:${action}:${expires}`).digest('hex');
+    return Buffer.from(`${expires}.${hmac}`).toString('base64url');
+}
 
 exports.handler = async (event) => {
     if (event.httpMethod !== 'POST') {
@@ -120,8 +132,8 @@ async function sendApprovalEmail(business, businessId) {
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'info@oldoaktown.co.uk';
     const SITE_URL = process.env.SITE_URL || 'https://www.oldoaktown.co.uk';
 
-    const approveUrl = `${SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${process.env.ADMIN_TOKEN}`;
-    const rejectUrl  = `${SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${process.env.ADMIN_TOKEN}`;
+    const approveUrl = `${SITE_URL}/api/approve-business?id=${businessId}&action=approve&token=${signApprovalToken(businessId, 'approve')}`;
+    const rejectUrl  = `${SITE_URL}/api/approve-business?id=${businessId}&action=reject&token=${signApprovalToken(businessId, 'reject')}`;
 
     const emailHtml = `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
