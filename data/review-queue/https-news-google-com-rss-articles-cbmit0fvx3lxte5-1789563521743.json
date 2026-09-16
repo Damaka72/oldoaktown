@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmit0fvx3lxte5",
+  "title": "Park Royal - BBC",
+  "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5oMmxIY25ValpyRzlFSDVqRElrZmtzOG43d0hDSjJUejVsSnliTE1ya0lwaVhKN0ZNMEdfUS11eFpBeTI5NHlUemlTSHRkMnc?oc=5",
+  "content": "Park Royal BBC",
+  "contentSnippet": "Park Royal BBC",
+  "publishDate": "Thu, 01 Jan 1970 00:00:00 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-09-16T12:58:39.242Z",
+    "status": "pending_review"
+  }
+}
