@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmis0fvx3lxte5",
+  "title": "HS2 works in Camden - camden.gov.uk",
+  "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE5VZFE5QU5mME1CRXI3NVJmQzFzSEVCNExXVnVnMFlhaWx4b1ctejZhQTIzVU1leXgwV3hoSEpfdjBsN2lWUUhrM3dVUQ?oc=5",
+  "content": "HS2 works in Camden camden.gov.uk",
+  "contentSnippet": "HS2 works in Camden camden.gov.uk",
+  "publishDate": "Wed, 26 Aug 2026 16:54:26 GMT",
+  "author": "Google News — HS2",
+  "source": {
+    "name": "Google News — HS2",
+    "url": "https://news.google.com/rss/search?q=HS2+%22Old+Oak%22+OR+%22Euston%22&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "hs2",
+    "priority": "medium"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-09-17T12:55:15.454Z",
+    "status": "pending_review"
+  }
+}
