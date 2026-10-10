@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmifkfvx3lxtfa",
+  "title": "Park Royal: Listening to the Hinterland - ArtReview",
+  "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAwT3B4WFVjMGt3dXVOVEI1cDJHWHdUOFYtVVN1NE1GY3dFSks3ZzBLOFlrR3JYdW1hXzk1OXpyZVZWN2twSjJ5eXVSS1BZWTJKTHV2cl93cGVLRlF1V0gyWXJ5UW9tQ2ZKNGpORW8zV3JEN2trU19ra0tJWHo2UQ?oc=5",
+  "content": "Park Royal: Listening to the Hinterland ArtReview",
+  "contentSnippet": "Park Royal: Listening to the Hinterland ArtReview",
+  "publishDate": "Thu, 08 Oct 2026 16:30:24 GMT",
+  "author": "Google News — Old Oak Common",
+  "source": {
+    "name": "Google News — Old Oak Common",
+    "url": "https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "general",
+    "priority": "high"
+  },
+  "tags": [
+    "news",
+    "regeneration",
+    "community"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-10-10T14:07:44.018Z",
+    "status": "pending_review"
+  }
+}
