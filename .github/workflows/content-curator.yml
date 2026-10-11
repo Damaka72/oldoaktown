@@ -28,7 +28,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund @anthropic-ai/sdk
+        run: npm install --no-save --no-audit --no-fund @anthropic-ai/sdk
 
       - name: Run content curator
         env:
@@ -52,5 +52,5 @@ jobs:
           git config user.email "bot@oldoaktown.co.uk"
           git add -A data/curator-digest/ data/news.json data/events.json data/videos-auto.json data/review-queue/
           git diff --staged --quiet || git commit -m "chore: curate + publish news, events, videos $(date +%Y-%m-%d)"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git push
