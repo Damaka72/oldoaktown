@@ -86,12 +86,30 @@ async function main() {
   }
 
   // 2. Read the current (decrypted) token value from the readable copy.
-  const single = await vercel(`/v1/projects/${projectId}/env/${readable.id}?${q}`);
-  const current = single && single.value;
+  //    Try the single-variable endpoint first, then the list endpoint with
+  //    decrypt=true (the two behave differently across Vercel API versions).
+  let current = null;
+  try {
+    const single = await vercel(`/v1/projects/${projectId}/env/${readable.id}?${q}`);
+    current = single && single.value;
+  } catch (err) {
+    console.log(`::warning::Single-variable read failed: ${err.message}`);
+  }
   if (!current) {
+    try {
+      const decrypted = await vercel(`/v9/projects/${projectId}/env?${q}&decrypt=true`);
+      const match = (decrypted.envs || []).find((e) => e.id === readable.id);
+      current = match && match.value;
+    } catch (err) {
+      console.log(`::warning::Decrypted list read failed: ${err.message}`);
+    }
+  }
+  if (!current) {
+    // Metadata only — never log the value itself.
     console.error(
-      `::error::Could not read ${readable.key}. It must not be Sensitive: create it with ` +
-      'only the Development environment ticked.'
+      `::error::Could not read ${readable.key} (type=${readable.type}, ` +
+      `target=${JSON.stringify(readable.target)}). It must not be Sensitive and should ` +
+      'have ONLY the Development environment ticked.'
     );
     process.exit(1);
   }
