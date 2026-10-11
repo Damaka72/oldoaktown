@@ -21,9 +21,11 @@
 //   VERCEL_DEPLOY_HOOK_URL  Vercel deploy hook — POSTed to trigger a redeploy
 //                           so functions load the new token immediately.
 //
-// IMPORTANT: the INSTAGRAM_ACCESS_TOKEN env var in Vercel must be of type
-// "Encrypted" (the default), not "Sensitive". Sensitive vars are write-only
-// and cannot be read back, so the refresh chain can't work with them.
+// IMPORTANT: Vercel makes Production/Preview variables Sensitive (write-only),
+// so they cannot be read back. The chain therefore needs a readable copy:
+// add INSTAGRAM_TOKEN_READABLE (same token value) with ONLY the Development
+// environment ticked — Development variables can't be Sensitive. This script
+// refreshes from that copy and updates it and INSTAGRAM_ACCESS_TOKEN together.
 
 const API = 'https://api.vercel.com';
 
@@ -61,21 +63,35 @@ async function main() {
   required('VERCEL_TOKEN');
   const q = `teamId=${encodeURIComponent(teamId)}`;
 
-  // 1. Find the INSTAGRAM_ACCESS_TOKEN env var and its id.
+  // 1. Find the live token entries and the readable copy.
+  //    Vercel makes Production/Preview variables Sensitive (write-only), so the
+  //    chain keeps a readable copy in INSTAGRAM_TOKEN_READABLE, set for the
+  //    Development environment only (Development variables can't be Sensitive).
   const list = await vercel(`/v9/projects/${projectId}/env?${q}`);
-  const entry = (list.envs || []).find((e) => e.key === 'INSTAGRAM_ACCESS_TOKEN');
-  if (!entry) {
+  const envs = list.envs || [];
+  const liveEntries = envs.filter((e) => e.key === 'INSTAGRAM_ACCESS_TOKEN');
+  if (!liveEntries.length) {
     console.error('::error::INSTAGRAM_ACCESS_TOKEN not found in the Vercel project.');
     process.exit(1);
   }
+  const readable =
+    envs.find((e) => e.key === 'INSTAGRAM_TOKEN_READABLE') ||
+    liveEntries.find((e) => e.type !== 'sensitive');
+  if (!readable) {
+    console.error(
+      '::error::No readable copy of the token. Add an env var INSTAGRAM_TOKEN_READABLE ' +
+      'with the current token, for the Development environment only.'
+    );
+    process.exit(1);
+  }
 
-  // 2. Read the current (decrypted) token value.
-  const single = await vercel(`/v1/projects/${projectId}/env/${entry.id}?${q}`);
+  // 2. Read the current (decrypted) token value from the readable copy.
+  const single = await vercel(`/v1/projects/${projectId}/env/${readable.id}?${q}`);
   const current = single && single.value;
   if (!current) {
     console.error(
-      '::error::Could not read the current token value. Make sure the ' +
-      'INSTAGRAM_ACCESS_TOKEN env var is type "Encrypted", not "Sensitive".'
+      `::error::Could not read ${readable.key}. It must not be Sensitive: create it with ` +
+      'only the Development environment ticked.'
     );
     process.exit(1);
   }
@@ -101,12 +117,16 @@ async function main() {
     return;
   }
 
-  // 4. Write the new token back to Vercel.
-  await vercel(`/v9/projects/${projectId}/env/${entry.id}?${q}`, {
-    method: 'PATCH',
-    body: JSON.stringify({ value: newToken }),
-  });
-  console.log(`Updated Vercel INSTAGRAM_ACCESS_TOKEN — new token valid ~${days} days.`);
+  // 4. Write the new token back to every copy (live entries + readable copy).
+  const targets = [...liveEntries];
+  if (!targets.some((e) => e.id === readable.id)) targets.push(readable);
+  for (const entry of targets) {
+    await vercel(`/v9/projects/${projectId}/env/${entry.id}?${q}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ value: newToken }),
+    });
+  }
+  console.log(`Updated ${targets.length} Vercel env var(s) — new token valid ~${days} days.`);
 
   // 5. Trigger a redeploy so live functions pick up the new value.
   const hook = process.env.VERCEL_DEPLOY_HOOK_URL;
