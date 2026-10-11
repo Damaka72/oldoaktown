@@ -83,7 +83,22 @@ oldoaktown/
 
 **Key sources:** HS2 Ltd, OPDC, Old Oak Neighbourhood Forum, Construction Enquirer, local council feeds.
 
-**HITL is non-negotiable** — all automated content goes through human review before publishing. Trust is the primary asset.
+**Old Oak Town curates, it does not write.** News, events and videos are pulled from public sources and published automatically as headline + short excerpt + link to the original publisher (never full articles, never invented facts). Trust is the primary asset, so: every item must carry attribution, the daily pipeline only takes fresh and clearly-local stories, and events come from structured listings with coordinates (no AI extraction). Original analysis (Pillar 3) stays manual.
+
+### Automated content pipeline (GitHub Actions)
+
+| Time (UTC) | Job | Script | Output |
+|---|---|---|---|
+| Daily 08:00 | RSS aggregation | `scripts/rss-aggregator.js` | `data/review-queue/` (≤45 days old only) |
+| Daily 08:30 | Curate + publish | `content-curator.js` → `publish-news.js` | `data/news.json` (live homepage news) |
+| Daily 08:30 | Event discovery | `events-discovery.js` | `data/events.json` (Eventbrite JSON-LD, ≤3 km of Old Oak Common) |
+| Daily 08:30 | Video discovery | `video-discovery.js` | `data/videos-auto.json` (merged into `/api/videos`) |
+| Mondays 09:00 | Weekly Edition | `weekly-edition.js` | `data/editions/` + email "[READY TO SEND]" (paste into Beehiiv) |
+
+- Curator only considers articles ≤21 days old, relevance ≥5, one per story, never re-publishes.
+- Add news sources in `RSS_SOURCES` (Google News queries **must** include `when:Nd`), video channels in `CHANNELS` in `video-discovery.js`.
+- Hand-entered events in `events.json` are never touched by automation (auto ones have `source: "auto-eventbrite"`).
+- Newsletter sending stays one click: Beehiiv's API key is not available to Actions.
 
 ---
 
@@ -158,7 +173,7 @@ Use the `/social-agent` skill (`.claude/commands/social-agent.md`) to scaffold a
 - API routes go in `api/` (Vercel) and `netlify/functions/` (Netlify) — keep both in sync
 - API routes are grouped into `api/content.js` and `api/submit.js`; add new endpoints as handlers in `lib/handlers` and register them in the router (plus a rewrite in `vercel.json`), so the 12-function limit is not reached again.
 - Never commit secrets — use environment variables for all API keys
-- The `data/review-queue/` directory is the HITL staging area — never auto-publish from it
+- `data/review-queue/` is the raw candidate pool; only `content-curator.js` + `publish-news.js` promote items from it to `data/news.json` (fresh, local, attributed). Do not publish from it any other way.
 
 ---
 

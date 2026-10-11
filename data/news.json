@@ -1,6 +1,39 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmifkfvx3lxtfa",
+      "title": "Park Royal: Listening to the Hinterland - ArtReview",
+      "excerpt": "Park Royal: Listening to the Hinterland ArtReview",
+      "category": "News",
+      "date": "2026-10-08",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop",
+      "imageAlt": "Park Royal: Listening to the Hinterland - ArtReview",
+      "body": "<p>Park Royal: Listening to the Hinterland ArtReview</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMifkFVX3lxTFAwT3B4WFVjMGt3dXVOVEI1cDJHWHdUOFYtVVN1NE1GY3dFSks3ZzBLOFlrR3JYdW1hXzk1OXpyZVZWN2twSjJ5eXVSS1BZWTJKTHV2cl93cGVLRlF1V0gyWXJ5UW9tQ2ZKNGpORW8zV3JEN2trU19ra0tJWHo2UQ?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Old Oak Common</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmixwjbvv95cux",
+      "title": "Old Oak Common redesign delivers level boarding for Elizabeth line passengers - Trending Now Infrastructure",
+      "excerpt": "Old Oak Common redesign delivers level boarding for Elizabeth line passengers Trending Now Infrastructure",
+      "category": "HS2 Updates",
+      "date": "2026-10-05",
+      "image": "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop",
+      "imageAlt": "Old Oak Common redesign delivers level boarding for Elizabeth line passengers - Trending Now Infrastructure",
+      "body": "<p>Old Oak Common redesign delivers level boarding for Elizabeth line passengers Trending Now Infrastructure</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMixwJBVV95cUxPSWtHM2NBT3pRTDJoTEgtcFZnNGFRNnBoR2hEd2VaTVVZWnVoS3RaTHBYTmppd0cxMWpQUWVTVi1OQi1JY1g3SGxRQW9WdWx5ZWJ2VWF0SGtqX2FmRWhoaTFyQk5HRjJGNE52ME5QYmZxaVpIY0VYR21rLVU4TDREOXRWY1FuWHl4bUl3aE1fTlZ3T3l1QjFoemprbk93N3BwY2pLTW5RMVdnNEhkemRNMW5JR01GTTVzQkRyeG9QUmM2aVR2YWFHSFE4OC1tRnRqaHNZbU8ycjdEY0xQelpmLVNGcDk3TnhLT1pGdWZkUDE2SzBfbzlHT2xKTTlYMUxrZElpRFJUcm1vUGJLaDd6UjBFUjJ1cHNQREdhZVdrOVgxYnVVbHN2R0lRRDE4Z08zT1hub05hQ0NQUG5DSzdOZGdITjBaTVk?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — HS2</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
+      "id": "https-www-constructionenquirer-com-2026-09-28-cost",
+      "title": "Costain appoints new head to deliver HS2 tunnels",
+      "excerpt": "Costain has appointed Rohan O’Grady as the new managing directior of Skanska Costain STRABAG joint venture delivering the London tunnels section of HS2. O&#8217;Grady will take up his new role next mo",
+      "category": "Planning & Development",
+      "date": "2026-09-28",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop",
+      "imageAlt": "Costain appoints new head to deliver HS2 tunnels",
+      "body": "<p>Costain has appointed Rohan O’Grady as the new managing directior of Skanska Costain STRABAG joint venture delivering the London tunnels section of HS2. O&#8217;Grady will take up his new role next month replacing Jonathan Morris who has served as interim MD for the last six months and will now be taking a sabbatical. O&#8217;Grady joins Costain from Australian based CPB Contractors where he oversaw a string of major infrastructure projects. Jonathan Willcock, Managing Director, Transportation, at Costain, said: “With his enviable CV and a successful track record at delivering large-scale mega-projects for both the public and private sectors, Rohan will be an excellent addition to Costain and is perfectly placed to lead the fantastic team working as part of the SCS joint venture. “Under his leadership, HS2’s London tunnels will continue to be delivered safely and efficiently, which will be critical for the new high-speed railway that will add capacity to the network and drive UK prosperity for generations to come.” O’Grady added: “Costain has a unique heritage and a fantastic reputation for engineering excellence. I’m proud to be taking on the leadership of the SCS JV at such an important stage in the delivery of HS2. &#8220;This is a project of enormous national significance, and I’m looking forward to working with the world-class expertise and talent that runs throughout the SCS JV to maintain momentum, ensure safety and build on the strong foundations that are already in place.”</p><p><em>Source: <a href=\"https://www.constructionenquirer.com/2026/09/28/costain-appoints-new-head-to-deliver-hs2-tunnels/\" target=\"_blank\" rel=\"noopener\">Construction Enquirer</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-news-google-com-rss-articles-cbmifkfvx3lxtfb",
       "title": "HS2 Completes Six Platforms at Old Oak Common - Railway Supply",
       "excerpt": "HS2 Completes Six Platforms at Old Oak Common Railway Supply",
@@ -89,7 +122,7 @@
       "author": "Old Oak Town"
     }
   ],
-  "total": 8,
+  "total": 11,
   "source": "auto",
-  "lastPublished": "2026-08-17T09:08:45.368Z"
+  "lastPublished": "2026-10-11T20:22:28.764Z"
 }

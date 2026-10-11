@@ -1,9 +1,21 @@
 name: Content Curator Agent
 
+# Daily, 30 min after RSS aggregation:
+#   1. curate the fresh review queue and auto-publish the best stories (news.json)
+#   2. discover local events (events.json) and videos (videos-auto.json)
+# Discovery steps are best-effort: a flaky source never blocks the news publish.
+
 on:
   schedule:
     - cron: '30 8 * * *'   # 8:30 AM UTC daily — 30 min after RSS aggregation
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: content-pipeline
+  cancel-in-progress: false
 
 jobs:
   curate:
@@ -26,10 +38,19 @@ jobs:
       - name: Publish top picks to live site
         run: node scripts/publish-news.js
 
-      - name: Commit curator digest and published news
+      - name: Discover local events
+        continue-on-error: true
+        run: node scripts/events-discovery.js
+
+      - name: Discover videos
+        continue-on-error: true
+        run: node scripts/video-discovery.js
+
+      - name: Commit curated content
         run: |
           git config user.name "Old Oak Town Bot"
           git config user.email "bot@oldoaktown.co.uk"
-          git add data/curator-digest/ data/news.json
-          git diff --staged --quiet || git commit -m "chore: curator digest + auto-publish $(date +%Y-%m-%d)"
+          git add -A data/curator-digest/ data/news.json data/events.json data/videos-auto.json data/review-queue/
+          git diff --staged --quiet || git commit -m "chore: curate + publish news, events, videos $(date +%Y-%m-%d)"
+          git pull --rebase origin main
           git push
