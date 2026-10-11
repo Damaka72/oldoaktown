@@ -1,12 +1,23 @@
 name: Weekly Newsletter Digest
 
+# Builds "The Old Oak Weekly" from what is already published on the site
+# (news, events, videos) and emails a ready-to-send copy to the admin.
+# Runs Monday 09:00 UTC, after the daily content jobs (08:00 / 08:30).
+
 on:
   schedule:
     - cron: '0 9 * * 1'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: content-pipeline
+  cancel-in-progress: false
+
 jobs:
-  generate-digest:
+  weekly-edition:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -22,10 +33,22 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ''
 
-      - name: Generate and email digest
+      - name: Build edition and email it
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-        run: node scripts/generate-digest.js
+          SITE_URL: ${{ secrets.SITE_URL }}
+        run: node scripts/weekly-edition.js
+
+      - name: Commit edition
+        run: |
+          git config user.name "Old Oak Town Bot"
+          git config user.email "bot@oldoaktown.co.uk"
+          git add data/editions/
+          git diff --staged --quiet || git commit -m "chore: weekly edition $(date +%Y-%m-%d)"
+          git pull --rebase origin main
+          git push

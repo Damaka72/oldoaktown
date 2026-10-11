@@ -79,6 +79,465 @@
       "registrationUrl": "https://www.london.gov.uk/opdc",
       "sourceUrl": "https://www.london.gov.uk/opdc",
       "status": "upcoming"
+    },
+    {
+      "id": "eb-1997666797166",
+      "title": "Updating The Brent  Black Music History Project (Harlesden  Library)",
+      "date": "2026-10-12",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Harlesden Library",
+        "address": "Craven Park Road, London, NW10 8SE"
+      },
+      "description": "Join the presentation and discussion to update the 2007-published DVD and booklet which captured Brent's rich & diverse black music history!",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/updating-the-brent-black-music-history-project-harlesden-library-tickets-1997666797166",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/updating-the-brent-black-music-history-project-harlesden-library-tickets-1997666797166",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1984869473025",
+      "title": "Creative Relaxation-Collage at Kensal Library",
+      "date": "2026-10-12",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Kensal Library",
+        "address": "20 Golborne Road, London, W10 5PF"
+      },
+      "description": "A relaxed, creative session to help you switch off and recharge.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869473025",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869473025",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1998019664602",
+      "title": "People's Emergency Briefing - Kensal and Kilburn",
+      "date": "2026-10-13",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "St Lukes West Kilburn",
+        "address": "Fernhead Road, London, W9 3EH"
+      },
+      "description": "Screening of the People's Emergency Briefing on the climate and nature crisis followed by open discussion of the implication for us all",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/peoples-emergency-briefing-kensal-and-kilburn-tickets-1998019664602",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/peoples-emergency-briefing-kensal-and-kilburn-tickets-1998019664602",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1996074631957",
+      "title": "Women of Willesden - Guided Walk of Willesden Jewish Cemetery",
+      "date": "2026-10-18",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "Join us for the Women of Willesden guided walk to celebrate some of the amazing women buried in the cemetery.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/women-of-willesden-guided-walk-of-willesden-jewish-cemetery-tickets-1996074631957",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/women-of-willesden-guided-walk-of-willesden-jewish-cemetery-tickets-1996074631957",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002529311076",
+      "title": "Have Your Say on Brent’s Climate Future – Harlesden Roadshow",
+      "date": "2026-10-19",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Rumi's Cave",
+        "address": "122–124 Craven Park Road Harlesden, London, NW10 8QD"
+      },
+      "description": "Join us at Rumi’s Cave Harlesden, have your say and help shape Brent’s Climate Strategy and the future of climate action across the borough",
+      "category": "consultation",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/have-your-say-on-brents-climate-future-harlesden-roadshow-tickets-2002529311076",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/have-your-say-on-brents-climate-future-harlesden-roadshow-tickets-2002529311076",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1998875106251",
+      "title": "Art on the Canalside:  Autumn Photo Walk",
+      "date": "2026-10-20",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Community garden at The Collective",
+        "address": "The Collective, London, NW10 6FF"
+      },
+      "description": "Come and practice your street and nature photography and meet other photographers on a photo walk along the Grand Union Canal.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/art-on-the-canalside-autumn-photo-walk-tickets-1998875106251",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/art-on-the-canalside-autumn-photo-walk-tickets-1998875106251",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2000887735078",
+      "title": "BABY Z's WRLD 3 years of art & madness",
+      "date": "2026-10-23",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Foundry Collective",
+        "address": "1 Victoria Road, London, W3 6FA"
+      },
+      "description": "Opening night with Zoe and friends for Zoe Atta's debut solo art exhibition of works from 2023 - present",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.com/e/baby-zs-wrld-3-years-of-art-madness-tickets-2000887735078",
+      "sourceUrl": "https://www.eventbrite.com/e/baby-zs-wrld-3-years-of-art-madness-tickets-2000887735078",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2000259769817",
+      "title": "Dhaqan Sip & Paint: An Off-Socials Experience",
+      "date": "2026-10-24",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Sweet Space Ldn",
+        "address": "52-56 Standard Road, London, NW10 6EU"
+      },
+      "description": "Join us for an evening of culture, music, painting & more - no event filming, just good vibes & an evening to enjoy!",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.com/e/dhaqan-sip-paint-an-off-socials-experience-tickets-2000259769817",
+      "sourceUrl": "https://www.eventbrite.com/e/dhaqan-sip-paint-an-off-socials-experience-tickets-2000259769817",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1987323619443",
+      "title": "Wellbeing Walk-ACTON",
+      "date": "2026-10-24",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Acton Park",
+        "address": "The Vale, London, W3 7JX"
+      },
+      "description": "Get ready to walk through the stunning walk of Acton and make new connections in blissful nature",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/wellbeing-walk-acton-tickets-1987323619443",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/wellbeing-walk-acton-tickets-1987323619443",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1996089469336",
+      "title": "Guided walk: Creativity Unwrapped at Willesden Jewish Cemetery",
+      "date": "2026-10-25",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "Historic Architectural Landscape of Willesden Jewish Cemetery",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-creativity-unwrapped-at-willesden-jewish-cemetery-tickets-1996089469336",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-creativity-unwrapped-at-willesden-jewish-cemetery-tickets-1996089469336",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002196205749",
+      "title": "A Canalside Flora - Exhibition opening and poetry reading",
+      "date": "2026-10-26",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "North Acton Square",
+        "address": "3 Victoria Road, London, W3 6UP"
+      },
+      "description": "Join us for the opening of our open air exhibition in North Acton Square featuring live poetry readings and cyanotype printmaking.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/a-canalside-flora-exhibition-opening-and-poetry-reading-tickets-2002196205749",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/a-canalside-flora-exhibition-opening-and-poetry-reading-tickets-2002196205749",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002539449400",
+      "title": "Have Your Say on Brent’s Climate Future – Willesden Roadshow",
+      "date": "2026-10-26",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Green Library",
+        "address": "95 High Road, London, NW10 2SF"
+      },
+      "description": "Join us at Willesden Green Library, have your say and help shape Brent’s Climate Strategy and the future of climate action across the Brent",
+      "category": "consultation",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/have-your-say-on-brents-climate-future-willesden-roadshow-tickets-2002539449400",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/have-your-say-on-brents-climate-future-willesden-roadshow-tickets-2002539449400",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002064943139",
+      "title": "Talk and guided walk on urban plants and folklore",
+      "date": "2026-10-27",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "North Acton Square",
+        "address": "3 Victoria Road, London, W3 6UP"
+      },
+      "description": "Join author and botanist Roy Vickery for a talk and walking tour as part of the Canal & River Trusts exhibition \"A Canalside Flora\".",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/talk-and-guided-walk-on-urban-plants-and-folklore-tickets-2002064943139",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/talk-and-guided-walk-on-urban-plants-and-folklore-tickets-2002064943139",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002704307495",
+      "title": "Icons of Black History – creative collage at Kensal Library",
+      "date": "2026-10-29",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Kensal Library",
+        "address": "20 Golborne Road, London, W10 5PF"
+      },
+      "description": "Celebrate Black History Month through collage, creating iconographic art inspired by influential Black historical figures and their legacies",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/icons-of-black-history-creative-collage-at-kensal-library-tickets-2002704307495",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/icons-of-black-history-creative-collage-at-kensal-library-tickets-2002704307495",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1991292747211",
+      "title": "The Brent Reggae Album Covers Exhibition Marking African History Season",
+      "date": "2026-10-31",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Harlesden Library",
+        "address": "Craven Park Road, London, NW10 8SE"
+      },
+      "description": "Exploring the reggae album covers shot in the north-west London borough of Brent in marking African History Season",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/the-brent-reggae-album-covers-exhibition-marking-african-history-season-tickets-1991292747211",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/the-brent-reggae-album-covers-exhibition-marking-african-history-season-tickets-1991292747211",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1990529082068",
+      "title": "The Brent Reggae Album Covers Exhibition 2026",
+      "date": "2026-10-31",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Harlesden Library",
+        "address": "Craven Park Road, London, NW10 8SE"
+      },
+      "description": "Explore the reggae album covers shot in the north-west London borough of Brent June 1-Oct. 31 + monthly in-library curator presentations",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/the-brent-reggae-album-covers-exhibition-2026-tickets-1990529082068",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/the-brent-reggae-album-covers-exhibition-2026-tickets-1990529082068",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002639845688",
+      "title": "BUDD -The Business Underdog Digital Development -Film Screenings",
+      "date": "2026-10-31",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "OPDC",
+        "address": "6-8 Victoria Road, London, W3 6FF"
+      },
+      "description": "Join CACE Events for BUDD -a chill in-person day of inspiring Business Brand Films and Networking with snacks and digital hustle vibes!",
+      "category": "networking",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/budd-the-business-underdog-digital-development-film-screenings-tickets-2002639845688",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/budd-the-business-underdog-digital-development-film-screenings-tickets-2002639845688",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1999485333457",
+      "title": "Guided Walk: Stories of London's Lost Synagogues",
+      "date": "2026-11-01",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "The stories of synagogues, communities and a unique exhibition of United Synagogue foundation stones.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-stories-of-londons-lost-synagogues-tickets-1999485333457",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-stories-of-londons-lost-synagogues-tickets-1999485333457",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2003262724736",
+      "title": "Kintsugi Workshop",
+      "date": "2026-11-06",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Mini Picassos",
+        "address": "8 Station Terrace, London, NW10 5RT"
+      },
+      "description": "Kintsugi, the ancient craft of mending once loved china with the golden seal. Embrace the imperfections in life and celebrate the history.",
+      "category": "networking",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-2003262724736",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-2003262724736",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2003109651891",
+      "title": "Screen Culture \"Out Of Frame\" Festival 2026 X Urban Echoes",
+      "date": "2026-11-07",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Foundry Collective",
+        "address": "1 Victoria Road, London, W3 6FA"
+      },
+      "description": "Catch bold films and performance art in person at Screen Culture’s Out Of Frame Festival 2026.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.com/e/screen-culture-out-of-frame-festival-2026-x-urban-echoes-tickets-2003109651891",
+      "sourceUrl": "https://www.eventbrite.com/e/screen-culture-out-of-frame-festival-2026-x-urban-echoes-tickets-2003109651891",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2002621581058",
+      "title": "Library at Willesden Green: Communication Pod - Exploring Stories",
+      "date": "2026-11-07",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Library at Willesden Green",
+        "address": "95 High Road, London, NW10 2SF"
+      },
+      "description": "An immersive experience which creates awe and wonder for children and supports the development of language, communication and writing.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/library-at-willesden-green-communication-pod-exploring-stories-tickets-2002621581058",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/library-at-willesden-green-communication-pod-exploring-stories-tickets-2002621581058",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2003248911420",
+      "title": "The Diwali Market - Art Workshops, Market and Social",
+      "date": "2026-11-07",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Foundry Collective",
+        "address": "1 Victoria Road, London, W3 6FA"
+      },
+      "description": "We invite everyone to celebrate South Asian art, culture and community on Diwali weekend. Grab some chai, chat, create and celebrate!",
+      "category": "networking",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/the-diwali-market-art-workshops-market-and-social-tickets-2003248911420",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/the-diwali-market-art-workshops-market-and-social-tickets-2003248911420",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1991402854545",
+      "title": "Acton’s Lost Cinemas - a walking tour",
+      "date": "2026-11-08",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "St Mary's Church, Acton",
+        "address": "High Street, London, W3 9NW"
+      },
+      "description": "Flea-pits, picture palaces and super-cinemas. This guided walk explores the local cinemas that once entertained thousands each week.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/actons-lost-cinemas-a-walking-tour-tickets-1991402854545",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/actons-lost-cinemas-a-walking-tour-tickets-1991402854545",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1996221081993",
+      "title": "Remembering Wartime Willesden",
+      "date": "2026-11-08",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "Discover the outstanding wartime contribution made by the Jewish community",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/remembering-wartime-willesden-tickets-1996221081993",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/remembering-wartime-willesden-tickets-1996221081993",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1998219943642",
+      "title": "UAL Halls Tour | The Costume Store | Saturday 14 November 2026",
+      "date": "2026-11-14",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Costume Store",
+        "address": "160 Victoria Road, London, W3 6EE"
+      },
+      "description": "Prospective UAL students are invited to visit The Costume Store, one of UAL's Halls of Residence. Tours run between 10am and 4:30pm.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/ual-halls-tour-the-costume-store-saturday-14-november-2026-tickets-1998219943642",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/ual-halls-tour-the-costume-store-saturday-14-november-2026-tickets-1998219943642",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1996076144481",
+      "title": "Guided Walk: Jewish Communal Leaders",
+      "date": "2026-11-22",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "Learn remarkable stories of leadership, learning and service exploring the stories in Willesden Jewish Cemetery",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1996090137334",
+      "title": "Guided Walk: Hidden Histories: The Stories of Willesden Jewish Cemetery",
+      "date": "2026-12-06",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "Guided walk at London's most surprising cemetery.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
     }
   ]
 }

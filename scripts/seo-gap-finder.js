@@ -33,11 +33,27 @@ const KEYWORD_TARGETS = [
 ];
 
 function getPublishedArticles() {
-  if (!fs.existsSync(PUBLISHED_DIR)) return [];
-  return fs.readdirSync(PUBLISHED_DIR)
-    .filter(f => f.endsWith('.json'))
-    .map(f => { try { return JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, f), 'utf8')); } catch { return null; } })
-    .filter(Boolean);
+  const fromDir = fs.existsSync(PUBLISHED_DIR)
+    ? fs.readdirSync(PUBLISHED_DIR)
+        .filter(f => f.endsWith('.json'))
+        .map(f => { try { return JSON.parse(fs.readFileSync(path.join(PUBLISHED_DIR, f), 'utf8')); } catch { return null; } })
+        .filter(Boolean)
+    : [];
+
+  // The live site's articles (data/news.json) are what readers actually see,
+  // and are what the daily auto-publisher writes to.
+  let fromNews = [];
+  try {
+    const news = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/news.json'), 'utf8'));
+    fromNews = (news.articles || []).map(a => ({
+      title: a.title,
+      content: `${a.excerpt || ''} ${a.category || ''}`,
+      tags: [a.category || ''],
+      publishDate: a.date,
+    }));
+  } catch { /* no news.json yet */ }
+
+  return [...fromDir, ...fromNews];
 }
 
 function findGaps(articles) {

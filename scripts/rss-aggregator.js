@@ -25,6 +25,17 @@ const parser = new Parser({
 });
 
 // RSS Feed Sources Configuration
+//
+// Health notes (checked 2026-10-11):
+//  - hs2.org.uk feed is frozen at 2024 and the Old Oak forum feed is empty; both
+//    are kept in case they revive (the age gate below drops anything stale).
+//  - london.gov.uk/opdc news.xml returns 404 and railwaypro.com blocks bots (403),
+//    so both were removed. OPDC/HS2 news is picked up via Google News instead.
+//  - Google News queries MUST carry a `when:Nd` window, otherwise Google returns
+//    its ten "most relevant" results, which are mostly years old.
+const gnews = (q) =>
+  `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-GB&gl=GB&ceid=GB:en`;
+
 const RSS_SOURCES = [
   {
     name: 'HS2 Ltd',
@@ -49,37 +60,73 @@ const RSS_SOURCES = [
     tags: ['community', 'residents', 'local']
   },
   {
-    name: 'Railway PRO',
-    url: 'https://www.railwaypro.com/feed/',
+    name: 'Ian Visits',
+    url: 'https://www.ianvisits.co.uk/feed/',
     category: 'transport',
     priority: 'medium',
-    tags: ['transport', 'railway', 'infrastructure'],
-    filter: ['old oak', 'hs2', 'elizabeth line']
-  },
-  {
-    name: 'OPDC Planning',
-    url: 'https://www.london.gov.uk/opdc/feeds/news.xml',
-    category: 'planning',
-    priority: 'high',
-    tags: ['planning', 'development', 'opdc']
+    tags: ['london', 'transport', 'local'],
+    filter: ['old oak', 'hs2', 'park royal', 'elizabeth line', 'acton', 'willesden', 'harlesden']
   },
   // Google News search feeds — no API key required
   {
     name: 'Google News — Old Oak Common',
-    url: 'https://news.google.com/rss/search?q=%22Old+Oak+Common%22+OR+%22Park+Royal%22+London&hl=en-GB&gl=GB&ceid=GB:en',
+    url: gnews('"Old Oak Common" OR "Park Royal" OR "Old Oak" London when:14d'),
     category: 'general',
     priority: 'high',
     tags: ['news', 'regeneration', 'community']
   },
   {
     name: 'Google News — HS2',
-    url: 'https://news.google.com/rss/search?q=HS2+%22Old+Oak%22+OR+%22Euston%22&hl=en-GB&gl=GB&ceid=GB:en',
+    url: gnews('HS2 "Old Oak" OR Euston when:14d'),
     category: 'hs2',
     priority: 'medium',
     tags: ['hs2', 'transport', 'infrastructure'],
     filter: ['old oak', 'hs2', 'euston', 'park royal']
+  },
+  {
+    name: 'Google News — OPDC & Planning',
+    url: gnews('OPDC OR "Old Oak and Park Royal Development Corporation" OR "Old Oak" planning application when:30d'),
+    category: 'construction',
+    priority: 'high',
+    tags: ['planning', 'development', 'opdc']
+  },
+  {
+    name: 'Google News — Housing',
+    url: gnews('("Old Oak" OR "Park Royal" OR "North Acton" OR "Willesden Junction") (homes OR housing OR development OR regeneration) when:30d'),
+    category: 'housing',
+    priority: 'medium',
+    tags: ['housing', 'development'],
+    filter: ['old oak', 'park royal', 'north acton', 'willesden']
+  },
+  {
+    name: 'Google News — Transport',
+    url: gnews('"Elizabeth line" OR "Old Oak Common station" OR "Old Oak" rail when:30d'),
+    category: 'transport',
+    priority: 'medium',
+    tags: ['transport', 'elizabeth line'],
+    filter: ['old oak', 'park royal', 'elizabeth line']
+  },
+  {
+    name: 'Google News — Jobs & Business',
+    url: gnews('"Park Royal" OR "Old Oak" (jobs OR employment OR business OR industrial OR apprenticeships) when:30d'),
+    category: 'employment',
+    priority: 'medium',
+    tags: ['jobs', 'business', 'employment'],
+    filter: ['old oak', 'park royal']
+  },
+  {
+    name: 'Google News — Local Community',
+    url: gnews('("Old Oak" OR "Harlesden" OR "Wormwood Scrubs" OR "North Acton") community OR residents OR council when:14d'),
+    category: 'community',
+    priority: 'medium',
+    tags: ['community', 'local'],
+    filter: ['old oak', 'harlesden', 'wormwood scrubs', 'north acton']
   }
 ];
+
+// Anything older than this never enters the queue. It also stops pruned items
+// being re-ingested if a feed keeps serving them.
+const MAX_ITEM_AGE_DAYS = 45;
 
 // Data directories
 const DATA_DIR = path.join(__dirname, '../data');
@@ -184,6 +231,13 @@ async function fetchFeed(source) {
     for (const item of feed.items) {
       // Apply filter if exists
       if (!matchesFilter(item, source.filter)) {
+        continue;
+      }
+
+      // Age gate: this is a news site, so skip stale items (and unparseable dates)
+      const published = new Date(item.isoDate || item.pubDate || '');
+      if (isNaN(published.getTime()) ||
+          (Date.now() - published.getTime()) / 86400000 > MAX_ITEM_AGE_DAYS) {
         continue;
       }
 
