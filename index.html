@@ -2851,7 +2851,14 @@
             var container = document.getElementById('calendar-container');
             var monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
+            // In the current month, hide events that have already happened.
+            // Past months still show their history when navigated to.
+            var todayStart = new Date();
+            todayStart.setHours(0, 0, 0, 0);
+            var viewingThisMonth = currentMonth === todayStart.getMonth() && currentYear === todayStart.getFullYear();
+
             var monthEvents = calendarEvents.filter(function(ev) {
+                if (viewingThisMonth && ev.date < todayStart) return false;
                 return ev.date.getMonth() === currentMonth && ev.date.getFullYear() === currentYear;
             });
 
