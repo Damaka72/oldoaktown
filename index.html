@@ -2777,11 +2777,64 @@
             .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
             .then(function(rows) {
                 if (Array.isArray(rows) && rows.length) {
-                    calendarEvents = rows
+                    baseEvents = rows
                         .map(normaliseEvent)
                         .filter(function(ev) { return ev.date && !isNaN(ev.date.getTime()); });
+                    mergeEvents();
                     renderCalendar();
                 }
+            })
+            .catch(function() {});
+
+        // Events = Supabase (approved submissions) + auto-discovered/curated
+        // events from /data/events.json (see scripts/events-discovery.js).
+        // Duplicates (same title + date) are collapsed; Supabase wins.
+        var baseEvents = calendarEvents.slice();
+        var autoEvents = [];
+
+        function mergeEvents() {
+            var seen = {};
+            calendarEvents = [];
+            baseEvents.concat(autoEvents).forEach(function(ev) {
+                var k = String(ev.title).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim() + '|' + ev.date.toDateString();
+                if (!seen[k]) { seen[k] = true; calendarEvents.push(ev); }
+            });
+        }
+
+        // Map an events.json record to the calendar's render shape
+        function normaliseJsonEvent(ev) {
+            var parts = String(ev.date || '').split('-');
+            var d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+            function fmt(t) {
+                if (!t) return '';
+                var p = String(t).split(':'), h = parseInt(p[0], 10);
+                return (h % 12 || 12) + ':' + p[1] + ' ' + (h >= 12 ? 'PM' : 'AM');
+            }
+            var start = fmt(ev.startTime), end = fmt(ev.endTime);
+            var time = start && end ? start + ' – ' + end : (start || 'Time TBC');
+            var url = ev.registrationUrl || ev.sourceUrl || '';
+            var loc = ev.location || {};
+            return {
+                title: escapeHtml(ev.title),
+                date: d,
+                time: time,
+                location: escapeHtml(loc.name || 'Old Oak Common'),
+                address: escapeHtml(loc.address || ''),
+                description: escapeHtml(ev.description || ''),
+                registerUrl: /^https?:\/\//i.test(url) ? escapeHtml(url) : '#'
+            };
+        }
+
+        fetch('/data/events.json')
+            .then(function(r) { return r.ok ? r.json() : Promise.reject(); })
+            .then(function(data) {
+                var today = new Date();
+                today.setHours(0, 0, 0, 0);
+                autoEvents = (data.events || [])
+                    .map(normaliseJsonEvent)
+                    .filter(function(ev) { return ev.date && !isNaN(ev.date.getTime()) && ev.date >= today; });
+                mergeEvents();
+                renderCalendar();
             })
             .catch(function() {});
 

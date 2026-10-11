@@ -54,9 +54,12 @@ function categorise(text) {
 const WANTED = /(consultation|have your say|public meeting|town hall|planning|opdc|hs2|regeneration|community|neighbourhood|resident|council|library|festival|carnival|market|fair\b|exhibition|gallery|talk\b|lecture|screening|film|tour|walk\b|heritage|history|open day|open house|volunteer|litter|clean-?up|garden|allotment|jobs? fair|careers|business (forum|network)|youth|concert|gig|live music|theatre|comedy)/i;
 const UNWANTED = /(nail|beauty|massage|therapy|clinic|meditation|healing|hypno|yoga|pilates|course\b|class(es)?\b|lesson|tutorial|bootcamp|certification|exam\b|seminar for|webinar|networking breakfast|sales|mlm|crypto|forex|speed dating|singles|party|club night|rave|nightlife|sip & paint|paint night|dj set|18+)/i;
 
+// Nightlife wording is checked in the description too (titles are often cryptic).
+const NIGHTLIFE = /(party|club night|rave|nightlife|dj set|djs|dress code|18\+|after-?party|bottle service)/i;
+
 function isWantedEvent(title, description) {
   const text = `${title} ${description}`;
-  return WANTED.test(text) && !UNWANTED.test(title);
+  return WANTED.test(text) && !UNWANTED.test(title) && !NIGHTLIFE.test(text);
 }
 
 // Third-party text is rendered with innerHTML by the calendar page, so strip markup.
