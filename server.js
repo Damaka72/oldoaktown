@@ -106,13 +106,13 @@ app.post('/api/subscribe', rateLimit(60_000, 5), async (req, res) => {
 // BUSINESS DIRECTORY
 // ─────────────────────────────────────────────
 
-const submitBusiness = require('./api/submit-business');
+const submitBusiness = require('./lib/handlers/submit-business');
 // approve-business / approve-event / approve-listing were consolidated into
 // api/approve.js (Vercel Hobby function-count limit). On Vercel the old paths
 // are preserved via rewrites in vercel.json; here we set `kind` explicitly so
 // local dev behaves the same.
 const approve = require('./api/approve');
-const getBusinesses = require('./api/get-businesses');
+const getBusinesses = require('./lib/handlers/get-businesses');
 const stripeWebhook = require('./api/stripe-webhook');
 app.post('/api/submit-business', rateLimit(60_000, 10), submitBusiness);
 app.get('/api/approve-business', (req, res) => { req.query.kind = 'business'; approve(req, res); });

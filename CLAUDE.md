@@ -156,6 +156,7 @@ Use the `/social-agent` skill (`.claude/commands/social-agent.md`) to scaffold a
 - Use CSS custom properties (`--var-name`) for all colours — never hardcode hex values in component styles
 - No frontend frameworks — vanilla JS only
 - API routes go in `api/` (Vercel) and `netlify/functions/` (Netlify) — keep both in sync
+- API routes are grouped into `api/content.js` and `api/submit.js`; add new endpoints as handlers in `lib/handlers` and register them in the router (plus a rewrite in `vercel.json`), so the 12-function limit is not reached again.
 - Never commit secrets — use environment variables for all API keys
 - The `data/review-queue/` directory is the HITL staging area — never auto-publish from it
 
