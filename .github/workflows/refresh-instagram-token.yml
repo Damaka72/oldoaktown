@@ -26,4 +26,6 @@ jobs:
           VERCEL_PROJECT_ID: prj_IGyLo0ADMJlofgrPbyrWYwMYbgPo
           VERCEL_TEAM_ID: team_2fG7WKNEcvEFVhRPxREhEgs8
           VERCEL_DEPLOY_HOOK_URL: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+          EDGE_CONFIG_ID: ${{ secrets.EDGE_CONFIG_ID }}
+          INSTAGRAM_TOKEN_SEED: ${{ secrets.INSTAGRAM_TOKEN_SEED }}
         run: node scripts/refresh-instagram-token.js
