@@ -21,11 +21,17 @@
 //   VERCEL_DEPLOY_HOOK_URL  Vercel deploy hook — POSTed to trigger a redeploy
 //                           so functions load the new token immediately.
 //
-// IMPORTANT: Vercel makes Production/Preview variables Sensitive (write-only),
-// so they cannot be read back. The chain therefore needs a readable copy:
-// add INSTAGRAM_TOKEN_READABLE (same token value) with ONLY the Development
-// environment ticked — Development variables can't be Sensitive. This script
-// refreshes from that copy and updates it and INSTAGRAM_ACCESS_TOKEN together.
+// WHY EDGE CONFIG: Vercel now stores every new env var as Sensitive
+// (write-only), so the current token can't be read back from env vars. The
+// refresh chain therefore lives in a Vercel Edge Config store (item
+// "instagram_token"), which this job can read and write with VERCEL_TOKEN.
+// After each refresh the new token is also written to INSTAGRAM_ACCESS_TOKEN
+// (write-only is fine there — the site only needs to read it at runtime).
+//
+// Extra env vars:
+//   EDGE_CONFIG_ID          id of the Edge Config store (ecfg_...)
+//   INSTAGRAM_TOKEN_SEED    one-off: a freshly generated token used only when
+//                           the store has no token yet. Remove after first run.
 
 const API = 'https://api.vercel.com';
 
@@ -63,53 +69,33 @@ async function main() {
   required('VERCEL_TOKEN');
   const q = `teamId=${encodeURIComponent(teamId)}`;
 
-  // 1. Find the live token entries and the readable copy.
-  //    Vercel makes Production/Preview variables Sensitive (write-only), so the
-  //    chain keeps a readable copy in INSTAGRAM_TOKEN_READABLE, set for the
-  //    Development environment only (Development variables can't be Sensitive).
+  const edgeId = required('EDGE_CONFIG_ID');
+  const ITEM_KEY = 'instagram_token';
+
+  // 1. Live env var entries (written to after the refresh; never read).
   const list = await vercel(`/v9/projects/${projectId}/env?${q}`);
-  const envs = list.envs || [];
-  const liveEntries = envs.filter((e) => e.key === 'INSTAGRAM_ACCESS_TOKEN');
+  const liveEntries = (list.envs || []).filter((e) => e.key === 'INSTAGRAM_ACCESS_TOKEN');
   if (!liveEntries.length) {
     console.error('::error::INSTAGRAM_ACCESS_TOKEN not found in the Vercel project.');
     process.exit(1);
   }
-  const readable =
-    envs.find((e) => e.key === 'INSTAGRAM_TOKEN_READABLE') ||
-    liveEntries.find((e) => e.type !== 'sensitive');
-  if (!readable) {
-    console.error(
-      '::error::No readable copy of the token. Add an env var INSTAGRAM_TOKEN_READABLE ' +
-      'with the current token, for the Development environment only.'
-    );
-    process.exit(1);
-  }
 
-  // 2. Read the current (decrypted) token value from the readable copy.
-  //    Try the single-variable endpoint first, then the list endpoint with
-  //    decrypt=true (the two behave differently across Vercel API versions).
+  // 2. Current token: from Edge Config, or the one-off seed on first run.
   let current = null;
   try {
-    const single = await vercel(`/v1/projects/${projectId}/env/${readable.id}?${q}`);
-    current = single && single.value;
+    const item = await vercel(`/v1/edge-config/${edgeId}/item/${ITEM_KEY}?${q}`);
+    current = item && item.value;
   } catch (err) {
-    console.log(`::warning::Single-variable read failed: ${err.message}`);
+    console.log(`Edge Config has no ${ITEM_KEY} yet (${err.message.slice(0, 80)}).`);
+  }
+  if (!current && process.env.INSTAGRAM_TOKEN_SEED) {
+    current = process.env.INSTAGRAM_TOKEN_SEED.trim();
+    console.log('Using INSTAGRAM_TOKEN_SEED to start the refresh chain.');
   }
   if (!current) {
-    try {
-      const decrypted = await vercel(`/v9/projects/${projectId}/env?${q}&decrypt=true`);
-      const match = (decrypted.envs || []).find((e) => e.id === readable.id);
-      current = match && match.value;
-    } catch (err) {
-      console.log(`::warning::Decrypted list read failed: ${err.message}`);
-    }
-  }
-  if (!current) {
-    // Metadata only — never log the value itself.
     console.error(
-      `::error::Could not read ${readable.key} (type=${readable.type}, ` +
-      `target=${JSON.stringify(readable.target)}). It must not be Sensitive and should ` +
-      'have ONLY the Development environment ticked.'
+      '::error::No token to refresh. Add a freshly generated Instagram token as the ' +
+      'GitHub secret INSTAGRAM_TOKEN_SEED and re-run.'
     );
     process.exit(1);
   }
@@ -131,20 +117,26 @@ async function main() {
   const days = igJson.expires_in ? Math.round(igJson.expires_in / 86400) : '?';
 
   if (newToken === current) {
-    console.log(`Instagram returned the same token (validity extended, ~${days} days). Nothing to update.`);
+    console.log(`Instagram returned the same token (validity extended, ~${days} days).`);
+    await vercel(`/v1/edge-config/${edgeId}/items?${q}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ items: [{ operation: 'upsert', key: ITEM_KEY, value: newToken }] }),
+    });
     return;
   }
 
-  // 4. Write the new token back to every copy (live entries + readable copy).
-  const targets = [...liveEntries];
-  if (!targets.some((e) => e.id === readable.id)) targets.push(readable);
-  for (const entry of targets) {
+  // 4. Store the new token for the next refresh, then update the live env var.
+  await vercel(`/v1/edge-config/${edgeId}/items?${q}`, {
+    method: 'PATCH',
+    body: JSON.stringify({ items: [{ operation: 'upsert', key: ITEM_KEY, value: newToken }] }),
+  });
+  for (const entry of liveEntries) {
     await vercel(`/v9/projects/${projectId}/env/${entry.id}?${q}`, {
       method: 'PATCH',
       body: JSON.stringify({ value: newToken }),
     });
   }
-  console.log(`Updated ${targets.length} Vercel env var(s) — new token valid ~${days} days.`);
+  console.log(`Token refreshed — valid ~${days} days. Updated Edge Config and ${liveEntries.length} env var(s).`);
 
   // 5. Trigger a redeploy so live functions pick up the new value.
   const hook = process.env.VERCEL_DEPLOY_HOOK_URL;
