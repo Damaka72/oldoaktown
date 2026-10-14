@@ -1,0 +1,24 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmigwfbvv95cux",
+  "title": "Routes Into Park Royal - ArtReview",
+  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQMGgzOVQtLU5RU2d2TkRpVU9TZUdpeTlXY25oQkdrRWliZXNEUWRwSnVvbkd5cGt4dEpmc2lQalNBcEZFblBGQWdsNkNnVkNWc0I3RndRME1VVnVpYlN3clFLblV6ZkM2bnFzMzhGS09zaG51MGlNd2dyaHBnLTZENlJ2SQ?oc=5",
+  "content": "Routes Into Park Royal ArtReview",
+  "contentSnippet": "Routes Into Park Royal ArtReview",
+  "publishDate": "Fri, 09 Oct 2026 18:12:13 GMT",
+  "author": "Google News — Housing",
+  "source": {
+    "name": "Google News — Housing",
+    "url": "https://news.google.com/rss/search?q=(%22Old%20Oak%22%20OR%20%22Park%20Royal%22%20OR%20%22North%20Acton%22%20OR%20%22Willesden%20Junction%22)%20(homes%20OR%20housing%20OR%20development%20OR%20regeneration)%20when%3A30d&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "housing",
+    "priority": "medium"
+  },
+  "tags": [
+    "housing",
+    "development"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-10-14T13:12:25.881Z",
+    "status": "pending_review"
+  }
+}
