@@ -8,7 +8,7 @@ This document provides the technical implementation roadmap for transforming old
 ## Strategic Context
 
 ### The Opportunity
-- **Scale:** 140 hectares, 25,500 homes, 65,000 jobs
+- **Scale:** 650 hectares; Local Plan targets at least 19,850 homes and 36,350 jobs by 2038 (indicative capacity 25,500 homes, 65,000 jobs)
 - **Timeline:** 2025-2039+ (extended due to HS2 delays)
 - **Market Gap:** Local journalism vacuum in hyperlocal regeneration coverage
 - **Target Audience:** Young (39% aged 20-39), diverse, multi-person households (27% vs 13% London avg)

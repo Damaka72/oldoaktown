@@ -2,7 +2,7 @@
 
 ## What this project is
 
-**Old Oak Town** (`oldoaktown.co.uk`) is a hyperlocal news and community resource covering the Old Oak Common regeneration project in West London — one of Europe's largest urban regeneration schemes. The site tracks HS2 station development, new housing (25,500 homes), job creation (65,000 jobs), and community life.
+**Old Oak Town** (`oldoaktown.co.uk`) is a hyperlocal news and community resource covering the Old Oak Common regeneration project in West London — one of Europe's largest urban regeneration schemes. The site tracks HS2 station development, new housing (Local Plan target: at least 19,850 homes by 2038, indicative capacity 25,500), job creation (target: 36,350 jobs by 2038, indicative capacity 65,000), and community life.
 
 **Strategic goal:** Build a trusted, long-term digital asset worth £100,000+ at exit (35–40× monthly profit). The HS2 timeline runs to 2039, so this is patient institution-building, not a quick flip.
 

@@ -37,19 +37,19 @@
             // HS2 Information
             hs2: {
                 patterns: ['hs2', 'high speed', 'train', 'station', 'railway', 'rail'],
-                response: "The HS2 Old Oak Common station is a major part of the regeneration! Here's what you should know:\n\n🚄 **Station Opening:** Expected 2033\n💰 **Investment:** £1.7 billion\n🚇 **Connections:** Elizabeth Line, Central Line, Overground\n⏱️ **To Birmingham:** 38 minutes\n\nThe station will be one of the UK's largest and best-connected transport hubs.\n\n[View latest HS2 news →](#news)"
+                response: "The HS2 Old Oak Common station is a major part of the regeneration! Here's what you should know:\n\n🚄 **HS2 services:** not before 2036, possibly as late as 2039\n🚇 **Connections:** Elizabeth Line, Central Line, Overground\n⏱️ **To Birmingham:** 38 minutes\n\nThe station will be one of the UK's largest and best-connected transport hubs.\n\n[View latest HS2 news →](#news)"
             },
 
             // Housing
             housing: {
                 patterns: ['housing', 'homes', 'flat', 'apartment', 'rent', 'buy', 'affordable', 'property', 'live', 'move'],
-                response: "Old Oak will have 25,500 new homes, with 50% designated as affordable housing:\n\n🏠 **Social Rent:** ~60% of market rate\n🏠 **London Affordable:** ~80% of market rate\n🏠 **Shared Ownership:** Buy 25-75%\n\n**Priority given to:**\n• Existing local residents\n• Key workers (teachers, nurses, etc.)\n\nFirst homes available from late 2027.\n\n[View housing resources →](#resources)"
+                response: "The Local Plan targets at least 19,850 new homes by 2038 (indicative capacity 25,500). Of the homes with planning permission, 39% are affordable:\n\n🏠 **Social Rent:** ~60% of market rate\n🏠 **London Affordable:** ~80% of market rate\n🏠 **Shared Ownership:** Buy 25-75%\n\n**Priority given to:**\n• Existing local residents\n• Key workers (teachers, nurses, etc.)\n\nFirst homes available from late 2027.\n\n[View housing resources →](#resources)"
             },
 
             // Jobs
             jobs: {
                 patterns: ['job', 'work', 'employment', 'career', 'hiring', 'vacancy', 'training', 'apprentice'],
-                response: "The regeneration will create 65,000 new jobs! The Old Oak Jobs Centre offers:\n\n💼 **Free Services:**\n• Job matching & placement\n• CV writing support\n• Interview preparation\n• Skills training courses\n• Apprenticeship links\n\n📍 **Location:** 45 High Street, Harlesden\n🕐 **Hours:** Mon-Fri 9am-6pm, Sat 10am-2pm\n\n[View community resources →](#resources)"
+                response: "The Local Plan targets 36,350 new jobs by 2038 (indicative capacity 65,000)! The Old Oak Jobs Centre offers:\n\n💼 **Free Services:**\n• Job matching & placement\n• CV writing support\n• Interview preparation\n• Skills training courses\n• Apprenticeship links\n\n📍 **Location:** 45 High Street, Harlesden\n🕐 **Hours:** Mon-Fri 9am-6pm, Sat 10am-2pm\n\n[View community resources →](#resources)"
             },
 
             // Business Directory
@@ -85,7 +85,7 @@
             // Timeline / Development
             development: {
                 patterns: ['timeline', 'when', 'development', 'regeneration', 'plan', 'masterplan', 'phase', 'future'],
-                response: "Old Oak regeneration timeline:\n\n**📍 Area:** 140 hectares\n**🏠 Homes:** 25,500 planned\n**💼 Jobs:** 65,000 expected\n**📅 Timeline:** 2025-2039+\n\n**Key Phases:**\n• 2025-2029: Infrastructure & early housing\n• 2029-2033: Station completion\n• 2033+: Full development\n\n[View development timeline →](#development)"
+                response: "Old Oak regeneration timeline:\n\n**📍 Area:** 650 hectares\n**🏠 Homes:** at least 19,850 targeted by 2038\n**💼 Jobs:** 36,350 targeted by 2038\n**📅 Local Plan period:** 2018-2038\n\n**Key Phases:**\n• 2025-2029: Infrastructure & early housing\n• HS2 services at the station: not before 2036\n• Local Plan period runs to 2038\n\n[View development timeline →](#development)"
             },
 
             // Contact
