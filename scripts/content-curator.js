@@ -119,7 +119,7 @@ async function generateEditorialContext(article) {
     system: 'You are a concise editorial assistant for a hyperlocal community news site.',
     messages: [{
       role: 'user',
-      content: `You edit Old Oak Town — hyperlocal news for Old Oak Common HS2 regeneration, West London (25,500 homes, 65,000 jobs). Audience: young (39% 20–39), diverse local residents.
+      content: `You edit Old Oak Town — hyperlocal news for Old Oak Common HS2 regeneration, West London (Local Plan targets: at least 19,850 homes and 36,350 jobs by 2038). Audience: young (39% 20–39), diverse local residents.
 
 ARTICLE:
 Title: ${article.title}

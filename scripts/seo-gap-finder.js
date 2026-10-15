@@ -89,7 +89,7 @@ async function generateBriefs(gaps) {
     system: 'You are a sharp editorial director. Respond with valid JSON array only, no markdown.',
     messages: [{
       role: 'user',
-      content: `You are editorial director of Old Oak Town — hyperlocal news for Old Oak Common regeneration, West London (25,500 homes, 65,000 jobs, HS2 super-hub). Audience: young (39% 20–39), diverse residents and property buyers.
+      content: `You are editorial director of Old Oak Town — hyperlocal news for Old Oak Common regeneration, West London (Local Plan targets: at least 19,850 homes and 36,350 jobs by 2038, HS2 super-hub). Audience: young (39% 20–39), diverse residents and property buyers.
 
 Overdue topics:
 ${gapList}
@@ -105,7 +105,7 @@ For each, suggest a specific article. Return JSON array:
   "pillar": 1
 }]
 
-Reference real specifics: HS2, OPDC, the 25,500 homes, 65,000 jobs, Elizabeth line, Park Royal, Harlesden. No generic content.`
+Reference real specifics: HS2, OPDC, the Local Plan targets (at least 19,850 homes, 36,350 jobs by 2038), Elizabeth line, Park Royal, Harlesden. No generic content.`
     }],
   });
   try { return JSON.parse(response.content[0].text.trim()); }

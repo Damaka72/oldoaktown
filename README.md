@@ -10,8 +10,8 @@ Old Oak Town is a hyperlocal news and community resource dedicated to tracking t
 
 ## 🎯 Project Overview
 
-- **Scale:** 140 hectares regeneration zone
-- **Impact:** 25,500 new homes, 65,000 new jobs
+- **Scale:** 650-hectare Old Oak and Park Royal Opportunity Area
+- **Impact:** Local Plan targets at least 19,850 new homes and 36,350 new jobs by 2038 (indicative capacity 25,500 homes and 65,000 jobs)
 - **Timeline:** 2025-2039+ (long-term project)
 - **Focus:** Hyperlocal journalism, community engagement, business directory
 
