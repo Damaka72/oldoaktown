@@ -37,19 +37,19 @@
             // HS2 Information
             hs2: {
                 patterns: ['hs2', 'high speed', 'train', 'station', 'railway', 'rail'],
-                response: "The HS2 Old Oak Common station is a major part of the regeneration! Here's what you should know:\n\n🚄 **HS2 services:** not before 2036, possibly as late as 2039\n🚇 **Connections:** Elizabeth Line, Central Line, Overground\n⏱️ **To Birmingham:** 38 minutes\n\nThe station will be one of the UK's largest and best-connected transport hubs.\n\n[View latest HS2 news →](#news)"
+                response: "The HS2 Old Oak Common station is a major part of the regeneration! Here's what you should know:\n\n🚄 **HS2 services:** not before 2036, possibly as late as 2039\n🚇 **Connections:** Elizabeth Line, Central Line, Overground\n\nThe station will be one of the UK's largest and best-connected transport hubs.\n\n[View latest HS2 news →](#news)"
             },
 
             // Housing
             housing: {
                 patterns: ['housing', 'homes', 'flat', 'apartment', 'rent', 'buy', 'affordable', 'property', 'live', 'move'],
-                response: "The Local Plan targets at least 19,850 new homes by 2038 (indicative capacity 25,500). Of the homes with planning permission, 39% are affordable:\n\n🏠 **Social Rent:** ~60% of market rate\n🏠 **London Affordable:** ~80% of market rate\n🏠 **Shared Ownership:** Buy 25-75%\n\n**Priority given to:**\n• Existing local residents\n• Key workers (teachers, nurses, etc.)\n\nFirst homes available from late 2027.\n\n[View housing resources →](#resources)"
+                response: "The Local Plan targets at least 19,850 new homes by 2038 (indicative capacity 25,500). Of the homes with planning permission, 39% are affordable:\n\nTenure types typically include social rent, London Affordable Rent and shared ownership. Check OPDC and the individual developers for current availability and eligibility.\n\n[View housing resources →](#resources)"
             },
 
             // Jobs
             jobs: {
                 patterns: ['job', 'work', 'employment', 'career', 'hiring', 'vacancy', 'training', 'apprentice'],
-                response: "The Local Plan targets 36,350 new jobs by 2038 (indicative capacity 65,000)! The Old Oak Jobs Centre offers:\n\n💼 **Free Services:**\n• Job matching & placement\n• CV writing support\n• Interview preparation\n• Skills training courses\n• Apprenticeship links\n\n📍 **Location:** 45 High Street, Harlesden\n🕐 **Hours:** Mon-Fri 9am-6pm, Sat 10am-2pm\n\n[View community resources →](#resources)"
+                response: "The Local Plan targets 36,350 new jobs by 2038 (indicative capacity 65,000)! For local job support, contact your nearest Jobcentre Plus or Ealing and Brent council employment services, and watch our jobs page for local employers.\n\n[View community resources →](#resources)"
             },
 
             // Business Directory
