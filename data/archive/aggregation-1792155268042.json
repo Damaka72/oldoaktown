@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-16T12:54:28.042Z",
+  "totalItemsFetched": 7,
+  "bySource": {
+    "Google News — Housing": 1,
+    "Google News — Transport": 2,
+    "Google News — Jobs & Business": 3,
+    "Google News — Local Community": 1
+  },
+  "byCategory": {
+    "housing": 1,
+    "transport": 2,
+    "employment": 3,
+    "community": 1
+  },
+  "byPriority": {
+    "medium": 7
+  },
+  "itemsInReviewQueue": 94
+}
