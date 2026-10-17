@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-17",
+  "generatedAt": "2026-10-17T12:19:01.415Z",
+  "stats": {
+    "totalInQueue": 98,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmitwfbvv95cux",
+      "title": "HS2’s Old Oak Common to deliver seamless step-free Elizabeth Line access - Rail Technology Magazine",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQREZ5WjZ2ajZ4RDdSRXk1bWsxelRjcXgya3ZKajQ1a3A1VjhhdzF2Snh4SmZfSmxlNE9ZVHFaWTBpaUoteG1uOV9TZDJrc0dHcFk1eUpRTHl1dzVqM2xqcGh5V3VrUGFCN0lUeXNmTkRkcGxJMFBRZ3BKdGZmU0xkYWJSVjU1eGdETlJ2cFA4UDZsZHJHQ082VzF4eEJmZktfSUFlblN5TDNCLTRJdFNLdFZpOWNxQ3M?oc=5",
+      "content": "HS2’s Old Oak Common to deliver seamless step-free Elizabeth Line access Rail Technology Magazine",
+      "contentSnippet": "HS2’s Old Oak Common to deliver seamless step-free Elizabeth Line access Rail Technology Magazine",
+      "publishDate": "Wed, 30 Sep 2026 07:00:00 GMT",
+      "author": "Google News — Transport",
+      "source": {
+        "name": "Google News — Transport",
+        "url": "https://news.google.com/rss/search?q=%22Elizabeth%20line%22%20OR%20%22Old%20Oak%20Common%20station%22%20OR%20%22Old%20Oak%22%20rail%20when%3A30d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "transport",
+        "priority": "medium"
+      },
+      "tags": [
+        "transport",
+        "elizabeth line"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-10-17T11:53:36.601Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 20,
+      "editorialNote": "**Editorial Note:**\n\nThis step-free access is crucial—it means disabled residents and parents with buggies get genuine transport equality at a major hub. **Context to add:** How this connects to the 19,850 planned homes and job accessibility. **Fact-check:** Confirm \"seamless\" claim against actual construction timelines and any accessibility gaps remaining."
+    }
+  ],
+  "skipped": []
+}
