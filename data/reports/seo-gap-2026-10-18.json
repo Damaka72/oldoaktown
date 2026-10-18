@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-18",
+  "totalPublished": 19,
+  "gaps": [
+    {
+      "topic": "HS2 delay & budget analysis",
+      "keywords": [
+        "delay",
+        "budget",
+        "overspend",
+        "2039",
+        "timeline"
+      ],
+      "pillar": 3,
+      "targetDays": 60,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Property & housing market",
+      "keywords": [
+        "property",
+        "price",
+        "market",
+        "rent",
+        "landlord"
+      ],
+      "pillar": 2,
+      "targetDays": 30,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Jobs & employment",
+      "keywords": [
+        "jobs",
+        "employment",
+        "careers",
+        "opportunity",
+        "workforce"
+      ],
+      "pillar": 1,
+      "targetDays": 30,
+      "lastCovered": "2026-03-04",
+      "daysSince": 228,
+      "urgent": true
+    },
+    {
+      "topic": "Old Oak community events",
+      "keywords": [
+        "event",
+        "community",
+        "consultation",
+        "meeting",
+        "forum"
+      ],
+      "pillar": 2,
+      "targetDays": 14,
+      "lastCovered": "2026-03-27",
+      "daysSince": 205,
+      "urgent": true
+    },
+    {
+      "topic": "Local business spotlights",
+      "keywords": [
+        "business",
+        "local",
+        "restaurant",
+        "shop",
+        "cafe"
+      ],
+      "pillar": 2,
+      "targetDays": 21,
+      "lastCovered": "2026-03-27",
+      "daysSince": 205,
+      "urgent": true
+    }
+  ],
+  "briefs": [],
+  "topicsOnTrack": 5
+}
