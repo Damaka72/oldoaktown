@@ -1,63 +1,19 @@
 {
-  "date": "2026-10-12",
-  "generatedAt": "2026-10-12T18:20:52.758Z",
-  "subject": "Art and accessibility: your neighbourhood this week",
-  "intro": "There's plenty happening across Old Oak Common and Park Royal. From cultural initiatives to transport improvements, here's what's been in the news locally.",
+  "date": "2026-10-19",
+  "generatedAt": "2026-10-19T16:00:03.014Z",
+  "subject": "New Routes Into Park Royal",
+  "intro": "This week, we're looking at fresh pathways into our neighbourhood. There's plenty happening to connect our community in new ways.",
   "news": [
     {
-      "title": "Park Royal: Listening to the Hinterland - ArtReview",
-      "excerpt": "Park Royal: Listening to the Hinterland ArtReview",
+      "title": "Routes Into Park Royal - ArtReview",
+      "excerpt": "Routes Into Park Royal ArtReview",
       "category": "News",
-      "date": "2026-10-08",
+      "date": "2026-10-09",
       "source": "Google News — Old Oak Common",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFAwT3B4WFVjMGt3dXVOVEI1cDJHWHdUOFYtVVN1NE1GY3dFSks3ZzBLOFlrR3JYdW1hXzk1OXpyZVZWN2twSjJ5eXVSS1BZWTJKTHV2cl93cGVLRlF1V0gyWXJ5UW9tQ2ZKNGpORW8zV3JEN2trU19ra0tJWHo2UQ?oc=5"
-    },
-    {
-      "title": "Old Oak Common redesign delivers level boarding for Elizabeth line passengers - Trending Now Infrastructure",
-      "excerpt": "Old Oak Common redesign delivers level boarding for Elizabeth line passengers Trending Now Infrastructure",
-      "category": "HS2 Updates",
-      "date": "2026-10-05",
-      "source": "Google News — HS2",
-      "url": "https://news.google.com/rss/articles/CBMixwJBVV95cUxPSWtHM2NBT3pRTDJoTEgtcFZnNGFRNnBoR2hEd2VaTVVZWnVoS3RaTHBYTmppd0cxMWpQUWVTVi1OQi1JY1g3SGxRQW9WdWx5ZWJ2VWF0SGtqX2FmRWhoaTFyQk5HRjJGNE52ME5QYmZxaVpIY0VYR21rLVU4TDREOXRWY1FuWHl4bUl3aE1fTlZ3T3l1QjFoemprbk93N3BwY2pLTW5RMVdnNEhkemRNMW5JR01GTTVzQkRyeG9QUmM2aVR2YWFHSFE4OC1tRnRqaHNZbU8ycjdEY0xQelpmLVNGcDk3TnhLT1pGdWZkUDE2SzBfbzlHT2xKTTlYMUxrZElpRFJUcm1vUGJLaDd6UjBFUjJ1cHNQREdhZVdrOVgxYnVVbHN2R0lRRDE4Z08zT1hub05hQ0NQUG5DSzdOZGdITjBaTVk?oc=5"
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQMGgzOVQtLU5RU2d2TkRpVU9TZUdpeTlXY25oQkdrRWliZXNEUWRwSnVvbkd5cGt4dEpmc2lQalNBcEZFblBGQWdsNkNnVkNWc0I3RndRME1VVnVpYlN3clFLblV6ZkM2bnFzMzhGS09zaG51MGlNd2dyaHBnLTZENlJ2SQ?oc=5"
     }
   ],
   "events": [
-    {
-      "title": "Updating The Brent Black Music History Project (Harlesden Library)",
-      "date": "2026-10-12",
-      "startTime": null,
-      "venue": "Harlesden Library",
-      "address": "Craven Park Road, London, NW10 8SE",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/updating-the-brent-black-music-history-project-harlesden-library-tickets-1997666797166"
-    },
-    {
-      "title": "Creative Relaxation-Collage at Kensal Library",
-      "date": "2026-10-12",
-      "startTime": null,
-      "venue": "Kensal Library",
-      "address": "20 Golborne Road, London, W10 5PF",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869473025"
-    },
-    {
-      "title": "People's Emergency Briefing - Kensal and Kilburn",
-      "date": "2026-10-13",
-      "startTime": null,
-      "venue": "St Lukes West Kilburn",
-      "address": "Fernhead Road, London, W9 3EH",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/peoples-emergency-briefing-kensal-and-kilburn-tickets-1998019664602"
-    },
-    {
-      "title": "Women of Willesden - Guided Walk of Willesden Jewish Cemetery",
-      "date": "2026-10-18",
-      "startTime": null,
-      "venue": "Willesden Jewish Cemetery",
-      "address": "Beaconsfield Road, London, NW10 2JE",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/women-of-willesden-guided-walk-of-willesden-jewish-cemetery-tickets-1996074631957"
-    },
     {
       "title": "Have Your Say on Brent’s Climate Future – Harlesden Roadshow",
       "date": "2026-10-19",
@@ -75,6 +31,42 @@
       "address": "The Collective, London, NW10 6FF",
       "category": "tour",
       "url": "https://www.eventbrite.co.uk/e/art-on-the-canalside-autumn-photo-walk-tickets-1998875106251"
+    },
+    {
+      "title": "BABY Z's WRLD 3 years of art & madness",
+      "date": "2026-10-23",
+      "startTime": null,
+      "venue": "The Foundry Collective",
+      "address": "1 Victoria Road, London, W3 6FA",
+      "category": "community",
+      "url": "https://www.eventbrite.com/e/baby-zs-wrld-3-years-of-art-madness-tickets-2000887735078"
+    },
+    {
+      "title": "Wellbeing Walk-ACTON",
+      "date": "2026-10-24",
+      "startTime": null,
+      "venue": "Acton Park",
+      "address": "The Vale, London, W3 7JX",
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/wellbeing-walk-acton-tickets-1987323619443"
+    },
+    {
+      "title": "Guided walk: Creativity Unwrapped at Willesden Jewish Cemetery",
+      "date": "2026-10-25",
+      "startTime": null,
+      "venue": "Willesden Jewish Cemetery",
+      "address": "Beaconsfield Road, London, NW10 2JE",
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/guided-walk-creativity-unwrapped-at-willesden-jewish-cemetery-tickets-1996089469336"
+    },
+    {
+      "title": "A Canalside Flora - Exhibition opening and poetry reading",
+      "date": "2026-10-26",
+      "startTime": null,
+      "venue": "North Acton Square",
+      "address": "3 Victoria Road, London, W3 6UP",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/a-canalside-flora-exhibition-opening-and-poetry-reading-tickets-2002196205749"
     }
   ],
   "videos": [
