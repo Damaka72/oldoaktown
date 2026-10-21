@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmiqafbvv95cux",
+      "title": "Inside Matthew McConaughey’s Expansive Old Oak Mansion in Austin - Zoom TV",
+      "excerpt": "Inside Matthew McConaughey’s Expansive Old Oak Mansion in Austin Zoom TV",
+      "category": "Community",
+      "date": "2026-10-20",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop",
+      "imageAlt": "Inside Matthew McConaughey’s Expansive Old Oak Mansion in Austin - Zoom TV",
+      "body": "<p>Inside Matthew McConaughey’s Expansive Old Oak Mansion in Austin Zoom TV</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMiqAFBVV95cUxPMkxMeHRwRnVKb0RFMEhxUUVrOTdCcThTYm90WkpnM1p3QUdBRHR5eHRsR3drbXhINXdMZ0hXU2IwQjhfOU5tdnhkQ1BySFVxUVR2WVhQdERsWlpxYmtCc19ZQlJYQUg3aDhrXzFVa19mTjJkaTVSXzVid3p6RVlUU1lvRUxLelVpYkhMREpYRzlGbkdVOWVFYmN2TG40Y0tURC1CTWJtNlc?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Local Community</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-news-google-com-rss-articles-cbmigwfbvv95cux",
       "title": "Routes Into Park Royal - ArtReview",
       "excerpt": "Routes Into Park Royal ArtReview",
@@ -210,7 +221,7 @@
       "author": "Old Oak Town"
     }
   ],
-  "total": 19,
+  "total": 20,
   "source": "auto",
-  "lastPublished": "2026-10-17T12:19:01.462Z"
+  "lastPublished": "2026-10-21T14:01:13.567Z"
 }
