@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-22T13:20:23.583Z",
+  "totalItemsFetched": 3,
+  "bySource": {
+    "Ian Visits": 1,
+    "Google News — Transport": 1,
+    "Google News — Jobs & Business": 1
+  },
+  "byCategory": {
+    "transport": 2,
+    "employment": 1
+  },
+  "byPriority": {
+    "medium": 3
+  },
+  "itemsInReviewQueue": 107
+}
