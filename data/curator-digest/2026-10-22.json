@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-22",
+  "generatedAt": "2026-10-22T13:59:49.861Z",
+  "stats": {
+    "totalInQueue": 106,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [
+    {
+      "id": "https-www-ianvisits-co-uk-articles-tfl-earns-1-1-m",
+      "title": "TfL earns £1.1 million from Turkish Airlines’ Elizabeth line advertising deal",
+      "url": "https://www.ianvisits.co.uk/articles/tfl-earns-1-1-million-from-turkish-airlines-elizabeth-line-advertising-deal-93446/",
+      "content": "You might have seen some large adverts appearing on the Elizabeth line recently, and they’re all part of a year-long campaign promoting Turkish Airlines. The campaign mixes banners at the bottom of station roundels with, in some places, very wide banners showing fictional timetables in a sort of tube moquette colour scheme. It’s now been confirmed that Transport for London (TfL) is earning £1.1 million from the campaign. In exchange, the airline gets its banners on up to 60 roundels across the Elizabeth line. They can also apply their vinyl to up to 60 platform benches at Bond Street, Tottenham Court Road and Liverpool Street stations. They can also add Turkish Airlines branding to some of the line diagram maps in the 15 Elizabeth line managed stations and host a one-day pop-up display at each station. One small change that’s worth pointing out is that the seats used to have ghostbuster vinyls on the walls, which are now covered up by the adverts. That also means the priority seat sign on the wall has been covered up. So a floor vinyl has replaced it, and arguably it&#8217;s more noticeable than the old sign had been. There may even be a long-term benefit, if the glue in the vinyls absorbs some dirt and removes it when the adverts are peeled off. Giant nasal pore strips for the tube. In the meantime, expect lots of Turkish Airlines adverts on the Lizzie line. Emma Strain, Customer Director at TfL, said: “This year-long collaboration with Turkish Airlines is part of our wider work to engage with brands, and creatively shows how our services connect people not just here but across the world. All the revenue raised though collaborations like this is invested into London&#8217;s transport network to provide further improvements across the capital.&#8221;",
+      "contentSnippet": "You might have seen some large adverts appearing on the Elizabeth line recently, and they’re all part of a year-long campaign promoting Turkish Airlines. The campaign mixes banners at the bottom of station roundels with, in some places, very wide banners showing fictional timetables in a sort of tub",
+      "publishDate": "Thu, 22 Oct 2026 09:00:18 +0000",
+      "author": "ianVisits",
+      "source": {
+        "name": "Ian Visits",
+        "url": "https://www.ianvisits.co.uk/feed/",
+        "category": "transport",
+        "priority": "medium"
+      },
+      "tags": [
+        "london",
+        "transport",
+        "local"
+      ],
+      "imageUrl": "https://www.ianvisits.co.uk/articles/wp-content/uploads/sites/2/2026/10/elizabeth-line-turkish-airlines-03-1024x683.jpg",
+      "metadata": {
+        "fetchedAt": "2026-10-22T13:20:12.941Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 20,
+      "editorialNote": "**Editorial Note:**\n\n**Why it matters:** Revenue from Elizabeth line ads funds transport infrastructure Old Oak residents depend on daily. **Local angle:** Highlight Old Oak Common station's role as a major interchange—does this deal affect advertising space for local businesses or community services? **Fact-check:** Confirm £1.1m figure and campaign duration; clarify if other major advertisers are competing for similar visibility."
+    }
+  ],
+  "skipped": []
+}
