@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmickfvx3lxtfb",
+      "title": "Old Oak Common - Premier Construction News",
+      "excerpt": "Old Oak Common Premier Construction News",
+      "category": "HS2 Updates",
+      "date": "2026-10-23",
+      "image": "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop",
+      "imageAlt": "Old Oak Common - Premier Construction News",
+      "body": "<p>Old Oak Common Premier Construction News</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMickFVX3lxTFBhN2NXdmVxbDRtZS1uRUgzc29Qd3RUQkU0c3QwYXAwRlNyNUw4UTdzRHhIMGQxNnFqMlMxRkdpVl93TnVfNjVWNEpUSEJKTGItNGRaQWd3Z1pQSnRta2Q2bzBxdGFhWHZQX2FidU9GM3RQQQ?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — HS2</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-www-ianvisits-co-uk-articles-tfl-earns-1-1-m",
       "title": "TfL earns £1.1 million from Turkish Airlines’ Elizabeth line advertising deal",
       "excerpt": "You might have seen some large adverts appearing on the Elizabeth line recently, and they’re all part of a year-long campaign promoting Turkish Airlines. The campaign mixes banners at the bottom of st",
@@ -232,7 +243,7 @@
       "author": "Old Oak Town"
     }
   ],
-  "total": 21,
+  "total": 22,
   "source": "auto",
-  "lastPublished": "2026-10-22T13:59:49.909Z"
+  "lastPublished": "2026-10-23T13:42:07.502Z"
 }
