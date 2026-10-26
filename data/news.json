@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmihwjbvv95cux",
+      "title": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
+      "excerpt": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
+      "category": "Employment",
+      "date": "2026-10-26",
+      "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop",
+      "imageAlt": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
+      "body": "<p>OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMihwJBVV95cUxOZlZNWVJBQm5oeHFMQUpnQWFlOFdNc2pQZTktMHdXOENXNm1jSlVzUmgzbTd4c2FKMTh4NUdMTXlPZFotOGQ2UFJ3bTF0NEZOdFBJcmRjc3IzMklFRXZKVGpFYmJUMXZSOFduNUlEWFJ6RHlHeGZUNGtPc3pfMkdxdE9xSWJwTWlhQ3BNcHMwWUV2S0phNW4zakxwTllzdkJVRzMteUZmYUdnR2k0TzlyelAzRVo0UDRueC14bVF4aTVaM0UyazhKRzBlLXFsbjJRRjlLVGZCaFlSTE4zQ0lMbkRZcFJXV3AyZ25oQ1VUeTF3WTVGcmIyTWFCQ3Z1MU1lTmctUFJQMA?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Jobs & Business</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-news-google-com-rss-articles-cbmickfvx3lxtfb",
       "title": "Old Oak Common - Premier Construction News",
       "excerpt": "Old Oak Common Premier Construction News",
@@ -243,7 +254,7 @@
       "author": "Old Oak Town"
     }
   ],
-  "total": 22,
+  "total": 23,
   "source": "auto",
-  "lastPublished": "2026-10-23T13:42:07.502Z"
+  "lastPublished": "2026-10-26T15:22:07.623Z"
 }

@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-26",
+  "generatedAt": "2026-10-26T15:22:07.548Z",
+  "stats": {
+    "totalInQueue": 113,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 1
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmihwjbvv95cux",
+      "title": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
+      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOZlZNWVJBQm5oeHFMQUpnQWFlOFdNc2pQZTktMHdXOENXNm1jSlVzUmgzbTd4c2FKMTh4NUdMTXlPZFotOGQ2UFJ3bTF0NEZOdFBJcmRjc3IzMklFRXZKVGpFYmJUMXZSOFduNUlEWFJ6RHlHeGZUNGtPc3pfMkdxdE9xSWJwTWlhQ3BNcHMwWUV2S0phNW4zakxwTllzdkJVRzMteUZmYUdnR2k0TzlyelAzRVo0UDRueC14bVF4aTVaM0UyazhKRzBlLXFsbjJRRjlLVGZCaFlSTE4zQ0lMbkRZcFJXV3AyZ25oQ1VUeTF3WTVGcmIyTWFCQ3Z1MU1lTmctUFJQMA?oc=5",
+      "content": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
+      "contentSnippet": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
+      "publishDate": "Mon, 26 Oct 2026 11:37:38 GMT",
+      "author": "Google News — Jobs & Business",
+      "source": {
+        "name": "Google News — Jobs & Business",
+        "url": "https://news.google.com/rss/search?q=%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20(jobs%20OR%20employment%20OR%20business%20OR%20industrial%20OR%20apprenticeships)%20when%3A30d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "employment",
+        "priority": "medium"
+      },
+      "tags": [
+        "jobs",
+        "business",
+        "employment"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-10-26T14:42:54.106Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 25,
+      "editorialNote": "**Editorial Note:**\n\nThis mural marks OPDC's community engagement as Park Royal regeneration accelerates—directly relevant to our Local Plan targets. **Verify:** mural location (gateway specifics), artist credits, and any job/housing announcements tied to the unveiling. **Add context:** how Park Royal's transformation connects to Old Oak Common's 19,850-home pipeline. Strong local interest for our 20–39 demographic."
+    }
+  ],
+  "skipped": []
+}
