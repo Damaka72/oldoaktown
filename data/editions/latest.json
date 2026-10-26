@@ -1,64 +1,43 @@
 {
-  "date": "2026-10-19",
-  "generatedAt": "2026-10-19T16:00:03.014Z",
-  "subject": "New Routes Into Park Royal",
-  "intro": "This week, we're looking at fresh pathways into our neighbourhood. There's plenty happening to connect our community in new ways.",
+  "date": "2026-10-26",
+  "generatedAt": "2026-10-26T15:36:42.266Z",
+  "subject": "Park Royal mural unveiled, Old Oak in focus",
+  "intro": "There's been plenty of activity in our neighbourhood this week. From new public art to transport developments, here's what's been happening locally.",
   "news": [
     {
-      "title": "Routes Into Park Royal - ArtReview",
-      "excerpt": "Routes Into Park Royal ArtReview",
-      "category": "News",
-      "date": "2026-10-09",
-      "source": "Google News — Old Oak Common",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQMGgzOVQtLU5RU2d2TkRpVU9TZUdpeTlXY25oQkdrRWliZXNEUWRwSnVvbkd5cGt4dEpmc2lQalNBcEZFblBGQWdsNkNnVkNWc0I3RndRME1VVnVpYlN3clFLblV6ZkM2bnFzMzhGS09zaG51MGlNd2dyaHBnLTZENlJ2SQ?oc=5"
+      "title": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
+      "excerpt": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
+      "category": "Employment",
+      "date": "2026-10-26",
+      "source": "Google News — Jobs & Business",
+      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOZlZNWVJBQm5oeHFMQUpnQWFlOFdNc2pQZTktMHdXOENXNm1jSlVzUmgzbTd4c2FKMTh4NUdMTXlPZFotOGQ2UFJ3bTF0NEZOdFBJcmRjc3IzMklFRXZKVGpFYmJUMXZSOFduNUlEWFJ6RHlHeGZUNGtPc3pfMkdxdE9xSWJwTWlhQ3BNcHMwWUV2S0phNW4zakxwTllzdkJVRzMteUZmYUdnR2k0TzlyelAzRVo0UDRueC14bVF4aTVaM0UyazhKRzBlLXFsbjJRRjlLVGZCaFlSTE4zQ0lMbkRZcFJXV3AyZ25oQ1VUeTF3WTVGcmIyTWFCQ3Z1MU1lTmctUFJQMA?oc=5"
+    },
+    {
+      "title": "Old Oak Common - Premier Construction News",
+      "excerpt": "Old Oak Common Premier Construction News",
+      "category": "HS2 Updates",
+      "date": "2026-10-23",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBhN2NXdmVxbDRtZS1uRUgzc29Qd3RUQkU0c3QwYXAwRlNyNUw4UTdzRHhIMGQxNnFqMlMxRkdpVl93TnVfNjVWNEpUSEJKTGItNGRaQWd3Z1pQSnRta2Q2bzBxdGFhWHZQX2FidU9GM3RQQQ?oc=5"
+    },
+    {
+      "title": "TfL earns £1.1 million from Turkish Airlines’ Elizabeth line advertising deal",
+      "excerpt": "You might have seen some large adverts appearing on the Elizabeth line recently, and they’re all part of a year-long campaign promoting Turkish Airlines. The campaign mixes banners at the bottom of st",
+      "category": "Transport",
+      "date": "2026-10-22",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/tfl-earns-1-1-million-from-turkish-airlines-elizabeth-line-advertising-deal-93446/"
+    },
+    {
+      "title": "Inside Matthew McConaughey’s Expansive Old Oak Mansion in Austin - Zoom TV",
+      "excerpt": "Inside Matthew McConaughey’s Expansive Old Oak Mansion in Austin Zoom TV",
+      "category": "Community",
+      "date": "2026-10-20",
+      "source": "Google News — Local Community",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPMkxMeHRwRnVKb0RFMEhxUUVrOTdCcThTYm90WkpnM1p3QUdBRHR5eHRsR3drbXhINXdMZ0hXU2IwQjhfOU5tdnhkQ1BySFVxUVR2WVhQdERsWlpxYmtCc19ZQlJYQUg3aDhrXzFVa19mTjJkaTVSXzVid3p6RVlUU1lvRUxLelVpYkhMREpYRzlGbkdVOWVFYmN2TG40Y0tURC1CTWJtNlc?oc=5"
     }
   ],
   "events": [
-    {
-      "title": "Have Your Say on Brent’s Climate Future – Harlesden Roadshow",
-      "date": "2026-10-19",
-      "startTime": null,
-      "venue": "Rumi's Cave",
-      "address": "122–124 Craven Park Road Harlesden, London, NW10 8QD",
-      "category": "consultation",
-      "url": "https://www.eventbrite.co.uk/e/have-your-say-on-brents-climate-future-harlesden-roadshow-tickets-2002529311076"
-    },
-    {
-      "title": "Art on the Canalside: Autumn Photo Walk",
-      "date": "2026-10-20",
-      "startTime": null,
-      "venue": "Community garden at The Collective",
-      "address": "The Collective, London, NW10 6FF",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/art-on-the-canalside-autumn-photo-walk-tickets-1998875106251"
-    },
-    {
-      "title": "BABY Z's WRLD 3 years of art & madness",
-      "date": "2026-10-23",
-      "startTime": null,
-      "venue": "The Foundry Collective",
-      "address": "1 Victoria Road, London, W3 6FA",
-      "category": "community",
-      "url": "https://www.eventbrite.com/e/baby-zs-wrld-3-years-of-art-madness-tickets-2000887735078"
-    },
-    {
-      "title": "Wellbeing Walk-ACTON",
-      "date": "2026-10-24",
-      "startTime": null,
-      "venue": "Acton Park",
-      "address": "The Vale, London, W3 7JX",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/wellbeing-walk-acton-tickets-1987323619443"
-    },
-    {
-      "title": "Guided walk: Creativity Unwrapped at Willesden Jewish Cemetery",
-      "date": "2026-10-25",
-      "startTime": null,
-      "venue": "Willesden Jewish Cemetery",
-      "address": "Beaconsfield Road, London, NW10 2JE",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/guided-walk-creativity-unwrapped-at-willesden-jewish-cemetery-tickets-1996089469336"
-    },
     {
       "title": "A Canalside Flora - Exhibition opening and poetry reading",
       "date": "2026-10-26",
@@ -67,6 +46,51 @@
       "address": "3 Victoria Road, London, W3 6UP",
       "category": "community",
       "url": "https://www.eventbrite.co.uk/e/a-canalside-flora-exhibition-opening-and-poetry-reading-tickets-2002196205749"
+    },
+    {
+      "title": "Have Your Say on Brent’s Climate Future – Willesden Roadshow",
+      "date": "2026-10-26",
+      "startTime": null,
+      "venue": "Willesden Green Library",
+      "address": "95 High Road, London, NW10 2SF",
+      "category": "consultation",
+      "url": "https://www.eventbrite.co.uk/e/have-your-say-on-brents-climate-future-willesden-roadshow-tickets-2002539449400"
+    },
+    {
+      "title": "Talk and guided walk on urban plants and folklore",
+      "date": "2026-10-27",
+      "startTime": null,
+      "venue": "North Acton Square",
+      "address": "3 Victoria Road, London, W3 6UP",
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/talk-and-guided-walk-on-urban-plants-and-folklore-tickets-2002064943139"
+    },
+    {
+      "title": "Icons of Black History – creative collage at Kensal Library",
+      "date": "2026-10-29",
+      "startTime": null,
+      "venue": "Kensal Library",
+      "address": "20 Golborne Road, London, W10 5PF",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/icons-of-black-history-creative-collage-at-kensal-library-tickets-2002704307495"
+    },
+    {
+      "title": "The Brent Reggae Album Covers Exhibition Marking African History Season",
+      "date": "2026-10-31",
+      "startTime": null,
+      "venue": "Harlesden Library",
+      "address": "Craven Park Road, London, NW10 8SE",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/the-brent-reggae-album-covers-exhibition-marking-african-history-season-tickets-1991292747211"
+    },
+    {
+      "title": "The Brent Reggae Album Covers Exhibition 2026",
+      "date": "2026-10-31",
+      "startTime": null,
+      "venue": "Harlesden Library",
+      "address": "Craven Park Road, London, NW10 8SE",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/the-brent-reggae-album-covers-exhibition-2026-tickets-1990529082068"
     }
   ],
   "videos": [
