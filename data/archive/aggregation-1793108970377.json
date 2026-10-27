@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-27T13:49:30.376Z",
+  "totalItemsFetched": 6,
+  "bySource": {
+    "Google News — Old Oak Common": 3,
+    "Google News — HS2": 2,
+    "Google News — Transport": 1
+  },
+  "byCategory": {
+    "general": 3,
+    "hs2": 2,
+    "transport": 1
+  },
+  "byPriority": {
+    "high": 3,
+    "medium": 3
+  },
+  "itemsInReviewQueue": 118
+}
