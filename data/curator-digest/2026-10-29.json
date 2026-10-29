@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-29",
+  "generatedAt": "2026-10-29T15:24:30.265Z",
+  "stats": {
+    "totalInQueue": 123,
+    "candidates": 0,
+    "topPicks": 0,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [],
+  "skipped": []
+}
