@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-30T14:43:39.840Z",
+  "totalItemsFetched": 6,
+  "bySource": {
+    "Google News — Old Oak Common": 2,
+    "Google News — Housing": 2,
+    "Google News — Jobs & Business": 1,
+    "Google News — Local Community": 1
+  },
+  "byCategory": {
+    "general": 2,
+    "housing": 2,
+    "employment": 1,
+    "community": 1
+  },
+  "byPriority": {
+    "high": 2,
+    "medium": 4
+  },
+  "itemsInReviewQueue": 128
+}
