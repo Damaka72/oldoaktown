@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-30",
+  "generatedAt": "2026-10-30T15:10:47.054Z",
+  "stats": {
+    "totalInQueue": 127,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmicefvx3lxte4",
+      "title": "Community-led Improvements Transform Park Royal Subway - EalingToday.co.uk",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE4yY1hMS2t0dVk2YTk4Z2lKLWQ1WnFDczdPaUEyczY2aWV1RHFhUzlpSVA0Qm5RcXJ4Mm0wZ0g4Y1JYUHVHLTYzTGFTN2RRUU0xYnFJWC1vU25rSkE5V2tzMUZLZWNqMjdJU0F0cGJRd1M?oc=5",
+      "content": "Community-led Improvements Transform Park Royal Subway EalingToday.co.uk",
+      "contentSnippet": "Community-led Improvements Transform Park Royal Subway EalingToday.co.uk",
+      "publishDate": "Thu, 29 Oct 2026 15:11:58 GMT",
+      "author": "Google News — Jobs & Business",
+      "source": {
+        "name": "Google News — Jobs & Business",
+        "url": "https://news.google.com/rss/search?q=%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20(jobs%20OR%20employment%20OR%20business%20OR%20industrial%20OR%20apprenticeships)%20when%3A30d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "employment",
+        "priority": "medium"
+      },
+      "tags": [
+        "jobs",
+        "business",
+        "employment"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-10-30T14:43:37.368Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 20,
+      "editorialNote": "**Editorial Note:**\n\n**Why it matters:** Park Royal station upgrades directly affect Old Oak commuters accessing jobs across West London's employment hub—critical as we welcome thousands of new residents under HS2 regeneration plans.\n\n**Add:** Local job numbers, transport links to Old Oak Central, community input timeline.\n\n**Fact-check:** Verify funding sources, completion dates, accessibility improvements."
+    }
+  ],
+  "skipped": []
+}

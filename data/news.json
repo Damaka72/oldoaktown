@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmicefvx3lxte4",
+      "title": "Community-led Improvements Transform Park Royal Subway - EalingToday.co.uk",
+      "excerpt": "Community-led Improvements Transform Park Royal Subway EalingToday.co.uk",
+      "category": "Employment",
+      "date": "2026-10-29",
+      "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop",
+      "imageAlt": "Community-led Improvements Transform Park Royal Subway - EalingToday.co.uk",
+      "body": "<p>Community-led Improvements Transform Park Royal Subway EalingToday.co.uk</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMicEFVX3lxTE4yY1hMS2t0dVk2YTk4Z2lKLWQ1WnFDczdPaUEyczY2aWV1RHFhUzlpSVA0Qm5RcXJ4Mm0wZ0g4Y1JYUHVHLTYzTGFTN2RRUU0xYnFJWC1vU25rSkE5V2tzMUZLZWNqMjdJU0F0cGJRd1M?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Jobs & Business</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-news-google-com-rss-articles-cbmihwjbvv95cux",
       "title": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
       "excerpt": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
@@ -254,7 +265,7 @@
       "author": "Old Oak Town"
     }
   ],
-  "total": 23,
+  "total": 24,
   "source": "auto",
-  "lastPublished": "2026-10-26T15:22:07.623Z"
+  "lastPublished": "2026-10-30T15:10:47.096Z"
 }
