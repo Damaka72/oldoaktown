@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-01",
+  "totalPublished": 24,
+  "gaps": [
+    {
+      "topic": "HS2 delay & budget analysis",
+      "keywords": [
+        "delay",
+        "budget",
+        "overspend",
+        "2039",
+        "timeline"
+      ],
+      "pillar": 3,
+      "targetDays": 60,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Property & housing market",
+      "keywords": [
+        "property",
+        "price",
+        "market",
+        "rent",
+        "landlord"
+      ],
+      "pillar": 2,
+      "targetDays": 30,
+      "lastCovered": null,
+      "daysSince": null,
+      "urgent": true
+    },
+    {
+      "topic": "Local business spotlights",
+      "keywords": [
+        "business",
+        "local",
+        "restaurant",
+        "shop",
+        "cafe"
+      ],
+      "pillar": 2,
+      "targetDays": 21,
+      "lastCovered": "2026-03-27",
+      "daysSince": 219,
+      "urgent": true
+    },
+    {
+      "topic": "Housing development updates",
+      "keywords": [
+        "housing",
+        "homes",
+        "residential",
+        "development",
+        "build"
+      ],
+      "pillar": 1,
+      "targetDays": 21,
+      "lastCovered": "2026-10-07",
+      "daysSince": 25,
+      "urgent": false
+    }
+  ],
+  "briefs": [],
+  "topicsOnTrack": 6
+}
