@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-02T17:37:06.103Z",
+  "totalItemsFetched": 3,
+  "bySource": {
+    "Google News — HS2": 1,
+    "Google News — Jobs & Business": 1,
+    "Google News — Local Community": 1
+  },
+  "byCategory": {
+    "hs2": 1,
+    "employment": 1,
+    "community": 1
+  },
+  "byPriority": {
+    "medium": 3
+  },
+  "itemsInReviewQueue": 132
+}
