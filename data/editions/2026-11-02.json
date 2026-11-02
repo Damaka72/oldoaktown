@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-02",
+  "generatedAt": "2026-11-02T18:57:55.034Z",
+  "subject": "Park Royal Gets New Look, Old Oak Common Updates",
+  "intro": "This week brings positive changes to our neighbourhood. Community-led improvements have transformed Park Royal Subway, while a new mural marks the gateway to Park Royal.",
+  "news": [
+    {
+      "title": "Community-led Improvements Transform Park Royal Subway - EalingToday.co.uk",
+      "excerpt": "Community-led Improvements Transform Park Royal Subway EalingToday.co.uk",
+      "category": "Employment",
+      "date": "2026-10-29",
+      "source": "Google News — Jobs & Business",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE4yY1hMS2t0dVk2YTk4Z2lKLWQ1WnFDczdPaUEyczY2aWV1RHFhUzlpSVA0Qm5RcXJ4Mm0wZ0g4Y1JYUHVHLTYzTGFTN2RRUU0xYnFJWC1vU25rSkE5V2tzMUZLZWNqMjdJU0F0cGJRd1M?oc=5"
+    },
+    {
+      "title": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
+      "excerpt": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
+      "category": "Employment",
+      "date": "2026-10-26",
+      "source": "Google News — Jobs & Business",
+      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOZlZNWVJBQm5oeHFMQUpnQWFlOFdNc2pQZTktMHdXOENXNm1jSlVzUmgzbTd4c2FKMTh4NUdMTXlPZFotOGQ2UFJ3bTF0NEZOdFBJcmRjc3IzMklFRXZKVGpFYmJUMXZSOFduNUlEWFJ6RHlHeGZUNGtPc3pfMkdxdE9xSWJwTWlhQ3BNcHMwWUV2S0phNW4zakxwTllzdkJVRzMteUZmYUdnR2k0TzlyelAzRVo0UDRueC14bVF4aTVaM0UyazhKRzBlLXFsbjJRRjlLVGZCaFlSTE4zQ0lMbkRZcFJXV3AyZ25oQ1VUeTF3WTVGcmIyTWFCQ3Z1MU1lTmctUFJQMA?oc=5"
+    },
+    {
+      "title": "Old Oak Common - Premier Construction News",
+      "excerpt": "Old Oak Common Premier Construction News",
+      "category": "HS2 Updates",
+      "date": "2026-10-23",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBhN2NXdmVxbDRtZS1uRUgzc29Qd3RUQkU0c3QwYXAwRlNyNUw4UTdzRHhIMGQxNnFqMlMxRkdpVl93TnVfNjVWNEpUSEJKTGItNGRaQWd3Z1pQSnRta2Q2bzBxdGFhWHZQX2FidU9GM3RQQQ?oc=5"
+    }
+  ],
+  "events": [
+    {
+      "title": "Kintsugi Workshop",
+      "date": "2026-11-06",
+      "startTime": null,
+      "venue": "Mini Picassos",
+      "address": "8 Station Terrace, London, NW10 5RT",
+      "category": "networking",
+      "url": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-2003262724736"
+    },
+    {
+      "title": "Screen Culture \"Out Of Frame\" Festival 2026 X Urban Echoes",
+      "date": "2026-11-07",
+      "startTime": null,
+      "venue": "The Foundry Collective",
+      "address": "1 Victoria Road, London, W3 6FA",
+      "category": "community",
+      "url": "https://www.eventbrite.com/e/screen-culture-out-of-frame-festival-2026-x-urban-echoes-tickets-2003109651891"
+    },
+    {
+      "title": "Library at Willesden Green: Communication Pod - Exploring Stories",
+      "date": "2026-11-07",
+      "startTime": null,
+      "venue": "The Library at Willesden Green",
+      "address": "95 High Road, London, NW10 2SF",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/library-at-willesden-green-communication-pod-exploring-stories-tickets-2002621581058"
+    },
+    {
+      "title": "The Diwali Market - Art Workshops, Market and Social",
+      "date": "2026-11-07",
+      "startTime": null,
+      "venue": "The Foundry Collective",
+      "address": "1 Victoria Road, London, W3 6FA",
+      "category": "networking",
+      "url": "https://www.eventbrite.co.uk/e/the-diwali-market-art-workshops-market-and-social-tickets-2003248911420"
+    },
+    {
+      "title": "Acton’s Lost Cinemas - a walking tour",
+      "date": "2026-11-08",
+      "startTime": null,
+      "venue": "St Mary's Church, Acton",
+      "address": "High Street, London, W3 9NW",
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/actons-lost-cinemas-a-walking-tour-tickets-1991402854545"
+    },
+    {
+      "title": "Remembering Wartime Willesden",
+      "date": "2026-11-08",
+      "startTime": null,
+      "venue": "Willesden Jewish Cemetery",
+      "address": "Beaconsfield Road, London, NW10 2JE",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/remembering-wartime-willesden-tickets-1996221081993"
+    }
+  ],
+  "videos": [
+    {
+      "title": "Old Oak Common | Level Boarding confirmed for Elizabeth line services",
+      "channel": "HS2 Ltd",
+      "url": "https://www.youtube.com/watch?v=Q7NuEDZc4Yk",
+      "published": "2026-10-05"
+    }
+  ]
+}
