@@ -1,0 +1,149 @@
+{
+  "date": "2026-11-05",
+  "generatedAt": "2026-11-05T16:39:41.631Z",
+  "stats": {
+    "totalInQueue": 140,
+    "candidates": 9,
+    "topPicks": 5,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmi0gfbvv95cux",
+      "title": "HS2: SCS breaks through into Old Oak Common connecting station with north London line - New Civil Engineer",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPaGwyX2pKaVplelFMMnRQQUpvZHlaWF9aR2YxaHJJZ3p1cTNCZ2RfNjN5OGFxWVo3MS1lUi1xLWdLMFZtSDdIOVY2WUZWdWVVYWdCYUttUlB4R2t3Wl9ET2pQamczMWJ2cFBfQXl6a0M4aWlHZEx2SW9oQ1oyZ3BTcUgyTG1Yby00emZiWXFCZ2hDOUxWbElwOXFoTGdKUlVuVUh2VFd0b2tKcXctVFY0TDJFemQ1bldWdXpCeW0ySGJZNDlya2FXVWVSdzZIcVdVSFE?oc=5",
+      "content": "HS2: SCS breaks through into Old Oak Common connecting station with north London line New Civil Engineer",
+      "contentSnippet": "HS2: SCS breaks through into Old Oak Common connecting station with north London line New Civil Engineer",
+      "publishDate": "Wed, 04 Nov 2026 13:05:46 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old%20Oak%20Common%22%20OR%20%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20London%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-05T15:58:29.935Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 31,
+      "editorialNote": "**Editorial Note:**\n\nThis breakthrough matters—it's a major construction milestone toward the interchange hub that'll reshape Old Oak's future. We should localize: what does this mean for nearby residents' disruption timelines and job opportunities? Verify: completion dates, how many jobs this phase creates, and whether community benefits agreements are on track."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmieefvx3lxtfa",
+      "title": "HS2 confirms Old Oak Common tunnel link - London Daily News",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxcm5YWTloMWFIZHV0VDVydlBFMi1BSTJSOG15X0xPR0JrbEZFOUJBWERTdGJaUFdmSllKdXBldURLRVlZQWNsQjkwN2hUejdkVWFNNW9KaTNqRk1XM1JnVkFjOEd3LUtLWFlKZERSb3RXMHZiYUY4TA?oc=5",
+      "content": "HS2 confirms Old Oak Common tunnel link London Daily News",
+      "contentSnippet": "HS2 confirms Old Oak Common tunnel link London Daily News",
+      "publishDate": "Thu, 05 Nov 2026 11:51:44 GMT",
+      "author": "Google News — HS2",
+      "source": {
+        "name": "Google News — HS2",
+        "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "hs2",
+        "priority": "medium"
+      },
+      "tags": [
+        "hs2",
+        "transport",
+        "infrastructure"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-05T15:58:31.219Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 30,
+      "editorialNote": "# Editorial Note\n\n**Why it matters:** This tunnel link is key to Old Oak's regeneration—it connects HS2 to London's rail network, making the area a major transport hub and attracting the jobs and homes promised in our Local Plan.\n\n**Add:** Timeline for construction; impact on local travel during works; how this affects housing development timelines.\n\n**Fact-check:** Confirm tunnel route specifics; verify job creation projections tied to this infrastructure."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmizafbvv95cux",
+      "title": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway - Rail Technology Magazine",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPMFNJYnNodjhNWG5hdVk2a1oyS0dYdXVFM0szQTNXc1piMTI1ZFExMFdiTjFvOUVuOVJmaEF1aFBYUXpHVEdkWmRxUFV4UUo4ZWZPZThXWjA0Y1BpbFU4X0JDVHV4aDlONzZLVVZHNUNyVXN1MGZrelc0dzQydHg2V2YxRnpWbC15N1pQX2JrN0pOSGlWTnR0QmlEWTlsTVFWTm9ydXJNOXM1QjdkRzdfUUJkVHVqa0laY2VCcS1IUGlycThWYlJ0RGozLXE?oc=5",
+      "content": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway Rail Technology Magazine",
+      "contentSnippet": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway Rail Technology Magazine",
+      "publishDate": "Wed, 04 Nov 2026 12:11:10 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old%20Oak%20Common%22%20OR%20%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20London%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-05T15:58:29.936Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 29,
+      "editorialNote": "**Editorial Note:**\n\nThis tunnelling milestone directly affects Old Oak's future—it's the backbone of our regeneration. We should localize: progress on the interchange hub, timeline for local jobs/housing, and community disruption. **Fact-check:** Verify tunnelling stage, completion dates, and whether this accelerates or delays our 2038 Local Plan targets."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmidefvx3lxte5",
+      "title": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough - Secret London",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5vSV93TFVjTnFMelNCZERRd2c3U0Y5R2xZVGFXNlhLS3djWkdsR1MzTDhiTWw2bTY3OFlLUFE4SE9jUzBzMnZZdkZvanBlaUFaSDB6a3RxTzBDc2VBc3dja1JqaTFLTFM2bktsTk1NTENFNkJW?oc=5",
+      "content": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough Secret London",
+      "contentSnippet": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough Secret London",
+      "publishDate": "Thu, 05 Nov 2026 12:26:07 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old%20Oak%20Common%22%20OR%20%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20London%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-05T15:58:29.937Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 24,
+      "editorialNote": "**Editorial Note:**\n\nThis breakthrough matters—Old Oak's new superhub will transform your commute and local economy. Before publishing, verify: which underground work achieved this milestone? Confirm timeline to job creation (Local Plan targets 36,350 by 2038). Add resident quotes on expected changes. Source: confirm Secret London's original reporting vs. wire-copy recycling."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiv0fvx3lxtfb",
+      "title": "HS2 criticised over handling of damage claims to homes near Euston Tunnel - Construction News",
+      "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFBlWFNqQU5lalhrX09NQndqdDB0WGJ4ZkpFVzVKbGFKc2NpbmlnWFZYTVRyOEc2cGRjMTZtbzNJVF80TzZGVFU3Y1d6VkEyUkY2R0tuT2lyYw?oc=5",
+      "content": "HS2 criticised over handling of damage claims to homes near Euston Tunnel Construction News",
+      "contentSnippet": "HS2 criticised over handling of damage claims to homes near Euston Tunnel Construction News",
+      "publishDate": "Tue, 03 Nov 2026 12:59:05 GMT",
+      "author": "Google News — HS2",
+      "source": {
+        "name": "Google News — HS2",
+        "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "hs2",
+        "priority": "medium"
+      },
+      "tags": [
+        "hs2",
+        "transport",
+        "infrastructure"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-05T15:58:31.217Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 17,
+      "editorialNote": "**Editorial Note:**\n\nHS2's claims process affects Old Oak residents too—we're bracing for similar issues as tunnelling approaches. Dig into: how many Old Oak damage claims filed so far? What's our timeline vs. Euston's? Compare compensation timescales. Interview residents with existing cracks or subsidence concerns. This shapes trust in the regeneration promise."
+    }
+  ],
+  "skipped": []
+}
