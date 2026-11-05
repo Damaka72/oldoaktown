@@ -1,0 +1,25 @@
+{
+  "id": "https-news-google-com-rss-articles-cbmieefvx3lxtfa",
+  "title": "HS2 confirms Old Oak Common tunnel link - London Daily News",
+  "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxcm5YWTloMWFIZHV0VDVydlBFMi1BSTJSOG15X0xPR0JrbEZFOUJBWERTdGJaUFdmSllKdXBldURLRVlZQWNsQjkwN2hUejdkVWFNNW9KaTNqRk1XM1JnVkFjOEd3LUtLWFlKZERSb3RXMHZiYUY4TA?oc=5",
+  "content": "HS2 confirms Old Oak Common tunnel link London Daily News",
+  "contentSnippet": "HS2 confirms Old Oak Common tunnel link London Daily News",
+  "publishDate": "Thu, 05 Nov 2026 11:51:44 GMT",
+  "author": "Google News — HS2",
+  "source": {
+    "name": "Google News — HS2",
+    "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+    "category": "hs2",
+    "priority": "medium"
+  },
+  "tags": [
+    "hs2",
+    "transport",
+    "infrastructure"
+  ],
+  "imageUrl": null,
+  "metadata": {
+    "fetchedAt": "2026-11-05T15:58:31.219Z",
+    "status": "pending_review"
+  }
+}
