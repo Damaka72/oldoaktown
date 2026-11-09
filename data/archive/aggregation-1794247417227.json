@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-09T18:03:37.227Z",
+  "totalItemsFetched": 3,
+  "bySource": {
+    "Ian Visits": 1,
+    "Google News — Old Oak Common": 1,
+    "Google News — HS2": 1
+  },
+  "byCategory": {
+    "transport": 1,
+    "general": 1,
+    "hs2": 1
+  },
+  "byPriority": {
+    "medium": 2,
+    "high": 1
+  },
+  "itemsInReviewQueue": 142
+}
