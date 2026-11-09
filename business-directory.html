@@ -14,452 +14,283 @@
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="apple-touch-icon" href="images/logo.png">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --primary-green: #2D5016;
-            --warm-brown: #8B4513;
-            --cream: #F5F5DC;
-            --dark-grey: #333333;
-            --light-grey: #f8f9fa;
+            /* Brand tokens (CLAUDE.md) */
+            --primary: #1C3A0E;
+            --accent: #4C8A35;
+            --mid-green: #2F6020;
+            --pale-green: #D4E8C8;
+            --ghost-green: #F0F7EB;
+            --cream: #FAF8F4;
+            --ink: #0F1A0A;
+            --muted: #6B7B5E;
+            --border: #DDE8D4;
+            --amber: #D4860A;
+            --white: #FFFFFF;
+
+            --font-head: 'Instrument Serif', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            --radius: 14px;
+            --shadow: 0 1px 2px color-mix(in srgb, var(--ink) 8%, transparent),
+                      0 4px 14px color-mix(in srgb, var(--ink) 6%, transparent);
+            --shadow-hover: 0 2px 4px color-mix(in srgb, var(--ink) 10%, transparent),
+                            0 12px 28px color-mix(in srgb, var(--ink) 12%, transparent);
+
+            /* Fallback "logo" panels: foreground / background pairs built from brand colours.
+               Categories map onto these so the grid has rhythm without any uploaded images. */
+            --t1-bg: var(--pale-green);   --t1-fg: var(--primary);
+            --t2-bg: var(--primary);      --t2-fg: var(--pale-green);
+            --t3-bg: var(--ghost-green);  --t3-fg: var(--mid-green);
+            --t4-bg: var(--mid-green);    --t4-fg: var(--ghost-green);
+            --t5-bg: color-mix(in srgb, var(--amber) 16%, var(--cream)); --t5-fg: var(--amber);
+            --t6-bg: var(--accent);       --t6-fg: var(--white);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--font-body);
             line-height: 1.6;
-            color: var(--dark-grey);
-            background: var(--light-grey);
+            color: var(--ink);
+            background: var(--cream);
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        a { color: inherit; }
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
 
-        header {
-            background: var(--primary-green);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+        /* ── Header ─────────────────────────────────────────── */
+        .site-header { background: var(--primary); color: var(--cream); }
+
+        .site-nav .container {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1.5rem; padding-top: 0.9rem; padding-bottom: 0.9rem; flex-wrap: wrap;
         }
+        .site-nav .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-family: var(--font-head); font-size: 1.5rem; }
+        .site-nav .brand img { height: 38px; width: auto; }
+        .nav-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-links a { color: color-mix(in srgb, var(--cream) 78%, transparent); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover, .nav-links a[aria-current] { color: var(--white); }
 
-        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .hero { padding: 2.5rem 0 4.5rem; text-align: center; }
+        .hero h1 { font-family: var(--font-head); font-style: italic; font-weight: 400; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.1; margin-bottom: 0.6rem; }
+        .hero p { max-width: 560px; margin: 0 auto; color: var(--pale-green); font-size: 1.05rem; }
 
-        nav {
-            background: #1a3009;
-            padding: 1rem 0;
+        /* ── Toolbar ────────────────────────────────────────── */
+        .toolbar {
+            background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
+            box-shadow: var(--shadow); padding: 1.1rem 1.25rem; margin: -2.5rem auto 1.5rem; position: relative;
         }
-
-        nav .container {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        .search-row { display: flex; gap: 0.75rem; }
+        .search-row input {
+            flex: 1; min-width: 0; padding: 0.8rem 1rem; font: inherit; color: var(--ink);
+            background: var(--cream); border: 1.5px solid var(--border); border-radius: 10px;
         }
+        .search-row input:focus { outline: none; border-color: var(--accent); background: var(--white); }
 
-        nav a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
+        .chip-row { display: flex; gap: 0.5rem; margin-top: 0.85rem; overflow-x: auto; padding-bottom: 2px; scrollbar-width: thin; }
+        .chip-label { flex: none; align-self: center; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-right: 0.25rem; }
+        .chip {
+            flex: none; font: inherit; font-size: 0.88rem; font-weight: 500; cursor: pointer;
+            padding: 0.4rem 0.9rem; border-radius: 999px; color: var(--mid-green);
+            background: var(--ghost-green); border: 1.5px solid var(--border); transition: all .15s;
         }
+        .chip:hover { border-color: var(--accent); }
+        .chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--white); }
+        .chip:focus-visible, .btn:focus-visible, .tile:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
-        nav a:hover { color: white; }
+        .directory-stats { color: var(--muted); font-size: 0.92rem; margin: 0 0 1.25rem 0.25rem; }
 
-        .search-bar {
-            background: white;
-            padding: 2rem;
-            margin: -1rem auto 2rem;
-            max-width: 800px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* ── Sections & grid ────────────────────────────────── */
+        .section { margin-bottom: 2.75rem; }
+        .section-head { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.1rem; padding-bottom: 0.6rem; border-bottom: 1.5px solid var(--border); }
+        .section-head h2 { font-family: var(--font-head); font-weight: 400; font-size: 1.7rem; color: var(--primary); }
+        .section-head .count { color: var(--muted); font-size: 0.9rem; }
+        .section-head.featured-head h2::before { content: '★ '; color: var(--amber); }
+
+        .grid { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+        /* ── Tile ───────────────────────────────────────────── */
+        .tile {
+            display: flex; flex-direction: column; background: var(--white);
+            border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); cursor: pointer; text-align: left; font: inherit; color: inherit;
+            transition: transform .2s, box-shadow .2s;
         }
+        .tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
 
-        .search-controls {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
+        .tile-visual { position: relative; height: 128px; background: var(--ghost-green); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .tile-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .tile-visual img.is-logo { object-fit: contain; padding: 1.1rem; background: var(--white); }
+
+        .monogram { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: var(--tbg); color: var(--tfg); position: relative; }
+        .monogram .letter { font-family: var(--font-head); font-style: italic; font-size: 4.2rem; line-height: 1; }
+        .monogram .cat-icon { position: absolute; right: 0.7rem; bottom: 0.55rem; font-size: 1.15rem; opacity: 0.85; }
+        .tone-1 { --tbg: var(--t1-bg); --tfg: var(--t1-fg); }
+        .tone-2 { --tbg: var(--t2-bg); --tfg: var(--t2-fg); }
+        .tone-3 { --tbg: var(--t3-bg); --tfg: var(--t3-fg); }
+        .tone-4 { --tbg: var(--t4-bg); --tfg: var(--t4-fg); }
+        .tone-5 { --tbg: var(--t5-bg); --tfg: var(--t5-fg); }
+        .tone-6 { --tbg: var(--t6-bg); --tfg: var(--t6-fg); }
+
+        .badge { position: absolute; top: 0.65rem; left: 0.65rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 999px; background: var(--amber); color: var(--white); }
+        .badge.premium { background: var(--primary); }
+
+        .tile-body { display: flex; flex-direction: column; gap: 0.35rem; padding: 1rem 1.1rem 1.1rem; flex: 1; }
+        .tile-cat { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+        .tile h3 { font-family: var(--font-head); font-weight: 400; font-size: 1.4rem; line-height: 1.2; color: var(--primary); }
+        .tile-place { font-size: 0.85rem; color: var(--muted); }
+        .tile-desc { font-size: 0.92rem; color: var(--ink); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-top: 0.15rem; }
+        .tile-foot { margin-top: auto; padding-top: 0.7rem; font-size: 0.85rem; font-weight: 600; color: var(--mid-green); }
+        .tile-foot span { transition: margin .2s; }
+        .tile:hover .tile-foot span { margin-left: 4px; }
+
+        /* Paid tiles: bigger, with a heavier top edge and the offer on show */
+        .tile.paid { border-top: 4px solid var(--amber); }
+        .tile.paid.premium { border-top-color: var(--primary); }
+        .tile.paid .tile-visual { height: 170px; }
+        .tile-offer { margin-top: 0.4rem; font-size: 0.85rem; padding: 0.5rem 0.7rem; border-radius: 8px; background: color-mix(in srgb, var(--amber) 12%, var(--cream)); border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--cream)); }
+        .grid.featured { grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); }
+
+        /* ── Detail dialog ──────────────────────────────────── */
+        dialog { border: none; border-radius: 18px; max-width: 620px; width: calc(100% - 32px); max-height: calc(100vh - 32px); padding: 0; background: var(--white); color: var(--ink); box-shadow: 0 24px 60px color-mix(in srgb, var(--ink) 35%, transparent); margin: auto; overflow: auto; position: fixed; }
+        dialog::backdrop { background: color-mix(in srgb, var(--primary) 55%, transparent); backdrop-filter: blur(2px); }
+        .dialog-visual { height: 150px; }
+        .dialog-visual .monogram .letter { font-size: 5rem; }
+        .dialog-body { padding: 1.5rem 1.6rem 1.7rem; }
+        .dialog-body h2 { font-family: var(--font-head); font-weight: 400; font-size: 2rem; line-height: 1.15; color: var(--primary); margin: 0.2rem 0 0.7rem; }
+        .dialog-body p.desc { margin-bottom: 1rem; }
+        .dialog-close { position: absolute; top: 0.7rem; right: 0.7rem; z-index: 2; width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--white); color: var(--primary); font-size: 1.3rem; cursor: pointer; box-shadow: var(--shadow); }
+        .detail-list { list-style: none; display: grid; gap: 0.45rem; margin-bottom: 1.1rem; font-size: 0.95rem; }
+        .detail-list li { display: flex; gap: 0.6rem; }
+        .detail-list .k { flex: none; width: 1.4rem; text-align: center; }
+        .gallery { display: flex; gap: 0.5rem; overflow-x: auto; margin: 0 0 1.1rem; }
+        .gallery img { height: 90px; border-radius: 8px; border: 1px solid var(--border); }
+        .actions { display: flex; flex-wrap: wrap; gap: 0.6rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+
+        .btn { display: inline-block; font: inherit; font-weight: 600; font-size: 0.92rem; text-decoration: none; cursor: pointer; padding: 0.65rem 1.3rem; border-radius: 10px; border: 1.5px solid transparent; transition: all .15s; }
+        .btn-primary { background: var(--primary); color: var(--white); }
+        .btn-primary:hover { background: var(--mid-green); }
+        .btn-ghost { background: var(--white); color: var(--primary); border-color: var(--border); }
+        .btn-ghost:hover { border-color: var(--accent); }
+        .btn-claim { background: var(--ghost-green); color: var(--mid-green); border-color: var(--pale-green); }
+        .btn-claim:hover { background: var(--pale-green); }
+
+        /* ── States, CTA, footer ────────────────────────────── */
+        .loading, .no-results { text-align: center; padding: 4rem 1rem; color: var(--muted); background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); }
+        .no-results h3 { font-family: var(--font-head); font-weight: 400; font-size: 1.6rem; color: var(--primary); margin-bottom: 0.4rem; }
+        .no-results .btn { margin-top: 1rem; }
+        .skeleton-grid .tile { pointer-events: none; }
+        .skeleton-grid .sk { background: linear-gradient(90deg, var(--ghost-green), var(--border), var(--ghost-green)); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+        @keyframes shimmer { to { background-position: -200% 0; } }
+
+        .cta-box { background: var(--primary); color: var(--cream); padding: clamp(2rem, 5vw, 3.2rem); border-radius: 20px; text-align: center; margin: 3.5rem 0 0; }
+        .cta-box h2 { font-family: var(--font-head); font-style: italic; font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.6rem; }
+        .cta-box p { max-width: 560px; margin: 0 auto 1.6rem; color: var(--pale-green); }
+        .cta-box .btn-primary { background: var(--accent); }
+        .cta-box .btn-primary:hover { background: var(--pale-green); color: var(--primary); }
+        .cta-box .btn-ghost { background: transparent; color: var(--cream); border-color: color-mix(in srgb, var(--cream) 40%, transparent); }
+        .cta-box .btn-ghost:hover { border-color: var(--cream); }
+        .cta-actions { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+
+        footer { background: var(--primary); color: var(--cream); padding: 2rem 0; text-align: center; margin-top: 4rem; }
+        footer a { color: color-mix(in srgb, var(--cream) 75%, transparent); text-decoration: none; margin: 0 0.8rem; }
+        footer a:hover { color: var(--white); }
+        footer .fine { margin-top: 1rem; color: color-mix(in srgb, var(--cream) 55%, transparent); font-size: 0.9rem; }
+
+        @media (max-width: 640px) {
+            .grid, .grid.featured { grid-template-columns: 1fr; }
+            .tile { flex-direction: row; }
+            .tile > .tile-visual { width: 104px; height: auto; min-height: 120px; flex: none; }
+            .tile.paid { flex-direction: column; }
+            .tile.paid > .tile-visual { width: 100%; height: 150px; }
+            .monogram .letter { font-size: 3rem; }
+            .tile-desc { -webkit-line-clamp: 2; }
+            .site-nav .brand { font-size: 1.3rem; }
+            .nav-links { gap: 0.4rem 0.9rem; }
+            .nav-links a { font-size: 0.85rem; }
         }
-
-        .search-controls input {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .search-controls select {
-            padding: 0.8rem;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .filter-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-tag {
-            padding: 0.5rem 1rem;
-            background: var(--light-grey);
-            border: 2px solid var(--primary-green);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .filter-tag:hover, .filter-tag.active {
-            background: var(--primary-green);
-            color: white;
-        }
-
-        .directory-stats {
-            text-align: center;
-            padding: 1rem 0 2rem;
-            color: #666;
-        }
-
-        .category-section { margin-bottom: 3rem; }
-
-        .category-section h2 {
-            color: var(--primary-green);
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--warm-brown);
-        }
-
-        .business-card {
-            background: white;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border-left: 4px solid var(--primary-green);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .business-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-
-        .business-card.featured {
-            background: linear-gradient(135deg, #fff 0%, var(--cream) 100%);
-            border-left-color: var(--warm-brown);
-            border-left-width: 6px;
-        }
-
-        .business-card.premium {
-            background: linear-gradient(135deg, #fff 0%, #f0f7e8 100%);
-            border-left-color: var(--primary-green);
-            border-left-width: 6px;
-            box-shadow: 0 4px 15px rgba(45, 80, 22, 0.15);
-        }
-
-        .business-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-            gap: 1rem;
-        }
-
-        .business-header-left {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-            flex: 1;
-        }
-
-        .business-logo {
-            width: 70px;
-            height: 70px;
-            object-fit: contain;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            flex-shrink: 0;
-        }
-
-        .business-info h3 {
-            color: var(--primary-green);
-            font-size: 1.4rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .business-category {
-            display: inline-block;
-            background: var(--primary-green);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .tier-badge {
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-
-        .tier-badge.featured { background: var(--warm-brown); color: white; }
-        .tier-badge.premium { background: var(--primary-green); color: white; }
-
-        .business-description {
-            color: #555;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .business-details {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            color: #666;
-            font-size: 0.95rem;
-        }
-
-        .business-images {
-            display: flex;
-            gap: 0.5rem;
-            margin: 1rem 0;
-            overflow-x: auto;
-        }
-
-        .business-images img {
-            width: 120px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-            border: 1px solid #eee;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 0.8rem;
-            margin: 0.5rem 0;
-        }
-
-        .social-links a {
-            color: var(--primary-green);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .social-links a:hover { text-decoration: underline; }
-
-        .special-offer {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            padding: 0.8rem 1rem;
-            border-radius: 8px;
-            margin: 0.8rem 0;
-            font-size: 0.95rem;
-        }
-
-        .special-offer strong { color: #856404; }
-
-        .business-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.6rem 1.5rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary { background: var(--primary-green); color: white; }
-        .btn-primary:hover { background: #1f3610; }
-
-        .btn-upgrade {
-            background: transparent;
-            color: var(--warm-brown);
-            border: 2px solid var(--warm-brown);
-            font-size: 0.85rem;
-        }
-
-        .btn-upgrade:hover { background: var(--warm-brown); color: white; }
-
-        .cta-box {
-            background: linear-gradient(135deg, var(--primary-green) 0%, var(--warm-brown) 100%);
-            color: white;
-            padding: 3rem;
-            border-radius: 15px;
-            text-align: center;
-            margin: 3rem 0;
-        }
-
-        .cta-box h2 { margin-bottom: 1rem; font-size: 2rem; }
-        .cta-box p { margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9; }
-
-        .cta-box .btn {
-            background: white;
-            color: var(--primary-green);
-            padding: 1rem 2.5rem;
-            font-size: 1.1rem;
-            margin: 0 0.5rem;
-        }
-
-        /* Loading state */
-        .loading {
-            text-align: center;
-            padding: 4rem;
-            color: #666;
-        }
-
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #ddd;
-            border-top-color: var(--primary-green);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .no-results {
-            text-align: center;
-            padding: 3rem;
-            color: #666;
-            background: white;
-            border-radius: 10px;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-grey);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        footer a { color: rgba(255,255,255,0.7); text-decoration: none; margin: 0 1rem; }
-        footer a:hover { color: white; }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.8rem; }
-            .search-controls { flex-direction: column; }
-            .business-header { flex-direction: column; }
-        }
+        @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
     </style>
     <!-- Vercel Speed Insights -->
     <script>
         window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/speed-insights/script.js"></script>
-
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <a href="index.html"><img src="images/logo.png" alt="Old Oak Town" style="height:80px; margin-bottom:1rem;"></a>
-            <h1>Business Directory</h1>
-            <p>Discover local businesses serving the Old Oak Common area</p>
+    <header class="site-header">
+        <nav class="site-nav" aria-label="Main">
+            <div class="container">
+                <a class="brand" href="index.html"><img src="images/logo.png" alt=""><span>Old Oak Town 🌳</span></a>
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="business-directory.html" aria-current="page">Directory</a>
+                    <a href="business-submit.html">List Your Business</a>
+                    <a href="index.html#news">News</a>
+                    <a href="index.html#newsletter">Newsletter</a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero">
+            <div class="container">
+                <h1>Local businesses, all in one place</h1>
+                <p>From Park Royal workshops to North Acton kitchens: the people and places around Old Oak Common.</p>
+            </div>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <a href="index.html">Home</a>
-            <a href="business-directory.html">Directory</a>
-            <a href="business-submit.html">List Your Business</a>
-            <a href="index.html#news">News</a>
-            <a href="index.html#newsletter">Newsletter</a>
-        </div>
-    </nav>
+    <main class="container">
 
-    <div class="container" style="padding-top: 2rem;">
-
-        <!-- Search & Filter -->
-        <div class="search-bar">
-            <div class="search-controls">
-                <input type="text" id="searchInput" placeholder="Search businesses..." oninput="handleSearch()">
-                <select id="categoryFilter" onchange="handleFilter()">
-                    <option value="all">All Categories</option>
-                    <option value="food-drink">Food & Drink</option>
-                    <option value="retail">Retail & Shopping</option>
-                    <option value="services">Professional Services</option>
-                    <option value="health">Health & Wellness</option>
-                    <option value="property">Property & Real Estate</option>
-                    <option value="construction">Construction & Trade</option>
-                    <option value="technology">Technology & IT</option>
-                    <option value="education">Education & Training</option>
-                    <option value="motor">Motor Services</option>
-                    <option value="industrial">Industrial & Manufacturing</option>
-                    <option value="entertainment">Entertainment & Leisure</option>
-                    <option value="other">Other</option>
-                </select>
+        <div class="toolbar" role="search">
+            <div class="search-row">
+                <input type="search" id="searchInput" placeholder="Search by name, service or street…" aria-label="Search businesses" autocomplete="off">
             </div>
-            <div class="filter-tags">
-                <span class="filter-tag active" onclick="filterArea('all', this)">All Areas</span>
-                <span class="filter-tag" onclick="filterArea('park-royal', this)">Park Royal</span>
-                <span class="filter-tag" onclick="filterArea('harlesden', this)">Harlesden</span>
-                <span class="filter-tag" onclick="filterArea('north-acton', this)">North Acton</span>
-                <span class="filter-tag" onclick="filterArea('kensal-green', this)">Kensal Green</span>
-                <span class="filter-tag" onclick="filterArea('willesden', this)">Willesden</span>
-            </div>
+            <div class="chip-row" id="categoryChips" role="group" aria-label="Filter by category"></div>
+            <div class="chip-row" id="areaChips" role="group" aria-label="Filter by area"></div>
         </div>
 
-        <div class="directory-stats" id="directoryStats">Loading businesses...</div>
+        <div class="directory-stats" id="directoryStats" aria-live="polite">Loading businesses…</div>
 
-        <!-- Directory Content -->
         <div id="directoryContent">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p>Loading local businesses...</p>
+            <div class="grid skeleton-grid" aria-hidden="true">
+                <div class="tile"><div class="tile-visual sk"></div><div class="tile-body"><div class="sk" style="height:12px;width:40%"></div><div class="sk" style="height:22px;width:80%"></div><div class="sk" style="height:12px;width:60%"></div></div></div>
+                <div class="tile"><div class="tile-visual sk"></div><div class="tile-body"><div class="sk" style="height:12px;width:40%"></div><div class="sk" style="height:22px;width:80%"></div><div class="sk" style="height:12px;width:60%"></div></div></div>
+                <div class="tile"><div class="tile-visual sk"></div><div class="tile-body"><div class="sk" style="height:12px;width:40%"></div><div class="sk" style="height:22px;width:80%"></div><div class="sk" style="height:12px;width:60%"></div></div></div>
             </div>
         </div>
 
-        <!-- CTA -->
-        <div class="cta-box">
-            <h2>Is Your Business Listed?</h2>
-            <p>Join hundreds of local businesses reaching thousands of Old Oak residents and workers.</p>
-            <a href="business-submit.html" class="btn">List Your Business Free</a>
-            <a href="business-submit.html" class="btn" style="background: var(--warm-brown); color: white; margin-left: 1rem;">Upgrade to Featured</a>
-        </div>
-    </div>
+        <section class="cta-box">
+            <h2>Is your business here?</h2>
+            <p>Every listing gets its own spotlight on our social channels and in the newsletter. Add yours free, or upgrade to Featured for a logo, photos and top-of-page placement.</p>
+            <div class="cta-actions">
+                <a href="business-submit.html" class="btn btn-primary">List your business free</a>
+                <a href="business-submit.html" class="btn btn-ghost">See Featured options</a>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
-            <p style="margin-bottom: 1rem;">
+            <p>
                 <a href="index.html">Home</a>
                 <a href="business-directory.html">Directory</a>
                 <a href="business-submit.html">Advertise</a>
             </p>
-            <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">© <span class="current-year">2026</span> Old Oak Town. Serving the Old Oak Common community.</p>
+            <p class="fine">© <span class="current-year">2026</span> Old Oak Town. Serving the Old Oak Common community.</p>
         </div>
     </footer>
+
+    <dialog id="detailDialog" aria-labelledby="dialogTitle">
+        <button class="dialog-close" id="dialogClose" aria-label="Close">×</button>
+        <div id="dialogContent"></div>
+    </dialog>
 
     <script>
         document.querySelectorAll('.current-year').forEach(function (el) {
@@ -469,229 +300,253 @@
         const SUPABASE_URL = 'https://mvttihozhozigtrwqsyy.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dHRpaG96aG96aWd0cndxc3l5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwNDU5NTYsImV4cCI6MjA4NzYyMTk1Nn0.g2GdUhXuxZm_EpF_WknmPAUNbrRqnqFTB5p0bpQvVlU';
 
-        let allBusinesses = [];
-        let currentArea = 'all';
+        const state = { all: [], category: 'all', area: 'all', search: '' };
 
-        // Category display names and icons
+        // tone = which brand colour pair the fallback panel uses (keeps the grid lively without images)
         const categoryInfo = {
-            'food-drink': { label: 'Food & Drink', icon: '🍽️' },
-            'retail': { label: 'Retail & Shopping', icon: '🛍️' },
-            'services': { label: 'Professional Services', icon: '💼' },
-            'health': { label: 'Health & Wellness', icon: '🏥' },
-            'property': { label: 'Property & Real Estate', icon: '🏠' },
-            'construction': { label: 'Construction & Trade', icon: '🔧' },
-            'technology': { label: 'Technology & IT', icon: '💻' },
-            'education': { label: 'Education & Training', icon: '📚' },
-            'motor': { label: 'Motor Services', icon: '🚗' },
-            'industrial': { label: 'Industrial & Manufacturing', icon: '🏭' },
-            'entertainment': { label: 'Entertainment & Leisure', icon: '🎬' },
-            'other': { label: 'Other Services', icon: '⭐' }
+            'food-drink':    { label: 'Food & Drink',               icon: '🍽️', tone: 1 },
+            'retail':        { label: 'Retail & Shopping',          icon: '🛍️', tone: 3 },
+            'services':      { label: 'Professional Services',      icon: '💼', tone: 4 },
+            'health':        { label: 'Health & Wellness',          icon: '🏥', tone: 6 },
+            'property':      { label: 'Property & Real Estate',     icon: '🏠', tone: 5 },
+            'construction':  { label: 'Construction & Trade',       icon: '🔧', tone: 2 },
+            'technology':    { label: 'Technology & IT',            icon: '💻', tone: 4 },
+            'education':     { label: 'Education & Training',       icon: '📚', tone: 6 },
+            'motor':         { label: 'Motor Services',             icon: '🚗', tone: 2 },
+            'industrial':    { label: 'Industrial & Manufacturing', icon: '🏭', tone: 3 },
+            'entertainment': { label: 'Entertainment & Leisure',    icon: '🎬', tone: 5 },
+            'other':         { label: 'Other Services',             icon: '⭐', tone: 1 }
         };
 
-        // Fetch businesses from Supabase
-        async function fetchBusinesses(filters = {}) {
+        const areas = [
+            { id: 'all',          label: 'All areas',    postcodes: [] },
+            { id: 'park-royal',   label: 'Park Royal',   postcodes: ['NW10 6', 'NW10 7', 'NW10 8'] },
+            { id: 'harlesden',    label: 'Harlesden',    postcodes: ['NW10 4', 'NW10 9'] },
+            { id: 'kensal-green', label: 'Kensal Green', postcodes: ['NW10 5'] },
+            { id: 'willesden',    label: 'Willesden',    postcodes: ['NW10 2', 'NW10 3', 'NW2'] },
+            { id: 'north-acton',  label: 'North Acton',  postcodes: ['W3 6'] },
+            { id: 'east-acton',   label: 'East Acton',   postcodes: ['W3 7', 'W12'] }
+        ];
+
+        // Everything from the database is user-submitted: escape before it touches innerHTML.
+        function esc(v) {
+            return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
+        // Only allow http(s) URLs in href/src so a submitted "javascript:" link can't run.
+        function safeUrl(u) {
+            try { const x = new URL(String(u).trim(), location.href); return /^https?:$/.test(x.protocol) ? x.href : ''; } catch { return ''; }
+        }
+        // Must stay identical to slugify() in scripts/business-promo-backfill.js: social posts deep-link to #slug.
+        function slugify(name) {
+            return String(name).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        }
+        const isPaid = b => b.tier === 'featured' || b.tier === 'premium';
+        const catOf = b => categoryInfo[b.category] || categoryInfo.other;
+
+        async function fetchBusinesses() {
             try {
-                let url = `${SUPABASE_URL}/rest/v1/businesses?status=eq.approved&order=tier.desc,approved_at.desc`;
-
-                if (filters.category && filters.category !== 'all') {
-                    url += `&category=eq.${filters.category}`;
-                }
-
-                if (filters.search) {
-                    url += `&or=(business_name.ilike.*${filters.search}*,description.ilike.*${filters.search}*)`;
-                }
-
-                const response = await fetch(url, {
-                    headers: {
-                        'apikey': SUPABASE_ANON_KEY,
-                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                if (!response.ok) throw new Error('Failed to fetch');
-
-                const data = await response.json();
-                return data;
-
-            } catch (error) {
-                console.error('Fetch error:', error);
-                return [];
+                const url = `${SUPABASE_URL}/rest/v1/businesses?status=eq.approved&order=tier.desc,business_name.asc&select=id,business_name,category,phone,address,postcode,description,website,logo_url,image_urls,instagram,twitter,linkedin,opening_hours,special_offers,tier`;
+                const res = await fetch(url, { headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` } });
+                if (!res.ok) throw new Error('Failed to fetch');
+                return await res.json();
+            } catch (err) {
+                console.error('Fetch error:', err);
+                return null;
             }
         }
 
-        // Render the directory
-        function renderDirectory(businesses) {
+        // ── Filtering (client-side: ~120 listings, so no round trip per keystroke) ──
+        function matches(b) {
+            if (state.category !== 'all' && (b.category || 'other') !== state.category) return false;
+            if (state.area !== 'all') {
+                const a = areas.find(x => x.id === state.area);
+                const pc = (b.postcode || '').toUpperCase().replace(/\s+/g, ' ').trim();
+                // Matches on postcode sector ("NW10 6"); a bare "NW10" can't be placed, so it only shows under All areas
+                if (!pc || !a.postcodes.some(p => pc.startsWith(p))) return false;
+            }
+            if (state.search) {
+                const q = state.search.toLowerCase();
+                const hay = [b.business_name, b.description, b.address, b.postcode, catOf(b).label].join(' ').toLowerCase();
+                if (!hay.includes(q)) return false;
+            }
+            return true;
+        }
+
+        // ── Rendering ──
+        function visualInner(b) {
+            const cat = catOf(b);
+            const img = safeUrl(b.logo_url) || safeUrl((b.image_urls || [])[0]);
+            const badge = b.tier === 'premium' ? '<span class="badge premium">Premium</span>' : b.tier === 'featured' ? '<span class="badge">Featured</span>' : '';
+            if (img) {
+                const isLogo = !!safeUrl(b.logo_url) && !(b.image_urls || []).length;
+                return `<img src="${esc(img)}" alt="${esc(b.business_name)}" loading="lazy" class="${isLogo ? 'is-logo' : ''}">${badge}`;
+            }
+            const letter = esc((b.business_name || '?').trim().charAt(0).toUpperCase());
+            return `<div class="monogram tone-${cat.tone}" aria-hidden="true"><span class="letter">${letter}</span><span class="cat-icon">${cat.icon}</span></div>${badge}`;
+        }
+
+        function placeText(b) {
+            return [b.address, b.postcode].filter(Boolean).join(', ');
+        }
+
+        function tileHtml(b) {
+            const cat = catOf(b);
+            const paid = isPaid(b);
+            const offer = paid && b.special_offers ? `<div class="tile-offer"><strong>🎁 Offer:</strong> ${esc(b.special_offers)}</div>` : '';
+            return `
+                <article class="tile ${paid ? 'paid ' + esc(b.tier) : ''}" id="${esc(b._slug)}" data-slug="${esc(b._slug)}" tabindex="0" role="button" aria-label="${esc(b.business_name)}: view details">
+                    <div class="tile-visual">${visualInner(b)}</div>
+                    <div class="tile-body">
+                        <span class="tile-cat">${esc(cat.label)}</span>
+                        <h3>${esc(b.business_name)}</h3>
+                        ${placeText(b) ? `<div class="tile-place">📍 ${esc(placeText(b))}</div>` : ''}
+                        ${b.description ? `<p class="tile-desc">${esc(b.description)}</p>` : ''}
+                        ${offer}
+                        <div class="tile-foot"><span>View details →</span></div>
+                    </div>
+                </article>`;
+        }
+
+        function render() {
             const content = document.getElementById('directoryContent');
             const stats = document.getElementById('directoryStats');
+            const list = state.all.filter(matches);
 
-            if (businesses.length === 0) {
+            stats.textContent = list.length ? `${list.length} business${list.length !== 1 ? 'es' : ''}` : 'No businesses found';
+
+            if (!list.length) {
                 content.innerHTML = `
                     <div class="no-results">
-                        <p style="font-size: 3rem; margin-bottom: 1rem;">🔍</p>
-                        <h3>No businesses found</h3>
-                        <p>Try adjusting your search or filters.</p>
-                        <a href="business-submit.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">Be the first to list here</a>
-                    </div>
-                `;
-                stats.textContent = 'No businesses found';
+                        <h3>Nothing matches that search</h3>
+                        <p>Try a different word, or clear a filter.</p>
+                        <a href="business-submit.html" class="btn btn-primary">Be the first to list here</a>
+                    </div>`;
                 return;
             }
 
-            // Filter by area if needed
-            let filtered = businesses;
-            if (currentArea !== 'all') {
-                const areaMap = {
-                    'park-royal': ['NW10'],
-                    'harlesden': ['NW10'],
-                    'north-acton': ['W3'],
-                    'kensal-green': ['NW10'],
-                    'willesden': ['NW10', 'NW2']
-                };
-                const postcodes = areaMap[currentArea] || [];
-                filtered = businesses.filter(b => {
-                    if (!b.postcode) return false;
-                    return postcodes.some(pc => b.postcode.toUpperCase().startsWith(pc));
-                });
+            const paid = list.filter(isPaid);
+            const free = list.filter(b => !isPaid(b));
+            let html = '';
+
+            if (paid.length) {
+                html += `<section class="section"><div class="section-head featured-head"><h2>Featured businesses</h2></div>
+                         <div class="grid featured">${paid.map(tileHtml).join('')}</div></section>`;
             }
 
-            stats.textContent = `${filtered.length} business${filtered.length !== 1 ? 'es' : ''} found`;
-
-            // Group by category
             const grouped = {};
-            filtered.forEach(b => {
-                const cat = b.category || 'other';
-                if (!grouped[cat]) grouped[cat] = [];
-                grouped[cat].push(b);
-            });
-
-            // Render each category
-            let html = '';
-            Object.keys(grouped).sort().forEach(cat => {
-                const info = categoryInfo[cat] || { label: cat, icon: '⭐' };
-                html += `
-                    <div class="category-section">
-                        <h2>${info.icon} ${info.label}</h2>
-                        ${grouped[cat].map(b => renderBusinessCard(b)).join('')}
-                    </div>
-                `;
+            free.forEach(b => { (grouped[b.category || 'other'] ||= []).push(b); });
+            Object.keys(grouped).sort((a, z) => catOf({ category: a }).label.localeCompare(catOf({ category: z }).label)).forEach(key => {
+                const info = categoryInfo[key] || categoryInfo.other;
+                html += `<section class="section"><div class="section-head"><h2>${info.icon} ${esc(info.label)}</h2><span class="count">${grouped[key].length}</span></div>
+                         <div class="grid">${grouped[key].map(tileHtml).join('')}</div></section>`;
             });
 
             content.innerHTML = html;
         }
 
-        // Render a single business card
-        function renderBusinessCard(b) {
-            const isFeatured = b.tier === 'featured';
-            const isPremium = b.tier === 'premium';
-            const tierClass = isPremium ? 'premium' : isFeatured ? 'featured' : '';
-
-            const tierBadge = isPremium
-                ? '<span class="tier-badge premium">⭐ Premium</span>'
-                : isFeatured
-                ? '<span class="tier-badge featured">★ Featured</span>'
-                : '';
-
-            const logo = b.logo_url
-                ? `<img src="${b.logo_url}" alt="${b.business_name} logo" class="business-logo">`
-                : '';
-
-            const images = b.image_urls && b.image_urls.length > 0
-                ? `<div class="business-images">${b.image_urls.map(url => `<img src="${url}" alt="${b.business_name}">`).join('')}</div>`
-                : '';
-
-            const socialLinks = (b.instagram || b.twitter || b.linkedin) ? `
-                <div class="social-links">
-                    ${b.instagram ? `<a href="${b.instagram}" target="_blank" rel="noopener">📸 Instagram</a>` : ''}
-                    ${b.twitter ? `<a href="${b.twitter}" target="_blank" rel="noopener">🐦 Twitter/X</a>` : ''}
-                    ${b.linkedin ? `<a href="${b.linkedin}" target="_blank" rel="noopener">💼 LinkedIn</a>` : ''}
-                </div>
-            ` : '';
-
-            const hours = b.opening_hours
-                ? `<div class="detail-item">🕐 ${b.opening_hours}</div>`
-                : '';
-
-            const specialOffer = b.special_offers
-                ? `<div class="special-offer"><strong>🎁 Special Offer:</strong> ${b.special_offers}</div>`
-                : '';
-
-            const upgradeBtn = b.tier === 'free'
-                ? `<a href="business-submit.html" class="btn btn-upgrade">Upgrade to Featured</a>`
-                : '';
-
-            const websiteBtn = (b.website && b.tier !== 'free')
-                ? `<a href="${b.website}" target="_blank" rel="noopener" class="btn btn-primary">Visit Website</a>`
-                : '';
-
-            const phoneBtn = b.phone
-                ? `<a href="tel:${b.phone}" class="btn" style="background: #f8f9fa; color: var(--dark-grey); border: 2px solid #ddd;">📞 ${b.phone}</a>`
-                : '';
-
-            return `
-                <div class="business-card ${tierClass}">
-                    <div class="business-header">
-                        <div class="business-header-left">
-                            ${logo}
-                            <div class="business-info">
-                                <span class="business-category">${categoryInfo[b.category]?.label || b.category}</span>
-                                <h3>${b.business_name}</h3>
-                                ${b.address ? `<div class="detail-item">📍 ${b.address}${b.postcode ? ', ' + b.postcode : ''}</div>` : ''}
-                            </div>
-                        </div>
-                        ${tierBadge}
-                    </div>
-                    <p class="business-description">${b.description || ''}</p>
-                    ${specialOffer}
-                    ${images}
-                    <div class="business-details">
-                        ${hours}
-                    </div>
-                    ${socialLinks}
-                    <div class="business-actions">
-                        ${websiteBtn}
-                        ${phoneBtn}
-                        ${upgradeBtn}
-                    </div>
-                </div>
-            `;
+        function renderChips() {
+            const present = new Set(state.all.map(b => b.category || 'other'));
+            const catBtns = [`<span class="chip-label">Type</span><button class="chip" data-cat="all" aria-pressed="${state.category === 'all'}">All</button>`]
+                .concat(Object.keys(categoryInfo).filter(k => present.has(k)).map(k =>
+                    `<button class="chip" data-cat="${k}" aria-pressed="${state.category === k}">${categoryInfo[k].icon} ${esc(categoryInfo[k].label)}</button>`));
+            document.getElementById('categoryChips').innerHTML = catBtns.join('');
+            document.getElementById('areaChips').innerHTML = `<span class="chip-label">Area</span>` + areas.map(a =>
+                `<button class="chip" data-area="${a.id}" aria-pressed="${state.area === a.id}">${esc(a.label)}</button>`).join('');
         }
 
-        // Search handler (debounced)
+        // ── Detail dialog ──
+        const dialog = document.getElementById('detailDialog');
+
+        function openDetail(slug, pushHash) {
+            const b = state.all.find(x => x._slug === slug);
+            if (!b) return;
+            const cat = catOf(b);
+            const web = safeUrl(b.website);
+            const detail = [];
+            if (placeText(b)) detail.push(['📍', esc(placeText(b))]);
+            if (b.opening_hours) detail.push(['🕐', esc(b.opening_hours)]);
+            if (b.phone) detail.push(['📞', `<a href="tel:${esc(String(b.phone).replace(/[^\d+]/g, ''))}">${esc(b.phone)}</a>`]);
+            const socials = [['📸 Instagram', b.instagram], ['🐦 X / Twitter', b.twitter], ['💼 LinkedIn', b.linkedin]]
+                .filter(s => safeUrl(s[1])).map(s => `<a href="${esc(safeUrl(s[1]))}" target="_blank" rel="noopener">${s[0]}</a>`);
+            if (socials.length) detail.push(['🔗', socials.join(' &nbsp;·&nbsp; ')]);
+
+            const gallery = (b.image_urls || []).map(safeUrl).filter(Boolean);
+            document.getElementById('dialogContent').innerHTML = `
+                <div class="dialog-visual tile-visual">${visualInner(b)}</div>
+                <div class="dialog-body">
+                    <span class="tile-cat">${esc(cat.label)}</span>
+                    <h2 id="dialogTitle">${esc(b.business_name)}</h2>
+                    ${b.description ? `<p class="desc">${esc(b.description)}</p>` : ''}
+                    ${isPaid(b) && b.special_offers ? `<div class="tile-offer" style="margin-bottom:1rem"><strong>🎁 Special offer:</strong> ${esc(b.special_offers)}</div>` : ''}
+                    <ul class="detail-list">${detail.map(d => `<li><span class="k">${d[0]}</span><span>${d[1]}</span></li>`).join('')}</ul>
+                    ${isPaid(b) && gallery.length ? `<div class="gallery">${gallery.map(u => `<img src="${esc(u)}" alt="" loading="lazy">`).join('')}</div>` : ''}
+                    <div class="actions">
+                        ${web && isPaid(b) ? `<a href="${esc(web)}" target="_blank" rel="noopener" class="btn btn-primary">Visit website</a>` : ''}
+                        ${!isPaid(b) ? `<a href="business-submit.html" class="btn btn-claim">Is this your business? Upgrade this listing</a>` : ''}
+                    </div>
+                </div>`;
+            if (!dialog.open) dialog.showModal();
+            if (pushHash) history.replaceState(null, '', '#' + slug);
+        }
+
+        function closeDetail() {
+            if (dialog.open) dialog.close();
+        }
+        dialog.addEventListener('close', () => {
+            if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+        });
+        document.getElementById('dialogClose').addEventListener('click', closeDetail);
+        dialog.addEventListener('click', e => { if (e.target === dialog) closeDetail(); });
+
+        // ── Events ──
+        document.getElementById('directoryContent').addEventListener('click', e => {
+            const tile = e.target.closest('.tile[data-slug]');
+            if (tile) openDetail(tile.dataset.slug, true);
+        });
+        document.getElementById('directoryContent').addEventListener('keydown', e => {
+            if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.tile[data-slug]')) {
+                e.preventDefault();
+                openDetail(e.target.dataset.slug, true);
+            }
+        });
+        document.getElementById('categoryChips').addEventListener('click', e => {
+            const c = e.target.closest('[data-cat]'); if (!c) return;
+            state.category = c.dataset.cat; renderChips(); render();
+        });
+        document.getElementById('areaChips').addEventListener('click', e => {
+            const c = e.target.closest('[data-area]'); if (!c) return;
+            state.area = c.dataset.area; renderChips(); render();
+        });
         let searchTimer;
-        function handleSearch() {
+        document.getElementById('searchInput').addEventListener('input', e => {
             clearTimeout(searchTimer);
-            searchTimer = setTimeout(async () => {
-                const search = document.getElementById('searchInput').value;
-                const category = document.getElementById('categoryFilter').value;
-                const businesses = await fetchBusinesses({ search, category });
-                allBusinesses = businesses;
-                renderDirectory(businesses);
-            }, 400);
-        }
+            searchTimer = setTimeout(() => { state.search = e.target.value.trim(); render(); }, 150);
+        });
 
-        // Filter handler
-        async function handleFilter() {
-            const search = document.getElementById('searchInput').value;
-            const category = document.getElementById('categoryFilter').value;
-            const businesses = await fetchBusinesses({ search, category });
-            allBusinesses = businesses;
-            renderDirectory(businesses);
+        // Social posts link to business-directory.html#<slug>: open that listing on arrival.
+        function openFromHash() {
+            const slug = decodeURIComponent(location.hash.slice(1));
+            if (slug && state.all.some(b => b._slug === slug)) openDetail(slug, false);
         }
+        window.addEventListener('hashchange', openFromHash);
 
-        // Area filter
-        function filterArea(area, el) {
-            currentArea = area;
-            document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-            if (el) el.classList.add('active');
-            renderDirectory(allBusinesses);
-        }
-
-        // Initial load
+        // ── Initial load ──
         (async () => {
-            const businesses = await fetchBusinesses();
-            allBusinesses = businesses;
-            renderDirectory(businesses);
+            const data = await fetchBusinesses();
+            if (data === null) {
+                document.getElementById('directoryStats').textContent = '';
+                document.getElementById('directoryContent').innerHTML = `
+                    <div class="no-results"><h3>We couldn't load the directory</h3><p>Please refresh in a moment.</p></div>`;
+                return;
+            }
+            const used = {};
+            state.all = data.map(b => {
+                let s = slugify(b.business_name) || 'business', n = used[s] = (used[s] || 0) + 1;
+                return Object.assign(b, { _slug: n > 1 ? `${s}-${n}` : s });
+            });
+            renderChips();
+            render();
+            openFromHash();
         })();
     </script>
 

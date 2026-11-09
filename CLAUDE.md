@@ -100,6 +100,14 @@ oldoaktown/
 - Hand-entered events in `events.json` are never touched by automation (auto ones have `source: "auto-eventbrite"`).
 - Newsletter sending stays one click: Beehiiv's API key is not available to Actions.
 
+
+### Directory promotion (every listing gets its own day)
+
+- **New sign-ups:** approval fires `business-spotlight-agent.js` (newsletter paragraph + social caption, human-reviewed).
+- **Backfill of existing listings:** `node scripts/business-promo-backfill.js` writes `data/review-queue/business-promos/schedule.json` — one independent business per weekday (paid first, categories interleaved), with Instagram/Facebook/LinkedIn drafts built **only** from the listing's own fields (no AI, no invented claims). Everything is `pending_review`; nothing is published by the script.
+- Chains, estates, public bodies and out-of-area listings are skipped via `data/promo-exclusions.json` (paid listings are always included). Re-running only appends new businesses.
+- Posts deep-link to `business-directory.html#<slug>`, which opens that listing's detail view. `slugify()` in the script and the page must stay identical.
+
 ---
 
 ## Revenue model
