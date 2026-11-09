@@ -1,96 +1,90 @@
 {
-  "date": "2026-11-02",
-  "generatedAt": "2026-11-02T18:57:55.034Z",
-  "subject": "Park Royal Gets New Look, Old Oak Common Updates",
-  "intro": "This week brings positive changes to our neighbourhood. Community-led improvements have transformed Park Royal Subway, while a new mural marks the gateway to Park Royal.",
+  "date": "2026-11-09",
+  "generatedAt": "2026-11-09T19:18:48.920Z",
+  "subject": "HS2 celebrates tunnel breakthrough at Old Oak Common",
+  "intro": "This week brought good news for the transport hub taking shape in our area. HS2 has reached a major tunnelling milestone as work continues on the station box.",
   "news": [
     {
-      "title": "Community-led Improvements Transform Park Royal Subway - EalingToday.co.uk",
-      "excerpt": "Community-led Improvements Transform Park Royal Subway EalingToday.co.uk",
-      "category": "Employment",
-      "date": "2026-10-29",
-      "source": "Google News — Jobs & Business",
-      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE4yY1hMS2t0dVk2YTk4Z2lKLWQ1WnFDczdPaUEyczY2aWV1RHFhUzlpSVA0Qm5RcXJ4Mm0wZ0g4Y1JYUHVHLTYzTGFTN2RRUU0xYnFJWC1vU25rSkE5V2tzMUZLZWNqMjdJU0F0cGJRd1M?oc=5"
-    },
-    {
-      "title": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal - Mayor of London",
-      "excerpt": "OPDC unveils 'Park Royal: Then and Now', a new mural at the gateway to Park Royal Mayor of London",
-      "category": "Employment",
-      "date": "2026-10-26",
-      "source": "Google News — Jobs & Business",
-      "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOZlZNWVJBQm5oeHFMQUpnQWFlOFdNc2pQZTktMHdXOENXNm1jSlVzUmgzbTd4c2FKMTh4NUdMTXlPZFotOGQ2UFJ3bTF0NEZOdFBJcmRjc3IzMklFRXZKVGpFYmJUMXZSOFduNUlEWFJ6RHlHeGZUNGtPc3pfMkdxdE9xSWJwTWlhQ3BNcHMwWUV2S0phNW4zakxwTllzdkJVRzMteUZmYUdnR2k0TzlyelAzRVo0UDRueC14bVF4aTVaM0UyazhKRzBlLXFsbjJRRjlLVGZCaFlSTE4zQ0lMbkRZcFJXV3AyZ25oQ1VUeTF3WTVGcmIyTWFCQ3Z1MU1lTmctUFJQMA?oc=5"
-    },
-    {
-      "title": "Old Oak Common - Premier Construction News",
-      "excerpt": "Old Oak Common Premier Construction News",
+      "title": "HS2 celebrates tunnel breakthrough at Old Oak Common station box - Ground Engineering",
+      "excerpt": "HS2 celebrates tunnel breakthrough at Old Oak Common station box Ground Engineering",
       "category": "HS2 Updates",
-      "date": "2026-10-23",
+      "date": "2026-11-09",
       "source": "Google News — HS2",
-      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBhN2NXdmVxbDRtZS1uRUgzc29Qd3RUQkU0c3QwYXAwRlNyNUw4UTdzRHhIMGQxNnFqMlMxRkdpVl93TnVfNjVWNEpUSEJKTGItNGRaQWd3Z1pQSnRta2Q2bzBxdGFhWHZQX2FidU9GM3RQQQ?oc=5"
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE52dWtWcC01X0l3Vm40TWQyZGNnXzRjSnFFRWlvYm50dUxFY191WjFuRTAxU0d0R2R5ZmZ6b1dkR094dWl4ZGwtQQ?oc=5"
+    },
+    {
+      "title": "No Elizabeth line between Stratford and Romford over Christmas",
+      "excerpt": "Major railway works in East London mean there will be no Elizabeth line services between Stratford and Romford over Christmas. Engineering works on Anglia route (c) Network Rail The closure is due to",
+      "category": "Transport",
+      "date": "2026-11-09",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/no-elizabeth-line-between-stratford-and-romford-over-christmas-93508/"
+    },
+    {
+      "title": "HS2 confirms Old Oak Common tunnel link - London Daily News",
+      "excerpt": "HS2 confirms Old Oak Common tunnel link London Daily News",
+      "category": "HS2 Updates",
+      "date": "2026-11-05",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxcm5YWTloMWFIZHV0VDVydlBFMi1BSTJSOG15X0xPR0JrbEZFOUJBWERTdGJaUFdmSllKdXBldURLRVlZQWNsQjkwN2hUejdkVWFNNW9KaTNqRk1XM1JnVkFjOEd3LUtLWFlKZERSb3RXMHZiYUY4TA?oc=5"
+    },
+    {
+      "title": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough - Secret London",
+      "excerpt": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough Secret London",
+      "category": "HS2 Updates",
+      "date": "2026-11-05",
+      "source": "Google News — Old Oak Common",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5vSV93TFVjTnFMelNCZERRd2c3U0Y5R2xZVGFXNlhLS3djWkdsR1MzTDhiTWw2bTY3OFlLUFE4SE9jUzBzMnZZdkZvanBlaUFaSDB6a3RxTzBDc2VBc3dja1JqaTFLTFM2bktsTk1NTENFNkJW?oc=5"
+    },
+    {
+      "title": "HS2: SCS breaks through into Old Oak Common connecting station with north London line - New Civil Engineer",
+      "excerpt": "HS2: SCS breaks through into Old Oak Common connecting station with north London line New Civil Engineer",
+      "category": "HS2 Updates",
+      "date": "2026-11-04",
+      "source": "Google News — Old Oak Common",
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPaGwyX2pKaVplelFMMnRQQUpvZHlaWF9aR2YxaHJJZ3p1cTNCZ2RfNjN5OGFxWVo3MS1lUi1xLWdLMFZtSDdIOVY2WUZWdWVVYWdCYUttUlB4R2t3Wl9ET2pQamczMWJ2cFBfQXl6a0M4aWlHZEx2SW9oQ1oyZ3BTcUgyTG1Yby00emZiWXFCZ2hDOUxWbElwOXFoTGdKUlVuVUh2VFd0b2tKcXctVFY0TDJFemQ1bldWdXpCeW0ySGJZNDlya2FXVWVSdzZIcVdVSFE?oc=5"
+    },
+    {
+      "title": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway - Rail Technology Magazine",
+      "excerpt": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway Rail Technology Magazine",
+      "category": "HS2 Updates",
+      "date": "2026-11-04",
+      "source": "Google News — Old Oak Common",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPMFNJYnNodjhNWG5hdVk2a1oyS0dYdXVFM0szQTNXc1piMTI1ZFExMFdiTjFvOUVuOVJmaEF1aFBYUXpHVEdkWmRxUFV4UUo4ZWZPZThXWjA0Y1BpbFU4X0JDVHV4aDlONzZLVVZHNUNyVXN1MGZrelc0dzQydHg2V2YxRnpWbC15N1pQX2JrN0pOSGlWTnR0QmlEWTlsTVFWTm9ydXJNOXM1QjdkRzdfUUJkVHVqa0laY2VCcS1IUGlycThWYlJ0RGozLXE?oc=5"
     }
   ],
   "events": [
     {
-      "title": "Kintsugi Workshop",
-      "date": "2026-11-06",
+      "title": "UAL Halls Tour | The Costume Store | Saturday 14 November 2026",
+      "date": "2026-11-14",
       "startTime": null,
-      "venue": "Mini Picassos",
-      "address": "8 Station Terrace, London, NW10 5RT",
-      "category": "networking",
-      "url": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-2003262724736"
-    },
-    {
-      "title": "Screen Culture \"Out Of Frame\" Festival 2026 X Urban Echoes",
-      "date": "2026-11-07",
-      "startTime": null,
-      "venue": "The Foundry Collective",
-      "address": "1 Victoria Road, London, W3 6FA",
-      "category": "community",
-      "url": "https://www.eventbrite.com/e/screen-culture-out-of-frame-festival-2026-x-urban-echoes-tickets-2003109651891"
-    },
-    {
-      "title": "Library at Willesden Green: Communication Pod - Exploring Stories",
-      "date": "2026-11-07",
-      "startTime": null,
-      "venue": "The Library at Willesden Green",
-      "address": "95 High Road, London, NW10 2SF",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/library-at-willesden-green-communication-pod-exploring-stories-tickets-2002621581058"
-    },
-    {
-      "title": "The Diwali Market - Art Workshops, Market and Social",
-      "date": "2026-11-07",
-      "startTime": null,
-      "venue": "The Foundry Collective",
-      "address": "1 Victoria Road, London, W3 6FA",
-      "category": "networking",
-      "url": "https://www.eventbrite.co.uk/e/the-diwali-market-art-workshops-market-and-social-tickets-2003248911420"
-    },
-    {
-      "title": "Acton’s Lost Cinemas - a walking tour",
-      "date": "2026-11-08",
-      "startTime": null,
-      "venue": "St Mary's Church, Acton",
-      "address": "High Street, London, W3 9NW",
+      "venue": "The Costume Store",
+      "address": "160 Victoria Road, London, W3 6EE",
       "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/actons-lost-cinemas-a-walking-tour-tickets-1991402854545"
+      "url": "https://www.eventbrite.co.uk/e/ual-halls-tour-the-costume-store-saturday-14-november-2026-tickets-1998219943642"
     },
     {
-      "title": "Remembering Wartime Willesden",
-      "date": "2026-11-08",
+      "title": "Guided Walk: Jewish Communal Leaders",
+      "date": "2026-11-22",
       "startTime": null,
       "venue": "Willesden Jewish Cemetery",
       "address": "Beaconsfield Road, London, NW10 2JE",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/remembering-wartime-willesden-tickets-1996221081993"
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481"
     }
   ],
   "videos": [
     {
-      "title": "Old Oak Common | Level Boarding confirmed for Elizabeth line services",
+      "title": "HS2 tunnel breakthrough reaches Old Oak Common superhub station",
       "channel": "HS2 Ltd",
-      "url": "https://www.youtube.com/watch?v=Q7NuEDZc4Yk",
-      "published": "2026-10-05"
+      "url": "https://www.youtube.com/watch?v=TqjuWh27XUE",
+      "published": "2026-11-08"
+    },
+    {
+      "title": "We've broken through at Old Oak Common — full story on Sunday #short",
+      "channel": "HS2 Ltd",
+      "url": "https://www.youtube.com/watch?v=_eA1YOehjks",
+      "published": "2026-11-06"
     }
   ]
 }
