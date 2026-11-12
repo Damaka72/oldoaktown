@@ -106,6 +106,8 @@ oldoaktown/
 - **New sign-ups:** approval fires `business-spotlight-agent.js` (newsletter paragraph + social caption, human-reviewed).
 - **Backfill of existing listings:** `node scripts/business-promo-backfill.js` writes `data/review-queue/business-promos/schedule.json` — one independent business per weekday (paid first, categories interleaved), with Instagram/Facebook/LinkedIn drafts built **only** from the listing's own fields (no AI, no invented claims). Everything is `pending_review`; nothing is published by the script.
 - Chains, estates, public bodies and out-of-area listings are skipped via `data/promo-exclusions.json` (paid listings are always included). Re-running only appends new businesses.
+- **Pilot:** `node scripts/business-promo-pilot.js --exclude "<name>"` picks the 10 best-documented independents for the first two weeks, writes `pilot-week1.csv` / `pilot-week2.csv` (import via the Command Centre's "Upload from spreadsheet", setting "Week starting" to the Monday shown) and renders a branded 1080×1080 image per business to `images/promo/`. The image URLs point at oldoaktown.co.uk, so merge + deploy before sending to Instagram (it refuses posts without an image).
+- **Outreach:** `node scripts/outreach-pack.js` builds `outreach/call-sheet.csv` and one personalised A5 leaflet (with QR) per business in `outreach/leaflets.html`; `outreach/claim-listing-pack.md` has the scripts, email templates and rules. Aim: get listings corrected, collect logos/photos, then the optional upgrade conversation. No emails/phones are stored in any of this.
 - Posts deep-link to `business-directory.html#<slug>`, which opens that listing's detail view. `slugify()` in the script and the page must stay identical.
 
 ---

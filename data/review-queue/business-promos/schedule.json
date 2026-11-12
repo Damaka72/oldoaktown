@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-09T01:35:24.459Z",
+  "generatedAt": "2026-11-12T15:11:13.712Z",
   "policy": "independents only; paid first; one business per weekday; drafts only — nothing is published by this script",
   "total": 95,
   "entries": [
@@ -13,21 +13,347 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Acton Lane, Park Royal, NW10 7AD",
+        "website": null,
+        "descLength": 118,
+        "blurb": "North West London's most vibrant canalside pub. Great atmosphere, live sports, and the best Sunday roasts in the area."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Featured local business: The Grand Junction Arms\n\nNorth West London's most vibrant canalside pub. Great atmosphere, live sports, and the best Sunday roasts in the area.\n📍 Acton Lane, Park Royal, NW10 7AD\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
+          "image": "https://www.oldoaktown.co.uk/images/promo/the-grand-junction-arms.png"
         },
         "facebook": {
           "text": "🌳 Featured local business: The Grand Junction Arms\n\nNorth West London's most vibrant canalside pub. Great atmosphere, live sports, and the best Sunday roasts in the area.\n📍 Acton Lane, Park Royal, NW10 7AD\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#the-grand-junction-arms\nKnow a local business that should be listed? It's free to add.",
-          "image": null
+          "image": "https://www.oldoaktown.co.uk/images/promo/the-grand-junction-arms.png"
         },
         "linkedin": {
           "text": "The Grand Junction Arms is part of the Old Oak Common business community.\n\nNorth West London's most vibrant canalside pub. Great atmosphere, live sports, and the best Sunday roasts in the area.\n📍 Acton Lane, Park Royal, NW10 7AD\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-grand-junction-arms\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/the-grand-junction-arms.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "9825364a-c36c-4016-a66b-cb5e6655cd8b",
+      "businessName": "QwikFone",
+      "category": "retail",
+      "tier": "free",
+      "slug": "qwikfone",
+      "scheduledDate": "2026-11-17",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA",
+        "website": "https://qwikfone.com/",
+        "descLength": 613,
+        "blurb": "QwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: QwikFone\n\nQwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market.\n📍 Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
+          "image": "https://www.oldoaktown.co.uk/images/promo/qwikfone.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: QwikFone\n\nQwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market.\n📍 Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#qwikfone\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/qwikfone.png"
+        },
+        "linkedin": {
+          "text": "QwikFone is part of the Old Oak Common business community.\n\nQwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market.\n📍 Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#qwikfone\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/qwikfone.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "51b10368-6b22-426d-bab3-b9a2c7ee6b55",
+      "businessName": "Pure Energy Project Ltd",
+      "category": "construction",
+      "tier": "free",
+      "slug": "pure-energy-project-ltd",
+      "scheduledDate": "2026-11-18",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "176A Braemar Avenue, NW10 0DS",
+        "website": "https://pep-plumbing.co.uk/",
+        "descLength": 331,
+        "blurb": "Pure Energy Project Ltd provides professional plumbing and heating services from NW10 across London."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: Pure Energy Project Ltd\n\nPure Energy Project Ltd provides professional plumbing and heating services from NW10 across London.\n📍 176A Braemar Avenue, NW10 0DS\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalTrades",
+          "image": "https://www.oldoaktown.co.uk/images/promo/pure-energy-project-ltd.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: Pure Energy Project Ltd\n\nPure Energy Project Ltd provides professional plumbing and heating services from NW10 across London.\n📍 176A Braemar Avenue, NW10 0DS\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#pure-energy-project-ltd\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/pure-energy-project-ltd.png"
+        },
+        "linkedin": {
+          "text": "Pure Energy Project Ltd is part of the Old Oak Common business community.\n\nPure Energy Project Ltd provides professional plumbing and heating services from NW10 across London.\n📍 176A Braemar Avenue, NW10 0DS\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#pure-energy-project-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/pure-energy-project-ltd.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "1226e385-d581-49a3-8f4d-de73f8177e26",
+      "businessName": "Russbridge Academy",
+      "category": "education",
+      "tier": "free",
+      "slug": "russbridge-academy",
+      "scheduledDate": "2026-11-19",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Victoria Road, W3 6UP",
+        "website": "https://russbridgeacademy.co.uk/north-acton-venue/",
+        "descLength": 179,
+        "blurb": "Vocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: Russbridge Academy\n\nVocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station.\n📍 Victoria Road, W3 6UP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalLearning",
+          "image": "https://www.oldoaktown.co.uk/images/promo/russbridge-academy.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: Russbridge Academy\n\nVocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station.\n📍 Victoria Road, W3 6UP\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#russbridge-academy\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/russbridge-academy.png"
+        },
+        "linkedin": {
+          "text": "Russbridge Academy is part of the Old Oak Common business community.\n\nVocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station.\n📍 Victoria Road, W3 6UP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#russbridge-academy\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/russbridge-academy.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "d7ddb19b-9a26-47a8-b9f6-122ed46eddfd",
+      "businessName": "Cargiant",
+      "category": "motor",
+      "tier": "free",
+      "slug": "cargiant",
+      "scheduledDate": "2026-11-20",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "44-45 Hythe Road, NW10 6RS",
+        "website": "https://www.cargiant.co.uk",
+        "descLength": 147,
+        "blurb": "The world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: Cargiant\n\nThe world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange.\n📍 44-45 Hythe Road, NW10 6RS\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
+          "image": "https://www.oldoaktown.co.uk/images/promo/cargiant.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: Cargiant\n\nThe world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange.\n📍 44-45 Hythe Road, NW10 6RS\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#cargiant\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/cargiant.png"
+        },
+        "linkedin": {
+          "text": "Cargiant is part of the Old Oak Common business community.\n\nThe world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange.\n📍 44-45 Hythe Road, NW10 6RS\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#cargiant\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/cargiant.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "ef972b80-afbd-4611-9bbe-6a8c05364f68",
+      "businessName": "HHB Communications Ltd",
+      "category": "technology",
+      "tier": "free",
+      "slug": "hhb-communications-ltd",
+      "scheduledDate": "2026-11-23",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "73-75 Scrubs Lane, NW10 6QU",
+        "website": "https://www.hhb.co.uk",
+        "descLength": 147,
+        "blurb": "Professional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: HHB Communications Ltd\n\nProfessional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky.\n📍 73-75 Scrubs Lane, NW10 6QU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LondonTech",
+          "image": "https://www.oldoaktown.co.uk/images/promo/hhb-communications-ltd.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: HHB Communications Ltd\n\nProfessional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky.\n📍 73-75 Scrubs Lane, NW10 6QU\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#hhb-communications-ltd\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/hhb-communications-ltd.png"
+        },
+        "linkedin": {
+          "text": "HHB Communications Ltd is part of the Old Oak Common business community.\n\nProfessional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky.\n📍 73-75 Scrubs Lane, NW10 6QU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#hhb-communications-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/hhb-communications-ltd.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "74448fc0-f1b6-4e6e-9a2f-79726df7d864",
+      "businessName": "London Professional Training College",
+      "category": "education",
+      "tier": "free",
+      "slug": "london-professional-training-college",
+      "scheduledDate": "2026-11-24",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE",
+        "website": "https://www.londonptcollege.ac.uk",
+        "descLength": 144,
+        "blurb": "Independent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: London Professional Training College\n\nIndependent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction.\n📍 Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalLearning",
+          "image": "https://www.oldoaktown.co.uk/images/promo/london-professional-training-college.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: London Professional Training College\n\nIndependent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction.\n📍 Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#london-professional-training-college\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/london-professional-training-college.png"
+        },
+        "linkedin": {
+          "text": "London Professional Training College is part of the Old Oak Common business community.\n\nIndependent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction.\n📍 Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#london-professional-training-college\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/london-professional-training-college.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "b340cc28-e175-4494-965a-1d8ff4ee8791",
+      "businessName": "Browns Seafoods Limited",
+      "category": "industrial",
+      "tier": "free",
+      "slug": "browns-seafoods-limited",
+      "scheduledDate": "2026-11-25",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Unit B6, Eldon Way, NW10 7QY",
+        "website": "http://www.brownsseafoods.co.uk",
+        "descLength": 139,
+        "blurb": "Family-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: Browns Seafoods Limited\n\nFamily-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers.\n📍 Unit B6, Eldon Way, NW10 7QY\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
+          "image": "https://www.oldoaktown.co.uk/images/promo/browns-seafoods-limited.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: Browns Seafoods Limited\n\nFamily-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers.\n📍 Unit B6, Eldon Way, NW10 7QY\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#browns-seafoods-limited\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/browns-seafoods-limited.png"
+        },
+        "linkedin": {
+          "text": "Browns Seafoods Limited is part of the Old Oak Common business community.\n\nFamily-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers.\n📍 Unit B6, Eldon Way, NW10 7QY\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#browns-seafoods-limited\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/browns-seafoods-limited.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "62d4c22c-f15f-41c7-acec-10c8eb5f769e",
+      "businessName": "VMI (Camera Hire)",
+      "category": "technology",
+      "tier": "free",
+      "slug": "vmi-camera-hire",
+      "scheduledDate": "2026-11-26",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU",
+        "website": "https://vmi.tv",
+        "descLength": 136,
+        "blurb": "Broadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: VMI (Camera Hire)\n\nBroadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ.\n📍 Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LondonTech",
+          "image": "https://www.oldoaktown.co.uk/images/promo/vmi-camera-hire.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: VMI (Camera Hire)\n\nBroadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ.\n📍 Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#vmi-camera-hire\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/vmi-camera-hire.png"
+        },
+        "linkedin": {
+          "text": "VMI (Camera Hire) is part of the Old Oak Common business community.\n\nBroadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ.\n📍 Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#vmi-camera-hire\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/vmi-camera-hire.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "7f61ffa0-9e9d-4548-a6e7-888228793571",
+      "businessName": "Le Pain Nouveau",
+      "category": "industrial",
+      "tier": "free",
+      "slug": "le-pain-nouveau",
+      "scheduledDate": "2026-11-27",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Unit D, 23-25 Sunbeam Road, NW10 6JP",
+        "website": "http://www.lepainltd.co.uk/",
+        "descLength": 136,
+        "blurb": "Craft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: Le Pain Nouveau\n\nCraft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade.\n📍 Unit D, 23-25 Sunbeam Road, NW10 6JP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
+          "image": "https://www.oldoaktown.co.uk/images/promo/le-pain-nouveau.png"
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: Le Pain Nouveau\n\nCraft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade.\n📍 Unit D, 23-25 Sunbeam Road, NW10 6JP\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#le-pain-nouveau\nKnow a local business that should be listed? It's free to add.",
+          "image": "https://www.oldoaktown.co.uk/images/promo/le-pain-nouveau.png"
+        },
+        "linkedin": {
+          "text": "Le Pain Nouveau is part of the Old Oak Common business community.\n\nCraft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade.\n📍 Unit D, 23-25 Sunbeam Road, NW10 6JP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#le-pain-nouveau\n\n#OldOakCommon #WestLondon #LocalBusiness",
+          "image": "https://www.oldoaktown.co.uk/images/promo/le-pain-nouveau.png"
+        }
+      },
+      "pilot": true
+    },
+    {
+      "businessId": "f54450e7-5206-423c-9326-f122e00479f3",
+      "businessName": "Electronic Theatre Controls Europe Ltd",
+      "category": "industrial",
+      "tier": "free",
+      "slug": "electronic-theatre-controls-europe-ltd",
+      "scheduledDate": "2026-11-30",
+      "scheduledTime": "12:00",
+      "timezone": "Europe/London",
+      "status": "pending_review",
+      "meta": {
+        "place": "Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU",
+        "website": "https://www.etcconnect.com",
+        "descLength": 140,
+        "blurb": "European office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems."
+      },
+      "posts": {
+        "instagram": {
+          "text": "🌳 Local business spotlight: Electronic Theatre Controls Europe Ltd\n\nEuropean office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems.\n📍 Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
+          "image": null
+        },
+        "facebook": {
+          "text": "🌳 Local business spotlight: Electronic Theatre Controls Europe Ltd\n\nEuropean office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems.\n📍 Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#electronic-theatre-controls-europe-ltd\nKnow a local business that should be listed? It's free to add.",
+          "image": null
+        },
+        "linkedin": {
+          "text": "Electronic Theatre Controls Europe Ltd is part of the Old Oak Common business community.\n\nEuropean office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems.\n📍 Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#electronic-theatre-controls-europe-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "39153342-a1d1-43cc-b063-a5b9fa76c849",
@@ -35,10 +361,16 @@
       "category": "industrial",
       "tier": "featured",
       "slug": "mcvities-factory",
-      "scheduledDate": "2026-11-17",
+      "scheduledDate": "2026-12-01",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Park Royal, NW10",
+        "website": null,
+        "descLength": 98,
+        "blurb": "Historic biscuit factory operating since 1902. One of the largest biscuit manufacturers in the UK."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Featured local business: McVitie's Factory\n\nHistoric biscuit factory operating since 1902. One of the largest biscuit manufacturers in the UK.\n📍 Park Royal, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
@@ -53,7 +385,8 @@
           "text": "McVitie's Factory is part of the Old Oak Common business community.\n\nHistoric biscuit factory operating since 1902. One of the largest biscuit manufacturers in the UK.\n📍 Park Royal, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#mcvities-factory\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "765d58e4-60f6-449b-b960-21db57e1a690",
@@ -61,10 +394,16 @@
       "category": "food-drink",
       "tier": "free",
       "slug": "king-kebab",
-      "scheduledDate": "2026-11-18",
+      "scheduledDate": "2026-12-02",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "1-2 East Acton Arcade, Old Oak Common Lane, W3 7DJ",
+        "website": null,
+        "descLength": 137,
+        "blurb": "Turkish/kebab takeaway serving doner, shish kebabs and chicken dishes; long-running local fast-food spot with hundreds of online reviews."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: King Kebab\n\nTurkish/kebab takeaway serving doner, shish kebabs and chicken dishes; long-running local fast-food spot with hundreds of online reviews.\n📍 1-2 East Acton Arcade, Old Oak Common Lane, W3 7DJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -79,59 +418,8 @@
           "text": "King Kebab is part of the Old Oak Common business community.\n\nTurkish/kebab takeaway serving doner, shish kebabs and chicken dishes; long-running local fast-food spot with hundreds of online reviews.\n📍 1-2 East Acton Arcade, Old Oak Common Lane, W3 7DJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#king-kebab\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "9825364a-c36c-4016-a66b-cb5e6655cd8b",
-      "businessName": "QwikFone",
-      "category": "retail",
-      "tier": "free",
-      "slug": "qwikfone",
-      "scheduledDate": "2026-11-19",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: QwikFone\n\nQwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market.\n📍 Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: QwikFone\n\nQwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market.\n📍 Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#qwikfone\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "QwikFone is part of the Old Oak Common business community.\n\nQwikFone is a highly trusted UK refurbished mobile phone provider with over a decade of experience in the Tech Circular Market.\n📍 Unit 4 Woodward Building 1 Victoria Road, London, United Kingdom, W3 6FA\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#qwikfone\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
-    },
-    {
-      "businessId": "f54450e7-5206-423c-9326-f122e00479f3",
-      "businessName": "Electronic Theatre Controls Europe Ltd",
-      "category": "industrial",
-      "tier": "free",
-      "slug": "electronic-theatre-controls-europe-ltd",
-      "scheduledDate": "2026-11-20",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: Electronic Theatre Controls Europe Ltd\n\nEuropean office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems.\n📍 Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: Electronic Theatre Controls Europe Ltd\n\nEuropean office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems.\n📍 Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#electronic-theatre-controls-europe-ltd\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "Electronic Theatre Controls Europe Ltd is part of the Old Oak Common business community.\n\nEuropean office/warehouse of ETC, a manufacturer and distributor of professional theatre, studio and architectural lighting control systems.\n📍 Unit 26-28 Victoria Industrial Estate, Victoria Road, W3 6UU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#electronic-theatre-controls-europe-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "8d7b04b5-a612-4c30-887b-ad191dd8c925",
@@ -139,10 +427,16 @@
       "category": "services",
       "tier": "free",
       "slug": "perfect-dry-cleaners",
-      "scheduledDate": "2026-11-23",
+      "scheduledDate": "2026-12-03",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "823 Harrow Road, NW10 5NJ",
+        "website": null,
+        "descLength": 128,
+        "blurb": "Long-established dry cleaning and clothing alterations shop, praised by regular customers for tailoring and reliable turnaround."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Perfect Dry Cleaners\n\nLong-established dry cleaning and clothing alterations shop, praised by regular customers for tailoring and reliable turnaround.\n📍 823 Harrow Road, NW10 5NJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -157,59 +451,8 @@
           "text": "Perfect Dry Cleaners is part of the Old Oak Common business community.\n\nLong-established dry cleaning and clothing alterations shop, praised by regular customers for tailoring and reliable turnaround.\n📍 823 Harrow Road, NW10 5NJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#perfect-dry-cleaners\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "d7ddb19b-9a26-47a8-b9f6-122ed46eddfd",
-      "businessName": "Cargiant",
-      "category": "motor",
-      "tier": "free",
-      "slug": "cargiant",
-      "scheduledDate": "2026-11-24",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: Cargiant\n\nThe world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange.\n📍 44-45 Hythe Road, NW10 6RS\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: Cargiant\n\nThe world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange.\n📍 44-45 Hythe Road, NW10 6RS\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#cargiant\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "Cargiant is part of the Old Oak Common business community.\n\nThe world's largest used car supermarket, a 48-acre site by Willesden Junction selling used cars with in-house finance, warranty and part-exchange.\n📍 44-45 Hythe Road, NW10 6RS\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#cargiant\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
-    },
-    {
-      "businessId": "1226e385-d581-49a3-8f4d-de73f8177e26",
-      "businessName": "Russbridge Academy",
-      "category": "education",
-      "tier": "free",
-      "slug": "russbridge-academy",
-      "scheduledDate": "2026-11-25",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: Russbridge Academy\n\nVocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station.\n📍 Victoria Road, W3 6UP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalLearning",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: Russbridge Academy\n\nVocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station.\n📍 Victoria Road, W3 6UP\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#russbridge-academy\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "Russbridge Academy is part of the Old Oak Common business community.\n\nVocational training provider running courses such as Award in Education and Training, SIA trainer, and taxi/private-hire driver qualifications, 4 minutes from North Acton station.\n📍 Victoria Road, W3 6UP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#russbridge-academy\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "24a9e72f-39b6-4dd8-afd2-ff4938881837",
@@ -217,10 +460,16 @@
       "category": "entertainment",
       "tier": "free",
       "slug": "the-collective-bar-and-kitchen",
-      "scheduledDate": "2026-11-26",
+      "scheduledDate": "2026-12-04",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Nash House, Old Oak Lane, NW10 6FF",
+        "website": null,
+        "descLength": 157,
+        "blurb": "All-day canal-side bar and restaurant within The Collective Old Oak building, with a wood-fired pizza oven and terrace, five minutes from Willesden Junction."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Collective Bar & Kitchen\n\nAll-day canal-side bar and restaurant within The Collective Old Oak building, with a wood-fired pizza oven and terrace, five minutes from Willesden Junction.\n📍 Nash House, Old Oak Lane, NW10 6FF\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonLife",
@@ -235,59 +484,8 @@
           "text": "The Collective Bar & Kitchen is part of the Old Oak Common business community.\n\nAll-day canal-side bar and restaurant within The Collective Old Oak building, with a wood-fired pizza oven and terrace, five minutes from Willesden Junction.\n📍 Nash House, Old Oak Lane, NW10 6FF\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-collective-bar-and-kitchen\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "51b10368-6b22-426d-bab3-b9a2c7ee6b55",
-      "businessName": "Pure Energy Project Ltd",
-      "category": "construction",
-      "tier": "free",
-      "slug": "pure-energy-project-ltd",
-      "scheduledDate": "2026-11-27",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: Pure Energy Project Ltd\n\nPure Energy Project Ltd provides professional plumbing and heating services from NW10 across London.\n📍 176A Braemar Avenue, NW10 0DS\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalTrades",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: Pure Energy Project Ltd\n\nPure Energy Project Ltd provides professional plumbing and heating services from NW10 across London.\n📍 176A Braemar Avenue, NW10 0DS\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#pure-energy-project-ltd\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "Pure Energy Project Ltd is part of the Old Oak Common business community.\n\nPure Energy Project Ltd provides professional plumbing and heating services from NW10 across London.\n📍 176A Braemar Avenue, NW10 0DS\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#pure-energy-project-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
-    },
-    {
-      "businessId": "ef972b80-afbd-4611-9bbe-6a8c05364f68",
-      "businessName": "HHB Communications Ltd",
-      "category": "technology",
-      "tier": "free",
-      "slug": "hhb-communications-ltd",
-      "scheduledDate": "2026-11-30",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: HHB Communications Ltd\n\nProfessional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky.\n📍 73-75 Scrubs Lane, NW10 6QU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LondonTech",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: HHB Communications Ltd\n\nProfessional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky.\n📍 73-75 Scrubs Lane, NW10 6QU\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#hhb-communications-ltd\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "HHB Communications Ltd is part of the Old Oak Common business community.\n\nProfessional audio technology retailer and systems integrator supplying broadcast, recording and AV equipment to clients including the BBC and Sky.\n📍 73-75 Scrubs Lane, NW10 6QU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#hhb-communications-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "fc1edc64-b83d-4390-8ae8-2028c457327f",
@@ -295,10 +493,16 @@
       "category": "food-drink",
       "tier": "free",
       "slug": "shepherds-sandwich-bar",
-      "scheduledDate": "2026-12-01",
+      "scheduledDate": "2026-12-07",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "30 Scrubs Lane, NW10 6RA",
+        "website": null,
+        "descLength": 124,
+        "blurb": "Independent sandwich bar and cafe serving homemade sandwiches and coffee near Willesden Junction, highly rated by customers."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Shepherd's Sandwich Bar\n\nIndependent sandwich bar and cafe serving homemade sandwiches and coffee near Willesden Junction, highly rated by customers.\n📍 30 Scrubs Lane, NW10 6RA\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -313,7 +517,8 @@
           "text": "Shepherd's Sandwich Bar is part of the Old Oak Common business community.\n\nIndependent sandwich bar and cafe serving homemade sandwiches and coffee near Willesden Junction, highly rated by customers.\n📍 30 Scrubs Lane, NW10 6RA\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#shepherds-sandwich-bar\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "0cf04291-7dfc-4984-ac26-2af6777753ee",
@@ -321,10 +526,16 @@
       "category": "retail",
       "tier": "free",
       "slug": "marcus-jones-pharmacy",
-      "scheduledDate": "2026-12-02",
+      "scheduledDate": "2026-12-08",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "96 Old Oak Common Lane, W3 7DA",
+        "website": "https://marcus-jones.wellcarepharmacy.co.uk/",
+        "descLength": 110,
+        "blurb": "Community pharmacy offering dispensing, repeat prescriptions, blood tests, earwax removal and a travel clinic."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Marcus Jones Pharmacy\n\nCommunity pharmacy offering dispensing, repeat prescriptions, blood tests, earwax removal and a travel clinic.\n📍 96 Old Oak Common Lane, W3 7DA\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -339,33 +550,8 @@
           "text": "Marcus Jones Pharmacy is part of the Old Oak Common business community.\n\nCommunity pharmacy offering dispensing, repeat prescriptions, blood tests, earwax removal and a travel clinic.\n📍 96 Old Oak Common Lane, W3 7DA\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#marcus-jones-pharmacy\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "b340cc28-e175-4494-965a-1d8ff4ee8791",
-      "businessName": "Browns Seafoods Limited",
-      "category": "industrial",
-      "tier": "free",
-      "slug": "browns-seafoods-limited",
-      "scheduledDate": "2026-12-03",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: Browns Seafoods Limited\n\nFamily-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers.\n📍 Unit B6, Eldon Way, NW10 7QY\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: Browns Seafoods Limited\n\nFamily-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers.\n📍 Unit B6, Eldon Way, NW10 7QY\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#browns-seafoods-limited\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "Browns Seafoods Limited is part of the Old Oak Common business community.\n\nFamily-owned wholesale fish supplier, trading since 1979, delivering fresh, chilled and frozen seafood to hotels, restaurants and caterers.\n📍 Unit B6, Eldon Way, NW10 7QY\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#browns-seafoods-limited\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "5fe7080d-8f03-41df-9ead-cead8c9a8962",
@@ -373,10 +559,16 @@
       "category": "services",
       "tier": "free",
       "slug": "storage-park-royal",
-      "scheduledDate": "2026-12-04",
+      "scheduledDate": "2026-12-09",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Park Royal, NW10",
+        "website": "http://www.storageparkroyal.co.uk/",
+        "descLength": 120,
+        "blurb": "Self-storage provider offering secure domestic, student and business storage units in Park Royal, trading over 10 years."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Storage Park Royal\n\nSelf-storage provider offering secure domestic, student and business storage units in Park Royal, trading over 10 years.\n📍 Park Royal, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -391,7 +583,8 @@
           "text": "Storage Park Royal is part of the Old Oak Common business community.\n\nSelf-storage provider offering secure domestic, student and business storage units in Park Royal, trading over 10 years.\n📍 Park Royal, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#storage-park-royal\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "4aefb968-7789-4d29-b6e8-75e6e0cd5a2b",
@@ -399,10 +592,16 @@
       "category": "motor",
       "tier": "free",
       "slug": "old-oak-car-sales-old-oak-garage-ltd",
-      "scheduledDate": "2026-12-07",
+      "scheduledDate": "2026-12-10",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "260 Old Oak Common Lane, NW10 6DT",
+        "website": "https://oldoakcarsales.co.uk/",
+        "descLength": 135,
+        "blurb": "Specialist used car and van dealer trading from the long-established Old Oak Garage site, offering home delivery and click-and-collect."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Old Oak Car Sales (Old Oak Garage Ltd)\n\nSpecialist used car and van dealer trading from the long-established Old Oak Garage site, offering home delivery and click-and-collect.\n📍 260 Old Oak Common Lane, NW10 6DT\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
@@ -417,33 +616,8 @@
           "text": "Old Oak Car Sales (Old Oak Garage Ltd) is part of the Old Oak Common business community.\n\nSpecialist used car and van dealer trading from the long-established Old Oak Garage site, offering home delivery and click-and-collect.\n📍 260 Old Oak Common Lane, NW10 6DT\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#old-oak-car-sales-old-oak-garage-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "74448fc0-f1b6-4e6e-9a2f-79726df7d864",
-      "businessName": "London Professional Training College",
-      "category": "education",
-      "tier": "free",
-      "slug": "london-professional-training-college",
-      "scheduledDate": "2026-12-08",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: London Professional Training College\n\nIndependent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction.\n📍 Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalLearning",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: London Professional Training College\n\nIndependent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction.\n📍 Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#london-professional-training-college\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "London Professional Training College is part of the Old Oak Common business community.\n\nIndependent higher education college offering accredited short courses in management, accountancy and English language, near Willesden Junction.\n📍 Unit 4-5, Westmoreland House, Scrubs Lane, NW10 6RE\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#london-professional-training-college\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "455f212d-c931-42c5-b5c4-450927e97a3d",
@@ -451,10 +625,16 @@
       "category": "entertainment",
       "tier": "free",
       "slug": "loft-studios",
-      "scheduledDate": "2026-12-09",
+      "scheduledDate": "2026-12-11",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "77-81 Scrubs Lane, NW10 6QU",
+        "website": "https://www.loftstudios.co.uk/",
+        "descLength": 131,
+        "blurb": "Established warehouse/loft venue offering photo and film shoot spaces plus event and wedding hire across five interlinking studios."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Loft Studios\n\nEstablished warehouse/loft venue offering photo and film shoot spaces plus event and wedding hire across five interlinking studios.\n📍 77-81 Scrubs Lane, NW10 6QU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonLife",
@@ -469,7 +649,8 @@
           "text": "Loft Studios is part of the Old Oak Common business community.\n\nEstablished warehouse/loft venue offering photo and film shoot spaces plus event and wedding hire across five interlinking studios.\n📍 77-81 Scrubs Lane, NW10 6QU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#loft-studios\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "6b385b01-992e-4ef9-bc64-107b7273cfe1",
@@ -477,10 +658,16 @@
       "category": "construction",
       "tier": "free",
       "slug": "builder-depot-ltd",
-      "scheduledDate": "2026-12-10",
+      "scheduledDate": "2026-12-14",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Abbey Road, Park Royal, NW10 7SJ",
+        "website": "https://www.builderdepot.co.uk",
+        "descLength": 126,
+        "blurb": "Builders' merchant supplying timber, plywood, trade kitchens, bathrooms and general construction materials to trade customers."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Builder Depot Ltd\n\nBuilders' merchant supplying timber, plywood, trade kitchens, bathrooms and general construction materials to trade customers.\n📍 Abbey Road, Park Royal, NW10 7SJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalTrades",
@@ -495,33 +682,8 @@
           "text": "Builder Depot Ltd is part of the Old Oak Common business community.\n\nBuilders' merchant supplying timber, plywood, trade kitchens, bathrooms and general construction materials to trade customers.\n📍 Abbey Road, Park Royal, NW10 7SJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#builder-depot-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "62d4c22c-f15f-41c7-acec-10c8eb5f769e",
-      "businessName": "VMI (Camera Hire)",
-      "category": "technology",
-      "tier": "free",
-      "slug": "vmi-camera-hire",
-      "scheduledDate": "2026-12-11",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: VMI (Camera Hire)\n\nBroadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ.\n📍 Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LondonTech",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: VMI (Camera Hire)\n\nBroadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ.\n📍 Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#vmi-camera-hire\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "VMI (Camera Hire) is part of the Old Oak Common business community.\n\nBroadcast/film camera, lens and lighting rental company with camera test rooms and technical support, operating from its West London HQ.\n📍 Unit 7, Grapht Works, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#vmi-camera-hire\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "1c358e92-8dff-4226-840b-9766728964cc",
@@ -529,10 +691,16 @@
       "category": "food-drink",
       "tier": "free",
       "slug": "the-terrace-bakery",
-      "scheduledDate": "2026-12-14",
+      "scheduledDate": "2026-12-15",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "30-32 Chase Road, NW10 6QN",
+        "website": "https://www.theterracerestaurants.com/",
+        "descLength": 118,
+        "blurb": "Halal Lebanese/Middle Eastern cafe-restaurant with a wood-fired oven, serving manousheh, brunch and meze grill dishes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Terrace Bakery\n\nHalal Lebanese/Middle Eastern cafe-restaurant with a wood-fired oven, serving manousheh, brunch and meze grill dishes.\n📍 30-32 Chase Road, NW10 6QN\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -547,7 +715,8 @@
           "text": "The Terrace Bakery is part of the Old Oak Common business community.\n\nHalal Lebanese/Middle Eastern cafe-restaurant with a wood-fired oven, serving manousheh, brunch and meze grill dishes.\n📍 30-32 Chase Road, NW10 6QN\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-terrace-bakery\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "b284a31d-695d-47d5-9612-b54e7355f7fa",
@@ -555,10 +724,16 @@
       "category": "retail",
       "tier": "free",
       "slug": "east-acton-supermarket",
-      "scheduledDate": "2026-12-15",
+      "scheduledDate": "2026-12-16",
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "79 Old Oak Common Lane, W3 7DD",
+        "website": null,
+        "descLength": 95,
+        "blurb": "Local convenience supermarket/off-licence serving the East Acton station area, open long hours."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: East Acton Supermarket\n\nLocal convenience supermarket/off-licence serving the East Acton station area, open long hours.\n📍 79 Old Oak Common Lane, W3 7DD\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -573,33 +748,8 @@
           "text": "East Acton Supermarket is part of the Old Oak Common business community.\n\nLocal convenience supermarket/off-licence serving the East Acton station area, open long hours.\n📍 79 Old Oak Common Lane, W3 7DD\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#east-acton-supermarket\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
-    },
-    {
-      "businessId": "7f61ffa0-9e9d-4548-a6e7-888228793571",
-      "businessName": "Le Pain Nouveau",
-      "category": "industrial",
-      "tier": "free",
-      "slug": "le-pain-nouveau",
-      "scheduledDate": "2026-12-16",
-      "scheduledTime": "12:00",
-      "timezone": "Europe/London",
-      "status": "pending_review",
-      "posts": {
-        "instagram": {
-          "text": "🌳 Local business spotlight: Le Pain Nouveau\n\nCraft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade.\n📍 Unit D, 23-25 Sunbeam Road, NW10 6JP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
-          "image": null,
-          "imageNote": "No logo/photo on file — use the branded directory tile or a real photo supplied by the owner."
-        },
-        "facebook": {
-          "text": "🌳 Local business spotlight: Le Pain Nouveau\n\nCraft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade.\n📍 Unit D, 23-25 Sunbeam Road, NW10 6JP\n\nSee the full listing in the Old Oak Town directory 👉 https://www.oldoaktown.co.uk/business-directory.html#le-pain-nouveau\nKnow a local business that should be listed? It's free to add.",
-          "image": null
-        },
-        "linkedin": {
-          "text": "Le Pain Nouveau is part of the Old Oak Common business community.\n\nCraft bakery manufacturer since 1985 producing speciality breads, French pastries and part-baked frozen products for the catering trade.\n📍 Unit D, 23-25 Sunbeam Road, NW10 6JP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#le-pain-nouveau\n\n#OldOakCommon #WestLondon #LocalBusiness",
-          "image": null
-        }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "004e85ea-d768-4603-a8e6-4a0f016d965c",
@@ -611,6 +761,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "203 Ebbett Court, 1 Victoria Road, W3 6BT",
+        "website": "https://liferesidential.co.uk",
+        "descLength": 114,
+        "blurb": "Estate and lettings agency branch located right by North Acton station, serving the area's new-build developments."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Life Residential\n\nEstate and lettings agency branch located right by North Acton station, serving the area's new-build developments.\n📍 203 Ebbett Court, 1 Victoria Road, W3 6BT\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -625,7 +781,8 @@
           "text": "Life Residential is part of the Old Oak Common business community.\n\nEstate and lettings agency branch located right by North Acton station, serving the area's new-build developments.\n📍 203 Ebbett Court, 1 Victoria Road, W3 6BT\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#life-residential\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "036043b0-6055-4804-ae02-f747e75b0a6d",
@@ -637,6 +794,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "5 Minerva Road, NW10 6HJ",
+        "website": "http://www.minervamotors.co.uk/",
+        "descLength": 123,
+        "blurb": "Family-run independent garage established 1986 offering car servicing, MOT testing, bodywork and diagnostics for all makes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Minerva Motors Ltd\n\nFamily-run independent garage established 1986 offering car servicing, MOT testing, bodywork and diagnostics for all makes.\n📍 5 Minerva Road, NW10 6HJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
@@ -651,7 +814,8 @@
           "text": "Minerva Motors Ltd is part of the Old Oak Common business community.\n\nFamily-run independent garage established 1986 offering car servicing, MOT testing, bodywork and diagnostics for all makes.\n📍 5 Minerva Road, NW10 6HJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#minerva-motors-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "2300c4c6-6089-4cf5-901c-312bed0e3c4c",
@@ -663,6 +827,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "161 College Road, NW10 3PH",
+        "website": "https://www.cgss.brent.sch.uk",
+        "descLength": 112,
+        "blurb": "Local-authority nursery school rated \"Outstanding\" by Ofsted, providing early years education for 3-4 year olds."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: College Green Nursery School & Services\n\nLocal-authority nursery school rated \"Outstanding\" by Ofsted, providing early years education for 3-4 year olds.\n📍 161 College Road, NW10 3PH\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalLearning",
@@ -677,7 +847,8 @@
           "text": "College Green Nursery School & Services is part of the Old Oak Common business community.\n\nLocal-authority nursery school rated \"Outstanding\" by Ofsted, providing early years education for 3-4 year olds.\n📍 161 College Road, NW10 3PH\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#college-green-nursery-school-and-services\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "ab7728a4-3187-4af1-8f05-055e062df9f4",
@@ -689,6 +860,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "3 The Parade, East Acton Arcade, Old Oak Common Lane, W3 7DJ",
+        "website": null,
+        "descLength": 85,
+        "blurb": "Snooker, American pool and English pool club with around 21 tables, a lounge and bar."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Hurricane Room\n\nSnooker, American pool and English pool club with around 21 tables, a lounge and bar.\n📍 3 The Parade, East Acton Arcade, Old Oak Common Lane, W3 7DJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonLife",
@@ -703,7 +880,8 @@
           "text": "Hurricane Room is part of the Old Oak Common business community.\n\nSnooker, American pool and English pool club with around 21 tables, a lounge and bar.\n📍 3 The Parade, East Acton Arcade, Old Oak Common Lane, W3 7DJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#hurricane-room\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "dd58a1a3-f3e6-4ca1-a663-3614b5a8851c",
@@ -715,6 +893,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "153a Wells House Road, NW10 6EA",
+        "website": null,
+        "descLength": 108,
+        "blurb": "House renovation and construction firm specialising in extensions, carpentry, joinery and bespoke furniture."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Maxwoodworker Construction Limited\n\nHouse renovation and construction firm specialising in extensions, carpentry, joinery and bespoke furniture.\n📍 153a Wells House Road, NW10 6EA\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalTrades",
@@ -729,7 +913,8 @@
           "text": "Maxwoodworker Construction Limited is part of the Old Oak Common business community.\n\nHouse renovation and construction firm specialising in extensions, carpentry, joinery and bespoke furniture.\n📍 153a Wells House Road, NW10 6EA\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#maxwoodworker-construction-limited\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "9576fd10-0905-493e-94dd-55b7073f9430",
@@ -741,6 +926,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "60 Hythe Road, NW10 6RS",
+        "website": "https://www.you.studio",
+        "descLength": 130,
+        "blurb": "36,000 sq ft creative workspace and events venue with photography/digital studios, offices and a cafe-bar near Willesden Junction."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: YOU STUDIO\n\n36,000 sq ft creative workspace and events venue with photography/digital studios, offices and a cafe-bar near Willesden Junction.\n📍 60 Hythe Road, NW10 6RS\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LondonTech",
@@ -755,7 +946,8 @@
           "text": "YOU STUDIO is part of the Old Oak Common business community.\n\n36,000 sq ft creative workspace and events venue with photography/digital studios, offices and a cafe-bar near Willesden Junction.\n📍 60 Hythe Road, NW10 6RS\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#you-studio\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "4b3a6770-8612-4a59-a99f-12f6d7e26bc7",
@@ -767,6 +959,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "869 Harrow Road (Willesden Junction Station), NW10 5NG",
+        "website": null,
+        "descLength": 110,
+        "blurb": "Galician social club and restaurant serving Spanish/Galician food and drink beside Willesden Junction station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Centro Galego de Londres\n\nGalician social club and restaurant serving Spanish/Galician food and drink beside Willesden Junction station.\n📍 869 Harrow Road (Willesden Junction Station), NW10 5NG\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -781,7 +979,8 @@
           "text": "Centro Galego de Londres is part of the Old Oak Common business community.\n\nGalician social club and restaurant serving Spanish/Galician food and drink beside Willesden Junction station.\n📍 869 Harrow Road (Willesden Junction Station), NW10 5NG\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#centro-galego-de-londres\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "e12163cf-5e81-451c-85fb-f6741c21e322",
@@ -793,6 +992,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "829 Harrow Road, NW10 5NJ",
+        "website": null,
+        "descLength": 88,
+        "blurb": "Independent convenience store near Kensal Green/Willesden Junction, open daily 9am-11pm."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Harrow Convenience Store\n\nIndependent convenience store near Kensal Green/Willesden Junction, open daily 9am-11pm.\n📍 829 Harrow Road, NW10 5NJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -807,7 +1012,8 @@
           "text": "Harrow Convenience Store is part of the Old Oak Common business community.\n\nIndependent convenience store near Kensal Green/Willesden Junction, open daily 9am-11pm.\n📍 829 Harrow Road, NW10 5NJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#harrow-convenience-store\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "58c31ec0-7477-4fe1-bf7e-0b8ba682f095",
@@ -819,6 +1025,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Park Royal Road, NW10 7LQ",
+        "website": "https://www.londontl.co.uk/",
+        "descLength": 129,
+        "blurb": "Haulage and heavy-lift firm operating HIAB-equipped lorries and flatbed trailers for transporting plant, machinery and steelwork."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: London Transport and Lifting Ltd\n\nHaulage and heavy-lift firm operating HIAB-equipped lorries and flatbed trailers for transporting plant, machinery and steelwork.\n📍 Park Royal Road, NW10 7LQ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
@@ -833,7 +1045,8 @@
           "text": "London Transport and Lifting Ltd is part of the Old Oak Common business community.\n\nHaulage and heavy-lift firm operating HIAB-equipped lorries and flatbed trailers for transporting plant, machinery and steelwork.\n📍 Park Royal Road, NW10 7LQ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#london-transport-and-lifting-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "683e1266-1cd6-4de3-8760-ca430cfb20ad",
@@ -845,6 +1058,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Victoria Road (Imperial College Acton Campus), W3 6BL",
+        "website": "https://igym.london/",
+        "descLength": 113,
+        "blurb": "Public gym and group-exercise studio with cardio, strength and functional training equipment and fitness classes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: iGym London\n\nPublic gym and group-exercise studio with cardio, strength and functional training equipment and fitness classes.\n📍 Victoria Road (Imperial College Acton Campus), W3 6BL\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -859,7 +1078,8 @@
           "text": "iGym London is part of the Old Oak Common business community.\n\nPublic gym and group-exercise studio with cardio, strength and functional training equipment and fitness classes.\n📍 Victoria Road (Imperial College Acton Campus), W3 6BL\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#igym-london\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "41ec89c4-42e3-4acd-8ad3-3e931866054e",
@@ -871,6 +1091,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Unit 4, The New Business Centre, 86 Goodhall Street, NW10 6TS",
+        "website": "https://www.collinsmotors.co.uk/parkroyal/",
+        "descLength": 98,
+        "blurb": "Service, MOT and tyre centre offering vehicle servicing and repairs to trade and public customers."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Collins Motors (Park Royal)\n\nService, MOT and tyre centre offering vehicle servicing and repairs to trade and public customers.\n📍 Unit 4, The New Business Centre, 86 Goodhall Street, NW10 6TS\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
@@ -885,7 +1111,8 @@
           "text": "Collins Motors (Park Royal) is part of the Old Oak Common business community.\n\nService, MOT and tyre centre offering vehicle servicing and repairs to trade and public customers.\n📍 Unit 4, The New Business Centre, 86 Goodhall Street, NW10 6TS\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#collins-motors-park-royal\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "5c1e6cc4-73e5-4553-b3a7-0b9aad3a59b3",
@@ -897,6 +1124,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "27 Old Oak Road, W3 7HN",
+        "website": "https://buttercups-nursery.co.uk/acton.html",
+        "descLength": 96,
+        "blurb": "Ofsted-registered children's day nursery for early years childcare, close to East Acton station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Buttercups Day Nursery Acton\n\nOfsted-registered children's day nursery for early years childcare, close to East Acton station.\n📍 27 Old Oak Road, W3 7HN\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalLearning",
@@ -911,7 +1144,8 @@
           "text": "Buttercups Day Nursery Acton is part of the Old Oak Common business community.\n\nOfsted-registered children's day nursery for early years childcare, close to East Acton station.\n📍 27 Old Oak Road, W3 7HN\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#buttercups-day-nursery-acton\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "850e5c73-8c12-4aa6-a8f4-33b92ea91eee",
@@ -923,6 +1157,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 66,
+        "blurb": "Britain's first independent boutique cinema and social enterprise."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Lexi Cinema\n\nBritain's first independent boutique cinema and social enterprise.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonLife",
@@ -937,7 +1177,8 @@
           "text": "The Lexi Cinema is part of the Old Oak Common business community.\n\nBritain's first independent boutique cinema and social enterprise.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-lexi-cinema\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "d6cd5ddd-262c-45f6-97da-4c12f24e7a39",
@@ -949,6 +1190,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Ace Corner, North Circular Road, NW10",
+        "website": null,
+        "descLength": 106,
+        "blurb": "Iconic roadside café serving breakfast, burgers and British classics. Popular with motorcycle enthusiasts."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Ace Cafe London\n\nIconic roadside café serving breakfast, burgers and British classics. Popular with motorcycle enthusiasts.\n📍 Ace Corner, North Circular Road, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -963,7 +1210,8 @@
           "text": "Ace Cafe London is part of the Old Oak Common business community.\n\nIconic roadside café serving breakfast, burgers and British classics. Popular with motorcycle enthusiasts.\n📍 Ace Corner, North Circular Road, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#ace-cafe-london\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "3d75a3ed-4904-4621-a011-7d5454fcfbbf",
@@ -975,6 +1223,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Acton, W3",
+        "website": null,
+        "descLength": 77,
+        "blurb": "Neighbourhood wine shop and wine bar with cheese, salami and premium spirits."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Vindinista\n\nNeighbourhood wine shop and wine bar with cheese, salami and premium spirits.\n📍 Acton, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -989,7 +1243,8 @@
           "text": "Vindinista is part of the Old Oak Common business community.\n\nNeighbourhood wine shop and wine bar with cheese, salami and premium spirits.\n📍 Acton, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#vindinista\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "f157911f-8dd7-48e4-953b-808b3442b05a",
@@ -1001,6 +1256,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Unit 22, Victoria Industrial Estate, Victoria Road, W3 6UU",
+        "website": "https://www.wrapology.com",
+        "descLength": 108,
+        "blurb": "Manufacturer and designer of luxury custom packaging for beauty, fashion, food & drink and jewellery brands."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Wrapology International Ltd\n\nManufacturer and designer of luxury custom packaging for beauty, fashion, food & drink and jewellery brands.\n📍 Unit 22, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
@@ -1015,7 +1276,8 @@
           "text": "Wrapology International Ltd is part of the Old Oak Common business community.\n\nManufacturer and designer of luxury custom packaging for beauty, fashion, food & drink and jewellery brands.\n📍 Unit 22, Victoria Industrial Estate, Victoria Road, W3 6UU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#wrapology-international-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "4deb1034-19a5-473c-a52c-58cc48c493c9",
@@ -1027,6 +1289,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "144 Victoria Road, W3 6UL",
+        "website": null,
+        "descLength": 110,
+        "blurb": "Local barbershop offering men's haircuts, beard and moustache grooming, a short walk from North Acton station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Victor Salon\n\nLocal barbershop offering men's haircuts, beard and moustache grooming, a short walk from North Acton station.\n📍 144 Victoria Road, W3 6UL\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -1041,7 +1309,8 @@
           "text": "Victor Salon is part of the Old Oak Common business community.\n\nLocal barbershop offering men's haircuts, beard and moustache grooming, a short walk from North Acton station.\n📍 144 Victoria Road, W3 6UL\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#victor-salon\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "64d1e390-7692-4cfe-8658-591d8ebd4264",
@@ -1053,6 +1322,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "173 Old Oak Road, W3 7HH",
+        "website": null,
+        "descLength": 95,
+        "blurb": "Independent garage offering tyre sales/fitting and Class 4 MOT testing near East Acton station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Budget Tyres & MOT Centre\n\nIndependent garage offering tyre sales/fitting and Class 4 MOT testing near East Acton station.\n📍 173 Old Oak Road, W3 7HH\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
@@ -1067,7 +1342,8 @@
           "text": "Budget Tyres & MOT Centre is part of the Old Oak Common business community.\n\nIndependent garage offering tyre sales/fitting and Class 4 MOT testing near East Acton station.\n📍 173 Old Oak Road, W3 7HH\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#budget-tyres-and-mot-centre\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "45388132-19f6-412e-9367-81588b4f8072",
@@ -1079,6 +1355,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "50 Old Oak Lane, NW10 6UB",
+        "website": null,
+        "descLength": 101,
+        "blurb": "Traditional pub dating from 1928 near Willesden Junction, offering drinks, pool, darts and sports TV."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Fishermans Arms\n\nTraditional pub dating from 1928 near Willesden Junction, offering drinks, pool, darts and sports TV.\n📍 50 Old Oak Lane, NW10 6UB\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1093,7 +1375,8 @@
           "text": "Fishermans Arms is part of the Old Oak Common business community.\n\nTraditional pub dating from 1928 near Willesden Junction, offering drinks, pool, darts and sports TV.\n📍 50 Old Oak Lane, NW10 6UB\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#fishermans-arms\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "9dc35752-8125-4e49-be96-614f882d0871",
@@ -1105,6 +1388,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "3 East Acton Arcade, Old Oak Common Lane, W3 7DJ",
+        "website": null,
+        "descLength": 77,
+        "blurb": "Independent halal butcher shop serving the East Acton Arcade parade of shops."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Al Malika Butchery\n\nIndependent halal butcher shop serving the East Acton Arcade parade of shops.\n📍 3 East Acton Arcade, Old Oak Common Lane, W3 7DJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1119,7 +1408,8 @@
           "text": "Al Malika Butchery is part of the Old Oak Common business community.\n\nIndependent halal butcher shop serving the East Acton Arcade parade of shops.\n📍 3 East Acton Arcade, Old Oak Common Lane, W3 7DJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#al-malika-butchery\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "4dbe59e1-a082-40b7-8cf8-3a063ad2d1e2",
@@ -1131,6 +1421,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Unit 2, Rutland Studios, Cumberland Park, Scrubs Lane, NW10 6RE",
+        "website": null,
+        "descLength": 107,
+        "blurb": "Independent automatic gearbox and transmission specialist offering repairs, reconditioning and diagnostics."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Phoenix Transmissions (Phoenix Automatics)\n\nIndependent automatic gearbox and transmission specialist offering repairs, reconditioning and diagnostics.\n📍 Unit 2, Rutland Studios, Cumberland Park, Scrubs Lane, NW10 6RE\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
@@ -1145,7 +1441,8 @@
           "text": "Phoenix Transmissions (Phoenix Automatics) is part of the Old Oak Common business community.\n\nIndependent automatic gearbox and transmission specialist offering repairs, reconditioning and diagnostics.\n📍 Unit 2, Rutland Studios, Cumberland Park, Scrubs Lane, NW10 6RE\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#phoenix-transmissions-phoenix-automatics\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "d3d11f3b-64ff-440c-bfd3-51861e8b53ac",
@@ -1157,6 +1454,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "71 Old Oak Common Lane, W3 7DH",
+        "website": "https://www.postoffice.co.uk/branch-finder/1380060/east-acton",
+        "descLength": 104,
+        "blurb": "Royal Mail/Post Office branch offering postal, banking and bill-payment services to the local community."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: East Acton Post Office\n\nRoyal Mail/Post Office branch offering postal, banking and bill-payment services to the local community.\n📍 71 Old Oak Common Lane, W3 7DH\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -1171,7 +1474,8 @@
           "text": "East Acton Post Office is part of the Old Oak Common business community.\n\nRoyal Mail/Post Office branch offering postal, banking and bill-payment services to the local community.\n📍 71 Old Oak Common Lane, W3 7DH\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#east-acton-post-office\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "6968a743-d157-4c24-a59c-7a28a0416142",
@@ -1183,6 +1487,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "19 Corby Road, NW10 7AH",
+        "website": null,
+        "descLength": 60,
+        "blurb": "MOT testing, servicing and repairs for all makes and models."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Park Royal Motor Services\n\nMOT testing, servicing and repairs for all makes and models.\n📍 19 Corby Road, NW10 7AH\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalGarage",
@@ -1197,7 +1507,8 @@
           "text": "Park Royal Motor Services is part of the Old Oak Common business community.\n\nMOT testing, servicing and repairs for all makes and models.\n📍 19 Corby Road, NW10 7AH\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#park-royal-motor-services\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "d41a2fd7-0a4b-414e-a07e-7ee81f3ac0c6",
@@ -1209,6 +1520,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 93,
+        "blurb": "All-day restaurant serving everything from DIY toast to cow pies and duck liver profiteroles."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Parlour\n\nAll-day restaurant serving everything from DIY toast to cow pies and duck liver profiteroles.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1223,7 +1540,8 @@
           "text": "Parlour is part of the Old Oak Common business community.\n\nAll-day restaurant serving everything from DIY toast to cow pies and duck liver profiteroles.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#parlour\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "406aaacf-262f-4ac3-b310-5bc922d7f346",
@@ -1235,6 +1553,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Delivering to W3, W4, W5, W12, W13",
+        "website": null,
+        "descLength": 72,
+        "blurb": "Family-run grocery delivering fruit/veg boxes, eggs and sourdough bread."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Basil & Tom's\n\nFamily-run grocery delivering fruit/veg boxes, eggs and sourdough bread.\n📍 Delivering to W3, W4, W5, W12, W13\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1249,7 +1573,8 @@
           "text": "Basil & Tom's is part of the Old Oak Common business community.\n\nFamily-run grocery delivering fruit/veg boxes, eggs and sourdough bread.\n📍 Delivering to W3, W4, W5, W12, W13\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#basil-and-toms\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "75a73faa-f815-44f8-87ad-76814d18ef52",
@@ -1261,6 +1586,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "104 Scrubs Lane, NW10 6SF",
+        "website": "https://capitalwasteltd.co.uk",
+        "descLength": 106,
+        "blurb": "Waste management and skip hire company founded in 1994, servicing inner London from its Scrubs Lane depot."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Capital Waste Services Ltd\n\nWaste management and skip hire company founded in 1994, servicing inner London from its Scrubs Lane depot.\n📍 104 Scrubs Lane, NW10 6SF\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
@@ -1275,7 +1606,8 @@
           "text": "Capital Waste Services Ltd is part of the Old Oak Common business community.\n\nWaste management and skip hire company founded in 1994, servicing inner London from its Scrubs Lane depot.\n📍 104 Scrubs Lane, NW10 6SF\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#capital-waste-services-ltd\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "9d6f2f86-a334-4d82-b226-f97822d75718",
@@ -1287,6 +1619,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "84a Old Oak Common Lane, W3 7DA",
+        "website": null,
+        "descLength": 84,
+        "blurb": "Local dry cleaning and laundry shop serving the Old Oak Common Lane/East Acton area."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Savoy Dry Cleaners\n\nLocal dry cleaning and laundry shop serving the Old Oak Common Lane/East Acton area.\n📍 84a Old Oak Common Lane, W3 7DA\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -1301,7 +1639,8 @@
           "text": "Savoy Dry Cleaners is part of the Old Oak Common business community.\n\nLocal dry cleaning and laundry shop serving the Old Oak Common Lane/East Acton area.\n📍 84a Old Oak Common Lane, W3 7DA\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#savoy-dry-cleaners\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "585b3466-ceff-4bf2-9b45-c66c76ea3f94",
@@ -1313,6 +1652,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "84-86 High Street, Harlesden, NW10 4SJ",
+        "website": "https://samschicken.com",
+        "descLength": 87,
+        "blurb": "Halal fried chicken takeaway chain outlet a short walk from Willesden Junction station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Sam's Chicken (Harlesden)\n\nHalal fried chicken takeaway chain outlet a short walk from Willesden Junction station.\n📍 84-86 High Street, Harlesden, NW10 4SJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1327,7 +1672,8 @@
           "text": "Sam's Chicken (Harlesden) is part of the Old Oak Common business community.\n\nHalal fried chicken takeaway chain outlet a short walk from Willesden Junction station.\n📍 84-86 High Street, Harlesden, NW10 4SJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#sams-chicken-harlesden\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "b7d8c135-0a74-4681-bc16-3b7189447cbd",
@@ -1339,6 +1685,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 68,
+        "blurb": "Independent wine, beer and spirits from small producers and dealers."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Rise & Vine\n\nIndependent wine, beer and spirits from small producers and dealers.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1353,7 +1705,8 @@
           "text": "Rise & Vine is part of the Old Oak Common business community.\n\nIndependent wine, beer and spirits from small producers and dealers.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#rise-and-vine\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "010a0534-61ea-44e8-afbb-d482519f1806",
@@ -1365,6 +1718,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "10 Warple Mews, Warple Way, W3 0RF",
+        "website": null,
+        "descLength": 37,
+        "blurb": "Artisan doughnut production facility."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Doughnut Factory\n\nArtisan doughnut production facility.\n📍 10 Warple Mews, Warple Way, W3 0RF\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ParkRoyal",
@@ -1379,7 +1738,8 @@
           "text": "The Doughnut Factory is part of the Old Oak Common business community.\n\nArtisan doughnut production facility.\n📍 10 Warple Mews, Warple Way, W3 0RF\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-doughnut-factory\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "70b9aafe-c48d-4724-a9b1-9c6dda4b3639",
@@ -1391,6 +1751,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Space House, Abbey Road, NW10 7SU",
+        "website": null,
+        "descLength": 34,
+        "blurb": "Personal care and beauty services."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Zubaldy & Co\n\nPersonal care and beauty services.\n📍 Space House, Abbey Road, NW10 7SU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #LocalServices",
@@ -1405,7 +1771,8 @@
           "text": "Zubaldy & Co is part of the Old Oak Common business community.\n\nPersonal care and beauty services.\n📍 Space House, Abbey Road, NW10 7SU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#zubaldy-and-co\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "aaafaa79-c5b5-4d84-b493-c86bc436ff46",
@@ -1417,6 +1784,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 85,
+        "blurb": "Authentic Southern Italian pizza with traditional cooking methods and imported ovens."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Sacro Cuore\n\nAuthentic Southern Italian pizza with traditional cooking methods and imported ovens.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1431,7 +1804,8 @@
           "text": "Sacro Cuore is part of the Old Oak Common business community.\n\nAuthentic Southern Italian pizza with traditional cooking methods and imported ovens.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#sacro-cuore\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "3ac97160-7024-4f45-a92c-d1037f16716e",
@@ -1443,6 +1817,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 62,
+        "blurb": "Aladdin's Cave of salvaged furniture and architectural pieces."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Retrouvius\n\nAladdin's Cave of salvaged furniture and architectural pieces.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1457,7 +1837,8 @@
           "text": "Retrouvius is part of the Old Oak Common business community.\n\nAladdin's Cave of salvaged furniture and architectural pieces.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#retrouvius\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "66736342-118b-4dc1-b0b8-7c2960900829",
@@ -1469,6 +1850,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 84,
+        "blurb": "BYOB Turkish Restaurant with great selection of meats, fresh salads and tasty sides."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Shishlique\n\nBYOB Turkish Restaurant with great selection of meats, fresh salads and tasty sides.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1483,7 +1870,8 @@
           "text": "Shishlique is part of the Old Oak Common business community.\n\nBYOB Turkish Restaurant with great selection of meats, fresh salads and tasty sides.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#shishlique\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "1e87d8d1-b713-447b-a5bb-c5e7d2e5c203",
@@ -1495,6 +1883,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 59,
+        "blurb": "Beautiful flower shop with fresh bouquets and arrangements."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Scarlet & Violet\n\nBeautiful flower shop with fresh bouquets and arrangements.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1509,7 +1903,8 @@
           "text": "Scarlet & Violet is part of the Old Oak Common business community.\n\nBeautiful flower shop with fresh bouquets and arrangements.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#scarlet-and-violet\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "4660a732-fca9-41bd-90c8-e45fb4081482",
@@ -1521,6 +1916,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Chamberlayne Road, Kensal Green, NW10",
+        "website": null,
+        "descLength": 82,
+        "blurb": "Vibrant pub and restaurant with Sunday roasts, live music, film nights and events."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Paradise By Way of Kensal Green\n\nVibrant pub and restaurant with Sunday roasts, live music, film nights and events.\n📍 Chamberlayne Road, Kensal Green, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1535,7 +1936,8 @@
           "text": "Paradise By Way of Kensal Green is part of the Old Oak Common business community.\n\nVibrant pub and restaurant with Sunday roasts, live music, film nights and events.\n📍 Chamberlayne Road, Kensal Green, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#paradise-by-way-of-kensal-green\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "4ce898cc-a804-4b4d-bb71-fc4392b3c054",
@@ -1547,6 +1949,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 56,
+        "blurb": "Award-winning butchers with quality meat, game and fish."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Brooks Butchers\n\nAward-winning butchers with quality meat, game and fish.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1561,7 +1969,8 @@
           "text": "Brooks Butchers is part of the Old Oak Common business community.\n\nAward-winning butchers with quality meat, game and fish.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#brooks-butchers\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "d579b205-7ec6-4c6f-af55-951a31fb025f",
@@ -1573,6 +1982,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "212 High Street, Harlesden, NW10 4SY",
+        "website": null,
+        "descLength": 80,
+        "blurb": "Authentic Caribbean cuisine specializing in jerk chicken and traditional dishes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: One Stop Jerk Centre\n\nAuthentic Caribbean cuisine specializing in jerk chicken and traditional dishes.\n📍 212 High Street, Harlesden, NW10 4SY\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1587,7 +2002,8 @@
           "text": "One Stop Jerk Centre is part of the Old Oak Common business community.\n\nAuthentic Caribbean cuisine specializing in jerk chicken and traditional dishes.\n📍 212 High Street, Harlesden, NW10 4SY\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#one-stop-jerk-centre\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "8b2d9ec6-35e4-4295-840d-33231b880e35",
@@ -1599,6 +2015,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "9 Craven Park Road, NW10",
+        "website": null,
+        "descLength": 56,
+        "blurb": "Local grocery store with diverse international products."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Harlesden Food Centre\n\nLocal grocery store with diverse international products.\n📍 9 Craven Park Road, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1613,7 +2035,8 @@
           "text": "Harlesden Food Centre is part of the Old Oak Common business community.\n\nLocal grocery store with diverse international products.\n📍 9 Craven Park Road, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#harlesden-food-centre\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "69f5d846-0c91-4a99-b431-6c25823a6c98",
@@ -1625,6 +2048,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Harlesden, NW10",
+        "website": null,
+        "descLength": 78,
+        "blurb": "Vibrant Caribbean restaurant serving authentic jerk dishes and island flavors."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Jerkalicious\n\nVibrant Caribbean restaurant serving authentic jerk dishes and island flavors.\n📍 Harlesden, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1639,7 +2068,8 @@
           "text": "Jerkalicious is part of the Old Oak Common business community.\n\nVibrant Caribbean restaurant serving authentic jerk dishes and island flavors.\n📍 Harlesden, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#jerkalicious\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "93847665-e56c-4b6e-828c-53da0c266e2a",
@@ -1651,6 +2081,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "83 College Road, NW10 5ES",
+        "website": null,
+        "descLength": 50,
+        "blurb": "Local greengrocer with fresh fruit and vegetables."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Kensal Green Grocery\n\nLocal greengrocer with fresh fruit and vegetables.\n📍 83 College Road, NW10 5ES\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1665,7 +2101,8 @@
           "text": "Kensal Green Grocery is part of the Old Oak Common business community.\n\nLocal greengrocer with fresh fruit and vegetables.\n📍 83 College Road, NW10 5ES\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#kensal-green-grocery\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "1802e610-e2e9-4597-bd9f-165037f497cc",
@@ -1677,6 +2114,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 77,
+        "blurb": "Specialist coffee house combining great coffee and delicious cafe style food."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Wild Card\n\nSpecialist coffee house combining great coffee and delicious cafe style food.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1691,7 +2134,8 @@
           "text": "Wild Card is part of the Old Oak Common business community.\n\nSpecialist coffee house combining great coffee and delicious cafe style food.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#wild-card\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "a9c82243-b192-4ef1-bdfa-f4bb1b98cf79",
@@ -1703,6 +2147,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Erconwald Street, W12 0BP",
+        "website": null,
+        "descLength": 47,
+        "blurb": "Convenience store with groceries and beverages."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Ankaran Food & Wine\n\nConvenience store with groceries and beverages.\n📍 Erconwald Street, W12 0BP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #ShopLocal",
@@ -1717,7 +2167,8 @@
           "text": "Ankaran Food & Wine is part of the Old Oak Common business community.\n\nConvenience store with groceries and beverages.\n📍 Erconwald Street, W12 0BP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#ankaran-food-and-wine\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "a9ca4724-fd9e-4aab-8afe-de1c8e9750a6",
@@ -1729,6 +2180,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 74,
+        "blurb": "Specialty coffee using Climpson & Sons roasted beans with expert baristas."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Cable Co\n\nSpecialty coffee using Climpson & Sons roasted beans with expert baristas.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1743,7 +2200,8 @@
           "text": "Cable Co is part of the Old Oak Common business community.\n\nSpecialty coffee using Climpson & Sons roasted beans with expert baristas.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#cable-co\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "5ec18352-7e5b-4db8-a2ae-bf55e5a83322",
@@ -1755,6 +2213,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Askew Road, W12 9BJ",
+        "website": null,
+        "descLength": 73,
+        "blurb": "Authentic Italian restaurant with homemade pasta and traditional recipes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Giulia Restaurant\n\nAuthentic Italian restaurant with homemade pasta and traditional recipes.\n📍 Askew Road, W12 9BJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1769,7 +2233,8 @@
           "text": "Giulia Restaurant is part of the Old Oak Common business community.\n\nAuthentic Italian restaurant with homemade pasta and traditional recipes.\n📍 Askew Road, W12 9BJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#giulia-restaurant\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "0a94108a-b7da-4035-9ca5-cd3fed33aaec",
@@ -1781,6 +2246,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 71,
+        "blurb": "Family-run neighbourhood favourite making healthy food taste indulgent."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Vicki's Cafe\n\nFamily-run neighbourhood favourite making healthy food taste indulgent.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1795,7 +2266,8 @@
           "text": "Vicki's Cafe is part of the Old Oak Common business community.\n\nFamily-run neighbourhood favourite making healthy food taste indulgent.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#vickis-cafe\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "3d60758b-7788-4162-aaf0-eec1314ca025",
@@ -1807,6 +2279,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Green, NW10",
+        "website": null,
+        "descLength": 70,
+        "blurb": "Independent gastropub with great vibes, craft beer and wine selection."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Whippet Inn\n\nIndependent gastropub with great vibes, craft beer and wine selection.\n📍 Kensal Green, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1821,7 +2299,8 @@
           "text": "The Whippet Inn is part of the Old Oak Common business community.\n\nIndependent gastropub with great vibes, craft beer and wine selection.\n📍 Kensal Green, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-whippet-inn\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "1532443f-da45-43b1-9d76-f0095ccca584",
@@ -1833,6 +2312,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 69,
+        "blurb": "Small family-run, family-friendly café serving tasty food and coffee."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Bel & Nev\n\nSmall family-run, family-friendly café serving tasty food and coffee.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1847,7 +2332,8 @@
           "text": "Bel & Nev is part of the Old Oak Common business community.\n\nSmall family-run, family-friendly café serving tasty food and coffee.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#bel-and-nev\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "cadfda33-7948-44bf-a8ec-0a53afd5eb6d",
@@ -1859,6 +2345,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Acton, W3",
+        "website": null,
+        "descLength": 68,
+        "blurb": "Non-traditional Indian restaurant offering modern takes on classics."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Chapati Club\n\nNon-traditional Indian restaurant offering modern takes on classics.\n📍 Acton, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1873,7 +2365,8 @@
           "text": "Chapati Club is part of the Old Oak Common business community.\n\nNon-traditional Indian restaurant offering modern takes on classics.\n📍 Acton, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#chapati-club\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "e3f3c1d0-d3eb-4876-92ac-248f6b007b95",
@@ -1885,6 +2378,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "High Street, Harlesden, NW10",
+        "website": null,
+        "descLength": 68,
+        "blurb": "Authentic Somali cuisine bringing East African flavors to Harlesden."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Saapo's\n\nAuthentic Somali cuisine bringing East African flavors to Harlesden.\n📍 High Street, Harlesden, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1899,7 +2398,8 @@
           "text": "Saapo's is part of the Old Oak Common business community.\n\nAuthentic Somali cuisine bringing East African flavors to Harlesden.\n📍 High Street, Harlesden, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#saapos\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "2aa7ec4d-adc5-4e4e-96af-5c1b12de4344",
@@ -1911,6 +2411,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Du Cane Road, W12 0BJ",
+        "website": null,
+        "descLength": 67,
+        "blurb": "Classic Indian restaurant with extensive menu and takeaway options."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Poets Indian Restaurant\n\nClassic Indian restaurant with extensive menu and takeaway options.\n📍 Du Cane Road, W12 0BJ\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1925,7 +2431,8 @@
           "text": "Poets Indian Restaurant is part of the Old Oak Common business community.\n\nClassic Indian restaurant with extensive menu and takeaway options.\n📍 Du Cane Road, W12 0BJ\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#poets-indian-restaurant\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "1fcd1aca-8de3-4444-baf7-d0280781c409",
@@ -1937,6 +2444,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 66,
+        "blurb": "Community-focused café and wellness hub with a relaxed atmosphere."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Gracelands Yard\n\nCommunity-focused café and wellness hub with a relaxed atmosphere.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1951,7 +2464,8 @@
           "text": "Gracelands Yard is part of the Old Oak Common business community.\n\nCommunity-focused café and wellness hub with a relaxed atmosphere.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#gracelands-yard\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "0524a720-0b94-4b74-a454-4e27c48cef1e",
@@ -1963,6 +2477,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Near North Acton Station, W3",
+        "website": null,
+        "descLength": 66,
+        "blurb": "Popular Lebanese restaurant serving mezze and grilled specialties."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Momtaz\n\nPopular Lebanese restaurant serving mezze and grilled specialties.\n📍 Near North Acton Station, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -1977,7 +2497,8 @@
           "text": "Momtaz is part of the Old Oak Common business community.\n\nPopular Lebanese restaurant serving mezze and grilled specialties.\n📍 Near North Acton Station, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#momtaz\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "fb1da13a-82a0-41b4-876b-2b32279dbb1c",
@@ -1989,6 +2510,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "639 Harrow Road, NW10 5NU",
+        "website": null,
+        "descLength": 66,
+        "blurb": "Authentic Brazilian cuisine and warm atmosphere near Kensal Green."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Restaurante Sabor Brasileiro\n\nAuthentic Brazilian cuisine and warm atmosphere near Kensal Green.\n📍 639 Harrow Road, NW10 5NU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2003,7 +2530,8 @@
           "text": "Restaurante Sabor Brasileiro is part of the Old Oak Common business community.\n\nAuthentic Brazilian cuisine and warm atmosphere near Kensal Green.\n📍 639 Harrow Road, NW10 5NU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#restaurante-sabor-brasileiro\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "003090dd-45de-44b5-87ff-8c27fcfb2d20",
@@ -2015,6 +2543,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "25 Harlesden Road, NW10 2BY",
+        "website": null,
+        "descLength": 66,
+        "blurb": "Traditional pub with Secret Garden serving authentic Thai cuisine."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Rising Sun\n\nTraditional pub with Secret Garden serving authentic Thai cuisine.\n📍 25 Harlesden Road, NW10 2BY\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2029,7 +2563,8 @@
           "text": "The Rising Sun is part of the Old Oak Common business community.\n\nTraditional pub with Secret Garden serving authentic Thai cuisine.\n📍 25 Harlesden Road, NW10 2BY\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-rising-sun\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "6ca33557-ea52-4fff-b139-5a70dd7e9654",
@@ -2041,6 +2576,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Near North Acton Station, W3",
+        "website": null,
+        "descLength": 65,
+        "blurb": "Italian restaurant offering traditional dishes in a warm setting."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Casa Bardotti\n\nItalian restaurant offering traditional dishes in a warm setting.\n📍 Near North Acton Station, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2055,7 +2596,8 @@
           "text": "Casa Bardotti is part of the Old Oak Common business community.\n\nItalian restaurant offering traditional dishes in a warm setting.\n📍 Near North Acton Station, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#casa-bardotti\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "2a456d44-c2c3-4748-b117-8fbc33c833c3",
@@ -2067,6 +2609,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "1 Victoria Road, W3 6UP",
+        "website": null,
+        "descLength": 63,
+        "blurb": "Contemporary restaurant and bar serving modern British cuisine."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Foundry\n\nContemporary restaurant and bar serving modern British cuisine.\n📍 1 Victoria Road, W3 6UP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2081,7 +2629,8 @@
           "text": "The Foundry is part of the Old Oak Common business community.\n\nContemporary restaurant and bar serving modern British cuisine.\n📍 1 Victoria Road, W3 6UP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-foundry\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "71e4449d-4e5a-40c9-ba4c-c045a3b65f1a",
@@ -2093,6 +2642,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "High Street, Harlesden, NW10",
+        "website": null,
+        "descLength": 59,
+        "blurb": "Portuguese café and deli with homemade pastries and coffee."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Tamariz Cafe & Deli\n\nPortuguese café and deli with homemade pastries and coffee.\n📍 High Street, Harlesden, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2107,7 +2662,8 @@
           "text": "Tamariz Cafe & Deli is part of the Old Oak Common business community.\n\nPortuguese café and deli with homemade pastries and coffee.\n📍 High Street, Harlesden, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#tamariz-cafe-and-deli\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "42659d94-ac1e-4046-a30a-fff137470dc0",
@@ -2119,6 +2675,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "31 Station Road, NW10 4UP",
+        "website": null,
+        "descLength": 59,
+        "blurb": "Traditional Portuguese restaurant serving authentic dishes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Tasca Da Madeira\n\nTraditional Portuguese restaurant serving authentic dishes.\n📍 31 Station Road, NW10 4UP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2133,7 +2695,8 @@
           "text": "Tasca Da Madeira is part of the Old Oak Common business community.\n\nTraditional Portuguese restaurant serving authentic dishes.\n📍 31 Station Road, NW10 4UP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#tasca-da-madeira\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "231bf362-4d77-460b-a28c-c3cb36f7bd9e",
@@ -2145,6 +2708,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Chamberlayne Road, Kensal Green, NW10",
+        "website": null,
+        "descLength": 59,
+        "blurb": "Cracking pub with great Sunday roasts and local atmosphere."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: The Chamberlayne\n\nCracking pub with great Sunday roasts and local atmosphere.\n📍 Chamberlayne Road, Kensal Green, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2159,7 +2728,8 @@
           "text": "The Chamberlayne is part of the Old Oak Common business community.\n\nCracking pub with great Sunday roasts and local atmosphere.\n📍 Chamberlayne Road, Kensal Green, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#the-chamberlayne\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "a3c092f8-38b0-4b39-bd22-61afb60542d1",
@@ -2171,6 +2741,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Near North Acton Station, W3",
+        "website": null,
+        "descLength": 58,
+        "blurb": "Lebanese restaurant with authentic Middle Eastern flavors."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Barbar\n\nLebanese restaurant with authentic Middle Eastern flavors.\n📍 Near North Acton Station, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2185,7 +2761,8 @@
           "text": "Barbar is part of the Old Oak Common business community.\n\nLebanese restaurant with authentic Middle Eastern flavors.\n📍 Near North Acton Station, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#barbar\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "7da06723-bfa7-493f-b9bc-fcb964e67e08",
@@ -2197,6 +2774,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "1 Manor Park Road, NW10 4JW",
+        "website": null,
+        "descLength": 58,
+        "blurb": "Authentic Indian and Pakistani cuisine with halal options."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Taste Of Lahore\n\nAuthentic Indian and Pakistani cuisine with halal options.\n📍 1 Manor Park Road, NW10 4JW\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2211,7 +2794,8 @@
           "text": "Taste Of Lahore is part of the Old Oak Common business community.\n\nAuthentic Indian and Pakistani cuisine with halal options.\n📍 1 Manor Park Road, NW10 4JW\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#taste-of-lahore\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "ebfe6129-d856-48ce-b111-946806e0960b",
@@ -2223,6 +2807,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "305 Uxbridge Road, W3 9QU",
+        "website": null,
+        "descLength": 56,
+        "blurb": "Authentic Chinese restaurant serving traditional dishes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: North China\n\nAuthentic Chinese restaurant serving traditional dishes.\n📍 305 Uxbridge Road, W3 9QU\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2237,7 +2827,8 @@
           "text": "North China is part of the Old Oak Common business community.\n\nAuthentic Chinese restaurant serving traditional dishes.\n📍 305 Uxbridge Road, W3 9QU\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#north-china\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "6022b5da-a80c-4be6-ba93-2351d1ea344b",
@@ -2249,6 +2840,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "High Street, Harlesden, NW10",
+        "website": null,
+        "descLength": 53,
+        "blurb": "Traditional Indian cuisine with tandoori specialties."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Palace Tandoori Restaurant\n\nTraditional Indian cuisine with tandoori specialties.\n📍 High Street, Harlesden, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2263,7 +2860,8 @@
           "text": "Palace Tandoori Restaurant is part of the Old Oak Common business community.\n\nTraditional Indian cuisine with tandoori specialties.\n📍 High Street, Harlesden, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#palace-tandoori-restaurant\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "ff56ce3c-5eac-4e31-a19b-bbc6bdfe4390",
@@ -2275,6 +2873,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Acton Town Station, W3",
+        "website": null,
+        "descLength": 52,
+        "blurb": "Homemade Sardinian food right by Acton Town Station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Casereccio\n\nHomemade Sardinian food right by Acton Town Station.\n📍 Acton Town Station, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2289,7 +2893,8 @@
           "text": "Casereccio is part of the Old Oak Common business community.\n\nHomemade Sardinian food right by Acton Town Station.\n📍 Acton Town Station, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#casereccio\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "fc919512-19f4-4f95-ab6a-f5d86883c503",
@@ -2301,6 +2906,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 52,
+        "blurb": "Authentic Italian cuisine in a welcoming atmosphere."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Ida\n\nAuthentic Italian cuisine in a welcoming atmosphere.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2315,7 +2926,8 @@
           "text": "Ida is part of the Old Oak Common business community.\n\nAuthentic Italian cuisine in a welcoming atmosphere.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#ida\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "b65d2df3-968b-4591-a115-d76d6652f93a",
@@ -2327,6 +2939,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "132 High Street, NW10 4SP",
+        "website": null,
+        "descLength": 52,
+        "blurb": "Authentic Caribbean takeaway with generous portions."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Movements Caribbean Takeaway\n\nAuthentic Caribbean takeaway with generous portions.\n📍 132 High Street, NW10 4SP\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2341,7 +2959,8 @@
           "text": "Movements Caribbean Takeaway is part of the Old Oak Common business community.\n\nAuthentic Caribbean takeaway with generous portions.\n📍 132 High Street, NW10 4SP\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#movements-caribbean-takeaway\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "ed781ead-d612-4975-821b-351362b2b5ed",
@@ -2353,6 +2972,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Kensal Rise, NW10",
+        "website": null,
+        "descLength": 51,
+        "blurb": "Local hidden gem visited by locals for generations."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Arthur's Cafe\n\nLocal hidden gem visited by locals for generations.\n📍 Kensal Rise, NW10\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2367,7 +2992,8 @@
           "text": "Arthur's Cafe is part of the Old Oak Common business community.\n\nLocal hidden gem visited by locals for generations.\n📍 Kensal Rise, NW10\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#arthurs-cafe\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "3eb9e425-b6ba-4164-a193-394188d8705e",
@@ -2379,6 +3005,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "247 Acton Lane, NW10 7NR",
+        "website": null,
+        "descLength": 51,
+        "blurb": "Modern dining and drinks in a contemporary setting."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Naava Restaurant & Bar\n\nModern dining and drinks in a contemporary setting.\n📍 247 Acton Lane, NW10 7NR\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2393,7 +3025,8 @@
           "text": "Naava Restaurant & Bar is part of the Old Oak Common business community.\n\nModern dining and drinks in a contemporary setting.\n📍 247 Acton Lane, NW10 7NR\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#naava-restaurant-and-bar\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "d8b62267-b7af-4509-b65c-3ca1c7dd5e2f",
@@ -2405,6 +3038,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "Near North Acton Station, W3",
+        "website": null,
+        "descLength": 49,
+        "blurb": "Authentic Iraqi cuisine near North Acton station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Al Enam\n\nAuthentic Iraqi cuisine near North Acton station.\n📍 Near North Acton Station, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2419,7 +3058,8 @@
           "text": "Al Enam is part of the Old Oak Common business community.\n\nAuthentic Iraqi cuisine near North Acton station.\n📍 Near North Acton Station, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#al-enam\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "5a723f1f-000f-4840-b2a3-7e5dd127396b",
@@ -2431,6 +3071,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "15 Churchfield Road, W3 6BD",
+        "website": null,
+        "descLength": 48,
+        "blurb": "Modern Indian restaurant with innovative dishes."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Anokha\n\nModern Indian restaurant with innovative dishes.\n📍 15 Churchfield Road, W3 6BD\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2445,7 +3091,8 @@
           "text": "Anokha is part of the Old Oak Common business community.\n\nModern Indian restaurant with innovative dishes.\n📍 15 Churchfield Road, W3 6BD\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#anokha\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     },
     {
       "businessId": "945a24e9-87c3-4246-911f-c61b3d51c6d1",
@@ -2457,6 +3104,12 @@
       "scheduledTime": "12:00",
       "timezone": "Europe/London",
       "status": "pending_review",
+      "meta": {
+        "place": "North Acton Station, W3",
+        "website": null,
+        "descLength": 47,
+        "blurb": "Convenient café located at North Acton Station."
+      },
       "posts": {
         "instagram": {
           "text": "🌳 Local business spotlight: Cafe Blue\n\nConvenient café located at North Acton Station.\n📍 North Acton Station, W3\n\nFind them, and plenty more local businesses, in the Old Oak Town directory — link in bio.\n\n#OldOakCommon #OldOakTown #WestLondon #SupportLocal #WestLondonEats",
@@ -2471,7 +3124,8 @@
           "text": "Cafe Blue is part of the Old Oak Common business community.\n\nConvenient café located at North Acton Station.\n📍 North Acton Station, W3\n\nWe're spotlighting the businesses listed in the Old Oak Town directory, one at a time, as the area grows around the new HS2 and Elizabeth line interchange. Full listing: https://www.oldoaktown.co.uk/business-directory.html#cafe-blue\n\n#OldOakCommon #WestLondon #LocalBusiness",
           "image": null
         }
-      }
+      },
+      "pilot": false
     }
   ],
   "skipped": [

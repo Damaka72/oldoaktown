@@ -218,6 +218,13 @@ async function main() {
             scheduledTime: POST_TIME,
             timezone: 'Europe/London',
             status: 'pending_review',
+            // Public listing facts the pilot + outreach tools reuse (no contact details / emails).
+            meta: {
+                place: placeLine(b),
+                website: b.website ? clean(b.website) : null,
+                descLength: clean(b.description).length,
+                blurb: blurb(b.description)
+            },
             posts: buildPosts(b)
         });
         day = nextPostingDay(day);
