@@ -1,0 +1,41 @@
+{
+  "date": "2026-11-12",
+  "generatedAt": "2026-11-12T16:58:25.393Z",
+  "stats": {
+    "totalInQueue": 146,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [
+    {
+      "id": "https-www-ianvisits-co-uk-articles-the-elizabeth-l",
+      "title": "The Elizabeth line’s newest rail inspector has four legs and a laser",
+      "url": "https://www.ianvisits.co.uk/articles/the-elizabeth-lines-newest-rail-inspector-has-four-legs-and-a-laser-94028/",
+      "content": "If you spot a robot dog on the Elizabeth line, don’t worry, it’s just sniffing out problems on the line. (c) Createc The four-legged robot, named Spot, was built by Boston Dynamics and is taking part in a trial led by TfL and Createc, a technology firm based in Cockermouth, Cumbria. Spot’s trick is to build a detailed digital map as it walks. A laser scanner measures the surfaces around it, giving engineers a record of the tunnel or platform. By comparing scans taken at different times, they could spot changes and work out where a closer inspection is needed. The trial will help establish whether this new breed of railway inspector can make surveys quicker and reduce the time staff need to spend in potentially hazardous areas on live railway tracks. View this post on Instagram A post shared by TfL (@transportforlondon) “Railway tunnels and stations are complex environments to inspect and maintain, and robotics offers some really interesting opportunities to support engineers in understanding the condition of their infrastructure whilst also looking to remove people from potential harm.” said Will Newsom, chief executive of Createc. Createc works with Boston Dynamics to fit robots with specialist sensors for use in industries including nuclear power and infrastructure. The Elizabeth line trial, which also involves scanning technology company Emesent, gives the team a chance to see how the kit performs on a working railway. TfL highlighted the project as part of National Engineering Day.",
+      "contentSnippet": "If you spot a robot dog on the Elizabeth line, don’t worry, it’s just sniffing out problems on the line. (c) Createc The four-legged robot, named Spot, was built by Boston Dynamics and is taking part in a trial led by TfL and Createc, a technology firm based in Cockermouth, Cumbria. Spot’s trick is ",
+      "publishDate": "Thu, 12 Nov 2026 15:05:50 +0000",
+      "author": "ianVisits",
+      "source": {
+        "name": "Ian Visits",
+        "url": "https://www.ianvisits.co.uk/feed/",
+        "category": "transport",
+        "priority": "medium"
+      },
+      "tags": [
+        "london",
+        "transport",
+        "local"
+      ],
+      "imageUrl": "https://www.ianvisits.co.uk/articles/wp-content/uploads/sites/2/2026/11/Createc-elizabeth-line-1024x683.jpg",
+      "metadata": {
+        "fetchedAt": "2026-11-12T16:28:17.570Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 21,
+      "editorialNote": "**Editorial Note:**\n\nSpot's trial matters: Old Oak's Elizabeth line station opens 2038–39, so understanding new maintenance tech now shapes our future commute reliability. Add local angle: Will Spot inspect Old Oak's tunnels? When does TfL roll this out west? Flag: Verify trial timeline, Boston Dynamics/Createc roles, and actual cost savings vs. traditional inspections."
+    }
+  ],
+  "skipped": []
+}
