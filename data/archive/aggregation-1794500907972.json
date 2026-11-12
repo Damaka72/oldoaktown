@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-12T16:28:27.972Z",
+  "totalItemsFetched": 3,
+  "bySource": {
+    "Ian Visits": 1,
+    "Google News — OPDC & Planning": 1,
+    "Google News — Local Community": 1
+  },
+  "byCategory": {
+    "transport": 1,
+    "construction": 1,
+    "community": 1
+  },
+  "byPriority": {
+    "medium": 2,
+    "high": 1
+  },
+  "itemsInReviewQueue": 147
+}
