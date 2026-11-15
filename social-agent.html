@@ -1716,13 +1716,26 @@ function parseCSVRow(line) {
 }
 
 function parseCSV(text) {
-  const lines = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
+  // RFC-4180: split into records while respecting quotes, so a quoted caption may
+  // contain line breaks (multi-paragraph posts) without being cut at the first one.
+  const src = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const records = [];
+  let cur = '', inQuote = false, start = 0;
+  for (let i = 0; i <= src.length; i++) {
+    const ch = src[i];
+    if (ch === '"') {
+      if (inQuote && src[i + 1] === '"') i++;      // escaped quote stays inside the field
+      else inQuote = !inQuote;
+    } else if ((ch === '\n' && !inQuote) || i === src.length) {
+      records.push(src.slice(start, i));
+      start = i + 1;
+    }
+  }
   let headers = null;
   const rows  = [];
-  for (const raw of lines) {
-    const line = raw.trim();
-    if (!line || line.startsWith('#')) continue;
-    const fields = parseCSVRow(line);
+  for (const raw of records) {
+    if (!raw.trim() || raw.trim().startsWith('#')) continue;
+    const fields = parseCSVRow(raw);
     if (!headers) {
       headers = fields.map(h => h.trim().toLowerCase().replace(/\s+/g, '_'));
     } else {

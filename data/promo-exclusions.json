@@ -1,0 +1,30 @@
+{
+  "_readme": "Listings skipped by scripts/business-promo-backfill.js (independents-only policy). 'match' is a case-insensitive regex tested against the business name. Paid listings (featured/premium) are always promoted regardless of this list. Edit freely; re-running the script never re-drafts a business that is already in the schedule.",
+  "exclusions": [
+    { "match": "^KFC", "reason": "national chain" },
+    { "match": "^Costa Coffee", "reason": "national chain" },
+    { "match": "^Esquires Coffee", "reason": "national chain" },
+    { "match": "^Greggs", "reason": "national chain" },
+    { "match": "^Giggling Squid", "reason": "national chain" },
+    { "match": "^Papa John", "reason": "national chain" },
+    { "match": "^Subway", "reason": "national chain" },
+    { "match": "^ASDA", "reason": "national chain" },
+    { "match": "^Iceland$", "reason": "national chain" },
+    { "match": "^Lidl$", "reason": "national chain" },
+    { "match": "^B&Q", "reason": "national chain" },
+    { "match": "^Homebase$", "reason": "national chain" },
+    { "match": "^Staples", "reason": "national chain" },
+    { "match": "^Tesco", "reason": "national chain" },
+    { "match": "^Sainsbury", "reason": "national chain" },
+    { "match": "^Co-op Food", "reason": "national chain" },
+    { "match": "^Screwfix", "reason": "national chain" },
+    { "match": "^Keyline", "reason": "national chain" },
+    { "match": "^Renault Dealership$", "reason": "national chain" },
+    { "match": "^Nissan Dealership$", "reason": "national chain" },
+    { "match": "^Heinz$", "reason": "multinational manufacturer" },
+    { "match": "^Greencore", "reason": "multinational manufacturer" },
+    { "match": "^Park Royal Business Park$", "reason": "an estate, not a business" },
+    { "match": "^Willesden County Court$", "reason": "public body, not a promotable business" },
+    { "match": "^Rosa Salas Perfumes$", "reason": "outside the Old Oak area (RH2)" }
+  ]
+}
