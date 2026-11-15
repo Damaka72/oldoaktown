@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-15",
+  "generatedAt": "2026-11-15T15:46:46.263Z",
+  "stats": {
+    "totalInQueue": 148,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 3
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmilgfbvv95cux",
+      "title": "Old Oak tunnellers link HS2 with wider rail network - Ealing Times",
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNMzRmV3R2RWtkZGZWSzgwY3h4cWhUNE1JSWhUQlB5N2pCaURyM09yYWZHX0dKY1JqZmtReTVUa042aHFDS0RwMkJYOExoQ05tWmhyNmtxb2ltSmY4VWtuaHoyc21wWkdHeHFpYlV4bldDVFExdV83ejA0MkotRmN1cDl1Y0FzMG9RTGNYRFVnXzFsQmVPclE?oc=5",
+      "content": "Old Oak tunnellers link HS2 with wider rail network Ealing Times",
+      "contentSnippet": "Old Oak tunnellers link HS2 with wider rail network Ealing Times",
+      "publishDate": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "author": "Google News — Local Community",
+      "source": {
+        "name": "Google News — Local Community",
+        "url": "https://news.google.com/rss/search?q=(%22Old%20Oak%22%20OR%20%22Harlesden%22%20OR%20%22Wormwood%20Scrubs%22%20OR%20%22North%20Acton%22)%20community%20OR%20residents%20OR%20council%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "community",
+        "priority": "medium"
+      },
+      "tags": [
+        "community",
+        "local"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-15T15:09:06.999Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 15,
+      "editorialNote": "**Editorial Note:**\n\nThis tunnelling milestone directly impacts our neighbourhood's transport future—better connections mean easier commutes for the 19,850+ new residents expected here. We should clarify: which existing rail lines connect? When's completion? Also verify job accessibility claims. Readers aged 20–39 will want to know: how does this affect commute times to central London and local employment hubs?"
+    }
+  ],
+  "skipped": []
+}
