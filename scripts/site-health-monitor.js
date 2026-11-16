@@ -130,7 +130,7 @@ async function sendReport(report) {
   const overall = report.criticalDown.length > 0 ? '🚨' : report.warnings > 0 ? '⚠️' : '✅';
 
   const pagesHtml = report.pages.map(p =>
-    `<div style="border:1px solid #ddd;border-radius:6px;padding:12px;margin:8px 0;background:${p.status === 'ok' ? '#f0f7eb' : p.status === 'warning' ? '#fff3cd' : '#f8d7da'}">
+    `<div style="border:1px solid #ddd;border-radius:6px;padding:12px;margin:8px 0;background:${p.status === 'ok' ? '#ECE8E0' : p.status === 'warning' ? '#fff3cd' : '#f8d7da'}">
       <strong>${si[p.status]} ${p.name}</strong>
       <span style="color:#666;font-size:13px"> — HTTP ${p.httpStatus}</span>
       ${p.failedChecks.length ? `<ul style="margin:6px 0 0;font-size:13px">${p.failedChecks.map(c => `<li>${c.check}: ${c.fix}</li>`).join('')}</ul>` : ''}
@@ -150,23 +150,23 @@ async function sendReport(report) {
     to: process.env.ADMIN_EMAIL,
     subject: `${overall} Site Health — ${report.date} — ${report.criticalDown.length > 0 ? 'CRITICAL ISSUES' : `${report.warnings} warning(s)`}`,
     html: `<div style="font-family:Arial,sans-serif;max-width:700px;margin:0 auto">
-<div style="background:#1C3A0E;color:white;padding:24px;border-radius:8px 8px 0 0">
+<div style="background:#2D5016;color:white;padding:24px;border-radius:8px 8px 0 0">
   <h1 style="margin:0;font-size:20px">🌳 Old Oak Town — Site Health</h1>
-  <p style="color:#D4E8C8;margin:4px 0">${report.date}</p>
+  <p style="color:#ECE8E0;margin:4px 0">${report.date}</p>
 </div>
 <div style="padding:24px;background:white">
   <div style="display:flex;gap:12px;margin-bottom:24px">
-    <div style="flex:1;text-align:center;padding:16px;background:#f0f7eb;border-radius:8px">
-      <div style="font-size:28px;font-weight:bold;color:#1C3A0E">${report.pagesOk}/${report.pages.length}</div>
-      <div style="color:#6B7B5E">Pages OK</div>
+    <div style="flex:1;text-align:center;padding:16px;background:#ECE8E0;border-radius:8px">
+      <div style="font-size:28px;font-weight:bold;color:#2D5016">${report.pagesOk}/${report.pages.length}</div>
+      <div style="color:#555555">Pages OK</div>
     </div>
-    <div style="flex:1;text-align:center;padding:16px;background:${report.warnings > 0 ? '#fff3cd' : '#f0f7eb'};border-radius:8px">
+    <div style="flex:1;text-align:center;padding:16px;background:${report.warnings > 0 ? '#fff3cd' : '#ECE8E0'};border-radius:8px">
       <div style="font-size:28px;font-weight:bold;color:#D4860A">${report.warnings}</div>
-      <div style="color:#6B7B5E">Warnings</div>
+      <div style="color:#555555">Warnings</div>
     </div>
-    <div style="flex:1;text-align:center;padding:16px;background:${report.criticalDown.length > 0 ? '#f8d7da' : '#f0f7eb'};border-radius:8px">
+    <div style="flex:1;text-align:center;padding:16px;background:${report.criticalDown.length > 0 ? '#f8d7da' : '#ECE8E0'};border-radius:8px">
       <div style="font-size:28px;font-weight:bold;color:#C0392B">${report.criticalDown.length}</div>
-      <div style="color:#6B7B5E">Critical Down</div>
+      <div style="color:#555555">Critical Down</div>
     </div>
   </div>
   <h2>Pages</h2>${pagesHtml}

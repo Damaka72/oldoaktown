@@ -29,7 +29,7 @@ UI-only status colours (admin tools, forms): amber `#D4860A` (warnings), red `#C
 
 Derived neutrals (not brand colours, used for UI only): muted text `#555555`, hairline borders `#DDD8C8`.
 
-> **Migrated (Nov 2026):** the blog, directory, homepage, admin pages, weekly edition email, outreach leaflets and the 10 pilot promo images now use this palette. Still on the old green set: the social-agent generator, `scripts/sites/`, `lib/handlers/agent-data.js`, `scripts/site-health-monitor.js` and `scripts/seo-gap-finder.js`.
+> **Migrated (Nov 2026):** all Old Oak Town pages, admin tools, email reports, leaflets and promo images use this palette. `scripts/sites/example.json` is a template for other sites and keeps its own colours; `generate-social-agent.js` matches the template's current oak green (`#2D5016`) for login-screen colours, so keep the two in step.
 
 **Fonts** (same pair on the homepage, blog, directory and promo images):
 - Headlines: `Instrument Serif` 400, italic for emphasis and hero text (fallback Georgia, serif)
