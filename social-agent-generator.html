@@ -7,13 +7,13 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
 :root {
-  --primary: #1C3A0E;
-  --accent:  #4C8A35;
-  --ghost:   #F0F7EB;
-  --cream:   #FAF8F4;
-  --ink:     #0F1A0A;
-  --muted:   #6B7B5E;
-  --border:  #DDE8D4;
+  --primary: #2D5016;
+  --accent:  #8B4513;
+  --ghost:   #ECE8E0;
+  --cream:   #F5F5DC;
+  --ink:     #333333;
+  --muted:   #555555;
+  --border:  #DDD8C8;
   --amber:   #D4860A;
   --red:     #C0392B;
   --white:   #FFFFFF;
@@ -81,7 +81,7 @@ input[type=color]{width:38px;height:38px;border:1.5px solid var(--border);border
 .generate-btn{width:100%;padding:16px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-family:"Instrument Serif",serif;font-size:20px;font-style:italic;cursor:pointer;transition:background .2s;margin-top:8px;}
 .generate-btn:hover{background:var(--accent);}
 .generate-btn:disabled{opacity:.6;cursor:not-allowed;}
-.success-panel{display:none;background:#F0F7EB;border:2px solid var(--accent);border-radius:12px;padding:22px 24px;margin-top:20px;}
+.success-panel{display:none;background:#ECE8E0;border:2px solid var(--accent);border-radius:12px;padding:22px 24px;margin-top:20px;}
 .success-panel h3{font-family:"Instrument Serif",serif;font-size:18px;color:var(--primary);margin-bottom:14px;}
 .success-panel ol{padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:14px;}
 .success-panel code{background:rgba(76,138,53,.12);padding:1px 5px;border-radius:4px;font-family:"Geist Mono",monospace;font-size:12px;}
@@ -222,7 +222,7 @@ const PLATFORM_PRESETS = [
 
 // ── Colour presets ────────────────────────────────────────────
 const COLOR_PRESETS = {
-  greens: { primary:'#1C3A0E', primaryMid:'#2F6020', accent:'#4C8A35', accentPale:'#D4E8C8', ghost:'#F0F7EB', border:'#DDE8D4', muted:'#6B7B5E', ink:'#0F1A0A', cream:'#FAF8F4' },
+  greens: { primary:'#2D5016', primaryMid:'#1C2F2B', accent:'#8B4513', accentPale:'#ECE8E0', ghost:'#ECE8E0', border:'#DDD8C8', muted:'#555555', ink:'#333333', cream:'#F5F5DC' },
   ocean:  { primary:'#0D2B4E', primaryMid:'#1A4A7A', accent:'#1E88E5', accentPale:'#BBDEFB', ghost:'#E3F2FD', border:'#C5D8F0', muted:'#607D8B', ink:'#0A1929', cream:'#F5F8FC' },
   red:    { primary:'#4A0E0E', primaryMid:'#7B2020', accent:'#D32F2F', accentPale:'#FFCDD2', ghost:'#FFEBEE', border:'#FFCDD2', muted:'#795548', ink:'#1A0505', cream:'#FFF8F8' },
   purple: { primary:'#2D1B4E', primaryMid:'#4A2E7A', accent:'#7B1FD4', accentPale:'#E1D5F8', ghost:'#F3EEFF', border:'#DDD0F5', muted:'#6E5F82', ink:'#120924', cream:'#F8F5FF' },

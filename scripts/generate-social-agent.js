@@ -103,8 +103,8 @@ if (config.colors) {
 
   // Update hardcoded hex values in the login screen inline styles
   if (c.primary) {
-    html = html.split('background:#1C3A0E').join(`background:${c.primary}`);
-    html = html.split('color:#1C3A0E').join(`color:${c.primary}`);
+    html = html.split('background:#2D5016').join(`background:${c.primary}`);
+    html = html.split('color:#2D5016').join(`color:${c.primary}`);
     html = html.split(`background: var(--green-deep)`).join(`background: var(--primary)`);
   }
 }

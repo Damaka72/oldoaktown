@@ -131,9 +131,9 @@ async function sendReport(report) {
   ).join('');
 
   const briefsHtml = report.briefs.map(b =>
-    `<div style="border:1px solid #DDE8D4;border-radius:8px;padding:16px;margin:12px 0;background:#F0F7EB">
-      <h3 style="margin:0 0 8px;color:#1C3A0E">${b.title}</h3>
-      <p style="margin:0 0 8px;color:#6B7B5E"><em>${b.angle}</em></p>
+    `<div style="border:1px solid #DDD8C8;border-radius:8px;padding:16px;margin:12px 0;background:#ECE8E0">
+      <h3 style="margin:0 0 8px;color:#2D5016">${b.title}</h3>
+      <p style="margin:0 0 8px;color:#555555"><em>${b.angle}</em></p>
       <ul>${b.outline.map(o => `<li>${o}</li>`).join('')}</ul>
       <p style="font-size:13px"><strong>Keywords:</strong> ${b.targetKeywords.join(', ')} · ~${b.estimatedWords}w · Pillar ${b.pillar}</p>
     </div>`
@@ -144,14 +144,14 @@ async function sendReport(report) {
     to: process.env.ADMIN_EMAIL,
     subject: `📊 SEO Gap Report — ${report.gaps.length} topic${report.gaps.length !== 1 ? 's' : ''} overdue`,
     html: `<div style="font-family:Arial,sans-serif;max-width:700px;margin:0 auto">
-<div style="background:#1C3A0E;color:white;padding:24px;border-radius:8px 8px 0 0">
+<div style="background:#2D5016;color:white;padding:24px;border-radius:8px 8px 0 0">
   <h1 style="margin:0;font-size:20px">🌳 Old Oak Town — SEO Gap Report</h1>
-  <p style="color:#D4E8C8;margin:4px 0">${report.date}</p>
+  <p style="color:#ECE8E0;margin:4px 0">${report.date}</p>
 </div>
 <div style="padding:24px;background:white">
   <h2>Content Gaps (${report.gaps.length} overdue)</h2>
   <table style="width:100%;border-collapse:collapse">
-    <thead><tr style="background:#F0F7EB">
+    <thead><tr style="background:#ECE8E0">
       <th style="padding:8px;text-align:left">Topic</th>
       <th style="padding:8px">Pillar</th>
       <th style="padding:8px">Last Covered</th>
@@ -161,7 +161,7 @@ async function sendReport(report) {
   </table>
   <h2 style="margin-top:32px">Article Briefs (write these this week)</h2>
   ${briefsHtml || '<p>No gaps this week — great work!</p>'}
-  <p style="color:#6B7B5E;font-size:13px">
+  <p style="color:#555555;font-size:13px">
     Total published: ${report.totalPublished} · On track: ${report.topicsOnTrack}/${KEYWORD_TARGETS.length}
   </p>
 </div></div>`,
