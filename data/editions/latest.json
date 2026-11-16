@@ -1,9 +1,33 @@
 {
-  "date": "2026-11-09",
-  "generatedAt": "2026-11-09T19:18:48.920Z",
-  "subject": "HS2 celebrates tunnel breakthrough at Old Oak Common",
-  "intro": "This week brought good news for the transport hub taking shape in our area. HS2 has reached a major tunnelling milestone as work continues on the station box.",
+  "date": "2026-11-16",
+  "generatedAt": "2026-11-16T19:01:30.697Z",
+  "subject": "Old Oak Common & Park Royal Weekly Update",
+  "intro": "This week brings news of progress at Old Oak Common station and service changes across the Elizabeth line. Here's what you need to know about your area.",
   "news": [
+    {
+      "title": "The Elizabeth line’s newest rail inspector has four legs and a laser",
+      "excerpt": "If you spot a robot dog on the Elizabeth line, don’t worry, it’s just sniffing out problems on the line. (c) Createc The four-legged robot, named Spot, was built by Boston Dynamics and is taking part",
+      "category": "Transport",
+      "date": "2026-11-12",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/the-elizabeth-lines-newest-rail-inspector-has-four-legs-and-a-laser-94028/"
+    },
+    {
+      "title": "Almost no Elizabeth line services running on the last weekend of the month",
+      "excerpt": "The Elizabeth line will be largely closed over the final weekend of November as Transport for London (TfL) warns passengers to seek alternative routes. The closure affects most of the line on Saturday",
+      "category": "Transport",
+      "date": "2026-11-11",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/almost-no-elizabeth-line-services-running-on-the-last-weekend-of-the-month-94001/"
+    },
+    {
+      "title": "HS2 development around Euston could support 6,000 new homes",
+      "excerpt": "More than 6,000 new homes could be built around Euston as part of the HS2 development, with proposals spanning railway land, housing estates, and redevelopment sites from Bloomsbury to Camley Street.",
+      "category": "Transport",
+      "date": "2026-11-10",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/hs2-development-around-euston-could-support-6000-new-homes-93550/"
+    },
     {
       "title": "HS2 celebrates tunnel breakthrough at Old Oak Common station box - Ground Engineering",
       "excerpt": "HS2 celebrates tunnel breakthrough at Old Oak Common station box Ground Engineering",
@@ -21,56 +45,68 @@
       "url": "https://www.ianvisits.co.uk/articles/no-elizabeth-line-between-stratford-and-romford-over-christmas-93508/"
     },
     {
-      "title": "HS2 confirms Old Oak Common tunnel link - London Daily News",
-      "excerpt": "HS2 confirms Old Oak Common tunnel link London Daily News",
-      "category": "HS2 Updates",
-      "date": "2026-11-05",
-      "source": "Google News — HS2",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFAxcm5YWTloMWFIZHV0VDVydlBFMi1BSTJSOG15X0xPR0JrbEZFOUJBWERTdGJaUFdmSllKdXBldURLRVlZQWNsQjkwN2hUejdkVWFNNW9KaTNqRk1XM1JnVkFjOEd3LUtLWFlKZERSb3RXMHZiYUY4TA?oc=5"
-    },
-    {
-      "title": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough - Secret London",
-      "excerpt": "London is officially a step closer to getting its huge new 'superhub' station - as HS2 celebrates a major underground breakthrough Secret London",
-      "category": "HS2 Updates",
-      "date": "2026-11-05",
-      "source": "Google News — Old Oak Common",
-      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5vSV93TFVjTnFMelNCZERRd2c3U0Y5R2xZVGFXNlhLS3djWkdsR1MzTDhiTWw2bTY3OFlLUFE4SE9jUzBzMnZZdkZvanBlaUFaSDB6a3RxTzBDc2VBc3dja1JqaTFLTFM2bktsTk1NTENFNkJW?oc=5"
-    },
-    {
-      "title": "HS2: SCS breaks through into Old Oak Common connecting station with north London line - New Civil Engineer",
-      "excerpt": "HS2: SCS breaks through into Old Oak Common connecting station with north London line New Civil Engineer",
-      "category": "HS2 Updates",
-      "date": "2026-11-04",
-      "source": "Google News — Old Oak Common",
-      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPaGwyX2pKaVplelFMMnRQQUpvZHlaWF9aR2YxaHJJZ3p1cTNCZ2RfNjN5OGFxWVo3MS1lUi1xLWdLMFZtSDdIOVY2WUZWdWVVYWdCYUttUlB4R2t3Wl9ET2pQamczMWJ2cFBfQXl6a0M4aWlHZEx2SW9oQ1oyZ3BTcUgyTG1Yby00emZiWXFCZ2hDOUxWbElwOXFoTGdKUlVuVUh2VFd0b2tKcXctVFY0TDJFemQ1bldWdXpCeW0ySGJZNDlya2FXVWVSdzZIcVdVSFE?oc=5"
-    },
-    {
-      "title": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway - Rail Technology Magazine",
-      "excerpt": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway Rail Technology Magazine",
-      "category": "HS2 Updates",
-      "date": "2026-11-04",
-      "source": "Google News — Old Oak Common",
-      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPMFNJYnNodjhNWG5hdVk2a1oyS0dYdXVFM0szQTNXc1piMTI1ZFExMFdiTjFvOUVuOVJmaEF1aFBYUXpHVEdkWmRxUFV4UUo4ZWZPZThXWjA0Y1BpbFU4X0JDVHV4aDlONzZLVVZHNUNyVXN1MGZrelc0dzQydHg2V2YxRnpWbC15N1pQX2JrN0pOSGlWTnR0QmlEWTlsTVFWTm9ydXJNOXM1QjdkRzdfUUJkVHVqa0laY2VCcS1IUGlycThWYlJ0RGozLXE?oc=5"
+      "title": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke - Community Impact",
+      "excerpt": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke Community Impact",
+      "category": "Community",
+      "date": "2026-11-06",
+      "source": "Google News — Local Community",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhZRm1Ba1B4YzJqc2pud1BKT0RIVVVjQll6alNQS1Q2b2I2cUM3c3hjVlhJdHZ0VUZ4RGIwNURpUU5OS2gyemJIZUd0NjI5dTVOb28zMzQweGlxRF9TV2lKR3lONXNmOWdrVC1GTHp5d3JyRDJzdlhoU01PWEt5UVNhWjBIQlo5N1pvSEVLZWUxc2NhYmVZcWItTUQ1TWN2aDBNVWdUVFhMU0E0azR3MlJ1cEhYanI5Vng4VUlR?oc=5"
     }
   ],
   "events": [
     {
-      "title": "UAL Halls Tour | The Costume Store | Saturday 14 November 2026",
-      "date": "2026-11-14",
+      "title": "Lets Talk : Grooming and keeping children safe",
+      "date": "2026-11-17",
       "startTime": null,
-      "venue": "The Costume Store",
-      "address": "160 Victoria Road, London, W3 6EE",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/ual-halls-tour-the-costume-store-saturday-14-november-2026-tickets-1998219943642"
+      "venue": "Old Oak Family Hub",
+      "address": "76 Braybrook Street, London, W12 0AP",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/lets-talk-grooming-and-keeping-children-safe-tickets-2004030033778"
     },
     {
-      "title": "Guided Walk: Jewish Communal Leaders",
-      "date": "2026-11-22",
+      "title": "W3 Community Orchard Programme",
+      "date": "2026-11-17",
       "startTime": null,
-      "venue": "Willesden Jewish Cemetery",
-      "address": "Beaconsfield Road, London, NW10 2JE",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481"
+      "venue": "North Acton Pavilion",
+      "address": "Eastfields Road, London, W3",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345604632"
+    },
+    {
+      "title": "Ghostsigns of Willesden Green – bygone brands and businesses",
+      "date": "2026-11-19",
+      "startTime": null,
+      "venue": "Dollis Hill station",
+      "address": "Dollis Hill, Dollis Hill, NW10",
+      "category": "networking",
+      "url": "https://www.eventbrite.co.uk/e/ghostsigns-of-willesden-green-bygone-brands-and-businesses-tickets-2003934079777"
+    },
+    {
+      "title": "North Kensington Library Poetry Group",
+      "date": "2026-11-19",
+      "startTime": null,
+      "venue": "North Kensington Library",
+      "address": "108 Ladbroke Grove, London, W11 1PZ",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466520105"
+    },
+    {
+      "title": "I Love Aves Fundraiser",
+      "date": "2026-11-19",
+      "startTime": null,
+      "venue": "Paradise by way of Kensal Green",
+      "address": "19 Kilburn Lane, London, W10 4AE",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/i-love-aves-fundraiser-tickets-2003403321264"
+    },
+    {
+      "title": "CYPHER & CHILL",
+      "date": "2026-11-20",
+      "startTime": null,
+      "venue": "The Foundry Collective",
+      "address": "1 Victoria Road, London, W3 6FA",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/cypher-chill-tickets-2003733081586"
     }
   ],
   "videos": [

@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-16",
+  "generatedAt": "2026-11-16T19:01:30.697Z",
+  "subject": "Old Oak Common & Park Royal Weekly Update",
+  "intro": "This week brings news of progress at Old Oak Common station and service changes across the Elizabeth line. Here's what you need to know about your area.",
+  "news": [
+    {
+      "title": "The Elizabeth line’s newest rail inspector has four legs and a laser",
+      "excerpt": "If you spot a robot dog on the Elizabeth line, don’t worry, it’s just sniffing out problems on the line. (c) Createc The four-legged robot, named Spot, was built by Boston Dynamics and is taking part",
+      "category": "Transport",
+      "date": "2026-11-12",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/the-elizabeth-lines-newest-rail-inspector-has-four-legs-and-a-laser-94028/"
+    },
+    {
+      "title": "Almost no Elizabeth line services running on the last weekend of the month",
+      "excerpt": "The Elizabeth line will be largely closed over the final weekend of November as Transport for London (TfL) warns passengers to seek alternative routes. The closure affects most of the line on Saturday",
+      "category": "Transport",
+      "date": "2026-11-11",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/almost-no-elizabeth-line-services-running-on-the-last-weekend-of-the-month-94001/"
+    },
+    {
+      "title": "HS2 development around Euston could support 6,000 new homes",
+      "excerpt": "More than 6,000 new homes could be built around Euston as part of the HS2 development, with proposals spanning railway land, housing estates, and redevelopment sites from Bloomsbury to Camley Street.",
+      "category": "Transport",
+      "date": "2026-11-10",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/hs2-development-around-euston-could-support-6000-new-homes-93550/"
+    },
+    {
+      "title": "HS2 celebrates tunnel breakthrough at Old Oak Common station box - Ground Engineering",
+      "excerpt": "HS2 celebrates tunnel breakthrough at Old Oak Common station box Ground Engineering",
+      "category": "HS2 Updates",
+      "date": "2026-11-09",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE52dWtWcC01X0l3Vm40TWQyZGNnXzRjSnFFRWlvYm50dUxFY191WjFuRTAxU0d0R2R5ZmZ6b1dkR094dWl4ZGwtQQ?oc=5"
+    },
+    {
+      "title": "No Elizabeth line between Stratford and Romford over Christmas",
+      "excerpt": "Major railway works in East London mean there will be no Elizabeth line services between Stratford and Romford over Christmas. Engineering works on Anglia route (c) Network Rail The closure is due to",
+      "category": "Transport",
+      "date": "2026-11-09",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/no-elizabeth-line-between-stratford-and-romford-over-christmas-93508/"
+    },
+    {
+      "title": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke - Community Impact",
+      "excerpt": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke Community Impact",
+      "category": "Community",
+      "date": "2026-11-06",
+      "source": "Google News — Local Community",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhZRm1Ba1B4YzJqc2pud1BKT0RIVVVjQll6alNQS1Q2b2I2cUM3c3hjVlhJdHZ0VUZ4RGIwNURpUU5OS2gyemJIZUd0NjI5dTVOb28zMzQweGlxRF9TV2lKR3lONXNmOWdrVC1GTHp5d3JyRDJzdlhoU01PWEt5UVNhWjBIQlo5N1pvSEVLZWUxc2NhYmVZcWItTUQ1TWN2aDBNVWdUVFhMU0E0azR3MlJ1cEhYanI5Vng4VUlR?oc=5"
+    }
+  ],
+  "events": [
+    {
+      "title": "Lets Talk : Grooming and keeping children safe",
+      "date": "2026-11-17",
+      "startTime": null,
+      "venue": "Old Oak Family Hub",
+      "address": "76 Braybrook Street, London, W12 0AP",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/lets-talk-grooming-and-keeping-children-safe-tickets-2004030033778"
+    },
+    {
+      "title": "W3 Community Orchard Programme",
+      "date": "2026-11-17",
+      "startTime": null,
+      "venue": "North Acton Pavilion",
+      "address": "Eastfields Road, London, W3",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345604632"
+    },
+    {
+      "title": "Ghostsigns of Willesden Green – bygone brands and businesses",
+      "date": "2026-11-19",
+      "startTime": null,
+      "venue": "Dollis Hill station",
+      "address": "Dollis Hill, Dollis Hill, NW10",
+      "category": "networking",
+      "url": "https://www.eventbrite.co.uk/e/ghostsigns-of-willesden-green-bygone-brands-and-businesses-tickets-2003934079777"
+    },
+    {
+      "title": "North Kensington Library Poetry Group",
+      "date": "2026-11-19",
+      "startTime": null,
+      "venue": "North Kensington Library",
+      "address": "108 Ladbroke Grove, London, W11 1PZ",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466520105"
+    },
+    {
+      "title": "I Love Aves Fundraiser",
+      "date": "2026-11-19",
+      "startTime": null,
+      "venue": "Paradise by way of Kensal Green",
+      "address": "19 Kilburn Lane, London, W10 4AE",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/i-love-aves-fundraiser-tickets-2003403321264"
+    },
+    {
+      "title": "CYPHER & CHILL",
+      "date": "2026-11-20",
+      "startTime": null,
+      "venue": "The Foundry Collective",
+      "address": "1 Victoria Road, London, W3 6FA",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/cypher-chill-tickets-2003733081586"
+    }
+  ],
+  "videos": [
+    {
+      "title": "HS2 tunnel breakthrough reaches Old Oak Common superhub station",
+      "channel": "HS2 Ltd",
+      "url": "https://www.youtube.com/watch?v=TqjuWh27XUE",
+      "published": "2026-11-08"
+    },
+    {
+      "title": "We've broken through at Old Oak Common — full story on Sunday #short",
+      "channel": "HS2 Ltd",
+      "url": "https://www.youtube.com/watch?v=_eA1YOehjks",
+      "published": "2026-11-06"
+    }
+  ]
+}
