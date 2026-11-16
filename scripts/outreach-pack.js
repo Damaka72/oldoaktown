@@ -66,7 +66,7 @@ function callSheet(entries) {
 }
 
 async function leafletHtml(e) {
-    const qr = await QRCode.toString(listingUrl(e), { type: 'svg', margin: 0, color: { dark: '#1C3A0E', light: '#FFFFFF' } });
+    const qr = await QRCode.toString(listingUrl(e), { type: 'svg', margin: 0, color: { dark: '#2D5016', light: '#FFFFFF' } });
     const cat = CATEGORY_LABEL[e.category] || 'Local Business';
     const place = ((e.meta && e.meta.place) || '').replace(/,\s*(London|United Kingdom)\b/gi, '');
     const blurb = (e.meta && e.meta.blurb) || '';
@@ -103,7 +103,7 @@ async function leafletHtml(e) {
 
 const CSS = `
 @page { size: A5; margin: 0; }
-:root { --primary:#1C3A0E; --accent:#4C8A35; --mid:#2F6020; --pale:#D4E8C8; --ghost:#F0F7EB; --cream:#FAF8F4; --ink:#0F1A0A; --muted:#6B7B5E; --border:#DDE8D4; }
+:root { --primary:#2D5016; --accent:#8B4513; --mid:#1C2F2B; --pale:#ECE8E0; --ghost:#ECE8E0; --cream:#F5F5DC; --ink:#333333; --muted:#555555; --border:#DDD8C8; }
 * { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 body { font-family:'DM Sans',Arial,sans-serif; color:var(--ink); background:#888; }
 .leaflet { width:148mm; height:210mm; margin:0 auto 6mm; background:var(--cream); padding:11mm 11mm 9mm; display:flex; flex-direction:column; page-break-after:always; break-after:page; overflow:hidden; }

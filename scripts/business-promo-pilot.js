@@ -119,7 +119,7 @@ function tileHtml(e) {
 @font-face{font-family:'Instrument Serif';font-style:italic;font-weight:400;src:url('${font('instrument-serif-latin-400-italic.woff2')}')}
 @font-face{font-family:'DM Sans';font-weight:400;src:url('${font('dm-sans-latin-400-normal.woff2')}')}
 @font-face{font-family:'DM Sans';font-weight:700;src:url('${font('dm-sans-latin-700-normal.woff2')}')}
-:root{--primary:#1C3A0E;--accent:#4C8A35;--pale:#D4E8C8;--ghost:#F0F7EB;--cream:#FAF8F4}
+:root{--primary:#2D5016;--accent:#8B4513;--pale:#ECE8E0;--ghost:#ECE8E0;--cream:#F5F5DC}
 *{margin:0;box-sizing:border-box}
 body{width:1080px;height:1080px;background:var(--primary);color:var(--cream);font-family:'DM Sans',sans-serif;position:relative;overflow:hidden}
 .frame{position:absolute;inset:44px;border:2px solid color-mix(in srgb,var(--pale) 35%,transparent);border-radius:36px}

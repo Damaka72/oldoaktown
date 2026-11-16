@@ -8,22 +8,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
 
 :root {
-  --ink: #0F1A0A;
-  --green-deep: #1C3A0E;
-  --green-mid: #2F6020;
-  --green-bright: #4C8A35;
-  --green-pale: #D4E8C8;
-  --green-ghost: #F0F7EB;
+  --ink: #333333;
+  --green-deep: #2D5016;
+  --green-mid: #1C2F2B;
+  --green-bright: #8B4513;
+  --green-pale: #ECE8E0;
+  --green-ghost: #ECE8E0;
   --amber: #D4860A;
   --amber-pale: #FEF3DC;
   --red: #C0392B;
   --red-pale: #FDECEA;
   --blue: #1A5CB8;
   --blue-pale: #E8F0FC;
-  --cream: #FAF8F4;
+  --cream: #F5F5DC;
   --white: #FFFFFF;
-  --border: #DDE8D4;
-  --muted: #6B7B5E;
+  --border: #DDD8C8;
+  --muted: #555555;
   --fb: #1877F2;
   --ig: #C13584;
   --li: #0A66C2;
@@ -601,15 +601,15 @@ textarea { min-height: 68px; }
 <body>
 
 <!-- Login Screen -->
-<div id="loginScreen" style="display:flex; align-items:center; justify-content:center; min-height:100vh; background:#1C3A0E; position:fixed; top:0; left:0; width:100%; z-index:9999;">
+<div id="loginScreen" style="display:flex; align-items:center; justify-content:center; min-height:100vh; background:#2D5016; position:fixed; top:0; left:0; width:100%; z-index:9999;">
   <div style="background:white; padding:3rem; border-radius:15px; max-width:400px; width:90%; text-align:center;">
     <img src="images/logo.png" alt="Old Oak Town" style="height:80px; margin-bottom:1rem;">
-    <h1 style="color:#1C3A0E; margin-bottom:0.5rem;">Admin Access</h1>
+    <h1 style="color:#2D5016; margin-bottom:0.5rem;">Admin Access</h1>
     <p style="color:#666; margin-bottom:2rem;">Social Command Centre</p>
     <input type="password" id="socialPasswordInput" placeholder="Enter admin password"
            style="width:100%; padding:1rem; border:2px solid #ddd; border-radius:5px; font-size:1rem; margin-bottom:1rem;"
            onkeypress="if(event.key==='Enter') socialLogin()">
-    <button onclick="socialLogin()" style="width:100%; background:#1C3A0E; color:white; border:none; padding:1rem; border-radius:5px; font-size:1rem; font-weight:600; cursor:pointer;">Sign In</button>
+    <button onclick="socialLogin()" style="width:100%; background:#2D5016; color:white; border:none; padding:1rem; border-radius:5px; font-size:1rem; font-weight:600; cursor:pointer;">Sign In</button>
     <p id="socialLoginError" style="color:#dc3545; margin-top:1rem; display:none;">Incorrect password</p>
   </div>
 </div>
@@ -816,7 +816,7 @@ textarea { min-height: 68px; }
           📤 Schedule via Buffer
         </button>
       </div>
-      <div id="bufferTestResult" style="display:none; margin-top:12px; padding:12px 16px; border-radius:8px; font-size:12px; font-family: 'Geist Mono', monospace; white-space:pre-wrap; word-break:break-all; background:#0F1A0A; border:1px solid var(--border); color:#D4E8C8;"></div>
+      <div id="bufferTestResult" style="display:none; margin-top:12px; padding:12px 16px; border-radius:8px; font-size:12px; font-family: 'Geist Mono', monospace; white-space:pre-wrap; word-break:break-all; background:#333333; border:1px solid var(--border); color:#ECE8E0;"></div>
     </div>
 
     <!-- SENDING -->
@@ -914,7 +914,7 @@ async function testBufferConnection() {
       lines.push('  No channels returned. Re-authorise Facebook/Instagram/LinkedIn at buffer.com → Channels.');
     }
 
-    box.style.borderColor = channels.length ? '#4C8A35' : '#D4860A';
+    box.style.borderColor = channels.length ? '#8B4513' : '#D4860A';
     box.textContent = lines.join('\n');
   } catch (err) {
     box.style.borderColor = '#C0392B';
