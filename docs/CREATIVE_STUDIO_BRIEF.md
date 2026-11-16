@@ -1,20 +1,20 @@
 Brand: Old Oak Town (oldoaktown.co.uk)
 
 Colours
-- Oak green #2D5016: main brand colour; backgrounds and headings
-- Forest night #1C2F2B: very dark green from the logo; card backgrounds
-- Logo gold #D9A736: accents, and the word TOWN on dark cards
-- Warm brown #8B4513: accent; rules, labels, highlights
-- Cream #F5F5DC: page and card backgrounds
-- Paper #ECE8E0: softer background for long cards
-- Charcoal #333333: body text
-- White #FFFFFF: text on green
 
+Oak green #2D5016: main brand colour; backgrounds and headings
+Forest night #1C2F2B: very dark green from the logo; card backgrounds
+Logo gold #D9A736: accents, and the word TOWN on dark cards
+Warm brown #8B4513: accent; rules, labels, highlights
+Cream #F5F5DC: page and card backgrounds
+Paper #ECE8E0: softer background for long cards
+Charcoal #333333: body text
+White #FFFFFF: text on green
 Fonts (confirmed; same pair on homepage, blog and directory)
-- Headlines: Instrument Serif 400; italic for emphasis. Fallback Georgia, serif.
-- Body: DM Sans 400, 500, 600. Fallback system-ui, sans-serif.
-- No other typefaces in creative work.
 
+Headlines: Instrument Serif 400; italic for emphasis. Fallback Georgia, serif.
+Body: DM Sans 400, 500, 600. Fallback system-ui, sans-serif.
+No other typefaces in creative work.
 Default card: background #F5F5DC, headline #2D5016, accent #8B4513, body #333333
 
 Voice: Community-first, factual and local; never corporate. Grounded in what is actually happening in the area. UK English.
