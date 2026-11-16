@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-16",
+  "generatedAt": "2026-11-16T18:46:49.649Z",
+  "stats": {
+    "totalInQueue": 147,
+    "candidates": 2,
+    "topPicks": 2,
+    "skipped": 0,
+    "pruned": 4
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmivgfbvv95cux",
+      "title": "HS2 Old Oak Common breakthrough: design and monitoring notes for tunnel engineers - Geomechanics.io",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPeDhXZV8wQ1dYazhCcU5oTER3bEZoSExBQlZEbEtkUVA5ZVZTZ0dyNGIzUG9ySkdVSklrQm5tcE1lck1oU3ViTDJTT3BiMlg2WEtPSHNaYUcwcVlOajRSSXdFa1JhbkRoNU9NVl9MQk9RQlEwY1lrd3ZEdElId1hWQkNnNHRfdEdId3JJWVVNSEpzc2lsLTBPRkdiLVFwTU5zNWNBV19RUUtraHlNTEtvX3RIMEdINktJd3pKblF3?oc=5",
+      "content": "HS2 Old Oak Common breakthrough: design and monitoring notes for tunnel engineers Geomechanics.io",
+      "contentSnippet": "HS2 Old Oak Common breakthrough: design and monitoring notes for tunnel engineers Geomechanics.io",
+      "publishDate": "Wed, 04 Nov 2026 08:00:00 GMT",
+      "author": "Google News — HS2",
+      "source": {
+        "name": "Google News — HS2",
+        "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "hs2",
+        "priority": "medium"
+      },
+      "tags": [
+        "hs2",
+        "transport",
+        "infrastructure"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-16T17:42:39.718Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 20,
+      "editorialNote": "**Editorial Note:**\n\nThis technical update signals real progress on HS2's tunnel work beneath Old Oak. For residents, it means the project is advancing toward the thousands of jobs and homes promised. **To add:** local employment timelines, impact on nearby streets during construction, and housing completion dates. **Check:** confirm tunnel safety protocols and community consultation schedule."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmivgfbvv95cux",
+      "title": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke - Community Impact",
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhZRm1Ba1B4YzJqc2pud1BKT0RIVVVjQll6alNQS1Q2b2I2cUM3c3hjVlhJdHZ0VUZ4RGIwNURpUU5OS2gyemJIZUd0NjI5dTVOb28zMzQweGlxRF9TV2lKR3lONXNmOWdrVC1GTHp5d3JyRDJzdlhoU01PWEt5UVNhWjBIQlo5N1pvSEVLZWUxc2NhYmVZcWItTUQ1TWN2aDBNVWdUVFhMU0E0azR3MlJ1cEhYanI5Vng4VUlR?oc=5",
+      "content": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke Community Impact",
+      "contentSnippet": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke Community Impact",
+      "publishDate": "Fri, 06 Nov 2026 21:15:00 GMT",
+      "author": "Google News — Local Community",
+      "source": {
+        "name": "Google News — Local Community",
+        "url": "https://news.google.com/rss/search?q=(%22Old%20Oak%22%20OR%20%22Harlesden%22%20OR%20%22Wormwood%20Scrubs%22%20OR%20%22North%20Acton%22)%20community%20OR%20residents%20OR%20council%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "community",
+        "priority": "medium"
+      },
+      "tags": [
+        "community",
+        "local"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-16T17:42:46.439Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 11,
+      "editorialNote": "**Editorial Note:**\n\nThis appears to be a Roanoke, Virginia story—not relevant to Old Oak Common, West London. We should verify the source and remove if misfiled. If submitting local accommodation features, focus on how Old Oak's regeneration is creating new hospitality opportunities and housing types that serve our community's growth targets. Priority: confirm any new guesthouses/mixed-use developments aligned with our 2038 plan."
+    }
+  ],
+  "skipped": []
+}
