@@ -27,7 +27,9 @@ Default card: background Cream, headline Oak green, accent Warm brown, body Char
 
 UI-only status colours (admin tools, forms): amber `#D4860A` (warnings), red `#C0392B` (errors/reject).
 
-> **Legacy tokens:** the blog, directory and admin pages still use an older green set (`#1C3A0E`, `#4C8A35`, `#2F6020`, `#D4E8C8`, `#F0F7EB`, `#FAF8F4`). Do not use these in new work; migrate them to the palette above when a page is next edited.
+Derived neutrals (not brand colours, used for UI only): muted text `#555555`, hairline borders `#DDD8C8`.
+
+> **Migrated (Nov 2026):** the blog, directory, homepage, admin pages, weekly edition email, outreach leaflets and promo-image script now use this palette. Still on the old green set: the social-agent generator, `scripts/sites/`, `lib/handlers/agent-data.js`, `scripts/site-health-monitor.js`, `scripts/seo-gap-finder.js` and the 10 pilot images already rendered in `images/promo/` (re-run `business-promo-pilot.js` to refresh them).
 
 **Fonts** (same pair on the homepage, blog, directory and promo images):
 - Headlines: `Instrument Serif` 400, italic for emphasis and hero text (fallback Georgia, serif)

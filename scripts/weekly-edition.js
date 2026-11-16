@@ -127,38 +127,38 @@ async function writeIntro(items) {
 
 function renderHtml(edition) {
   const { subject, intro, news, events, videos, date } = edition;
-  const h2 = t => `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:22px;color:#1C3A0E;margin:32px 0 12px;border-bottom:2px solid #D4E8C8;padding-bottom:6px">${t}</h2>`;
-  const link = (u, t) => `<a href="${esc(u)}" style="color:#2F6020;text-decoration:underline">${t}</a>`;
+  const h2 = t => `<h2 style="font-family:Georgia,serif;font-weight:normal;font-size:22px;color:#2D5016;margin:32px 0 12px;border-bottom:2px solid #ECE8E0;padding-bottom:6px">${t}</h2>`;
+  const link = (u, t) => `<a href="${esc(u)}" style="color:#1C2F2B;text-decoration:underline">${t}</a>`;
 
   const newsHtml = news.length
     ? news.map(n => `
       <div style="margin:0 0 18px">
-        <div style="font-size:12px;color:#6B7B5E;text-transform:uppercase;letter-spacing:.04em">${esc(n.category)} · ${esc(niceDate(n.date))}</div>
+        <div style="font-size:12px;color:#555555;text-transform:uppercase;letter-spacing:.04em">${esc(n.category)} · ${esc(niceDate(n.date))}</div>
         <div style="font-size:17px;font-weight:bold;margin:2px 0 4px">${link(n.url, esc(n.title))}</div>
-        ${n.excerpt ? `<div style="font-size:15px;color:#0F1A0A">${esc(n.excerpt)}</div>` : ''}
-        <div style="font-size:12px;color:#6B7B5E;margin-top:4px">via ${esc(n.source)}</div>
+        ${n.excerpt ? `<div style="font-size:15px;color:#333333">${esc(n.excerpt)}</div>` : ''}
+        <div style="font-size:12px;color:#555555;margin-top:4px">via ${esc(n.source)}</div>
       </div>`).join('')
-    : '<p style="color:#6B7B5E">A quiet week for news. We will be back with more soon.</p>';
+    : '<p style="color:#555555">A quiet week for news. We will be back with more soon.</p>';
 
   const eventsHtml = events.length
     ? events.map(e => `
       <div style="margin:0 0 14px">
-        <div style="font-size:12px;color:#6B7B5E">${esc(niceDate(e.date))}${e.startTime ? ' · ' + esc(e.startTime) : ''}</div>
+        <div style="font-size:12px;color:#555555">${esc(niceDate(e.date))}${e.startTime ? ' · ' + esc(e.startTime) : ''}</div>
         <div style="font-size:16px;font-weight:bold">${link(e.url, esc(e.title))}</div>
-        <div style="font-size:14px;color:#0F1A0A">${esc([e.venue, e.address].filter(Boolean).join(' — '))}</div>
+        <div style="font-size:14px;color:#333333">${esc([e.venue, e.address].filter(Boolean).join(' — '))}</div>
       </div>`).join('')
-    : '<p style="color:#6B7B5E">No events listed for the next two weeks. Know of one? Reply and tell us.</p>';
+    : '<p style="color:#555555">No events listed for the next two weeks. Know of one? Reply and tell us.</p>';
 
   const videosHtml = videos.length
-    ? videos.map(v => `<p style="margin:0 0 10px">▶ ${link(v.url, esc(v.title))} <span style="color:#6B7B5E;font-size:13px">— ${esc(v.channel)}</span></p>`).join('')
+    ? videos.map(v => `<p style="margin:0 0 10px">▶ ${link(v.url, esc(v.title))} <span style="color:#555555;font-size:13px">— ${esc(v.channel)}</span></p>`).join('')
     : '';
 
   return `<!doctype html>
-<html><body style="margin:0;background:#FAF8F4;font-family:'DM Sans',Arial,sans-serif;color:#0F1A0A">
+<html><body style="margin:0;background:#F5F5DC;font-family:'DM Sans',Arial,sans-serif;color:#333333">
 <div style="max-width:620px;margin:0 auto;background:#ffffff">
-  <div style="background:#1C3A0E;color:#ffffff;padding:24px 28px">
+  <div style="background:#2D5016;color:#ffffff;padding:24px 28px">
     <div style="font-family:Georgia,serif;font-style:italic;font-size:28px">The Old Oak Weekly</div>
-    <div style="font-size:13px;color:#D4E8C8;margin-top:4px">Old Oak Common &amp; Park Royal · ${esc(niceDate(date))}</div>
+    <div style="font-size:13px;color:#ECE8E0;margin-top:4px">Old Oak Common &amp; Park Royal · ${esc(niceDate(date))}</div>
   </div>
   <div style="padding:24px 28px">
     <p style="font-size:16px;line-height:1.5;margin:0">${esc(intro)}</p>
@@ -167,7 +167,7 @@ function renderHtml(edition) {
     ${videos.length ? h2('Worth watching') + videosHtml : ''}
     <p style="margin:32px 0 0;font-size:14px">${link(SITE, 'See everything on oldoaktown.co.uk')}</p>
   </div>
-  <div style="background:#F0F7EB;padding:16px 28px;font-size:12px;color:#6B7B5E">
+  <div style="background:#ECE8E0;padding:16px 28px;font-size:12px;color:#555555">
     Old Oak Town curates local news, events and video from public sources and links back to the original publisher. Subject: ${esc(subject)}
   </div>
 </div>
