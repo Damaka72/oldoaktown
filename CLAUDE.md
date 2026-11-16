@@ -10,24 +10,33 @@
 
 ## Brand identity
 
-| Token | Value |
-|---|---|
-| Primary (header/hero) | `#1C3A0E` (deep forest green) |
-| Accent (buttons/highlights) | `#4C8A35` (bright green) |
-| Mid green | `#2F6020` |
-| Pale green | `#D4E8C8` |
-| Ghost green (bg) | `#F0F7EB` |
-| Cream (page bg) | `#FAF8F4` |
-| Ink (text) | `#0F1A0A` |
-| Muted (labels) | `#6B7B5E` |
-| Border | `#DDE8D4` |
-| Amber (warnings) | `#D4860A` |
-| Red (errors/reject) | `#C0392B` |
+The palette comes from the logo and the homepage (`index.html`). It is also the Creative Studio brief.
 
-**Fonts:**
-- Headings: `Instrument Serif` (italic for hero text)
-- Body: `DM Sans`
-- Monospace/code: `Geist Mono`
+| Token | Value | Use |
+|---|---|---|
+| Oak green | `#2D5016` | Main brand colour: backgrounds and headings |
+| Forest night | `#1C2F2B` | Very dark green from the logo: card backgrounds |
+| Logo gold | `#D9A736` | Accents, and the word TOWN on dark cards |
+| Warm brown | `#8B4513` | Accent: rules, labels, highlights |
+| Cream | `#F5F5DC` | Page and card backgrounds |
+| Paper | `#ECE8E0` | Softer background for long cards |
+| Charcoal | `#333333` | Body text |
+| White | `#FFFFFF` | Text on green |
+
+Default card: background Cream, headline Oak green, accent Warm brown, body Charcoal. **Never put brown text on green** (too faint to read).
+
+UI-only status colours (admin tools, forms): amber `#D4860A` (warnings), red `#C0392B` (errors/reject).
+
+> **Legacy tokens:** the blog, directory and admin pages still use an older green set (`#1C3A0E`, `#4C8A35`, `#2F6020`, `#D4E8C8`, `#F0F7EB`, `#FAF8F4`). Do not use these in new work; migrate them to the palette above when a page is next edited.
+
+**Fonts** (same pair on the homepage, blog, directory and promo images):
+- Headlines: `Instrument Serif` 400, italic for emphasis and hero text (fallback Georgia, serif)
+- Body: `DM Sans` 400, 500, 600 (fallback system-ui, sans-serif)
+- Monospace/code: `Geist Mono`, for admin and code tools only, never creative work
+
+**Logo:** a tree with green and gold leaves and a brown trunk, over 'OLD OAK' in white capitals and 'TOWN' in gold, on a very dark green background. Original: `images/logo.png` (also in Drive, `99 Brand Assets`). It was made with AI and is the one exception to the no-AI-imagery rule.
+
+**Imagery rules:** typographic cards or real local photos only. No AI imagery or stock footage in posts, photos or video. Where people appear, show a mix of nationalities and ethnicities.
 
 **Tone:** Warm, community-focused, journalistic. Trustworthy and local, not corporate. The tree emoji 🌳 is the site's signature icon.
 
