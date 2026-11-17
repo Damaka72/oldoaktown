@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-17",
+  "generatedAt": "2026-11-17T17:45:59.638Z",
+  "stats": {
+    "totalInQueue": 146,
+    "candidates": 2,
+    "topPicks": 2,
+    "skipped": 0,
+    "pruned": 2
+  },
+  "topPicks": [
+    {
+      "id": "https-www-ianvisits-co-uk-articles-euston-stations",
+      "title": "Euston station’s disused Platform 17 gets a new job hauling HS2 spoil",
+      "url": "https://www.ianvisits.co.uk/articles/euston-stations-disused-platform-17-gets-a-new-job-hauling-hs2-spoil-94169/",
+      "content": "Euston station is getting heavy-duty freight trains again, as a dedicated route has opened to carry spoil out of the HS2 construction site. Rail Minister and Leader of Camden Council waving off freight train at Euston (c) HS2 Now that it’s open, trains from Euston’s now-disused Platform 17 will remove up to 170,000 tonnes of excavated material by rail, including 35,000 tonnes already moved during trials. HS2 says the programme will avoid more than 10,000 lorry journeys on roads around Euston and across London. Rail Minister Lord Hendy and Camden Council’s new leader, Cllr James Slater, were at Euston station on Monday (16th November) to see off a freight train hauled by Green Progressor. The trains run to Forders Sidings in Bedfordshire, where the excavated material will be reused at the Stewartby Brickworks development. HS2’s construction partner, the Mace Dragados joint venture, has begun digging down around seven metres to the level where the new station’s platforms will be built. Around 135,000 tonnes of material are expected to leave Euston by rail over the next ten months. When needed, GB Railfreight will run up to two trains a day alongside Euston’s passenger services. Each will have two locomotives and up to 12 wagons, carrying around 715 tonnes, equivalent to about 45 lorry loads. Trials between February and September showed the trains could carry more material than originally expected and run reliably around the passenger timetable. Slater said Camden had been calling for construction material to be removed from Euston by rail for years. “Taking more than 10,000 lorries off Camden&#8217;s roads is a significant achievement that will reduce disruption for our residents and businesses, improve air quality and help cut carbon emissions.” HS2 has already used freight trains to deliver tunnel segments to West Ruislip and Willesden and to remove millions of tonnes of excavated material from construction sites around Old Oak Common. Track 17 is expected to remain available until early 2029, and HS2 is looking at whether the loading facility could also serve other construction work around Euston. You can track train movements on RealTimeTrains, but note that they show up in the timetable as reserved spaces, but that doesn’t always mean a train will run, as they run as needed. If you’re using RealTimeTrains, search for Euston station, go to Detailed, then in the TOC menu select ZZ and set the time to All Day. Then you’re looking for the MBR (Materials by Train) service, and that&#8217;s the HS2 spoil trains.",
+      "contentSnippet": "Euston station is getting heavy-duty freight trains again, as a dedicated route has opened to carry spoil out of the HS2 construction site. Rail Minister and Leader of Camden Council waving off freight train at Euston (c) HS2 Now that it’s open, trains from Euston’s now-disused Platform 17 will remo",
+      "publishDate": "Tue, 17 Nov 2026 09:45:18 +0000",
+      "author": "ianVisits",
+      "source": {
+        "name": "Ian Visits",
+        "url": "https://www.ianvisits.co.uk/feed/",
+        "category": "transport",
+        "priority": "medium"
+      },
+      "tags": [
+        "london",
+        "transport",
+        "local"
+      ],
+      "imageUrl": "https://www.ianvisits.co.uk/articles/wp-content/uploads/sites/2/2026/11/Rail-Minister-and-Leader-of-Camden-Council-waving-off-freight-train-at-Euston-1024x683.jpg",
+      "metadata": {
+        "fetchedAt": "2026-11-17T17:16:22.901Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 36,
+      "editorialNote": "**Editorial Note:**\n\nThis matters: Old Oak's freight route will handle similar HS2 spoil removal—efficiency here directly impacts local air quality and construction timelines. Add context: compare Euston's capacity with Old Oak Common's projected volumes; clarify if our route opens on schedule. Fact-check: confirm Platform 17's operational status and current freight tonnage estimates."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiakfvx3lxte8",
+      "title": "HS2 move Euston spoil by rail - Agg-Net",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE81Um9ndDk0MUZDa29GNnlCX3N4SEpYUWt3alQ0VWdwTlFtTHVXaDlqNjFscWp5eFc0RDdLZFVMb1FoMEN1S0NqTnNrdGxVWjVvbThWeDYyTk9VSURuNl9JYU02YWZlQW81RUE?oc=5",
+      "content": "HS2 move Euston spoil by rail Agg-Net",
+      "contentSnippet": "HS2 move Euston spoil by rail Agg-Net",
+      "publishDate": "Tue, 17 Nov 2026 15:38:56 GMT",
+      "author": "Google News — HS2",
+      "source": {
+        "name": "Google News — HS2",
+        "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "hs2",
+        "priority": "medium"
+      },
+      "tags": [
+        "hs2",
+        "transport",
+        "infrastructure"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-17T17:16:25.565Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 19,
+      "editorialNote": "**Editorial Note:**\n\nHS2's rail haulage of Euston spoil affects Old Oak Common—our hub station handles similar logistics. We need: tonnage volumes, timeline, local air-quality/noise impact. Verify: does this reduce road congestion versus earlier plans? Confirm how this supports our 19,850-home target."
+    }
+  ],
+  "skipped": []
+}
