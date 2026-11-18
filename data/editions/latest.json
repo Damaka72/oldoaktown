@@ -1,9 +1,25 @@
 {
-  "date": "2026-11-16",
-  "generatedAt": "2026-11-16T19:01:30.697Z",
-  "subject": "Old Oak Common & Park Royal Weekly Update",
-  "intro": "This week brings news of progress at Old Oak Common station and service changes across the Elizabeth line. Here's what you need to know about your area.",
+  "date": "2026-11-18",
+  "generatedAt": "2026-11-18T18:55:48.273Z",
+  "subject": "HS2 tunnels through, Elizabeth line gets four-legged help",
+  "intro": "This week brings updates on HS2's progress at Old Oak Common and work at Euston station. There's also news about Elizabeth line services and a special new inspector on the job.",
   "news": [
+    {
+      "title": "Euston station’s disused Platform 17 gets a new job hauling HS2 spoil",
+      "excerpt": "Euston station is getting heavy-duty freight trains again, as a dedicated route has opened to carry spoil out of the HS2 construction site. Rail Minister and Leader of Camden Council waving off freigh",
+      "category": "Transport",
+      "date": "2026-11-17",
+      "source": "Ian Visits",
+      "url": "https://www.ianvisits.co.uk/articles/euston-stations-disused-platform-17-gets-a-new-job-hauling-hs2-spoil-94169/"
+    },
+    {
+      "title": "HS2 move Euston spoil by rail - Agg-Net",
+      "excerpt": "HS2 move Euston spoil by rail Agg-Net",
+      "category": "HS2 Updates",
+      "date": "2026-11-17",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE81Um9ndDk0MUZDa29GNnlCX3N4SEpYUWt3alQ0VWdwTlFtTHVXaDlqNjFscWp5eFc0RDdLZFVMb1FoMEN1S0NqTnNrdGxVWjVvbThWeDYyTk9VSURuNl9JYU02YWZlQW81RUE?oc=5"
+    },
     {
       "title": "The Elizabeth line’s newest rail inspector has four legs and a laser",
       "excerpt": "If you spot a robot dog on the Elizabeth line, don’t worry, it’s just sniffing out problems on the line. (c) Createc The four-legged robot, named Spot, was built by Boston Dynamics and is taking part",
@@ -35,43 +51,9 @@
       "date": "2026-11-09",
       "source": "Google News — HS2",
       "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE52dWtWcC01X0l3Vm40TWQyZGNnXzRjSnFFRWlvYm50dUxFY191WjFuRTAxU0d0R2R5ZmZ6b1dkR094dWl4ZGwtQQ?oc=5"
-    },
-    {
-      "title": "No Elizabeth line between Stratford and Romford over Christmas",
-      "excerpt": "Major railway works in East London mean there will be no Elizabeth line services between Stratford and Romford over Christmas. Engineering works on Anglia route (c) Network Rail The closure is due to",
-      "category": "Transport",
-      "date": "2026-11-09",
-      "source": "Ian Visits",
-      "url": "https://www.ianvisits.co.uk/articles/no-elizabeth-line-between-stratford-and-romford-over-christmas-93508/"
-    },
-    {
-      "title": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke - Community Impact",
-      "excerpt": "Historic charm meets modern luxury at Old Oak Street Cottage & Guesthouse in Roanoke Community Impact",
-      "category": "Community",
-      "date": "2026-11-06",
-      "source": "Google News — Local Community",
-      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQTXhZRm1Ba1B4YzJqc2pud1BKT0RIVVVjQll6alNQS1Q2b2I2cUM3c3hjVlhJdHZ0VUZ4RGIwNURpUU5OS2gyemJIZUd0NjI5dTVOb28zMzQweGlxRF9TV2lKR3lONXNmOWdrVC1GTHp5d3JyRDJzdlhoU01PWEt5UVNhWjBIQlo5N1pvSEVLZWUxc2NhYmVZcWItTUQ1TWN2aDBNVWdUVFhMU0E0azR3MlJ1cEhYanI5Vng4VUlR?oc=5"
     }
   ],
   "events": [
-    {
-      "title": "Lets Talk : Grooming and keeping children safe",
-      "date": "2026-11-17",
-      "startTime": null,
-      "venue": "Old Oak Family Hub",
-      "address": "76 Braybrook Street, London, W12 0AP",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/lets-talk-grooming-and-keeping-children-safe-tickets-2004030033778"
-    },
-    {
-      "title": "W3 Community Orchard Programme",
-      "date": "2026-11-17",
-      "startTime": null,
-      "venue": "North Acton Pavilion",
-      "address": "Eastfields Road, London, W3",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345604632"
-    },
     {
       "title": "Ghostsigns of Willesden Green – bygone brands and businesses",
       "date": "2026-11-19",
@@ -107,6 +89,24 @@
       "address": "1 Victoria Road, London, W3 6FA",
       "category": "community",
       "url": "https://www.eventbrite.co.uk/e/cypher-chill-tickets-2003733081586"
+    },
+    {
+      "title": "Guided Walk: Jewish Communal Leaders",
+      "date": "2026-11-22",
+      "startTime": null,
+      "venue": "Willesden Jewish Cemetery",
+      "address": "Beaconsfield Road, London, NW10 2JE",
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481"
+    },
+    {
+      "title": "CNWL Brent Community Month event",
+      "date": "2026-11-27",
+      "startTime": null,
+      "venue": "Church End and Roundwood Unity Centre",
+      "address": "103 Church Road, London, NW10 9EG",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/cnwl-brent-community-month-event-tickets-2003814318568"
     }
   ],
   "videos": [
