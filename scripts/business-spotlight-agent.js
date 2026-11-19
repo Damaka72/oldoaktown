@@ -2,10 +2,10 @@
  * Business Spotlight Agent — Old Oak Town
  *
  * Runs after a business listing is approved. Researches the business
- * (submitted fields + its own website, when it has one), drafts a warm
- * newsletter spotlight paragraph and a header-image prompt using Claude,
- * and saves the result to data/review-queue/business-spotlights/ for
- * human review. Per CLAUDE.md, HITL is non-negotiable — this script
+ * (submitted fields + candidate photos from its own website), builds a
+ * newsletter spotlight paragraph and social caption from the listing's own
+ * fields (no AI, no API cost), and saves the result to
+ * data/review-queue/business-spotlights/ for human review. Per CLAUDE.md, HITL is non-negotiable — this script
  * never publishes anything on its own.
  *
  * Triggered by:
@@ -17,7 +17,6 @@
  */
 
 const { createClient } = require('@supabase/supabase-js');
-const Anthropic = require('@anthropic-ai/sdk');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
@@ -28,7 +27,6 @@ const path = require('path');
 // keeps this workflow from needing the far more powerful service-role
 // secret at all.
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const OUTPUT_DIR = path.join(__dirname, '../data/review-queue/business-spotlights');
 
@@ -98,40 +96,65 @@ function extractImageUrls(html, baseUrl) {
         .slice(0, 8);
 }
 
-async function draftSpotlight(business, websiteExcerpt) {
-    const response = await client.messages.create({
-        model: 'claude-sonnet-5',
-        max_tokens: 1000,
-        system: 'You write for Old Oak Town, a hyperlocal community newsletter covering the Old Oak Common regeneration project in West London. Tone: warm, community-focused, journalistic — trustworthy and local, not corporate. Respond with valid JSON only, no markdown.',
-        messages: [{
-            role: 'user',
-            content: `Draft a "Business Spotlight" for our newsletter and directory.
+const DIRECTORY_URL = 'https://www.oldoaktown.co.uk/business-directory.html';
 
-BUSINESS (submitted details — treat as ground truth):
-Name: ${business.business_name}
-Category: ${business.category}
-Description: ${business.description || 'Not provided'}
-Address: ${business.address || 'Not provided'}, ${business.postcode || ''}
-Phone: ${business.phone || 'Not provided'}
-Website: ${business.website || 'Not provided'}
+// Must match slugify() in business-directory.html so links open the listing.
+function slugify(name) {
+    return String(name).toLowerCase().replace(/&/g, ' and ').replace(/['’]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
 
-${websiteExcerpt ? `EXTRA CONTEXT from their own website (use only facts consistent with the submitted details above; do not invent services or claims not supported by either source):\n${websiteExcerpt}` : 'No website content available — use only the submitted details above.'}
+function clean(s) {
+    return String(s || '').replace(/^["“\s]+|["”\s]+$/g, '').replace(/\s+/g, ' ').trim();
+}
 
-Return JSON with this exact structure:
-{
-  "headline": "short, warm headline for the spotlight, e.g. 'Business Spotlight: ...'",
-  "paragraph": "120-150 word newsletter paragraph in Old Oak Town's voice, ending with how readers can find/contact them",
-  "social_caption": "one short caption (under 280 characters) suitable for Instagram/Facebook, tree emoji optional",
-  "image_prompt": "detailed prompt for a header/spotlight image — scene, style, mood, matching a warm community-journalism aesthetic in deep forest green (#1C3A0E) and cream tones, no text in the image. Used as a fallback if no real photo of the business is available."
-}`
-        }],
-    });
-
-    try {
-        return JSON.parse(response.content[0].text.trim());
-    } catch {
-        throw new Error(`Claude response was not valid JSON: ${response.content[0].text.slice(0, 200)}`);
+// First whole sentences of the owner's own description, max ~240 chars.
+function blurb(description) {
+    const text = clean(description);
+    if (!text) return '';
+    const sentences = text.match(/[^.!?]+[.!?]+(\s|$)|[^.!?]+$/g) || [text];
+    let out = '';
+    for (const s of sentences) {
+        if ((out + s).trim().length > 200 && out) break;
+        out += s;
     }
+    out = out.trim();
+    if (out.length > 240) out = out.slice(0, 237).replace(/\s+\S*$/, '') + '…';
+    return /[.!?…]$/.test(out) ? out : out + '.';
+}
+
+// No AI: the draft is built only from the listing's own submitted fields, so
+// it costs nothing, cannot invent claims, and matches the curate-don't-write
+// rule in CLAUDE.md. A human still reviews and edits before anything is used.
+function draftSpotlight(business) {
+    const name = business.business_name;
+    const about = blurb(business.description);
+    const place = [clean(business.address).replace(/,\s*GB\.?$/i, ''), clean(business.postcode)].filter(Boolean).join(', ');
+    const link = `${DIRECTORY_URL}#${slugify(name)}`;
+    const site = clean(business.website);
+
+    const paragraph = [
+        `${name} is one of the local businesses listed in the Old Oak Town directory.`,
+        about,
+        place && `You'll find them at ${place}.`,
+        business.opening_hours && `Opening hours: ${clean(business.opening_hours)}.`,
+        site && `More at ${site}.`,
+        `See the full listing: ${link}`,
+    ].filter(Boolean).join(' ');
+
+    const social_caption = [
+        `🌳 Local business spotlight: ${name}`,
+        about,
+        place && `📍 ${place}`,
+        `Full listing: ${link}`,
+    ].filter(Boolean).join('\n');
+
+    return {
+        headline: `Business Spotlight: ${name}`,
+        paragraph,
+        social_caption,
+        imageNote: 'No AI imagery. Use a real photo from candidateImages (check the owner is happy), one supplied by the owner, or the branded typographic tile.',
+    };
 }
 
 async function notifyAdmin(business, draft, candidateImages) {
@@ -151,7 +174,7 @@ async function notifyAdmin(business, draft, candidateImages) {
 <h3>${draft.headline}</h3>
 <p>${draft.paragraph}</p>
 <p><em>Social caption:</em> ${draft.social_caption}</p>
-<p><em>Image prompt:</em> ${draft.image_prompt}</p>
+<p><em>Image:</em> ${draft.imageNote}</p>
 ${candidateImages?.length ? `<p><em>Candidate real photos from their site:</em><br>${candidateImages.map(src => `<a href="${src}">${src}</a>`).join('<br>')}</p>` : ''}
 <hr>
 <p>Waiting in data/review-queue/business-spotlights/ for human review — nothing has been published.</p>`,
@@ -178,7 +201,7 @@ async function main() {
     console.log(research.text ? '🔍 Pulled extra context from business website.' : '🔍 No website on file — drafting from submitted details only.');
     if (research.images.length) console.log(`🖼️  Found ${research.images.length} candidate photo(s) on their site.`);
 
-    const draft = await draftSpotlight(business, research.text);
+    const draft = draftSpotlight(business);
 
     if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
     fs.writeFileSync(outputPath, JSON.stringify({
