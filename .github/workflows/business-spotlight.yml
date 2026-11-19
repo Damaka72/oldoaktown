@@ -20,12 +20,11 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund @anthropic-ai/sdk @supabase/supabase-js nodemailer
+        run: npm install --no-audit --no-fund @supabase/supabase-js nodemailer
 
       - name: Draft business spotlight
         env:
           BUSINESS_ID: ${{ github.event.client_payload.businessId || github.event.inputs.businessId }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
