@@ -81,57 +81,6 @@
       "status": "upcoming"
     },
     {
-      "id": "eb-2004030033778",
-      "title": "Lets Talk : Grooming and keeping children safe",
-      "date": "2026-11-17",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Old Oak Family Hub",
-        "address": "76 Braybrook Street, London, W12 0AP"
-      },
-      "description": "Join us for an open and informative conversation for parents, carers and family members, designed to raise awareness and empower families.",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/lets-talk-grooming-and-keeping-children-safe-tickets-2004030033778",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/lets-talk-grooming-and-keeping-children-safe-tickets-2004030033778",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2003345604632",
-      "title": "W3 Community Orchard Programme",
-      "date": "2026-11-17",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "North Acton Pavilion",
-        "address": "Eastfields Road, London, W3"
-      },
-      "description": "Help design, plant and care for a vibrant new community orchard in North Acton Playing Fields",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345604632",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345604632",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2003934079777",
-      "title": "Ghostsigns of Willesden Green – bygone brands and businesses",
-      "date": "2026-11-19",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Dollis Hill station",
-        "address": "Dollis Hill, Dollis Hill, NW10"
-      },
-      "description": "Willesden High Road offers rich cross-section of old signage that offers a fascinating glimpse into the area's colourful history",
-      "category": "networking",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/ghostsigns-of-willesden-green-bygone-brands-and-businesses-tickets-2003934079777",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/ghostsigns-of-willesden-green-bygone-brands-and-businesses-tickets-2003934079777",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-1996466520105",
       "title": "North Kensington Library Poetry Group",
       "date": "2026-11-19",
@@ -183,6 +132,23 @@
       "source": "auto-eventbrite"
     },
     {
+      "id": "eb-2004169175956",
+      "title": "Trina Marei Presents : A Vincy Independence — Sip & Create . ✨",
+      "date": "2026-11-22",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "NW10 6EU",
+        "address": "Standard Road, London, NW10 6EU"
+      },
+      "description": "Trina Marei presents : Sip n Create . A Vincy Independence celebration honouring our culture, community and heritage through creativity.",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/trina-marei-presents-a-vincy-independence-sip-create-tickets-2004169175956",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/trina-marei-presents-a-vincy-independence-sip-create-tickets-2004169175956",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
       "id": "eb-1996076144481",
       "title": "Guided Walk: Jewish Communal Leaders",
       "date": "2026-11-22",
@@ -230,23 +196,6 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.co.uk/e/sing-gospel-christmas-concert-2026-tickets-2003764692134",
       "sourceUrl": "https://www.eventbrite.co.uk/e/sing-gospel-christmas-concert-2026-tickets-2003764692134",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2003670086165",
-      "title": "Stallholders Booking | Elmwood Christmas Fair 2026",
-      "date": "2026-11-28",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Elmwood Lawn Tennis Club, Holland Road, London, UKLondon, England",
-        "address": "Holland Road, London, NW10 5AJ"
-      },
-      "description": "Calling local businesses, makers & residents! Book your Christmas Fair stall for £10 (+ Eventbrite fee). Tables available. Book now! ️",
-      "category": "networking",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/stallholders-booking-elmwood-christmas-fair-2026-tickets-2003670086165",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/stallholders-booking-elmwood-christmas-fair-2026-tickets-2003670086165",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -353,19 +302,19 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-1993017544125",
-      "title": "Kintsugi Workshop",
-      "date": "2026-12-04",
+      "id": "eb-2005067649314",
+      "title": "Willesden Green Christmas Celebration",
+      "date": "2026-12-05",
       "startTime": null,
       "endTime": null,
       "location": {
-        "name": "Mini Picassos",
-        "address": "8 Station Terrace, London, NW10 5RT"
+        "name": "The Library at Willesden Green",
+        "address": "95 High Road, London, NW10 2SF"
       },
-      "description": "Kintsugi, the ancient craft of mending once loved china with the golden seal. Embrace the imperfections in life and celebrate the history.",
-      "category": "networking",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-1993017544125",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-1993017544125",
+      "description": "Enjoy a Christmas fête, grotto, crafts, storytelling, tree-lighting countdown and community carol sing-along in Willesden Green.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.com/e/willesden-green-christmas-celebration-tickets-2005067649314",
+      "sourceUrl": "https://www.eventbrite.com/e/willesden-green-christmas-celebration-tickets-2005067649314",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -383,6 +332,23 @@
       "category": "tour",
       "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
       "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2004822192145",
+      "title": "VEJ OUT! Improv Comedy night",
+      "date": "2026-12-10",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Foundry Collective",
+        "address": "1 Victoria Road, London, W3 6FA"
+      },
+      "description": "Get ready to laugh your socks off with some wild, unscripted fun at VEJ OUT! Improv Comedy night. Feel free to come join in or just watch!",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/vej-out-improv-comedy-night-tickets-2004822192145",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/vej-out-improv-comedy-night-tickets-2004822192145",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -421,6 +387,23 @@
       "source": "auto-eventbrite"
     },
     {
+      "id": "eb-2003058770704",
+      "title": "Diaspora Africa Media and Community Mixer - The Diaspora Exchange",
+      "date": "2026-12-12",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Library at Willesden Green",
+        "address": "95 High Road, London, NW10 2SF"
+      },
+      "description": "Join Diaspora Africa for an afternoon of conversations, connections and community.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/diaspora-africa-media-and-community-mixer-the-diaspora-exchange-tickets-2003058770704",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/diaspora-africa-media-and-community-mixer-the-diaspora-exchange-tickets-2003058770704",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
       "id": "eb-2002228652799",
       "title": "Next Stop Comedy at Paradise by way of Kensal Green.! - London, England",
       "date": "2026-12-18",
@@ -451,6 +434,23 @@
       "category": "tour",
       "registrationUrl": "https://www.eventbrite.co.uk/e/gentle-walks-jewish-life-heritage-and-hidden-stories-tickets-2001489240196",
       "sourceUrl": "https://www.eventbrite.co.uk/e/gentle-walks-jewish-life-heritage-and-hidden-stories-tickets-2001489240196",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2003345666818",
+      "title": "W3 Community Orchard Programme",
+      "date": "2027-01-19",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "North Acton Pavilion",
+        "address": "Eastfields Road, London, W3"
+      },
+      "description": "Help design, plant and care for a vibrant new community orchard in North Acton Playing Fields",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345666818",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345666818",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },

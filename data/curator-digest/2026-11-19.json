@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-19",
+  "generatedAt": "2026-11-19T17:32:06.155Z",
+  "stats": {
+    "totalInQueue": 153,
+    "candidates": 2,
+    "topPicks": 2,
+    "skipped": 0,
+    "pruned": 1
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmizgfbvv95cux",
+      "title": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads - https://www.facilitiesmanagement-now.com/",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOZS1QWmRqTlV3cmdIYmg4ckIyWGNZLTBaZE9nZHRENVp3NVZJYzBqVFRESmlMcklmcUFrcjRsT2M5cEF6XzMtbUEwSVlyYkQ3UVVjd0tPeDdDTEVUUVVrNFZRaWhpYnVfSnh4Z0Zkc3ZQRTJNOUlSdDZ4SlF2d1lZRUtwR0hBckE1WXRMeFJmOE5kZmhGN0VqZGswOGJlYXhjcnJyU2F2bEh0UU9PLVF1dUhEU3JPbWxEdDhiSlNGa1BzSF9OWlg2VWczSFlUUQ?oc=5",
+      "content": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads https://www.facilitiesmanagement-now.com/",
+      "contentSnippet": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads https://www.facilitiesmanagement-now.com/",
+      "publishDate": "Thu, 19 Nov 2026 09:59:55 GMT",
+      "author": "Google News — HS2",
+      "source": {
+        "name": "Google News — HS2",
+        "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "hs2",
+        "priority": "medium"
+      },
+      "tags": [
+        "hs2",
+        "transport",
+        "infrastructure"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-19T16:57:55.247Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 19,
+      "editorialNote": "**Editorial Note:**\n\nThis HS2 freight rail plan directly affects us—keeping 170,000 tonnes off local streets means fewer lorries, less congestion, and cleaner air around Old Oak. We need local figures: how much construction traffic hits *our* roads currently? Verify: does freight rail launch from Old Oak depot, and when?"
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmiowjbvv95cux",
+      "title": "First pictures after body of newborn baby found in Grand Union Canal near Old Oak Lane - My London",
+      "url": "https://news.google.com/rss/articles/CBMiowJBVV95cUxPYjNJSHlUbFFKVEVfWThseDZndXozdmNQMFQ3SUs3c1Q2UV9peVNoLWZYOUFUWGIyZHNzenhlM2VvVDZaOXhGaTlpX3lpZjNwRmJ2U1VpQl9sUmczUWtUYTk1d25kOGxBVld4dnRMdGpPaUcxVk1YcEtMWHVhUmp3YzV0RVVaeXJISy10OUlvQlZOZ3FJRUtZS2RaZXlMd0xrejFDZTFBQ25seC1lcl9HeldCWjg2bEQwM2I2UUc1ZzFKMXJOeXpzUFg0aWI5d1hSci1acUhBMFl1c3RjbUNUd0UwY1pPZlFWTDFJUEwwUHpUcDFISF9haGwyU1U1V0ZjZFRYODg4ZmgtNGRvTzByZVFOU0ZZTURhS1ZTQ3JndVRGc3PSAZoBQVVfeXFMTlBWYnlJeTFQTjY0ejBZbUFRS3d2ZHp4ZnREb0V2YlRvVS1LdFZwOEhWc1VvOE9PaFFjcWpzV1Vab2Z1VmVsNlNfTk90UFhaLVVmYlY5YVFRMzJnblRrcUlIS01GbnFVNGZUalRXWXhaRG9ZOUl0Ym5Fbk5sS3RWRHFxVkljQy03eXBKeGU0cEVScnJFVldCY2IxUQ?oc=5",
+      "content": "First pictures after body of newborn baby found in Grand Union Canal near Old Oak Lane My London",
+      "contentSnippet": "First pictures after body of newborn baby found in Grand Union Canal near Old Oak Lane My London",
+      "publishDate": "Sat, 07 Nov 2026 07:27:51 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old%20Oak%20Common%22%20OR%20%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20London%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-19T16:57:54.019Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 14,
+      "editorialNote": "**Editorial Note:**\n\nThis tragic incident affects our community's safety perceptions during rapid growth. We should request statement from local police/canal authority on response protocols, and contextualize within broader child welfare services available in Old Oak. Verify: exact location, police case status, any preventative measures announced. Approach with sensitivity—this involves vulnerable families."
+    }
+  ],
+  "skipped": []
+}
