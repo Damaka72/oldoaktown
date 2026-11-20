@@ -81,40 +81,6 @@
       "status": "upcoming"
     },
     {
-      "id": "eb-1996466520105",
-      "title": "North Kensington Library Poetry Group",
-      "date": "2026-11-19",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "North Kensington Library",
-        "address": "108 Ladbroke Grove, London, W11 1PZ"
-      },
-      "description": "A weekly poetry writing group.",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466520105",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466520105",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2003403321264",
-      "title": "I Love Aves Fundraiser",
-      "date": "2026-11-19",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Paradise by way of Kensal Green",
-        "address": "19 Kilburn Lane, London, W10 4AE"
-      },
-      "description": "DJs, dancing and live music at the annual ‘I ❤️ Aves’ fundraiser clubnight",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/i-love-aves-fundraiser-tickets-2003403321264",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/i-love-aves-fundraiser-tickets-2003403321264",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-2003733081586",
       "title": "CYPHER & CHILL",
       "date": "2026-11-20",
@@ -162,6 +128,23 @@
       "category": "tour",
       "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481",
       "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1996466521108",
+      "title": "North Kensington Library Poetry Group",
+      "date": "2026-11-26",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "North Kensington Library",
+        "address": "108 Ladbroke Grove, London, W11 1PZ"
+      },
+      "description": "A weekly poetry writing group.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466521108",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466521108",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -302,6 +285,23 @@
       "source": "auto-eventbrite"
     },
     {
+      "id": "eb-1993017544125",
+      "title": "Kintsugi Workshop",
+      "date": "2026-12-04",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Mini Picassos",
+        "address": "8 Station Terrace, London, NW10 5RT"
+      },
+      "description": "Kintsugi, the ancient craft of mending once loved china with the golden seal. Embrace the imperfections in life and celebrate the history.",
+      "category": "networking",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-1993017544125",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-1993017544125",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
       "id": "eb-2005067649314",
       "title": "Willesden Green Christmas Celebration",
       "date": "2026-12-05",
@@ -332,6 +332,23 @@
       "category": "tour",
       "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
       "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2004260752865",
+      "title": "Fair votes. Fair media. Fair taxes. Can Andy Burnham bring better?",
+      "date": "2026-12-08",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "St Lukes West Kilburn",
+        "address": "Fernhead Road, London, W9 3EH"
+      },
+      "description": "Melissa Benn meets The Better Coalition, the new campaign alliance with 3 game-changing demands of the Burnham government: can they succeed?",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/fair-votes-fair-media-fair-taxes-can-andy-burnham-bring-better-tickets-2004260752865",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/fair-votes-fair-media-fair-taxes-can-andy-burnham-bring-better-tickets-2004260752865",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -387,19 +404,19 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-2003058770704",
-      "title": "Diaspora Africa Media and Community Mixer - The Diaspora Exchange",
-      "date": "2026-12-12",
+      "id": "eb-1984869475031",
+      "title": "Creative Relaxation-Collage at Kensal Library",
+      "date": "2026-12-14",
       "startTime": null,
       "endTime": null,
       "location": {
-        "name": "The Library at Willesden Green",
-        "address": "95 High Road, London, NW10 2SF"
+        "name": "Kensal Library",
+        "address": "20 Golborne Road, London, W10 5PF"
       },
-      "description": "Join Diaspora Africa for an afternoon of conversations, connections and community.",
+      "description": "A relaxed, creative session to help you switch off and recharge.",
       "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/diaspora-africa-media-and-community-mixer-the-diaspora-exchange-tickets-2003058770704",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/diaspora-africa-media-and-community-mixer-the-diaspora-exchange-tickets-2003058770704",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869475031",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869475031",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
