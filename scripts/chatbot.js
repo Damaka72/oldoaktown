@@ -61,7 +61,7 @@
             // List Business
             listBusiness: {
                 patterns: ['list my business', 'advertise', 'add business', 'submit business', 'promote', 'listing'],
-                response: "Great! We have several options to list your business:\n\n**📋 Free Listing** - £0\nBasic directory presence with contact details\n\n**⭐ Featured Listing** - £35/month\nTop placement, logo, enhanced description\n\n**🏆 Premium Package** - £75/month\nHomepage banner, newsletter feature, analytics\n\n**📧 Newsletter Sponsor** - £150/month\nReach 5,000+ subscribers directly\n\n[Submit your business now →](business-submit.html)"
+                response: "Great! We have several options to list your business:\n\n**📋 Free Listing** - £0\nBasic directory presence with contact details\n\n**⭐ Featured Listing** - £35/month\nTop placement, logo, enhanced description\n\n**🏆 Premium Package** - £75/month\nHomepage banner, newsletter feature, analytics\n\n**📧 Newsletter Sponsor** - £150/month\nYour business in front of Old Oak readers every Thursday in The Old Oak Weekly, plus a monthly report.\n\n[Submit your business now →](business-submit.html)"
             },
 
             // Events
