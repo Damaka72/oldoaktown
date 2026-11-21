@@ -81,40 +81,6 @@
       "status": "upcoming"
     },
     {
-      "id": "eb-2003733081586",
-      "title": "CYPHER & CHILL",
-      "date": "2026-11-20",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "The Foundry Collective",
-        "address": "1 Victoria Road, London, W3 6FA"
-      },
-      "description": "Cypher & Chill is the monthly event built purely for the culture, the community, and the love of hip hop.",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/cypher-chill-tickets-2003733081586",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/cypher-chill-tickets-2003733081586",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2004169175956",
-      "title": "Trina Marei Presents : A Vincy Independence — Sip & Create . ✨",
-      "date": "2026-11-22",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "NW10 6EU",
-        "address": "Standard Road, London, NW10 6EU"
-      },
-      "description": "Trina Marei presents : Sip n Create . A Vincy Independence celebration honouring our culture, community and heritage through creativity.",
-      "category": "tour",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/trina-marei-presents-a-vincy-independence-sip-create-tickets-2004169175956",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/trina-marei-presents-a-vincy-independence-sip-create-tickets-2004169175956",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-1996076144481",
       "title": "Guided Walk: Jewish Communal Leaders",
       "date": "2026-11-22",
@@ -166,6 +132,23 @@
       "source": "auto-eventbrite"
     },
     {
+      "id": "eb-2005202872771",
+      "title": "PH Willesden - Rep Your Flag Concert",
+      "date": "2026-11-28",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Library at Willesden Green, High Road, London NW10 2SF, UK",
+        "address": "95 High Road, London, NW10 2SF"
+      },
+      "description": "Bring your flag or wear your country's colours! Join us for an evening of music, live performances, culture and community. DON'T MISS THIS!",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/ph-willesden-rep-your-flag-concert-tickets-2005202872771",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/ph-willesden-rep-your-flag-concert-tickets-2005202872771",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
       "id": "eb-2003764692134",
       "title": "Sing Gospel Christmas Concert 2026",
       "date": "2026-11-28",
@@ -196,23 +179,6 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.com/e/the-art-of-frankincense-tickets-2003512998311",
       "sourceUrl": "https://www.eventbrite.com/e/the-art-of-frankincense-tickets-2003512998311",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2004475605495",
-      "title": "Small Gifts & Christmas Cards Workshop at Acton Light Switch on Market",
-      "date": "2026-11-29",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Acton Market",
-        "address": "The Mount/King Street, London, W3 9NW"
-      },
-      "description": "Make small gifts and handmade cards from reclaimed materials",
-      "category": "networking",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/small-gifts-christmas-cards-workshop-at-acton-light-switch-on-market-tickets-2004475605495",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/small-gifts-christmas-cards-workshop-at-acton-light-switch-on-market-tickets-2004475605495",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -281,6 +247,23 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.co.uk/e/climate-cafe-tickets-1998374185985",
       "sourceUrl": "https://www.eventbrite.co.uk/e/climate-cafe-tickets-1998374185985",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2003015691854",
+      "title": "West London Trade Union Club UK Disability History Month Event",
+      "date": "2026-12-03",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "West London Trade Union Club",
+        "address": "33-35 High Street, London, W3 6ND"
+      },
+      "description": "Join us in West London celebrating UK Disability History Month with two videos and speaker Cllr Atlyn Forde, Ealing Labour Equality Officer",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/west-london-trade-union-club-uk-disability-history-month-event-tickets-2003015691854",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/west-london-trade-union-club-uk-disability-history-month-event-tickets-2003015691854",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
