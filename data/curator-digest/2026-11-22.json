@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-22",
+  "generatedAt": "2026-11-22T16:31:54.154Z",
+  "stats": {
+    "totalInQueue": 159,
+    "candidates": 3,
+    "topPicks": 2,
+    "skipped": 0,
+    "pruned": 0
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmihwfbvv95cux",
+      "title": "HS2 Tunneling Crews Break Through Into Old Oak Common Station - Tunnel Business Magazine",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPaTF5ZkJzc1VqTE9BZUZwRkpQYWl0djVBcHZqVlVrdDFIVGRXTnZxMklKYm9uNkVadHJ4bWJwSGRBM1A1am1BYXZtRzFVaTVMZlpRYWowTmVlbmVlemVHdTFZU01YNkNaQkYyQlFldGFUb1ZtMTlsdUJVSTZ0QVRnMWt5RHFQN0U?oc=5",
+      "content": "HS2 Tunneling Crews Break Through Into Old Oak Common Station Tunnel Business Magazine",
+      "contentSnippet": "HS2 Tunneling Crews Break Through Into Old Oak Common Station Tunnel Business Magazine",
+      "publishDate": "Tue, 10 Nov 2026 08:00:00 GMT",
+      "author": "Google News — Old Oak Common",
+      "source": {
+        "name": "Google News — Old Oak Common",
+        "url": "https://news.google.com/rss/search?q=%22Old%20Oak%20Common%22%20OR%20%22Park%20Royal%22%20OR%20%22Old%20Oak%22%20London%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "general",
+        "priority": "high"
+      },
+      "tags": [
+        "news",
+        "regeneration",
+        "community"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-22T15:48:47.492Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 24,
+      "editorialNote": "**Editorial Note:**\n\nThis breakthrough matters—it's a tangible milestone toward the jobs and homes promised here. Before publishing, verify the breakthrough date and ask: what's next for construction access? Also confirm current resident disruption estimates. Local angle: interview nearby businesses on impact timeline. Keep it concrete for our younger, diverse audience planning their futures here."
+    },
+    {
+      "id": "https-news-google-com-rss-articles-cbmioafbvv95cux",
+      "title": "HS2 starts main Euston spoil trains after trials move 35,000 metric tons - Railway Supply",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOWmtBRjdHWVA5RlVtTTJGTG9seFZrR1NRYzRkbG5qNlZ1YzhyMnNCTXhRbm9iVk5xNVlNNVJUTTdRaC0yMGdDMmh0RWJ2VTBsdlV5a0lKbkJmUjY2ME8xYWU2UWlPLWYtb0lQb2lvZ3VWampaQ3hGcFlLekJUM2ExWUsyV1ZlYjFhZmc0TlozYVBaOGJOWXZJRkJ2X0RTWXZ2?oc=5",
+      "content": "HS2 starts main Euston spoil trains after trials move 35,000 metric tons Railway Supply",
+      "contentSnippet": "HS2 starts main Euston spoil trains after trials move 35,000 metric tons Railway Supply",
+      "publishDate": "Thu, 19 Nov 2026 11:29:11 GMT",
+      "author": "Google News — HS2",
+      "source": {
+        "name": "Google News — HS2",
+        "url": "https://news.google.com/rss/search?q=HS2%20%22Old%20Oak%22%20OR%20Euston%20when%3A14d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "hs2",
+        "priority": "medium"
+      },
+      "tags": [
+        "hs2",
+        "transport",
+        "infrastructure"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-22T15:48:48.784Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 13,
+      "editorialNote": "**Editorial Note:**\n\n**Why it matters:** Euston spoil trains signal HS2 construction momentum affecting local air quality, traffic, and timelines for Old Oak Common station opening.\n\n**Add:** Old Oak's role as a major interchange hub; comparable spoil volumes from our own site; jobs timeline for local residents.\n\n**Fact-check:** Train frequency, noise impact data, and completion dates vs. Local Plan 2038 targets."
+    }
+  ],
+  "skipped": []
+}

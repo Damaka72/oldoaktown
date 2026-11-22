@@ -81,36 +81,19 @@
       "status": "upcoming"
     },
     {
-      "id": "eb-1996076144481",
-      "title": "Guided Walk: Jewish Communal Leaders",
+      "id": "eb-2004169175956",
+      "title": "Trina Marei Presents : A Vincy Independence — Sip & Create . ✨",
       "date": "2026-11-22",
       "startTime": null,
       "endTime": null,
       "location": {
-        "name": "Willesden Jewish Cemetery",
-        "address": "Beaconsfield Road, London, NW10 2JE"
+        "name": "NW10 6EU",
+        "address": "Standard Road, London, NW10 6EU"
       },
-      "description": "Learn remarkable stories of leadership, learning and service exploring the stories in Willesden Jewish Cemetery",
+      "description": "Trina Marei presents : Sip n Create . A Vincy Independence celebration honouring our culture, community and heritage through creativity.",
       "category": "tour",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-1996466521108",
-      "title": "North Kensington Library Poetry Group",
-      "date": "2026-11-26",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "North Kensington Library",
-        "address": "108 Ladbroke Grove, London, W11 1PZ"
-      },
-      "description": "A weekly poetry writing group.",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466521108",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466521108",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/trina-marei-presents-a-vincy-independence-sip-create-tickets-2004169175956",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/trina-marei-presents-a-vincy-independence-sip-create-tickets-2004169175956",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -145,6 +128,23 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.co.uk/e/ph-willesden-rep-your-flag-concert-tickets-2005202872771",
       "sourceUrl": "https://www.eventbrite.co.uk/e/ph-willesden-rep-your-flag-concert-tickets-2005202872771",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2003670086165",
+      "title": "Stallholders Booking | Elmwood Christmas Fair 2026",
+      "date": "2026-11-28",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Elmwood Lawn Tennis Club, Holland Road, London, UKLondon, England",
+        "address": "Holland Road, London, NW10 5AJ"
+      },
+      "description": "Calling local businesses, makers & residents! Book your Christmas Fair stall for £10 (+ Eventbrite fee). Tables available. Book now! ️",
+      "category": "networking",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/stallholders-booking-elmwood-christmas-fair-2026-tickets-2003670086165",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/stallholders-booking-elmwood-christmas-fair-2026-tickets-2003670086165",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -200,19 +200,19 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-2004281178960",
-      "title": "Off-site Tour and Talk honouring Phineas May and the Kitchener Camp",
+      "id": "eb-1287591935139",
+      "title": "Cacao Alchemy Ceremony",
       "date": "2026-11-29",
       "startTime": null,
       "endTime": null,
       "location": {
-        "name": "House of Life Heritage Centre",
-        "address": "Beaconsfield Road, London, NW10 2JE"
+        "name": "Zenw2 Wellness Collective",
+        "address": "Walm Lane, London, NW2 5HT"
       },
-      "description": "Co-organized by Willesden Jewish Cemetery and The Wiener Holocaust Library",
-      "category": "tour",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/off-site-tour-and-talk-honouring-phineas-may-and-the-kitchener-camp-tickets-2004281178960",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/off-site-tour-and-talk-honouring-phineas-may-and-the-kitchener-camp-tickets-2004281178960",
+      "description": "Join Jade Lovel for a special 4-Year Anniversary Cacao Ceremony, celebrating connection, growth & community through a heart-opening journey",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/cacao-alchemy-ceremony-tickets-1287591935139",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/cacao-alchemy-ceremony-tickets-1287591935139",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -268,23 +268,6 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-1993017544125",
-      "title": "Kintsugi Workshop",
-      "date": "2026-12-04",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Mini Picassos",
-        "address": "8 Station Terrace, London, NW10 5RT"
-      },
-      "description": "Kintsugi, the ancient craft of mending once loved china with the golden seal. Embrace the imperfections in life and celebrate the history.",
-      "category": "networking",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-1993017544125",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/kintsugi-workshop-tickets-1993017544125",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-2005067649314",
       "title": "Willesden Green Christmas Celebration",
       "date": "2026-12-05",
@@ -302,36 +285,19 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-1996090137334",
-      "title": "Guided Walk: Hidden Histories: The Stories of Willesden Jewish Cemetery",
-      "date": "2026-12-06",
+      "id": "eb-1998358753827",
+      "title": "Join the Christmas Celebrations with the Royal Philharmonic Orchestra",
+      "date": "2026-12-09",
       "startTime": null,
       "endTime": null,
       "location": {
-        "name": "Willesden Jewish Cemetery",
-        "address": "Beaconsfield Road, London, NW10 2JE"
+        "name": "The Library at Willesden Green",
+        "address": "95 High Road, London, NW10 2SF"
       },
-      "description": "Guided walk at London's most surprising cemetery.",
-      "category": "tour",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-hidden-histories-the-stories-of-willesden-jewish-cemetery-tickets-1996090137334",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2004260752865",
-      "title": "Fair votes. Fair media. Fair taxes. Can Andy Burnham bring better?",
-      "date": "2026-12-08",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "St Lukes West Kilburn",
-        "address": "Fernhead Road, London, W9 3EH"
-      },
-      "description": "Melissa Benn meets The Better Coalition, the new campaign alliance with 3 game-changing demands of the Burnham government: can they succeed?",
+      "description": "This informal and interactive concert will feature orchestral musicians in a fun and festive hour-long musical programme.",
       "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/fair-votes-fair-media-fair-taxes-can-andy-burnham-bring-better-tickets-2004260752865",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/fair-votes-fair-media-fair-taxes-can-andy-burnham-bring-better-tickets-2004260752865",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/join-the-christmas-celebrations-with-the-royal-philharmonic-orchestra-tickets-1998358753827",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/join-the-christmas-celebrations-with-the-royal-philharmonic-orchestra-tickets-1998358753827",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -387,6 +353,23 @@
       "source": "auto-eventbrite"
     },
     {
+      "id": "eb-2003058770704",
+      "title": "Diaspora Africa Media and Community Mixer - The Diaspora Exchange",
+      "date": "2026-12-12",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "The Library at Willesden Green",
+        "address": "95 High Road, London, NW10 2SF"
+      },
+      "description": "Join Diaspora Africa for an afternoon of conversations, connections and community.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/diaspora-africa-media-and-community-mixer-the-diaspora-exchange-tickets-2003058770704",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/diaspora-africa-media-and-community-mixer-the-diaspora-exchange-tickets-2003058770704",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
       "id": "eb-1984869475031",
       "title": "Creative Relaxation-Collage at Kensal Library",
       "date": "2026-12-14",
@@ -421,23 +404,6 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-2001489240196",
-      "title": "Gentle Walks: Jewish Life, Heritage and Hidden Stories",
-      "date": "2027-01-10",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Willesden Jewish Cemetery",
-        "address": "Beaconsfield Road, London, NW10 2JE"
-      },
-      "description": "Special guided walk for those who might find walking challenging but still wish to enjoy the benefits of a leisurely stroll",
-      "category": "tour",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/gentle-walks-jewish-life-heritage-and-hidden-stories-tickets-2001489240196",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/gentle-walks-jewish-life-heritage-and-hidden-stories-tickets-2001489240196",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-2003345666818",
       "title": "W3 Community Orchard Programme",
       "date": "2027-01-19",
@@ -468,23 +434,6 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.co.uk/e/marked-for-death-soundclash-tickets-2004590802051",
       "sourceUrl": "https://www.eventbrite.co.uk/e/marked-for-death-soundclash-tickets-2004590802051",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
-      "id": "eb-2001043660455",
-      "title": "Birdwatch at Willesden Jewish Cemetery",
-      "date": "2027-01-31",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Willesden Jewish Cemetery",
-        "address": "Beaconsfield Road, London, NW10 2JE"
-      },
-      "description": "Join us for Birdwatch: learn about birds, meet our enthusiastic volunteers and enjoy refreshments",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/birdwatch-at-willesden-jewish-cemetery-tickets-2001043660455",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/birdwatch-at-willesden-jewish-cemetery-tickets-2001043660455",
       "status": "upcoming",
       "source": "auto-eventbrite"
     }
