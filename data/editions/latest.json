@@ -1,104 +1,59 @@
 {
-  "date": "2026-11-18",
-  "generatedAt": "2026-11-18T19:00:18.338Z",
-  "subject": "HS2 progress and Elizabeth line updates",
-  "intro": "This week brings news of progress on major transport projects affecting our area. From tunnel breakthroughs to new ways of moving materials, here's what's happening locally.",
+  "date": "2026-11-23",
+  "generatedAt": "2026-11-23T20:42:06.935Z",
+  "subject": "HS2 tunnel work passes halfway point",
+  "intro": "The tunnel boring machines working on HS2's Euston section have reached the halfway mark. Work continues with spoil trains now moving material away from the site.",
   "news": [
     {
-      "title": "Euston station’s disused Platform 17 gets a new job hauling HS2 spoil",
-      "excerpt": "Euston station is getting heavy-duty freight trains again, as a dedicated route has opened to carry spoil out of the HS2 construction site. Rail Minister and Leader of Camden Council waving off freigh",
+      "title": "HS2’s tunnel boring machines are halfway to Euston",
+      "excerpt": "The two machines digging HS2’s tunnels from Old Oak Common are now halfway to Euston, having drilled 2.25 miles of their 4.5-mile journey. The TBM being pushed up to the tunnel starting site in March",
       "category": "Transport",
-      "date": "2026-11-17",
+      "date": "2026-11-23",
       "source": "Ian Visits",
-      "url": "https://www.ianvisits.co.uk/articles/euston-stations-disused-platform-17-gets-a-new-job-hauling-hs2-spoil-94169/"
+      "url": "https://www.ianvisits.co.uk/articles/hs2s-tunnel-boring-machines-are-halfway-to-euston-94341/"
     },
     {
-      "title": "HS2 move Euston spoil by rail - Agg-Net",
-      "excerpt": "HS2 move Euston spoil by rail Agg-Net",
+      "title": "HS2 Euston tunnel reaches halfway mark: 2.25 miles bored under London - Yahoo News UK",
+      "excerpt": "HS2 Euston tunnel reaches halfway mark: 2.25 miles bored under London Yahoo News UK",
       "category": "HS2 Updates",
-      "date": "2026-11-17",
+      "date": "2026-11-23",
       "source": "Google News — HS2",
-      "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE81Um9ndDk0MUZDa29GNnlCX3N4SEpYUWt3alQ0VWdwTlFtTHVXaDlqNjFscWp5eFc0RDdLZFVMb1FoMEN1S0NqTnNrdGxVWjVvbThWeDYyTk9VSURuNl9JYU02YWZlQW81RUE?oc=5"
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9IWFU1eC1HZWd5ZGExX09vNDdzYm1GemJOZXVPdkVIZ1ZpYjJpdEc2OFFnamFSM3l3SWRGbWVDQ1kzMEk5SnF1dGlBaks5ZlVKbzZraFhoZWxidVJpYXF2bUlLcXBWY0ZnLV94WEZrWXpMNmxLdnRRdFg5czB4aEk?oc=5"
     },
     {
-      "title": "The Elizabeth line’s newest rail inspector has four legs and a laser",
-      "excerpt": "If you spot a robot dog on the Elizabeth line, don’t worry, it’s just sniffing out problems on the line. (c) Createc The four-legged robot, named Spot, was built by Boston Dynamics and is taking part",
-      "category": "Transport",
-      "date": "2026-11-12",
-      "source": "Ian Visits",
-      "url": "https://www.ianvisits.co.uk/articles/the-elizabeth-lines-newest-rail-inspector-has-four-legs-and-a-laser-94028/"
-    },
-    {
-      "title": "Almost no Elizabeth line services running on the last weekend of the month",
-      "excerpt": "The Elizabeth line will be largely closed over the final weekend of November as Transport for London (TfL) warns passengers to seek alternative routes. The closure affects most of the line on Saturday",
-      "category": "Transport",
-      "date": "2026-11-11",
-      "source": "Ian Visits",
-      "url": "https://www.ianvisits.co.uk/articles/almost-no-elizabeth-line-services-running-on-the-last-weekend-of-the-month-94001/"
-    },
-    {
-      "title": "HS2 development around Euston could support 6,000 new homes",
-      "excerpt": "More than 6,000 new homes could be built around Euston as part of the HS2 development, with proposals spanning railway land, housing estates, and redevelopment sites from Bloomsbury to Camley Street.",
-      "category": "Transport",
-      "date": "2026-11-10",
-      "source": "Ian Visits",
-      "url": "https://www.ianvisits.co.uk/articles/hs2-development-around-euston-could-support-6000-new-homes-93550/"
-    },
-    {
-      "title": "HS2 celebrates tunnel breakthrough at Old Oak Common station box - Ground Engineering",
-      "excerpt": "HS2 celebrates tunnel breakthrough at Old Oak Common station box Ground Engineering",
+      "title": "HS2’s Euston TBMs Reach Halfway - The Tunnelling Journal",
+      "excerpt": "HS2’s Euston TBMs Reach Halfway The Tunnelling Journal",
       "category": "HS2 Updates",
-      "date": "2026-11-09",
+      "date": "2026-11-23",
       "source": "Google News — HS2",
-      "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE52dWtWcC01X0l3Vm40TWQyZGNnXzRjSnFFRWlvYm50dUxFY191WjFuRTAxU0d0R2R5ZmZ6b1dkR094dWl4ZGwtQQ?oc=5"
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE5sNExEYTVadlBTeWc3NHdmUXRBaDEydmlKR1c3WWg3V2lMN09mVW9NVXdRX2k1eHk3UGFfSlFvM0lXcTNOTnRUcGplQ0Z2cUpzRmVTZk5kMU1ESjlkYks5SUNLMVNzNnlLYlVKYnJR?oc=5"
+    },
+    {
+      "title": "HS2 starts main Euston spoil trains after trials move 35,000 metric tons - Railway Supply",
+      "excerpt": "HS2 starts main Euston spoil trains after trials move 35,000 metric tons Railway Supply",
+      "category": "HS2 Updates",
+      "date": "2026-11-19",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOWmtBRjdHWVA5RlVtTTJGTG9seFZrR1NRYzRkbG5qNlZ1YzhyMnNCTXhRbm9iVk5xNVlNNVJUTTdRaC0yMGdDMmh0RWJ2VTBsdlV5a0lKbkJmUjY2ME8xYWU2UWlPLWYtb0lQb2lvZ3VWampaQ3hGcFlLekJUM2ExWUsyV1ZlYjFhZmc0TlozYVBaOGJOWXZJRkJ2X0RTWXZ2?oc=5"
+    },
+    {
+      "title": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads - New Civil Engineer",
+      "excerpt": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads New Civil Engineer",
+      "category": "HS2 Updates",
+      "date": "2026-11-19",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1ScDN3WDRiT21HSGY3TzJiMFdIakJmcmg1WWd0OFpCVWk5ckd1WlhDcC1UWFRKZS1icGE0dWp1V3h3dmVvdXdZa3Fjc3ZlYmpJeXlscA?oc=5"
+    },
+    {
+      "title": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads - https://www.facilitiesmanagement-now.com/",
+      "excerpt": "HS2 rail freight set to move 170,000t of material avoiding use of Euston roads https://www.facilitiesmanagement-now.com/",
+      "category": "HS2 Updates",
+      "date": "2026-11-19",
+      "source": "Google News — HS2",
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOZS1QWmRqTlV3cmdIYmg4ckIyWGNZLTBaZE9nZHRENVp3NVZJYzBqVFRESmlMcklmcUFrcjRsT2M5cEF6XzMtbUEwSVlyYkQ3UVVjd0tPeDdDTEVUUVVrNFZRaWhpYnVfSnh4Z0Zkc3ZQRTJNOUlSdDZ4SlF2d1lZRUtwR0hBckE1WXRMeFJmOE5kZmhGN0VqZGswOGJlYXhjcnJyU2F2bEh0UU9PLVF1dUhEU3JPbWxEdDhiSlNGa1BzSF9OWlg2VWczSFlUUQ?oc=5"
     }
   ],
   "events": [
-    {
-      "title": "Ghostsigns of Willesden Green – bygone brands and businesses",
-      "date": "2026-11-19",
-      "startTime": null,
-      "venue": "Dollis Hill station",
-      "address": "Dollis Hill, Dollis Hill, NW10",
-      "category": "networking",
-      "url": "https://www.eventbrite.co.uk/e/ghostsigns-of-willesden-green-bygone-brands-and-businesses-tickets-2003934079777"
-    },
-    {
-      "title": "North Kensington Library Poetry Group",
-      "date": "2026-11-19",
-      "startTime": null,
-      "venue": "North Kensington Library",
-      "address": "108 Ladbroke Grove, London, W11 1PZ",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/north-kensington-library-poetry-group-tickets-1996466520105"
-    },
-    {
-      "title": "I Love Aves Fundraiser",
-      "date": "2026-11-19",
-      "startTime": null,
-      "venue": "Paradise by way of Kensal Green",
-      "address": "19 Kilburn Lane, London, W10 4AE",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/i-love-aves-fundraiser-tickets-2003403321264"
-    },
-    {
-      "title": "CYPHER & CHILL",
-      "date": "2026-11-20",
-      "startTime": null,
-      "venue": "The Foundry Collective",
-      "address": "1 Victoria Road, London, W3 6FA",
-      "category": "community",
-      "url": "https://www.eventbrite.co.uk/e/cypher-chill-tickets-2003733081586"
-    },
-    {
-      "title": "Guided Walk: Jewish Communal Leaders",
-      "date": "2026-11-22",
-      "startTime": null,
-      "venue": "Willesden Jewish Cemetery",
-      "address": "Beaconsfield Road, London, NW10 2JE",
-      "category": "tour",
-      "url": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996076144481"
-    },
     {
       "title": "CNWL Brent Community Month event",
       "date": "2026-11-27",
@@ -107,6 +62,51 @@
       "address": "103 Church Road, London, NW10 9EG",
       "category": "community",
       "url": "https://www.eventbrite.co.uk/e/cnwl-brent-community-month-event-tickets-2003814318568"
+    },
+    {
+      "title": "Sing Gospel Christmas Concert 2026",
+      "date": "2026-11-28",
+      "startTime": null,
+      "venue": "St Mary's Church - Acton",
+      "address": "1 Acton High Street, London, W3 9NW",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/sing-gospel-christmas-concert-2026-tickets-2003764692134"
+    },
+    {
+      "title": "PH Willesden - Rep Your Flag Concert",
+      "date": "2026-11-28",
+      "startTime": null,
+      "venue": "The Library at Willesden Green, High Road, London NW10 2SF, UK",
+      "address": "95 High Road, London, NW10 2SF",
+      "category": "community",
+      "url": "https://www.eventbrite.co.uk/e/ph-willesden-rep-your-flag-concert-tickets-2005202872771"
+    },
+    {
+      "title": "The Art of Frankincense",
+      "date": "2026-11-28",
+      "startTime": null,
+      "venue": "Hablo Studio",
+      "address": "Scrubs Lane, London, NW10 6RE",
+      "category": "community",
+      "url": "https://www.eventbrite.com/e/the-art-of-frankincense-tickets-2003512998311"
+    },
+    {
+      "title": "Small Gifts & Christmas Cards Workshop at Acton Light Switch on Market",
+      "date": "2026-11-29",
+      "startTime": null,
+      "venue": "Acton Market",
+      "address": "The Mount/King Street, London, W3 9NW",
+      "category": "networking",
+      "url": "https://www.eventbrite.co.uk/e/small-gifts-christmas-cards-workshop-at-acton-light-switch-on-market-tickets-2004475605495"
+    },
+    {
+      "title": "The Wiener Holocaust Library, Kitchener Camp and Willesden Jewish Cemetery",
+      "date": "2026-11-29",
+      "startTime": null,
+      "venue": "Willesden Jewish Cemetery",
+      "address": "Beaconsfield Road, London, NW10 2JE",
+      "category": "tour",
+      "url": "https://www.eventbrite.co.uk/e/the-wiener-holocaust-library-kitchener-camp-and-willesden-jewish-cemetery-tickets-2003703554269"
     }
   ],
   "videos": [
