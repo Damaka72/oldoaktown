@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-25T18:18:46.944Z",
+  "totalItemsFetched": 3,
+  "bySource": {
+    "Google News — OPDC & Planning": 1,
+    "Google News — Transport": 1,
+    "Google News — Jobs & Business": 1
+  },
+  "byCategory": {
+    "construction": 1,
+    "transport": 1,
+    "employment": 1
+  },
+  "byPriority": {
+    "high": 1,
+    "medium": 2
+  },
+  "itemsInReviewQueue": 168
+}
