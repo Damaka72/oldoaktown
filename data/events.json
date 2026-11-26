@@ -200,6 +200,23 @@
       "source": "auto-eventbrite"
     },
     {
+      "id": "eb-2004943380623",
+      "title": "Old Oak Common Lane closure 2028: Information drop-in events",
+      "date": "2026-12-01",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Old Oak Common station",
+        "address": "Old Oak Common Lane, London, NW10 6DZ"
+      },
+      "description": "HS2 and BBVS are inviting you to attend a drop-in event about the upcoming long-term road closure of Old Oak Common Lane.",
+      "category": "consultation",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/old-oak-common-lane-closure-2028-information-drop-in-events-tickets-2004943380623",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/old-oak-common-lane-closure-2028-information-drop-in-events-tickets-2004943380623",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
       "id": "eb-2001342849337",
       "title": "UAL Halls Tour | The Costume Store | Wednesday 2 December 2026",
       "date": "2026-12-02",
@@ -230,6 +247,23 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.co.uk/e/climate-cafe-tickets-1998374185985",
       "sourceUrl": "https://www.eventbrite.co.uk/e/climate-cafe-tickets-1998374185985",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2005283445767",
+      "title": "Park Royal Design & Manufacturing Tour",
+      "date": "2026-12-04",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "North Acton Square",
+        "address": "North Acton Square, London, W3 6UP"
+      },
+      "description": "Park Royal is full of artists, makers, workshops and some great bars. Join Johnny Brewin and walk around the neighbourhood!",
+      "category": "networking",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/park-royal-design-manufacturing-tour-tickets-2005283445767",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/park-royal-design-manufacturing-tour-tickets-2005283445767",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
@@ -366,6 +400,23 @@
       "category": "tour",
       "registrationUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996783732897",
       "sourceUrl": "https://www.eventbrite.co.uk/e/guided-walk-jewish-communal-leaders-tickets-1996783732897",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-1984869475031",
+      "title": "Creative Relaxation-Collage at Kensal Library",
+      "date": "2026-12-14",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Kensal Library",
+        "address": "20 Golborne Road, London, W10 5PF"
+      },
+      "description": "A relaxed, creative session to help you switch off and recharge.",
+      "category": "community",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869475031",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869475031",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
