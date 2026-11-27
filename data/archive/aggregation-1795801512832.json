@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-27T17:45:12.832Z",
+  "totalItemsFetched": 3,
+  "bySource": {
+    "Google News — Housing": 1,
+    "Google News — Local Community": 2
+  },
+  "byCategory": {
+    "housing": 1,
+    "community": 2
+  },
+  "byPriority": {
+    "medium": 3
+  },
+  "itemsInReviewQueue": 170
+}
