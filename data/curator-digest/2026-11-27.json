@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-27",
+  "generatedAt": "2026-11-27T18:21:46.922Z",
+  "stats": {
+    "totalInQueue": 168,
+    "candidates": 1,
+    "topPicks": 1,
+    "skipped": 0,
+    "pruned": 1
+  },
+  "topPicks": [
+    {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte4",
+      "title": "West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal - CBC",
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE4xemxxSE50S3JiUDRSU2FkTGx6aFFkWlE1XzRWSXlrVWFSUndWUktRTGVUdGhpbzNlQ185eXQ2amhsQk5UNnBqN1dPeFJlX3V0VDJmUTVuZWFzZw?oc=5",
+      "content": "West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal CBC",
+      "contentSnippet": "West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal CBC",
+      "publishDate": "Fri, 27 Nov 2026 13:51:53 GMT",
+      "author": "Google News — Housing",
+      "source": {
+        "name": "Google News — Housing",
+        "url": "https://news.google.com/rss/search?q=(%22Old%20Oak%22%20OR%20%22Park%20Royal%22%20OR%20%22North%20Acton%22%20OR%20%22Willesden%20Junction%22)%20(homes%20OR%20housing%20OR%20development%20OR%20regeneration)%20when%3A30d&hl=en-GB&gl=GB&ceid=GB:en",
+        "category": "housing",
+        "priority": "medium"
+      },
+      "tags": [
+        "housing",
+        "development"
+      ],
+      "imageUrl": null,
+      "metadata": {
+        "fetchedAt": "2026-11-27T17:45:07.652Z",
+        "status": "pending_review"
+      },
+      "curatorScore": 22,
+      "editorialNote": "**Editorial Note:**\n\nThis West Vancouver piece explores regional housing governance—directly relevant as Old Oak Common faces similar pressures. We should commission a local explainer: How does HS2 regeneration compare to Metro Vancouver's approach? Key fact-check: Our 19,850-home target vs. actual delivery timelines and affordability commitments."
+    }
+  ],
+  "skipped": []
+}

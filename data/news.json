@@ -1,6 +1,17 @@
 {
   "articles": [
     {
+      "id": "https-news-google-com-rss-articles-cbmiwkfvx3lxte4",
+      "title": "West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal - CBC",
+      "excerpt": "West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal CBC",
+      "category": "Housing",
+      "date": "2026-11-27",
+      "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop",
+      "imageAlt": "West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal - CBC",
+      "body": "<p>West Vancouver's Kirk Lapointe talks housing, Metro Vancouver governance in Park Royal CBC</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMiWkFVX3lxTE4xemxxSE50S3JiUDRSU2FkTGx6aFFkWlE1XzRWSXlrVWFSUndWUktRTGVUdGhpbzNlQ185eXQ2amhsQk5UNnBqN1dPeFJlX3V0VDJmUTVuZWFzZw?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Housing</a></em></p>",
+      "author": "Old Oak Town"
+    },
+    {
       "id": "https-news-google-com-rss-articles-cbmi4gfbvv95cux",
       "title": "Euston HS2-linked redevelopment major plans move forward on three fronts - TransportXtra",
       "excerpt": "Euston HS2-linked redevelopment major plans move forward on three fronts TransportXtra",
@@ -252,20 +263,9 @@
       "imageAlt": "HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway - Rail Technology Magazine",
       "body": "<p>HS2 Reaches Key Tunnelling Milestone as Old Oak Common Connects to Britain’s New High-Speed Railway Rail Technology Magazine</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMizAFBVV95cUxPMFNJYnNodjhNWG5hdVk2a1oyS0dYdXVFM0szQTNXc1piMTI1ZFExMFdiTjFvOUVuOVJmaEF1aFBYUXpHVEdkWmRxUFV4UUo4ZWZPZThXWjA0Y1BpbFU4X0JDVHV4aDlONzZLVVZHNUNyVXN1MGZrelc0dzQydHg2V2YxRnpWbC15N1pQX2JrN0pOSGlWTnR0QmlEWTlsTVFWTm9ydXJNOXM1QjdkRzdfUUJkVHVqa0laY2VCcS1IUGlycThWYlJ0RGozLXE?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — Old Oak Common</a></em></p>",
       "author": "Old Oak Town"
-    },
-    {
-      "id": "https-news-google-com-rss-articles-cbmiv0fvx3lxtfb",
-      "title": "HS2 criticised over handling of damage claims to homes near Euston Tunnel - Construction News",
-      "excerpt": "HS2 criticised over handling of damage claims to homes near Euston Tunnel Construction News",
-      "category": "HS2 Updates",
-      "date": "2026-11-03",
-      "image": "https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop",
-      "imageAlt": "HS2 criticised over handling of damage claims to homes near Euston Tunnel - Construction News",
-      "body": "<p>HS2 criticised over handling of damage claims to homes near Euston Tunnel Construction News</p><p><em>Source: <a href=\"https://news.google.com/rss/articles/CBMiV0FVX3lxTFBlWFNqQU5lalhrX09NQndqdDB0WGJ4ZkpFVzVKbGFKc2NpbmlnWFZYTVRyOEc2cGRjMTZtbzNJVF80TzZGVFU3Y1d6VkEyUkY2R0tuT2lyYw?oc=5\" target=\"_blank\" rel=\"noopener\">Google News — HS2</a></em></p>",
-      "author": "Old Oak Town"
     }
   ],
   "total": 24,
   "source": "auto",
-  "lastPublished": "2026-11-24T19:38:28.144Z"
+  "lastPublished": "2026-11-27T18:21:46.956Z"
 }
