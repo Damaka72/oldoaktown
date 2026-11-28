@@ -81,23 +81,6 @@
       "status": "upcoming"
     },
     {
-      "id": "eb-2003814318568",
-      "title": "CNWL Brent Community Month event",
-      "date": "2026-11-27",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Church End and Roundwood Unity Centre",
-        "address": "103 Church Road, London, NW10 9EG"
-      },
-      "description": "Come along to our Brent Community Day and discover local health and wellbeing services, meet our teams and special guests!",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/cnwl-brent-community-month-event-tickets-2003814318568",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/cnwl-brent-community-month-event-tickets-2003814318568",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-2003764692134",
       "title": "Sing Gospel Christmas Concert 2026",
       "date": "2026-11-28",
@@ -404,23 +387,6 @@
       "source": "auto-eventbrite"
     },
     {
-      "id": "eb-1984869475031",
-      "title": "Creative Relaxation-Collage at Kensal Library",
-      "date": "2026-12-14",
-      "startTime": null,
-      "endTime": null,
-      "location": {
-        "name": "Kensal Library",
-        "address": "20 Golborne Road, London, W10 5PF"
-      },
-      "description": "A relaxed, creative session to help you switch off and recharge.",
-      "category": "community",
-      "registrationUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869475031",
-      "sourceUrl": "https://www.eventbrite.co.uk/e/creative-relaxation-collage-at-kensal-library-tickets-1984869475031",
-      "status": "upcoming",
-      "source": "auto-eventbrite"
-    },
-    {
       "id": "eb-2002228652799",
       "title": "Next Stop Comedy at Paradise by way of Kensal Green.! - London, England",
       "date": "2026-12-18",
@@ -468,6 +434,23 @@
       "category": "community",
       "registrationUrl": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345666818",
       "sourceUrl": "https://www.eventbrite.co.uk/e/w3-community-orchard-programme-tickets-2003345666818",
+      "status": "upcoming",
+      "source": "auto-eventbrite"
+    },
+    {
+      "id": "eb-2005387006520",
+      "title": "Refuge and Rescue: Hidden Stories, Extraordinary Lives",
+      "date": "2027-01-27",
+      "startTime": null,
+      "endTime": null,
+      "location": {
+        "name": "Willesden Jewish Cemetery",
+        "address": "Beaconsfield Road, London, NW10 2JE"
+      },
+      "description": "Special guided walk for Holocaust Memorial Day",
+      "category": "tour",
+      "registrationUrl": "https://www.eventbrite.co.uk/e/refuge-and-rescue-hidden-stories-extraordinary-lives-tickets-2005387006520",
+      "sourceUrl": "https://www.eventbrite.co.uk/e/refuge-and-rescue-hidden-stories-extraordinary-lives-tickets-2005387006520",
       "status": "upcoming",
       "source": "auto-eventbrite"
     },
