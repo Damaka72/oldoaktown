@@ -14,8 +14,8 @@ const fs = require('fs');
 const path = require('path');
 
 const OUT_FILE = path.join(__dirname, '../data/videos-auto.json');
-const MAX_AGE_DAYS = 120;
-const MAX_VIDEOS = 12;
+const MAX_AGE_DAYS = 365;   // older videos stay on the /videos archive page for a year
+const MAX_VIDEOS = 60;
 
 // Add channels here. `mustMention` keeps only videos about our area.
 const CHANNELS = [
