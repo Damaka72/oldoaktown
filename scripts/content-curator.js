@@ -50,9 +50,13 @@ function relevanceScore(article) {
 const LOCAL_ANCHOR = /(old oak (common|north|south|town|lane|road|and park royal)|park royal|opdc|north acton|willesden junction|harlesden|wormwood scrubs|elizabeth line|west london|ealing|brent council)/;
 const LONDON_CONTEXT = /(london|euston|northolt|old oak|park royal|acton|west london)/;
 
+// "Park Royal" (and "Ealing") are also place names overseas, e.g. Park Royal in West Vancouver.
+const OVERSEAS = /(vancouver|british columbia|\bbc\b|canada|canadian|\bcbc\b|sydney|melbourne|australia|new zealand|auckland|\bnsw\b|new york|\busa\b)/;
+
 function isLocalStory(article) {
   const text = `${article.title} ${article.contentSnippet || ''}`.toLowerCase();
   if (/oak tree|year-old oak/.test(text)) return false;
+  if (OVERSEAS.test(text) && !/\b(london|uk|england)\b/.test(text)) return false;
   if (LOCAL_ANCHOR.test(text)) return true;
   if (/\bold oak\b/.test(text)) return true;
   if (/\bhs2\b/.test(text) && LONDON_CONTEXT.test(text)) return true;

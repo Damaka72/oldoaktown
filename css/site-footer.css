@@ -1,0 +1,101 @@
+/* Old Oak Town: shared site footer (big wordmark, link columns, social icons).
+   Colours come from the brand palette; pages may override the custom properties. */
+.site-footer {
+    --sf-bg: #1C2F2B;          /* Forest night */
+    --sf-text: #F5F5DC;        /* Cream */
+    --sf-muted: #C9C9AE;       /* Cream, softened (AA on Forest night) */
+    --sf-gold: #D9A736;        /* Logo gold */
+    --sf-line: rgba(245, 245, 220, 0.18);
+    background: var(--sf-bg);
+    color: var(--sf-text);
+    padding: 3.5rem 0 1.75rem;
+    font-family: 'DM Sans', system-ui, sans-serif;
+}
+.site-footer * { box-sizing: border-box; }
+.site-footer .sf-wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Link columns */
+.sf-cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 2rem 1.5rem;
+}
+.sf-cols h3 {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sf-gold);
+    margin: 0 0 0.75rem;
+}
+.sf-cols ul { list-style: none; margin: 0; padding: 0; }
+.sf-cols li { margin: 0; }
+.sf-cols a {
+    display: inline-block;
+    padding: 0.2rem 0;
+    color: var(--sf-text);
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+.sf-cols a:hover, .sf-cols a:focus-visible { color: var(--sf-gold); text-decoration: underline; }
+
+/* Newsletter (homepage only) */
+.sf-news p { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--sf-muted); }
+.sf-news .footer-newsletter-form { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.sf-news .footer-newsletter-form input {
+    flex: 1 1 150px; min-width: 0;
+    padding: 0.6rem 0.8rem; border: 0; border-radius: 4px;
+    font: inherit; font-size: 0.9rem; color: #333333; background: #FFFFFF;
+}
+.sf-news .footer-newsletter-form button {
+    padding: 0.6rem 1rem; border: 0; border-radius: 4px; cursor: pointer;
+    font: inherit; font-size: 0.9rem; font-weight: 600;
+    background: var(--sf-gold); color: var(--sf-bg);
+}
+.sf-news .footer-newsletter-form button:hover { filter: brightness(1.08); }
+.sf-news .footer-newsletter-form button:disabled { opacity: 0.7; cursor: not-allowed; }
+.sf-news .footer-nl-message { margin-top: 0.5rem; font-size: 0.85rem; min-height: 1.2em; }
+.sf-news .footer-nl-message.success { color: #a8f0a8; }
+.sf-news .footer-nl-message.error { color: #ffb3b3; }
+
+/* Social icons */
+.sf-social {
+    display: flex; justify-content: center; gap: 0.9rem;
+    margin: 2.75rem 0 2rem; padding: 0; list-style: none;
+}
+.sf-social a {
+    display: grid; place-items: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--sf-text); color: var(--sf-bg);
+    transition: transform 0.2s, background 0.2s;
+}
+.sf-social a:hover, .sf-social a:focus-visible { background: var(--sf-gold); transform: translateY(-3px); }
+.sf-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* Giant wordmark (SVG scales edge to edge at any width) */
+.sf-wordmark { display: block; width: 100%; height: auto; margin: 0 auto; user-select: none; }
+.sf-wordmark text {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+.sf-wordmark .sf-old { fill: #FFFFFF; }
+.sf-wordmark .sf-town { fill: var(--sf-gold); }
+.sf-wordmark-wrap { padding: 0 20px; max-width: 1400px; margin: 0 auto; }
+
+/* Bottom row */
+.sf-bottom {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 2rem;
+    margin-top: 1.75rem; padding-top: 1.25rem;
+    border-top: 1px solid var(--sf-line);
+    font-size: 0.85rem; color: var(--sf-muted);
+}
+.sf-bottom a { color: var(--sf-muted); text-decoration: none; }
+.sf-bottom a:hover { color: var(--sf-gold); text-decoration: underline; }
+
+@media (max-width: 600px) {
+    .sf-cols { grid-template-columns: repeat(2, 1fr); }
+    .sf-cols .sf-news { grid-column: 1 / -1; }
+}

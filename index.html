@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/site-footer.css">
     <title>Old Oak Town | West London's Largest Regeneration Project</title>
     <meta name="description" content="Your guide to Old Oak Common's transformation. Latest news on HS2, housing, jobs and community developments in West London.">
 
@@ -104,6 +105,11 @@
             --cream: #F5F5DC;
             --dark-grey: #333333;
             --light-grey: #f8f9fa;
+            --forest-night: #1C2F2B;
+            --logo-gold: #D9A736;
+            --paper: #ECE8E0;
+            --hairline: #DDD8C8;
+            --muted: #555555;
         }
 
         body {
@@ -948,63 +954,40 @@
             .timeline-phase:nth-child(even) .timeline-content { margin-left: 80px; margin-right: 0; }
         }
 
-        /* Footer */
-        footer { background: var(--dark-grey); color: white; padding: 3rem 0 1rem; }
 
-        .footer-grid {
+
+        /* ─── What's new strip ─── */
+        .whats-new { background: var(--paper); padding: 3rem 0; }
+        .whats-new h2 { margin-bottom: 0.25rem; }
+        .whats-new__sub { color: var(--muted); margin-bottom: 1.75rem; }
+        .whats-new__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem;
         }
-
-        .footer-section h3 { color: var(--cream); margin-bottom: 1rem; }
-        .footer-section ul { list-style: none; }
-        .footer-section a { color: #ccc; text-decoration: none; line-height: 2; }
-        .footer-section a:hover { color: white; }
-
-        .footer-newsletter-form {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .wn-card {
+            display: flex; flex-direction: column;
+            background: var(--cream);
+            border: 1px solid var(--hairline);
+            border-radius: 10px;
+            padding: 1.25rem 1.25rem 1.1rem;
         }
-
-        .footer-newsletter-form input {
-            flex: 1;
-            padding: 0.6rem 0.8rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            color: var(--dark-grey);
-            background: #fff;
+        .wn-label {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+            color: var(--warm-brown); margin-bottom: 0.6rem;
         }
-
-        .footer-newsletter-form button {
-            padding: 0.6rem 1rem;
-            background: var(--warm-brown);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: background 0.2s;
-        }
-
-        .footer-newsletter-form button:hover { background: #7a4010; }
-        .footer-newsletter-form button:disabled { opacity: 0.7; cursor: not-allowed; }
-
-        .footer-nl-message { margin-top: 0.5rem; font-size: 0.85rem; min-height: 1.2em; }
-        .footer-nl-message.success { color: #a8f0a8; }
-        .footer-nl-message.error { color: #ffb3b3; }
-
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #555; color: #999; }
-
-        .social-links { list-style: none; margin-top: 1rem; }
-        .social-links li { margin-bottom: 0.5rem; }
-        .social-links a { display: inline-flex; align-items: center; color: #ccc; text-decoration: none; transition: color 0.3s ease; }
-        .social-links a:hover { color: var(--primary-green); }
+        .wn-card h3 { font-size: 1.35rem; color: var(--primary-green); margin-bottom: 0.5rem; }
+        .wn-card p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.9rem; }
+        .wn-list { list-style: none; margin: 0 0 0.9rem; padding: 0; }
+        .wn-list li { padding: 0.45rem 0; border-top: 1px solid var(--hairline); }
+        .wn-list li:first-child { border-top: 0; padding-top: 0; }
+        .wn-list a { color: var(--primary-green); font-weight: 600; text-decoration: none; }
+        .wn-list a:hover { text-decoration: underline; }
+        .wn-list small { display: block; color: var(--muted); font-size: 0.8rem; }
+        .wn-photo { display: block; margin-bottom: 0.75rem; border-radius: 8px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--paper); }
+        .wn-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .wn-link { margin-top: auto; color: var(--primary-green); font-weight: 600; text-decoration: none; }
+        .wn-link:hover { text-decoration: underline; }
 
         /* Modal Styles */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); overflow: auto; }
@@ -1497,6 +1480,34 @@
         </div>
     </section>
 
+    <!-- What's new: newest directory listings, latest social post and the newsletter, so there is always something fresh above the fold -->
+    <section class="whats-new" id="whats-new" aria-labelledby="whatsNewTitle">
+        <div class="container">
+            <h2 id="whatsNewTitle">What's new on Old Oak Town</h2>
+            <p class="whats-new__sub">New local businesses, our latest social posts and this week's newsletter, in one place.</p>
+            <div class="whats-new__grid">
+                <article class="wn-card" id="wnBusinesses">
+                    <div class="wn-label">New in the directory</div>
+                    <h3>Local businesses</h3>
+                    <p>Loading the newest listings&hellip;</p>
+                    <a class="wn-link" href="business-directory.html">Browse the directory &rarr;</a>
+                </article>
+                <article class="wn-card" id="wnSocial">
+                    <div class="wn-label">From social media</div>
+                    <h3>@oldoaktown</h3>
+                    <p>Behind-the-scenes shots, events and local stories from West London's biggest transformation.</p>
+                    <a class="wn-link" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">Follow on Instagram &rarr;</a>
+                </article>
+                <article class="wn-card" id="wnNewsletter">
+                    <div class="wn-label">From the newsletter</div>
+                    <h3>The Old Oak Weekly</h3>
+                    <p>HS2 updates, planning news, business spotlights and community stories, every Thursday. Free.</p>
+                    <a class="wn-link" href="#newsletter">Subscribe free &rarr;</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══════════════════════════════════════════
          NEWSLETTER SIGN-UP — POSITION 1: Hero CTA
          Immediately below the hero, above the stats.
@@ -1548,12 +1559,9 @@
                 <div class="skeleton-card"></div>
                 <div class="skeleton-card"></div>
                 <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
-                <div class="skeleton-card"></div>
             </div>
-            <div style="text-align: center; margin-top: 2rem;" id="newsFooter" style="display:none;">
-                <p style="color: #666; font-style: italic;">More articles coming soon as the development progresses</p>
+            <div style="text-align: center; margin-top: 2rem; display: none;" id="newsFooter">
+                <a href="news.html" class="btn btn-primary">See all news &rarr;</a>
             </div>
         </div>
     </section>
@@ -1619,13 +1627,17 @@
     <!-- Videos Section -->
     <section id="videos" style="background: var(--light-grey);">
         <div class="container">
-            <h2>Video Gallery</h2>
+            <h2>Latest Videos</h2>
             <p style="margin-bottom: 2rem;">Watch the transformation of Old Oak Common - construction updates, community stories, and development insights</p>
 
             <div class="video-grid" id="videoGrid">
                 <div id="videoLoading" style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
                     Loading videos...
                 </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 2rem; display: none;" id="videoMore">
+                <a href="videos.html" class="btn btn-primary">See all videos &rarr;</a>
             </div>
 
             <div style="text-align: center; margin-top: 2rem;">
@@ -2274,81 +2286,68 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>Old Oak Town</h3>
-                    <p>Your comprehensive guide to West London's largest regeneration project.</p>
-                    <p style="margin-top: 1rem;">Tracking the transformation of Old Oak Common.</p>
-                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-                        <a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #1877f2; text-decoration: none; font-weight: 500;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                            Follow us on Facebook
-                        </a>
-                        <a href="https://www.linkedin.com/company/110106506/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #0077b5; text-decoration: none; font-weight: 500;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                            Follow us on LinkedIn
-                        </a>
-                        <a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.5rem; color: #e1306c; text-decoration: none; font-weight: 500;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                            </svg>
-                            Follow us on Instagram
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
+<!-- Footer -->
+    <footer class="site-footer">
+        <div class="sf-wrap">
+            <div class="sf-cols">
+                <div>
+                    <h3>Explore</h3>
                     <ul>
-                        <li><a href="#news">Latest News</a></li>
-                        <li><a href="#directory">Business Directory</a></li>
-                        <li><a href="#events">Community Events</a></li>
-                        <li><a href="#development">Development Progress</a></li>
+                        <li><a href="news.html">Latest news</a></li>
+                        <li><a href="videos.html">Videos</a></li>
+                        <li><a href="business-directory.html">Business directory</a></li>
+                        <li><a href="#events">Community events</a></li>
+                        <li><a href="#development">Development progress</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h3>Advertise</h3>
+                <div>
+                    <h3>Get involved</h3>
                     <ul>
-                        <li><a href="#advertise">Pricing & Packages</a></li>
-                        <li><a href="#contact">List Your Business</a></li>
-                        <li><a href="#advertise">Newsletter Sponsorship</a></li>
-                        <li><a href="#contact">Contact Sales</a></li>
+                        <li><a href="event-submit.html">Submit an event</a></li>
+                        <li><a href="#submit-tip">Send us a news tip</a></li>
+                        <li><a href="#contact">Submit a video</a></li>
+                        <li><a href="#community">Community</a></li>
                     </ul>
                 </div>
-                <!-- ═══════════════════════════════════════════
-                     NEWSLETTER SIGN-UP — POSITION 4: Footer
-                     Wired to the real /api/subscribe endpoint.
-                     ═══════════════════════════════════════════ -->
-                <div class="footer-section">
+                <div>
+                    <h3>For business</h3>
+                    <ul>
+                        <li><a href="business-submit.html">List your business</a></li>
+                        <li><a href="#advertise">Advertise</a></li>
+                        <li><a href="#advertise">Newsletter sponsorship</a></li>
+                        <li><a href="#contact">Contact us</a></li>
+                    </ul>
+                </div>
+                <div class="sf-news">
                     <h3>Newsletter</h3>
-                    <p>Get <strong>The Old Oak Weekly</strong> delivered to your inbox every Thursday.</p>
+                    <p>Get <strong>The Old Oak Weekly</strong> in your inbox every Thursday.</p>
                     <form id="nlFormFooter">
                         <div class="footer-newsletter-form">
-                            <input type="email" id="nlEmailFooter" placeholder="Your email" required autocomplete="email">
+                            <input type="email" id="nlEmailFooter" placeholder="Your email" required autocomplete="email" aria-label="Email address">
                             <button type="submit" id="nlBtnFooter">Subscribe</button>
                         </div>
                         <p class="footer-nl-message" id="nlMsgFooter" aria-live="polite"></p>
                     </form>
                 </div>
-                <div class="footer-section">
-                    <h3>Follow Us</h3>
-                    <p>Connect with us on social media</p>
-                    <ul class="social-links">
-                        <li><a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                        <li><a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                        <li><a href="https://www.linkedin.com/company/110106506/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a href="https://twitter.com/oldoaktown" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
-                    </ul>
-                </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; <span class="current-year">2026</span> Old Oak Town. All rights reserved. | <a href="privacy.html" style="color: #999;">Privacy Policy</a></p>
+            <ul class="sf-social" aria-label="Follow Old Oak Town">
+                <li><a href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></li>
+                <li><a href="https://www.facebook.com/profile.php?id=61584494333990" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a></li>
+                <li><a href="https://www.linkedin.com/company/110106506/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+                <li><a href="https://twitter.com/oldoaktown" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a></li>
+            </ul>
+        </div>
+        <div class="sf-wordmark-wrap">
+            <svg class="sf-wordmark" viewBox="0 0 1000 322" role="img" aria-label="Old Oak Town">
+                <text class="sf-old" x="500" y="152" text-anchor="middle" font-size="215" textLength="1000" lengthAdjust="spacingAndGlyphs">Old Oak</text>
+                <text class="sf-town" x="500" y="312" text-anchor="middle" font-size="215" textLength="590" lengthAdjust="spacingAndGlyphs">Town</text>
+            </svg>
+        </div>
+        <div class="sf-wrap">
+            <div class="sf-bottom">
+                <a href="privacy.html">Privacy</a>
+                <span>&copy; <span class="current-year">2026</span> Old Oak Town. All rights reserved.</span>
+                <a href="mailto:info@oldoaktown.co.uk">info@oldoaktown.co.uk</a>
             </div>
         </div>
     </footer>
@@ -2582,13 +2581,16 @@
             return Math.floor(diff / 30) + ' months ago';
         }
 
+        var HOME_NEWS_MAX = 3;   // homepage shows the latest 3; everything else lives on news.html
+
         function renderNewsCards(articles) {
             var grid = document.getElementById('newsGrid');
             if (!grid) return;
             articlesMap = {};
+            // Every article stays reachable by permalink / "More stories"; only the newest HOME_NEWS_MAX get a card here.
+            articles.forEach(function(a) { articlesMap[a.id] = a; });
             var html = '';
-            articles.forEach(function(a) {
-                articlesMap[a.id] = a;
+            articles.slice(0, HOME_NEWS_MAX).forEach(function(a) {
                 var relDate = formatRelativeDate(a.date);
                 var imgSrc = (a.image || 'https://images.unsplash.com/photo-1580757468214-c73f7062a5cb?w=600&h=400&fit=crop').replace('w=900&h=400', 'w=600&h=400');
                 html += '<div class="news-card" data-article="' + a.id + '">'
@@ -3136,6 +3138,71 @@
         })();
 
         // ─────────────────────────────────────────
+        // WHAT'S NEW STRIP — newest businesses, latest social post, latest newsletter.
+        // Each card has sensible static copy and only upgrades when real data arrives.
+        // ─────────────────────────────────────────
+        (function() {
+            function esc(str) {
+                return String(str == null ? '' : str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+            function clip(str, n) {
+                str = String(str || '').replace(/\s+/g, ' ').trim();
+                return str.length > n ? str.slice(0, n - 1).replace(/\s+\S*$/, '') + '\u2026' : str;
+            }
+            // Must stay identical to slugify() in business-directory.html and scripts/business-promo-backfill.js
+            function slugify(name) {
+                return String(name).toLowerCase().replace(/&/g, ' and ').replace(/['\u2019]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+            }
+            function getJson(url) {
+                return fetch(url).then(function(r) { return r.ok ? r.json() : Promise.reject(); });
+            }
+
+            // 1. Newest approved directory listings
+            getJson('/api/get-businesses?sort=new&limit=3').then(function(data) {
+                var list = (data.businesses || []).slice(0, 3);
+                var card = document.getElementById('wnBusinesses');
+                if (!list.length || !card) return;
+                card.innerHTML =
+                    '<div class="wn-label">New in the directory</div>' +
+                    '<h3>Welcome to the neighbourhood</h3>' +
+                    '<ul class="wn-list">' + list.map(function(b) {
+                        var name = b.business_name || '';
+                        return '<li><a href="business-directory.html#' + esc(slugify(name)) + '">' + esc(name) + '</a>' +
+                            (b.category ? '<small>' + esc(b.category) + '</small>' : '') + '</li>';
+                    }).join('') + '</ul>' +
+                    '<a class="wn-link" href="business-directory.html">Browse the directory &rarr;</a>';
+            }).catch(function() {
+                var card = document.getElementById('wnBusinesses');
+                if (!card) return;
+                card.querySelector('p').textContent = 'Find shops, services and cafes around Old Oak, or get your own business listed.';
+            });
+
+            // 2. Latest Instagram post
+            getJson('/api/instagram-feed?limit=1').then(function(data) {
+                var p = (data.posts || [])[0];
+                var card = document.getElementById('wnSocial');
+                if (!p || !card || !p.permalink || !p.image) return;
+                card.innerHTML =
+                    '<div class="wn-label">From social media</div>' +
+                    '<a class="wn-photo" href="' + esc(p.permalink) + '" target="_blank" rel="noopener noreferrer"><img src="' + esc(p.image) + '" alt="' + esc(clip(p.caption, 90) || 'Latest Instagram post from @oldoaktown') + '" loading="lazy"></a>' +
+                    (p.caption ? '<p>' + esc(clip(p.caption, 120)) + '</p>' : '') +
+                    '<a class="wn-link" href="https://www.instagram.com/oldoaktown" target="_blank" rel="noopener noreferrer">Follow @oldoaktown &rarr;</a>';
+            }).catch(function() { /* keep the static follow card */ });
+
+            // 3. Latest Weekly Edition
+            getJson('/data/editions/latest.json').then(function(ed) {
+                var card = document.getElementById('wnNewsletter');
+                if (!ed || !ed.subject || !card) return;
+                var when = ed.date ? new Date(ed.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) : '';
+                card.innerHTML =
+                    '<div class="wn-label">From the newsletter' + (when ? ' \u00B7 ' + esc(when) : '') + '</div>' +
+                    '<h3>' + esc(ed.subject) + '</h3>' +
+                    (ed.intro ? '<p>' + esc(clip(ed.intro, 150)) + '</p>' : '') +
+                    '<a class="wn-link" href="#newsletter">Get it in your inbox, free &rarr;</a>';
+            }).catch(function() { /* keep the static newsletter card */ });
+        })();
+
+        // ─────────────────────────────────────────
         // VIDEO GALLERY — dynamic load
         // ─────────────────────────────────────────
         document.addEventListener('DOMContentLoaded', function() {
@@ -3144,10 +3211,13 @@
 
             if (!grid) return;
 
-            fetch('/api/videos')
+            var HOME_VIDEO_MAX = 6;   // homepage shows 6; the full library lives on videos.html
+
+            fetch('/api/videos?limit=' + HOME_VIDEO_MAX)
                 .then(function(response) { return response.json(); })
                 .then(function(data) {
-                    var videos = data.videos || [];
+                    var videos = (data.videos || []).slice(0, HOME_VIDEO_MAX);
+                    if (videos.length) document.getElementById('videoMore').style.display = '';
 
                     if (videos.length === 0) {
                         loading.textContent = 'No videos yet — check back soon.';
